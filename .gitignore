@@ -1,0 +1,14 @@
+# Local archives (docs live in docs/requirements/)
+requirements.zip
+*.zip
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets / env
+.env
+.env.*
+!.env.example
