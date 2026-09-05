@@ -238,175 +238,2086 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 | --- | --- |
 | 2026-09-05 | Первая полная версия Phase 2; численные диапазоны помечены как внутренние |
 
-## LEX bundle registry (canonical)
+## LEX bundle registry (canonical, semantic)
 
-Каждый `LEX-*`, используемый как prerequisite в `functional-inventory.md`, определён здесь как **лексический bundle** (не lemma-list). Число лемм внутри bundle — внутреннее, `CALIBRATION=required`. **Не** норма CEFR.
+Каждый `LEX-*` — **рабочий scope** для FN, не lemma-list и не норма CEFR. Размеры — `CALIBRATION=required`. Источник отбора: PRODUCT ANALYSIS (сценарии первой аудитории) + сверка тем Katalog A/B (Dz.U. 2025 poz. 217 zał. 1) как coverage checklist (`REQUIRES VERIFICATION` поклеточно).
 
-| ID | Домен / назначение | Default level | Владение |
-|---|---|---|---|
-| `LEX-ADDRESS` | Functional bundle `ADDRESS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-ADDRESS-FORMS` | Functional bundle `ADDRESS-FORMS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-ADVICE-A2` | Functional bundle `ADVICE-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-AGREEMENT` | Functional bundle `AGREEMENT` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-ANALYTIC` | Functional bundle `ANALYTIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-APOLOGY-B2` | Functional bundle `APOLOGY-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-APPEAL` | Functional bundle `APPEAL` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-APPOINTMENT` | Functional bundle `APPOINTMENT` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-ARGUMENT-B1` | Functional bundle `ARGUMENT-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-ARGUMENT-B2` | Functional bundle `ARGUMENT-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-ASPECT-PAIRS` | Functional bundle `ASPECT-PAIRS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-ASSERTIVE` | Functional bundle `ASSERTIVE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-AVAILABILITY` | Functional bundle `AVAILABILITY` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-BADNEWS` | Functional bundle `BADNEWS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-BANK-A2` | Functional bundle `BANK-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-BANK-B1` | Functional bundle `BANK-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-BANK-B2` | Functional bundle `BANK-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-BANK-BASIC` | Functional bundle `BANK-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-BILLS` | Functional bundle `BILLS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-BODY` | Functional bundle `BODY` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-BUDGET` | Functional bundle `BUDGET` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-CHAT-A2` | Functional bundle `CHAT-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-COLLOQ-CONTROL` | Functional bundle `COLLOQ-CONTROL` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-COMPARE` | Functional bundle `COMPARE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-COMPARE-B2` | Functional bundle `COMPARE-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-COMPLAINT` | Functional bundle `COMPLAINT` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-COMPLAINT-B1` | Functional bundle `COMPLAINT-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-COMPLAINT-B2` | Functional bundle `COMPLAINT-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-COMPLAINT-WRITE` | Functional bundle `COMPLAINT-WRITE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-CONSUMER` | Functional bundle `CONSUMER` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-CONSUMER-B2` | Functional bundle `CONSUMER-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-CONTRACT-B1` | Functional bundle `CONTRACT-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-CONTRACT-B2` | Functional bundle `CONTRACT-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-CONTRACT-BASIC` | Functional bundle `CONTRACT-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-CRITICAL-READ` | Functional bundle `CRITICAL-READ` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-CV-ORAL` | Functional bundle `CV-ORAL` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-DEBATE-B2` | Functional bundle `DEBATE-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-DESCRIPTION` | Functional bundle `DESCRIPTION` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-DISCUSSION` | Functional bundle `DISCUSSION` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-DOCS` | Functional bundle `DOCS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-DOCS-B1` | Functional bundle `DOCS-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EMAIL-A2` | Functional bundle `EMAIL-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EMAIL-B1` | Functional bundle `EMAIL-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EMERGENCY-BASIC` | Functional bundle `EMERGENCY-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EVIDENCE` | Functional bundle `EVIDENCE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EXAM-ORAL-B1` | Functional bundle `EXAM-ORAL-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EXAM-ORAL-B2` | Functional bundle `EXAM-ORAL-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EXAM-WRITE-B1` | Functional bundle `EXAM-WRITE-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EXAM-WRITE-B2` | Functional bundle `EXAM-WRITE-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-EXPLAIN-B2` | Functional bundle `EXPLAIN-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-FEEDBACK` | Functional bundle `FEEDBACK` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-FEEDBACK-B2` | Functional bundle `FEEDBACK-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-FOOD` | Functional bundle `FOOD` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-FORMAL-B1` | Functional bundle `FORMAL-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-FORMAL-B2` | Functional bundle `FORMAL-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-FORMS` | Functional bundle `FORMS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-FORMS-A2` | Functional bundle `FORMS-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-GREETINGS` | Functional bundle `GREETINGS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-HEALTH-LIMIT` | Functional bundle `HEALTH-LIMIT` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-HOUSING-A2` | Functional bundle `HOUSING-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-HOUSING-B1` | Functional bundle `HOUSING-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-HOUSING-B2` | Functional bundle `HOUSING-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-HOUSING-BASIC` | Functional bundle `HOUSING-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-HOUSING-FIX` | Functional bundle `HOUSING-FIX` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-HYPOTHESIS` | Functional bundle `HYPOTHESIS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-HYPOTHESIS-B2` | Functional bundle `HYPOTHESIS-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-IDENTITY` | Functional bundle `IDENTITY` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-INSTRUCTIONS` | Functional bundle `INSTRUCTIONS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-INSTRUCTIONS-A2` | Functional bundle `INSTRUCTIONS-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-INSTRUCTIONS-B1` | Functional bundle `INSTRUCTIONS-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-KINDER` | Functional bundle `KINDER` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-LETTER-B1` | Functional bundle `LETTER-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-LETTER-B2` | Functional bundle `LETTER-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-MANIP-RESIST` | Functional bundle `MANIP-RESIST` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-MED-A2` | Functional bundle `MED-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-MED-B1` | Functional bundle `MED-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-MED-B2` | Functional bundle `MED-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-MEDIATION-B1` | Functional bundle `MEDIATION-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-MEDIATION-B2` | Functional bundle `MEDIATION-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-MEETING` | Functional bundle `MEETING` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-MONEY` | Functional bundle `MONEY` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-NARRATIVE-A2` | Functional bundle `NARRATIVE-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-NARRATIVE-B1` | Functional bundle `NARRATIVE-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-NEIGHBOR` | Functional bundle `NEIGHBOR` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-NEIGHBOR-A2` | Functional bundle `NEIGHBOR-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-NEIGHBOR-B1` | Functional bundle `NEIGHBOR-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-NOTIFY` | Functional bundle `NOTIFY` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-NUM-B1` | Functional bundle `NUM-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-OPINION-A2` | Functional bundle `OPINION-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PEOPLE` | Functional bundle `PEOPLE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PERSISTENCE` | Functional bundle `PERSISTENCE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PHARMA` | Functional bundle `PHARMA` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PHONE` | Functional bundle `PHONE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PHONE-A2` | Functional bundle `PHONE-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PHONE-B1` | Functional bundle `PHONE-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PHONE-B2` | Functional bundle `PHONE-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PLANNING` | Functional bundle `PLANNING` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-POLITENESS` | Functional bundle `POLITENESS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-POLITENESS-A2` | Functional bundle `POLITENESS-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PRAG-META` | Functional bundle `PRAG-META` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PRESENTATION` | Functional bundle `PRESENTATION` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PRIVACY-BASIC` | Functional bundle `PRIVACY-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PROCESS` | Functional bundle `PROCESS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-PUBLIC-SPEAK` | Functional bundle `PUBLIC-SPEAK` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REFUSAL` | Functional bundle `REFUSAL` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REFUSAL-A2` | Functional bundle `REFUSAL-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REFUSAL-B1` | Functional bundle `REFUSAL-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REFUSAL-B2` | Functional bundle `REFUSAL-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REGISTER-FLEX` | Functional bundle `REGISTER-FLEX` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REPAIR` | Functional bundle `REPAIR` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REPAIR-A2` | Functional bundle `REPAIR-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REPAIR-B2` | Functional bundle `REPAIR-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REQUEST` | Functional bundle `REQUEST` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REQUEST-A2` | Functional bundle `REQUEST-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REVIEW` | Functional bundle `REVIEW` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-REVIEW-B2` | Functional bundle `REVIEW-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-ROUTINE` | Functional bundle `ROUTINE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-RULES` | Functional bundle `RULES` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-RULES-B1` | Functional bundle `RULES-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHEDULING` | Functional bundle `SCHEDULING` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHOOL-A2` | Functional bundle `SCHOOL-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHOOL-B1` | Functional bundle `SCHOOL-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHOOL-B2` | Functional bundle `SCHOOL-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHOOL-BASIC` | Functional bundle `SCHOOL-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHOOL-MED` | Functional bundle `SCHOOL-MED` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHOOL-READ` | Functional bundle `SCHOOL-READ` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHOOL-WRITE` | Functional bundle `SCHOOL-WRITE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SCHOOL-WRITE-B2` | Functional bundle `SCHOOL-WRITE-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SERVICE` | Functional bundle `SERVICE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SETTLEMENT` | Functional bundle `SETTLEMENT` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SHOP` | Functional bundle `SHOP` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SIGNS` | Functional bundle `SIGNS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SMALLTALK` | Functional bundle `SMALLTALK` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SMALLTALK-B2` | Functional bundle `SMALLTALK-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SMS` | Functional bundle `SMS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SOFTEN` | Functional bundle `SOFTEN` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-STANCE` | Functional bundle `STANCE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SUMMARY` | Functional bundle `SUMMARY` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-SYNTHESIS` | Functional bundle `SYNTHESIS` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-TIME` | Functional bundle `TIME` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-TRANS-A2` | Functional bundle `TRANS-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-TRANS-B1` | Functional bundle `TRANS-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-TRANS-B2` | Functional bundle `TRANS-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-TRANS-BASIC` | Functional bundle `TRANS-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-TV-B1` | Functional bundle `TV-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-TV-B2` | Functional bundle `TV-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-TV-SHIFT` | Functional bundle `TV-SHIFT` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-URGENCY` | Functional bundle `URGENCY` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-URZAD-A2` | Functional bundle `URZAD-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-URZAD-B1` | Functional bundle `URZAD-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-URZAD-B2` | Functional bundle `URZAD-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-URZAD-BASIC` | Functional bundle `URZAD-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-URZAD-READ` | Functional bundle `URZAD-READ` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-WORK-A2` | Functional bundle `WORK-A2` для FN сценариев | A2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-WORK-B1` | Functional bundle `WORK-B1` для FN сценариев | B1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-WORK-B2` | Functional bundle `WORK-B2` для FN сценариев | B2 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-WORK-BASIC` | Functional bundle `WORK-BASIC` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-WORK-CONFLICT` | Functional bundle `WORK-CONFLICT` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-WORK-LEAVE` | Functional bundle `WORK-LEAVE` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
-| `LEX-WORK-RULES` | Functional bundle `WORK-RULES` для FN сценариев | A1 | PROD core + RECP shell; `CALIBRATION=required` |
+### LEX-ADDRESS
+- **Purpose:** Лексический scope для домена `IDENTITY` / сценариев `ADDRESS`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** имя, происхождение, семья, базовые характеристики
+- **Required MWU (examples):** *nazywam się*, *mam na imię*, *jestem z*
+- **Required FIX (examples):** *Dzień dobry*, *Miło mi*
+- **Required COLL (examples):** *pochodzić z + Gen*
+- **Related FN:** FN-A1-004
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
 
-### Правила bundle
+### LEX-ADDRESS-FORMS
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `ADDRESS-FORMS`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-B1-032
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
 
-1. Bundle ID стабилен; состав лемм версионируется в authoring (не в этом файле).
-2. Rekcja и aspectual pairs хранятся на леммах внутри bundle.
-3. L1 false friends помечаются на lemma-карточках и ERR-*.
+### LEX-ADVICE-A2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `ADVICE-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-043
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-AGREEMENT
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `AGREEMENT`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A1-037
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-ANALYTIC
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `ANALYTIC`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-004
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-APOLOGY-B2
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `APOLOGY-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-B2-038
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-APPEAL
+- **Purpose:** Лексический scope для домена `FORMAL` / сценариев `APPEAL`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** email/pismo structure, attachments
+- **Required MWU (examples):** *w odpowiedzi na*, *uprzejmie proszę o*
+- **Required FIX (examples):** *Z poważaniem*, *Z wyrazami szacunku*
+- **Required COLL (examples):** *przesłać dokumenty*
+- **Related FN:** FN-B2-008
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-APPOINTMENT
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `APPOINTMENT`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A1-014
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-ARGUMENT-B1
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `ARGUMENT-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-036
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-ARGUMENT-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `ARGUMENT-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-025
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-ASPECT-PAIRS
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `ASPECT-PAIRS`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-040
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-ASSERTIVE
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `ASSERTIVE`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-030
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-AVAILABILITY
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `AVAILABILITY`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A1-026
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-BADNEWS
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `BADNEWS`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-045
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-BANK-A2
+- **Purpose:** Лексический scope для домена `BANK` / сценариев `BANK-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** konto, karta, przelew, opłaty
+- **Required MWU (examples):** *otworzyć konto*, *zrobić przelew*, *limit karty*
+- **Required FIX (examples):** *Proszę o wyciąg*
+- **Required COLL (examples):** *doładować telefon*, *zablokować kartę*
+- **Related FN:** FN-A2-015, FN-A2-016
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-BANK-B1
+- **Purpose:** Лексический scope для домена `BANK` / сценариев `BANK-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** konto, karta, przelew, opłaty
+- **Required MWU (examples):** *otworzyć konto*, *zrobić przelew*, *limit karty*
+- **Required FIX (examples):** *Proszę o wyciąg*
+- **Required COLL (examples):** *doładować telefon*, *zablokować kartę*
+- **Related FN:** FN-B1-018, FN-B1-019
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-BANK-B2
+- **Purpose:** Лексический scope для домена `BANK` / сценариев `BANK-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** konto, karta, przelew, opłaty
+- **Required MWU (examples):** *otworzyć konto*, *zrobić przelew*, *limit karty*
+- **Required FIX (examples):** *Proszę o wyciąg*
+- **Required COLL (examples):** *doładować telefon*, *zablokować kartę*
+- **Related FN:** FN-B2-013
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-BANK-BASIC
+- **Purpose:** Лексический scope для домена `BANK` / сценариев `BANK-BASIC`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** konto, karta, przelew, opłaty
+- **Required MWU (examples):** *otworzyć konto*, *zrobić przelew*, *limit karty*
+- **Required FIX (examples):** *Proszę o wyciąg*
+- **Required COLL (examples):** *doładować telefon*, *zablokować kartę*
+- **Related FN:** FN-A1-030, FN-A1-031
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-BILLS
+- **Purpose:** Лексический scope для домена `BANK` / сценариев `BILLS`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** konto, karta, przelew, opłaty
+- **Required MWU (examples):** *otworzyć konto*, *zrobić przelew*, *limit karty*
+- **Required FIX (examples):** *Proszę o wyciąg*
+- **Required COLL (examples):** *doładować telefon*, *zablokować kartę*
+- **Related FN:** FN-A2-041
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-BODY
+- **Purpose:** Лексический scope для домена `MED` / сценариев `BODY`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-A1-015
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-BUDGET
+- **Purpose:** Лексический scope для домена `BANK` / сценариев `BUDGET`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** konto, karta, przelew, opłaty
+- **Required MWU (examples):** *otworzyć konto*, *zrobić przelew*, *limit karty*
+- **Required FIX (examples):** *Proszę o wyciąg*
+- **Required COLL (examples):** *doładować telefon*, *zablokować kartę*
+- **Related FN:** FN-B1-048
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-CHAT-A2
+- **Purpose:** Лексический scope для домена `PHONE` / сценариев `CHAT-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** opening/closing, callback, message
+- **Required MWU (examples):** *słucham*, *czy mogę rozmawiać z*, *proszę oddzwonić*
+- **Required FIX (examples):** *Halo, tu …*
+- **Required COLL (examples):** *zostawić wiadomość*
+- **Related FN:** FN-A2-032
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-COLLOQ-CONTROL
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `COLLOQ-CONTROL`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-024
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-COMPARE
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `COMPARE`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-034
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-COMPARE-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `COMPARE-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-014
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-COMPLAINT
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `COMPLAINT`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-A2-017, FN-A2-018, FN-A2-027
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-COMPLAINT-B1
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `COMPLAINT-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-B1-014, FN-B1-020
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-COMPLAINT-B2
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `COMPLAINT-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-B2-010
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-COMPLAINT-WRITE
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `COMPLAINT-WRITE`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-B1-028
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-CONSUMER
+- **Purpose:** Лексический scope для домена `SHOP` / сценариев `CONSUMER`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** zakup, płatność, reklamacja
+- **Required MWU (examples):** *poproszę o*, *czy mogę zapłacić kartą*
+- **Required FIX (examples):** *Paragon, proszę*
+- **Required COLL (examples):** *zrobić reklamację*, *zwrócić towar*
+- **Related FN:** FN-B1-053
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-CONSUMER-B2
+- **Purpose:** Лексический scope для домена `SHOP` / сценариев `CONSUMER-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** zakup, płatność, reklamacja
+- **Required MWU (examples):** *poproszę o*, *czy mogę zapłacić kartą*
+- **Required FIX (examples):** *Paragon, proszę*
+- **Required COLL (examples):** *zrobić reklamację*, *zwrócić towar*
+- **Related FN:** FN-B2-015
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-CONTRACT-B1
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `CONTRACT-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-007
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-CONTRACT-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `CONTRACT-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-005
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-CONTRACT-BASIC
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `CONTRACT-BASIC`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-006
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-CRITICAL-READ
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `CRITICAL-READ`.
+- **First use level:** B2
+- **Ownership:** receptive-primary (productive optional)
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-037
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-CV-ORAL
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `CV-ORAL`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-B1-003
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-DEBATE-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `DEBATE-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-003
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-DESCRIPTION
+- **Purpose:** Лексический scope для домена `IDENTITY` / сценариев `DESCRIPTION`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** имя, происхождение, семья, базовые характеристики
+- **Required MWU (examples):** *nazywam się*, *mam na imię*, *jestem z*
+- **Required FIX (examples):** *Dzień dobry*, *Miło mi*
+- **Required COLL (examples):** *pochodzić z + Gen*
+- **Related FN:** FN-A2-042
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-DISCUSSION
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `DISCUSSION`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-042
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-DOCS
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `DOCS`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-A1-016, FN-A1-018
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-DOCS-B1
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `DOCS-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-B1-010
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EMAIL-A2
+- **Purpose:** Лексический scope для домена `FORMAL` / сценариев `EMAIL-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** email/pismo structure, attachments
+- **Required MWU (examples):** *w odpowiedzi na*, *uprzejmie proszę o*
+- **Required FIX (examples):** *Z poważaniem*, *Z wyrazami szacunku*
+- **Required COLL (examples):** *przesłać dokumenty*
+- **Related FN:** FN-A2-031
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EMAIL-B1
+- **Purpose:** Лексический scope для домена `FORMAL` / сценариев `EMAIL-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** email/pismo structure, attachments
+- **Required MWU (examples):** *w odpowiedzi na*, *uprzejmie proszę o*
+- **Required FIX (examples):** *Z poważaniem*, *Z wyrazami szacunku*
+- **Required COLL (examples):** *przesłać dokumenty*
+- **Related FN:** FN-B1-004, FN-B1-034
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EMERGENCY-BASIC
+- **Purpose:** Лексический scope для домена `MED` / сценариев `EMERGENCY-BASIC`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-A1-040
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EVIDENCE
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `EVIDENCE`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-048
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EXAM-ORAL-B1
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `EXAM-ORAL-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-050
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EXAM-ORAL-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `EXAM-ORAL-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-034
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EXAM-WRITE-B1
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `EXAM-WRITE-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-051
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EXAM-WRITE-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `EXAM-WRITE-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-035
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-EXPLAIN-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `EXPLAIN-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-028
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-FEEDBACK
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `FEEDBACK`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-B1-046
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-FEEDBACK-B2
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `FEEDBACK-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-B2-002
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-FOOD
+- **Purpose:** Лексический scope для домена `SHOP` / сценариев `FOOD`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** zakup, płatność, reklamacja
+- **Required MWU (examples):** *poproszę o*, *czy mogę zapłacić kartą*
+- **Required FIX (examples):** *Paragon, proszę*
+- **Required COLL (examples):** *zrobić reklamację*, *zwrócić towar*
+- **Related FN:** FN-A1-011
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-FORMAL-B1
+- **Purpose:** Лексический scope для домена `FORMAL` / сценариев `FORMAL-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** email/pismo structure, attachments
+- **Required MWU (examples):** *w odpowiedzi na*, *uprzejmie proszę o*
+- **Required FIX (examples):** *Z poważaniem*, *Z wyrazami szacunku*
+- **Required COLL (examples):** *przesłać dokumenty*
+- **Related FN:** FN-B1-008
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-FORMAL-B2
+- **Purpose:** Лексический scope для домена `FORMAL` / сценариев `FORMAL-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** email/pismo structure, attachments
+- **Required MWU (examples):** *w odpowiedzi na*, *uprzejmie proszę o*
+- **Required FIX (examples):** *Z poważaniem*, *Z wyrazami szacunku*
+- **Required COLL (examples):** *przesłać dokumenty*
+- **Related FN:** FN-B2-043
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-FORMS
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `FORMS`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-A1-034
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-FORMS-A2
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `FORMS-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-A2-009
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-GREETINGS
+- **Purpose:** Лексический scope для домена `TV` / сценариев `GREETINGS`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** pan/pani, ty, wołacz usług
+- **Required MWU (examples):** *przejść na ty*, *mówić panu/pani*
+- **Required FIX (examples):** *Możemy mówić sobie na ty?*
+- **Required COLL (examples):** *zwracać się per pan*
+- **Related FN:** FN-A1-005, FN-A1-041
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-HEALTH-LIMIT
+- **Purpose:** Лексический scope для домена `MED` / сценариев `HEALTH-LIMIT`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-A2-038
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-HOUSING-A2
+- **Purpose:** Лексический scope для домена `HOUSING` / сценариев `HOUSING-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** ogłoszenie, umowa, czynsz, kaucja, usterki
+- **Required MWU (examples):** *wynająć mieszkanie*, *płacić czynsz*, *kaucja zwrotna*
+- **Required FIX (examples):** *Do wynajęcia*
+- **Required COLL (examples):** *podpisać umowę*, *zgłosić usterkę*
+- **Related FN:** FN-A2-004
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-HOUSING-B1
+- **Purpose:** Лексический scope для домена `HOUSING` / сценариев `HOUSING-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** ogłoszenie, umowa, czynsz, kaucja, usterki
+- **Required MWU (examples):** *wynająć mieszkanie*, *płacić czynsz*, *kaucja zwrotna*
+- **Required FIX (examples):** *Do wynajęcia*
+- **Required COLL (examples):** *podpisać umowę*, *zgłosić usterkę*
+- **Related FN:** FN-B1-006
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-HOUSING-B2
+- **Purpose:** Лексический scope для домена `HOUSING` / сценариев `HOUSING-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** ogłoszenie, umowa, czynsz, kaucja, usterki
+- **Required MWU (examples):** *wynająć mieszkanie*, *płacić czynsz*, *kaucja zwrotna*
+- **Required FIX (examples):** *Do wynajęcia*
+- **Required COLL (examples):** *podpisać umowę*, *zgłosić usterkę*
+- **Related FN:** FN-B2-006
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-HOUSING-BASIC
+- **Purpose:** Лексический scope для домена `HOUSING` / сценариев `HOUSING-BASIC`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** ogłoszenie, umowa, czynsz, kaucja, usterki
+- **Required MWU (examples):** *wynająć mieszkanie*, *płacić czynsz*, *kaucja zwrotna*
+- **Required FIX (examples):** *Do wynajęcia*
+- **Required COLL (examples):** *podpisać umowę*, *zgłosić usterkę*
+- **Related FN:** FN-A1-003
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-HOUSING-FIX
+- **Purpose:** Лексический scope для домена `HOUSING` / сценариев `HOUSING-FIX`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** ogłoszenie, umowa, czynsz, kaucja, usterki
+- **Required MWU (examples):** *wynająć mieszkanie*, *płacić czynsz*, *kaucja zwrotna*
+- **Required FIX (examples):** *Do wynajęcia*
+- **Required COLL (examples):** *podpisać umowę*, *zgłosić usterkę*
+- **Related FN:** FN-A1-027, FN-A2-005
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-HYPOTHESIS
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `HYPOTHESIS`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-042
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-HYPOTHESIS-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `HYPOTHESIS-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-026
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-IDENTITY
+- **Purpose:** Лексический scope для домена `IDENTITY` / сценариев `IDENTITY`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** имя, происхождение, семья, базовые характеристики
+- **Required MWU (examples):** *nazywam się*, *mam na imię*, *jestem z*
+- **Required FIX (examples):** *Dzień dobry*, *Miło mi*
+- **Required COLL (examples):** *pochodzić z + Gen*
+- **Related FN:** FN-A1-001, FN-A1-035
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-INSTRUCTIONS
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `INSTRUCTIONS`.
+- **First use level:** A1
+- **Ownership:** receptive-primary (productive optional)
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A1-042
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-INSTRUCTIONS-A2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `INSTRUCTIONS-A2`.
+- **First use level:** A2
+- **Ownership:** receptive-primary (productive optional)
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-048
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-INSTRUCTIONS-B1
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `INSTRUCTIONS-B1`.
+- **First use level:** B1
+- **Ownership:** receptive-primary (productive optional)
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-044
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-KINDER
+- **Purpose:** Лексический scope для домена `SCHOOL` / сценариев `KINDER`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** nieobecność, wychowawca, przedszkole/szkoła
+- **Required MWU (examples):** *usprawiedliwić nieobecność*, *zebrać rodziców*
+- **Required FIX (examples):** *Uprzejmie informuję, że*
+- **Required COLL (examples):** *odebrać dziecko*, *mieć alergię*
+- **Related FN:** FN-A2-014
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-LETTER-B1
+- **Purpose:** Лексический scope для домена `FORMAL` / сценариев `LETTER-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** email/pismo structure, attachments
+- **Required MWU (examples):** *w odpowiedzi na*, *uprzejmie proszę o*
+- **Required FIX (examples):** *Z poważaniem*, *Z wyrazami szacunku*
+- **Required COLL (examples):** *przesłać dokumenty*
+- **Related FN:** FN-B1-033
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-LETTER-B2
+- **Purpose:** Лексический scope для домена `FORMAL` / сценариев `LETTER-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** email/pismo structure, attachments
+- **Required MWU (examples):** *w odpowiedzi na*, *uprzejmie proszę o*
+- **Required FIX (examples):** *Z poważaniem*, *Z wyrazami szacunku*
+- **Required COLL (examples):** *przesłać dokumenty*
+- **Related FN:** FN-B2-021
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-MANIP-RESIST
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `MANIP-RESIST`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-045
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-MED-A2
+- **Purpose:** Лексический scope для домена `MED` / сценариев `MED-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-A2-010, FN-A2-037
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-MED-B1
+- **Purpose:** Лексический scope для домена `MED` / сценариев `MED-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-B1-012, FN-B1-013
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-MED-B2
+- **Purpose:** Лексический scope для домена `MED` / сценариев `MED-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-B2-009
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-MEDIATION-B1
+- **Purpose:** Лексический scope для домена `MED` / сценариев `MEDIATION-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-B1-037, FN-B1-038
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-MEDIATION-B2
+- **Purpose:** Лексический scope для домена `MED` / сценариев `MEDIATION-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-B2-018, FN-B2-027, FN-B2-041
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-MEETING
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `MEETING`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-B1-002, FN-B1-025
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-MONEY
+- **Purpose:** Лексический scope для домена `BANK` / сценариев `MONEY`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** konto, karta, przelew, opłaty
+- **Required MWU (examples):** *otworzyć konto*, *zrobić przelew*, *limit karty*
+- **Required FIX (examples):** *Proszę o wyciąg*
+- **Required COLL (examples):** *doładować telefon*, *zablokować kartę*
+- **Related FN:** FN-A1-009, FN-A1-036
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-NARRATIVE-A2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `NARRATIVE-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-033
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-NARRATIVE-B1
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `NARRATIVE-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-035
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-NEIGHBOR
+- **Purpose:** Лексический scope для домена `NEIGHBOR` / сценариев `NEIGHBOR`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** sąsiedztwo, hałas, drobna prośba
+- **Required MWU (examples):** *cisza nocna*, *wspólnota mieszkaniowa*
+- **Required FIX (examples):** *Przepraszam za hałas*
+- **Required COLL (examples):** *pożyczyć narzędzie*
+- **Related FN:** FN-A1-039
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-NEIGHBOR-A2
+- **Purpose:** Лексический scope для домена `NEIGHBOR` / сценариев `NEIGHBOR-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** sąsiedztwo, hałas, drobna prośba
+- **Required MWU (examples):** *cisza nocna*, *wspólnota mieszkaniowa*
+- **Required FIX (examples):** *Przepraszam za hałas*
+- **Required COLL (examples):** *pożyczyć narzędzie*
+- **Related FN:** FN-A2-021, FN-A2-022
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-NEIGHBOR-B1
+- **Purpose:** Лексический scope для домена `NEIGHBOR` / сценариев `NEIGHBOR-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** sąsiedztwo, hałas, drobna prośba
+- **Required MWU (examples):** *cisza nocna*, *wspólnota mieszkaniowa*
+- **Required FIX (examples):** *Przepraszam za hałas*
+- **Required COLL (examples):** *pożyczyć narzędzie*
+- **Related FN:** FN-B1-024
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-NOTIFY
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `NOTIFY`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-044
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-NUM-B1
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `NUM-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-039
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-OPINION-A2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `OPINION-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-035
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PEOPLE
+- **Purpose:** Лексический scope для домена `IDENTITY` / сценариев `PEOPLE`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** имя, происхождение, семья, базовые характеристики
+- **Required MWU (examples):** *nazywam się*, *mam na imię*, *jestem z*
+- **Required FIX (examples):** *Dzień dobry*, *Miło mi*
+- **Required COLL (examples):** *pochodzić z + Gen*
+- **Related FN:** FN-A2-047
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PERSISTENCE
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `PERSISTENCE`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-049
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PHARMA
+- **Purpose:** Лексический scope для домена `MED` / сценариев `PHARMA`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-A2-011
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PHONE
+- **Purpose:** Лексический scope для домена `PHONE` / сценариев `PHONE`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** opening/closing, callback, message
+- **Required MWU (examples):** *słucham*, *czy mogę rozmawiać z*, *proszę oddzwonić*
+- **Required FIX (examples):** *Halo, tu …*
+- **Required COLL (examples):** *zostawić wiadomość*
+- **Related FN:** FN-A1-020, FN-A1-021
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PHONE-A2
+- **Purpose:** Лексический scope для домена `PHONE` / сценариев `PHONE-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** opening/closing, callback, message
+- **Required MWU (examples):** *słucham*, *czy mogę rozmawiać z*, *proszę oddzwonić*
+- **Required FIX (examples):** *Halo, tu …*
+- **Required COLL (examples):** *zostawić wiadomość*
+- **Related FN:** FN-A2-023
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PHONE-B1
+- **Purpose:** Лексический scope для домена `PHONE` / сценариев `PHONE-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** opening/closing, callback, message
+- **Required MWU (examples):** *słucham*, *czy mogę rozmawiać z*, *proszę oddzwonić*
+- **Required FIX (examples):** *Halo, tu …*
+- **Required COLL (examples):** *zostawić wiadomość*
+- **Related FN:** FN-B1-026, FN-B1-027
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PHONE-B2
+- **Purpose:** Лексический scope для домена `PHONE` / сценариев `PHONE-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** opening/closing, callback, message
+- **Required MWU (examples):** *słucham*, *czy mogę rozmawiać z*, *proszę oddzwonić*
+- **Required FIX (examples):** *Halo, tu …*
+- **Required COLL (examples):** *zostawić wiadomość*
+- **Related FN:** FN-B2-020
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PLANNING
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `PLANNING`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-054
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-POLITENESS
+- **Purpose:** Лексический scope для домена `TV` / сценариев `POLITENESS`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** pan/pani, ty, wołacz usług
+- **Required MWU (examples):** *przejść na ty*, *mówić panu/pani*
+- **Required FIX (examples):** *Możemy mówić sobie na ty?*
+- **Required COLL (examples):** *zwracać się per pan*
+- **Related FN:** FN-A1-024, FN-A1-025
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-POLITENESS-A2
+- **Purpose:** Лексический scope для домена `TV` / сценариев `POLITENESS-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** pan/pani, ty, wołacz usług
+- **Required MWU (examples):** *przejść na ty*, *mówić panu/pani*
+- **Required FIX (examples):** *Możemy mówić sobie na ty?*
+- **Required COLL (examples):** *zwracać się per pan*
+- **Related FN:** FN-A2-028
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PRAG-META
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `PRAG-META`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-049
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PRESENTATION
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `PRESENTATION`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-046
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PRIVACY-BASIC
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `PRIVACY-BASIC`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-040
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PROCESS
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `PROCESS`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-030
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-PUBLIC-SPEAK
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `PUBLIC-SPEAK`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-019
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REFUSAL
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `REFUSAL`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-A1-023
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REFUSAL-A2
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `REFUSAL-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-A2-026
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REFUSAL-B1
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `REFUSAL-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-B1-021
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REFUSAL-B2
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `REFUSAL-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-B2-016
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REGISTER-FLEX
+- **Purpose:** Лексический scope для домена `TV` / сценариев `REGISTER-FLEX`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** pan/pani, ty, wołacz usług
+- **Required MWU (examples):** *przejść na ty*, *mówić panu/pani*
+- **Required FIX (examples):** *Możemy mówić sobie na ty?*
+- **Required COLL (examples):** *zwracać się per pan*
+- **Related FN:** FN-B2-022
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REPAIR
+- **Purpose:** Лексический scope для домена `REPAIR` / сценариев `REPAIR`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** niezrozumienie, powtórzenie, parafraza
+- **Required MWU (examples):** *nie rozumiem*, *proszę powtórzyć*, *proszę mówić wolniej*
+- **Required FIX (examples):** *Jak to się pisze?*
+- **Required COLL (examples):** *znaczyć + Acc*
+- **Related FN:** FN-A1-007, FN-A1-008
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REPAIR-A2
+- **Purpose:** Лексический scope для домена `REPAIR` / сценариев `REPAIR-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** niezrozumienie, powtórzenie, parafraza
+- **Required MWU (examples):** *nie rozumiem*, *proszę powtórzyć*, *proszę mówić wolniej*
+- **Required FIX (examples):** *Jak to się pisze?*
+- **Required COLL (examples):** *znaczyć + Acc*
+- **Related FN:** FN-A2-024
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REPAIR-B2
+- **Purpose:** Лексический scope для домена `REPAIR` / сценариев `REPAIR-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** niezrozumienie, powtórzenie, parafraza
+- **Required MWU (examples):** *nie rozumiem*, *proszę powtórzyć*, *proszę mówić wolniej*
+- **Required FIX (examples):** *Jak to się pisze?*
+- **Required COLL (examples):** *znaczyć + Acc*
+- **Related FN:** FN-B2-032
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REQUEST
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `REQUEST`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-A1-022
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REQUEST-A2
+- **Purpose:** Лексический scope для домена `COMPLAINT` / сценариев `REQUEST-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** problem, żądanie, termin
+- **Required MWU (examples):** *chciałbym złożyć reklamację*, *nie działa*
+- **Required FIX (examples):** *Wnoszę reklamację*
+- **Required COLL (examples):** *żądać naprawy / zwrotu*
+- **Related FN:** FN-A2-025
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REVIEW
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `REVIEW`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-043
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-REVIEW-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `REVIEW-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-047
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-ROUTINE
+- **Purpose:** Лексический scope для домена `IDENTITY` / сценариев `ROUTINE`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** имя, происхождение, семья, базовые характеристики
+- **Required MWU (examples):** *nazywam się*, *mam na imię*, *jestem z*
+- **Required FIX (examples):** *Dzień dobry*, *Miło mi*
+- **Required COLL (examples):** *pochodzić z + Gen*
+- **Related FN:** FN-A1-032
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-RULES
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `RULES`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-036
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-RULES-B1
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `RULES-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-041
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHEDULING
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `SCHEDULING`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-045
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHOOL-A2
+- **Purpose:** Лексический scope для домена `SCHOOL` / сценариев `SCHOOL-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** nieobecność, wychowawca, przedszkole/szkoła
+- **Required MWU (examples):** *usprawiedliwić nieobecność*, *zebrać rodziców*
+- **Required FIX (examples):** *Uprzejmie informuję, że*
+- **Required COLL (examples):** *odebrać dziecko*, *mieć alergię*
+- **Related FN:** FN-A2-012, FN-A2-013
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHOOL-B1
+- **Purpose:** Лексический scope для домена `SCHOOL` / сценариев `SCHOOL-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** nieobecność, wychowawca, przedszkole/szkoła
+- **Required MWU (examples):** *usprawiedliwić nieobecność*, *zebrać rodziców*
+- **Required FIX (examples):** *Uprzejmie informuję, że*
+- **Required COLL (examples):** *odebrać dziecko*, *mieć alergię*
+- **Related FN:** FN-B1-015
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHOOL-B2
+- **Purpose:** Лексический scope для домена `SCHOOL` / сценариев `SCHOOL-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** nieobecność, wychowawca, przedszkole/szkoła
+- **Required MWU (examples):** *usprawiedliwić nieobecność*, *zebrać rodziców*
+- **Required FIX (examples):** *Uprzejmie informuję, że*
+- **Required COLL (examples):** *odebrać dziecko*, *mieć alergię*
+- **Related FN:** FN-B2-011
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHOOL-BASIC
+- **Purpose:** Лексический scope для домена `SCHOOL` / сценариев `SCHOOL-BASIC`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** nieobecność, wychowawca, przedszkole/szkoła
+- **Required MWU (examples):** *usprawiedliwić nieobecność*, *zebrać rodziców*
+- **Required FIX (examples):** *Uprzejmie informuję, że*
+- **Required COLL (examples):** *odebrać dziecko*, *mieć alergię*
+- **Related FN:** FN-A1-028, FN-A1-029
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHOOL-MED
+- **Purpose:** Лексический scope для домена `MED` / сценариев `SCHOOL-MED`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** objawy, wizyta, recepta, apteka
+- **Required MWU (examples):** *boli mnie*, *umówić wizytę*, *wypisać receptę*
+- **Required FIX (examples):** *Czy jest wolny termin?*
+- **Required COLL (examples):** *przyjmować lek*, *mieć objawy*
+- **Related FN:** FN-B1-047
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHOOL-READ
+- **Purpose:** Лексический scope для домена `SCHOOL` / сценариев `SCHOOL-READ`.
+- **First use level:** B1
+- **Ownership:** receptive-primary (productive optional)
+- **Thematic subgroups:** nieobecność, wychowawca, przedszkole/szkoła
+- **Required MWU (examples):** *usprawiedliwić nieobecność*, *zebrać rodziców*
+- **Required FIX (examples):** *Uprzejmie informuję, że*
+- **Required COLL (examples):** *odebrać dziecko*, *mieć alergię*
+- **Related FN:** FN-B1-017
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHOOL-WRITE
+- **Purpose:** Лексический scope для домена `SCHOOL` / сценариев `SCHOOL-WRITE`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** nieobecność, wychowawca, przedszkole/szkoła
+- **Required MWU (examples):** *usprawiedliwić nieobecność*, *zebrać rodziców*
+- **Required FIX (examples):** *Uprzejmie informuję, że*
+- **Required COLL (examples):** *odebrać dziecko*, *mieć alergię*
+- **Related FN:** FN-B1-016
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SCHOOL-WRITE-B2
+- **Purpose:** Лексический scope для домена `SCHOOL` / сценариев `SCHOOL-WRITE-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** nieobecność, wychowawca, przedszkole/szkoła
+- **Required MWU (examples):** *usprawiedliwić nieobecność*, *zebrać rodziców*
+- **Required FIX (examples):** *Uprzejmie informuję, że*
+- **Required COLL (examples):** *odebrać dziecko*, *mieć alergię*
+- **Related FN:** FN-B2-012
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SERVICE
+- **Purpose:** Лексический scope для домена `SHOP` / сценариев `SERVICE`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** zakup, płatność, reklamacja
+- **Required MWU (examples):** *poproszę o*, *czy mogę zapłacić kartą*
+- **Required FIX (examples):** *Paragon, proszę*
+- **Required COLL (examples):** *zrobić reklamację*, *zwrócić towar*
+- **Related FN:** FN-A1-006
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SETTLEMENT
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `SETTLEMENT`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-039
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SHOP
+- **Purpose:** Лексический scope для домена `SHOP` / сценариев `SHOP`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** zakup, płatność, reklamacja
+- **Required MWU (examples):** *poproszę o*, *czy mogę zapłacić kartą*
+- **Required FIX (examples):** *Paragon, proszę*
+- **Required COLL (examples):** *zrobić reklamację*, *zwrócić towar*
+- **Related FN:** FN-A1-010
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SIGNS
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `SIGNS`.
+- **First use level:** A1
+- **Ownership:** receptive-primary (productive optional)
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A1-038
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SMALLTALK
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `SMALLTALK`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-039
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SMALLTALK-B2
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `SMALLTALK-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-029
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SMS
+- **Purpose:** Лексический scope для домена `PHONE` / сценариев `SMS`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** opening/closing, callback, message
+- **Required MWU (examples):** *słucham*, *czy mogę rozmawiać z*, *proszę oddzwonić*
+- **Required FIX (examples):** *Halo, tu …*
+- **Required COLL (examples):** *zostawić wiadomość*
+- **Related FN:** FN-A1-019
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SOFTEN
+- **Purpose:** Лексический scope для домена `TV` / сценариев `SOFTEN`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** pan/pani, ty, wołacz usług
+- **Required MWU (examples):** *przejść na ty*, *mówić panu/pani*
+- **Required FIX (examples):** *Możemy mówić sobie na ty?*
+- **Required COLL (examples):** *zwracać się per pan*
+- **Related FN:** FN-B1-029
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-STANCE
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `STANCE`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-031
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SUMMARY
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `SUMMARY`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B1-055
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-SYNTHESIS
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `SYNTHESIS`.
+- **First use level:** B2
+- **Ownership:** receptive-primary (productive optional)
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-B2-033
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-TIME
+- **Purpose:** Лексический scope для домена `IDENTITY` / сценариев `TIME`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** имя, происхождение, семья, базовые характеристики
+- **Required MWU (examples):** *nazywam się*, *mam na imię*, *jestem z*
+- **Required FIX (examples):** *Dzień dobry*, *Miło mi*
+- **Required COLL (examples):** *pochodzić z + Gen*
+- **Related FN:** FN-A1-033
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-TRANS-A2
+- **Purpose:** Лексический scope для домена `TRANS` / сценариев `TRANS-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** bilet, dojazd, opóźnienie
+- **Required MWU (examples):** *biletomat*, *przesiadka*, *spóźniony autobus*
+- **Required FIX (examples):** *Jedzie do centrum?*
+- **Required COLL (examples):** *skasować bilet*, *dojechać do pracy*
+- **Related FN:** FN-A2-019, FN-A2-020
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-TRANS-B1
+- **Purpose:** Лексический scope для домена `TRANS` / сценариев `TRANS-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** bilet, dojazd, opóźnienie
+- **Required MWU (examples):** *biletomat*, *przesiadka*, *spóźniony autobus*
+- **Required FIX (examples):** *Jedzie do centrum?*
+- **Required COLL (examples):** *skasować bilet*, *dojechać do pracy*
+- **Related FN:** FN-B1-022, FN-B1-023
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-TRANS-B2
+- **Purpose:** Лексический scope для домена `TRANS` / сценариев `TRANS-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** bilet, dojazd, opóźnienie
+- **Required MWU (examples):** *biletomat*, *przesiadka*, *spóźniony autobus*
+- **Required FIX (examples):** *Jedzie do centrum?*
+- **Required COLL (examples):** *skasować bilet*, *dojechać do pracy*
+- **Related FN:** FN-B2-017
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-TRANS-BASIC
+- **Purpose:** Лексический scope для домена `TRANS` / сценариев `TRANS-BASIC`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** bilet, dojazd, opóźnienie
+- **Required MWU (examples):** *biletomat*, *przesiadka*, *spóźniony autobus*
+- **Required FIX (examples):** *Jedzie do centrum?*
+- **Required COLL (examples):** *skasować bilet*, *dojechać do pracy*
+- **Related FN:** FN-A1-012, FN-A1-013
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-TV-B1
+- **Purpose:** Лексический scope для домена `TV` / сценариев `TV-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** pan/pani, ty, wołacz usług
+- **Required MWU (examples):** *przejść na ty*, *mówić panu/pani*
+- **Required FIX (examples):** *Możemy mówić sobie na ty?*
+- **Required COLL (examples):** *zwracać się per pan*
+- **Related FN:** FN-B1-031
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-TV-B2
+- **Purpose:** Лексический scope для домена `TV` / сценариев `TV-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** pan/pani, ty, wołacz usług
+- **Required MWU (examples):** *przejść na ty*, *mówić panu/pani*
+- **Required FIX (examples):** *Możemy mówić sobie na ty?*
+- **Required COLL (examples):** *zwracać się per pan*
+- **Related FN:** FN-B2-023
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-TV-SHIFT
+- **Purpose:** Лексический scope для домена `TV` / сценариев `TV-SHIFT`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** pan/pani, ty, wołacz usług
+- **Required MWU (examples):** *przejść na ty*, *mówić panu/pani*
+- **Required FIX (examples):** *Możemy mówić sobie na ty?*
+- **Required COLL (examples):** *zwracać się per pan*
+- **Related FN:** FN-A2-029, FN-A2-030
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-URGENCY
+- **Purpose:** Лексический scope для домена `DEFAULT` / сценариев `URGENCY`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** сценарийный минимум по связанным FN
+- **Required MWU (examples):** *na przykład*
+- **Required FIX (examples):** —
+- **Required COLL (examples):** —
+- **Related FN:** FN-A2-046
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-URZAD-A2
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `URZAD-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-A2-007, FN-A2-008
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-URZAD-B1
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `URZAD-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-B1-009
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-URZAD-B2
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `URZAD-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-B2-007
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-URZAD-BASIC
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `URZAD-BASIC`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-A1-017
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-URZAD-READ
+- **Purpose:** Лексический scope для домена `URZAD` / сценариев `URZAD-READ`.
+- **First use level:** B1
+- **Ownership:** receptive-primary (productive optional)
+- **Thematic subgroups:** wniosek, wizyta, dokumenty, status sprawy
+- **Required MWU (examples):** *złożyć wniosek*, *umówić wizytę*, *odebrać dokumenty*
+- **Required FIX (examples):** *Proszę o informację*, *W załączeniu przesyłam*
+- **Required COLL (examples):** *wypełnić formularz*, *okazać dokument*
+- **Related FN:** FN-B1-011
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-WORK-A2
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `WORK-A2`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-A2-001
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-WORK-B1
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `WORK-B1`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-B1-001
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-WORK-B2
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `WORK-B2`.
+- **First use level:** B2
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-B2-001
+- **Size orientation:** 50–120 lemmas + 15–40 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-WORK-BASIC
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `WORK-BASIC`.
+- **First use level:** A1
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-A1-002
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-WORK-CONFLICT
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `WORK-CONFLICT`.
+- **First use level:** B1
+- **Ownership:** productive in priority domains; receptive elsewhere
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-B1-005
+- **Size orientation:** 40–90 lemmas + 12–30 MWU/COLL (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-WORK-LEAVE
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `WORK-LEAVE`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-A2-002, FN-A2-040
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION
+
+### LEX-WORK-RULES
+- **Purpose:** Лексический scope для домена `WORK` / сценариев `WORK-RULES`.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** должность, график, обязанности, неявка, BHP-минимум
+- **Required MWU (examples):** *iść do pracy*, *mieć dyżur*, *wziąć wolne*
+- **Required FIX (examples):** *Z poważaniem*
+- **Required COLL (examples):** *wykonywać obowiązki*, *zgłosić nieobecność*
+- **Related FN:** FN-A2-003
+- **Size orientation:** 25–60 lemmas + 8–20 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** Хранить rekcja на lemma/COLL внутри bundle; не дублировать весь GR-REK. Видовые пары помечать ASPECT-PAIR; на A1 чаще LEX без свободного выбора. TV/formal FIX обязательны, если bundle обслуживает URZAD/MED/FORMAL.
+- **Selection source:** PRODUCT ANALYSIS + Katalog A/B theme check — Medium; cell mapping REQUIRES VERIFICATION

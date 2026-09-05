@@ -10,7 +10,12 @@
 python scripts/validate-curriculum.py
 ```
 
-Скрипт (только stdlib) проверяет уникальность ID, prerequisites, циклы, счётчики, покрытие FN, LEX/ERR ссылки, запрет временных псевдо-ID. Код выхода `0` = OK. Отчёт: [curriculum/phase-2-integrity-report.md](curriculum/phase-2-integrity-report.md).
+Скрипт (только stdlib) проверяет **structural integrity**: ID, prerequisites, циклы, late FN deps, Exit status, stub-фразы, LEX fields, exact FN rows в traceability, распределение Criticality/Evidence.  
+
+**`OK` ≠ методическая корректность и ≠ JPJO approval.**  
+Отчёт: [curriculum/phase-2-integrity-report.md](curriculum/phase-2-integrity-report.md).
+
+Механический генератор `rebuild_phase2_integrity.py` **удалён** и не должен возвращаться.
 
 Этот каталог задаёт проверяемую систему требований. Он не выбирает стек, не проектирует базу, не описывает API и не содержит UI-макетов.
 

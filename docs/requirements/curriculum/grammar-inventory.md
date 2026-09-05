@@ -69,6 +69,7 @@
 
 #### GR-GEN-MFN-01 — Rodzaj gramatyczny (m/ż/n) · Грамматический род (м/ж/ср)
 - **Intro:** A1 · **Re-deepen:** A2 (исключения), B1 (родовые сдвиги в словообразовании)
+- **Exit status:** Required
 - **Prereq:** —
 - **Функция:** Классификация N для согласования Adj/Pron/V_past.
 - **Form / Meaning / Use:** Формальные маркеры (*-a* ж. часто; *-o/-e* ср.; нулевое м.); род лексический, не «биологический».
@@ -83,6 +84,7 @@
 
 #### GR-NUM-SGPL-01 — Liczba pojedyncza / mnoga · Ед. / мн. число
 - **Intro:** A1 · **Re-deepen:** A2 (чередования), B1 (suppletive: *człowiek/ludzie*)
+- **Exit status:** Required
 - **Prereq:** GR-GEN-MFN-01
 - **Функция:** Обозначение количества референтов; триггер согласования.
 - **Form / Meaning / Use:** Регулярные мн.; чередования (*ręka → ręce*, *miasto → miasta*).
@@ -97,6 +99,7 @@
 
 #### GR-AGR-ADJ-01 — Zgoda przymiotnika z rzeczownikiem · Согласование прилагательного
 - **Intro:** A1 · **Re-deepen:** A2–B2 (все падежи, мн. męskoosobowe)
+- **Exit status:** Required
 - **Prereq:** GR-GEN-MFN-01, GR-CAS-NOM-01
 - **Функция:** Атрибутивная характеристика.
 - **Form / Meaning / Use:** Adj копирует род/число/падеж N.
@@ -111,6 +114,7 @@
 
 #### GR-AGR-VPAST-01 — Zgoda rodzaju w czasie przeszłym · Согласование рода в прошедшем
 - **Intro:** A1 · **Re-deepen:** A2 (мн.), B1 (męskoosobowy)
+- **Exit status:** Required
 - **Prereq:** GR-GEN-MFN-01, GR-TNS-PST-01
 - **Функция:** Маркировка субъекта в прош.
 - **Form / Meaning / Use:** *-łem/-łam/-ło*; мн. *-li/-ły*.
@@ -125,6 +129,7 @@
 
 #### GR-MO-VIR-01 — Męskoosobowy / niemęskoosobowy · Мужсколичный / немужсколичный
 - **Intro:** A2 · **Re-deepen:** B1 (liczebniki), B2 (стиль/обобщения)
+- **Exit status:** Required
 - **Prereq:** GR-NUM-SGPL-01, GR-AGR-ADJ-01
 - **Функция:** Польская категория мн.ч. для групп мужчин vs остальное.
 - **Form / Meaning / Use:** *ci nowi studenci byli* vs *te nowe studentki / stoły były*; числительные *czterej / cztery*.
@@ -139,6 +144,7 @@
 
 #### GR-ALT-STEM-01 — Oboczności tematyczne · Чередования основ
 - **Intro:** A1 (распознавание в *w mieście*) · **Re-deepen:** A2–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-GEN-MFN-01, GR-NUM-SGPL-01
 - **Pedagogical note:** Вводится **параллельно** с `GR-CAS-LOC-01` (не как его prerequisite и не наоборот): сначала замечаем чередование в формах места, затем систематизируем.
 - **Функция:** Предсказуемые изменения основы в падежах/степенях/спряжении.
@@ -158,6 +164,7 @@
 
 #### GR-CAS-NOM-01 — Mianownik: podmiot · Именительный: подлежащее
 - **Intro:** A1 · **Re-deepen:** A2–B2
+- **Exit status:** Required
 - **Prereq:** —
 - **Функция:** Назвать деятеля/тему предложения.
 - **Form / Meaning / Use:** Словарная форма; согласование с V.
@@ -170,6 +177,7 @@
 
 #### GR-CAS-NOM-02 — Mianownik: orzecznik (to / jest + Adj) · Именительный: предикатив
 - **Intro:** A1 · **Re-deepen:** A2 (контраст с Narz)
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-NOM-01
 - **Функция:** Классификация/свойство (*to Polka*; *jest mały*).
 - **Form / Meaning / Use:** *X to Y*; *X jest + Adj*.
@@ -184,6 +192,7 @@
 
 #### GR-CAS-ACC-01 — Biernik: dopełnienie bliższe · Винительный: прямое дополнение
 - **Intro:** A1 · **Re-deepen:** A2 (żywotność м.), B1
+- **Exit status:** Required
 - **Prereq:** GR-CAS-NOM-01
 - **Функция:** Объект транзитивного глагола.
 - **Form / Meaning / Use:** Ж. *-ę*; м. неодуш. = Nom; м. одуш. = Gen (часто).
@@ -198,6 +207,7 @@
 
 #### GR-CAS-ACC-02 — Biernik z przyimkami (na, o, przez…) · Винительный с предлогами
 - **Intro:** A1 · **Re-deepen:** A2–B1 (*na* направление vs Msc место)
+- **Exit status:** Required
 - **Prereq:** GR-CAS-ACC-01
 - **Функция:** Цель движения, тема (*pytać o*), ожидание (*czekać na*).
 - **Form / Meaning / Use:** *idę na pocztę*; *czekam na autobus*; *pytam o godzinę*.
@@ -212,6 +222,7 @@
 
 #### GR-CAS-GEN-01 — Dopełniacz: dopełniacz dzierżawczy / ilości · Родительный: принадлежность / мера
 - **Intro:** A1 · **Re-deepen:** A2–B2
+- **Exit status:** Required
 - **Prereq:** GR-CAS-NOM-01
 - **Функция:** «Чей / сколько чего».
 - **Form / Meaning / Use:** *brat Ewy*; *kilogram ryżu*.
@@ -226,6 +237,7 @@
 
 #### GR-CAS-GEN-02 — Dopełniacz z przyimkami (do, u, z, od, bez…) · Родительный с предлогами
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Required
 - **Prereq:** GR-CAS-GEN-01
 - **Функция:** Направление *do*, источник *z/od*, визит *u*, отсутствие *bez*.
 - **Form / Meaning / Use:** *Idę do domu. Byliśmy u lekarza. Wracają z Warszawy.*
@@ -240,6 +252,7 @@
 
 #### GR-CAS-GEN-03 — Dopełniacz po negacji (nie + V + obiekt) · Родительный после отрицания
 - **Intro:** A1 · **Re-deepen:** A2–B2 (объём «обязательности»)
+- **Exit status:** Required
 - **Prereq:** GR-CAS-ACC-01, GR-NEG-01
 - **Функция:** Объект отрицаемого транзитива часто в D.
 - **Form / Meaning / Use:** *Nie kupiły tego soku.* vs *Kupiły ten sok.*
@@ -254,6 +267,7 @@
 
 #### GR-CAS-GEN-04 — Dopełniacz: podmiot po «nie ma / nie było» · Родительный подлежащего при отсутствии
 - **Intro:** A1 · **Re-deepen:** A2
+- **Exit status:** Required
 - **Prereq:** GR-CAS-GEN-01
 - **Функция:** Отсутствие / ненахождение.
 - **Form / Meaning / Use:** *Nie ma pasty. Koleżanki nie było w szkole.*
@@ -268,6 +282,7 @@
 
 #### GR-CAS-GEN-05 — Rekcja dopełniaczowa czasownika · Глагольное управление D
 - **Intro:** A1 (*słuchać*) · **Re-deepen:** A2–B2 (список глаголов)
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-GEN-01
 - **Функция:** Объект глаголов с фиксированным D.
 - **Form / Meaning / Use:** *słuchać muzyki; szukać pracy; potrzebować czasu; uczyć się polskiego*.
@@ -282,6 +297,7 @@
 
 #### GR-CAS-DAT-01 — Celownik: odbiorca / doświadczający · Дательный: адресат / экспериенцер
 - **Intro:** A2 (формулы с A1: *dziękuję*) · **Re-deepen:** B1–B2
+- **Exit status:** Required
 - **Prereq:** GR-CAS-NOM-01
 - **Функция:** Кому; *podobać się*; *jest mi zimno*.
 - **Form / Meaning / Use:** *Daję mamie kwiaty. Film podoba mi się. Czy jest ci zimno?*
@@ -296,6 +312,7 @@
 
 #### GR-CAS-INS-01 — Narzędnik: orzecznik po «być» · Творительный: предикатив профессии/роли
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Required
 - **Prereq:** GR-CAS-NOM-02
 - **Функция:** Кем/чем является.
 - **Form / Meaning / Use:** *Paweł jest dobrym uczniem. Ona była aktorką.*
@@ -310,6 +327,7 @@
 
 #### GR-CAS-INS-02 — Narzędnik: narzędzie / towarzyszenie · Творительный: орудие / совместность
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Required
 - **Prereq:** GR-CAS-INS-01
 - **Функция:** Чем ехать / с чем / интересоваться.
 - **Form / Meaning / Use:** *Jechał pociągiem. Kawę z mlekiem. Interesuję się sportem.*
@@ -324,6 +342,7 @@
 
 #### GR-CAS-LOC-01 — Miejscownik z «w / na / o / po» · Местный с предлогами
 - **Intro:** A1 · **Re-deepen:** A2–B2
+- **Exit status:** Required
 - **Prereq:** GR-CAS-NOM-01
 - **Pedagogical note:** Чередования основ (*miasto → mieście*) отрабатываются совместно с `GR-ALT-STEM-01`, без циклической зависимости в графе.
 - **Функция:** Место, тема (*o*), время.
@@ -339,6 +358,7 @@
 
 #### GR-CAS-VOC-01 — Wołacz: zwrot do osoby · Звательный: обращение
 - **Intro:** A1 (формулы *panie…*, *Aniu*) · **Re-deepen:** A2 (продуктивно), B1 (регистр)
+- **Exit status:** Required
 - **Prereq:** PRAG-PAN-01
 - **Функция:** Адресация; живой падеж польского.
 - **Form / Meaning / Use:** *Panie doktorze! Aniu! Drogi Marku!*
@@ -353,6 +373,7 @@
 
 #### GR-CAS-FUNC-MAP-01 — Mapa funkcji przypadków · Карта функций падежей (метаконцепт)
 - **Intro:** A1 · **Re-deepen:** каждый уровень
+- **Exit status:** Supporting
 - **Prereq:** —
 - **Функция:** Не учить «окончания падежа», а функцию + форму.
 - **Form / Meaning / Use:** Семь столпов PED-001.
@@ -369,6 +390,7 @@
 
 #### GR-REK-PREP-01 — Rekcja przyimków częstych · Управление частых предлогов
 - **Intro:** A1 · **Re-deepen:** A2–B2
+- **Exit status:** Required
 - **Prereq:** GR-CAS-ACC-02, GR-CAS-GEN-02, GR-CAS-LOC-01, GR-CAS-INS-02
 - **Функция:** Стабильные связки предлог→падеж.
 - **Form / Meaning / Use:** *w+Msc, do+D, na+B/Msc, z+D/Narz, o+B/Msc, po+Msc, dla+D, bez+D, od+D, u+D, przed/za/nad/pod + B/Narz* (по значению).
@@ -383,6 +405,7 @@
 
 #### GR-REK-VERB-01 — Rekcja czasowników (rdzeń A1–A2) · Управление глаголов (ядро)
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Required
 - **Prereq:** GR-CAS-GEN-05, GR-CAS-ACC-02
 - **Функция:** Лексикализованные рамки.
 - **Form / Meaning / Use:** *dziękować + C; pomagać + C; czekać na + B; pytać o + B; bać się + D; lubić + B; uczyć się + D*.
@@ -398,6 +421,7 @@
 
 #### GR-REK-VERB-DAT-01 — Rekcja czasowników z celownikiem · Управление глаголов с дательным
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Required
 - **Prereq:** GR-CAS-DAT-01, GR-REK-VERB-01
 - **Функция:** Системный выбор Dat при *pomagać, dziękować, przyglądać się* и т.п.
 - **Form / Meaning / Use:** V + Dat (± Prep); отличие от Acc-объекта L1.
@@ -412,6 +436,7 @@
 
 #### GR-REK-ADJ-01 — Rekcja przymiotników / imiesłowów · Управление прилагательных
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-REK-PREP-01
 - **Функция:** *zadowolony z + D; podobny do + D; pewny + D*.
 - **Form / Meaning / Use:** Adj задаёт падеж/предлог.
@@ -428,6 +453,7 @@
 
 #### GR-PRO-PERS-01 — Zaimki osobowe (odmiana) · Личные местоимения
 - **Intro:** A1 · **Re-deepen:** A2 (энклитики), B1
+- **Exit status:** Required
 - **Prereq:** GR-CAS-NOM-01
 - **Функция:** Замена N; акцент vs клитика (*mnie/mi*).
 - **Form / Meaning / Use:** *ja/ty/on…*; ударные vs краткие формы.
@@ -442,6 +468,7 @@
 
 #### GR-PRO-DEM-01 — Zaimki wskazujące ten/ta/to · Указательные
 - **Intro:** A1 · **Re-deepen:** A2–B1 (все падежи, мн. *ci/te*)
+- **Exit status:** Required
 - **Prereq:** GR-GEN-MFN-01
 - **Функция:** Дейксис, определение.
 - **Form / Meaning / Use:** Согласование с N; мн. męskoosobowe *ci*.
@@ -456,6 +483,7 @@
 
 #### GR-PRO-POSS-01 — Zaimki dzierżawcze · Притяжательные
 - **Intro:** A1 · **Re-deepen:** A2 (*swój*), B1
+- **Exit status:** Required
 - **Prereq:** GR-AGR-ADJ-01
 - **Функция:** Принадлежность.
 - **Form / Meaning / Use:** *mój/twój/nasz/wasz*; согласование.
@@ -468,6 +496,7 @@
 
 #### GR-PRO-SWOJ-01 — Zaimek «swój» · Местоимение *swój*
 - **Intro:** A2 · **Re-deepen:** B1–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-PRO-POSS-01
 - **Функция:** Рефлексивная принадлежность к субъекту.
 - **Form / Meaning / Use:** *On myje swój samochód* (свой), не *\*jego* если субъект = владелец.
@@ -482,6 +511,7 @@
 
 #### GR-PRO-INT-01 — Zaimki pytające · Вопросительные
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Required
 - **Prereq:** —
 - **Функция:** Запрос информации.
 - **Form / Meaning / Use:** *kto, co, jaki, który, czyj, ile* + склонение.
@@ -494,6 +524,7 @@
 
 #### GR-PRO-INDEF-01 — Zaimki nieokreślone / przeczące · Неопределённые / отрицательные
 - **Intro:** A2 · **Re-deepen:** B1, B2
+- **Exit status:** Required
 - **Prereq:** GR-NEG-01, GR-PRO-INT-01
 - **Функция:** *ktoś/coś/nikt/nic/żaden*.
 - **Form / Meaning / Use:** Отрицательные с *nie*; согласование *żaden*.
@@ -508,6 +539,7 @@
 
 #### GR-PRO-REFL-01 — «się» / «siebie» · Возвратность
 - **Intro:** A1 (*się* лексически) · **Re-deepen:** A2–B1 (позиция, *siebie*)
+- **Exit status:** Required
 - **Prereq:** GR-TNS-PRS-01
 - **Функция:** Возвратные/reciprocal/лексические *się*.
 - **Form / Meaning / Use:** *Myję się. Boję się. Uczę się.* vs *Widzę siebie.*
@@ -526,6 +558,7 @@
 
 #### GR-NUM-CARD-01 — Liczebniki 1–4 · Числительные 1–4
 - **Intro:** A1 · **Re-deepen:** A2 (*dwaj*), B1
+- **Exit status:** Required
 - **Prereq:** GR-GEN-MFN-01
 - **Функция:** Счёт малых количеств; согласование.
 - **Form / Meaning / Use:** *jeden/jedna; dwa/dwie; trzy; cztery* + Nom/Acc N (часто).
@@ -540,6 +573,7 @@
 
 #### GR-NUM-CARD-05 — Liczebniki 5+ i dopełniacz · 5+ и родительный считаемого
 - **Intro:** A1 (рецептивно/формулы) · **Re-deepen:** A2 (продуктивно), B1
+- **Exit status:** Required
 - **Prereq:** GR-CAS-GEN-01
 - **Функция:** Количество ≥5.
 - **Form / Meaning / Use:** *pięć książek; mam pięć złotych*.
@@ -554,6 +588,7 @@
 
 #### GR-NUM-ORD-01 — Liczebniki porządkowe · Порядковые
 - **Intro:** A1 · **Re-deepen:** A2–B1 (даты, сложные)
+- **Exit status:** Supporting
 - **Prereq:** GR-AGR-ADJ-01
 - **Функция:** Дата, порядок, этаж.
 - **Form / Meaning / Use:** *pierwszy maja; na trzecim piętrze*.
@@ -566,6 +601,7 @@
 
 #### GR-NUM-VIR-01 — Formy męskoosobowe liczebników · Мужсколичные формы числительных
 - **Intro:** B1 (подготовка A2: *dwaj/czterej*) · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-MO-VIR-01, GR-NUM-CARD-01
 - **Функция:** Счёт мужчин.
 - **Form / Meaning / Use:** *dwaj studenci / dwóch studentów; czterej / czterech*.
@@ -578,6 +614,7 @@
 
 #### GR-NUM-COL-01 — Liczebniki zbiorowe (ograniczone) · Собирательные (ограниченно)
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Extension
 - **Prereq:** GR-NUM-CARD-05
 - **Функция:** *dwoje dzieci, oboje*.
 - **Form / Meaning / Use:** С *dzieci*, смешанными парами и т.п.
@@ -592,6 +629,7 @@
 
 #### GR-NUM-MONEY-01 — Liczebniki w czasie i pieniądzach · Числительные во времени и деньгах
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-NUM-CARD-01, GR-NUM-ORD-01
 - **Функция:** Быт: цена, час, дата.
 - **Form / Meaning / Use:** *za pięć złotych; o ósmej; pół godziny*.
@@ -608,6 +646,7 @@
 
 #### GR-TNS-PRS-01 — Czas teraźniejszy · Настоящее время
 - **Intro:** A1 · **Re-deepen:** A2–B1 (классы спряжения, чередования)
+- **Exit status:** Required
 - **Prereq:** —
 - **Функция:** Сейчас / привычка / ближайшее будущее (ограниченно).
 - **Form / Meaning / Use:** Типы *-am/-em/-ę* и др.; *jestem/mam*.
@@ -620,6 +659,7 @@
 
 #### GR-TNS-PST-01 — Czas przeszły · Прошедшее время
 - **Intro:** A1 · **Re-deepen:** A2–B2 (аспектный выбор)
+- **Exit status:** Required
 - **Prereq:** GR-GEN-MFN-01, GR-NUM-SGPL-01, GR-TNS-PRS-01
 - **Pedagogical note:** Формы прошедшего вводятся до отдельного mastery согласования рода (`GR-AGR-VPAST-01` зависит от этого концепта, не наоборот).
 - **Функция:** Прошедшие события/процессы.
@@ -633,6 +673,7 @@
 
 #### GR-TNS-FUT-01 — Czas przyszły złożony (niedokonany) · Сложное будущее
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Required
 - **Prereq:** GR-TNS-PRS-01, GR-ASP-LEX-01
 - **Функция:** Будущий процесс / незавершённость.
 - **Form / Meaning / Use:** *będę czytać / będę czytał(a)*.
@@ -647,6 +688,7 @@
 
 #### GR-TNS-FUT-02 — Czas przyszły prosty (dokonany) · Простое будущее
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-ASP-LEX-01
 - **Функция:** Целостное будущее событие.
 - **Form / Meaning / Use:** Настоящие формы dok. со значением будущего: *przeczytam, kupię*.
@@ -659,6 +701,7 @@
 
 #### GR-MOD-IMP-01 — Tryb rozkazujący · Повелительное наклонение
 - **Intro:** A2 · **Re-deepen:** B1 (аспект в императиве), B2
+- **Exit status:** Required
 - **Prereq:** GR-TNS-PRS-01, GR-ASP-CON-01
 - **Функция:** Просьба/приказ/инструкция.
 - **Form / Meaning / Use:** *czytaj, napiszcie, niech idą*.
@@ -671,6 +714,7 @@
 
 #### GR-MOD-COND-01 — Tryb przypuszczający · Сослагательное
 - **Intro:** A2 · **Re-deepen:** B1–B2 (*by*, вежливость)
+- **Exit status:** Required
 - **Prereq:** GR-TNS-PST-01
 - **Функция:** Гипотеза, вежливая просьба (*chciałbym*).
 - **Form / Meaning / Use:** L-форма + *by* + лицо: *chciałbym, zrobilibyście*.
@@ -685,6 +729,7 @@
 
 #### GR-MOD-VERB-01 — Czasowniki modalne (móc, musieć, chcieć, mieć, powinien) · Модальность
 - **Intro:** A1 (*chcieć/móc/musieć* лексически) · **Re-deepen:** A2–B2
+- **Exit status:** Required
 - **Prereq:** GR-TNS-PRS-01
 - **Функция:** Возможность, необходимость, желание, мягкий долг.
 - **Form / Meaning / Use:** Modal + infinitiv; *powinien/powinna*; *mam + inf* (обязанность).
@@ -703,6 +748,7 @@
 
 #### GR-ASP-LEX-01 — Aspekt: znajomość leksykalna par · Аспект: лексическое знакомство с парами
 - **Intro:** A1 · **Re-deepen:** —
+- **Exit status:** Required
 - **Prereq:** —
 - **Функция:** Узнать, что глаголы бывают dok/niedok; хранить пары в словаре.
 - **Form / Meaning / Use:** *czytać/przeczytać; kupować/kupić* как лексика, **без** требования свободного выбора.
@@ -715,6 +761,7 @@
 
 #### GR-ASP-CON-01 — Aspekt: pierwszy świadomy kontrast · Аспект: первый сознательный контраст
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Required
 - **Prereq:** GR-ASP-LEX-01, GR-TNS-PST-01
 - **Функция:** Процесс/привычка vs целостное событие в понятном контексте.
 - **Form / Meaning / Use:** Минимальные пары в прош.: *pisał list / napisał list*.
@@ -729,6 +776,7 @@
 
 #### GR-ASP-PST-01 — Wybór aspektu w czasie przeszłym · Выбор аспекта в прошедшем
 - **Intro:** A2 · **Re-deepen:** B1–B2
+- **Exit status:** Required
 - **Prereq:** GR-ASP-CON-01
 - **Функция:** Нарратив: фон vs событие.
 - **Form / Meaning / Use:** Правила контекста + лексика.
@@ -741,6 +789,7 @@
 
 #### GR-ASP-FUT-01 — Wybór aspektu w przyszłości · Выбор аспекта в будущем
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Required
 - **Prereq:** GR-TNS-FUT-01, GR-TNS-FUT-02, GR-ASP-CON-01
 - **Функция:** *będę pisać* vs *napiszę*.
 - **Form / Meaning / Use:** Запрет *będę* + dok. инф.
@@ -755,6 +804,7 @@
 
 #### GR-ASP-IMP-01 — Aspekt w imperatywie · Аспект в императиве
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-MOD-IMP-01, GR-ASP-CON-01
 - **Функция:** *pisz* (процесс/общая инструкция) vs *napisz* (конкретный результат).
 - **Form / Meaning / Use:** Зависит от иллокуции.
@@ -767,6 +817,7 @@
 
 #### GR-ASP-NEG-01 — Aspekt a negacja · Аспект и отрицание
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-ASP-PST-01, GR-NEG-01
 - **Функция:** Отрицание результата vs процесса (*nie przeczytał* vs *nie czytał*).
 - **Form / Meaning / Use:** Контекст «не сумел / не делал».
@@ -779,6 +830,7 @@
 
 #### GR-ASP-PREF-01 — Prefiksy a aspekt · Приставки и аспект
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-ASP-CON-01, GR-WF-PREF-01
 - **Функция:** Приставка часто (но не всегда) делает dok и меняет лексику.
 - **Form / Meaning / Use:** *robić → zrobić / przerobić / wyrobić* — разные значения.
@@ -791,6 +843,7 @@
 
 #### GR-ASP-CTRL-01 — Produktywna kontrola aspektu B1–B2 · Продуктивный контроль аспекта
 - **Intro:** B1 · **Re-deepen:** B2 (стиль, нарратив)
+- **Exit status:** Required
 - **Prereq:** GR-ASP-PST-01, GR-ASP-FUT-01, GR-ASP-IMP-01, GR-ASP-NEG-01
 - **Функция:** Свободный выбор вида в речи/письме на знакомые темы.
 - **Form / Meaning / Use:** Интеграция всех предыдущих узлов.
@@ -806,6 +859,7 @@
 
 #### GR-MOT-BASE-01 — iść / chodzić, jechać / jeździć · Базовые глаголы движения
 - **Intro:** A1 (лексика *iść/jechać*) · **Re-deepen:** A2 (привычка vs однонаправленность)
+- **Exit status:** Supporting
 - **Prereq:** GR-TNS-PRS-01
 - **Функция:** Пешком/транспортом; однократное направление vs хабитуалис.
 - **Form / Meaning / Use:** *Idę do sklepu. Chodzę do pracy piechotą. Jadę tramwajem.*
@@ -820,6 +874,7 @@
 
 #### GR-MOT-PREF-01 — Ruch z przedrostkami · Движение с приставками
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-MOT-BASE-01, GR-WF-PREF-01
 - **Функция:** *przyjść, wyjść, wejść, dojść, przejść, wrócić…*
 - **Form / Meaning / Use:** Пространственная конфигурация + часто dok.
@@ -836,6 +891,7 @@
 
 #### GR-DEG-ADJ-01 — Stopniowanie przymiotników · Степени прилагательных
 - **Intro:** A2 · **Re-deepen:** B1 (чередования), B2
+- **Exit status:** Supporting
 - **Prereq:** GR-AGR-ADJ-01
 - **Функция:** Сравнение свойств.
 - **Form / Meaning / Use:** *ładniejszy; lepszy; bardziej chory*.
@@ -848,6 +904,7 @@
 
 #### GR-DEG-ADV-01 — Stopniowanie przysłówków · Степени наречий
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-DEG-ADJ-01
 - **Функция:** Сравнение образа действия.
 - **Form / Meaning / Use:** *szybciej, lepiej, więcej, bardziej kolorowo*.
@@ -864,6 +921,7 @@
 
 #### GR-SYN-COORD-01 — Zdania współrzędne · Сочинительная связь
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** —
 - **Функция:** Связка равноправных клауз.
 - **Form / Meaning / Use:** *i, a, ale, lub, więc…*
@@ -876,6 +934,7 @@
 
 #### GR-SYN-SUB-01 — Zdania podrzędne (że, bo, kiedy) · Подчинение базовое
 - **Intro:** A1 · **Re-deepen:** A2
+- **Exit status:** Required
 - **Prereq:** GR-SYN-COORD-01
 - **Функция:** Содержание, причина, время.
 - **Form / Meaning / Use:** *Myślę, że…; bo…; kiedy…*
@@ -888,6 +947,7 @@
 
 #### GR-SYN-SUB-02 — «żeby» / cel i uzupełnienie · *żeby*
 - **Intro:** A2 · **Re-deepen:** B1–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-SYN-SUB-01, GR-MOD-COND-01 (частично)
 - **Функция:** Цель / желаемое дополнение.
 - **Form / Meaning / Use:** *Chcę, żeby przyszedł. Uczę się, żeby pracować.*
@@ -902,6 +962,7 @@
 
 #### GR-SYN-REL-01 — Zdania względne z «który» · Относительные с *który*
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Required
 - **Prereq:** GR-AGR-ADJ-01, падежи A2
 - **Функция:** Определение через клаузу.
 - **Form / Meaning / Use:** *który* согласуется с антецедентом; падеж по роли в придаточном.
@@ -916,6 +977,7 @@
 
 #### GR-SYN-COND-01 — Okresy warunkowe · Условные периоды
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-MOD-COND-01
 - **Функция:** Реальное/гипотетическое условие.
 - **Form / Meaning / Use:** *Jeśli będę miał czas, przyjdę. Gdybym miał czas, przyszedłbym.*
@@ -932,6 +994,7 @@
 
 #### GR-NEG-01 — Negacja «nie» · Отрицание *nie*
 - **Intro:** A1 · **Re-deepen:** A2–B1 (слитное/раздельное, Gen)
+- **Exit status:** Required
 - **Prereq:** —
 - **Функция:** Отрицание предиката/элемента.
 - **Form / Meaning / Use:** *nie* + V; орфография *nie* с Adj/Adv по правилам.
@@ -944,6 +1007,7 @@
 
 #### GR-NEG-GEN-01 — Negacja a dopełniacz · Связка отрицания с D
 - **Intro:** A1 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-GEN-03, GR-NEG-01
 - **Функция:** Контроль объекта при *nie*.
 - **Form / Meaning / Use:** См. GR-CAS-GEN-03.
@@ -960,6 +1024,7 @@
 
 #### GR-WO-NEUT-01 — Neutralny szyk SVO · Нейтральный порядок
 - **Intro:** A1 · **Re-deepen:** A2
+- **Exit status:** Required
 - **Prereq:** —
 - **Функция:** Базовая декларативка.
 - **Form / Meaning / Use:** *Anna czyta książkę.*
@@ -972,6 +1037,7 @@
 
 #### GR-WO-CLIT-01 — Pozycja «się» i enklityk · Позиция *się* и энклитик
 - **Intro:** A2 · **Re-deepen:** B1–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-PRO-REFL-01
 - **Функция:** Нормативная позиция клитик.
 - **Form / Meaning / Use:** *On się boi. Boję się.*
@@ -986,6 +1052,7 @@
 
 #### GR-WO-IS-01 — Tema–rema / fokus · Тема–рема / фокус
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Required
 - **Prereq:** GR-WO-NEUT-01
 - **Функция:** Выделение данного/нового.
 - **Form / Meaning / Use:** Перестановки и интонация меняют акцент.
@@ -1002,6 +1069,7 @@
 
 #### GR-WF-PREF-01 — Przedrostki czasownikowe (system) · Глагольные приставки как система
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-ASP-LEX-01
 - **Функция:** Значение + часто аспект (*w-, wy-, przy-, za-, po-, u-, roz-, prze-*).
 - **Form / Meaning / Use:** Учить как сеть, не алфавит глаголов (`PED-012`).
@@ -1014,6 +1082,7 @@
 
 #### GR-WF-NOM-01 — Słowotwórstwo rzeczowników / przymiotników (B1–B2) · Именное словообразование
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Extension
 - **Prereq:** —
 - **Функция:** Суффиксы деятеля, признака, абстракции (*-arz, -ka, -ość…*) в объёме уровня.
 - **Form / Meaning / Use:** Продуктивные модели рецептивно→продуктивно.
@@ -1030,6 +1099,7 @@
 
 #### GR-PART-ACT-01 — Imiesłów przymiotnikowy czynny · Действительное причастие
 - **Intro:** B2 · **Re-deepen:** —
+- **Exit status:** Extension
 - **Prereq:** GR-TNS-PRS-01, GR-AGR-ADJ-01
 - **Функция:** *słuchający, czytające*.
 - **Form / Meaning / Use:** Образование и согласование; стиль.
@@ -1042,6 +1112,7 @@
 
 #### GR-PART-PASS-01 — Imiesłów przymiotnikowy bierny · Страдательное причастие
 - **Intro:** B2 · **Re-deepen:** —
+- **Exit status:** Required
 - **Prereq:** GR-ASP-CON-01
 - **Функция:** *zmęczony, zabici, wypoczęte*; база пассива.
 - **Form / Meaning / Use:** Часто от dok.; согласование.
@@ -1054,6 +1125,7 @@
 
 #### GR-PART-ADV-01 — Imiesłowy przysłówkowe · Деепричастия
 - **Intro:** B2 · **Re-deepen:** —
+- **Exit status:** Extension
 - **Prereq:** GR-ASP-CON-01
 - **Функция:** *słuchając* (współczesny); распознавание *wysłuchawszy* (uprzedni).
 - **Form / Meaning / Use:** Ограниченный продуктивный контроль; uprzedni чаще receptive.
@@ -1066,6 +1138,7 @@
 
 #### GR-PASS-01 — Strona bierna (ograniczona) · Страдательный залог
 - **Intro:** B2 · **Re-deepen:** —
+- **Exit status:** Required
 - **Prereq:** GR-PART-PASS-01, GR-TNS-PRS-01
 - **Функция:** *Dziecko jest myte. Pokój zostanie uporządkowany.*
 - **Form / Meaning / Use:** *być* + imiesłów bierny; агенс *przez + B*.
@@ -1078,6 +1151,7 @@
 
 #### GR-IMPERS-SIE-01 — Formy bezosobowe z «się» · Безличность на *się*
 - **Intro:** B2 · **Re-deepen:** —
+- **Exit status:** Extension
 - **Prereq:** GR-PRO-REFL-01
 - **Функция:** *mówi się, robiło się, będzie się mówiło*.
 - **Form / Meaning / Use:** Обобщённый субъект / процесс.
@@ -1092,6 +1166,7 @@
 
 #### GR-IMPERS-NO-01 — Formy na -no / -to · Безличные *-no/-to*
 - **Intro:** B2 · **Re-deepen:** —
+- **Exit status:** Extension
 - **Prereq:** GR-TNS-PST-01
 - **Функция:** *zrobiono, otwarto, czytano* — результат без агенса.
 - **Form / Meaning / Use:** Ограниченный объём; часто офиц./медийный регистр.
@@ -1110,6 +1185,7 @@
 
 #### GR-PUNCT-CLAUSE-01 — Przecinek w zdaniu złożonym · Запятая в сложном предложении
 - **Intro:** A2 · **Re-deepen:** B1–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-SYN-SUB-01
 - **Функция:** Граница клауз (*że, bo, kiedy, który…*).
 - **Form / Meaning / Use:** Нормы польской пунктуации придаточных.
@@ -1122,6 +1198,7 @@
 
 #### GR-PUNCT-VOC-01 — Interpunkcja wołacza i wtrąceń · Пунктуация обращения
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-VOC-01
 - **Функция:** Выделение Voc/обращений запятыми.
 - **Form / Meaning / Use:** *Anno, chodź tutaj!*
@@ -1138,6 +1215,7 @@
 
 #### GR-TV-AGR-01 — Pan/pani + 3. osoba (zgoda gramatyczna) · Согласование при pan/pani
 - **Intro:** A1 · **Re-deepen:** A2, B1
+- **Exit status:** Required
 - **Prereq:** GR-TNS-PRS-01, GR-GEN-MFN-01
 - **Функция:** Грамматическое согласование 3 л. при вежливом обращении; прагматика регистра — `PRAG-PAN-01`.
 - **Form / Meaning / Use:** *Czy pan/pani + 3sg*; мн. *państwo*.
@@ -1166,6 +1244,7 @@
 
 #### GR-Q-YESNO-01 — Pytania rozstrzygające (czy) · Общие вопросы
 - **Intro:** A1 · **Re-deepen:** A2
+- **Exit status:** Required
 - **Prereq:** GR-WO-NEUT-01
 - **Функция:** Да/нет вопрос.
 - **Form / Meaning / Use:** *Czy Anna uczyła się w Warszawie?*
@@ -1178,6 +1257,7 @@
 
 #### GR-EXIST-01 — Konstrukcje z «jest / są / nie ma» · Бытийные конструкции
 - **Intro:** A1 · **Re-deepen:** A2
+- **Exit status:** Required
 - **Prereq:** GR-CAS-GEN-04, GR-CAS-NOM-01
 - **Функция:** Наличие/отсутствие.
 - **Form / Meaning / Use:** *Jest kawa. Są książki. Nie ma cukru.*
@@ -1196,6 +1276,7 @@
 
 #### GR-ANIM-MASC-01 — Żywotność w bierniku męskim · Одушевлённость в Acc м.р.
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-ACC-01
 - **Функция:** Различать *widzę stół* vs *widzę psa/studenta*.
 - **Form / Meaning / Use:** М. одуш. Acc = Gen; неодуш. Acc = Nom.
@@ -1210,6 +1291,7 @@
 
 #### GR-CONJ-TYPE-01 — Typy koniugacji teraźniejszej · Типы спряжения настоящего
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-TNS-PRS-01
 - **Функция:** Предсказывать окончания (*czytam, lubię, niosę*).
 - **Form / Meaning / Use:** Рабочая классификация JPJO (не обязательно школьные «I/II/III» ярлыки).
@@ -1222,6 +1304,7 @@
 
 #### GR-VERB-IRREG-01 — Czasowniki nieregularne częste · Частые нерегулярные
 - **Intro:** A1 · **Re-deepen:** A2–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-CONJ-TYPE-01
 - **Функция:** *być, mieć, iść, jechać, jeść, wiedzieć, umieć, rozumieć, chcieć, móc*.
 - **Form / Meaning / Use:** Парадигмы как лексико-грамматические чанки + правило.
@@ -1236,9 +1319,10 @@
 
 #### GR-ZNA-WIED-01 — znać / wiedzieć / umieć · Семантическое различение
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-VERB-IRREG-01
 - **Функция:** Знать человека/место vs факт vs навык.
-- **Form / Meaning / Use:** *Znam Annę. Wiem, że… Umniem pływać.*
+- **Form / Meaning / Use:** *Znam Annę. Wiem, że… Umiem pływać.*
 - **Пределы:** Краевые контексты B1+.
 - **Пример:** *Nie wiem. Nie znam tego słowa. Nie umiem gotować.*
 - **Контрпример:** *\*Nie znam, że…* / *\*Umiem Annę*
@@ -1250,6 +1334,7 @@
 
 #### GR-PREP-DO-NA-01 — «do» vs «na» vs «w» (kierunek) · Выбор предлога направления
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-GEN-02, GR-CAS-ACC-02, GR-CAS-LOC-01
 - **Функция:** Лексикализованный выбор рамки места.
 - **Form / Meaning / Use:** *do sklepu / na pocztę / w góry*; жить *w/na*.
@@ -1264,6 +1349,7 @@
 
 #### GR-PREP-Z-01 — «z» + D vs «z» + Narz · Два *z*
 - **Intro:** A1 · **Re-deepen:** A2
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-GEN-02, GR-CAS-INS-02
 - **Функция:** Источник (*z Warszawy*) vs совместность/ингредиент (*z mlekiem*).
 - **Form / Meaning / Use:** Падеж различает значение.
@@ -1278,6 +1364,7 @@
 
 #### GR-TIME-EXPR-01 — Wyrażanie czasu (godzina, dzień, okres) · Выражение времени
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-NUM-ORD-01, GR-CAS-ACC-01, GR-CAS-GEN-01
 - **Функция:** Час, дата, длительность.
 - **Form / Meaning / Use:** *o ósmej; w poniedziałek; przez godzinę; od… do…*
@@ -1292,6 +1379,7 @@
 
 #### GR-COMP-EQ-01 — Porównania równości (tak… jak) · Равенство сравнения
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-DEG-ADJ-01
 - **Функция:** *tak samy / taki jak*; *więcej niż*.
 - **Form / Meaning / Use:** Конструкции равенства и неравенства.
@@ -1306,6 +1394,7 @@
 
 #### GR-Q-WH-01 — Pytania uzupełniające · Специальные вопросы
 - **Intro:** A1 · **Re-deepen:** A2
+- **Exit status:** Supporting
 - **Prereq:** GR-PRO-INT-01
 - **Функция:** *kto/co/gdzie/kiedy/jak/dlaczego/ile…*
 - **Form / Meaning / Use:** Вопросительное слово + падеж по роли.
@@ -1318,6 +1407,7 @@
 
 #### GR-GEN-PART-01 — Dopełniacz partytywny / miary · Партитивный / количественный D
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-GEN-01, GR-NUM-CARD-05
 - **Функция:** *trochę wody, szklanka herbaty, dużo czasu*.
 - **Form / Meaning / Use:** Мера/квантификатор + D.
@@ -1332,6 +1422,7 @@
 
 #### GR-DAT-EXP-01 — Celownik doświadczający (mi / ci) · Дательный экспериенцера
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-DAT-01
 - **Функция:** *jest mi zimno; podoba mi się; brakuje mi*.
 - **Form / Meaning / Use:** Клитика Dat + предикатив/глагол.
@@ -1346,6 +1437,7 @@
 
 #### GR-REK-VERB-02 — Rekcja czasowników (rozszerzenie B1) · Расширение глагольной rekcja
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-REK-VERB-01
 - **Функция:** *zależeć od + D; składać się z + D; uważać na + B; zgadzać się z + Narz*.
 - **Form / Meaning / Use:** Словарь минимума B1 с рамками.
@@ -1358,6 +1450,7 @@
 
 #### GR-SYN-CAUSE-01 — Przyczyna i skutek (bo / dlatego / więc) · Причина и следствие
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Required
 - **Prereq:** GR-SYN-COORD-01, GR-SYN-SUB-01
 - **Функция:** Объяснение и вывод.
 - **Form / Meaning / Use:** *bo / dlatego że / więc / dlatego*.
@@ -1370,6 +1463,7 @@
 
 #### GR-SYN-TIME-01 — Zdania czasowe (kiedy / gdy / zanim / dopiero gdy) · Временные придаточные
 - **Intro:** A2 · **Re-deepen:** B1–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-SYN-SUB-01, GR-ASP-CON-01
 - **Функция:** Временная рамка события.
 - **Form / Meaning / Use:** *kiedy/gdy*; позже *zanim, dopiero gdy*.
@@ -1384,6 +1478,7 @@
 
 #### GR-SYN-COMP-01 — Zdania porównawcze / dopełniaczowe złożone · Сложные сравнительные / изъяснительные
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Extension
 - **Prereq:** GR-SYN-SUB-02, GR-DEG-ADJ-01
 - **Функция:** Развёрнутое сравнение и изъяснение.
 - **Form / Meaning / Use:** *Twierdzi, że…; Jest lepszy, niż myśleliśmy.*
@@ -1396,6 +1491,7 @@
 
 #### GR-REPORT-01 — Mowa zależna (podstawy) · Косвенная речь (база)
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Extension
 - **Prereq:** GR-SYN-SUB-01, GR-TNS-PST-01
 - **Функция:** Пересказ чужих слов.
 - **Form / Meaning / Use:** *powiedział, że…; zapytał, czy…*
@@ -1408,6 +1504,7 @@
 
 #### GR-PASS-SIE-01 — «się» bierne / medialne · Медиально-страдательное *się*
 - **Intro:** B2 · **Re-deepen:** —
+- **Exit status:** Extension
 - **Prereq:** GR-IMPERS-SIE-01, GR-PASS-01
 - **Функция:** *Drzwi otworzyły się. To się robi tak.*
 - **Form / Meaning / Use:** Отличать от рефлексива гигиены и от *jest + imiesłów*.
@@ -1422,6 +1519,7 @@
 
 #### GR-WF-ASPECT-PAIR-01 — Tworzenie pary aspektowej · Образование видовой пары
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Supporting
 - **Prereq:** GR-ASP-PREF-01
 - **Функция:** От ndk к dk (префикс/суффикс) в продуктивных моделях.
 - **Form / Meaning / Use:** zał. 1 B1 «tworzenie form aspektu dokonanego…».
@@ -1434,6 +1532,7 @@
 
 #### GR-NEG-DOUBLE-01 — Podwójna negacja · Двойное отрицание
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Required
 - **Prereq:** GR-NEG-01, GR-PRO-INDEF-01
 - **Функция:** *nikt nie…, nigdy nie…, nic nie…*
 - **Form / Meaning / Use:** Отрицательные местоимения/наречия требуют *nie* при V.
@@ -1448,6 +1547,7 @@
 
 #### GR-WO-Q-01 — Szyk w pytaniu i po partykule · Порядок в вопросе
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-Q-YESNO-01, GR-WO-NEUT-01
 - **Функция:** *Czy + SVO*; WH-слово в начале.
 - **Form / Meaning / Use:** Учебная норма письма/речи A1–A2.
@@ -1460,6 +1560,7 @@
 
 #### GR-PUNCT-LIST-01 — Interpunkcja wyliczeń i zdań złożonych współrzędnych · Пунктуация перечислений и сочинения
 - **Intro:** A2 · **Re-deepen:** B1–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-SYN-COORD-01
 - **Функция:** Запятые при однородных / перед *ale* и т.п. по норме письма.
 - **Form / Meaning / Use:** Связь синтаксис→письмо (экзаменационное pisanie).
@@ -1472,6 +1573,7 @@
 
 #### GR-MOD-PERM-01 — Pozwolenie / zakaz (można, wolno, nie wolno) · Разрешение и запрет
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-MOD-VERB-01
 - **Функция:** Безличные модальные рамки быта/объявлений.
 - **Form / Meaning / Use:** *Tu nie wolno palić. Można wejść.*
@@ -1486,6 +1588,7 @@
 
 #### GR-DIM-01 — Zdrobnienia (gramatyka + rejestr) · Уменьшительные
 - **Intro:** A2 · **Re-deepen:** B1–B2
+- **Exit status:** Extension
 - **Prereq:** PRAG-PAN-01, GR-GEN-MFN-01
 - **Функция:** *Ania/Aniu; kawusia* — морфология и уместность (`PED-010`).
 - **Form / Meaning / Use:** Суффиксы + Voc/регистр.
@@ -1500,6 +1603,7 @@
 
 #### GR-GEN-ADJ-01 — Odmiana przymiotnika we wszystkich przypadkach (spirala) · Склонение Adj по падежам
 - **Intro:** A1 (Nom/Acc/Gen/Loc/Instr базы) · **Re-deepen:** A2–B2
+- **Exit status:** Supporting
 - **Prereq:** GR-AGR-ADJ-01
 - **Функция:** Согласованное Adj в каждом новом падеже стадии.
 - **Form / Meaning / Use:** Не отдельная «глава Adj», а спираль с `GR-CAS-*`.
@@ -1512,6 +1616,7 @@
 
 #### GR-CAS-GEN-PREP-02 — Dopełniacz z «dla / podczas / koło / obok» · D с расширенными предлогами
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-GEN-02
 - **Функция:** Бенефактив *dla*, время *podczas*, локация *koło/obok*.
 - **Form / Meaning / Use:** *dla dzieci; podczas lekcji; obok szkoły*.
@@ -1526,6 +1631,7 @@
 
 #### GR-ASP-ITER-01 — Iteratywność / wielokrotność · Итератив / многократность
 - **Intro:** B1 · **Re-deepen:** B2
+- **Exit status:** Extension
 - **Prereq:** GR-ASP-PST-01, GR-MOT-BASE-01
 - **Функция:** Привычка, повторяемость (*czytywać* — осторожно; чаще ndk + адвербиалы).
 - **Form / Meaning / Use:** Предпочитать *często + ndk*; специальные итеративы — ограниченно.
@@ -1538,6 +1644,7 @@
 
 #### GR-B2-STYLE-01 — Wybór konstrukcji (aktyw / się / bierna) · Стилистический выбор конструкции
 - **Intro:** B2 · **Re-deepen:** —
+- **Exit status:** Extension
 - **Prereq:** GR-PASS-01, GR-IMPERS-SIE-01, GR-IMPERS-NO-01
 - **Функция:** Уместность залога/безличности в тексте B2.
 - **Form / Meaning / Use:** Актив по умолчанию; bierna/‑no/‑to — по регистру.
@@ -1550,6 +1657,7 @@
 
 #### GR-CASE-NUM-01 — Przypadek po liczebniku (schemat 2–4 vs 5+) · Падеж после числительного
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-NUM-CARD-01, GR-NUM-CARD-05
 - **Функция:** Схема согласования считаемого.
 - **Form / Meaning / Use:** 2–4 часто Nom/Acc-подобные формы N; 5+ → Gen pl (упрощённо для урока).
@@ -1564,6 +1672,7 @@
 
 #### GR-VOC-NAME-01 — Wołacz imion i tytułów · Voc имён и титулов
 - **Intro:** A2 · **Re-deepen:** B1
+- **Exit status:** Supporting
 - **Prereq:** GR-CAS-VOC-01
 - **Функция:** Продуктивные образцы *Aniu, Piotrze, panie doktorze*.
 - **Form / Meaning / Use:** Типовые чередования; титулы с *panie*.
@@ -1578,6 +1687,7 @@
 
 #### GR-INF-COMPL-01 — Bezokolicznik po modalnych i fazowych · Инфинитив после модальных/фазовых
 - **Intro:** A1 · **Re-deepen:** A2–B1
+- **Exit status:** Supporting
 - **Prereq:** GR-MOD-VERB-01
 - **Функция:** *chcę spać; muszę iść; zaczynam pracować*.
 - **Form / Meaning / Use:** Inf без личных окончаний; аспект инфинитива связан с путём аспекта.

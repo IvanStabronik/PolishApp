@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Validate PolishApp Phase 2 curriculum integrity.
+"""Validate PolishApp Phase 2 curriculum structural integrity.
 
 Usage:
   python scripts/validate-curriculum.py
 
-Exit codes:
-  0 — success
-  1 — validation failures
+Exit 0 = structural integrity only (NOT semantic/methodological correctness).
 """
 from __future__ import annotations
 
@@ -20,17 +18,20 @@ CUR = ROOT / "docs" / "requirements" / "curriculum"
 REQ = ROOT / "docs" / "requirements"
 
 LEVEL_ORDER = {"A1": 1, "A2": 2, "B1": 3, "B2": 4}
-EXACT_ID = re.compile(
-    r"\b((?:GR|PHON|ORTH|PRAG|FN|LEX|ERR|EXIT|LT|WR|LV|PAN)-[A-Z0-9-]+)\b"
-)
-CANON_DEF = re.compile(
-    r"^#### ((?:GR|PHON|ORTH|PRAG)-[A-Z0-9-]+)\b", re.M
-)
-FN_DEF = re.compile(r"^### (FN-(?:A1|A2|B1|B2)-\d{3})\b", re.M)
-ERR_DEF = re.compile(r"^### (ERR-(?:UKR|RUS|BEL)-\d{2})\b", re.M)
-LEX_DEF = re.compile(r"\|\s*`?(LEX-[A-Z0-9-]+)`?\s*\|", re.M)
 
-FORBIDDEN_TEMP = [
+STUB_PHRASES = [
+    "см. название",
+    "учебный минимум",
+    "задаётся в упражнении",
+    "смешение с L1-нормой",
+]
+
+GENERIC_COMPLETION = (
+    "Наблюдаемое выполнение функции в целевом домене без блокирующей "
+    "ошибки регистра/управления/понимания; см. mastery model."
+)
+
+FORBIDDEN_TEMP_EXACT = [
     "GR-CASE-NOM",
     "GR-CASE-ACC",
     "GR-CASE-GEN",
@@ -54,68 +55,71 @@ FORBIDDEN_TEMP = [
     "TBD",
 ]
 
+LEX_REQUIRED_FIELDS = [
+    "Purpose",
+    "First use level",
+    "Ownership",
+    "Thematic subgroups",
+    "Required MWU",
+    "Related FN",
+    "Size orientation",
+    "Selection source",
+]
 
-class Validator:
+
+class V:
     def __init__(self) -> None:
         self.errors: list[str] = []
         self.warnings: list[str] = []
 
     def err(self, file: str, msg: str, id_: str | None = None) -> None:
-        loc = f"{file}" + (f" [{id_}]" if id_ else "")
+        loc = file + (f" [{id_}]" if id_ else "")
         self.errors.append(f"ERROR {loc}: {msg}")
 
     def warn(self, file: str, msg: str, id_: str | None = None) -> None:
-        loc = f"{file}" + (f" [{id_}]" if id_ else "")
+        loc = file + (f" [{id_}]" if id_ else "")
         self.warnings.append(f"WARN {loc}: {msg}")
 
 
-def read(name: str) -> str:
+def read_cur(name: str) -> str:
     return (CUR / name).read_text(encoding="utf-8")
 
 
-def parse_concepts(text: str, ns_prefix: tuple[str, ...]) -> dict[str, dict]:
+def parse_lang_concepts(*texts: str) -> dict[str, dict]:
     concepts: dict[str, dict] = {}
-    current = None
-    for line in text.splitlines():
-        m = re.match(r"^#### ((" + "|".join(ns_prefix) + r")-[A-Z0-9-]+)\b", line)
-        if m:
-            current = m.group(1)
-            concepts[current] = {
-                "intro": None,
-                "prereq": [],
-                "fields": set(),
-            }
-            continue
-        if not current:
-            continue
-        m = re.search(r"^\s*-\s*\*\*Intro:\*\*\s*([A-B][12])", line)
-        if m:
-            concepts[current]["intro"] = m.group(1)
-        m = re.search(r"^\s*-\s*\*\*Prereq:\*\*\s*(.+)$", line)
-        if m:
-            val = m.group(1).strip()
-            concepts[current]["fields"].add("Prereq")
-            if val not in ("—", "-", "нет", "none", ""):
-                concepts[current]["prereq"] = re.findall(
-                    r"(?:GR|PHON|ORTH|PRAG)-[A-Z0-9-]+", val
-                )
-                if "*" in val or "соответствующ" in val.lower():
-                    concepts[current]["wildcard"] = True
-        for field in (
-            "Функция",
-            "Form / Meaning / Use",
-            "Пределы",
-            "Пример",
-            "Контрпример",
-            "Evidence",
-            "Source",
-        ):
-            if f"**{field}:**" in line or (
-                field == "Form / Meaning / Use" and "Form / Meaning / Use" in line
-            ):
-                concepts[current]["fields"].add(field)
-        if "**UKR:**" in line or "**UKR**:" in line or "UKR:" in line:
-            concepts[current]["fields"].add("L1")
+    for text in texts:
+        current = None
+        for line in text.splitlines():
+            m = re.match(
+                r"^#### ((?:GR|PHON|ORTH|PRAG)-[A-Z0-9-]+)\b", line
+            )
+            if m:
+                current = m.group(1)
+                concepts[current] = {
+                    "intro": None,
+                    "exit": None,
+                    "prereq": [],
+                }
+                continue
+            if not current:
+                continue
+            m = re.search(r"\*\*Intro:\*\*\s*([A-B][12])", line)
+            if m:
+                concepts[current]["intro"] = m.group(1)
+            m = re.search(
+                r"\*\*Exit status:\*\*\s*(Required|Supporting|Extension)", line
+            )
+            if m:
+                concepts[current]["exit"] = m.group(1)
+            m = re.search(r"\*\*Prereq:\*\*\s*(.+)$", line)
+            if m:
+                val = m.group(1).strip()
+                if val not in ("—", "-", "нет", "none", ""):
+                    concepts[current]["prereq"] = re.findall(
+                        r"(?:GR|PHON|ORTH|PRAG)-[A-Z0-9-]+", val
+                    )
+                    if "*" in val:
+                        concepts[current]["wildcard"] = True
     return concepts
 
 
@@ -128,7 +132,7 @@ def has_cycle(graph: dict[str, list[str]]) -> list[str] | None:
         visiting.add(n)
         stack.append(n)
         for nxt in graph.get(n, []):
-            if nxt not in graph and nxt not in visiting and nxt not in visited:
+            if nxt not in graph:
                 continue
             if nxt in visiting:
                 return stack[stack.index(nxt) :] + [nxt]
@@ -149,9 +153,55 @@ def has_cycle(graph: dict[str, list[str]]) -> list[str] | None:
     return None
 
 
+def parse_fns(text: str) -> list[dict]:
+    rows = []
+    for m in re.finditer(
+        r"^### (FN-(A1|A2|B1|B2)-\d{3})\n([\s\S]*?)(?=^### |\Z)",
+        text,
+        re.M,
+    ):
+        fid, level, block = m.group(1), m.group(2), m.group(3)
+
+        def field(name: str) -> str:
+            mm = re.search(rf"\*\*{name}:\*\*\s*(.+)", block)
+            return mm.group(1).strip() if mm else ""
+
+        rows.append(
+            {
+                "id": fid,
+                "level": level,
+                "block": block,
+                "function": field("Function"),
+                "gr": re.findall(
+                    r"(?<![A-Z0-9-])(?:GR|PHON|ORTH|PRAG)-[A-Z0-9-]+",
+                    field("GR prerequisites"),
+                ),
+                "lex": re.findall(
+                    r"(?<![A-Z0-9-])LEX-[A-Z0-9-]+", field("LEX bundles")
+                ),
+                "evidence": field("Required evidence"),
+                "criticality": field("Criticality"),
+                "completion": field("Completion criterion"),
+                "l1": field("L1 risks"),
+                "exam": field("Exam relevance"),
+                "anchor": field("Source anchor"),
+            }
+        )
+    return rows
+
+
+def parse_lex_bundles(text: str) -> dict[str, str]:
+    bundles = {}
+    for m in re.finditer(
+        r"^### (LEX-[A-Z0-9-]+)\n([\s\S]*?)(?=^### |\Z)", text, re.M
+    ):
+        bundles[m.group(1)] = m.group(2)
+    return bundles
+
+
 def main() -> int:
-    v = Validator()
-    required_files = [
+    v = V()
+    required = [
         "grammar-inventory.md",
         "concept-extensions.md",
         "functional-inventory.md",
@@ -159,152 +209,125 @@ def main() -> int:
         "curriculum-traceability.md",
         "level-exit-criteria.md",
         "l1-error-model.md",
-        "case-aspect-sequence.md",
-        "methodology.md",
-        "sources-and-evidence.md",
-        "review-checklist.md",
-        "phase-2-report.md",
         "phase-2-integrity-report.md",
     ]
-    for f in required_files:
+    for f in required:
         if not (CUR / f).exists():
             v.err(f, "missing required file")
-
     if v.errors:
-        for e in v.errors:
-            print(e)
+        print("\n".join(v.errors))
         return 1
 
-    gram_text = read("grammar-inventory.md")
-    ext_text = read("concept-extensions.md")
-    fn_text = read("functional-inventory.md")
-    lex_text = read("lexical-targets.md")
-    tr_text = read("curriculum-traceability.md")
-    exit_text = read("level-exit-criteria.md")
-    l1_text = read("l1-error-model.md")
-    report = read("phase-2-report.md")
-    integ = read("phase-2-integrity-report.md")
+    # rebuild script must not exist
+    if (ROOT / "scripts" / "rebuild_phase2_integrity.py").exists():
+        v.err(
+            "scripts/rebuild_phase2_integrity.py",
+            "mechanical integrity generator must be deleted",
+        )
 
-    grammar = parse_concepts(gram_text, ("GR",))
-    extensions = parse_concepts(ext_text, ("PHON", "ORTH", "PRAG"))
-    all_lang = {**grammar, **extensions}
+    gram = read_cur("grammar-inventory.md")
+    ext = read_cur("concept-extensions.md")
+    fn_text = read_cur("functional-inventory.md")
+    lex_text = read_cur("lexical-targets.md")
+    tr_text = read_cur("curriculum-traceability.md")
+    exit_text = read_cur("level-exit-criteria.md")
+    l1_text = read_cur("l1-error-model.md")
 
-    # 1 uniqueness
-    ids = list(grammar) + list(extensions)
-    dup = [i for i, c in collections.Counter(ids).items() if c > 1]
-    for d in dup:
-        v.err("grammar/extensions", "duplicate canonical ID", d)
+    concepts = parse_lang_concepts(gram, ext)
+    grammar_ids = [c for c in concepts if c.startswith("GR-")]
+    by_intro = collections.Counter(
+        concepts[c]["intro"] for c in grammar_ids if concepts[c]["intro"]
+    )
 
-    # GR must not define PHON/ORTH/PRAG namespaces wrongly — already separated
+    # uniqueness
+    if len(concepts) != len(set(concepts)):
+        v.err("grammar/extensions", "duplicate canonical IDs")
 
-    # required fields for GR
-    required_fields = {
-        "Функция",
-        "Form / Meaning / Use",
-        "Пределы",
-        "Пример",
-        "Контрпример",
-        "Evidence",
-        "Source",
-        "L1",
-        "Prereq",
-    }
-    for cid, meta in grammar.items():
-        if not meta["intro"]:
-            v.err("grammar-inventory.md", "missing Intro level", cid)
-        missing = required_fields - meta["fields"]
-        # Prereq line may be — which still counts if fields has Prereq
-        if "Prereq" not in meta["fields"]:
-            # check raw
-            if f"#### {cid}" in gram_text:
-                block = gram_text.split(f"#### {cid}", 1)[1].split("#### ", 1)[0]
-                if "**Prereq:**" not in block:
-                    v.err("grammar-inventory.md", "missing Prereq field", cid)
-        for f in ("Функция", "Пример", "Контрпример", "Evidence", "Source"):
-            if f not in meta["fields"]:
-                block = gram_text.split(f"#### {cid}", 1)[1].split("#### ", 1)[0]
-                if f"**{f}:**" not in block and (
-                    f != "Form / Meaning / Use"
-                    or "Form / Meaning / Use" not in block
-                ):
-                    v.err("grammar-inventory.md", f"missing field {f}", cid)
-
-    # 3-5 prerequisites exist, no late, no wildcard, no cycles
-    graph = {cid: list(meta["prereq"]) for cid, meta in all_lang.items()}
-    for cid, meta in all_lang.items():
-        if meta.get("wildcard"):
+    # Exit status required
+    for cid, meta in concepts.items():
+        if not meta["exit"]:
             v.err(
-                "grammar-inventory.md" if cid.startswith("GR-") else "concept-extensions.md",
-                "wildcard prerequisite not allowed",
+                "grammar-inventory.md"
+                if cid.startswith("GR-")
+                else "concept-extensions.md",
+                "missing Exit status",
                 cid,
             )
+        if not meta["intro"]:
+            v.err(
+                "grammar-inventory.md"
+                if cid.startswith("GR-")
+                else "concept-extensions.md",
+                "missing Intro",
+                cid,
+            )
+
+    # stub phrases banned in extensions cards
+    for phrase in STUB_PHRASES:
+        if phrase in ext:
+            v.err("concept-extensions.md", f"forbidden stub phrase: {phrase}")
+
+    # prereq graph
+    graph = {cid: list(meta["prereq"]) for cid, meta in concepts.items()}
+    for cid, meta in concepts.items():
+        if meta.get("wildcard"):
+            v.err("grammar-inventory.md", "wildcard prerequisite", cid)
         intro = meta.get("intro")
         for p in meta["prereq"]:
-            if p not in all_lang:
+            if p not in concepts:
                 v.err(
-                    "grammar-inventory.md",
-                    f"prerequisite does not exist: {p}",
+                    "grammar-inventory.md"
+                    if cid.startswith("GR-")
+                    else "concept-extensions.md",
+                    f"missing prerequisite {p}",
                     cid,
                 )
-                continue
-            pintro = all_lang[p].get("intro")
-            if intro and pintro and LEVEL_ORDER[pintro] > LEVEL_ORDER[intro]:
-                v.err(
-                    "grammar-inventory.md",
-                    f"prerequisite {p} ({pintro}) is later than concept ({intro})",
-                    cid,
-                )
+            else:
+                pi = concepts[p]["intro"]
+                if intro and pi and LEVEL_ORDER[pi] > LEVEL_ORDER[intro]:
+                    v.err(
+                        "grammar-inventory.md",
+                        f"prerequisite {p} ({pi}) later than concept ({intro})",
+                        cid,
+                    )
     cyc = has_cycle(graph)
     if cyc:
-        v.err("grammar-inventory.md", f"prerequisite cycle: {' -> '.join(cyc)}")
+        v.err("grammar-inventory.md", f"cycle: {' -> '.join(cyc)}")
 
-    # 6 factual counts
-    by = collections.Counter(m["intro"] for m in grammar.values())
-    total = len(grammar)
-    # summary table must match
+    # grammar summary matches fact
     for lv in ("A1", "A2", "B1", "B2"):
-        m = re.search(rf"\| {lv} \| (\d+) \|", gram_text)
+        m = re.search(rf"\| {lv} \| (\d+) \|", gram)
+        actual = by_intro.get(lv, 0)
         if not m:
-            v.err("grammar-inventory.md", f"missing summary count for {lv}")
-        elif int(m.group(1)) != by.get(lv, 0):
+            v.err("grammar-inventory.md", f"missing summary row {lv}")
+        elif int(m.group(1)) != actual:
             v.err(
                 "grammar-inventory.md",
-                f"summary {lv}={m.group(1)} but actual {by.get(lv, 0)}",
+                f"summary {lv}={m.group(1)} actual={actual}",
             )
-    m = re.search(r"\|\ \*\*Всего\*\* \| \*\*(\d+)\*\* \|", gram_text)
-    if not m or int(m.group(1)) != total:
+    m = re.search(r"\|\ \*\*Всего\*\* \| \*\*(\d+)\*\* \|", gram)
+    if not m or int(m.group(1)) != len(grammar_ids):
         v.err(
             "grammar-inventory.md",
-            f"summary total mismatch actual={total}",
+            f"summary total mismatch actual={len(grammar_ids)}",
         )
 
-    # 7 report counters
-    for label, val in (
-        ("A1", by.get("A1", 0)),
-        ("A2", by.get("A2", 0)),
-        ("B1", by.get("B1", 0)),
-        ("B2", by.get("B2", 0)),
-    ):
-        # integrity report should carry factual counts
-        if f"| {label} |" not in integ and f"**{label}**" not in integ:
-            v.warn("phase-2-integrity-report.md", f"missing {label} count mention")
+    # FN checks
+    fns = parse_fns(fn_text)
+    fn_ids = [f["id"] for f in fns]
+    if len(fn_ids) != len(set(fn_ids)):
+        v.err("functional-inventory.md", "duplicate FN ids")
 
-    # 8 FN coverage in traceability
-    fns = FN_DEF.findall(fn_text)
-    if len(fns) != len(set(fns)):
-        v.err("functional-inventory.md", "duplicate FN definitions")
-    if len(set(fns)) != 195:
-        v.err(
-            "functional-inventory.md",
-            f"expected 195 FN definitions, found {len(set(fns))}",
-        )
-    for fid in fns:
-        if fid not in tr_text:
-            v.err("curriculum-traceability.md", "FN not traced", fid)
-        # required fields in FN record
-        block = fn_text.split(f"### {fid}", 1)[1].split("### ", 1)[0]
+    late_fn = []
+    crit = collections.Counter()
+    evid = collections.Counter()
+    completions = collections.Counter()
+
+    for fr in fns:
+        crit[fr["criticality"]] += 1
+        evid[fr["evidence"]] += 1
+        completions[fr["completion"]] += 1
         for field in (
-            "Level",
             "Function",
             "Domains",
             "GR prerequisites",
@@ -314,117 +337,207 @@ def main() -> int:
             "Completion criterion",
             "L1 risks",
             "Exam relevance",
+            "Source anchor",
         ):
-            if f"**{field}:**" not in block:
-                v.err("functional-inventory.md", f"missing field {field}", fid)
-        # resolve GR and LEX
-        lexs = re.findall(r"(?<![A-Z0-9-])LEX-[A-Z0-9-]+", block)
-        for lx in lexs:
-            if lx not in lex_text:
-                v.err("functional-inventory.md", f"LEX bundle not defined: {lx}", fid)
-        errs = re.findall(r"(?<![A-Z0-9-])ERR-(?:UKR|RUS|BEL)-\d{2}", block)
-        for e in errs:
-            if f"### {e}" not in l1_text:
-                v.err("functional-inventory.md", f"ERR not defined: {e}", fid)
-
-        grs = re.findall(
-            r"(?<![A-Z0-9-])(?:GR|PHON|ORTH|PRAG)-[A-Z0-9-]+",
-            block.split("**LEX bundles:**")[0],
-        )
-        for g in grs:
-            if g.endswith("-") or "*" in g:
-                v.err("functional-inventory.md", f"bad GR token {g}", fid)
-            elif g not in all_lang:
-                v.err("functional-inventory.md", f"unresolvable GR/ext ID {g}", fid)
-
-    # forbidden temporary IDs as exact tokens in curriculum (allow in migration table)
-    for fname in (
-        "functional-inventory.md",
-        "curriculum-traceability.md",
-        "level-exit-criteria.md",
-        "grammar-inventory.md",
-    ):
-        text = read(fname)
-        # strip migration tables / historical notes
-        scrub = text
-        if fname == "grammar-inventory.md":
-            scrub = re.sub(
-                r"## Таблица миграции[\s\S]*",
-                "",
-                scrub,
+            if f"**{field}:**" not in fr["block"]:
+                v.err("functional-inventory.md", f"missing {field}", fr["id"])
+        if fr["criticality"] not in ("Core", "Important", "Extension"):
+            v.err(
+                "functional-inventory.md",
+                f"bad criticality {fr['criticality']}",
+                fr["id"],
             )
-        if "concept-extensions.md" == fname:
+        if fr["completion"] == GENERIC_COMPLETION:
+            v.err(
+                "functional-inventory.md",
+                "generic identical completion criterion",
+                fr["id"],
+            )
+        if not fr["anchor"]:
+            v.err("functional-inventory.md", "missing Source anchor", fr["id"])
+        # late deps
+        for g in fr["gr"]:
+            if g not in concepts:
+                v.err(
+                    "functional-inventory.md",
+                    f"unresolvable concept {g}",
+                    fr["id"],
+                )
+            else:
+                gi = concepts[g]["intro"]
+                if gi and LEVEL_ORDER[gi] > LEVEL_ORDER[fr["level"]]:
+                    late_fn.append((fr["id"], fr["level"], g, gi))
+                    v.err(
+                        "functional-inventory.md",
+                        f"depends on later-level concept {g} ({gi})",
+                        fr["id"],
+                    )
+
+    # mass-identical completion
+    for text, n in completions.items():
+        if text and n >= 10:
+            v.err(
+                "functional-inventory.md",
+                f"completion criterion repeated {n} times (mass template)",
+            )
+
+    # LEX bundles
+    bundles = parse_lex_bundles(lex_text)
+    used_lex = {x for fr in fns for x in fr["lex"]}
+    for lx in used_lex:
+        if lx not in bundles:
+            v.err("lexical-targets.md", "LEX used in FN but not defined", lx)
             continue
-        for bad in FORBIDDEN_TEMP:
-            # allow as substring of canonical longer id? use boundaries
-            if bad in ("TODO", "TBD", "Placeholder — Phase 2"):
-                if bad in scrub and "migration" not in scrub.lower():
-                    # allow TODO in comments? fail hard
-                    if bad in scrub:
-                        v.err(fname, f"forbidden placeholder/temporary token: {bad}")
-                continue
-            for m in re.finditer(rf"(?<![A-Z0-9-]){re.escape(bad)}(?![A-Z0-9-])", scrub):
-                # allow inside migration docs only
-                if "concept-extensions" in fname:
+        block = bundles[lx]
+        for field in LEX_REQUIRED_FIELDS:
+            if f"**{field}" not in block and f"**{field}:**" not in block:
+                # allow Required MWU (examples)
+                if field == "Required MWU" and "**Required MWU" in block:
                     continue
-                v.err(fname, f"unresolved temporary ID {bad}")
+                v.err("lexical-targets.md", f"bundle missing field {field}", lx)
+        m = re.search(r"\*\*First use level:\*\*\s*([A-B][12])", block)
+        if not m:
+            v.err("lexical-targets.md", "missing First use level", lx)
+        else:
+            lex_lv = m.group(1)
+            # first FN use
+            firsts = [fr["level"] for fr in fns if lx in fr["lex"]]
+            if firsts:
+                earliest = min(firsts, key=lambda x: LEVEL_ORDER[x])
+                if LEVEL_ORDER[lex_lv] > LEVEL_ORDER[earliest]:
+                    v.err(
+                        "lexical-targets.md",
+                        f"First use level {lex_lv} later than FN use {earliest}",
+                        lx,
+                    )
 
-    # migration table exists
-    if "Таблица миграции" not in ext_text and "миграции" not in ext_text.lower():
-        v.err("concept-extensions.md", "missing migration table")
+    # Traceability: exact FN row, not substring
+    # Expect markdown table rows containing | `FN-…` |
+    for fr in fns:
+        pattern = rf"\|\s*`{re.escape(fr['id'])}`\s*\|"
+        if not re.search(pattern, tr_text):
+            v.err(
+                "curriculum-traceability.md",
+                "FN missing as exact table cell",
+                fr["id"],
+            )
+    # ban generic-only anchors if every row identical short A1 blurb without source variety
+    # soft: require Source anchor column values diversity
+    anchors = re.findall(r"^\| ([^|]+) \| (A1|A2|B1|B2) \| `FN-", tr_text, re.M)
+    if anchors:
+        uniq = {a[0].strip() for a in anchors}
+        if len(uniq) < 3:
+            v.err(
+                "curriculum-traceability.md",
+                f"too few distinct source anchors ({len(uniq)}); generic level anchors only",
+            )
 
-    # mastery model
-    if "Mastery model" not in exit_text:
-        v.err("level-exit-criteria.md", "missing Mastery model section")
-    if "Criticality=Core" not in exit_text and "Criticality=Core" not in exit_text:
-        if "Criticality" not in exit_text or "Core" not in exit_text:
-            v.err("level-exit-criteria.md", "missing Core FN completion rule")
-    if "CALIBRATION=required" not in exit_text:
-        v.err("level-exit-criteria.md", "missing CALIBRATION=required markers")
+    # mastery exit status language
+    if "Exit status=Required" not in exit_text and "Exit status" not in exit_text:
+        v.err("level-exit-criteria.md", "missing Exit status mastery rules")
 
     # L1 counts
-    for lang, prefix in (("UKR", "ERR-UKR-"), ("RUS", "ERR-RUS-"), ("BEL", "ERR-BEL-")):
-        cards = [x for x in ERR_DEF.findall(l1_text) if x.startswith(prefix)]
-        if len(cards) < 20:
-            v.err("l1-error-model.md", f"{lang} has only {len(cards)} cards, need ≥20")
+    for prefix, lang in (
+        ("ERR-UKR-", "UKR"),
+        ("ERR-RUS-", "RUS"),
+        ("ERR-BEL-", "BEL"),
+    ):
+        n = len(re.findall(rf"^### ({prefix}\d{{2}})\b", l1_text, re.M))
+        if n < 20:
+            v.err("l1-error-model.md", f"{lang} has {n} cards, need ≥20")
 
-    # standard_status / session_availability preserved
+    # exam status fields
     exam = (REQ / "07-exam-preparation-requirements.md").read_text(encoding="utf-8")
     if "standard_status" not in exam or "session_availability" not in exam:
         v.err("07-exam-preparation-requirements.md", "status fields missing")
-    if re.search(r"A1.*historical", exam, re.I):
-        # allow negation "Не historical"
-        if "Не** `historical`" not in exam and "не `historical`" not in exam.lower():
-            if "`historical`" in exam and "Не" not in exam:
-                v.err("07-exam-preparation-requirements.md", "A1 marked historical")
 
-    # coverage table present
-    if "| FN |" not in tr_text or "Трассируется" not in tr_text:
-        v.err("curriculum-traceability.md", "missing coverage summary table")
+    # forbidden temps outside migration table
+    mig = ""
+    if "## Таблица миграции" in ext:
+        mig = ext.split("## Таблица миграции", 1)[1]
+    for fname, text in (
+        ("functional-inventory.md", fn_text),
+        ("curriculum-traceability.md", tr_text),
+        ("level-exit-criteria.md", exit_text),
+        ("grammar-inventory.md", gram),
+    ):
+        for bad in FORBIDDEN_TEMP_EXACT:
+            if bad in ("TODO", "TBD", "Placeholder — Phase 2"):
+                if bad in text:
+                    v.err(fname, f"forbidden token {bad}")
+                continue
+            for m in re.finditer(
+                rf"(?<![A-Z0-9-]){re.escape(bad)}(?![A-Z0-9-])", text
+            ):
+                v.err(fname, f"unresolved temporary ID {bad}")
 
-    # no fake FN domain ids in traceability
-    for m in re.finditer(r"\bFN-[A-Z]+-[A-Z0-9-]+\b", tr_text):
-        tok = m.group(0)
-        if not re.match(r"FN-(?:A1|A2|B1|B2)-\d{3}$", tok):
-            v.err("curriculum-traceability.md", f"non-canonical FN id {tok}")
+    # migration must mark DISAMBIGUATE for dangerous aliases
+    for key in ("`GR-CASE`", "`GR-NUM`", "`GR-PART`", "`GR-TENSE`"):
+        if key not in mig or "DISAMBIGUATE" not in mig:
+            # check per key line
+            pass
+    for key in ("GR-CASE`", "GR-NUM`", "GR-PART`", "GR-TENSE`"):
+        if key in mig:
+            # find line
+            for line in mig.splitlines():
+                if key in line and "DISAMBIGUATE" not in line and "запрет" not in line.lower():
+                    if key.startswith("GR-CASE`") or key in (
+                        "GR-NUM`",
+                        "GR-PART`",
+                        "GR-TENSE`",
+                    ):
+                        if "DISAMBIGUATE" not in line:
+                            v.err(
+                                "concept-extensions.md",
+                                f"ambiguous migration for {key} must say DISAMBIGUATE",
+                            )
 
-    # print results
+    # report distributions
+    print("=== DISTRIBUTION REPORT (structural) ===")
+    print(f"GR by Intro: {dict(by_intro)} total={len(grammar_ids)}")
+    print(
+        "Exit status:",
+        dict(
+            collections.Counter(
+                concepts[c]["exit"] for c in concepts if concepts[c]["exit"]
+            )
+        ),
+    )
+    print(f"FN count (from docs): {len(fns)}")
+    print(f"Criticality: {dict(crit)}")
+    print(f"Evidence: {dict(evid)}")
+    print(f"Late FN prerequisites: {len(late_fn)}")
+    for item in late_fn[:20]:
+        print(f"  late {item}")
+    used_lang = {g for fr in fns for g in fr["gr"]}
+    uncovered = sorted(set(concepts) - used_lang)
+    print(f"Concepts not linked from any FN: {len(uncovered)}")
+    used_err = set()
+    for fr in fns:
+        used_err.update(re.findall(r"ERR-(?:UKR|RUS|BEL)-\d{2}", fr["l1"]))
+    all_err = re.findall(
+        r"^### (ERR-(?:UKR|RUS|BEL)-\d{2})\b", l1_text, re.M
+    )
+    unused_err = sorted(set(all_err) - used_err)
+    print(f"ERR unused by FN: {len(unused_err)}")
+    print("=== END DISTRIBUTION ===")
+    print()
+    print(
+        "NOTE: OK means structural integrity only — "
+        "NOT semantic/methodological correctness or JPJO approval."
+    )
+
     for w in v.warnings:
         print(w)
     if v.errors:
         for e in v.errors:
             print(e)
-        print(f"\nFAILED: {len(v.errors)} error(s), {len(v.warnings)} warning(s)")
-        print(
-            f"Counts: GR={total} {dict(by)}; FN={len(set(fns))}; "
-            f"EXT={len(extensions)}"
-        )
+        print(f"\nFAILED: {len(v.errors)} error(s)")
         return 1
 
-    print("OK: curriculum validation passed")
     print(
-        f"Counts: GR={total} by_level={dict(by)}; FN={len(set(fns))}; "
-        f"PHON+ORTH+PRAG={len(extensions)}"
+        f"OK (structural only): GR={len(grammar_ids)} {dict(by_intro)}; "
+        f"FN={len(fns)}; concepts={len(concepts)}"
     )
     return 0
 

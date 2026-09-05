@@ -79,8 +79,10 @@ A1/A2 **не** помечать как `historical`.
 1. Все FN с `Criticality=Core` на уровне выполнены (completion criterion + evidence).
 2. FN `Important`: ≥ **85%** выполнены (`CALIBRATION=required`).
 3. FN `Extension` не блокируют.
-4. Все GR/PHON/ORTH/PRAG с Intro=уровня, помеченные mandatory для уровня в grammar/extensions, имеют productive или declared receptive mastery.
-5. Нет открытых blocking errors на Core FN.
+4. Все языковые концепты (`GR` / `PHON` / `ORTH` / `PRAG`) с **Exit status=Required** и Intro ≤ уровня имеют mastery (receptive или productive по карточке).
+5. Концепты `Supporting` проверяются через связанные FN и internal summative; сами по себе не блокируют, если Core FN и Required-концепты закрыты.
+6. Концепты `Extension` уровень не блокируют.
+7. Нет открытых blocking errors на Core FN.
 
 Слой internal summative и exam readiness — отдельные вердикты (см. §1). Нельзя подменить Core-сценарии «70% функций overall».
 

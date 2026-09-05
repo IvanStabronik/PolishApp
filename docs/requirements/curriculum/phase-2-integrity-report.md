@@ -1,151 +1,158 @@
-# Phase 2 integrity report
+# Phase 2 integrity report (semantic pass)
 
-**Статус пакета:** Candidate for independent JPJO review  
-**Не утверждено** как официальная программа продукта.  
+**Статус:** Candidate for independent JPJO review  
+**Не** внутренний gate pass и **не** утверждённая программа.  
 **Ветка:** `docs/phase-2-integrity-fix`  
-**База:** `27a94c9` (`docs/requirements-r2`)  
+**База предыдущего structural commit:** `85c461a`  
 **Дата:** 2026-09-05  
 
-Код приложения, ERD, API, UI, Figma, Phase 3 — **не** создавались.
+`validator OK` = **structural integrity only**, не методическая корректность.
 
 ---
 
-## 1. Какие ошибки исправлены
+## 1. Что исправлено в этом проходе
 
-1. Ложные счётчики grammar inventory (заявлено 110 при 79 определениях на `27a94c9`) → автосводка из фактических `#### GR-*`.
-2. Временные неразрешимые GR-псевдо-ID (`GR-CASE-NOM`, `GR-TV`, `GR-CONCORD`, …) → канонические ID + миграция.
-3. Разделение namespace: грамматика `GR-*`; фонетика `PHON-*`; орфография `ORTH-*`; прагматика `PRAG-*`; лексика `LEX-*`; ошибки `ERR-*`.
-4. Functional inventory: 195 FN с каноническими GR/LEX/ERR, criticality, evidence, exam relevance.
-5. Traceability: только реальные `FN-A1-*…FN-B2-*`; покрытие всех 195 FN; reverse index.
-6. Exit criteria: Mastery model с измеримыми порогами; Core FN обязательны; Important ≥85% provisional; AI formative / human summative.
-7. Prerequisites: убраны циклы (`AGR-VPAST↔TNS-PST`, `ALT↔LOC`); late dependency `REK-VERB`+Dat разделена; `PRO-INDEF` Intro→A2 для `NEG-DOUBLE`.
-8. L1 model: ссылки на канонические ORTH/PHON/PRAG/GR; 24×3 карточки сохранены.
-9. Добавлен `scripts/validate-curriculum.py` (stdlib only).
+1. Удалён `scripts/rebuild_phase2_integrity.py` (механический coverage injector).
+2. Переписаны все 13 `PHON`/`ORTH`/`PRAG` карточек без stub-формулировок; раздельные UKR/RUS/BEL; `Exit status`.
+3. Всем `GR-*` добавлен `Exit status: Required | Supporting | Extension`.
+4. Исправлено `Umniem pływać` → `Umiem pływać`.
+5. Таблица миграции: запрещены автоподмены `GR-CASE`→Nom, `GR-PART`→только passive, `GR-NUM`→только 1–4, `GR-TENSE`→present (`DISAMBIGUATE per FN`).
+6. 195 FN: убраны late prerequisites; slim GR; уникальные completion; evidence по типу функции; пересмотрена Criticality; Source anchor на каждую FN.
+7. L1: не форсируется покрытие всех 72 ERR.
+8. LEX bundles: содержательные поля (purpose, level, MWU/FIX/COLL examples, related FN, size orientation).
+9. Traceability: якоря из FN Source anchor (не 4 generic CEFR rows).
+10. Mastery logic привязана к `Exit status`.
+11. Validator усилен + distribution report + явная оговорка structural-only.
 
 ---
 
-## 2. Фактические количества ID
+## 2. Фактические счётчики
 
-| Объект | Всего | По уровням Intro (где применимо) |
-| --- | ---: | --- |
-| GR | **110** | см. ниже |
-| PHON | 4 | — |
-| ORTH | 5 | — |
-| PRAG | 4 | — |
-| FN | **195** | A1 42 · A2 48 · B1 55 · B2 50 |
-| LEX bundles | 160 | registry в `lexical-targets.md` |
-| ERR | **72** | UKR 24 · RUS 24 · BEL 24 |
-| EXIT anchors | 12 | INSTR/SUM/EXAM × уровни |
-
-### GR по Intro
-
-| Уровень | Концептов |
+| Объект | Число |
 | --- | ---: |
-| A1 | 58 |
-| A2 | 26 |
-| B1 | 18 |
-| B2 | 8 |
-| **Всего** | **110** |
+| GR | **110** (A1 58 / A2 26 / B1 18 / B2 8) |
+| PHON+ORTH+PRAG | **13** |
+| FN | **195** (A1 42 / A2 48 / B1 55 / B2 50) |
+| LEX bundles | **160** |
+| ERR | **72** (24×3) |
 
-Обоснование GR=110 (диапазон 80–120): после сверки с пробелами покрытия добавлены только недостающие системные концепты (rekcja Dat, TV-agreement, расширения синтаксиса/пунктуации и т.д.), без искусственного дробления ради числа.
+**Почему не «любой ценой 110»:** после ручной классификации Exit status и проверки late-deps искусственно не дробили и не удаляли столпы без JPJO; число честно следует из `#### GR-*`. Если JPJO сольёт дубликаты (напр. `GR-VOC-NAME-01`↔`GR-CAS-VOC-01`), счётчик уменьшится — это допустимо.
 
----
+### Exit status (язык)
 
-## 3. Coverage (после integrity fix)
-
-| Объект | Всего | Трассируется | Не трассируется |
-| --- | ---: | ---: | ---: |
-| FN | 195 | 195 | 0 |
-| GR | 110 | 110 | 0 |
-| PHON | 4 | 4 | 0 |
-| ORTH | 5 | 5 | 0 |
-| PRAG | 4 | 4 | 0 |
-| LEX bundles | 160 | 160 | 0 |
-| ERR | 72 | 72 | 0 |
+| Status | Count (GR+ext) |
+| --- | ---: |
+| Required | 62 |
+| Supporting | 49 |
+| Extension | 12 |
 
 ---
 
-## 4. Prerequisites
+## 3. Criticality distribution (FN)
 
-- Все exact prerequisites существуют.
-- Циклов нет (проверено validator).
-- Late-level deps исправлены:
-  - `GR-REK-VERB-01` (A1) больше не зависит от `GR-CAS-DAT-01` (A2); Dat-система → `GR-REK-VERB-DAT-01` (A2).
-  - `GR-PRO-INDEF-01` Intro сдвинут на A2; `GR-NEG-DOUBLE-01` зависит от него легально.
-  - `GR-TNS-PST-01` ↔ `GR-AGR-VPAST-01` цикл разорван.
-  - `GR-CAS-LOC-01` ↔ `GR-ALT-STEM-01` цикл разорван (параллельное введение).
-- Wildcard `GR-CAS-*` в Prereq удалён.
+| Criticality | Count | % |
+| --- | ---: | ---: |
+| Core | **76** | 39.0% |
+| Important | **94** | 48.2% |
+| Extension | **25** | 12.8% |
+
+**Объяснение:** Core только для способностей, без которых instructional exit уровня для первой аудитории ложен (выживание A1, ключевые институции A2, самостоятельность/exam-relevant B1, сложные институциональные акты B2). Домен ≠ Core. Extension — специализации (дебаты, синтез, манипул-resist и т.п.). Квота заранее не задавалась.
 
 ---
 
-## 5. Результат validator
+## 4. Evidence distribution (FN)
+
+| Evidence | Count |
+| --- | ---: |
+| task_performance | 135 |
+| writing_rubric | 22 |
+| reading_task | 12 |
+| speaking_rubric | 10 |
+| roleplay_tv | 9 |
+| closed_item | 3 |
+| listening_task | 2 |
+| mediation_task | 2 |
+
+`closed_item` больше не клеится ко всем FN.
+
+---
+
+## 5. Late prerequisites
+
+| До | После |
+| --- | --- |
+| ≥8 известных (IMP A2 на A1; DAT A2 на A1; PASS B2 на B1) + возможные injected | **0** |
+
+Исправления (примеры):
+
+- A1 request/repair/emergency/instructions: `GR-MOD-IMP-01` снят; **Formulaic exposure** (`Proszę powtórzyć` …).
+- `FN-A1-024`: Dat снят; формулы `Dziękuję` / `Proszę bardzo`.
+- `FN-B1-011`: `GR-PASS-01` снят; receptive reading + formulaic urzędowe; note `receptive_only`.
+
+---
+
+## 6. Удалённые искусственные связи
+
+- Механические GR-инъекции ради reverse coverage 110/110.
+- Принудительная привязка всех 72 ERR к FN.
+- Generic completion criterion на 195 FN.
+- Авто-Criticality=Core по одному только домену.
+- Generic CEFR A1/A2/B1/B2 якорь без Source anchor разнообразия.
+
+**Честное непокрытие (не баг):**
+
+| Объект | Не связано с FN | Причина |
+| --- | ---: | --- |
+| GR / ext concepts | ~86 | Supporting/Extension системные концепты; спираль case-aspect; не каждый урок = отдельная FN |
+| ERR | 47 | банк диагностики; линк только при сценарном fit |
+
+---
+
+## 7. Validator
 
 ```text
 python scripts/validate-curriculum.py
-OK: curriculum validation passed
-Counts: GR=110 by_level={'A1': 58, 'A2': 26, 'B1': 18, 'B2': 8}; FN=195; PHON+ORTH+PRAG=13
+OK (structural only): GR=110 … FN=195
+Late FN prerequisites: 0
+NOTE: OK means structural integrity only — NOT semantic/methodological correctness or JPJO approval.
 exit code: 0
 ```
 
----
-
-## 6. Оставшиеся REQUIRES VERIFICATION
-
-1. Номера страниц Swan / Nagórko и иных описательных грамматик.
-2. Частотности L1-ошибок и часть remediation (`EXPERT VALIDATION REQUIRED` на карточках).
-3. Численные lexical ranges и mastery/Important пороги — `CALIBRATION=required`.
-4. Поклеточная матрица Katalog A/B załącznik ↔ каждый FN/GR (семантическая трассировка есть; операционный coverage pass — после JPJO).
-5. Актуальный снимок `session_availability` после 2026-09-05.
+Удалены генераторы: `rebuild_phase2_integrity.py`, одноразовые `semantic_fn_pass.py` / `enrich_lex_trace.py` после прогона.
 
 ---
 
-## 7. Методические решения для JPJO
+## 8. REQUIRES VERIFICATION
 
-1. Компромиссный порядок падежей (Nom→Acc→Loc→Gen→Ins→Voc; Dat A2) vs учебник/частотность.
-2. A1 rekcja без системного Dat; Dat-глаголы с A2.
-3. Intro неопределённых/отрицательных местоимений на A2 (раньше прежнего B1).
-4. Criticality разметка Core/Important/Extension по доменам первой аудитории.
-5. Рабочие lexical ranges как внутренние, не CEFR.
-
----
-
-## 8. Изменённые / созданные файлы
-
-**Созданы:**
-
-- `docs/requirements/curriculum/concept-extensions.md`
-- `docs/requirements/curriculum/phase-2-integrity-report.md`
-- `scripts/validate-curriculum.py`
-- `scripts/rebuild_phase2_integrity.py` (вспомогательный regenerate; не обязателен к запуску в CI)
-
-**Обновлены:**
-
-- `grammar-inventory.md`, `functional-inventory.md`, `lexical-targets.md`
-- `curriculum-traceability.md`, `level-exit-criteria.md`, `l1-error-model.md`
-- `phase-2-report.md`, `docs/requirements/README.md`
+1. Точные строки шкал CEFR Companion Volume на каждую FN.
+2. Поклеточный mapping Katalog A/B Dz.U. 2025 poz. 217.
+3. Полнота исключений ударения / носовых аллофонов.
+4. CALIBRATION порогов Important 85%, lexical size ranges, mastery %.
+5. EXPERT VALIDATION L1-карточек.
+6. Возможное слияние дублирующих GR после JPJO.
 
 ---
 
-## 9. `git diff --stat` (относительно `27a94c9` / ветки до коммита)
+## 9. Вопросы для JPJO
 
-См. актуальный вывод `git diff --stat` в коммите. Ожидаемый порядок величины: тысячи строк в FN/traceability/grammar + новые scripts.
-
----
-
-## 10. Что сознательно не делалось
-
-- Техническая архитектура, БД, API, UI, Figma
-- Phase 3 / ICE / обязательный набор XT
-- Утверждение Phase 2 как «approved syllabus»
-- Назначение конкретного JPJO reviewer (DEC-016)
-- Конкретные тарифы
+1. Сохранить ли 110 GR или слить пары вроде Voc name / Voc case, Dat experiencer / Dat core?
+2. Достаточен ли formulaic IMP на A1 без системного `GR-MOD-IMP-01`?
+3. Criticality 76/94/25 — сдвинуть Core вверх/вниз для urzęd/school?
+4. Какие ERR из 47 unused должны стать обязательными диагностиками V1?
+5. PHON-NASAL Supporting на A2 — поднять до Required?
+6. Подтвердить порядок падежей и Dat@A2.
 
 ---
 
-## 11. Сохранённые working locks
+## 10. Сознательно не сделано
 
-- аудитория UKR/RUS/BEL взрослые в PL; цель A1–B2;
-- автор: основатель + AI pipeline; публикация после JPJO;
-- AI formative only; confirmed writing/speaking = human paid;
-- placement + первый модуль free; trajectory + exam-mode paid; цены TBD;
-- `standard_status` ≠ `session_availability`; A1/A2 не `historical`.
+- Phase 3 / приложение / API / ERD / Figma
+- Утверждение Phase 2 gate
+- Полные lemma-lists
+- Восстановление механического 100% GR↔FN coverage
+
+---
+
+## 11. Working locks (сохранены)
+
+Автор+AI draft; JPJO перед публикацией; AI formative; human scoring письма/речи платно; placement+1 модуль free; trajectory+exam paid; цены TBD; `standard_status`≠`session_availability`; A1/A2 не historical.
