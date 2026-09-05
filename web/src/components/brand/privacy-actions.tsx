@@ -1,0 +1,148 @@
+"use client";
+
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
+export function PrivacyActions() {
+  const t = useTranslations("privacy");
+  const [pending, setPending] = useState(false);
+  const [exportMsg, setExportMsg] = useState<string | null>(null);
+  const [deleteMsg, setDeleteMsg] = useState<string | null>(null);
+  const [confirm, setConfirm] = useState("");
+  const [confirming, setConfirming] = useState(false);
+
+  function onExport() {
+    setPending(true);
+    void (async () => {
+      try {
+        const res = await fetch("/api/privacy/export", { method: "POST" });
+        if (res.ok) {
+          const blob = await res.blob();
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "slowarium-export.json";
+          a.click();
+          URL.revokeObjectURL(url);
+        }
+      } finally {
+        setExportMsg(t("exportDone"));
+        setPending(false);
+      }
+    })();
+  }
+
+  function onDelete() {
+    const word = t("deleteConfirmWord");
+    const typed =
+      (typeof document !== "undefined"
+        ? (document.getElementById("delete-confirm") as HTMLInputElement | null)
+            ?.value
+        : null) ?? confirm;
+    if (typed.trim() !== word) return;
+    setPending(true);
+    void (async () => {
+      try {
+        const res = await fetch("/api/privacy/delete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ confirm: word }),
+        });
+        if (!res.ok && res.status !== 202) return;
+        setDeleteMsg(t("deleteDone"));
+        setConfirming(false);
+        if (typeof window !== "undefined") {
+          window.sessionStorage.removeItem("slowarium.demoSession");
+          window.localStorage.removeItem("slowarium.onboarding");
+        }
+      } finally {
+        setPending(false);
+      }
+    })();
+  }
+
+  return (
+    <div className="flex flex-col gap-6" data-testid="privacy-actions">
+      <Card>
+        <h2 className="m-0 font-display text-xl">{t("exportTitle")}</h2>
+        <p className="mt-2 text-[var(--color-graphite)]">{t("exportLead")}</p>
+        <Button
+          className="mt-4"
+          disabled={pending}
+          onClick={onExport}
+          data-testid="privacy-export"
+        >
+          {t("exportAction")}
+        </Button>
+        {exportMsg ? (
+          <p
+            className="mt-3 text-sm text-[var(--color-forest)]"
+            role="status"
+            data-testid="privacy-export-status"
+          >
+            {exportMsg}
+          </p>
+        ) : null}
+      </Card>
+
+      <Card>
+        <h2 className="m-0 font-display text-xl">{t("deleteTitle")}</h2>
+        <p className="mt-2 text-[var(--color-graphite)]">{t("deleteLead")}</p>
+        {!confirming ? (
+          <Button
+            className="mt-4"
+            variant="danger"
+            disabled={pending}
+            onClick={() => setConfirming(true)}
+            data-testid="privacy-delete"
+          >
+            {t("deleteAction")}
+          </Button>
+        ) : (
+          <div className="mt-4 flex flex-col gap-3">
+            <div className="field">
+              <label htmlFor="delete-confirm">{t("deleteConfirmPrompt")}</label>
+              <input
+                id="delete-confirm"
+                data-testid="privacy-delete-confirm-input"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                autoComplete="off"
+              />
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button
+                variant="danger"
+                disabled={pending || confirm !== t("deleteConfirmWord")}
+                onClick={onDelete}
+                data-testid="privacy-delete-confirm"
+              >
+                {t("deleteAction")}
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setConfirming(false);
+                  setConfirm("");
+                }}
+              >
+                {t("deleteCancel")}
+              </Button>
+            </div>
+          </div>
+        )}
+        {deleteMsg ? (
+          <p
+            className="mt-3 text-sm text-[var(--color-burgundy)]"
+            role="status"
+            data-testid="privacy-delete-status"
+          >
+            {deleteMsg}
+          </p>
+        ) : null}
+      </Card>
+    </div>
+  );
+}
