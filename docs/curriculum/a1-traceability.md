@@ -3,11 +3,13 @@
 **Статус:** A1 semantic reference — candidate for human / JPJO review.
 **A2–B2:** pending semantic migration — **не** объявлены готовыми.
 **Дата:** 2026-09-05
+**Бренд продукта:** SŁOWARIUM (`slowarium`) — entity ID не переименованы.
+**Review packet:** [`../reviews/a1-jpjo-review-packet.md`](../reviews/a1-jpjo-review-packet.md) · [`../reviews/a1-source-verification.md`](../reviews/a1-source-verification.md) · [`../reports/phase-2-a1-review-readiness-report.md`](../reports/phase-2-a1-review-readiness-report.md).
 
 Цепочка: `SCN → FN → concepts → LEX → ERR → evidence → exit`.
 
 ID функций и сценариев согласованы с A1 model (`FN-A1-*`, `SCN-A1-*` в `docs/curriculum/`).
-Нормативные ячейки CEFR/Dz.U. помечены `REQUIRES VERIFICATION` там, где точная строка не сверена.
+Нормативные ячейки CEFR/Dz.U. помечены `REQUIRES VERIFICATION` там, где точная строка не сверена; реестр claims — в source-verification.
 
 ## Coverage summary
 

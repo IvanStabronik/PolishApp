@@ -333,6 +333,9 @@ def main() -> int:
         DOC_CUR / "asm-exm-a1.md",
         DOC_CUR / "a1-traceability.md",
         DOC_REP / "phase-2-a1-model-report.md",
+        DOC_REP / "phase-2-a1-review-readiness-report.md",
+        ROOT / "docs" / "reviews" / "a1-source-verification.md",
+        ROOT / "docs" / "reviews" / "a1-jpjo-review-packet.md",
     ]
     for f in required_cur:
         if not (CUR / f).exists():
@@ -1210,6 +1213,176 @@ def main() -> int:
                 "phase-2-status",
                 "possible claim that A2–B2 are complete — verify wording",
             )
+
+    # --- A1 review-readiness packet (structural only) ---
+    DOC_REV = ROOT / "docs" / "reviews"
+    src_ver_path = DOC_REV / "a1-source-verification.md"
+    jpjo_path = DOC_REV / "a1-jpjo-review-packet.md"
+    ready_path = DOC_REP / "phase-2-a1-review-readiness-report.md"
+    src_ver = read(src_ver_path)
+    jpjo = read(jpjo_path)
+    ready = read(ready_path)
+
+    EVIDENCE_ENUM = {
+        "NORMATIVE_DIRECT",
+        "CEFR_DIRECT",
+        "SOURCE_INTERPRETATION",
+        "PRODUCT_ANALYSIS",
+        "EXPERT_JUDGMENT_REQUIRED",
+    }
+    STATUS_ENUM = {
+        "VERIFIED",
+        "PARTIALLY_VERIFIED",
+        "REQUIRES_VERIFICATION",
+        "NOT_SUPPORTED",
+        "CONFLICT",
+    }
+    VERDICT_ENUM = {
+        "APPROVE",
+        "APPROVE_WITH_CHANGES",
+        "REJECT",
+        "NEEDS_EVIDENCE",
+        "NOT_REVIEWED",
+    }
+    META_ENTITIES = {
+        "PRODUCT-STATUS-MODEL",
+        "A1",
+        "ASM-005",
+        "L1-ERR-SET-A1",
+    }
+
+    claim_ids = re.findall(r"^\*\*Claim ID:\*\*\s*`([^`]+)`", src_ver, re.M)
+    if not claim_ids:
+        claim_ids = re.findall(r"^- \*\*Claim ID:\*\*\s*`([^`]+)`", src_ver, re.M)
+    if len(claim_ids) != len(set(claim_ids)):
+        v.err("a1-source-verification.md", "duplicate Claim ID")
+    if len(claim_ids) < 1:
+        v.err("a1-source-verification.md", "no Claim ID entries")
+
+    for m in re.finditer(
+        r"^- \*\*evidence class:\*\*\s*`([^`]+)`", src_ver, re.M
+    ):
+        if m.group(1) not in EVIDENCE_ENUM:
+            v.err(
+                "a1-source-verification.md",
+                f"invalid evidence class {m.group(1)}",
+            )
+    for m in re.finditer(
+        r"^- \*\*verification status:\*\*\s*`([^`]+)`", src_ver, re.M
+    ):
+        if m.group(1) not in STATUS_ENUM:
+            v.err(
+                "a1-source-verification.md",
+                f"invalid verification status {m.group(1)}",
+            )
+
+    # entity resolvability for claims
+    resolvable = set(concepts)
+    resolvable.update(f["id"] for f in a1_fns)
+    resolvable.update(scn_ids)
+    resolvable.update(asm_ids)
+    resolvable.update(exm_ids)
+    resolvable.update(a1_bundles)
+    resolvable.update(META_ENTITIES)
+    all_err = set(
+        re.findall(r"^### (ERR-(?:UKR|RUS|BEL)-\d{2})\b", l1_text, re.M)
+    )
+    resolvable.update(all_err)
+    for m in re.finditer(r"^- \*\*entity ID:\*\*\s*`([^`]+)`", src_ver, re.M):
+        ent = m.group(1)
+        # allow FN-A1-* wildcard mention in multi lists? single id expected
+        if ent in resolvable:
+            continue
+        if ent.startswith("FN-A1-") and ent in {f["id"] for f in a1_fns}:
+            continue
+        v.err(
+            "a1-source-verification.md",
+            f"unresolvable entity ID {ent}",
+        )
+
+    review_ids = re.findall(r"\| `(REV-\d+)` \|", jpjo)
+    if len(review_ids) != len(set(review_ids)):
+        v.err("a1-jpjo-review-packet.md", "duplicate Review ID")
+    if len(review_ids) < 16:
+        v.err(
+            "a1-jpjo-review-packet.md",
+            f"expected ≥16 review items, found {len(review_ids)}",
+        )
+
+    for m in re.finditer(r"\| `(REV-\d+)` \|.*?\| `(APPROVE[^`]*|REJECT|NEEDS_EVIDENCE|NOT_REVIEWED|APPROVE_WITH_CHANGES)` \|", jpjo):
+        pass
+    verdicts = []
+    for line in jpjo.splitlines():
+        if not line.startswith("| `REV-"):
+            continue
+        cols = [c.strip() for c in line.strip("|").split("|")]
+        if len(cols) < 7:
+            continue
+        verd = cols[6].strip("` ")
+        verdicts.append(verd)
+        if verd not in VERDICT_ENUM:
+            v.err(
+                "a1-jpjo-review-packet.md",
+                f"invalid verdict {verd}",
+                cols[0].strip("`"),
+            )
+        if verd == "APPROVE":
+            v.err(
+                "a1-jpjo-review-packet.md",
+                "false APPROVE before independent JPJO review",
+                cols[0].strip("`"),
+            )
+
+    # snapshot counts must match inventories
+    if not re.search(r"\|\s*Канонические FN A1\s*\|\s*\*\*30\*\*", jpjo):
+        v.err("a1-jpjo-review-packet.md", "snapshot FN count must be 30")
+    if not re.search(r"\|\s*SCN A1\s*\|\s*\*\*17\*\*", jpjo):
+        v.err("a1-jpjo-review-packet.md", "snapshot SCN count must be 17")
+    if not re.search(r"\|\s*LEX-A1 bundles\s*\|\s*\*\*21\*\*", jpjo):
+        v.err("a1-jpjo-review-packet.md", "snapshot LEX count must be 21")
+    if not re.search(r"\|\s*ASM A1\s*\|\s*\*\*5\*\*", jpjo):
+        v.err("a1-jpjo-review-packet.md", "snapshot ASM count must be 5")
+    if not re.search(r"\|\s*EXM A1\s*\|\s*\*\*5\*\*", jpjo):
+        v.err("a1-jpjo-review-packet.md", "snapshot EXM count must be 5")
+    if not re.search(r"46/46", jpjo):
+        v.err("a1-jpjo-review-packet.md", "snapshot Required must show 46/46")
+    if not re.search(r"\|\s*ERR in canonical A1 chains\s*\|\s*\*\*31\*\*", jpjo):
+        v.err("a1-jpjo-review-packet.md", "snapshot ERR count must be 31")
+    if len(a1_fns) != 30:
+        v.err("functional-inventory.md", f"canonical A1 FN count {len(a1_fns)} ≠ 30")
+    if len(scn_ids) != 17:
+        v.err("scenario-inventory.md", f"SCN count {len(scn_ids)} ≠ 17")
+    if len(a1_bundles) != 21:
+        v.err("lexical-targets.md", f"LEX-A1 count {len(a1_bundles)} ≠ 21")
+    if len(asm_ids) != 5 or len(exm_ids) != 5:
+        v.err(
+            "asm-exm-a1.md",
+            f"ASM/EXM counts {len(asm_ids)}/{len(exm_ids)} ≠ 5/5",
+        )
+    if "A2–B2 semantic migration not started" not in ready and (
+        "pending semantic migration" not in ready
+    ):
+        v.err(
+            "phase-2-a1-review-readiness-report.md",
+            "must state A2–B2 migration not started / pending",
+        )
+    if re.search(
+        r"A2–B2.*(заверш|готовы|complete)", ready + jpjo, re.I
+    ) and not re.search(r"не.*(заверш|готов)|not started|pending", ready + jpjo, re.I):
+        v.err("review-packet", "A2–B2 must not be declared complete")
+
+    for blob_name, blob in (
+        ("a1-source-verification.md", src_ver),
+        ("a1-jpjo-review-packet.md", jpjo),
+        ("phase-2-a1-review-readiness-report.md", ready),
+    ):
+        if blob.startswith("\ufeff"):
+            v.err(blob_name, "UTF-8 BOM is not allowed")
+
+    print(
+        f"Review packet: claims={len(claim_ids)}; review_items={len(review_ids)}; "
+        f"verdicts={dict(collections.Counter(verdicts))}"
+    )
 
     # distributions
     scn_counts = {fid: len(ss) for fid, ss in fn_to_scn.items()}
