@@ -1,8 +1,10 @@
 # Система требований: платформа польского как иностранного
 
-Статус пакета: **Proposed** — редакция 2 + Phase 2 curriculum (**Candidate for independent JPJO review**).  
-Целевое состояние продукта: полная web-платформа A1–B2. Порядок поставки — [10-scope-phasing-and-dependencies.md](10-scope-phasing-and-dependencies.md).  
-Педагогическая архитектура A1–B2 — [curriculum/](curriculum/). Набор упражнений — после Phase 3.
+Статус пакета: **Proposed** — редакция 2 + Phase 2 curriculum.
+**A1 semantic reference** = **candidate for human review** (не публикация без JPJO).
+**A2–B2** = **pending semantic migration** — **не** объявлены завершёнными.
+Целевое состояние продукта: полная web-платформа A1–B2. Порядок поставки — [10-scope-phasing-and-dependencies.md](10-scope-phasing-and-dependencies.md).
+Педагогическая архитектура — [curriculum/](curriculum/) + эталон A1 в [`../curriculum/`](../curriculum/). Набор упражнений — после Phase 3.
 
 ### Проверка целостности curriculum
 
@@ -10,10 +12,10 @@
 python scripts/validate-curriculum.py
 ```
 
-Скрипт (только stdlib) проверяет **structural integrity**: ID, prerequisites, циклы, late FN deps, Exit status, stub-фразы, LEX fields, exact FN rows в traceability, распределение Criticality/Evidence.  
+Скрипт (только stdlib) проверяет **structural integrity** и A1 anti-patterns: ID сущностей FN/SCN/ASM/EXM, prerequisites, циклы, late FN deps, Exit status, stub-фразы, A1 Required coverage, LEX substance, нормализованные completion templates.
 
-**`OK` ≠ методическая корректность и ≠ JPJO approval.**  
-Отчёт: [curriculum/phase-2-integrity-report.md](curriculum/phase-2-integrity-report.md).
+**`OK` ≠ методическая корректность и ≠ JPJO approval.**
+Отчёты: [curriculum/phase-2-integrity-report.md](curriculum/phase-2-integrity-report.md), [`../reports/phase-2-a1-model-report.md`](../reports/phase-2-a1-model-report.md).
 
 Механический генератор `rebuild_phase2_integrity.py` **удалён** и не должен возвращаться.
 

@@ -1,8 +1,8 @@
 ﻿# Коммуникативно-функциональный инвентарь (A1–B2)
 
-**Статус:** Phase 2 curriculum draft — требует калибровки и linguistic review.  
-**Аудитория:** первая очередь — взрослые с L1 UKR / RUS / BEL, живущие в Польше.  
-**Язык документа:** русский (метаязык требований); польские формы — объект обучения.  
+**Статус:** Phase 2 curriculum draft — A1 semantic reference = **candidate for human review**; A2–B2 = **LEGACY / pending semantic migration** (не эталон). Требует калибровки и JPJO review перед публикацией.
+**Аудитория:** первая очередь — взрослые с L1 UKR / RUS / BEL, живущие в Польше.
+**Язык документа:** русский (метаязык требований); польские формы — объект обучения.
 **Дата сверки внешних источников:** **2026-09-05**.
 
 ---
@@ -48,11 +48,11 @@
 
 | Уровень | Число FN-* | Примечание |
 | --- | ---: | --- |
-| A1 | **42** | Выживание + первый официальный регистр |
-| A2 | **48** | Расширение институциональных сценариев |
-| B1 | **55** | Самостоятельность + аргументация в быту/работе |
-| B2 | **50** | Сложные жалобы, переговоры, нюанс регистра |
-| **Итого** | **195** | Без дублирования ID между уровнями; спиральное возвращение темы = новый FN на новом уровне |
+| A1 | **30** | Канон после семантической миграции (candidate for review) |
+| A2 | **48** | LEGACY — pending semantic migration |
+| B1 | **55** | LEGACY — pending semantic migration |
+| B2 | **50** | LEGACY — pending semantic migration |
+| **Итого (смешанный срез)** | **183** | A1 канон + legacy A2–B2; не объявлять A2–B2 готовыми |
 
 Остальные разделы уровня (сценарии, речевые акты, жанры, прагматика, регистр, компенсации, R/L) — полные перечни **без** отдельной нумерации FN; трассируются к FN через домены.
 
@@ -60,7 +60,7 @@
 
 ## 3. Канонические языковые ID
 
-Временные ярлыки прежнего черновика (псевдо-ID падежей/регистра без канонической записи) **удалены**.  
+Временные ярлыки прежнего черновика (псевдо-ID падежей/регистра без канонической записи) **удалены**.
 Канонические определения:
 
 - грамматика: `grammar-inventory.md` (`GR-*`);
@@ -69,578 +69,727 @@
 
 Кластеры `GR-CAS-*` / `GR-ASP-*` допустимы только в обзорных картах, не как exact prerequisite.
 
+**Семантическая модель сущностей (A1):** см. [`../../curriculum/entity-definitions.md`](../../curriculum/entity-definitions.md), миграция [`../../curriculum/functional-migration-a1.md`](../../curriculum/functional-migration-a1.md), сценарии [`../../curriculum/scenario-inventory.md`](../../curriculum/scenario-inventory.md), ASM/EXM [`../../curriculum/asm-exm-a1.md`](../../curriculum/asm-exm-a1.md).
+
 ---
 
 # A1
 
-**CEFR-ориентир (качественно):** очень простые высказывания о себе и ближайших нуждах; понимание медленной чёткой речи в знакомых ситуациях ([CEFR/CV](https://www.coe.int/en/web/common-european-framework-reference-languages), confidence: высокий на характер уровня).  
+**Статус среза:** semantic reference — **candidate for human review**.
+**Определения сущностей:** [`../../curriculum/entity-definitions.md`](../../curriculum/entity-definitions.md).
+**Миграция 42 → 30:** [`../../curriculum/functional-migration-a1.md`](../../curriculum/functional-migration-a1.md).
+**Сценарии:** [`../../curriculum/scenario-inventory.md`](../../curriculum/scenario-inventory.md).
+**ASM/EXM:** [`../../curriculum/asm-exm-a1.md`](../../curriculum/asm-exm-a1.md).
+
+**CEFR-ориентир (качественно):** очень простые высказывания о себе и ближайших нуждах; понимание медленной чёткой речи в знакомых ситуациях ([CEFR/CV](https://www.coe.int/en/web/common-european-framework-reference-languages), confidence: высокий на характер уровня).
 **Связь с госстандартом:** A1 взрослые — `standard_status=current`; модули słuch / czytanie / pisanie + mówienie ([struktura](https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/), Dz.U. 2025 poz. 217); `session_availability` 2026 = **not_announced** ([terminy 2026](https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/), проверка 2026-09-05).
 
-## Canonical FN records (integrity fix)
+**Criticality:** Core блокирует exit уровня; Important — провизорный порог; Extension не блокирует exit.
 
-Каждая функция ниже имеет канонические prerequisites (см. миграцию в `concept-extensions.md`). **Criticality:** Core блокирует exit уровня; Important — провизорный порог; Extension не блокирует.
+| Показатель | Значение |
+| --- | ---: |
+| Канонических FN A1 | **30** |
+| SCN A1 | см. scenario-inventory |
+| Старых FN-A1-001…042 | мигрированы; не используются как канон |
 
-| Уровень | FN |
-|---|---:|
-| A1 | 42 |
-| A2 | 48 |
-| B1 | 55 |
-| B2 | 50 |
-| **Всего** | **195** |
+---
 
-### FN-A1-001
+### FN-A1-IDENTIFY-01
+- **ID:** FN-A1-IDENTIFY-01
+- **Title (PL):** Przedstawienie tożsamości
+- **Can-do:** Может назвать себя и базовые биографические данные так, чтобы собеседник однозначно идентифицировал человека.
+- **Intent:** Сообщить, кто говорит / кто представлен (имя + происхождение/локация L1).
+- **Modality/skill:** speaking (primary); writing — копирование тех же слотов в анкете
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-SCHOOL-01, SCN-A1-URZAD-01, SCN-A1-WORK-01
 - **Level:** A1
-- **Function:** Представиться: имя, страна, город, L1
-- **Domains:** EVERYDAY, SOCIAL
-- **GR prerequisites:** GR-CAS-NOM-01, GR-TNS-PRS-01, GR-PRO-POSS-01
-- **LEX bundles:** LEX-IDENTITY
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** —
+- **Concepts:** GR-CAS-NOM-01, GR-TNS-PRS-01, GR-PRO-POSS-01, GR-PRO-PERS-01, PHON-CORE-01, ORTH-CORE-01
+- **LEX bundle:** LEX-A1-IDENTITY
+- **Evidence type:** task_performance (oral ID card + optional written slots)
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog umiejętności A (tematy: człowiek / dane osobowe) — REQUIRES VERIFICATION exact cell
+  - CEFR: Companion Volume — Spoken interaction / Overall oral production A1 (qualitative) — REQUIRES VERIFICATION scale row
+  - PRODUCT ANALYSIS: первая аудитория — быстрое самопредставление в школе/urzędzie/работе
+  - METHOD: формульный каркас *Nazywam się… / Jestem z… / Mówię po…* до свободной парафразы
+- **Completion criterion:** В устном мини-диалоге (до 60 с) учащийся без подсказки названия слотов произносит **четыре** понятных пункта: (1) имя и фамилия или устойчивое имя, (2) страна или город происхождения, (3) текущий город в Польше **или** язык L1, (4) одна уточняющая реплика на вопрос собеседника («Skąd pan/pani jest?» / «Jak się pan/pani nazywa?»). Допускается **одна** лексическая подсказка-карточка. Успех блокируется, если имя неразборчиво, слоты перепутаны так, что идентификация ложна, или ответ дан только на L1.
+- **Allowed support:** 1 карточка-подсказка слота; модель *Nazywam się…* на экране до первой попытки
+- **Blocking errors:** неразборчивое имя; ответ целиком не по-польски; ложный город/страна относительно задания; отказ от обязательного слота
+- **L1 risks:** UKR: ERR-UKR-01 (i/y в имени/городе), ERR-UKR-04 (калька «у мене» вместо *mam* при доп. имуществе); RUS: ERR-RUS-02 (i/y), ERR-RUS-04 (посессивные кальки); BEL: ERR-BEL-01 (орфография имён), ERR-BEL-04 (посессив)
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Представиться: имя, страна, город, L1» in domain EVERYDAY with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-001]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-002
+### FN-A1-IDENTIFY-02
+- **ID:** FN-A1-IDENTIFY-02
+- **Title (PL):** Zawód i miejsce pracy
+- **Can-do:** Может спросить и назвать профессию и место работы простыми конструкциями.
+- **Intent:** Уточнить профессиональную роль собеседника или сообщить свою.
+- **Modality/skill:** speaking; listening (понять ответ о работе)
+- **Scenarios:** SCN-A1-WORK-01, SCN-A1-EVERYDAY-01, SCN-A1-NEIGHBOR-01
 - **Level:** A1
-- **Function:** Спросить / назвать профессию и место работы
-- **Domains:** WORK
-- **GR prerequisites:** GR-CAS-NOM-01, GR-CAS-LOC-01, GR-TNS-PRS-01, GR-PREP-Z-01
-- **LEX bundles:** LEX-WORK-BASIC
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-IDENTIFY-01
+- **Concepts:** GR-CAS-NOM-01, GR-CAS-INS-01, GR-CAS-LOC-01, GR-TNS-PRS-01, GR-PREP-Z-01, GR-Q-WH-01
+- **LEX bundle:** LEX-A1-WORK
+- **Evidence type:** task_performance (paired Q–A)
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — tematy praca / zawód — REQUIRES VERIFICATION
+  - CEFR: Spoken interaction A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: трудоустройство и HR-знакомство первой аудитории
+  - METHOD: сначала *pracuję w… / jestem…* (Ins), затем вопрос *Kim pan/pani jest? / Gdzie pan/pani pracuje?*
+- **Completion criterion:** В парном обмене учащийся **и** задаёт, **и** отвечает: минимум один вопрос о профессии **или** месте работы и один ответ с понятной профессией **и** местом (фирма/тип места: sklep, biuro, magazyn). В ответе различимы субъект и локатив/инструменталь без смешения «я есть продавец в» на L1-кальке, ломающей смысл. Лимит: 90 с; до 2 уточняющих переспросов собеседника-робота. Блок: только односложный *tak/nie* без содержания; профессия и место неразличимы.
+- **Allowed support:** список из 8 профессий на экране; 1 повтор вопроса ассистентом
+- **Blocking errors:** невозможность назвать ни профессию, ни место; вопрос без вопросительного маркера и с полным непониманием собеседника; ответ на другом языке
+- **L1 risks:** UKR: ERR-UKR-09 (Ins профессии); RUS: ERR-RUS-09; BEL: ERR-BEL-09
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Спросить / назвать профессию и место работы» in domain WORK with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-002]
-- **L1 risks:** ERR-UKR-09, ERR-RUS-09
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-003
+### FN-A1-LOCATE-01
+- **ID:** FN-A1-LOCATE-01
+- **Title (PL):** Miejsce zamieszkania
+- **Can-do:** Может сказать, где живёт или снимает жильё, простой формулой.
+- **Intent:** Локализовать себя относительно жилья (город/район/тип).
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-HOUSING-01, SCN-A1-EVERYDAY-01, SCN-A1-URZAD-01
 - **Level:** A1
-- **Function:** Сказать, где живёт / снимает жильё (простая формула)
-- **Domains:** HOUSING
-- **GR prerequisites:** GR-CAS-LOC-01, GR-TNS-PRS-01, GR-REK-VERB-01
-- **LEX bundles:** LEX-HOUSING-BASIC
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-IDENTIFY-01
+- **Concepts:** GR-CAS-LOC-01, GR-TNS-PRS-01, GR-REK-VERB-01, GR-EXIST-01
+- **LEX bundle:** LEX-A1-HOUSING
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — mieszkanie / miejsce zamieszkania — REQUIRES VERIFICATION
+  - CEFR: Spoken production A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: аренда и бытовая локализация в Польше
+  - METHOD: каркас *Mieszkam w… / Wynajmuję…* до вариаций
+- **Completion criterion:** На стимул «где вы живёте?» учащийся даёт **одну** полную польскую реплику с (a) глаголом локализации и (b) понятным местом (город или тип жилья + город). Дополнительно отличает «живу» от «сейчас нахожусь» если в задании дан ложный стимул «где вы сейчас?». Время ответа ≤ 20 с после стимула. Блок: только жест/L1; место без глагола, если из-за этого нельзя понять, живёт ли человек там постоянно.
+- **Allowed support:** карта Польши с 3 городами; модель предложения один раз
+- **Blocking errors:** отсутствие места; ответ *u mnie jest mieszkanie* как единственная форма без *mieszkam*; полное непонимание стимула после одного повтора
+- **L1 risks:** UKR: ERR-UKR-04; RUS: ERR-RUS-04; BEL: ERR-BEL-04; плюс путаница *w/na* (GR-CAS-LOC-01)
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Сказать, где живёт / снимает жильё (простая формула)» in domain HOUSING with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-003]
-- **L1 risks:** ERR-UKR-04, ERR-RUS-04
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-004
+### FN-A1-LOCATE-02
+- **ID:** FN-A1-LOCATE-02
+- **Title (PL):** Adres i lokalizacja w budynku
+- **Can-do:** Может назвать улицу, номер дома/квартиры и этаж так, чтобы адрес можно было записать.
+- **Intent:** Передать записываемый адрес и позицию в здании.
+- **Modality/skill:** speaking; writing (диктовка/копирование)
+- **Scenarios:** SCN-A1-HOUSING-01, SCN-A1-URZAD-01, SCN-A1-FORM-01, SCN-A1-EMERGENCY-01
 - **Level:** A1
-- **Function:** Назвать адрес, этаж, номер квартиры
-- **Domains:** HOUSING, URZAD
-- **GR prerequisites:** GR-CAS-NOM-01, GR-NUM-CARD-01
-- **LEX bundles:** LEX-ADDRESS
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-LOCATE-01
+- **Concepts:** GR-CAS-NOM-01, GR-NUM-CARD-01, GR-NUM-ORD-01, GR-CAS-LOC-01, ORTH-CORE-01
+- **LEX bundle:** LEX-A1-ADDRESS
+- **Evidence type:** task_performance (oral → listener writes address)
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — dane adresowe — REQUIRES VERIFICATION
+  - CEFR: Transactions / information exchange A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: urząd, доставка, экстренные службы
+  - METHOD: порядок слотов ulica → numer → mieszkanie → piętro; проверка диктовкой
+- **Completion criterion:** Слушатель-ассистент **точно** записывает с устной диктовки учащегося: улицу, номер дома, номер квартиры **и** этаж (4 слота). Допускается **одна** просьба «proszę powtórzyć numer». Успех = запись совпадает с карточкой задания (допустима орфография улицы с 1 опечаткой диакритики, если номерные слоты верны). Блок: перепутаны дом и квартира; этаж не назван; номера неразборчивы после повтора.
+- **Allowed support:** 1 повтор числовых слотов; образец порядка полей на экране
+- **Blocking errors:** неполный адрес без номера; системная путаница дом/квартира; отказ диктовать по-польски
+- **L1 risks:** UKR: ERR-UKR-04, ERR-UKR-13 (чтение чисел); RUS: ERR-RUS-04, ERR-RUS-13; BEL: ERR-BEL-04
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Назвать адрес, этаж, номер квартиры» in domain HOUSING with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-004]
-- **L1 risks:** ERR-UKR-04, ERR-RUS-04
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-005
+### FN-A1-GREET-01
+- **ID:** FN-A1-GREET-01
+- **Title (PL):** Powitanie i pożegnanie
+- **Can-do:** Может поздороваться и попрощаться в официальном и бытовом регистре.
+- **Intent:** Открыть и закрыть контакт уместной формулой.
+- **Modality/skill:** speaking; listening (распознать формулу)
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-NEIGHBOR-01, SCN-A1-SHOP-01, SCN-A1-WORK-01
 - **Level:** A1
-- **Function:** Поздороваться / попрощаться в официальном и бытовом регистре
-- **Domains:** TV, SOCIAL
-- **GR prerequisites:** PRAG-PAN-01, GR-CAS-VOC-01
-- **LEX bundles:** LEX-GREETINGS
-- **Required evidence:** roleplay_tv
+- **Prerequisites (FN):** —
+- **Concepts:** PRAG-PAN-01, GR-CAS-VOC-01, PHON-CORE-01 (имена в wołacz — формульно на A1; системный VOC-NAME остаётся A2)
+- **LEX bundle:** LEX-A1-GREETINGS
+- **Evidence type:** roleplay_tv
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — sytuacje komunikacyjne / kurtuazja — REQUIRES VERIFICATION
+  - CEFR: Sociolinguistic appropriateness (pre-A1/A1 qualitative) — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: ежедневные контакты первой аудитории
+  - METHOD: пары Dzień dobry / Cześć и Do widzenia / Na razie до выбора по карточке роли
+- **Completion criterion:** В двух коротких ролях (≤ 40 с каждая) учащийся: (1) открывает контакт формулой, согласованной с карточкой «urzędnik» vs «kolega», (2) закрывает контакт уместным прощанием. Оценивается **пара** открытие+закрытие в каждом регистре. Блок: *Cześć* официальному незнакомцу на окошке; отсутствие прощания; формула на L1.
+- **Allowed support:** карточка роли; список из 6 формул (без пометки регистра — учащийся выбирает)
+- **Blocking errors:** регистровая инверсия в официальной роли; нет ни приветствия, ни прощания
+- **L1 risks:** UKR: ERR-UKR-18 (T–V); RUS: ERR-RUS-18; BEL: ERR-BEL-18
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Поздороваться / попрощаться в официальном и бытовом регистре» in domain TV with correct T–V register choice in a short roleplay, without blocking register/rekcja failure. [FN-A1-005]
-- **L1 risks:** ERR-UKR-18, ERR-RUS-18
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-006
+### FN-A1-ADDRESS-01
+- **ID:** FN-A1-ADDRESS-01
+- **Title (PL):** Zwrot pan/pani
+- **Can-do:** Может обратиться pan/pani с глаголом в 3 лице в сервисной ситуации.
+- **Intent:** Вежливо адресовать реплику незнакомцу в сервисе.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-SHOP-01, SCN-A1-URZAD-01, SCN-A1-MED-01, SCN-A1-BANK-01
 - **Level:** A1
-- **Function:** Обратиться pan/pani + 3 л. в магазине / на ресепшене
-- **Domains:** TV, SHOP
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01, GR-TV-AGR-01
-- **LEX bundles:** LEX-SERVICE
-- **Required evidence:** roleplay_tv
+- **Prerequisites (FN):** FN-A1-GREET-01
+- **Concepts:** PRAG-PAN-01, GR-TV-AGR-01, GR-TNS-PRS-01, GR-CAS-VOC-01
+- **LEX bundle:** LEX-A1-SERVICE
+- **Evidence type:** roleplay_tv
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — rejestr oficjalny — REQUIRES VERIFICATION
+  - CEFR: Sociolinguistic A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: магазин, ресепшен, окно urzędu
+  - METHOD: запрет *ty* в сервисной карточке до автоматизации 3 л.
+- **Completion criterion:** В сервисном диалоге (магазин или ресепшен, 4–6 реплик) минимум **две** реплики учащегося содержат уместное *pan/pani* **и** глагол в 3 лице (*czy może mi pan… / proszę pani…*). Собеседник выполняет просьбу — pragmatic success. Блок: устойчивое *ty* + 2 л. к незнакомцу; *pan* + 2 л. (*pan chcesz*); оскорбительный регистр.
+- **Allowed support:** 1 коррекция ассистента «proszę w 3. osobie»; визуальная схема pan→on
+- **Blocking errors:** полное отсутствие pan/pani в официальной роли; согласование 2 л. с pan
+- **L1 risks:** UKR: ERR-UKR-18; RUS: ERR-RUS-18; BEL: ERR-BEL-18
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Обратиться pan/pani + 3 л. в магазине / на ресепшене» in domain TV with correct T–V register choice in a short roleplay, without blocking register/rekcja failure. [FN-A1-006]
-- **L1 risks:** ERR-UKR-18, ERR-RUS-18
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-007
+### FN-A1-REPAIR-01
+- **ID:** FN-A1-REPAIR-01
+- **Title (PL):** Prośba o powtórzenie
+- **Can-do:** Может попросить повторить или говорить медленнее, чтобы восстановить понимание.
+- **Intent:** Восстановить канал связи при недослышанном сообщении.
+- **Modality/skill:** speaking; listening
+- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-URZAD-01, SCN-A1-EVERYDAY-01, SCN-A1-MED-01
 - **Level:** A1
-- **Function:** Попросить повторить / говорить медленнее
-- **Domains:** PHONE, EVERYDAY
-- **GR prerequisites:** PRAG-REPAIR-01, GR-Q-YESNO-01
-- **LEX bundles:** LEX-REPAIR
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-GREET-01
+- **Concepts:** PRAG-REPAIR-01, GR-Q-YESNO-01, PHON-CORE-01 (императив в FIX: *powtórz / mów wolniej* — без системного IMP A2)
+- **LEX bundle:** LEX-A1-REPAIR
+- **Evidence type:** task_performance (noise / fast-speech prompt)
+- **Source anchor:**
+  - NORMATIVE: CEFR Companion — Communication strategies / Asking for clarification (qualitative A1) — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: телефон и очереди — высокий шум
+  - METHOD: *Proszę powtórzyć; Proszę mówić wolniej; Jeszcze raz, proszę*
+  - METHOD note: не смешивать с запросом перевода (REPAIR-02)
+- **Completion criterion:** После намеренно быстрого/шумного стимула учащийся **до** угадывания содержания использует ≥1 формулу ремонта (повтор или «медленнее»), затем отвечает по существу на **повторенный** стимул. Успех = корректный выбор из 3 опций смысла **после** ремонта. Без формулы ремонта, но с угадыванием — не засчитывается. Лимит попыток ремонта: 2.
+- **Allowed support:** список из 3 формул repair; визуальный сигнал «шум»
+- **Blocking errors:** молчание/отключение; ответ наугад без repair; формула на L1 без польского эквивалента
+- **L1 risks:** UKR/RUS/BEL: кальки «ещё раз» без *proszę*; смешение императива грубости — PRAG-REPAIR-01
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Попросить повторить / говорить медленнее» in domain PHONE with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-007]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Formulaic exposure:** Proszę powtórzyć; Proszę mówić wolniej; Nie rozumiem
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-008
+### FN-A1-REPAIR-02
+- **ID:** FN-A1-REPAIR-02
+- **Title (PL):** Sygnał niezrozumienia
+- **Can-do:** Может сказать, что не понимает, и попросить объяснить/перевести ключевое слово.
+- **Intent:** Зафиксировать пробел в понимании и запросить значение.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-URZAD-01, SCN-A1-EVERYDAY-01, SCN-A1-BANK-01, SCN-A1-MED-01
 - **Level:** A1
-- **Function:** Сказать, что не понимает; попросить перевод ключевого слова
-- **Domains:** EVERYDAY, URZAD
-- **GR prerequisites:** GR-NEG-01, PRAG-REPAIR-01, GR-Q-YESNO-01
-- **LEX bundles:** LEX-REPAIR
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-REPAIR-01
+- **Concepts:** GR-NEG-01, PRAG-REPAIR-01, GR-Q-WH-01, GR-PRO-INT-01
+- **LEX bundle:** LEX-A1-REPAIR
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: CEFR — asking for clarification — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: неизвестные термины urzędu/банка
+  - METHOD: *Nie rozumiem; Co znaczy…?; Jak to jest po…?*
+- **Completion criterion:** В диалоге с одним неизвестным ключевым словом (подсвечено в стенограмме для ассистента) учащийся: (1) явно сигнализирует непонимание по-польски, (2) запрашивает значение **этого** слова или простую парафразу, (3) затем выполняет задание, используя полученное значение. Успех без шага (2) не засчитывается. Блок: игнор неизвестного слова; запрос на L1 без попытки польской формулы.
+- **Allowed support:** 1 подсказка жестом на слово; карточка *Co znaczy…?*
+- **Blocking errors:** нет сигнала непонимания; продолжение «как будто понял» с ошибкой задания
+- **L1 risks:** UKR: ERR-UKR-03 (*co/że* при попытке сложного уточнения); RUS: ERR-RUS-03; BEL: ERR-BEL-03
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Сказать, что не понимает; попросить перевод ключевого слова» in domain EVERYDAY with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-008]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-009
+### FN-A1-QUANT-01
+- **ID:** FN-A1-QUANT-01
+- **Title (PL):** Cena, ilość, reszta
+- **Can-do:** Может назвать и понять цену, количество и сдачу на простых числах.
+- **Intent:** Обменяться числовой информацией о мере и деньгах.
+- **Modality/skill:** speaking; listening; (цифры oral)
+- **Scenarios:** SCN-A1-SHOP-01, SCN-A1-FOOD-01, SCN-A1-TICKET-01, SCN-A1-BANK-01
 - **Level:** A1
-- **Function:** Назвать цену, количество, сдачу (простые числа)
-- **Domains:** SHOP, BANK
-- **GR prerequisites:** GR-NUM-CARD-01, GR-NUM-MONEY-01, GR-CAS-GEN-01
-- **LEX bundles:** LEX-MONEY
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** —
+- **Concepts:** GR-NUM-CARD-01, GR-NUM-CARD-05, GR-NUM-MONEY-01, GR-CAS-GEN-01, GR-GEN-PART-01
+- **LEX bundle:** LEX-A1-MONEY
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — liczby / zakupy — REQUIRES VERIFICATION
+  - CEFR: Transactions A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: касса, билет, сдача
+  - METHOD: различать *ile kosztuje* / *ile sztuk* / *reszta*
+- **Completion criterion:** В кассовом микродиалоге учащийся корректно обрабатывает **три** числовых слота: названная цена (zł), запрошенное количество товара, и сдача (или констатация «bez reszty» при точной сумме). Слушатель сверяет числа с чеком-заданием; допускается погрешность ±0 только после одного уточняющего вопроса учащегося. Блок: цена и сдача перепутаны; количество не названо при запросе кассира.
+- **Allowed support:** калькулятор-экран с суммой (без подсказки сдачи); 1 переспрос
+- **Blocking errors:** невозможность произнести/понять цену в злотых; ответ только жестом без числа при требовании сказать
+- **L1 risks:** UKR: ERR-UKR-13; RUS: ERR-RUS-13; BEL: ERR-BEL-13; genitive после числительных 5+
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Назвать цену, количество, сдачу (простые числа)» in domain SHOP with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-009]
-- **L1 risks:** ERR-UKR-13
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-010
+### FN-A1-TRANS-01
+- **ID:** FN-A1-TRANS-01
+- **Title (PL):** Transakcja wyboru i zakupu
+- **Can-do:** Может провести простую транзакцию: выразить выбор, завершить обмен «товар/услуга ↔ оплата», подтвердить результат.
+- **Intent:** Довести сервисный обмен до наблюдаемого результата (получен товар/заказ/билет).
+- **Modality/skill:** speaking; interactive
+- **Scenarios:** SCN-A1-SHOP-01, SCN-A1-FOOD-01, SCN-A1-TICKET-01
 - **Level:** A1
-- **Function:** Купить товар / заказать услугу по образцу
-- **Domains:** SHOP
-- **GR prerequisites:** GR-CAS-ACC-01, GR-NUM-CARD-01, PRAG-PAN-01
-- **LEX bundles:** LEX-SHOP
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-ADDRESS-01, FN-A1-QUANT-01
+- **Concepts:** GR-CAS-ACC-01, GR-TNS-PRS-01, GR-MOD-VERB-01, PRAG-PAN-01, GR-PRO-DEM-01
+- **LEX bundle:** LEX-A1-SERVICE (ядро; доменные расширения в SCN FOOD/TICKET)
+- **Evidence type:** task_performance (end-to-end transaction)
+- **Source anchor:**
+  - NORMATIVE: CEFR — obtaining goods and services A1 — REQUIRES VERIFICATION exact descriptor
+  - PRODUCT ANALYSIS: единая функция для магазина/еды/билета вместо трёх FN
+  - METHOD: слоты wybór → potwierdzenie → płatność → odbiór
+  - METHOD: сценарии задают LEX, не плодят FN
+- **Completion criterion:** В любом из трёх сервисных сценариев учащийся доводит обмен до **физического/экранного результата** задания (товар в «корзине», заказ принят, билет выдан). Обязательные слоты речи: (1) выбор объекта, (2) реакция на цену или способ оплаты, (3) подтверждение получения/заказа (*tak / proszę / to wszystko*). Допускается ≤2 подсказки кассира типа «co podać?». Блок: обрыв до оплаты без обозначения выбора; только кивок без польских реплик на шагах 1–2.
+- **Allowed support:** меню/витрина с 5 позициями; 2 наводящих вопроса кассира
+- **Blocking errors:** нет выбора; отказ говорить при необходимости назвать позицию; регистр *ty* к кассиру-незнакомцу при карточке «sklep»
+- **L1 risks:** UKR: ERR-UKR-06 (*czekać na* в очереди), ERR-UKR-18; RUS: ERR-RUS-06, ERR-RUS-18; BEL: ERR-BEL-06
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Купить товар / заказать услугу по образцу» in domain SHOP with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-010]
-- **L1 risks:** ERR-UKR-13
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** PRODUCT ANALYSIS — first-audience scenario (work/housing/urzęd/med/school/bank)
 
-### FN-A1-011
+### FN-A1-ASK-01
+- **ID:** FN-A1-ASK-01
+- **Title (PL):** Pytanie o dostępność
+- **Can-do:** Может спросить о наличии товара, услуги или свободного временного слота.
+- **Intent:** Получить информацию «есть / нет / когда».
+- **Modality/skill:** speaking; listening
+- **Scenarios:** SCN-A1-SHOP-01, SCN-A1-MED-01, SCN-A1-TICKET-01, SCN-A1-BANK-01
 - **Level:** A1
-- **Function:** Заказать еду / напиток
-- **Domains:** SHOP
-- **GR prerequisites:** GR-CAS-ACC-01, PRAG-PAN-01
-- **LEX bundles:** LEX-FOOD
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-GREET-01
+- **Concepts:** GR-Q-YESNO-01, GR-Q-WH-01, GR-EXIST-01, GR-NEG-01, GR-CAS-GEN-04
+- **LEX bundle:** LEX-A1-SERVICE
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: CEFR — information exchange A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: слияние бывших отдельных «наличие» FN
+  - METHOD: *Czy jest…? / Czy są wolne miejsca? / Na kiedy jest termin?*
+- **Completion criterion:** Учащийся задаёт **понятный польский вопрос о наличии** и на основе ответа ассистента выбирает верное действие из трёх (купить / записаться / уйти). Вопрос должен содержать маркер существования/наличия или времени слота; ответ «nie ma» должен быть понят (не игнорирован). Блок: утверждение вместо вопроса; вопрос без связи с наличием; непонимание отрицательного ответа.
+- **Allowed support:** 1 модель вопроса; карточка объекта запроса
+- **Blocking errors:** нет вопросительной формы при задании «спросите»; покупка при ответе «nie ma»
+- **L1 risks:** UKR: ERR-UKR-02 (*czy*); RUS: ERR-RUS-02; BEL: ERR-BEL-02; *nie ma* + Gen
 - **Criticality:** Important
-- **Completion criterion:** Learner can «Заказать еду / напиток» in domain SHOP with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-011]
-- **L1 risks:** ERR-UKR-13
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-012
+### FN-A1-DIRECT-01
+- **ID:** FN-A1-DIRECT-01
+- **Title (PL):** Droga i orientacja
+- **Can-do:** Может спросить и дать базовые ориентиры пути (направление, ориентир, транспорт).
+- **Intent:** Получить или передать маршрут в пределах 2–3 шагов.
+- **Modality/skill:** speaking; listening
+- **Scenarios:** SCN-A1-DIRECTIONS-01, SCN-A1-EVERYDAY-01, SCN-A1-TICKET-01
 - **Level:** A1
-- **Function:** Спросить / объяснить дорогу (базовые ориентиры)
-- **Domains:** TRANS
-- **GR prerequisites:** GR-CAS-ACC-01, GR-CAS-LOC-01, GR-Q-WH-01
-- **LEX bundles:** LEX-TRANS-BASIC
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-ASK-01
+- **Concepts:** GR-MOT-BASE-01, GR-PREP-DO-NA-01, GR-CAS-ACC-02, GR-Q-WH-01 (императив направления — формульный RECP, без IMP A2)
+- **LEX bundle:** LEX-A1-TRANSPORT
+- **Evidence type:** task_performance (map micro-task)
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — podróżowanie / miasto — REQUIRES VERIFICATION
+  - CEFR: Asking for / giving directions (qualitative A1/A2 border) — A1 limited — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: дорога на работу/до urzędu
+  - METHOD: *prosto / w lewo / w prawo / przystanek*
+- **Completion criterion:** На карте из 4 точек учащийся либо (вариант A) спрашивает путь и отмечает цель по устному ответу ассистента, либо (вариант B) даёт 2–3 понятных шага к отмеченной цели. Успех = цель отмечена верно **или** слушатель доходит по инструкции без тупика. Допустим 1 repair. Блок: только жест без слов; инструкция из одного неясного слова; противоположное направление без самоисправления.
+- **Allowed support:** карта; 3 стрелки-легенды; 1 repair
+- **Blocking errors:** выбран неверный конечный пункт после инструкции; полный отказ от польских ориентиров
+- **L1 risks:** UKR: ERR-UKR-06; RUS: ERR-RUS-06; BEL: ERR-BEL-06; *do/na/w*
 - **Criticality:** Important
-- **Completion criterion:** Learner can «Спросить / объяснить дорогу (базовые ориентиры)» in domain TRANS with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-012]
-- **L1 risks:** ERR-UKR-02, ERR-BEL-10
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Formulaic exposure:** Proszę, gdzie jest…?; Proszę tutaj; Jak dojść do…?
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-013
+### FN-A1-APPOINT-01
+- **ID:** FN-A1-APPOINT-01
+- **Title (PL):** Umówienie wizyty
+- **Can-do:** Может записаться на визит, назвав день и час простой фразой.
+- **Intent:** Зафиксировать договорённость о времени встречи/приёма.
+- **Modality/skill:** speaking; listening
+- **Scenarios:** SCN-A1-MED-01, SCN-A1-URZAD-01, SCN-A1-SCHOOL-01
 - **Level:** A1
-- **Function:** Купить билет / спросить о времени отправления
-- **Domains:** TRANS
-- **GR prerequisites:** GR-NUM-CARD-01, GR-TIME-EXPR-01, PRAG-PAN-01
-- **LEX bundles:** LEX-TRANS-BASIC
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-TIME-01, FN-A1-ADDRESS-01
+- **Concepts:** GR-TIME-EXPR-01, GR-NUM-ORD-01, GR-TNS-PRS-01, GR-Q-WH-01, PRAG-PAN-01
+- **LEX bundle:** LEX-A1-TIME
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — wizyty / usługi — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: przychodnia, urząd, szkoła
+  - METHOD: *Poproszę termin / Czy mogę się zapisać na…?*
+  - CEFR: arrangements A1 — REQUIRES VERIFICATION
+- **Completion criterion:** Учащийся предлагает или принимает слот, назвав **день** и **час**, и получает подтверждение ассистента («zapisuję pana/panią»). В протоколе должны совпасть день+час с целевой карточкой (допуск ±0; при конфликте слотов — одна альтернатива). Блок: запись без времени; время без дня; отсутствие подтверждения понимания (*tak / dobrze*).
+- **Allowed support:** календарь на неделю; часы циферблатом
+- **Blocking errors:** несогласованные день/час; полный срыв записи без попытки назвать время
+- **L1 risks:** UKR: ERR-UKR-15 (время); RUS: ERR-RUS-15; BEL: ERR-BEL-15
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Купить билет / спросить о времени отправления» in domain TRANS with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-013]
-- **L1 risks:** ERR-UKR-02, ERR-BEL-10
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** PRODUCT ANALYSIS — first-audience scenario (work/housing/urzęd/med/school/bank)
 
-### FN-A1-014
+### FN-A1-HEALTH-01
+- **ID:** FN-A1-HEALTH-01
+- **Title (PL):** Objawy i dolegliwości
+- **Can-do:** Может назвать симптомы списком и формулой *boli mnie…*
+- **Intent:** Сообщить о состоянии здоровья собеседнику-медику/аптекарю.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-MED-01, SCN-A1-EMERGENCY-01
 - **Level:** A1
-- **Function:** Записаться на визит (простая фраза: день, час)
-- **Domains:** MED, URZAD, SCHOOL
-- **GR prerequisites:** GR-TIME-EXPR-01, PRAG-PAN-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-APPOINTMENT
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-IDENTIFY-01
+- **Concepts:** GR-CAS-ACC-01, GR-PRO-PERS-01, GR-TNS-PRS-01, PHON-CORE-01 (экспериенцер *boli mnie* — формульный Dat на A1; системный DAT-EXP остаётся A2)
+- **LEX bundle:** LEX-A1-HEALTH
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — zdrowie — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: przychodnia / apteka первой аудитории
+  - METHOD: список органов + *boli mnie głowa/brzuch…*
+  - CEFR: describing health A1 — REQUIRES VERIFICATION
+- **Completion criterion:** По карточке симптомов учащийся называет ≥2 понятных симптома, из них ≥1 с конструкцией экспериенцера (*boli mnie…* / *źle się czuję* + уточнение). Врач-ассистент выбирает верный «код жалобы» из 4. Блок: только жест на тело без слов; симптом на L1; *boli ja* без коррекции после одной подсказки.
+- **Allowed support:** схема тела; 1 модель *boli mnie…*
+- **Blocking errors:** ни одного распознаваемого симптома; отказ говорить о боли при задании
+- **L1 risks:** UKR: ERR-UKR-05 (путаница lubić/podobać при оценке самочувствия редко), dat. experiencer; RUS: ERR-RUS-14; BEL: ERR-BEL-14
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Записаться на визит (простая фраза: день, час)» in domain MED with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-014]
-- **L1 risks:** ERR-UKR-06, ERR-RUS-06
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-015
+### FN-A1-HELP-01
+- **ID:** FN-A1-HELP-01
+- **Title (PL):** Wezwanie pomocy
+- **Can-do:** Может сообщить о срочности/боли и попросить помочь вызвать помощь по скрипту.
+- **Intent:** Инициировать помощь третьих лиц в угрожающей ситуации.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-EMERGENCY-01, SCN-A1-MED-01
 - **Level:** A1
-- **Function:** Назвать симптомы на уровне списка слов + «boli mnie…»
-- **Domains:** MED
-- **GR prerequisites:** GR-CAS-ACC-01, GR-TNS-PRS-01, GR-PRO-PERS-01
-- **LEX bundles:** LEX-BODY
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-HEALTH-01, FN-A1-REQUEST-01
+- **Concepts:** GR-MOD-VERB-01, PRAG-PAN-01, GR-CAS-ACC-01, PHON-CORE-01 (просьба о помощи — модалки + FIX; без системного IMP A2)
+- **LEX bundle:** LEX-A1-HELP
+- **Evidence type:** task_performance (timed script)
+- **Source anchor:**
+  - NORMATIVE: PRODUCT SAFETY / first-audience emergency literacy — не подмена мед. протокола
+  - CEFR: dealing with emergencies (qualitative; A1 limited scripts) — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: скрипт «нужна помощь / вызовите…»
+  - METHOD: приоритет понятности и адреса над граммат. полнотой
+- **Completion criterion:** За ≤ 45 с учащийся выдаёт скрипт из ≥3 слотов: (1) сигнал срочности или боли, (2) явная просьба о помощи / вызвать службу, (3) место **или** имя/идентификация пострадавшего. Ассистент должен суметь «набрать» службу по этим данным. Блок: нет просьбы о помощи; только описание без обращения; данные места ложны относительно карточки.
+- **Allowed support:** карточка экстренных номеров как рецептив; 1 подсказка «powiedz gdzie»
+- **Blocking errors:** отсутствие просьбы; юмор/отказ в ролевой «угрозе»; полный L1
+- **L1 risks:** UKR: ERR-UKR-07 (телефонные rekcja при звонке); RUS: ERR-RUS-07; BEL: ERR-BEL-07
+- **Criticality:** Important
+
+### FN-A1-DOCS-01
+- **ID:** FN-A1-DOCS-01
+- **Title (PL):** Dokumenty i formularz
+- **Can-do:** Может передать/получить документы на окошке и попросить бланк или указать недостающий документ.
+- **Intent:** Обеспечить документооборот в институциональном контакте.
+- **Modality/skill:** speaking; interactive
+- **Scenarios:** SCN-A1-URZAD-01, SCN-A1-BANK-01, SCN-A1-FORM-01
+- **Level:** A1
+- **Prerequisites (FN):** FN-A1-ADDRESS-01, FN-A1-PURPOSE-01
+- **Concepts:** GR-CAS-ACC-01, GR-PRO-DEM-01, PRAG-PAN-01, GR-NEG-01, GR-Q-WH-01
+- **LEX bundle:** LEX-A1-DOCS
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — urzędy / dokumenty — REQUIRES VERIFICATION
+  - CEFR: Companion Volume — transactions / obtaining goods and services (qualitative A1) — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: слияние «отдать документы» и «попросить форму»
+  - METHOD: *Oto dokumenty; Proszę formularz; Brakuje mi…*
+- **Completion criterion:** В окошке urzędu учащийся выполняет **оба** действия в одном визите: (A) передаёт названный комплект (паспорт/PESEL-карта по заданию) с понятной репликой, (B) либо просит бланк, либо указывает, чего не хватает, если ассистент сообщает о пробеле. Успех = ассистент отмечает «комплект принят» **или** «бланк выдан». Блок: молчаливая передача без речи при требовании назвать документ; игнор запроса о недостающем.
+- **Allowed support:** физические карточки-«документы»; список названий
+- **Blocking errors:** неверный документ при наличии названий; отсутствие просьбы о бланке, когда это единственный путь успеха
+- **L1 risks:** UKR: ERR-UKR-18; RUS: ERR-RUS-18; BEL: ERR-BEL-18
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Назвать симптомы на уровне списка слов + «boli mnie…»» in domain MED with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-015]
-- **L1 risks:** ERR-UKR-15, ERR-RUS-16
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-016
+### FN-A1-PURPOSE-01
+- **ID:** FN-A1-PURPOSE-01
+- **Title (PL):** Cel wizyty
+- **Can-do:** Может одной фразой назвать цель визита в учреждении.
+- **Intent:** Сориентировать служащего, зачем пришёл посетитель.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-URZAD-01, SCN-A1-BANK-01, SCN-A1-MED-01
 - **Level:** A1
-- **Function:** Получить / отдать документы на окошке (мини-скрипт)
-- **Domains:** URZAD
-- **GR prerequisites:** PRAG-PAN-01, GR-CAS-ACC-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-DOCS
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-IDENTIFY-01, FN-A1-GREET-01
+- **Concepts:** GR-TNS-PRS-01, GR-CAS-ACC-01, GR-INF-COMPL-01 (цель визита формулой *w sprawie…*; *żeby* — RECP, не A2 SYN-SUB как prereq)
+- **LEX bundle:** LEX-A1-URZAD
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — sytuacje urzędowe — REQUIRES VERIFICATION
+  - CEFR: Companion Volume — spoken interaction: stating purpose in service encounters (qualitative A1) — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: очередь / окошко — цель до деталей
+  - METHOD: *Przyszedłem / Przyszłam w sprawie… / Chcę złożyć…*
+- **Completion criterion:** После приветствия учащийся произносит **одну** фразу цели, по которой ассистент направляет к верному окну (выбор из 3). Цель должна совпасть с карточкой (PESEL / meldunek / wniosek — по заданию). Допускается 1 repair. Блок: только имя без цели; цель на L1; неверное окно из-за неверной цели.
+- **Allowed support:** 3 карточки целей; модель *w sprawie…*
+- **Blocking errors:** отсутствие цели; цель противоречит документам в руках
+- **L1 risks:** UKR: ERR-UKR-09 (род в *przyszedłem/am*); RUS: ERR-RUS-09; BEL: ERR-BEL-09
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Получить / отдать документы на окошке (мини-скрипт)» in domain URZAD with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-016]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Formulaic exposure:** Proszę bardzo; Poproszę formularz; Oto dokumenty
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-017
+### FN-A1-PHONE-01
+- **ID:** FN-A1-PHONE-01
+- **Title (PL):** Przedstawienie w telefonie
+- **Can-do:** Может по телефону сказать, кто звонит и зачем.
+- **Intent:** Открыть телефонный контакт с идентификацией и целью.
+- **Modality/skill:** speaking; listening
+- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-WORK-01, SCN-A1-SCHOOL-01
 - **Level:** A1
-- **Function:** Представиться в urzędzie и назвать цель визита одной фразой
-- **Domains:** URZAD
-- **GR prerequisites:** PRAG-PAN-01, GR-CAS-NOM-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-URZAD-BASIC
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-IDENTIFY-01, FN-A1-PURPOSE-01
+- **Concepts:** GR-REK-VERB-01, PRAG-PAN-01, GR-TNS-PRS-01, PHON-CORE-01
+- **LEX bundle:** LEX-A1-PHONE
+- **Evidence type:** task_performance (audio-only)
+- **Source anchor:**
+  - NORMATIVE: CEFR — telephoning (qualitative; A1 scripted) — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: звонок на работу/в школу/в urząd
+  - METHOD: *Dzień dobry, z tej strony… / Dzwonię w sprawie…*
+  - L1 note: *dzwonić do* — ERR-*-07
+- **Completion criterion:** В аудио-диалоге без видео учащийся в первых **двух** своих репликах передаёт (1) кто звонит, (2) зачем. Ассистент заполняет карточку «caller / purpose» без догадок. Допустим 1 repair из-за связи. Блок: цель не названа за 3 реплики; имя неразборчиво после повтора; *dzwonię pani X* без *do* с полной потерей смысла для ассистента.
+- **Allowed support:** скрипт-каркас с пропусками; 1 повтор
+- **Blocking errors:** анонимный звонок без имени при требовании; нет цели
+- **L1 risks:** UKR: ERR-UKR-07; RUS: ERR-RUS-07; BEL: ERR-BEL-07
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Представиться в urzędzie и назвать цель визита одной фразой» in domain URZAD with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-017]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-018
+### FN-A1-PHONE-02
+- **ID:** FN-A1-PHONE-02
+- **Title (PL):** Prośba o oddzwonienie
+- **Can-do:** Может оставить голосовое / передать просьбу перезвонить.
+- **Intent:** Организовать отложенный контакт.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-WORK-01
 - **Level:** A1
-- **Function:** Попросить форму / указать недостающий документ
-- **Domains:** URZAD
-- **GR prerequisites:** PRAG-PAN-01, GR-CAS-ACC-01, GR-Q-WH-01
-- **LEX bundles:** LEX-DOCS
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-PHONE-01, FN-A1-TIME-01
+- **Concepts:** GR-MOD-VERB-01, GR-INF-COMPL-01, GR-PRO-PERS-01, GR-NUM-MONEY-01 (номер как числа)
+- **LEX bundle:** LEX-A1-PHONE
+- **Evidence type:** task_performance (voicemail recording)
+- **Source anchor:**
+  - PRODUCT ANALYSIS: недоступность собеседника на смене
+  - CEFR: leaving a message A1 — REQUIRES VERIFICATION
+  - METHOD: *Proszę oddzwonić / Zostawiam numer…*
+  - NORMATIVE: — (продуктовый скрипт; не отдельная статья закона)
+- **Completion criterion:** Запись голосового ≤ 30 с содержит: имя, просьбу перезвонить, контакт (номер **или** «ten sam numer») и опционально удобный интервал. Ассистент перезванивает по записанным данным успешно. Блок: нет просьбы о callback; номер искажён так, что звонок невозможен; только гудок без речи.
+- **Allowed support:** таймер; шаблон из 4 пустых полей
+- **Blocking errors:** отсутствует callback-просьба; неверный номер относительно задания
+- **L1 risks:** UKR: ERR-UKR-07, ERR-UKR-13; RUS: ERR-RUS-07, ERR-RUS-13; BEL: ERR-BEL-07
+- **Criticality:** Important
+
+### FN-A1-REQUEST-01
+- **ID:** FN-A1-REQUEST-01
+- **Title (PL):** Prosta prośba
+- **Can-do:** Может коротко и вежливо попросить о помощи у коллеги или соседа.
+- **Intent:** Получить бытовую/рабочую помощь без эскалации.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-WORK-01, SCN-A1-NEIGHBOR-01, SCN-A1-HOUSING-01
+- **Level:** A1
+- **Prerequisites (FN):** FN-A1-GREET-01
+- **Concepts:** GR-MOD-VERB-01, GR-INF-COMPL-01, GR-CAS-ACC-01, PRAG-PAN-01 (смягчение — лексические маркеры *proszę / czy może*; системный SOFTEN остаётся A2)
+- **LEX bundle:** LEX-A1-POLITENESS
+- **Evidence type:** roleplay_tv
+- **Source anchor:**
+  - CEFR: requesting assistance A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: сосед / смена
+  - METHOD: *Czy możesz mi pomóc…? / Proszę o…*
+  - NORMATIVE: — PRODUCT + CEFR
+- **Completion criterion:** Учащийся формулирует просьбу с понятным **объектом помощи** и маркером вежливости (*proszę / czy możesz / czy może pan*). Сосед/коллега выполняет действие в роле. После успеха — благодарность (можно связкой с THANKS). Блок: приказ без смягчения в карточке «вежливый сосед»; просьба без содержания (*pomóż*); грубое *ty* незнакомцу.
+- **Allowed support:** 2 модели смягчения; карточка объекта
+- **Blocking errors:** оскорбительный императив; отсутствие объекта просьбы
+- **L1 risks:** UKR: ERR-UKR-18; RUS: ERR-RUS-18; BEL: ERR-BEL-18
+- **Criticality:** Important
+
+### FN-A1-REFUSE-01
+- **ID:** FN-A1-REFUSE-01
+- **Title (PL):** Grzeczna odmowa
+- **Can-do:** Может коротко и вежливо отказать (*nie mogę / niestety*).
+- **Intent:** Отклонить просьбу без разрыва отношений.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-WORK-01, SCN-A1-NEIGHBOR-01, SCN-A1-PHONE-01
+- **Level:** A1
+- **Prerequisites (FN):** FN-A1-GREET-01
+- **Concepts:** GR-NEG-01, GR-MOD-VERB-01, PRAG-PAN-01 (смягчение отказа — *niestety / przepraszam*; системный SOFTEN остаётся A2)
+- **LEX bundle:** LEX-A1-POLITENESS
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — interakcja społeczna / grzeczność — REQUIRES VERIFICATION
+  - CEFR: refusing politely A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: смена / соседские просьбы
+  - METHOD: *Niestety nie mogę; Przepraszam, ale…*
+- **Completion criterion:** На три разные просьбы ассистента учащийся даёт **понятный отказ** минимум в двух, с маркером смягчения (*niestety / przepraszam / nie mogę*). Третья может быть согласием для контроля. Успех = ассистент не интерпретирует отказ как согласие. Блок: *nie* без смягчения в карточке «сохранить отношения»; согласие там, где задан отказ.
+- **Allowed support:** 3 формулы отказа; карточка «odmów grzecznie»
+- **Blocking errors:** грубый обрыв; ложное согласие
+- **L1 risks:** UKR: ERR-UKR-18; RUS: ERR-RUS-18; BEL: ERR-BEL-18
+- **Criticality:** Important
+
+### FN-A1-THANKS-01
+- **ID:** FN-A1-THANKS-01
+- **Title (PL):** Podziękowanie
+- **Can-do:** Может поблагодарить и ответить на благодарность.
+- **Intent:** Закрыть обмен услугой/информацией этикетной парой.
+- **Modality/skill:** speaking
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-SHOP-01, SCN-A1-NEIGHBOR-01, SCN-A1-WORK-01
+- **Level:** A1
+- **Prerequisites (FN):** FN-A1-GREET-01
+- **Concepts:** PRAG-PAN-01, PHON-CORE-01
+- **LEX bundle:** LEX-A1-POLITENESS
+- **Evidence type:** roleplay_tv
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — formuły grzecznościowe — REQUIRES VERIFICATION
+  - CEFR: politeness formulae A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: касса, сосед, коллега
+  - METHOD: *Dziękuję / Proszę bardzo / Nie ma za co*
+- **Completion criterion:** В двух микроэпизодах учащийся (1) инициирует *dziękuję* после услуги, (2) отвечает на благодарность уместной формулой (*proszę / nie ma za co*). Блок: молчание после явной услуги в карточке; ответ *cześć* на *dziękuję*.
+- **Allowed support:** 4 формулы; сигнал «podziękuj»
+- **Blocking errors:** нет благодарности при обязательном слоте; нерелевантная формула
+- **L1 risks:** UKR/RUS/BEL: смешение *proszę* (просьба vs пожалуйста) — прагматика
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Попросить форму / указать недостающий документ» in domain URZAD with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-018]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-019
+### FN-A1-APOLOGY-01
+- **ID:** FN-A1-APOLOGY-01
+- **Title (PL):** Przeprosiny
+- **Can-do:** Может извиниться за опоздание или помеху.
+- **Intent:** Восстановить лицо после нарушения нормы (время/пространство).
+- **Modality/skill:** speaking; writing (SMS)
+- **Scenarios:** SCN-A1-WORK-01, SCN-A1-SCHOOL-01, SCN-A1-NEIGHBOR-01, SCN-A1-SMS-01
 - **Level:** A1
-- **Function:** Написать короткое SMS: опоздание, подтверждение
-- **Domains:** WORK, SCHOOL, PHONE
-- **GR prerequisites:** GR-TNS-PRS-01, GR-NEG-01, ORTH-CORE-01
-- **LEX bundles:** LEX-SMS
-- **Required evidence:** writing_rubric
+- **Prerequisites (FN):** FN-A1-TIME-01 (для опоздания), FN-A1-GREET-01
+- **Concepts:** PRAG-PAN-01, GR-TNS-PRS-01, GR-CAS-ACC-01, ORTH-CORE-01 (SMS)
+- **LEX bundle:** LEX-A1-APOLOGY
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - CEFR: apologising A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: смена, школа, сосед (cisza)
+  - METHOD: *Przepraszam za spóźnienie / za hałas*
+  - NORMATIVE: — PRODUCT + CEFR (не лексика рекламации)
+- **Completion criterion:** По карточке нарушения учащийся произносит или пишет извинение с (1) формулой *przepraszam* и (2) названной причиной/объектом (*spóźnienie / hałas / pomyłka*). Ассистент отмечает «apology accepted». Блок: извинение без объекта при требовании уточнить; лексика жалобы/рекламации вместо извинения; L1-only.
+- **Allowed support:** 1 модель; для SMS — лимит 20 слов
+- **Blocking errors:** нет *przepraszam*; обвинение собеседника вместо извинения
+- **L1 risks:** UKR: ERR-UKR-18; RUS: ERR-RUS-18; BEL: ERR-BEL-18
 - **Criticality:** Important
-- **Completion criterion:** Learner can «Написать короткое SMS: опоздание, подтверждение» in domain WORK with an acceptable short written product on rubric, without blocking register/rekcja failure. [FN-A1-019]
-- **L1 risks:** ERR-UKR-01, ERR-RUS-02
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-020
+### FN-A1-CONFIRM-01
+- **ID:** FN-A1-CONFIRM-01
+- **Title (PL):** Potwierdzenie
+- **Can-do:** Может согласиться и подтвердить договорённость.
+- **Intent:** Зафиксировать согласие на предложенное действие/время.
+- **Modality/skill:** speaking; writing (SMS)
+- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-WORK-01, SCN-A1-SMS-01, SCN-A1-MED-01
 - **Level:** A1
-- **Function:** Позвонить и сказать, кто звонит + зачем (скрипт)
-- **Domains:** PHONE
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01, GR-Q-WH-01
-- **LEX bundles:** LEX-PHONE
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-ASK-01
+- **Concepts:** GR-Q-YESNO-01, GR-NEG-01, GR-TNS-PRS-01
+- **LEX bundle:** LEX-A1-POLITENESS
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — proste potwierdzenie / interakcja — REQUIRES VERIFICATION
+  - CEFR: agreeing A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: подтверждение смены/визита/SMS
+  - METHOD: *Tak / Dobrze / Pasuje mi / Potwierdzam*
+- **Completion criterion:** В серии из 4 предложений ассистента учащийся корректно подтверждает **два** подходящих и отклоняет/уточняет **два** неподходящих (связка с REFUSE допустима). Минимум одно подтверждение — развёрнутое (*tak, o 15:00 / dobrze, jutro*). Блок: все ответы *tak* без различения; подтверждение неверного слота времени.
+- **Allowed support:** календарь; карточка «potwierdź tylko jeśli…»
+- **Blocking errors:** ложное подтверждение конфликтного слота; отсутствие реакции
+- **L1 risks:** UKR: ERR-UKR-02; RUS: ERR-RUS-02; BEL: ERR-BEL-02
+- **Criticality:** Important
+
+### FN-A1-REPORT-01
+- **ID:** FN-A1-REPORT-01
+- **Title (PL):** Zgłoszenie zdarzenia
+- **Can-do:** Может сообщить о простой неисправности жилья или об отсутствии ребёнка в школе.
+- **Intent:** Передать факт проблемы/отсутствия ответственному лицу.
+- **Modality/skill:** speaking; writing (SMS/wiadomość)
+- **Scenarios:** SCN-A1-HOUSING-01, SCN-A1-SCHOOL-01
+- **Level:** A1
+- **Prerequisites (FN):** FN-A1-IDENTIFY-01, FN-A1-LOCATE-01, FN-A1-TIME-01
+- **Concepts:** GR-TNS-PRS-01, GR-NEG-01, GR-EXIST-01, GR-PRO-POSS-01, GR-CAS-NOM-01
+- **LEX bundle:** LEX-A1-HOUSING / LEX-A1-SCHOOL (по сценарию)
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - PRODUCT ANALYSIS: слияние usterka + nieobecność dziecka
+  - NORMATIVE: Dz.U. 2025 poz. 217 — życie codzienne / edukacja — REQUIRES VERIFICATION
+  - METHOD: *Nie działa… / Cieknie… / Dziecko nie przyjdzie, bo…*
+  - CEFR: reporting simple incidents A1 — REQUIRES VERIFICATION
+- **Completion criterion:** В одном из двух сценариев (карточка выбирается случайно) учащийся передаёт: (1) **что** случилось / кого касается, (2) **где** или **когда**, (3) контакт или просьбу о реакции. Ассистент классифицирует тип события верно (usterka vs nieobecność). Блок: нет субъекта события; описание без факта («źle» без объекта); путаница «ребёнок болен» vs «кран течёт» при явной карточке.
+- **Allowed support:** фото-стимул usterki или школьная карточка; 1 вопрос ассистента
+- **Blocking errors:** событие не идентифицировано; полный отказ от польских лексем проблемы
+- **L1 risks:** UKR: ERR-UKR-04; RUS: ERR-RUS-04; BEL: ERR-BEL-04
+- **Criticality:** Important
+
+### FN-A1-TIME-01
+- **ID:** FN-A1-TIME-01
+- **Title (PL):** Czas i termin
+- **Can-do:** Может назвать дни, месяцы и часы встречи.
+- **Intent:** Задать временную координату события.
+- **Modality/skill:** speaking; listening
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-MED-01, SCN-A1-TICKET-01, SCN-A1-SMS-01, SCN-A1-WORK-01
+- **Level:** A1
+- **Prerequisites (FN):** —
+- **Concepts:** GR-TIME-EXPR-01, GR-NUM-ORD-01, GR-NUM-MONEY-01, GR-CAS-GEN-02 (dni tygodnia patterns)
+- **LEX bundle:** LEX-A1-TIME
+- **Evidence type:** task_performance
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — czas — REQUIRES VERIFICATION
+  - CEFR: telling the time A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: запись, транспорт, смена
+  - METHOD: дни недели → месяцы → godziny
+- **Completion criterion:** Учащийся в устной проверке корректно озвучивает **три** стимула: день недели, дату (день+месяц), час (в т.ч. *wpół do* **или** цифровой формат 24h — по карточке уровня). Слушатель отмечает совпадение с ключом. Допускается 1 переспрос. Блок: час и день перепутаны местами так, что встреча невозможна; месяц не назван при требовании даты.
+- **Allowed support:** календарь; аналоговые часы
+- **Blocking errors:** систематическая ошибка am/pm без 24h и без уточнения; отказ от дней недели
+- **L1 risks:** UKR: ERR-UKR-15; RUS: ERR-RUS-15; BEL: ERR-BEL-15
+- **Criticality:** Important
+
+### FN-A1-FORM-01
+- **ID:** FN-A1-FORM-01
+- **Title (PL):** Dane w ankiecie
+- **Can-do:** Может заполнить анкету: личные данные, адрес, телефон.
+- **Intent:** Письменно передать идентифицирующие данные в формуляре.
+- **Modality/skill:** writing
+- **Scenarios:** SCN-A1-FORM-01, SCN-A1-URZAD-01, SCN-A1-WORK-01
+- **Level:** A1
+- **Prerequisites (FN):** FN-A1-IDENTIFY-01, FN-A1-LOCATE-02
+- **Concepts:** ORTH-CORE-01, ORTH-IY-01, GR-CAS-NOM-01, GR-NUM-CARD-01
+- **LEX bundle:** LEX-A1-DOCS
+- **Evidence type:** writing_task
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — pisanie / formularze — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: HR / urząd анкеты
+  - METHOD: поля imię, nazwisko, adres, telefon, PESEL(optional mask)
+  - CEFR: filling in forms A1 — REQUIRES VERIFICATION
+- **Completion criterion:** На бланке из ≥5 обязательных полей учащийся заполняет все обязательные **разборчиво** латиницей польской орфографии имени/адреса; телефон — 9 цифр PL-формата или международный с `+`. Проверка: валидатор полей + сверка с ID-карточкой учащегося. Допускается 1 исправление по пометке. Блок: пустые обязательные поля; телефон < 9 цифр; адрес без улицы и номера.
+- **Allowed support:** легенда полей PL→L1 UI; образец заполненного поля «telefon»
+- **Blocking errors:** незаполненный обязательный блок; заведомо чужие данные относительно профиля
+- **L1 risks:** UKR: ERR-UKR-01; RUS: ERR-RUS-02; BEL: ERR-BEL-01; диакритики ORTH-CORE-01
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Позвонить и сказать, кто звонит + зачем (скрипт)» in domain PHONE with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-020]
-- **L1 risks:** ERR-UKR-07, ERR-RUS-07
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-021
+### FN-A1-READ-01
+- **ID:** FN-A1-READ-01
+- **Title (PL):** Krótki tekst użytkowy
+- **Can-do:** Может понять вывеску/короткое объявление и выполнить короткую инструкцию устройства.
+- **Intent:** Извлечь действие или запрет из короткого утилитарного текста.
+- **Modality/skill:** reading (+ minimal speaking for confirmation)
+- **Scenarios:** SCN-A1-TICKET-01, SCN-A1-MED-01, SCN-A1-SHOP-01, SCN-A1-HOUSING-01
 - **Level:** A1
-- **Function:** Оставить голосовое / передать просьбу перезвонить
-- **Domains:** PHONE
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-PHONE
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Оставить голосовое / передать просьбу перезвонить» in domain PHONE with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-021]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Formulaic exposure:** Proszę oddzwonić; Proszę przekazać, że dzwoniłem/am
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
-
-### FN-A1-022
-- **Level:** A1
-- **Function:** Попросить о помощи у коллеги / соседа (простая prośba)
-- **Domains:** WORK, NEIGHBOR
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01, GR-MOD-VERB-01
-- **LEX bundles:** LEX-REQUEST
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Попросить о помощи у коллеги / соседа (простая prośba)» in domain WORK with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-022]
-- **L1 risks:** ERR-BEL-24
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** PRODUCT ANALYSIS — first-audience scenario (work/housing/urzęd/med/school/bank)
-
-### FN-A1-023
-- **Level:** A1
-- **Function:** Отказать коротко и вежливо (nie mogę / niestety)
-- **Domains:** COMPLAINT, WORK
-- **GR prerequisites:** GR-NEG-01, PRAG-PAN-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-REFUSAL
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Отказать коротко и вежливо (nie mogę / niestety)» in domain COMPLAINT with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-023]
-- **L1 risks:** ERR-RUS-24, ERR-UKR-18
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
-
-### FN-A1-024
-- **Level:** A1
-- **Function:** Поблагодарить и ответить на благодарность
-- **Domains:** SOCIAL, TV
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-POLITENESS
-- **Required evidence:** task_performance
-- **Criticality:** Core
-- **Completion criterion:** Learner can «Поблагодарить и ответить на благодарность» in domain SOCIAL with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-024]
-- **L1 risks:** ERR-UKR-18, ERR-RUS-18
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Formulaic exposure:** Dziękuję; Dziękuję bardzo; Proszę bardzo
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
-
-### FN-A1-025
-- **Level:** A1
-- **Function:** Извиниться за опоздание / помеху
-- **Domains:** WORK, SCHOOL, NEIGHBOR
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-POLITENESS
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Извиниться за опоздание / помеху» in domain WORK with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-025]
-- **L1 risks:** ERR-UKR-18, ERR-BEL-18
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
-
-### FN-A1-026
-- **Level:** A1
-- **Function:** Спросить о наличии товара / свободного слота
-- **Domains:** SHOP, MED
-- **GR prerequisites:** GR-Q-YESNO-01, GR-CAS-NOM-01, PRAG-PAN-01
-- **LEX bundles:** LEX-AVAILABILITY
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Спросить о наличии товара / свободного слота» in domain SHOP with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-026]
-- **L1 risks:** ERR-UKR-23, ERR-RUS-21
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
-
-### FN-A1-027
-- **Level:** A1
-- **Function:** Сообщить о простой usterce в квартире (cieknie, nie działa)
-- **Domains:** HOUSING
-- **GR prerequisites:** GR-NEG-01, GR-TNS-PRS-01, GR-CAS-NOM-01
-- **LEX bundles:** LEX-HOUSING-FIX
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Сообщить о простой usterce в квартире (cieknie, nie działa)» in domain HOUSING with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-027]
-- **L1 risks:** ERR-UKR-04, ERR-RUS-04
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
-
-### FN-A1-028
-- **Level:** A1
-- **Function:** Представиться воспитателю / сказать имя ребёнка
-- **Domains:** SCHOOL
-- **GR prerequisites:** PRAG-PAN-01, GR-CAS-NOM-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-SCHOOL-BASIC
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Представиться воспитателю / сказать имя ребёнка» in domain SCHOOL with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-028]
-- **L1 risks:** ERR-UKR-18, ERR-BEL-18
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
-
-### FN-A1-029
-- **Level:** A1
-- **Function:** Сообщить об отсутствии ребёнка (болезнь / поездка)
-- **Domains:** SCHOOL
-- **GR prerequisites:** GR-TNS-PRS-01, GR-NEG-01, PRAG-PAN-01
-- **LEX bundles:** LEX-SCHOOL-BASIC
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Сообщить об отсутствии ребёнка (болезнь / поездка)» in domain SCHOOL with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-029]
-- **L1 risks:** ERR-UKR-23, ERR-RUS-21
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
-
-### FN-A1-030
-- **Level:** A1
-- **Function:** Открыть счёт / спросить о карте (скриптовые реплики)
-- **Domains:** BANK
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01, GR-Q-WH-01
-- **LEX bundles:** LEX-BANK-BASIC
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Открыть счёт / спросить о карте (скриптовые реплики)» in domain BANK with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-030]
-- **L1 risks:** ERR-UKR-02, ERR-BEL-10
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
-
-### FN-A1-031
-- **Level:** A1
-- **Function:** Сделать простой przelew по образцу (термины)
-- **Domains:** BANK
-- **GR prerequisites:** GR-NUM-CARD-01, GR-CAS-ACC-01, PRAG-PAN-01
-- **LEX bundles:** LEX-BANK-BASIC
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Сделать простой przelew по образцу (термины)» in domain BANK with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-031]
-- **L1 risks:** ERR-UKR-22, ERR-RUS-09
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** PRODUCT ANALYSIS — first-audience scenario (work/housing/urzęd/med/school/bank)
-
-### FN-A1-032
-- **Level:** A1
-- **Function:** Описать типичный день (работа–дом–магазин)
-- **Domains:** WORK, EVERYDAY
-- **GR prerequisites:** GR-TNS-PRS-01, GR-TIME-EXPR-01, GR-SYN-COORD-01
-- **LEX bundles:** LEX-ROUTINE
-- **Required evidence:** task_performance
+- **Prerequisites (FN):** FN-A1-REPAIR-02 (если слово неизвестно)
+- **Concepts:** GR-PRO-DEM-01, GR-CAS-ACC-01, ORTH-CORE-01 (императив на вывесках — RECP без IMP A2)
+- **LEX bundle:** LEX-A1-SIGNS / LEX-A1-SIGNS
+- **Evidence type:** reading_task
+- **Source anchor:**
+  - NORMATIVE: Dz.U. 2025 poz. 217 — czytanie A1 — REQUIRES VERIFICATION
+  - CEFR: reading instructions / signs A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: biletomat, apteka, ogłoszenie
+  - METHOD: receptive labels; без требования продуктивного императива
+- **Completion criterion:** По тексту ≤ 40 слов (вывеска **или** шаги устройства) учащийся выполняет целевое действие в интерфейсе задания (выбор кнопки / порядка шагов) **или** отмечает верный смысл из 4 опций. Успех без угадывания: объясняет одним словом/короткой репликой, *почему* выбран шаг (на L1 UI допустимо). Блок: выбор, противоречащий запрету на вывеске; пропуск обязательного шага «zapłać/odbierz».
+- **Allowed support:** словарь 3 слов; 1 уточняющий вопрос
+- **Blocking errors:** действие против текста; полный отказ читать
+- **L1 risks:** UKR: ERR-UKR-13; RUS: ERR-RUS-13; BEL: ERR-BEL-13; ложные друзья вывесок
 - **Criticality:** Extension
-- **Completion criterion:** Learner can «Описать типичный день (работа–дом–магазин)» in domain WORK with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-032]
-- **L1 risks:** ERR-UKR-09, ERR-RUS-09
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-033
+### FN-A1-REG-01
+- **ID:** FN-A1-REG-01
+- **Title (PL):** Wybór rejestru
+- **Can-do:** Может различить официальное и неофициальное обращение в готовых репликах и выбрать уместную.
+- **Intent:** Контролировать регистр T–V на уровне выбора готовых форм.
+- **Modality/skill:** listening/reading discrimination; speaking (selection)
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-URZAD-01, SCN-A1-NEIGHBOR-01, SCN-A1-WORK-01
 - **Level:** A1
-- **Function:** Назвать дни, месяцы, часы встречи
-- **Domains:** EVERYDAY
-- **GR prerequisites:** GR-TIME-EXPR-01, GR-NUM-ORD-01, GR-NUM-CARD-01
-- **LEX bundles:** LEX-TIME
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Назвать дни, месяцы, часы встречи» in domain EVERYDAY with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-033]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
-
-### FN-A1-034
-- **Level:** A1
-- **Function:** Заполнить анкету: личные данные, адрес, телефон
-- **Domains:** URZAD, WORK
-- **GR prerequisites:** GR-CAS-NOM-01, ORTH-CORE-01, GR-NUM-CARD-01
-- **LEX bundles:** LEX-FORMS
-- **Required evidence:** closed_item
+- **Prerequisites (FN):** FN-A1-GREET-01, FN-A1-ADDRESS-01
+- **Concepts:** PRAG-PAN-01, GR-TV-AGR-01, GR-CAS-VOC-01
+- **LEX bundle:** LEX-A1-GREETINGS
+- **Evidence type:** roleplay_tv / discrimination_task
+- **Source anchor:**
+  - NORMATIVE: CEFR sociolinguistic A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: критический навык для urzędu vs kolega
+  - METHOD: выбор из минимальных пар реплик
+  - RELATED FN: ADDRESS-01 (продукция), REG-01 (распознавание+выбор)
+- **Completion criterion:** В тесте из 6 минимальных пар (офиц./неофиц.) учащийся выбирает уместную реплику ≥5/6 для описанного адресата. Затем в одном коротком говорящем задании применяет выбор. Блок: <4/6; систематический *ty* к urzędnik.
+- **Allowed support:** карточка адресата; без перевода реплик
+- **Blocking errors:** порог ниже 4/6; игнор карточки «oficjalnie»
+- **L1 risks:** UKR: ERR-UKR-18; RUS: ERR-RUS-18; BEL: ERR-BEL-18
 - **Criticality:** Core
-- **Completion criterion:** Learner can «Заполнить анкету: личные данные, адрес, телефон» in domain URZAD with correct closed-item responses on target forms, without blocking register/rekcja failure. [FN-A1-034]
-- **L1 risks:** ERR-UKR-01, ERR-RUS-02
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
 
-### FN-A1-035
+### FN-A1-NARRATE-01
+- **ID:** FN-A1-NARRATE-01
+- **Title (PL):** Typowy dzień
+- **Can-do:** Может описать типичный день (работа–дом–магазин) несколькими связными фразами.
+- **Intent:** Дать простой линейный рассказ о рутине.
+- **Modality/skill:** speaking (monologue); writing optional
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-WORK-01, SCN-A1-WRITE-SELF-01 (как вход в ASM)
 - **Level:** A1
-- **Function:** Написать 3–5 предложений о себе (учебный жанр)
-- **Domains:** EVERYDAY
-- **GR prerequisites:** GR-TNS-PRS-01, GR-CAS-NOM-01, ORTH-CORE-01
-- **LEX bundles:** LEX-IDENTITY
-- **Required evidence:** writing_rubric
+- **Prerequisites (FN):** FN-A1-IDENTIFY-01, FN-A1-TIME-01, FN-A1-LOCATE-01
+- **Concepts:** GR-TNS-PRS-01, GR-SYN-COORD-01, GR-TIME-EXPR-01, GR-ASP-LEX-01 (exposure)
+- **LEX bundle:** LEX-A1-ROUTINE
+- **Evidence type:** task_performance (short monologue)
+- **Source anchor:**
+  - CEFR: describing daily routine A1 — REQUIRES VERIFICATION
+  - PRODUCT ANALYSIS: Extension — не блокирует выживание, усиливает связность
+  - METHOD: 4–6 фраз с маркерами времени
+  - NORMATIVE: Dz.U. 2025 poz. 217 — mówienie — REQUIRES VERIFICATION
+- **Completion criterion:** Устный монолог 40–90 с содержит ≥4 понятных действия рутины в правдоподобном порядке суток и ≥2 маркера времени (*rano / po pracy / wieczorem*). Слушатель восстанавливает порядок дня без дыр. Допускается 3 хезитации. Блок: набор несвязанных слов без глаголов; меньше 3 действий; рассказ целиком о другом человеке без указания при задании «о себе».
+- **Allowed support:** timeline из 4 иконок; 1 перезапуск записи
+- **Blocking errors:** нет временной линии; полная неразборчивость >50% реплик
+- **L1 risks:** UKR: ERR-UKR-09; RUS: ERR-RUS-09; BEL: ERR-BEL-09; аспект — только exposure
 - **Criticality:** Extension
-- **Completion criterion:** Learner can «Написать 3–5 предложений о себе (учебный жанр)» in domain EVERYDAY with an acceptable short written product on rubric, without blocking register/rekcja failure. [FN-A1-035]
-- **L1 risks:** ERR-UKR-01, ERR-RUS-02
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
 
-### FN-A1-036
-- **Level:** A1
-- **Function:** Попросить счёт / уточнить способ оплаты
-- **Domains:** SHOP
-- **GR prerequisites:** GR-CAS-ACC-01, PRAG-PAN-01, GR-Q-WH-01
-- **LEX bundles:** LEX-MONEY
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Попросить счёт / уточнить способ оплаты» in domain SHOP with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-036]
-- **L1 risks:** ERR-UKR-13
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
+---
 
-### FN-A1-037
-- **Level:** A1
-- **Function:** Согласиться / подтвердить договорённость
-- **Domains:** WORK, PHONE
-- **GR prerequisites:** GR-TNS-PRS-01, GR-Q-YESNO-01
-- **LEX bundles:** LEX-AGREEMENT
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Согласиться / подтвердить договорённость» in domain WORK with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-037]
-- **L1 risks:** —
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** PRODUCT ANALYSIS — first-audience scenario (work/housing/urzęd/med/school/bank)
+## A2–B2 (LEGACY — pending semantic migration)
+**Не объявлены готовыми.** Записи ниже — pre-refactor inventory; не эталон.
 
-### FN-A1-038
-- **Level:** A1
-- **Function:** Уточнить значение вывески / короткого объявления
-- **Domains:** HOUSING, SHOP, URZAD
-- **GR prerequisites:** GR-PRO-DEM-01, GR-CAS-NOM-01
-- **LEX bundles:** LEX-SIGNS
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Уточнить значение вывески / короткого объявления» in domain HOUSING with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-038]
-- **L1 risks:** ERR-UKR-13
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
+ID `FN-A2-*` / `FN-B1-*` / `FN-B2-*` временно сохранены as-is до отдельной семантической миграции по образцу A1.
 
-### FN-A1-039
-- **Level:** A1
-- **Function:** Поздороваться с соседом и обменяться 1–2 фразами
-- **Domains:** NEIGHBOR, TV
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01
-- **LEX bundles:** LEX-NEIGHBOR
-- **Required evidence:** task_performance
-- **Criticality:** Extension
-- **Completion criterion:** Learner can «Поздороваться с соседом и обменяться 1–2 фразами» in domain NEIGHBOR with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-039]
-- **L1 risks:** ERR-UKR-18, ERR-RUS-18
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
-
-### FN-A1-040
-- **Level:** A1
-- **Function:** Сообщить о боли / срочности и попросить помочь вызвать помощь (скрипт)
-- **Domains:** MED
-- **GR prerequisites:** PRAG-PAN-01, GR-TNS-PRS-01, PRAG-REPAIR-01
-- **LEX bundles:** LEX-EMERGENCY-BASIC
-- **Required evidence:** task_performance
-- **Criticality:** Important
-- **Completion criterion:** Learner can «Сообщить о боли / срочности и попросить помочь вызвать помощь (скрипт)» in domain MED with successful task completion in a timed scenario, without blocking register/rekcja failure. [FN-A1-040]
-- **L1 risks:** ERR-UKR-15, ERR-RUS-16
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Formulaic exposure:** Proszę o pomoc; Boli mnie…; Proszę wezwać pomoc
-- **Source anchor:** PRODUCT ANALYSIS — first-audience scenario (work/housing/urzęd/med/school/bank)
-
-### FN-A1-041
-- **Level:** A1
-- **Function:** Различать официальное vs неофициальное обращение в готовых репликах
-- **Domains:** TV
-- **GR prerequisites:** PRAG-PAN-01, GR-TV-AGR-01
-- **LEX bundles:** LEX-GREETINGS
-- **Required evidence:** roleplay_tv
-- **Criticality:** Core
-- **Completion criterion:** Learner can «Различать официальное vs неофициальное обращение в готовых репликах» in domain TV with correct T–V register choice in a short roleplay, without blocking register/rekcja failure. [FN-A1-041]
-- **L1 risks:** ERR-UKR-18, ERR-RUS-18
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Source anchor:** CEFR Companion Volume — overall oral interaction A1 (qualitative; REQUIRES VERIFICATION exact scale row)
-
-### FN-A1-042
-- **Level:** A1
-- **Function:** Прочитать и выполнить короткую инструкцию (biletomat, аптека)
-- **Domains:** TRANS, MED, SHOP
-- **GR prerequisites:** GR-PRO-DEM-01, GR-CAS-ACC-01
-- **LEX bundles:** LEX-INSTRUCTIONS
-- **Required evidence:** reading_task
-- **Criticality:** Extension
-- **Completion criterion:** Learner can «Прочитать и выполнить короткую инструкцию (biletomat, аптека)» in domain TRANS with correct gist selection from a short authentic text, without blocking register/rekcja failure. [FN-A1-042]
-- **L1 risks:** ERR-UKR-13
-- **Exam relevance:** standards-aligned / future (session_availability=not_announced 2026)
-- **Formulaic exposure:** Włóż kartę; Wybierz język; Zapłać; Odbierz bilet (receptive labels)
-- **Notes:** receptive_only for instructional labels; no productive IMP required
-- **Source anchor:** Dz.U. 2025 poz. 217 załącznik nr 1 — Katalog A/B thematic competence (PRODUCT mapping; REQUIRES VERIFICATION cell)
+---
 
 ### FN-A2-001
 - **Level:** A2

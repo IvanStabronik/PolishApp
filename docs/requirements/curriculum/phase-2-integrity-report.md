@@ -1,12 +1,14 @@
-# Phase 2 integrity report (semantic pass)
+# Phase 2 integrity report (semantic pass + A1 model refactor)
 
-**Статус:** Candidate for independent JPJO review  
-**Не** внутренний gate pass и **не** утверждённая программа.  
-**Ветка:** `docs/phase-2-integrity-fix`  
-**База предыдущего structural commit:** `85c461a`  
-**Дата:** 2026-09-05  
+**Статус Phase 2 overall:** **не завершена**.
+**A1 semantic reference:** candidate for human review.
+**A2–B2:** pending semantic migration — **не** эталон.
+**Не** внутренний gate pass и **не** утверждённая программа.
+**Ветка:** `docs/phase-2-integrity-fix`
+**Актуальный отчёт A1-модели:** [`../../reports/phase-2-a1-model-report.md`](../../reports/phase-2-a1-model-report.md)
+**Дата:** 2026-09-05
 
-`validator OK` = **structural integrity only**, не методическая корректность.
+`validator OK` = **structural / anti-pattern checks only**, не методическая корректность.
 
 ---
 
