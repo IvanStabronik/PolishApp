@@ -334,30 +334,20 @@ def _parse_claims(src_ver: str) -> list[dict]:
     for i in range(1, len(parts), 2):
         heading = parts[i]
         body = parts[i + 1]
-        fields: dict[str, str] = {"_heading": heading, "_body": body}
+        fields: dict[str, object] = {"_heading": heading, "_body": body}
 
-        def grab(label: str) -> str | None:
-            mm = re.search(
-                rf"^- \*\*{re.escape(label)}:\*\*\s*(.*)$", body, re.M
-            )
-            return mm.group(1).strip() if mm else None
+        def grab_all(label: str) -> list[str]:
+            return [
+                mm.group(1).strip()
+                for mm in re.finditer(
+                    rf"^- \*\*{re.escape(label)}:\*\*\s*(.*)$", body, re.M
+                )
+            ]
 
-        for label in (
-            "Claim ID",
-            "entity ID",
-            "Точное проверяемое утверждение",
-            "Тип утверждения",
-            "source ID",
-            "URL",
-            "Документ",
-            "Точное место",
-            "evidence class",
-            "confidence",
-            "verification status",
-            "дата проверки",
-            "замечание",
-        ):
-            fields[label] = grab(label)
+        for label in CLAIM_REQUIRED_LABELS:
+            vals = grab_all(label)
+            fields[f"_{label}_count"] = len(vals)
+            fields[label] = vals[0] if vals else None
         claims.append(fields)
     return claims
 
@@ -514,8 +504,27 @@ def _validate_review_row_fields(
     return errs
 
 
+def _claim_field_counts(body: str) -> dict[str, int]:
+    """Same counting path as live CLAIM validation (duplicate / missing detection)."""
+    counts: dict[str, int] = {}
+    for label in CLAIM_REQUIRED_LABELS:
+        counts[label] = len(
+            re.findall(
+                rf"^- \*\*{re.escape(label)}:\*\*\s*(.*)$", body, re.M
+            )
+        )
+    return counts
+
+
+def _completed_forbidden_while_pending(
+    review_status: str, pending_not_reviewed: int
+) -> bool:
+    """Mirror of live gate: COMPLETED forbidden while any NOT_REVIEWED remains."""
+    return review_status == "COMPLETED" and pending_not_reviewed > 0
+
+
 def _run_review_packet_negative_tests() -> list[str]:
-    """Synthetic regressions for review-packet integrity rules."""
+    """Synthetic regressions for review-packet integrity rules. Returns failure messages."""
     failures: list[str] = []
 
     # 1) missing claim field
@@ -523,7 +532,6 @@ def _run_review_packet_negative_tests() -> list[str]:
         [
             "- **Claim ID:** `CLAIM-X`",
             "- **entity ID:** `A1`",
-            # missing assertion
             "- **Тип утверждения:** t",
             "- **source ID:** `SRC-REQ-07`",
             "- **URL:** x",
@@ -536,26 +544,54 @@ def _run_review_packet_negative_tests() -> list[str]:
             "- **замечание:** x",
         ]
     )
-    fields = {lab: None for lab in CLAIM_REQUIRED_LABELS}
-    for lab in CLAIM_REQUIRED_LABELS:
-        mm = re.search(rf"^- \*\*{re.escape(lab)}:\*\*\s*(.*)$", body, re.M)
-        fields[lab] = mm.group(1).strip() if mm else None
-    if fields["Точное проверяемое утверждение"] is not None:
+    counts = _claim_field_counts(body)
+    if counts.get("Точное проверяемое утверждение", 0) != 0:
         failures.append("neg-missing-field: expected assertion absent")
+    missing = [lab for lab in CLAIM_REQUIRED_LABELS if counts.get(lab, 0) == 0]
+    if "Точное проверяемое утверждение" not in missing:
+        failures.append("neg-missing-field: detector did not flag missing assertion")
 
-    # 2) unknown source ID
+    # 2) duplicate required CLAIM field
+    dup_body = "\n".join(
+        [
+            "- **Claim ID:** `CLAIM-Y`",
+            "- **Claim ID:** `CLAIM-Y`",
+            "- **entity ID:** `A1`",
+            "- **Точное проверяемое утверждение:** x",
+            "- **Тип утверждения:** t",
+            "- **source ID:** `SRC-REQ-07`",
+            "- **URL:** x",
+            "- **Документ:** x",
+            "- **Точное место:** x",
+            "- **evidence class:** `PRODUCT_ANALYSIS`",
+            "- **confidence:** High",
+            "- **verification status:** `VERIFIED`",
+            "- **дата проверки:** 2026-09-05",
+            "- **замечание:** x",
+        ]
+    )
+    dup_counts = _claim_field_counts(dup_body)
+    if dup_counts.get("Claim ID", 0) < 2:
+        failures.append("neg-duplicate-field: fixture missing duplicate Claim ID")
+    duplicates = [lab for lab, n in dup_counts.items() if n > 1]
+    if "Claim ID" not in duplicates:
+        failures.append(
+            "neg-duplicate-field: detector did not flag duplicate Claim ID"
+        )
+
+    # 3) unknown source ID
     catalog = {"SRC-REQ-07": "x"}
     unknown = [s for s in ["SRC-NOPE"] if s not in catalog]
     if not unknown:
         failures.append("neg-unknown-source: expected unknown")
 
-    # 3) forged status summary
+    # 4) forged status summary
     actual = {"VERIFIED": 1}
     claimed = {"VERIFIED": 9}
     if actual == claimed:
         failures.append("neg-forged-summary: expected mismatch")
 
-    # 4) APPROVE_WITH_CHANGES without reviewer/date
+    # 5) APPROVE_WITH_CHANGES without reviewer/date
     e4 = _validate_review_row_fields(
         "IN_REVIEW",
         "APPROVE_WITH_CHANGES",
@@ -570,14 +606,28 @@ def _run_review_packet_negative_tests() -> list[str]:
     ):
         failures.append(f"neg-awc-fields: {e4}")
 
-    # 5) APPROVE while NOT_STARTED
+    # 6) APPROVE while NOT_STARTED
     e5 = _validate_review_row_fields(
         "NOT_STARTED", "APPROVE", "—", "ok", "—", "Dr X", "2026-09-05"
     )
     if not any("NOT_STARTED" in x for x in e5):
         failures.append(f"neg-approve-not-started: {e5}")
 
-    # 6) unknown entity token in review item
+    # 7) COMPLETED forbidden while NOT_REVIEWED remains
+    if not _completed_forbidden_while_pending("COMPLETED", 3):
+        failures.append(
+            "neg-completed-pending: COMPLETED + pending NOT_REVIEWED must be invalid"
+        )
+    if _completed_forbidden_while_pending("IN_REVIEW", 3):
+        failures.append(
+            "neg-completed-pending: IN_REVIEW + pending must not trip COMPLETED gate"
+        )
+    if _completed_forbidden_while_pending("COMPLETED", 0):
+        failures.append(
+            "neg-completed-pending: COMPLETED with zero pending must pass this gate"
+        )
+
+    # 8) unknown entity token in review item
     token = "FN-UNKNOWN-99"
     if token in REVIEW_ENTITY_GROUPS:
         failures.append("neg-unknown-entity: token unexpectedly allowed")
@@ -1554,8 +1604,15 @@ def main() -> int:
             )
         claim_ids.append(cid)
         for lab in CLAIM_REQUIRED_LABELS:
+            count = int(cl.get(f"_{lab}_count") or 0)
+            if count > 1:
+                v.err(
+                    "a1-source-verification.md",
+                    f"duplicate required field: {lab} ({count} times)",
+                    cid,
+                )
             val = cl.get(lab)
-            if val is None or val.strip() == "":
+            if not isinstance(val, str) or val.strip() == "":
                 v.err(
                     "a1-source-verification.md",
                     f"missing required field: {lab}",
@@ -1754,6 +1811,11 @@ def main() -> int:
             "a1-jpjo-review-packet.md",
             f"NOT_STARTED expects 16 pending items, found {pending}",
         )
+    if _completed_forbidden_while_pending(review_status, pending):
+        v.err(
+            "a1-jpjo-review-packet.md",
+            f"COMPLETED forbidden while {pending} items remain NOT_REVIEWED",
+        )
 
     # snapshot counts must match inventories
     if not re.search(r"\|\s*Канонические FN A1\s*\|\s*\*\*30\*\*", jpjo):
@@ -1805,13 +1867,13 @@ def main() -> int:
 
     neg_fail = _run_review_packet_negative_tests()
     for msg in neg_fail:
-        v.err("negative-tests", msg)
+        v.err("review-packet-regression", msg)
     print(
         f"Review packet: claims={len(claim_ids)}; review_items={len(review_ids)}; "
         f"Review status={review_status}; pending={pending}; "
         f"expert_blockers={expert_blockers}; "
         f"status_hist={dict(status_hist)}; "
-        f"negative_tests={'PASS' if not neg_fail else 'FAIL'}"
+        f"regressions={len(neg_fail)}"
     )
 
     # distributions
