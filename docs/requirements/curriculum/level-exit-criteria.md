@@ -28,6 +28,63 @@ A1/A2 **не** помечать как `historical`.
 
 ---
 
+
+## Mastery model (measurable; no DB design)
+
+**Статус чисел:** `CALIBRATION=required`.  
+Согласовано с `ASM-*` и Phase 2 ops: AI = formative only; confirmed writing/speaking summative = human paid.
+
+### Evidence types (канонические)
+
+| Code | Meaning | Closed/Open |
+|---|---|---|
+| `closed_item` | Задания с ключом (form/rekcja/orth) | closed |
+| `closed_morph` | Морфологический ключ | closed |
+| `closed_rekcja` | Управление | closed |
+| `guided_prod` | Направляемая продукция (подсказки допустимы) | mixed |
+| `task_performance` | Выполнение FN-сценария | open-ish |
+| `roleplay_tv` | Регистр pan/pani | open-ish |
+| `pronunciation_task` | Произношение | mixed |
+| `writing_rubric` | Письмо по рубрике | open |
+| `speaking_rubric` | Речь по рубрике | open |
+| `portfolio_sample` | Образец портфолио | open |
+
+### Пороги по типу концепта (`CALIBRATION=required`)
+
+| Concept class | Min distinct tasks/contexts | Min score | Spaced recheck | Residual OK | Blocking errors |
+|---|---:|---:|---|---|---|
+| GR case/rekcja/agreement | 3 | 80% closed | ≥1 after ≥7 days | local form slips | wrong case changing meaning; pan/pani→ty collapse |
+| GR aspect/syntax B1+ | 3 | 75% closed + 1 guided_prod | ≥1 | aspect slip in non-critical narration | aspect/government breaking task goal |
+| PHON | 2 | 70% | ≥1 | accent | unintelligible segment in Core FN |
+| ORTH | 3 | 85% closed | ≥1 | rare ó/u in non-assessed | missing diacritics in formal Core writing |
+| PRAG | 2 roleplay | pass rubric | ≥1 | over-formality | insulting register / wrong T–V in urzęd/med |
+| LEX bundle Core | 2 retrieval + 1 FN use | 80% target lemmas | SRS | paraphrase | absence of required formula in Core FN |
+
+### Receptive vs productive mastery
+
+- **Receptive:** closed_item / listening-reading evidence only; не открывает productive exit.
+- **Productive:** требует guided_prod или task_performance / rubric.
+- Концепт с Intro=A1 может быть receptive-only до re-deepen.
+
+### Open production rules
+
+1. Письмо/речь на summative: рубрика; **человек** ставит confirmed verdict (paid).
+2. AI feedback — только formative, не pass/fail уровня.
+3. Средний % **не** растворяет блокирующие ошибки регистра, rekcja или непонимания.
+
+### Level completion logic
+
+Уровень считается instructional-complete только если:
+
+1. Все FN с `Criticality=Core` на уровне выполнены (completion criterion + evidence).
+2. FN `Important`: ≥ **85%** выполнены (`CALIBRATION=required`).
+3. FN `Extension` не блокируют.
+4. Все GR/PHON/ORTH/PRAG с Intro=уровня, помеченные mandatory для уровня в grammar/extensions, имеют productive или declared receptive mastery.
+5. Нет открытых blocking errors на Core FN.
+
+Слой internal summative и exam readiness — отдельные вердикты (см. §1). Нельзя подменить Core-сценарии «70% функций overall».
+
+
 ## 1. Три слоя достижения (обязательная семантика продукта)
 
 Каждый уровень описывается **тремя независимыми вердиктами**. UI и отчёты не имеют права сливать их в один бейдж «уровень сдан».
@@ -60,7 +117,7 @@ A1/A2 **не** помечать как `historical`.
 | Тип свидетельства | Минимум |
 | --- | ---: |
 | Различные концепты грамматических столпов уровня (mastery ≥ порога концепта) | см. уровень |
-| Коммуникативные функции FN-* (продукция или наблюдаемое выполнение) | ≥ **70%** каркаса уровня (`CALIBRATION=required`) |
+| Коммуникативные функции FN-* (продукция или наблюдаемое выполнение) | **Все Core** + ≥ **85% Important** (`CALIBRATION=required`); Extension не обязательны |
 | Письменные образцы разных жанров уровня | ≥ **3** |
 | Устные образцы (запись/сессия) разных жанров | ≥ **3** |
 | Reading checks | ≥ **2** текста разных доменов |
@@ -128,13 +185,13 @@ A1/A2 **не** помечать как `historical`.
 
 ## A1.3 Обязательные концепты (минимум)
 
-Семь падежей — **введение** частотных функций (не полная таблица mastery); `GR-TV`; `GR-REKCJA` для do/w/na/z частотных; `GR-CONCORD` Adj–N sg; числа и время; отрицание в простых фразах; орфографические узлы — диагностика+старт; wołacz в обращениях сервиса; `GR-ASPECT-LEX` без требования свободного выбора.
+Частотные функции падежей: `GR-CAS-NOM-01`, `GR-CAS-ACC-01`, `GR-CAS-GEN-01`, `GR-CAS-LOC-01`, `GR-CAS-INS-01`, `GR-CAS-VOC-01` (введение, не полная таблица mastery); `PRAG-PAN-01` + `GR-TV-AGR-01`; `GR-REK-VERB-01` / `GR-REK-PREP-01` для частотных do/w/na/z; `GR-AGR-ADJ-01`; `GR-NUM-CARD-01`; `GR-TNS-PRS-01`; `GR-NEG-01`; `ORTH-CORE-01`; `GR-ASP-LEX-01` без требования свободного выбора.
 
 ## A1.4 Три слоя — A1
 
 | Слой | Вердикт «достигнуто», если… |
 | --- | --- |
-| **I Instructional** | Mastery обязательных концептов ≥ порога концепта; ≥70% FN-A1; разнообразие свидетельств §1.1; прагматика TV ok |
+| **I Instructional** | Mastery обязательных концептов по Mastery model; **все** Core FN-A1; Important ≥85% (`CALIBRATION=required`); разнообразие свидетельств; прагматика TV ok |
 | **II Internal summative** | Пороги таблицы §1.2 для A1; оригинальные задания продукта |
 | **III State-exam readiness** | Только **future/standards-aligned** чеклист модулей A1; UI показывает `session_availability=not_announced` (2026). **Не** «готов к сессии 2026» |
 
@@ -167,13 +224,13 @@ A1/A2 **не** помечать как `historical`.
 
 ## A2.3 Обязательные концепты
 
-`GR-ASPECT` (введение); `GR-MASC-PERS`; `GR-NUM` деньги/даты; `GR-TENSE-PAST/FUT`; `GR-COMPLEX` bo/ponieważ/żeby (базово); `GR-TV` shift; орфография — закрепление узлов; rekcja расширенный минимум.
+`GR-ASP-CON-01` (введение); `GR-MO-VIR-01`; `GR-NUM-CARD-05` / `GR-NUM-MONEY-01`; `GR-TNS-PST-01` / `GR-TNS-FUT-01`; `GR-SYN-SUB-01` / `GR-SYN-CAUSE-01` / `GR-SYN-SUB-02`; `PRAG-PAN-01` shift; `ORTH-CORE-01` закрепление; `GR-REK-VERB-DAT-01` расширенный минимум.
 
 ## A2.4 Три слоя — A2
 
 | Слой | Вердикт |
 | --- | --- |
-| **I** | Концепты A2 + ≥70% FN-A2 + жанры письма/речи A2 |
+| **I** | Концепты A2 + **все** Core FN-A2 + Important ≥85% (`CALIBRATION=required`) + жанры письма/речи A2 |
 | **II** | Пороги §1.2 A2; блок rozpoznawanie struktur — если включён в internal test |
 | **III** | Standards-aligned A2; на struktura A2 сдаваем для взрослых, но **2026 session not_announced** — не обещать дату сессии |
 
@@ -206,13 +263,13 @@ A1/A2 **не** помечать как `historical`.
 
 ## B1.3 Обязательные концепты
 
-Полный каркас PED-001…007 на уровне B1; `GR-COND` базовый; `GR-COMPLEX`; `GR-WORDORDER` введение; aspectual pairs продуктивный набор; false friends ремонт; exam grammar столпы для модуля *poprawność gramatyczna*.
+Полный каркас PED-001…007 на уровне B1; `GR-MOD-COND-01` базовый; `GR-SYN-SUB-01` / `GR-SYN-REL-01`; `GR-WO-NEUT-01` введение; `GR-ASP-CTRL-01` продуктивный набор; false friends ремонт; exam grammar столпы для модуля *poprawność gramatyczna*.
 
 ## B1.4 Три слоя — B1
 
 | Слой | Вердикт |
 | --- | --- |
-| **I Instructional** | Mastery столпов B1; ≥70% FN-B1; разнообразие §1.1 |
+| **I Instructional** | Mastery столпов B1; **все** Core FN-B1; Important ≥85% (`CALIBRATION=required`); разнообразие evidence |
 | **II Internal summative** | Пороги §1.2 B1; **обязательно** отдельный grammar-модуль в тесте уровня |
 | **III State-exam readiness** | В exam-mode: каждый модуль ≥50% (закон); рекомендуется продуктовый «confident» ≥ порогов §1.2; `session_availability=announced` (2026). Устная часть ≤15 мин потолок всей части (§ 17). Не выдавать результат за certyfikat |
 
@@ -245,13 +302,13 @@ A1/A2 **не** помечать как `historical`.
 
 ## B2.3 Обязательные концепты
 
-Углубление PED-001…012; `GR-PASS`; advanced `GR-COMPLEX`; `GR-WORDORDER` в длинном монологе; mediation; exam grammar B2.
+Углубление PED-001…012; `GR-PASS-01`; `GR-SYN-COMP-01` / advanced subordination; `GR-WO-IS-01` в длинном монологе; `PRAG-MEDIATION-01`; exam grammar B2.
 
 ## B2.4 Три слоя — B2
 
 | Слой | Вердикт |
 | --- | --- |
-| **I** | Столпы B2; ≥70% FN-B2; разнообразие свидетельств |
+| **I** | Столпы B2; **все** Core FN-B2; Important ≥85% (`CALIBRATION=required`); разнообразие свидетельств |
 | **II** | Пороги §1.2 B2; grammar-модуль обязателен |
 | **III** | Exam-mode: **≥60% каждой части** (§ 23.1.c); сессии 2026 announced (проверить актуальные даты на certyfikatpolski.pl). Не certyfikat продукта |
 
@@ -284,3 +341,21 @@ A1/A2 **не** помечать как `historical`.
 | Дата | Событие |
 | --- | --- |
 | 2026-09-05 | Первая полная версия Phase 2; разделены слои I/II/III; зафиксированы session_availability 2026 |
+
+
+## Exit anchors (IDs for traceability)
+
+| ID | Layer | Level |
+|---|---|---|
+| EXIT-A1-INSTR | Instructional | A1 |
+| EXIT-A2-INSTR | Instructional | A2 |
+| EXIT-B1-INSTR | Instructional | B1 |
+| EXIT-B2-INSTR | Instructional | B2 |
+| EXIT-A1-SUM | Internal summative | A1 |
+| EXIT-A2-SUM | Internal summative | A2 |
+| EXIT-B1-SUM | Internal summative | B1 |
+| EXIT-B2-SUM | Internal summative | B2 |
+| EXIT-B1-EXAM | State exam readiness | B1 |
+| EXIT-B2-EXAM | State exam readiness | B2 |
+| EXIT-A1-EXAM | Standards-aligned / future only | A1 |
+| EXIT-A2-EXAM | Standards-aligned / future only | A2 |

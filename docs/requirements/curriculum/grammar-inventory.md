@@ -30,17 +30,28 @@
 
 ## 1. Сводка: число концептов по уровню **первого введения**
 
+Единица подсчёта: один атомарный концепт = один заголовок `#### GR-…` с полными полями и ровно одним **Intro**.
+
 | Уровень первого введения | Число концептов | Комментарий |
 |---|---:|---|
-| A1 | 38 | Формулы + базовые функции падежей; аспект **лексически** |
-| A2 | 28 | Celownik, wołacz продуктивно, męskoosobowy, сознательный аспект, наклонения, степени |
-| B1 | 26 | Продуктивный контроль аспекта, числительные męskoosobowe, относительные предложения, приставки |
-| B2 | 18 | Причастия, страдательный залог, безличные формы, информационная структура |
-| **Всего** | **110** | Цель диапазона 80–120 |
+| A1 | 58 | Формулы + базовые функции падежей; аспект лексически |
+| A2 | 26 | Celownik-система, męskoosobowy, сознательный аспект, indef/neg |
+| B1 | 18 | Продуктивный контроль аспекта, сложный синтаксис, числительные virile |
+| B2 | 8 | Причастия, пассив/безличность, информационная структура, стиль |
+| **Всего** | **110** | Автосводка из фактических записей; диапазон 80–120 без искусственного дробления |
 
-Повторное углубление (re-deepening) **не** увеличивает счётчик «первого введения».
+Повторное углубление (re-deepening) **не** увеличивает счётчик. Наличие в таблице ≠ полное освоение уровня.
 
----
+
+
+## 1b. Документированные кластеры (не замена exact prerequisite)
+
+| Кластер | Члены | Когда допустим |
+|---|---|---|
+| `GR-CAS-*` | все `GR-CAS-…` | только в обзорных картах; в Prereq FN/GR — exact ID |
+| `GR-ASP-*` | все `GR-ASP-…` | обзор пути аспекта |
+| `GR-TNS-*` | все `GR-TNS-…` | обзор времён |
+| `GR-REK-*` | все `GR-REK-…` | обзор rekcja |
 
 ## 2. Формат записи
 
@@ -128,7 +139,8 @@
 
 #### GR-ALT-STEM-01 — Oboczności tematyczne · Чередования основ
 - **Intro:** A1 (распознавание в *w mieście*) · **Re-deepen:** A2–B2
-- **Prereq:** GR-CAS-LOC-01
+- **Prereq:** GR-GEN-MFN-01, GR-NUM-SGPL-01
+- **Pedagogical note:** Вводится **параллельно** с `GR-CAS-LOC-01` (не как его prerequisite и не наоборот): сначала замечаем чередование в формах места, затем систематизируем.
 - **Функция:** Предсказуемые изменения основы в падежах/степенях/спряжении.
 - **Form / Meaning / Use:** *miasto/mieście, ręka/ręce, Bóg/Bogu, mogę/możesz*.
 - **Пределы:** Не все чередования «правило + исключение» одинаково продуктивны.
@@ -312,7 +324,8 @@
 
 #### GR-CAS-LOC-01 — Miejscownik z «w / na / o / po» · Местный с предлогами
 - **Intro:** A1 · **Re-deepen:** A2–B2
-- **Prereq:** GR-ALT-STEM-01 (параллельно)
+- **Prereq:** GR-CAS-NOM-01
+- **Pedagogical note:** Чередования основ (*miasto → mieście*) отрабатываются совместно с `GR-ALT-STEM-01`, без циклической зависимости в графе.
 - **Функция:** Место, тема (*o*), время.
 - **Form / Meaning / Use:** *Mieszkam w Polsce. Byliśmy na spotkaniu. Rozmawiamy o wakacjach.*
 - **Пределы:** *w/na + B* направление; выбор *w/na* лексический.
@@ -326,7 +339,7 @@
 
 #### GR-CAS-VOC-01 — Wołacz: zwrot do osoby · Звательный: обращение
 - **Intro:** A1 (формулы *panie…*, *Aniu*) · **Re-deepen:** A2 (продуктивно), B1 (регистр)
-- **Prereq:** GR-PRAG-PAN-01
+- **Prereq:** PRAG-PAN-01
 - **Функция:** Адресация; живой падеж польского.
 - **Form / Meaning / Use:** *Panie doktorze! Aniu! Drogi Marku!*
 - **Пределы:** Не все имена имеют частотный Voc; *pan/pani + Voc/Nom* по регистру.
@@ -356,7 +369,7 @@
 
 #### GR-REK-PREP-01 — Rekcja przyimków częstych · Управление частых предлогов
 - **Intro:** A1 · **Re-deepen:** A2–B2
-- **Prereq:** соответствующие GR-CAS-*
+- **Prereq:** GR-CAS-ACC-02, GR-CAS-GEN-02, GR-CAS-LOC-01, GR-CAS-INS-02
 - **Функция:** Стабильные связки предлог→падеж.
 - **Form / Meaning / Use:** *w+Msc, do+D, na+B/Msc, z+D/Narz, o+B/Msc, po+Msc, dla+D, bez+D, od+D, u+D, przed/za/nad/pod + B/Narz* (по значению).
 - **Пределы:** Полисемия предлога; не учить как перевод «in/on».
@@ -370,7 +383,7 @@
 
 #### GR-REK-VERB-01 — Rekcja czasowników (rdzeń A1–A2) · Управление глаголов (ядро)
 - **Intro:** A1 · **Re-deepen:** A2–B1
-- **Prereq:** GR-CAS-GEN-05, GR-CAS-ACC-02, GR-CAS-DAT-01
+- **Prereq:** GR-CAS-GEN-05, GR-CAS-ACC-02
 - **Функция:** Лексикализованные рамки.
 - **Form / Meaning / Use:** *dziękować + C; pomagać + C; czekać na + B; pytać o + B; bać się + D; lubić + B; uczyć się + D*.
 - **Пределы:** Расширение списка на B1–B2 по минимуму.
@@ -381,6 +394,21 @@
   **BEL:** *дзякаваць*; *чакаць* без *na*.
 - **Evidence:** `pair_choice` · словарь `FUN-103`
 - **Source:** PED-002; zał. 1 — **High**
+
+
+#### GR-REK-VERB-DAT-01 — Rekcja czasowników z celownikiem · Управление глаголов с дательным
+- **Intro:** A2 · **Re-deepen:** B1
+- **Prereq:** GR-CAS-DAT-01, GR-REK-VERB-01
+- **Функция:** Системный выбор Dat при *pomagać, dziękować, przyglądać się* и т.п.
+- **Form / Meaning / Use:** V + Dat (± Prep); отличие от Acc-объекта L1.
+- **Пределы:** Не все «кому» L1 = Dat PL.
+- **Пример:** *Pomogę sąsiadowi.* / *Dziękuję pani.*
+- **Контрпример:** *\*Pomogę sąsiada.* (калька Acc)
+- **UKR:** Часто Acc/Gen калька.
+  **RUS:** *помогать кому* близко, но лексика и возвратность путаются.
+  **BEL:** Смешение с Acc в быту.
+- **Evidence:** `closed_rekcja` + `guided_prod`
+- **Source:** PED-002; Swan/Nagórko — Medium; стр. REQUIRES VERIFICATION
 
 #### GR-REK-ADJ-01 — Rekcja przymiotników / imiesłowów · Управление прилагательных
 - **Intro:** B1 · **Re-deepen:** B2
@@ -465,7 +493,7 @@
 - **Source:** zał. 1 A1 — **High**
 
 #### GR-PRO-INDEF-01 — Zaimki nieokreślone / przeczące · Неопределённые / отрицательные
-- **Intro:** B1 · **Re-deepen:** B2
+- **Intro:** A2 · **Re-deepen:** B1, B2
 - **Prereq:** GR-NEG-01, GR-PRO-INT-01
 - **Функция:** *ktoś/coś/nikt/nic/żaden*.
 - **Form / Meaning / Use:** Отрицательные с *nie*; согласование *żaden*.
@@ -592,7 +620,8 @@
 
 #### GR-TNS-PST-01 — Czas przeszły · Прошедшее время
 - **Intro:** A1 · **Re-deepen:** A2–B2 (аспектный выбор)
-- **Prereq:** GR-AGR-VPAST-01
+- **Prereq:** GR-GEN-MFN-01, GR-NUM-SGPL-01, GR-TNS-PRS-01
+- **Pedagogical note:** Формы прошедшего вводятся до отдельного mastery согласования рода (`GR-AGR-VPAST-01` зависит от этого концепта, не наоборот).
 - **Функция:** Прошедшие события/процессы.
 - **Form / Meaning / Use:** L-причастие + личные показатели; род/число.
 - **Пределы:** Выбор dok/niedok — отдельный столп.
@@ -1107,7 +1136,21 @@
 
 ### 3.16 Прагматика грамматических форм (обязательные смежные концепты)
 
-#### GR-PRAG-PAN-01 — Pan / pani + 3. osoba · Вежливое обращение
+#### GR-TV-AGR-01 — Pan/pani + 3. osoba (zgoda gramatyczna) · Согласование при pan/pani
+- **Intro:** A1 · **Re-deepen:** A2, B1
+- **Prereq:** GR-TNS-PRS-01, GR-GEN-MFN-01
+- **Функция:** Грамматическое согласование 3 л. при вежливом обращении; прагматика регистра — `PRAG-PAN-01`.
+- **Form / Meaning / Use:** *Czy pan/pani + 3sg*; мн. *państwo*.
+- **Пределы:** Не смешивать с `ty`+2sg без сигнала.
+- **Пример:** *Czy pan mówi po polsku?*
+- **Контрпример:** *\*Czy pan mówisz…*
+- **UKR:** Калька «вы»+мн. / 2 л.
+  **RUS:** То же + слабый voc.
+  **BEL:** То же; регистр mail.
+- **Evidence:** `roleplay_tv` + `closed_morph`
+- **Source:** PED-010; PRODUCT ANALYSIS — **High** (продукт)
+
+<!-- former title: Pan / pani + 3. osoba · Вежливое обращение; pragmatic bundle defined in concept-extensions.md as PRAG-PAN-01 -->
 - **Intro:** A1 · **Re-deepen:** A2–B2
 - **Prereq:** GR-TNS-PRS-01
 - **Функция:** T–V; официальный регистр.
@@ -1146,6 +1189,404 @@
   **BEL:** *ёсць / няма*.
 - **Evidence:** `pair_choice`
 - **Source:** zał. 1 A1 — **High**
+
+---
+
+### 3.17 Дополнительные концепты (покрытие плотности A1–B2)
+
+#### GR-ANIM-MASC-01 — Żywotność w bierniku męskim · Одушевлённость в Acc м.р.
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-CAS-ACC-01
+- **Функция:** Различать *widzę stół* vs *widzę psa/studenta*.
+- **Form / Meaning / Use:** М. одуш. Acc = Gen; неодуш. Acc = Nom.
+- **Пределы:** Пограничные лексемы (*trup*, бренды, роботы) — позже.
+- **Пример:** *Widzę nowy samochód. Widzę nowego kolegę.*
+- **Контрпример:** *\*Widzę nowy kolega*
+- **UKR:** Правило знакомо, окончания иные.  
+  **RUS:** То же; сильный перенос.  
+  **BEL:** То же.
+- **Evidence:** `pair_choice`
+- **Source:** zał. 1 A2 żywotne/nieżywotne (явный акцент); подготовка с A1 — **High**
+
+#### GR-CONJ-TYPE-01 — Typy koniugacji teraźniejszej · Типы спряжения настоящего
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-TNS-PRS-01
+- **Функция:** Предсказывать окончания (*czytam, lubię, niosę*).
+- **Form / Meaning / Use:** Рабочая классификация JPJO (не обязательно школьные «I/II/III» ярлыки).
+- **Пределы:** Нерегулярные *być, mieć, jeść, wiedzieć*.
+- **Пример:** *Lubię kawę. Niosę torbę.*
+- **Контрпример:** *\*Lubiem kawę*
+- **UKR/RUS/BEL:** Другие классы спряжения → гипергенерализация польских окончаний.
+- **Evidence:** `closed_morph`
+- **Source:** zał. 1 A1 przykłady czasowników; Swan — **Medium**
+
+#### GR-VERB-IRREG-01 — Czasowniki nieregularne częste · Частые нерегулярные
+- **Intro:** A1 · **Re-deepen:** A2–B2
+- **Prereq:** GR-CONJ-TYPE-01
+- **Функция:** *być, mieć, iść, jechać, jeść, wiedzieć, umieć, rozumieć, chcieć, móc*.
+- **Form / Meaning / Use:** Парадигмы как лексико-грамматические чанки + правило.
+- **Пределы:** Не смешивать с «все исключения языка».
+- **Пример:** *Jestem, jesteś, jest… Wiem / znam / umiem* (развести значения).
+- **Контрпример:** *\*Ja jest*
+- **UKR:** *єсмь* нет; *знати/уміти/відати* распределение иное.  
+  **RUS:** *знать/уметь/ведать*.  
+  **BEL:** *ведаць/умець/знаць*.
+- **Evidence:** `closed_morph` · `pair_choice` (*znać/wiedzieć/umieć*)
+- **Source:** zał. 1 przykłady; PED практика — **High**
+
+#### GR-ZNA-WIED-01 — znać / wiedzieć / umieć · Семантическое различение
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-VERB-IRREG-01
+- **Функция:** Знать человека/место vs факт vs навык.
+- **Form / Meaning / Use:** *Znam Annę. Wiem, że… Umniem pływać.*
+- **Пределы:** Краевые контексты B1+.
+- **Пример:** *Nie wiem. Nie znam tego słowa. Nie umiem gotować.*
+- **Контрпример:** *\*Nie znam, że…* / *\*Umiem Annę*
+- **UKR:** *знати* покрывает шире → *\*znam, że*.  
+  **RUS:** *знать* vs *уметь*; *знать, что* ок, но *znać że* ошибка.  
+  **BEL:** *ведаць/знаць* смешение.
+- **Evidence:** `pair_choice` · `disc_repair`
+- **Source:** практика JPJO; Swan — **Medium**
+
+#### GR-PREP-DO-NA-01 — «do» vs «na» vs «w» (kierunek) · Выбор предлога направления
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-CAS-GEN-02, GR-CAS-ACC-02, GR-CAS-LOC-01
+- **Функция:** Лексикализованный выбор рамки места.
+- **Form / Meaning / Use:** *do sklepu / na pocztę / w góry*; жить *w/na*.
+- **Пределы:** Список растёт со словарём; не «переведи in/to».
+- **Пример:** *Idę do szkoły. Idę na uczelnię. Jadę w góry.*
+- **Контрпример:** *\*Idę w sklep*
+- **UKR:** *в/на/до* иначе.  
+  **RUS:** *в/на* давление.  
+  **BEL:** *у/на/да*.
+- **Evidence:** `pair_choice`
+- **Source:** PED-002; zał. 1 przykłady — **High**
+
+#### GR-PREP-Z-01 — «z» + D vs «z» + Narz · Два *z*
+- **Intro:** A1 · **Re-deepen:** A2
+- **Prereq:** GR-CAS-GEN-02, GR-CAS-INS-02
+- **Функция:** Источник (*z Warszawy*) vs совместность/ингредиент (*z mlekiem*).
+- **Form / Meaning / Use:** Падеж различает значение.
+- **Пределы:** *ze* перед стечениями.
+- **Пример:** *Wracam z pracy. Herbata z cytryną.*
+- **Контрпример:** *\*Wraca z pracą* (если «с работы»)
+- **UKR:** *з* + різні відмінки.  
+  **RUS:** *из/с* разные лексемы → ложная лёгкость.  
+  **BEL:** *з/са*.
+- **Evidence:** `pair_choice`
+- **Source:** zał. 1; Swan — **High**
+
+#### GR-TIME-EXPR-01 — Wyrażanie czasu (godzina, dzień, okres) · Выражение времени
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-NUM-ORD-01, GR-CAS-ACC-01, GR-CAS-GEN-01
+- **Функция:** Час, дата, длительность.
+- **Form / Meaning / Use:** *o ósmej; w poniedziałek; przez godzinę; od… do…*
+- **Пределы:** *za* «через» vs цена; разговорные варианты.
+- **Пример:** *Spotkamy się w piątek o dziesiątej.*
+- **Контрпример:** *\*o dziesięć*
+- **UKR:** *о десятій* близко; *в п’ятницю* vs *w piątek*.  
+  **RUS:** *в пятницу / в десять*.  
+  **BEL:** *у пятніцу*.
+- **Evidence:** `guided_prod`
+- **Source:** Katalog B; zał. 1 przykłady czasu — **Medium**
+
+#### GR-COMP-EQ-01 — Porównania równości (tak… jak) · Равенство сравнения
+- **Intro:** A2 · **Re-deepen:** B1
+- **Prereq:** GR-DEG-ADJ-01
+- **Функция:** *tak samy / taki jak*; *więcej niż*.
+- **Form / Meaning / Use:** Конструкции равенства и неравенства.
+- **Пределы:** Падеж после *niż* в полном объёме позже.
+- **Пример:** *Jestem tak zmęczony jak ty. On jest wyższy niż brat.*
+- **Контрпример:** *\*wyższy jak brat* (в учебной норме предпочтительно *niż*)
+- **UKR:** *такий як / ніж*.  
+  **RUS:** *такой как / чем*.  
+  **BEL:** *такі як*.
+- **Evidence:** `guided_prod`
+- **Source:** A2 stopniowanie + JPJO — **Medium**
+
+#### GR-Q-WH-01 — Pytania uzupełniające · Специальные вопросы
+- **Intro:** A1 · **Re-deepen:** A2
+- **Prereq:** GR-PRO-INT-01
+- **Функция:** *kto/co/gdzie/kiedy/jak/dlaczego/ile…*
+- **Form / Meaning / Use:** Вопросительное слово + падеж по роли.
+- **Пределы:** Сложный порядок B1.
+- **Пример:** *Gdzie mieszkasz? Czego szukasz?*
+- **Контрпример:** *\*Szukasz co?* как единственная норма A1 письма
+- **UKR/RUS/BEL:** Кальки порядка и падежа вопросительного.
+- **Evidence:** `guided_prod`
+- **Source:** zał. 1 A1 pytania uzupełniające — **High**
+
+#### GR-GEN-PART-01 — Dopełniacz partytywny / miary · Партитивный / количественный D
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-CAS-GEN-01, GR-NUM-CARD-05
+- **Функция:** *trochę wody, szklanka herbaty, dużo czasu*.
+- **Form / Meaning / Use:** Мера/квантификатор + D.
+- **Пределы:** Не все квантификаторы одинаковы.
+- **Пример:** *Poproszę szklankę wody.*
+- **Контрпример:** *\*szklanka woda*
+- **UKR:** *склянка води* близко.  
+  **RUS:** *стакан воды*.  
+  **BEL:** *шклянка вады*.
+- **Evidence:** `guided_prod`
+- **Source:** zał. 1 A1 dopełniacz ilości — **High**
+
+#### GR-DAT-EXP-01 — Celownik doświadczający (mi / ci) · Дательный экспериенцера
+- **Intro:** A2 · **Re-deepen:** B1
+- **Prereq:** GR-CAS-DAT-01
+- **Функция:** *jest mi zimno; podoba mi się; brakuje mi*.
+- **Form / Meaning / Use:** Клитика Dat + предикатив/глагол.
+- **Пределы:** Полные формы *mnie* под ударением.
+- **Пример:** *Czy jest ci ciepło? Podoba mi się ten film.*
+- **Контрпример:** *\*Jest zimno dla mnie* как единственный перевод
+- **UKR:** *мені холодно* близко.  
+  **RUS:** *мне холодно*; *\*dla mnie jest zimno*.  
+  **BEL:** *мне холадна*.
+- **Evidence:** `guided_prod` · `pair_choice`
+- **Source:** zał. 1 A2 celownik przykłady — **High**
+
+#### GR-REK-VERB-02 — Rekcja czasowników (rozszerzenie B1) · Расширение глагольной rekcja
+- **Intro:** B1 · **Re-deepen:** B2
+- **Prereq:** GR-REK-VERB-01
+- **Функция:** *zależeć od + D; składać się z + D; uważać na + B; zgadzać się z + Narz*.
+- **Form / Meaning / Use:** Словарь минимума B1 с рамками.
+- **Пределы:** Список открыт; каждый глагол — карточка.
+- **Пример:** *To zależy od pogody.*
+- **Контрпример:** *\*zależy od pogodą*
+- **UKR/RUS/BEL:** Разные предложные эквиваленты.
+- **Evidence:** `pair_choice` · словарь
+- **Source:** PED-002; JPJO B1 — **Medium**
+
+#### GR-SYN-CAUSE-01 — Przyczyna i skutek (bo / dlatego / więc) · Причина и следствие
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-SYN-COORD-01, GR-SYN-SUB-01
+- **Функция:** Объяснение и вывод.
+- **Form / Meaning / Use:** *bo / dlatego że / więc / dlatego*.
+- **Пределы:** *bo* vs *ponieważ* (регистр B1+).
+- **Пример:** *Zostań w domu, bo pada.*
+- **Контрпример:** канцелярит *ponieważ* в SMS A1 как единственный стиль
+- **UKR/RUS/BEL:** Ложные друзья союзов.
+- **Evidence:** `guided_prod`
+- **Source:** zał. 1 spójniki; Katalog A — **High**
+
+#### GR-SYN-TIME-01 — Zdania czasowe (kiedy / gdy / zanim / dopiero gdy) · Временные придаточные
+- **Intro:** A2 · **Re-deepen:** B1–B2
+- **Prereq:** GR-SYN-SUB-01, GR-ASP-CON-01
+- **Функция:** Временная рамка события.
+- **Form / Meaning / Use:** *kiedy/gdy*; позже *zanim, dopiero gdy*.
+- **Пределы:** Аспект в главной/придаточной — связка с путём аспекта.
+- **Пример:** *Zadzwoń, kiedy będziesz wolny.*
+- **Контрпример:** аспектная калька L1 в обеих частях
+- **UKR:** *коли*.  
+  **RUS:** *когда*.  
+  **BEL:** *калі*.
+- **Evidence:** `guided_prod` · `pair_choice`
+- **Source:** zał. 1 A2 kiedy/gdy — **High**
+
+#### GR-SYN-COMP-01 — Zdania porównawcze / dopełniaczowe złożone · Сложные сравнительные / изъяснительные
+- **Intro:** B1 · **Re-deepen:** B2
+- **Prereq:** GR-SYN-SUB-02, GR-DEG-ADJ-01
+- **Функция:** Развёрнутое сравнение и изъяснение.
+- **Form / Meaning / Use:** *Twierdzi, że…; Jest lepszy, niż myśleliśmy.*
+- **Пределы:** Не полный C1 набор союзов.
+- **Пример:** *Mówił, że przyjdzie później.*
+- **Контрпример:** смешение *że/żeby*
+- **UKR/RUS/BEL:** Косвенная речь L1 давит на времена/союзы.
+- **Evidence:** `guided_prod`
+- **Source:** zał. 1 B1 składnia — **Medium**
+
+#### GR-REPORT-01 — Mowa zależna (podstawy) · Косвенная речь (база)
+- **Intro:** B1 · **Re-deepen:** B2
+- **Prereq:** GR-SYN-SUB-01, GR-TNS-PST-01
+- **Функция:** Пересказ чужих слов.
+- **Form / Meaning / Use:** *powiedział, że…; zapytał, czy…*
+- **Пределы:** Полный sequence of tenses не как в английском; польские сдвиги ограничены.
+- **Пример:** *Anna powiedziała, że jest chora.*
+- **Контрпример:** калька англ./рус. сдвига времён дословно всегда
+- **UKR/RUS/BEL:** Иные привычки пересказа.
+- **Evidence:** `guided_prod` · `free_prod`
+- **Source:** Katalog A «relacjonowanie»; JPJO B1 — **Medium**
+
+#### GR-PASS-SIE-01 — «się» bierne / medialne · Медиально-страдательное *się*
+- **Intro:** B2 · **Re-deepen:** —
+- **Prereq:** GR-IMPERS-SIE-01, GR-PASS-01
+- **Функция:** *Drzwi otworzyły się. To się robi tak.*
+- **Form / Meaning / Use:** Отличать от рефлексива гигиены и от *jest + imiesłów*.
+- **Пределы:** Стилистический выбор актив vs *się* vs bierna.
+- **Пример:** *Sklep otwiera się o ósmej.*
+- **Контрпример:** *\*Sklep jest otwierający się o ósmej* как норма
+- **UKR:** *-ся* близко.  
+  **RUS:** *-ся*.  
+  **BEL:** *-ся*.
+- **Evidence:** `pair_choice`
+- **Source:** zał. 1 B2 strona zwrotna; Swan — **Medium**
+
+#### GR-WF-ASPECT-PAIR-01 — Tworzenie pary aspektowej · Образование видовой пары
+- **Intro:** B1 · **Re-deepen:** B2
+- **Prereq:** GR-ASP-PREF-01
+- **Функция:** От ndk к dk (префикс/суффикс) в продуктивных моделях.
+- **Form / Meaning / Use:** zał. 1 B1 «tworzenie form aspektu dokonanego…».
+- **Пределы:** Много пар супплетивны / непредсказуемы — словарь первичен.
+- **Пример:** *pisać → napisać; kupować → kupić*.
+- **Контрпример:** *\*kupić → kupować* как единственное «правило суффикса» без исключений
+- **UKR/RUS/BEL:** Ложная продуктивность приставок L1.
+- **Evidence:** `guided_prod` · словарь
+- **Source:** zał. 1 B1 — **High**
+
+#### GR-NEG-DOUBLE-01 — Podwójna negacja · Двойное отрицание
+- **Intro:** A2 · **Re-deepen:** B1
+- **Prereq:** GR-NEG-01, GR-PRO-INDEF-01
+- **Функция:** *nikt nie…, nigdy nie…, nic nie…*
+- **Form / Meaning / Use:** Отрицательные местоимения/наречия требуют *nie* при V.
+- **Пределы:** Логика ≠ английская.
+- **Пример:** *Nikt nigdy nic nie mówił.*
+- **Контрпример:** *\*Nikt mówił coś*
+- **UKR:** Двойное отрицание норма.  
+  **RUS:** Норма.  
+  **BEL:** Норма. Ошибки — в формах *nikt/nic*, не в самой идее.
+- **Evidence:** `guided_prod`
+- **Source:** zał. 1 zdania zaprzeczone; B1 zaimki przeczące — **High**
+
+#### GR-WO-Q-01 — Szyk w pytaniu i po partykule · Порядок в вопросе
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-Q-YESNO-01, GR-WO-NEUT-01
+- **Функция:** *Czy + SVO*; WH-слово в начале.
+- **Form / Meaning / Use:** Учебная норма письма/речи A1–A2.
+- **Пределы:** Разговорные инверсии.
+- **Пример:** *Czy ty to zrobiłeś? Gdzie on mieszka?*
+- **Контрпример:** тяжёлая L1-инверсия без учебной задачи
+- **UKR/RUS/BEL:** Свободный порядок вопросов L1.
+- **Evidence:** `guided_prod`
+- **Source:** zał. 1 pytania; PED-011 — **Medium**
+
+#### GR-PUNCT-LIST-01 — Interpunkcja wyliczeń i zdań złożonych współrzędnych · Пунктуация перечислений и сочинения
+- **Intro:** A2 · **Re-deepen:** B1–B2
+- **Prereq:** GR-SYN-COORD-01
+- **Функция:** Запятые при однородных / перед *ale* и т.п. по норме письма.
+- **Form / Meaning / Use:** Связь синтаксис→письмо (экзаменационное pisanie).
+- **Пределы:** Не полный курс «все правила запятой».
+- **Пример:** *Kupiłem chleb, masło i ser.*
+- **Контрпример:** хаотичные запятые как в L1
+- **UKR/RUS/BEL:** Разные школьные нормы запятых.
+- **Evidence:** `guided_prod` (письмо)
+- **Source:** zał. 1 A2 podstawy interpunkcji — **Medium**
+
+#### GR-MOD-PERM-01 — Pozwolenie / zakaz (można, wolno, nie wolno) · Разрешение и запрет
+- **Intro:** A2 · **Re-deepen:** B1
+- **Prereq:** GR-MOD-VERB-01
+- **Функция:** Безличные модальные рамки быта/объявлений.
+- **Form / Meaning / Use:** *Tu nie wolno palić. Można wejść.*
+- **Пределы:** Отличие *można* / *możesz* / *wolno*.
+- **Пример:** *Czy można tu usiąść?*
+- **Контрпример:** *\*Nie możesz palić* на объявлении вместо *Nie wolno palić* (регистр)
+- **UKR:** *можна / заборонено*.  
+  **RUS:** *можно / нельзя*.  
+  **BEL:** *можна / нельга*.
+- **Evidence:** `pair_choice` · `guided_prod`
+- **Source:** Katalog A; napisy użytkowe zał. 1 — **Medium**
+
+#### GR-DIM-01 — Zdrobnienia (gramatyka + rejestr) · Уменьшительные
+- **Intro:** A2 · **Re-deepen:** B1–B2
+- **Prereq:** PRAG-PAN-01, GR-GEN-MFN-01
+- **Функция:** *Ania/Aniu; kawusia* — морфология и уместность (`PED-010`).
+- **Form / Meaning / Use:** Суффиксы + Voc/регистр.
+- **Пределы:** Не «милые слова» без социолингвистики.
+- **Пример:** *Cześć, Aniu!* (своим) vs официальный контекст.
+- **Контрпример:** zdrobnienie к незнакомцу в urzęd
+- **UKR:** Уменьшительные частотны → overuse.  
+  **RUS:** Иные суффиксы.  
+  **BEL:** Иные суффиксы.
+- **Evidence:** `disc_repair`
+- **Source:** PED-010 — **Medium**
+
+#### GR-GEN-ADJ-01 — Odmiana przymiotnika we wszystkich przypadkach (spirala) · Склонение Adj по падежам
+- **Intro:** A1 (Nom/Acc/Gen/Loc/Instr базы) · **Re-deepen:** A2–B2
+- **Prereq:** GR-AGR-ADJ-01
+- **Функция:** Согласованное Adj в каждом новом падеже стадии.
+- **Form / Meaning / Use:** Не отдельная «глава Adj», а спираль с `GR-CAS-*`.
+- **Пределы:** Мн. męskoosobowe отдельно через GR-MO-VIR-01.
+- **Пример:** *o nowym domu; z nowym domem; bez nowego domu*
+- **Контрпример:** N в падеже, Adj в Nom
+- **UKR/RUS/BEL:** Окончания Adj — зона стабильных ошибок.
+- **Evidence:** `closed_morph`
+- **Source:** zał. 1 odmiana przymiotników A1–B2 — **High**
+
+#### GR-CAS-GEN-PREP-02 — Dopełniacz z «dla / podczas / koło / obok» · D с расширенными предлогами
+- **Intro:** A2 · **Re-deepen:** B1
+- **Prereq:** GR-CAS-GEN-02
+- **Функция:** Бенефактив *dla*, время *podczas*, локация *koło/obok*.
+- **Form / Meaning / Use:** *dla dzieci; podczas lekcji; obok szkoły*.
+- **Пределы:** *dla* ≠ универсальный перевод «для» датива.
+- **Пример:** *To jest prezent dla mamy.*
+- **Контрпример:** *\*Daję prezent dla mama* вместо Dat адресата *mamie* в многих контекстах
+- **UKR:** *для* давление.  
+  **RUS:** *для* вместо Dat.  
+  **BEL:** *для*.
+- **Evidence:** `pair_choice`
+- **Source:** zał. 1 A2 przykłady dopełniacza z przyimkiem — **High**
+
+#### GR-ASP-ITER-01 — Iteratywność / wielokrotność · Итератив / многократность
+- **Intro:** B1 · **Re-deepen:** B2
+- **Prereq:** GR-ASP-PST-01, GR-MOT-BASE-01
+- **Функция:** Привычка, повторяемость (*czytywać* — осторожно; чаще ndk + адвербиалы).
+- **Form / Meaning / Use:** Предпочитать *często + ndk*; специальные итеративы — ограниченно.
+- **Пределы:** Не раздувать редкие *czytywać*-типы на A2.
+- **Пример:** *Co tydzień pisała do matki.*
+- **Контрпример:** навязывание редкого итеративного суффикса как нормы A2
+- **UKR/RUS/BEL:** Итеративные модели L1 провоцируют гиперкоррекцию.
+- **Evidence:** `pair_choice`
+- **Source:** Swan/Nagórko — **Medium** / REQUIRES VERIFICATION (объём суффиксальных итеративов в минимуме)
+
+#### GR-B2-STYLE-01 — Wybór konstrukcji (aktyw / się / bierna) · Стилистический выбор конструкции
+- **Intro:** B2 · **Re-deepen:** —
+- **Prereq:** GR-PASS-01, GR-IMPERS-SIE-01, GR-IMPERS-NO-01
+- **Функция:** Уместность залога/безличности в тексте B2.
+- **Form / Meaning / Use:** Актив по умолчанию; bierna/‑no/‑to — по регистру.
+- **Пределы:** Не «чем книжнее, тем лучше».
+- **Пример:** *Podpisano umowę.* vs *Prezes podpisał umowę.*
+- **Контрпример:** пассив в каждом бытовом предложении
+- **UKR/RUS/BEL:** Разная «книжность» пассива.
+- **Evidence:** `guided_prod` · `free_prod`
+- **Source:** zał. 1 B2 stylistyka / strony — **Medium**
+
+#### GR-CASE-NUM-01 — Przypadek po liczebniku (schemat 2–4 vs 5+) · Падеж после числительного
+- **Intro:** A2 · **Re-deepen:** B1
+- **Prereq:** GR-NUM-CARD-01, GR-NUM-CARD-05
+- **Функция:** Схема согласования считаемого.
+- **Form / Meaning / Use:** 2–4 часто Nom/Acc-подобные формы N; 5+ → Gen pl (упрощённо для урока).
+- **Пределы:** Полная таблица падежей числительного в предложении — B1.
+- **Пример:** *trzy książki; pięć książek*
+- **Контрпример:** *\*pięć książki*
+- **UKR:** Близко.  
+  **RUS:** Близко.  
+  **BEL:** Близко. Ломается на польских окончаниях и męskoosobowy.
+- **Evidence:** `closed_morph` · `pair_choice`
+- **Source:** PED-007; zał. 1 A2 liczebniki — **High**
+
+#### GR-VOC-NAME-01 — Wołacz imion i tytułów · Voc имён и титулов
+- **Intro:** A2 · **Re-deepen:** B1
+- **Prereq:** GR-CAS-VOC-01
+- **Функция:** Продуктивные образцы *Aniu, Piotrze, panie doktorze*.
+- **Form / Meaning / Use:** Типовые чередования; титулы с *panie*.
+- **Пределы:** Нерегулярности фамилий.
+- **Пример:** *Panie Prezesie! Magdo!*
+- **Контрпример:** *\*Pani Prezes!* как Voc-обращение в той же функции
+- **UKR:** Кличный иных окончаний.  
+  **RUS:** Нет привычки.  
+  **BEL:** Ограниченный Voc.
+- **Evidence:** `guided_prod`
+- **Source:** zał. 1 A2 wołacz — **High**
+
+#### GR-INF-COMPL-01 — Bezokolicznik po modalnych i fazowych · Инфинитив после модальных/фазовых
+- **Intro:** A1 · **Re-deepen:** A2–B1
+- **Prereq:** GR-MOD-VERB-01
+- **Функция:** *chcę spać; muszę iść; zaczynam pracować*.
+- **Form / Meaning / Use:** Inf без личных окончаний; аспект инфинитива связан с путём аспекта.
+- **Пределы:** *żeby + l-forma* vs инф.
+- **Пример:** *Chcę kupić bilet.*
+- **Контрпример:** *\*Chcę kupię bilet*
+- **UKR/RUS/BEL:** Иногда личная форма вместо инф.
+- **Evidence:** `pair_choice`
+- **Source:** zał. 1; Katalog A — **High**
 
 ---
 

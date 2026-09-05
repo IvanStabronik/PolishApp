@@ -1,8 +1,16 @@
 # Система требований: платформа польского как иностранного
 
-Статус пакета: **Proposed** — редакция 2 + Phase 2 curriculum draft (2026-09-05).  
+Статус пакета: **Proposed** — редакция 2 + Phase 2 curriculum (**Candidate for independent JPJO review**).  
 Целевое состояние продукта: полная web-платформа A1–B2. Порядок поставки — [10-scope-phasing-and-dependencies.md](10-scope-phasing-and-dependencies.md).  
-Педагогическая архитектура A1–B2 — [curriculum/](curriculum/) (Phase 2 draft; публикация контента только после JPJO). Набор упражнений — после Phase 3.
+Педагогическая архитектура A1–B2 — [curriculum/](curriculum/). Набор упражнений — после Phase 3.
+
+### Проверка целостности curriculum
+
+```bash
+python scripts/validate-curriculum.py
+```
+
+Скрипт (только stdlib) проверяет уникальность ID, prerequisites, циклы, счётчики, покрытие FN, LEX/ERR ссылки, запрет временных псевдо-ID. Код выхода `0` = OK. Отчёт: [curriculum/phase-2-integrity-report.md](curriculum/phase-2-integrity-report.md).
 
 Этот каталог задаёт проверяемую систему требований. Он не выбирает стек, не проектирует базу, не описывает API и не содержит UI-макетов.
 
@@ -47,14 +55,18 @@ docs/requirements/
     ├── methodology.md
     ├── review-checklist.md
     ├── grammar-inventory.md
+    ├── concept-extensions.md   # PHON / ORTH / PRAG + migration
     ├── case-aspect-sequence.md
     ├── functional-inventory.md
     ├── lexical-targets.md
     ├── level-exit-criteria.md
     ├── l1-error-model.md
     ├── curriculum-traceability.md
-    └── phase-2-report.md
+    ├── phase-2-report.md
+    └── phase-2-integrity-report.md
 ```
+
+Также: `scripts/validate-curriculum.py`.
 
 Существующие материалы не перезаписывались: их не было.
 
