@@ -1,0 +1,46 @@
+kind: module
+canonical_id: MOD-A1-PIERWSZE-SPOTKANIE
+slug: pierwsze-spotkanie
+version: 1
+status: DRAFT
+level: A1
+title_pl: Pierwsze spotkanie
+working_title: Pierwsze spotkanie
+situation_ru: >
+  Короткий первый контакт со взрослым собеседником в Польше — сосед во дворе
+  или знакомый коллеги. Нужно поздороваться в уместном регистре, назвать себя
+  и сказать, откуда вы.
+objective_ru: >
+  После модуля учащийся может открыть контакт формулой дня, представиться
+  (nazywam się… / jestem z…) и удержать адрес pan/pani, не скатываясь в ty
+  с незнакомцем.
+curriculum_links:
+  scenarios:
+    - SCN-A1-EVERYDAY-01
+  functions:
+    - FN-A1-IDENTIFY-01
+    - FN-A1-GREET-01
+  lex_bundles:
+    - LEX-A1-IDENTITY
+    - LEX-A1-GREETINGS
+  concepts:
+    - GR-CAS-NOM-01
+    - GR-TNS-PRS-01
+    - PRAG-PAN-01
+    - PHON-CORE-01
+lesson_files:
+  - lessons/01-powitanie-i-przedstawienie.yaml
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-ola-nowak
+  reviewer_id: reviewer-placeholder-igor-savchuk
+  sources:
+    - "PRODUCT ANALYSIS — first-audience everyday contact"
+    - "Curriculum SCN-A1-EVERYDAY-01 / FN-A1-GREET-01 / FN-A1-IDENTIFY-01"
+    - "Common-knowledge Polish greeting & self-introduction patterns (język ogólny)"
+  ai_assisted: false
+  notes: >
+    INTERNAL PREVIEW ONLY. DRAFT — not JPJO-approved, not learner-published.
+    Author and reviewer are distinct placeholders; no PUBLISHED status.
+visibility: internal_preview_only
+internal_preview_only: true
