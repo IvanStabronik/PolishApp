@@ -157,17 +157,22 @@ Phase 3 exercise ICE → утверждает набор XT
 5. Считать все XT обязательными до Phase 3.
 6. Подменить reviewer генеративной моделью.
 
-## 10.8 Phase 2 — curriculum matrices (заглушки)
+## 10.8 Phase 2 — curriculum matrices (draft)
 
-До утверждения этих артефактов **нельзя** заявлять, что требования A1–B2 полностью подтверждены программой:
+Артефакты Phase 2 созданы как **педагогический draft** (2026-09-05). До независимой проверки методистом JPJO **нельзя** публиковать учебный контент и нельзя заявлять официальную «утверждённую программу» продукта. Требования A1–B2 опираются на эти матрицы как baseline Phase 2.
 
-| Будущий артефакт | Статус | Ссылка-заглушка |
+| Артефакт | Статус | Ссылка |
 | --- | --- | --- |
-| Grammar inventory по уровням | отсутствует | [`curriculum/grammar-inventory.md`](curriculum/grammar-inventory.md) |
-| Communicative / functional inventory | отсутствует | [`curriculum/functional-inventory.md`](curriculum/functional-inventory.md) |
-| Lexical targets | отсутствует | [`curriculum/lexical-targets.md`](curriculum/lexical-targets.md) |
-| Последовательность введения падежей и аспекта | отсутствует | [`curriculum/case-aspect-sequence.md`](curriculum/case-aspect-sequence.md) |
-| Exit criteria уровней A1–B2 | отсутствуют | [`curriculum/level-exit-criteria.md`](curriculum/level-exit-criteria.md) |
-| Полная модель ошибок UKR/RUS/BEL | отсутствует (минимумы PED-013 — interim) | [`curriculum/l1-error-model.md`](curriculum/l1-error-model.md) |
+| Sources and evidence | Phase 2 draft | [`curriculum/sources-and-evidence.md`](curriculum/sources-and-evidence.md) |
+| Methodology | Phase 2 draft | [`curriculum/methodology.md`](curriculum/methodology.md) |
+| Review checklist | Phase 2 draft | [`curriculum/review-checklist.md`](curriculum/review-checklist.md) |
+| Grammar inventory по уровням | Phase 2 draft | [`curriculum/grammar-inventory.md`](curriculum/grammar-inventory.md) |
+| Communicative / functional inventory | Phase 2 draft | [`curriculum/functional-inventory.md`](curriculum/functional-inventory.md) |
+| Lexical targets | Phase 2 draft | [`curriculum/lexical-targets.md`](curriculum/lexical-targets.md) |
+| Последовательность падежей и аспекта | Phase 2 draft | [`curriculum/case-aspect-sequence.md`](curriculum/case-aspect-sequence.md) |
+| Exit criteria уровней A1–B2 | Phase 2 draft | [`curriculum/level-exit-criteria.md`](curriculum/level-exit-criteria.md) |
+| Модель ошибок UKR/RUS/BEL | Phase 2 draft | [`curriculum/l1-error-model.md`](curriculum/l1-error-model.md) |
+| Curriculum traceability | Phase 2 draft | [`curriculum/curriculum-traceability.md`](curriculum/curriculum-traceability.md) |
+| Phase 2 report | Phase 2 draft | [`curriculum/phase-2-report.md`](curriculum/phase-2-report.md) |
 
-Языковые столпы `PED-001`–`PED-012` — **обязательные явления для покрытия**, не готовый syllabus.
+Языковые столпы `PED-001`–`PED-012` — **обязательные явления для покрытия**, не готовый syllabus. Наличие концепта в inventory ≠ полное освоение уровня.

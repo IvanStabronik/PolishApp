@@ -6,42 +6,51 @@
 
 Первая очередь продукта — **группа взрослых**. Детско-молодёжная группа — Later.
 
-## Реестр доступности уровней (взрослые)
+## Реестр статусов уровней (взрослые)
 
-Проверка: **2026-09-04**. Источник сессий: [certyfikatpolski.pl — Terminy 2026](https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/). Источник стандартов: Dz.U. 2025 poz. 217.
+Проверка: **2026-09-05**.
 
-| Уровень | В стандартах (взрослые) | В опубликованном расписании сессий 2026 (взрослые) | Статус для продукта | Примечание |
+Два независимых поля:
+
+| Поле | Значения | Смысл |
+| --- | --- | --- |
+| `standard_status` | `current` / `superseded` | Действует ли уровень в официальном стандарте требований |
+| `session_availability` | `announced` / `not_announced` / `requires_recheck` | Объявлена ли сессия в конкретном расписании (год/горизонт) |
+
+Не путать: существование официального уровня ≠ объявление сессии в конкретном году.
+
+| Уровень | standard_status | session_availability (расписание 2026) | Источники | Примечание для продукта |
 | --- | --- | --- | --- | --- |
-| A1 | да (§ 14, załącznik) | не найден в гармониграмме 2026 | `historical` / `requires_recheck` | **Не** позиционировать как текущую exam-prep; допустим standards-aligned / future exam-compatible режим |
-| A2 | да | не найден в гармониграмме 2026 взрослых | `requires_recheck` | Может быть доступен вне этой гармониграммы; до подтверждения — не обещать текущие сессии |
-| B1 | да | да (все перечисленные сессии 2026) | `current` | Основной exam-prep |
-| B2 | да | да (часть сессий 2026) | `current` | Exam-prep |
-| C1 | да | да | `current` (экзамен существует) / вне учебной цели продукта | Не цель A1–B2 |
-| C2 | да | да | как C1 | Не цель A1–B2 |
+| A1 | `current` | `not_announced` | Dz.U. 2025 poz. 217 §14; [struktura egzaminu](https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/); [terminy 2026](https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/) | Стандарт действующий. Взрослая сессия в расписании 2026 не объявлена. **Не** `historical`. Exam-prep как «ближайшая сессия» запрещён; допустим standards-aligned / future exam-compatible |
+| A2 | `current` | `not_announced` | То же; на [struktura](https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/): «Obecnie egzaminy można zdawać na poziomie A2, B1, B2, C1 i C2» (взрослые) | Официальный уровень существует и сайт сообщает, что A2 для взрослых можно сдавать; в опубликованном расписании **2026** сессия A2 не объявлена |
+| B1 | `current` | `announced` | terminy 2026 | Основной exam-prep |
+| B2 | `current` | `announced` | terminy 2026 (часть сессий) | Exam-prep |
+| C1 | `current` | `announced` | terminy 2026 | Вне учебной цели A1–B2 |
+| C2 | `current` | `announced` | terminy 2026 | Вне учебной цели A1–B2 |
 
-При смене расписания Komisji — обновить таблицу, дату проверки и статус (`CNT-008`, `CNT-022`).
+Дата проверки: 2026-09-05. При смене расписания — обновить `session_availability` и дату (`CNT-008`, `CNT-022`).
 
 ---
 
 ### EXM-001 — Соответствие модулей и привязка к доступности
 
-- **Формулировка:** Для уровней со статусом `current` exam-mode воспроизводит состав модулей взрослой группы из § 14:
-  - B1 и B2: słuch, czytanie, poprawność gramatyczna, pisanie + mówienie.
-  - Если A2 подтверждён как `current`: słuch, czytanie z rozpoznawaniem struktur gramatycznych, pisanie + mówienie.
-  - A1: модули из стандарта могут использоваться только в режиме **standards-aligned / future exam-compatible**, с явной пометкой, что текущих взрослых сессий A1 на дату проверки нет.
-- **Причина:** Иначе тренировка не готовит к реальной сессии либо врёт про доступность A1.
+- **Формулировка:** Exam-mode воспроизводит состав модулей взрослой группы из § 14 с учётом двух полей статуса:
+  - B1 и B2 (`session_availability=announced`): słuch, czytanie, poprawność gramatyczna, pisanie + mówienie.
+  - A2 (`standard_status=current`, `session_availability=not_announced` в 2026): модули стандарта A2 допустимы в standards-aligned / future; не обещать объявленную сессию 2026. Если позже `session_availability=announced`: słuch, czytanie z rozpoznawaniem struktur gramatycznych, pisanie + mówienie.
+  - A1 (`standard_status=current`, `session_availability=not_announced`): только **standards-aligned / future exam-compatible**, с явной пометкой об отсутствии объявленной взрослой сессии. Не использовать статус `historical`.
+- **Причина:** Не смешивать действующий стандарт с расписанием конкретного года.
 - **Основная персона:** P-OLENA
 - **Приоритет:** Core
 - **Target necessity:** Mandatory
 - **Delivery stage:** V4
 - **Критерии приёмки:**
   1. Нельзя запустить «B1 exam-mode» без модуля грамматики.
-  2. Режим A1 не подписан как «подготовка к ближайшей сессии госэкзамена», пока статус ≠ `current`.
-  3. В справке режима видны источник, дата проверки доступности, статус current/historical/requires_recheck.
+  2. Режим A1 не подписан как «подготовка к ближайшей объявленной сессии», пока `session_availability≠announced`.
+  3. В справке режима видны: источник стандарта, `standard_status`, `session_availability`, дата проверки.
 - **Зависимости:** FUN-160, PED-027, BUS-004
-- **Риски:** Один шаблон «5 частей» на все уровни; ложный A1 exam-claim.
+- **Риски:** Один шаблон на все уровни; ложный A1/A2 exam-claim.
 - **Статус:** Proposed
-- **Источник:** Dz.U. 2025 poz. 217 § 14; certyfikatpolski.pl terminy 2026 (проверка 2026-09-04) — `current` для B1/B2
+- **Источник:** Dz.U. 2025 poz. 217 § 14; [struktura](https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/); [terminy 2026](https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/) — проверка 2026-09-05
 - **Проверка:** automated test, content review
 
 ### EXM-002 — Отличие A1/A2 от B1/B2 (стандарт)
@@ -101,7 +110,7 @@
 - **Зависимости:** FUN-161, EXM-001, EXM-010
 - **Риски:** Перенести B1-логику на A1; продать A1 как ближайший госэкзамен.
 - **Статус:** Proposed
-- **Источник:** Dz.U. 2025 poz. 217 § 23 (`current`); доступность сессий — certyfikatpolski.pl 2026 (`requires_recheck` для A2, `historical`/`requires_recheck` для A1)
+- **Источник:** Dz.U. 2025 poz. 217 § 23 (`standard_status=current`); session A1/A2 2026 — `not_announced` (certyfikatpolski.pl, проверка 2026-09-05); A2 как сдаваемый уровень — [struktura egzaminu](https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/)
 - **Проверка:** automated test, manual test
 
 ### EXM-005 — Модуль poprawność gramatyczna с B1
@@ -211,17 +220,17 @@
 
 ### EXM-012 — Взрослые; детская группа Later; A1 не как текущий экзамен
 
-- **Формулировка:** Детско-молодёжная группа вне первой поставки. Для взрослых exam-prep первой очереди — уровни со статусом `current` (B1/B2). A1 не включается в «текущую подготовку к госэкзамену» до подтверждения сессий.
-- **Причина:** Первая аудитория — взрослые; смешение порогов и ложная доступность A1 опасны.
+- **Формулировка:** Детско-молодёжная группа вне первой поставки. Для взрослых exam-prep первой очереди — уровни с `session_availability=announced` (B1/B2 в расписании 2026). A1: `standard_status=current`, `session_availability=not_announced` — не «текущая подготовка к объявленной сессии». A2: уровень существует официально и сайт сообщает о возможности сдачи, но сессия 2026 не объявлена — не обещать конкретную дату сессии до обновления расписания.
+- **Причина:** Не смешивать стандарт, общую доступность уровня и календарь года.
 - **Основная персона:** P-OLENA
 - **Приоритет:** Core
 - **Target necessity:** Mandatory
 - **Delivery stage:** V4
-- **Критерии приёмки:** Нет детского exam-mode до Later; A1-режим, если есть, помечен standards-aligned / future; видны источник и дата проверки доступности.
+- **Критерии приёмки:** Нет детского exam-mode до Later; A1-режим помечен standards-aligned / future; у справки видны `standard_status` и `session_availability` с датой проверки.
 - **Зависимости:** BUS-002, BUS-004, SEC-009, EXM-001
-- **Риски:** 50% «как у детей» на взрослом B2; продажа несуществующих A1-сессий.
+- **Риски:** Продажа несуществующих A1-сессий 2026; путаница A2 «можно сдавать» vs «объявлено в 2026».
 - **Статус:** Proposed
-- **Источник:** Dz.U. 2025 poz. 217 § 14, § 23; certyfikatpolski.pl 2026 (проверка 2026-09-04)
+- **Источник:** Dz.U. 2025 poz. 217; [struktura](https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/); [terminy 2026](https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/) — проверка 2026-09-05
 - **Проверка:** manual test
 
 ### EXM-013 — Честные формулировки о правовых применениях B1

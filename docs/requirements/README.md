@@ -1,8 +1,8 @@
 # Система требований: платформа польского как иностранного
 
-Статус пакета: **Proposed** — редакция 2 (2026-09-04).  
+Статус пакета: **Proposed** — редакция 2 + Phase 2 curriculum draft (2026-09-05).  
 Целевое состояние продукта: полная web-платформа A1–B2. Порядок поставки — [10-scope-phasing-and-dependencies.md](10-scope-phasing-and-dependencies.md).  
-Полнота программы уровней — после Phase 2 ([curriculum/](curriculum/)). Набор упражнений — после Phase 3.
+Педагогическая архитектура A1–B2 — [curriculum/](curriculum/) (Phase 2 draft; публикация контента только после JPJO). Набор упражнений — после Phase 3.
 
 Этот каталог задаёт проверяемую систему требований. Он не выбирает стек, не проектирует базу, не описывает API и не содержит UI-макетов.
 
@@ -17,7 +17,7 @@
 | корневой `README` | отсутствует |
 | любая существующая документация | отсутствует |
 | исходный код, дизайн, схема БД | отсутствуют |
-| git-история / удалённый remote | не обнаружены в рабочей копии |
+| git remote | https://github.com/IvanStabronik/PolishApp.git (ветка `docs/requirements-r2`) |
 
 **Дерево релевантных файлов до этой работы:** пустой каталог.
 
@@ -42,7 +42,18 @@ docs/requirements/
 ├── 13-validation-register.md
 ├── 14-priority-stage-index.md
 ├── 15-revision-2-report.md
-└── curriculum/          # Phase 2 stubs
+└── curriculum/          # Phase 2 pedagogical architecture
+    ├── sources-and-evidence.md
+    ├── methodology.md
+    ├── review-checklist.md
+    ├── grammar-inventory.md
+    ├── case-aspect-sequence.md
+    ├── functional-inventory.md
+    ├── lexical-targets.md
+    ├── level-exit-criteria.md
+    ├── l1-error-model.md
+    ├── curriculum-traceability.md
+    └── phase-2-report.md
 ```
 
 Существующие материалы не перезаписывались: их не было.
@@ -72,12 +83,13 @@ docs/requirements/
 
 | Тема | Ложный вывод | Как снято |
 | --- | --- | --- |
-| «A1 = текущий госэкзамен для взрослых» | В стандартах A1 есть; в гармониграмме сессий 2026 для взрослых A1 не найден | `BUS-004`, `EXM-001`, `EXM-012`, реестр в `07` |
+| «A1 = текущий госэкзамен для взрослых» | Стандарт A1 `current`; сессия 2026 `not_announced` — не путать | `BUS-004`, `EXM-001`, `EXM-012`, реестр в `07` |
+| «A2 нет / A2 есть как сессия 2026» | Уровень существует; сайт сообщает о сдаче; сессия 2026 не объявлена | `EXM-001`, `EXM-012` |
 | «Нужен B1 для любого ВНЖ» | Путает stały pobyt и rezydent UE / obywatelstwo | `BUS-008`, `EXM-013` |
 | «A1/A2 тоже имеют модуль грамматики как B1» | На A1 грамматика в письме/речи; отдельный модуль с B1 | `EXM-002`, `EXM-005` |
 | «AI может проверять письмо и речь» | Не единственный оценщик высоких ставок | `PED-023`, `ASM-010`, `NFR-004` |
 | «Первый релиз = вся A1–B2» | Цель полна, поставка поэтапна; V1 = production-grade срез | `BUS-007`, документ 10 |
-| «Столпы = готовый syllabus» | Phase 2 matrices отсутствуют | `PED-015`, `curriculum/*` |
+| «Столпы = готовый syllabus» | Syllabus = Phase 2 curriculum matrices (draft) | `PED-015`, `curriculum/*` |
 | «Все 52 XT обязательны» | Каталог кандидатов; Phase 3 | `CNT-017` |
 
 ## 3. Как читать пакет

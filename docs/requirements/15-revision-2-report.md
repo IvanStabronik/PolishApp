@@ -19,7 +19,7 @@
 - `docs/requirements/09-accessibility-i18n-privacy.md`
 - `docs/requirements/10-scope-phasing-and-dependencies.md`
 - `docs/requirements/11-open-decisions.md`
-- `docs/requirements/12-requirements-traceability-matrix.md` (частично устаревает относительно ред. 2; индекс 14 — авторитетен для stage)
+- `docs/requirements/12-requirements-traceability-matrix.md`
 
 **Созданы:**
 
@@ -27,8 +27,6 @@
 - `docs/requirements/14-priority-stage-index.md`
 - `docs/requirements/15-revision-2-report.md`
 - `docs/requirements/curriculum/*.md` (6 заглушек Phase 2)
-
-**Вспомогательный скрипт (можно удалить):** `docs/requirements/_inject_priority.py`
 
 ## 2. Распределение приоритетов и этапов
 
@@ -69,8 +67,8 @@
 
 | Утверждение | Исправление | Источник / дата / статус |
 | --- | --- | --- |
-| Exam-prep A1–B2 как текущий госэкзамен | A1 не в гармониграмме взрослых сессий 2026 → не текущая exam-prep | certyfikatpolski.pl terminy 2026; проверка **2026-09-04**; A1: `historical`/`requires_recheck`; B1/B2: `current` |
-| A2 доступность | В гармониграмме 2026 взрослых не найден → `requires_recheck` | тот же источник |
+| Exam-prep A1–B2 как текущий госэкзамен | Разделены `standard_status` и `session_availability`. A1: стандарт `current`, сессия 2026 `not_announced` (не `historical`). B1/B2: сессии 2026 `announced` | certyfikatpolski.pl struktura + terminy 2026; проверка **2026-09-05** |
+| A2 доступность | Уровень `current`; сайт сообщает о сдаче A2 взрослыми; сессия 2026 `not_announced` | тот же источник |
 | Пороги § 23 | Без изменения смысла; добавлены статусы нормы `current` | Dz.U. 2025 poz. 217 |
 | Устная часть | Потолок всей части ≤10 / ≤15 мин; без выдуманной подготовки | § 17; `current` |
 | Legal uses B1 | Без изменения; дата recheck перед публикацией | EXM-013 |
