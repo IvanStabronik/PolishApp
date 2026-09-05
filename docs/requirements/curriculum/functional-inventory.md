@@ -1,4 +1,4 @@
-﻿# Коммуникативно-функциональный инвентарь (A1–B2)
+# Коммуникативно-функциональный инвентарь (A1–B2)
 
 **Статус:** Phase 2 curriculum draft — A1 semantic reference = **candidate for human review**; A2–B2 = **LEGACY / pending semantic migration** (не эталон). Требует калибровки и JPJO review перед публикацией.
 **Аудитория:** первая очередь — взрослые с L1 UKR / RUS / BEL, живущие в Польше.
@@ -100,7 +100,7 @@
 - **Can-do:** Может назвать себя и базовые биографические данные так, чтобы собеседник однозначно идентифицировал человека.
 - **Intent:** Сообщить, кто говорит / кто представлен (имя + происхождение/локация L1).
 - **Modality/skill:** speaking (primary); writing — копирование тех же слотов в анкете
-- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-SCHOOL-01, SCN-A1-URZAD-01, SCN-A1-WORK-01
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-SCHOOL-01, SCN-A1-URZAD-01, SCN-A1-WORK-01, SCN-A1-NEIGHBOR-01, SCN-A1-FORM-01, SCN-A1-SMS-01, SCN-A1-WRITE-SELF-01
 - **Level:** A1
 - **Prerequisites (FN):** —
 - **Concepts:** GR-CAS-NOM-01, GR-TNS-PRS-01, GR-PRO-POSS-01, GR-PRO-PERS-01, PHON-CORE-01, ORTH-CORE-01
@@ -114,7 +114,7 @@
 - **Completion criterion:** В устном мини-диалоге (до 60 с) учащийся без подсказки названия слотов произносит **четыре** понятных пункта: (1) имя и фамилия или устойчивое имя, (2) страна или город происхождения, (3) текущий город в Польше **или** язык L1, (4) одна уточняющая реплика на вопрос собеседника («Skąd pan/pani jest?» / «Jak się pan/pani nazywa?»). Допускается **одна** лексическая подсказка-карточка. Успех блокируется, если имя неразборчиво, слоты перепутаны так, что идентификация ложна, или ответ дан только на L1.
 - **Allowed support:** 1 карточка-подсказка слота; модель *Nazywam się…* на экране до первой попытки
 - **Blocking errors:** неразборчивое имя; ответ целиком не по-польски; ложный город/страна относительно задания; отказ от обязательного слота
-- **L1 risks:** UKR: ERR-UKR-01 (i/y в имени/городе), ERR-UKR-04 (калька «у мене» вместо *mam* при доп. имуществе); RUS: ERR-RUS-02 (i/y), ERR-RUS-04 (посессивные кальки); BEL: ERR-BEL-01 (орфография имён), ERR-BEL-04 (посессив)
+- **L1 risks:** UKR: ERR-UKR-01 (i/y в имени/городе), ERR-UKR-04 (калька «у мене» вместо *mam* при доп. имуществе); RUS: ERR-RUS-02 (i/y), ERR-RUS-04 (посессивные кальки); BEL: ERR-BEL-01 (орфография имён), ERR-BEL-05 (посессив)
 - **Criticality:** Core
 
 ### FN-A1-IDENTIFY-02
@@ -123,7 +123,7 @@
 - **Can-do:** Может спросить и назвать профессию и место работы простыми конструкциями.
 - **Intent:** Уточнить профессиональную роль собеседника или сообщить свою.
 - **Modality/skill:** speaking; listening (понять ответ о работе)
-- **Scenarios:** SCN-A1-WORK-01, SCN-A1-EVERYDAY-01, SCN-A1-NEIGHBOR-01
+- **Scenarios:** SCN-A1-WORK-01, SCN-A1-EVERYDAY-01, SCN-A1-NEIGHBOR-01, SCN-A1-WRITE-SELF-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-IDENTIFY-01
 - **Concepts:** GR-CAS-NOM-01, GR-CAS-INS-01, GR-CAS-LOC-01, GR-TNS-PRS-01, GR-PREP-Z-01, GR-Q-WH-01
@@ -146,7 +146,7 @@
 - **Can-do:** Может сказать, где живёт или снимает жильё, простой формулой.
 - **Intent:** Локализовать себя относительно жилья (город/район/тип).
 - **Modality/skill:** speaking
-- **Scenarios:** SCN-A1-HOUSING-01, SCN-A1-EVERYDAY-01, SCN-A1-URZAD-01
+- **Scenarios:** SCN-A1-HOUSING-01, SCN-A1-EVERYDAY-01, SCN-A1-URZAD-01, SCN-A1-WRITE-SELF-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-IDENTIFY-01
 - **Concepts:** GR-CAS-LOC-01, GR-TNS-PRS-01, GR-REK-VERB-01, GR-EXIST-01
@@ -160,7 +160,7 @@
 - **Completion criterion:** На стимул «где вы живёте?» учащийся даёт **одну** полную польскую реплику с (a) глаголом локализации и (b) понятным местом (город или тип жилья + город). Дополнительно отличает «живу» от «сейчас нахожусь» если в задании дан ложный стимул «где вы сейчас?». Время ответа ≤ 20 с после стимула. Блок: только жест/L1; место без глагола, если из-за этого нельзя понять, живёт ли человек там постоянно.
 - **Allowed support:** карта Польши с 3 городами; модель предложения один раз
 - **Blocking errors:** отсутствие места; ответ *u mnie jest mieszkanie* как единственная форма без *mieszkam*; полное непонимание стимула после одного повтора
-- **L1 risks:** UKR: ERR-UKR-04; RUS: ERR-RUS-04; BEL: ERR-BEL-04; плюс путаница *w/na* (GR-CAS-LOC-01)
+- **L1 risks:** UKR: ERR-UKR-04; RUS: ERR-RUS-04; BEL: ERR-BEL-05; плюс путаница *w/na* (GR-CAS-LOC-01)
 - **Criticality:** Core
 
 ### FN-A1-LOCATE-02
@@ -183,7 +183,7 @@
 - **Completion criterion:** Слушатель-ассистент **точно** записывает с устной диктовки учащегося: улицу, номер дома, номер квартиры **и** этаж (4 слота). Допускается **одна** просьба «proszę powtórzyć numer». Успех = запись совпадает с карточкой задания (допустима орфография улицы с 1 опечаткой диакритики, если номерные слоты верны). Блок: перепутаны дом и квартира; этаж не назван; номера неразборчивы после повтора.
 - **Allowed support:** 1 повтор числовых слотов; образец порядка полей на экране
 - **Blocking errors:** неполный адрес без номера; системная путаница дом/квартира; отказ диктовать по-польски
-- **L1 risks:** UKR: ERR-UKR-04, ERR-UKR-13 (чтение чисел); RUS: ERR-RUS-04, ERR-RUS-13; BEL: ERR-BEL-04
+- **L1 risks:** UKR: ERR-UKR-01; RUS: ERR-RUS-02, ERR-RUS-03; BEL: ERR-BEL-01; риск здесь орфографический (адрес/имя), отдельной A1-карточки диктовки чисел в банке ERR нет
 - **Criticality:** Core
 
 ### FN-A1-GREET-01
@@ -192,7 +192,7 @@
 - **Can-do:** Может поздороваться и попрощаться в официальном и бытовом регистре.
 - **Intent:** Открыть и закрыть контакт уместной формулой.
 - **Modality/skill:** speaking; listening (распознать формулу)
-- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-NEIGHBOR-01, SCN-A1-SHOP-01, SCN-A1-WORK-01
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-NEIGHBOR-01, SCN-A1-SHOP-01, SCN-A1-WORK-01, SCN-A1-URZAD-01, SCN-A1-SCHOOL-01
 - **Level:** A1
 - **Prerequisites (FN):** —
 - **Concepts:** PRAG-PAN-01, GR-CAS-VOC-01, PHON-CORE-01 (имена в wołacz — формульно на A1; системный VOC-NAME остаётся A2)
@@ -215,7 +215,7 @@
 - **Can-do:** Может обратиться pan/pani с глаголом в 3 лице в сервисной ситуации.
 - **Intent:** Вежливо адресовать реплику незнакомцу в сервисе.
 - **Modality/skill:** speaking
-- **Scenarios:** SCN-A1-SHOP-01, SCN-A1-URZAD-01, SCN-A1-MED-01, SCN-A1-BANK-01
+- **Scenarios:** SCN-A1-SHOP-01, SCN-A1-URZAD-01, SCN-A1-MED-01, SCN-A1-BANK-01, SCN-A1-FOOD-01, SCN-A1-SCHOOL-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-GREET-01
 - **Concepts:** PRAG-PAN-01, GR-TV-AGR-01, GR-TNS-PRS-01, GR-CAS-VOC-01
@@ -238,7 +238,7 @@
 - **Can-do:** Может попросить повторить или говорить медленнее, чтобы восстановить понимание.
 - **Intent:** Восстановить канал связи при недослышанном сообщении.
 - **Modality/skill:** speaking; listening
-- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-URZAD-01, SCN-A1-EVERYDAY-01, SCN-A1-MED-01
+- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-URZAD-01, SCN-A1-EVERYDAY-01, SCN-A1-MED-01, SCN-A1-TICKET-01, SCN-A1-DIRECTIONS-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-GREET-01
 - **Concepts:** PRAG-REPAIR-01, GR-Q-YESNO-01, PHON-CORE-01 (императив в FIX: *powtórz / mów wolniej* — без системного IMP A2)
@@ -261,7 +261,7 @@
 - **Can-do:** Может сказать, что не понимает, и попросить объяснить/перевести ключевое слово.
 - **Intent:** Зафиксировать пробел в понимании и запросить значение.
 - **Modality/skill:** speaking
-- **Scenarios:** SCN-A1-URZAD-01, SCN-A1-EVERYDAY-01, SCN-A1-BANK-01, SCN-A1-MED-01
+- **Scenarios:** SCN-A1-URZAD-01, SCN-A1-EVERYDAY-01, SCN-A1-BANK-01, SCN-A1-MED-01, SCN-A1-PHONE-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-REPAIR-01
 - **Concepts:** GR-NEG-01, PRAG-REPAIR-01, GR-Q-WH-01, GR-PRO-INT-01
@@ -274,7 +274,7 @@
 - **Completion criterion:** В диалоге с одним неизвестным ключевым словом (подсвечено в стенограмме для ассистента) учащийся: (1) явно сигнализирует непонимание по-польски, (2) запрашивает значение **этого** слова или простую парафразу, (3) затем выполняет задание, используя полученное значение. Успех без шага (2) не засчитывается. Блок: игнор неизвестного слова; запрос на L1 без попытки польской формулы.
 - **Allowed support:** 1 подсказка жестом на слово; карточка *Co znaczy…?*
 - **Blocking errors:** нет сигнала непонимания; продолжение «как будто понял» с ошибкой задания
-- **L1 risks:** UKR: ERR-UKR-03 (*co/że* при попытке сложного уточнения); RUS: ERR-RUS-03; BEL: ERR-BEL-03
+- **L1 risks:** UKR/RUS/BEL: буквальный перевод формулы «что значит?» и слишком сложное уточнение; отдельная валидированная ERR-карточка для этого repair-акта отсутствует
 - **Criticality:** Core
 
 ### FN-A1-QUANT-01
@@ -297,7 +297,7 @@
 - **Completion criterion:** В кассовом микродиалоге учащийся корректно обрабатывает **три** числовых слота: названная цена (zł), запрошенное количество товара, и сдача (или констатация «bez reszty» при точной сумме). Слушатель сверяет числа с чеком-заданием; допускается погрешность ±0 только после одного уточняющего вопроса учащегося. Блок: цена и сдача перепутаны; количество не названо при запросе кассира.
 - **Allowed support:** калькулятор-экран с суммой (без подсказки сдачи); 1 переспрос
 - **Blocking errors:** невозможность произнести/понять цену в злотых; ответ только жестом без числа при требовании сказать
-- **L1 risks:** UKR: ERR-UKR-13; RUS: ERR-RUS-13; BEL: ERR-BEL-13; genitive после числительных 5+
+- **L1 risks:** UKR: ERR-UKR-22 (числительные 5+ + Gen); RUS/BEL: отдельные карточки общих количественных конструкций ещё не валидированы
 - **Criticality:** Core
 
 ### FN-A1-TRANS-01
@@ -329,7 +329,7 @@
 - **Can-do:** Может спросить о наличии товара, услуги или свободного временного слота.
 - **Intent:** Получить информацию «есть / нет / когда».
 - **Modality/skill:** speaking; listening
-- **Scenarios:** SCN-A1-SHOP-01, SCN-A1-MED-01, SCN-A1-TICKET-01, SCN-A1-BANK-01
+- **Scenarios:** SCN-A1-SHOP-01, SCN-A1-MED-01, SCN-A1-TICKET-01, SCN-A1-BANK-01, SCN-A1-FOOD-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-GREET-01
 - **Concepts:** GR-Q-YESNO-01, GR-Q-WH-01, GR-EXIST-01, GR-NEG-01, GR-CAS-GEN-04
@@ -342,7 +342,7 @@
 - **Completion criterion:** Учащийся задаёт **понятный польский вопрос о наличии** и на основе ответа ассистента выбирает верное действие из трёх (купить / записаться / уйти). Вопрос должен содержать маркер существования/наличия или времени слота; ответ «nie ma» должен быть понят (не игнорирован). Блок: утверждение вместо вопроса; вопрос без связи с наличием; непонимание отрицательного ответа.
 - **Allowed support:** 1 модель вопроса; карточка объекта запроса
 - **Blocking errors:** нет вопросительной формы при задании «спросите»; покупка при ответе «nie ma»
-- **L1 risks:** UKR: ERR-UKR-02 (*czy*); RUS: ERR-RUS-02; BEL: ERR-BEL-02; *nie ma* + Gen
+- **L1 risks:** UKR: ERR-UKR-02 (*czy*), ERR-UKR-23 (*nie ma* + Gen); RUS: ERR-RUS-21 (*nie ma* + Gen); BEL: ERR-BEL-10 (*czy/ці*), ERR-BEL-21 (*nie ma/няма*)
 - **Criticality:** Important
 
 ### FN-A1-DIRECT-01
@@ -365,7 +365,7 @@
 - **Completion criterion:** На карте из 4 точек учащийся либо (вариант A) спрашивает путь и отмечает цель по устному ответу ассистента, либо (вариант B) даёт 2–3 понятных шага к отмеченной цели. Успех = цель отмечена верно **или** слушатель доходит по инструкции без тупика. Допустим 1 repair. Блок: только жест без слов; инструкция из одного неясного слова; противоположное направление без самоисправления.
 - **Allowed support:** карта; 3 стрелки-легенды; 1 repair
 - **Blocking errors:** выбран неверный конечный пункт после инструкции; полный отказ от польских ориентиров
-- **L1 risks:** UKR: ERR-UKR-06; RUS: ERR-RUS-06; BEL: ERR-BEL-06; *do/na/w*
+- **L1 risks:** UKR: ERR-UKR-10 (*do/na* в направлении); RUS/BEL: отдельные карточки базовой навигационной рекции ещё не валидированы
 - **Criticality:** Important
 
 ### FN-A1-APPOINT-01
@@ -388,7 +388,7 @@
 - **Completion criterion:** Учащийся предлагает или принимает слот, назвав **день** и **час**, и получает подтверждение ассистента («zapisuję pana/panią»). В протоколе должны совпасть день+час с целевой карточкой (допуск ±0; при конфликте слотов — одна альтернатива). Блок: запись без времени; время без дня; отсутствие подтверждения понимания (*tak / dobrze*).
 - **Allowed support:** календарь на неделю; часы циферблатом
 - **Blocking errors:** несогласованные день/час; полный срыв записи без попытки назвать время
-- **L1 risks:** UKR: ERR-UKR-15 (время); RUS: ERR-RUS-15; BEL: ERR-BEL-15
+- **L1 risks:** RUS: ERR-RUS-10 (дни недели с *w + Acc*); UKR/BEL: отдельные карточки выражения даты/часа ещё не валидированы
 - **Criticality:** Core
 
 ### FN-A1-HEALTH-01
@@ -400,7 +400,7 @@
 - **Scenarios:** SCN-A1-MED-01, SCN-A1-EMERGENCY-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-IDENTIFY-01
-- **Concepts:** GR-CAS-ACC-01, GR-PRO-PERS-01, GR-TNS-PRS-01, PHON-CORE-01 (экспериенцер *boli mnie* — формульный Dat на A1; системный DAT-EXP остаётся A2)
+- **Concepts:** GR-CAS-ACC-01, GR-PRO-PERS-01, GR-TNS-PRS-01, PHON-CORE-01 (экспериенцер *mnie* в *boli mnie głowa* — Acc, не Dat; системный DAT-EXP не нужен для этой формулы)
 - **LEX bundle:** LEX-A1-HEALTH
 - **Evidence type:** task_performance
 - **Source anchor:**
@@ -411,7 +411,7 @@
 - **Completion criterion:** По карточке симптомов учащийся называет ≥2 понятных симптома, из них ≥1 с конструкцией экспериенцера (*boli mnie…* / *źle się czuję* + уточнение). Врач-ассистент выбирает верный «код жалобы» из 4. Блок: только жест на тело без слов; симптом на L1; *boli ja* без коррекции после одной подсказки.
 - **Allowed support:** схема тела; 1 модель *boli mnie…*
 - **Blocking errors:** ни одного распознаваемого симптома; отказ говорить о боли при задании
-- **L1 risks:** UKR: ERR-UKR-05 (путаница lubić/podobać при оценке самочувствия редко), dat. experiencer; RUS: ERR-RUS-14; BEL: ERR-BEL-14
+- **L1 risks:** UKR/RUS/BEL: калька конструкции «у меня болит» и формы частей тела; отдельные health-specific ERR-карточки требуют экспертной разработки
 - **Criticality:** Core
 
 ### FN-A1-HELP-01
@@ -480,7 +480,7 @@
 - **Completion criterion:** После приветствия учащийся произносит **одну** фразу цели, по которой ассистент направляет к верному окну (выбор из 3). Цель должна совпасть с карточкой (PESEL / meldunek / wniosek — по заданию). Допускается 1 repair. Блок: только имя без цели; цель на L1; неверное окно из-за неверной цели.
 - **Allowed support:** 3 карточки целей; модель *w sprawie…*
 - **Blocking errors:** отсутствие цели; цель противоречит документам в руках
-- **L1 risks:** UKR: ERR-UKR-09 (род в *przyszedłem/am*); RUS: ERR-RUS-09; BEL: ERR-BEL-09
+- **L1 risks:** UKR/RUS/BEL: родовая форма прошедшего в *przyszedłem/przyszłam*; подходящей отдельной ERR-карточки в текущем банке нет
 - **Criticality:** Core
 
 ### FN-A1-PHONE-01
@@ -489,7 +489,7 @@
 - **Can-do:** Может по телефону сказать, кто звонит и зачем.
 - **Intent:** Открыть телефонный контакт с идентификацией и целью.
 - **Modality/skill:** speaking; listening
-- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-WORK-01, SCN-A1-SCHOOL-01
+- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-WORK-01, SCN-A1-SCHOOL-01, SCN-A1-HOUSING-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-IDENTIFY-01, FN-A1-PURPOSE-01
 - **Concepts:** GR-REK-VERB-01, PRAG-PAN-01, GR-TNS-PRS-01, PHON-CORE-01
@@ -515,7 +515,7 @@
 - **Scenarios:** SCN-A1-PHONE-01, SCN-A1-WORK-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-PHONE-01, FN-A1-TIME-01
-- **Concepts:** GR-MOD-VERB-01, GR-INF-COMPL-01, GR-PRO-PERS-01, GR-NUM-MONEY-01 (номер как числа)
+- **Concepts:** GR-MOD-VERB-01, GR-INF-COMPL-01, GR-PRO-PERS-01, GR-NUM-CARD-01 (номер телефона как последовательность цифр)
 - **LEX bundle:** LEX-A1-PHONE
 - **Evidence type:** task_performance (voicemail recording)
 - **Source anchor:**
@@ -526,7 +526,7 @@
 - **Completion criterion:** Запись голосового ≤ 30 с содержит: имя, просьбу перезвонить, контакт (номер **или** «ten sam numer») и опционально удобный интервал. Ассистент перезванивает по записанным данным успешно. Блок: нет просьбы о callback; номер искажён так, что звонок невозможен; только гудок без речи.
 - **Allowed support:** таймер; шаблон из 4 пустых полей
 - **Blocking errors:** отсутствует callback-просьба; неверный номер относительно задания
-- **L1 risks:** UKR: ERR-UKR-07, ERR-UKR-13; RUS: ERR-RUS-07, ERR-RUS-13; BEL: ERR-BEL-07
+- **L1 risks:** UKR: ERR-UKR-07; RUS: ERR-RUS-07; BEL: ERR-BEL-07; отдельной карточки диктовки номера телефона в ERR-банке нет
 - **Criticality:** Important
 
 ### FN-A1-REQUEST-01
@@ -549,7 +549,7 @@
 - **Completion criterion:** Учащийся формулирует просьбу с понятным **объектом помощи** и маркером вежливости (*proszę / czy możesz / czy może pan*). Сосед/коллега выполняет действие в роле. После успеха — благодарность (можно связкой с THANKS). Блок: приказ без смягчения в карточке «вежливый сосед»; просьба без содержания (*pomóż*); грубое *ty* незнакомцу.
 - **Allowed support:** 2 модели смягчения; карточка объекта
 - **Blocking errors:** оскорбительный императив; отсутствие объекта просьбы
-- **L1 risks:** UKR: ERR-UKR-18; RUS: ERR-RUS-18; BEL: ERR-BEL-18
+- **L1 risks:** UKR: ERR-UKR-18; RUS: ERR-RUS-18; BEL: ERR-BEL-18, ERR-BEL-24 (*proszę / калі ласка*)
 - **Criticality:** Important
 
 ### FN-A1-REFUSE-01
@@ -581,7 +581,7 @@
 - **Can-do:** Может поблагодарить и ответить на благодарность.
 - **Intent:** Закрыть обмен услугой/информацией этикетной парой.
 - **Modality/skill:** speaking
-- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-SHOP-01, SCN-A1-NEIGHBOR-01, SCN-A1-WORK-01
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-SHOP-01, SCN-A1-NEIGHBOR-01, SCN-A1-WORK-01, SCN-A1-FOOD-01, SCN-A1-DIRECTIONS-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-GREET-01
 - **Concepts:** PRAG-PAN-01, PHON-CORE-01
@@ -595,7 +595,7 @@
 - **Completion criterion:** В двух микроэпизодах учащийся (1) инициирует *dziękuję* после услуги, (2) отвечает на благодарность уместной формулой (*proszę / nie ma za co*). Блок: молчание после явной услуги в карточке; ответ *cześć* на *dziękuję*.
 - **Allowed support:** 4 формулы; сигнал «podziękuj»
 - **Blocking errors:** нет благодарности при обязательном слоте; нерелевантная формула
-- **L1 risks:** UKR/RUS/BEL: смешение *proszę* (просьба vs пожалуйста) — прагматика
+- **L1 risks:** BEL: ERR-BEL-24; UKR/RUS: смешение *proszę* (просьба vs ответ на благодарность) требует отдельных карточек
 - **Criticality:** Core
 
 ### FN-A1-APOLOGY-01
@@ -627,7 +627,7 @@
 - **Can-do:** Может согласиться и подтвердить договорённость.
 - **Intent:** Зафиксировать согласие на предложенное действие/время.
 - **Modality/skill:** speaking; writing (SMS)
-- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-WORK-01, SCN-A1-SMS-01, SCN-A1-MED-01
+- **Scenarios:** SCN-A1-PHONE-01, SCN-A1-WORK-01, SCN-A1-SMS-01, SCN-A1-MED-01, SCN-A1-SHOP-01
 - **Level:** A1
 - **Prerequisites (FN):** FN-A1-ASK-01
 - **Concepts:** GR-Q-YESNO-01, GR-NEG-01, GR-TNS-PRS-01
@@ -641,7 +641,7 @@
 - **Completion criterion:** В серии из 4 предложений ассистента учащийся корректно подтверждает **два** подходящих и отклоняет/уточняет **два** неподходящих (связка с REFUSE допустима). Минимум одно подтверждение — развёрнутое (*tak, o 15:00 / dobrze, jutro*). Блок: все ответы *tak* без различения; подтверждение неверного слота времени.
 - **Allowed support:** календарь; карточка «potwierdź tylko jeśli…»
 - **Blocking errors:** ложное подтверждение конфликтного слота; отсутствие реакции
-- **L1 risks:** UKR: ERR-UKR-02; RUS: ERR-RUS-02; BEL: ERR-BEL-02
+- **L1 risks:** UKR/RUS/BEL: кальки формул согласия и неоднозначное однословное подтверждение; подходящих отдельных ERR-карточек в текущем банке нет
 - **Criticality:** Important
 
 ### FN-A1-REPORT-01
@@ -664,7 +664,7 @@
 - **Completion criterion:** В одном из двух сценариев (карточка выбирается случайно) учащийся передаёт: (1) **что** случилось / кого касается, (2) **где** или **когда**, (3) контакт или просьбу о реакции. Ассистент классифицирует тип события верно (usterka vs nieobecność). Блок: нет субъекта события; описание без факта («źle» без объекта); путаница «ребёнок болен» vs «кран течёт» при явной карточке.
 - **Allowed support:** фото-стимул usterki или школьная карточка; 1 вопрос ассистента
 - **Blocking errors:** событие не идентифицировано; полный отказ от польских лексем проблемы
-- **L1 risks:** UKR: ERR-UKR-04; RUS: ERR-RUS-04; BEL: ERR-BEL-04
+- **L1 risks:** UKR/RUS/BEL: кальки безличного сообщения о неисправности/отсутствии; scenario-specific ERR-карточки ещё не валидированы
 - **Criticality:** Important
 
 ### FN-A1-TIME-01
@@ -673,10 +673,10 @@
 - **Can-do:** Может назвать дни, месяцы и часы встречи.
 - **Intent:** Задать временную координату события.
 - **Modality/skill:** speaking; listening
-- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-MED-01, SCN-A1-TICKET-01, SCN-A1-SMS-01, SCN-A1-WORK-01
+- **Scenarios:** SCN-A1-EVERYDAY-01, SCN-A1-MED-01, SCN-A1-TICKET-01, SCN-A1-SMS-01, SCN-A1-WORK-01, SCN-A1-SCHOOL-01
 - **Level:** A1
 - **Prerequisites (FN):** —
-- **Concepts:** GR-TIME-EXPR-01, GR-NUM-ORD-01, GR-NUM-MONEY-01, GR-CAS-GEN-02 (dni tygodnia patterns)
+- **Concepts:** GR-TIME-EXPR-01, GR-NUM-ORD-01, GR-NUM-CARD-01, GR-CAS-GEN-02 (dni tygodnia patterns)
 - **LEX bundle:** LEX-A1-TIME
 - **Evidence type:** task_performance
 - **Source anchor:**
@@ -687,7 +687,7 @@
 - **Completion criterion:** Учащийся в устной проверке корректно озвучивает **три** стимула: день недели, дату (день+месяц), час (в т.ч. *wpół do* **или** цифровой формат 24h — по карточке уровня). Слушатель отмечает совпадение с ключом. Допускается 1 переспрос. Блок: час и день перепутаны местами так, что встреча невозможна; месяц не назван при требовании даты.
 - **Allowed support:** календарь; аналоговые часы
 - **Blocking errors:** систематическая ошибка am/pm без 24h и без уточнения; отказ от дней недели
-- **L1 risks:** UKR: ERR-UKR-15; RUS: ERR-RUS-15; BEL: ERR-BEL-15
+- **L1 risks:** RUS: ERR-RUS-10 (дни недели с *w + Acc*); UKR/BEL: отдельные карточки выражения даты/часа ещё не валидированы
 - **Criticality:** Important
 
 ### FN-A1-FORM-01
@@ -707,7 +707,7 @@
   - PRODUCT ANALYSIS: HR / urząd анкеты
   - METHOD: поля imię, nazwisko, adres, telefon, PESEL(optional mask)
   - CEFR: filling in forms A1 — REQUIRES VERIFICATION
-- **Completion criterion:** На бланке из ≥5 обязательных полей учащийся заполняет все обязательные **разборчиво** латиницей польской орфографии имени/адреса; телефон — 9 цифр PL-формата или международный с `+`. Проверка: валидатор полей + сверка с ID-карточкой учащегося. Допускается 1 исправление по пометке. Блок: пустые обязательные поля; телефон < 9 цифр; адрес без улицы и номера.
+- **Completion criterion:** На бланке из ≥5 обязательных полей учащийся заполняет все обязательные **разборчиво**: имя и фамилию — как в документе/профиле, польский адрес — с нужными польскими диакритиками; телефон — 9 цифр PL-формата или международный с `+`. Проверка: валидатор полей + сверка с ID-карточкой учащегося. Допускается 1 исправление по пометке. Блок: пустые обязательные поля; телефон < 9 цифр; адрес без улицы и номера.
 - **Allowed support:** легенда полей PL→L1 UI; образец заполненного поля «telefon»
 - **Blocking errors:** незаполненный обязательный блок; заведомо чужие данные относительно профиля
 - **L1 risks:** UKR: ERR-UKR-01; RUS: ERR-RUS-02; BEL: ERR-BEL-01; диакритики ORTH-CORE-01
@@ -733,7 +733,7 @@
 - **Completion criterion:** По тексту ≤ 40 слов (вывеска **или** шаги устройства) учащийся выполняет целевое действие в интерфейсе задания (выбор кнопки / порядка шагов) **или** отмечает верный смысл из 4 опций. Успех без угадывания: объясняет одним словом/короткой репликой, *почему* выбран шаг (на L1 UI допустимо). Блок: выбор, противоречащий запрету на вывеске; пропуск обязательного шага «zapłać/odbierz».
 - **Allowed support:** словарь 3 слов; 1 уточняющий вопрос
 - **Blocking errors:** действие против текста; полный отказ читать
-- **L1 risks:** UKR: ERR-UKR-13; RUS: ERR-RUS-13; BEL: ERR-BEL-13; ложные друзья вывесок
+- **L1 risks:** UKR: ERR-UKR-13; RUS: ERR-RUS-14; BEL: ERR-BEL-14 — ложный друг *magazyn* в вывесках/навигации магазина
 - **Criticality:** Extension
 
 ### FN-A1-REG-01

@@ -1,4 +1,4 @@
-﻿# Лексические цели по уровням A1–B2
+# Лексические цели по уровням A1–B2
 
 **Статус:** Phase 2 curriculum draft — **все количественные диапазоны внутренние и требуют калибровки**.
 **Дата сверки внешних источников:** **2026-09-05**.
@@ -11,7 +11,7 @@
 | Утверждение | Статус | Источник / дата | Confidence |
 | --- | --- | --- | --- |
 | CEFR / Companion Volume задают **качественные** дескрипторы владения, а **не** официальные нормы «N слов на уровень» | Принято | [CEFR (Council of Europe)](https://www.coe.int/en/web/common-european-framework-reference-languages); Companion Volume | **высокий** |
-| Любые числа лемм / семей / MWU ниже | **Внутренние рабочие диапазоны PolishApp** | `PRODUCT ANALYSIS` / методическая гипотеза | **низкий→средний** до корпусной и classroom калибровки |
+| Любые числа лемм / семей / MWU ниже | **Внутренние рабочие диапазоны SŁOWARIUM** | `PRODUCT ANALYSIS` / методическая гипотеза | **низкий→средний** до корпусной и classroom калибровки |
 | Каталоги умений и грамматики госэкзамена | Ориентир покрытия тем, не готовый frequency list | [Dz.U. 2025 poz. 217](https://dziennikustaw.gov.pl/D2025000021701.pdf) załącznik nr 1 | **высокий** на существование стандарта |
 | Доступность сессий ≠ объём лексики | Раздельные поля | [struktura](https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/); [terminy 2026](https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/) — 2026-09-05 | **высокий** |
 
@@ -26,7 +26,7 @@
 
 ### 1.1 Первичные типы
 
-| Тип | Код | Определение для PolishApp | Пример (иллюстрация) |
+| Тип | Код | Определение для SŁOWARIUM | Пример (иллюстрация) |
 | --- | --- | --- | --- |
 | Лемма | `LT-LEMMA` | Словарная голова; для глагола — инфинитив; для N — mianownik sg | *mieszkanie*, *pracować* |
 | Словосемейство | `LT-FAMILY` | Набор этимологически/словообразовательно связанных лемм, учтённых как семья для прогресса | *pracować – praca – pracownik – pracowniczy* |
@@ -46,7 +46,7 @@
 
 1. Одна и та же лемма может быть `LV-RECP` на A1 и `LV-PROD` на A2.
 2. `LV-FORM` обязателен для высокочастотных N/Adj/V с богатой fleksją уже на A1 (*jestem/jesteś*, *w sklepie*).
-3. Видовая пара = две леммы + связь `ASPECT-PAIR`; на A1 часто `LV-RECP`/`LT-LEMMA` без свободного выбора вида (`GR-ASPECT-LEX`).
+3. Видовая пара = две леммы + связь `ASPECT-PAIR`; на A1 часто `LV-RECP`/`LT-LEMMA` без свободного выбора вида (`GR-ASP-LEX-01`).
 4. Rekcja хранится **на лемме/COLL**, не «в грамматике вообще» (см. PED-002).
 
 ---
@@ -83,7 +83,7 @@
 
 1. **Сценарий > частота alone:** приоритет `DOM-WORK, HOUSING, URZAD, MED, SCHOOL, BANK, SHOP, TRANS, NEIGHBOR, PHONE, COMPLAINT, TV, FORMAL`.
 2. **Частота:** ориентиры внешних frequency lists допустимы как **вход сигнала**, не как копируемый словник; финальный список — оригинальная подборка автора (`CNT-*`).
-3. **Rekcja обязательна** для V/Prep с несвободным управлением до публикации (`GR-REKCJA`).
+3. **Rekcja обязательна** для V/Prep с несвободным управлением до публикации (`GR-REK-VERB-01` / `GR-REK-PREP-01` и их расширения).
 4. **Видовые пары:** помечать связь; на A1 не требовать свободного выбора.
 5. **Регистр:** каждая FIX/COLL с пометкой `reg=official|neutral|colloquial|taboo-avoid`.
 6. **L1 false friends:** отдельный контур `FF-UKR|RUS|BEL` (см. §8); не смешивать три банка.
@@ -262,7 +262,7 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Aspect notes:** Аспект не exit: *zamieszkać* остаётся RECP; продуктивно *mieszkać / jestem*.
 - **Register:** neutral + mild formal при первом контакте; *ty* только после сигнала собеседника.
 - **Related FN:** FN-A1-IDENTIFY-01, FN-A1-IDENTIFY-02
-- **Related SCN:** SCN-A1-EVERYDAY-01, SCN-A1-FORM-01, SCN-A1-NEIGHBOR-01
+- **Related SCN:** SCN-A1-EVERYDAY-01, SCN-A1-FORM-01, SCN-A1-NEIGHBOR-01, SCN-A1-WRITE-SELF-01
 - **Selection source:** PRODUCT ANALYSIS (первая аудитория) + CEFR A1 self-identification (качественно; REQUIRES VERIFICATION scale row)
 - **L1 risks — UKR:** Калька *У мене на ім'я* → *\*U mnie na imię*; путаница *język* / *мова*.
 - **L1 risks — RUS:** *Меня зовут* → *\*Mienia zowut* / пропуск *się*; *из Украины* → *\*z Ukrainy* ok, но *\*ja z Ukraina* без падежа.
@@ -371,7 +371,7 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Minimal lemmas (PROD/RECP mix):** *cena*, *kosztować*, *złoty*, *grosz*, *reszta*, *gotówka*, *karta*, *płatność*, *rachunek*, *paragon*, *tanio*, *drogo*, *kwota*, *zapłacić*, *płacić*
 - **MWU:** *ile to kosztuje?*, *płacę kartą*, *poproszę o paragon*, *to będzie… złotych*
 - **FIX:** *Ile płacę?*, *Czy mogę zapłacić kartą?*
-- **COLL:** *kosztować + Acc/Num*, *płacić + Ins* (*kartą*), *prosić o rachunek*
+- **COLL:** *kosztować + wyrażenie ceny*, *płacić + Ins* (*kartą*), *prosić o rachunek*
 - **Rekcja (bundle-specific):** *kosztować* + цена; *płacić kartą/gotówką* (Ins); Gen после 5+ (*pięć złotych*) — GR-NUM-CARD-05.
 - **Aspect notes:** *zapłacić* vs *płacić* — скриптовый выбор (касса = dok часто).
 - **Register:** neutral service; *paragon fiskalny* RECP official.
@@ -426,9 +426,9 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Ownership:** productive core (boli, głowa, gorączka, wizyta); receptive (recepta details, NFZ jargon)
 - **Thematic subgroups:** части тела; симптомы; запись; срочность
 - **Minimal lemmas (PROD/RECP mix):** *boli*, *ból*, *głowa*, *gardło*, *brzuch*, *gorączka*, *kaszel*, *lekarz*, *przychodnia*, *wizyta*, *recepta*, *apteka*, *pilne*, *chory*, *temperatura*
-- **MWU:** *boli mnie + Nom/Acc body*, *mam gorączkę*, *chcę się zapisać*, *potrzebuję lekarza*
+- **MWU:** *boli mnie + Nom (część ciała)*, *mam gorączkę*, *chcę się zapisać*, *potrzebuję lekarza*
 - **FIX:** *Proszę o wizytę.*, *To pilne.*
-- **COLL:** *boleć + Acc experiencer* (*boli mnie głowa*), *zapisać się do + Gen*
+- **COLL:** *boleć + Acc experiencer + Nom stimulus* (*boli mnie głowa*), *zapisać się do + Gen*
 - **Rekcja (bundle-specific):** *boli mnie głowa*; *zapisać się do lekarza*; *iść do przychodni* (Gen).
 - **Aspect notes:** *zachorować* RECP; продуктивно состояния (*boli / mam*).
 - **Register:** neutral→official в rejestracji; emergency — short urgent FIX.
@@ -446,9 +446,9 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Thematic subgroups:** просьба о помощи; предложение помощи; экстренный вызов (минимум)
 - **Minimal lemmas (PROD/RECP mix):** *pomóc*, *pomoc*, *potrzebować*, *wesprzeć*, *problem*, *trudność*, *ratunek*, *pogotowie*, *telefon*, *numer*, *alarmowy*, *sąsiad*, *kolega*, *prośba*
 - **MWU:** *proszę o pomoc*, *czy może pan / pani pomóc?*, *potrzebuję pomocy*, *możesz mi pomóc?* (ty)
-- **FIX:** *Pomocy!*, *Proszę zadzwonić na pogotowie.*
+- **FIX:** *Pomocy!*, *Proszę zadzwonić pod numer 112.*, *Proszę wezwać pogotowie.*
 - **COLL:** *pomóc + Dat*, *prosić o pomoc*, *potrzebować + Gen*
-- **Rekcja (bundle-specific):** *pomóc komuś* (Dat); *potrzebować pomocy* (Gen); *zadzwonić na + Acc* (pogotowie).
+- **Rekcja (bundle-specific):** *pomóc komuś* (Dat); *potrzebować pomocy* (Gen); *zadzwonić pod numer 112*; *wezwać pogotowie* (Acc).
 - **Aspect notes:** *pomóc* (dok) vs *pomagać* — просьба часто dok; процесс — niedok.
 - **Register:** official soft с незнакомцем; *ty* с коллегой/соседом после GREET.
 - **Related FN:** FN-A1-HELP-01, FN-A1-REQUEST-01, FN-A1-PHONE-01
@@ -527,8 +527,8 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Rekcja (bundle-specific):** *dziękuję panu / pani* (Dat formula); *proszę o chwilę*; modal *nie mogę + Inf*.
 - **Aspect notes:** Модалки без видового выбора; *podziękować* RECP.
 - **Register:** neutral→official; *spoko* colloquial avoid в службе.
-- **Related FN:** FN-A1-THANKS-01, FN-A1-REQUEST-01, FN-A1-REFUSE-01
-- **Related SCN:** SCN-A1-EVERYDAY-01, SCN-A1-SHOP-01, SCN-A1-WORK-01, SCN-A1-URZAD-01
+- **Related FN:** FN-A1-THANKS-01, FN-A1-REQUEST-01, FN-A1-REFUSE-01, FN-A1-CONFIRM-01
+- **Related SCN:** SCN-A1-EVERYDAY-01, SCN-A1-SHOP-01, SCN-A1-WORK-01, SCN-A1-URZAD-01, SCN-A1-SMS-01, SCN-A1-NEIGHBOR-01
 - **Selection source:** PED-010 politeness; PRODUCT ANALYSIS service scripts
 - **L1 risks — UKR:** *Дякую* → забывают Dat; *будь ласка* ↔ *proszę* распределение.
 - **L1 risks — RUS:** *пожалуйста* на всё; *не могу* → *\*nie mogu*; *спасибо большое* calque order.
@@ -547,7 +547,7 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Aspect notes:** *spóźnić się* (dok) типично для факта опоздания; *spóźniać się* — Habit RECP.
 - **Register:** neutral→official; искренность важнее длинных смягчений A2.
 - **Related FN:** FN-A1-APOLOGY-01
-- **Related SCN:** SCN-A1-WORK-01, SCN-A1-SCHOOL-01, SCN-A1-NEIGHBOR-01, SCN-A1-PHONE-01
+- **Related SCN:** SCN-A1-WORK-01, SCN-A1-SCHOOL-01, SCN-A1-NEIGHBOR-01, SCN-A1-PHONE-01, SCN-A1-SMS-01
 - **Selection source:** PRODUCT ANALYSIS apology speech act; contrast vs COMPLAINT lexicon (anti-mix)
 - **L1 risks — UKR:** *Вибачте* → *\*Wybacz*; *за запізнення* падеж; путают с *reklamacja*.
 - **L1 risks — RUS:** *извините за* → Gen/Acc; *я опоздал* без *się*; не тащить *жалоба*.
@@ -566,7 +566,7 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Aspect notes:** Не центрально; *umówić się* dok в записи.
 - **Register:** neutral; calendar SMS — short official-neutral.
 - **Related FN:** FN-A1-TIME-01, FN-A1-APPOINT-01, FN-A1-NARRATE-01
-- **Related SCN:** SCN-A1-EVERYDAY-01, SCN-A1-MED-01, SCN-A1-WORK-01, SCN-A1-SCHOOL-01
+- **Related SCN:** SCN-A1-EVERYDAY-01, SCN-A1-MED-01, SCN-A1-WORK-01, SCN-A1-SCHOOL-01, SCN-A1-SMS-01
 - **Selection source:** PRODUCT ANALYSIS scheduling; Katalog czas (REQUIRES VERIFICATION)
 - **L1 risks — UKR:** *о восьмій* близко; *в понеділок* → *\*w poniedziałekok*; 24h vs 12h.
 - **L1 risks — RUS:** *в понедельник* Acc/Prep; *в 8 часов* → *\*w 8 godzin* vs *o ósmej*.
@@ -585,7 +585,7 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Aspect notes:** RECP verbs на знаках; продукция — уточняющие вопросы.
 - **Register:** public notices = official short; learner questions neutral.
 - **Related FN:** FN-A1-READ-01, FN-A1-ASK-01
-- **Related SCN:** SCN-A1-HOUSING-01, SCN-A1-SHOP-01, SCN-A1-URZAD-01
+- **Related SCN:** SCN-A1-HOUSING-01, SCN-A1-SHOP-01, SCN-A1-URZAD-01, SCN-A1-TICKET-01
 - **Selection source:** PRODUCT ANALYSIS environmental print; FN-A1-READ-01 frame
 - **L1 risks — UKR:** Кириллические вывески привычка → пропускают диакритику PL; *зачинено* calque.
 - **L1 risks — RUS:** *закрыто/открыто* → *\*zakryto*; *вход* → *\*wchod*.
@@ -642,7 +642,7 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 - **Aspect notes:** Habitual niedok (*wstaję, idę*); dok точечные события RECP.
 - **Register:** neutral narrative; classroom Extension criticality ok.
 - **Related FN:** FN-A1-NARRATE-01, FN-A1-TIME-01, FN-A1-LOCATE-01
-- **Related SCN:** SCN-A1-EVERYDAY-01, SCN-A1-WORK-01
+- **Related SCN:** SCN-A1-EVERYDAY-01, SCN-A1-WORK-01, SCN-A1-WRITE-SELF-01
 - **Selection source:** CEFR A1 simple daily routine (qualitative; REQUIRES VERIFICATION) + PRODUCT classroom genre
 - **L1 risks — UKR:** *Я встаю* ok; *іду на роботу* → *\*idę na pracę* vs *do pracy*.
 - **L1 risks — RUS:** *иду на работу* Prep; *потом* → *\*potom*; aspect mix.
@@ -653,6 +653,19 @@ IDENTITY, TIME, FOOD, SHOP-BASIC, MONEY-CASH, TRANS-BASIC, WORK-BASIC, HOUSING-B
 Ниже — **A2+** (и прочие non-A1) пакеты до семантической миграции.
 A1 tautological / DEFAULT micro-packs удалены из этого списка после введения `LEX-A1-*`.
 **Не использовать** legacy A1 имена в новых цепочках SCN→FN→LEX.
+
+### LEX-HOUSING-FIX
+- **Purpose:** Legacy A2 scope для сообщения о неисправности жилья и согласования визита сервиса.
+- **First use level:** A2
+- **Ownership:** productive core + receptive shell
+- **Thematic subgroups:** usterki; контакт с владельцем; визит сервиса
+- **Required MWU (examples):** *zgłosić usterkę*, *umówić wizytę serwisu*, *nie działa ogrzewanie*
+- **Required FIX (examples):** *W mieszkaniu nie działa…*, *Kiedy może przyjść serwisant?*
+- **Required COLL (examples):** *zgłosić usterkę*, *naprawić ogrzewanie*, *uzgodnić termin*
+- **Related FN:** FN-A2-005
+- **Size orientation:** 15–40 lemmas + 5–12 MWU/FIX (`CALIBRATION=required`; не норма CEFR)
+- **Rekcja / aspect / register:** *zgłosić + Acc*; *umówić się na + Acc*; формальный T–V в контакте с владельцем/сервисом.
+- **Selection source:** сохранено для legacy A2 до семантической миграции; A1 successor — `LEX-A1-HOUSING`; exact Katalog A/B cell `REQUIRES VERIFICATION`.
 
 ### LEX-ADDRESS-FORMS
 - **Purpose:** Лексический scope для домена `URZAD` / сценариев `ADDRESS-FORMS`.

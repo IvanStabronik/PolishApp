@@ -1,4 +1,4 @@
-﻿# Phase 2 — отчёт по семантической модели A1
+# Phase 2 — отчёт по семантической модели A1
 
 **Ветка:** `docs/phase-2-integrity-fix`
 **Базовый коммит:** `10ed7f340491a817de338970219ca0591dcc1ec8`
@@ -128,10 +128,30 @@ A2–B2 FN остаются в `functional-inventory.md` под баннером
 - нормализация completion criteria + топ повторов;
 - распределение FN по числу SCN; SCN без FN / FN без SCN;
 - LEX-A1 без содержательных MWU/FIX/COLL;
+- точное покрытие миграции `FN-A1-001…042` и разрешимость каждого нового target ID;
+- односторонний контракт `SCN required FN → FN.Scenarios`, отсутствие duplicate/unknown FN и LEX;
+- точное совпадение проекции FN/LEX между `scenario-inventory` и `a1-traceability`;
+- согласованность `FN → LEX.Related FN` и `SCN → LEX.Related SCN`;
+- разрешимость concept-ID в L1 error bank и единый набор ERR в FN / SCN trace / used-register;
+- отсутствие UTF-8 BOM в проверяемых Markdown-файлах;
 - ненулевой exit при критических нарушениях;
 - явная оговорка: OK ≠ педагогическая корректность.
 
 Результаты конкретного прогона фиксируются в финальном ответе коммита / CI-логе.
+
+### 9.1. Независимая проверка после коммита `7e76368`
+
+Проверка выявила и исправила дефекты, которые прежний validator пропускал:
+
+- 21 обязательная связь `SCN → FN` не была отражена в поле `FN.Scenarios`;
+- почти все строки компактного A1 trace расходились с `scenario-inventory` по FN и/или LEX;
+- два дублированных LEX в сценариях;
+- `LEX-HOUSING-FIX` использовался legacy A2, но не был определён;
+- число EXM в migration summary было 4 вместо фактических 5;
+- 29 несуществующих concept-ID оставались в `l1-error-model.md`;
+- ряд ERR был связан по номеру, а не по смыслу (например health/time → unrelated false friends/orthography);
+- исправлены `boli mnie` (Acc experiencer + Nom stimulus), emergency FIX и два ошибочных `GR-NUM-MONEY-01` вне денежного контекста;
+- старые A1-строки `curriculum-traceability.md` заменены указателем на канонический trace и карту миграции.
 
 ---
 
@@ -142,7 +162,8 @@ A2–B2 FN остаются в `functional-inventory.md` под баннером
 3. Калибровка порогов Important / lexical size / mastery %.
 4. Нужен ли системный `GR-MOD-IMP-01` на A1 vs formulaic IMP.
 5. Семантическая миграция A2–B2 (включая очистку legacy DEFAULT LEX).
-6. Обновление `curriculum-traceability.md` A1-строк под новые ID (рабочий эталон A1 — `docs/curriculum/a1-traceability.md`).
+
+Старые A1-строки `curriculum-traceability.md` уже заменены указателем на канонический A1 trace и карту миграции; это больше не открытый вопрос.
 
 ---
 

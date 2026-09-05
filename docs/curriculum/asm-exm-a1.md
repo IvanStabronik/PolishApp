@@ -38,7 +38,7 @@
 
 ### ASM-A1-DIAG-ORAL-01 — Диагностический устный зонд A1
 - **Тип:** diagnostic assessment
-- **Опирается на FN:** IDENTIFY-01, GREET-01, REPAIR-01, ASK-01, TRANS-01 (выборка)
+- **Опирается на FN:** FN-A1-IDENTIFY-01, FN-A1-GREET-01, FN-A1-REPAIR-01, FN-A1-ASK-01, FN-A1-TRANS-01 (выборка)
 - **Что измеряет:** стартовый профиль пробелов по Core FN, не vanity-балл.
 - **Критерий успеха процедуры:** Отчёт содержит статусы по затронутым FN/концептам и L1-риски; нет единственного процента как главного вывода.
 - **Связь требованиям:** ASM-001 (пакет требований) — методическая реализация на уровне A1.
@@ -70,29 +70,30 @@
 - **session_availability:** not_announced (снимок 2026-09-05)
 - **Содержание:** Ориентиры модулей słuchanie / czytanie / pisanie / mówienie по [struktura egzaminu](https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/) и Dz.U. 2025 poz. 217.
 - **Связь с продуктом:** Карта покрытия FN/SCN → модули; без имитации «официального балла».
-- **REQUIRES VERIFICATION:** точные веса/пороги в актуальном распоряжении.
+- **Проверенные параметры:** письменная часть — не более 120 минут; устная — не более 10 минут; порог — не менее 50% баллов отдельно за письменную и устную части. Источник: официальная таблица структуры экзамена, проверено 2026-09-05.
 
 ### EXM-A1-LISTEN-01 — Ориентир słuchanie A1
 - **Назначение:** Сопоставить учебные аудирования (PHONE, касса, запись) с типами экзаменационных аудитивных заданий.
-- **Связанные FN (пример):** PHONE-01, REPAIR-01, TIME-01, QUANT-01
+- **Связанные FN (пример):** FN-A1-PHONE-01, FN-A1-REPAIR-01, FN-A1-TIME-01, FN-A1-QUANT-01
 - **session_availability:** not_announced
 - **Примечание:** Внутренние listening tasks ≠ сертификат.
 
 ### EXM-A1-READ-01 — Ориентир czytanie A1
 - **Назначение:** Короткие утилитарные тексты (вывески, инструкции) как подготовка к чтению A1.
 - **Связанные FN:** FN-A1-READ-01
-- **Связанные SCN:** TICKET, SHOP, MED, HOUSING
+- **Связанные SCN:** SCN-A1-TICKET-01, SCN-A1-SHOP-01, SCN-A1-MED-01, SCN-A1-HOUSING-01
 - **session_availability:** not_announced
 
 ### EXM-A1-WRITE-01 — Ориентир pisanie A1
 - **Назначение:** Анкета + короткий связный текст о себе как мост к письменному модулю.
-- **Связанные ASM:** ASM-A1-WRITE-SELF-01, FN-A1-FORM-01 / SCN-A1-FORM-01
+- **Связанные ASM:** ASM-A1-WRITE-SELF-01
+- **Связанные FN / SCN:** FN-A1-FORM-01 / SCN-A1-FORM-01
 - **session_availability:** not_announced
 - **Примечание:** Не выдавать внутренний текст за экзаменационную работу.
 
 ### EXM-A1-SPEAK-01 — Ориентир mówienie A1
 - **Назначение:** Устные сценарии IDENTIFY / TRANS / APPOINT / URZAD как покрытие говорения.
-- **Связанные FN:** IDENTIFY-*, TRANS-01, PURPOSE-01, APPOINT-01, GREET-01
+- **Связанные FN:** FN-A1-IDENTIFY-01, FN-A1-IDENTIFY-02, FN-A1-TRANS-01, FN-A1-PURPOSE-01, FN-A1-APPOINT-01, FN-A1-GREET-01
 - **session_availability:** not_announced
 
 ---

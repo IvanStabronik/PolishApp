@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate PolishApp Phase 2 curriculum structural integrity + A1 semantic-model antipatterns.
+"""Validate SŁOWARIUM Phase 2 curriculum structural integrity + A1 semantic-model antipatterns.
 
 Usage:
   python scripts/validate-curriculum.py
@@ -340,6 +340,9 @@ def main() -> int:
     for p in required_doc:
         if not p.exists():
             v.err(str(p.relative_to(ROOT)), "missing required A1 model file")
+    for p in [*(CUR / f for f in required_cur), *required_doc]:
+        if p.exists() and p.read_bytes().startswith(b"\xef\xbb\xbf"):
+            v.err(str(p.relative_to(ROOT)), "UTF-8 BOM is not allowed")
     if v.errors:
         print("\n".join(v.errors))
         return 1
@@ -361,6 +364,7 @@ def main() -> int:
     asm_text = read(DOC_CUR / "asm-exm-a1.md")
     a1_tr = read(DOC_CUR / "a1-traceability.md")
     entity_text = read(DOC_CUR / "entity-definitions.md")
+    migration_text = read(DOC_CUR / "functional-migration-a1.md")
 
     concepts = parse_lang_concepts(gram, ext)
     grammar_ids = [c for c in concepts if c.startswith("GR-")]
@@ -480,6 +484,64 @@ def main() -> int:
     exm_ids = parse_entities(asm_text, "EXM")
     if len(scn_ids) != len(set(scn_ids)):
         v.err("scenario-inventory.md", "duplicate SCN ids")
+
+    # Migration manifest must cover the entire old A1 range exactly once and
+    # may only point to resolvable canonical entities.
+    migrated_old_ids = re.findall(r"^### (FN-A1-\d{3})\b", migration_text, re.M)
+    expected_old_ids = {f"FN-A1-{n:03d}" for n in range(1, 43)}
+    if len(migrated_old_ids) != len(set(migrated_old_ids)):
+        v.err("docs/curriculum/functional-migration-a1.md", "duplicate old A1 migration headings")
+    if set(migrated_old_ids) != expected_old_ids:
+        missing = sorted(expected_old_ids - set(migrated_old_ids))
+        extra = sorted(set(migrated_old_ids) - expected_old_ids)
+        v.err(
+            "docs/curriculum/functional-migration-a1.md",
+            f"migration range mismatch; missing={missing}, extra={extra}",
+        )
+    canonical_entity_ids = {
+        *(f["id"] for f in a1_fns),
+        *scn_ids,
+        *asm_ids,
+        *exm_ids,
+    }
+    for old_id in migrated_old_ids:
+        block_m = re.search(
+            rf"^### {re.escape(old_id)}\b\n([\s\S]*?)(?=^### |\Z)",
+            migration_text,
+            re.M,
+        )
+        if not block_m:
+            continue
+        target_line = _field(block_m.group(1), "Новые ID")
+        if not target_line:
+            v.err(
+                "docs/curriculum/functional-migration-a1.md",
+                "missing Новые ID",
+                old_id,
+            )
+            continue
+        targets = re.findall(r"(?:FN|SCN|ASM|EXM)-A1-[A-Z][A-Z0-9-]*-\d{2}", target_line)
+        if not targets:
+            v.err(
+                "docs/curriculum/functional-migration-a1.md",
+                "Новые ID has no canonical target",
+                old_id,
+            )
+        for target in targets:
+            if target not in canonical_entity_ids:
+                v.err(
+                    "docs/curriculum/functional-migration-a1.md",
+                    f"unresolvable migration target {target}",
+                    old_id,
+                )
+    exm_summary = re.search(
+        r"\| Элементов EXM[^|]*\|\s*(\d+)\s*\|", migration_text
+    )
+    if not exm_summary or int(exm_summary.group(1)) != len(exm_ids):
+        v.err(
+            "docs/curriculum/functional-migration-a1.md",
+            f"EXM summary mismatch; actual={len(exm_ids)}",
+        )
 
     # Distinguish entity namespaces in inventories
     for bad_prefix, where, text in (
@@ -628,7 +690,9 @@ def main() -> int:
                         fr["id"],
                     )
 
-    # SCN inventory fields (spot-check required keys)
+    # SCN inventory fields and references
+    scn_required_fns: dict[str, list[str]] = {}
+    scn_required_lex: dict[str, list[str]] = {}
     for sid in scn_ids:
         block_m = re.search(
             rf"^### {re.escape(sid)}[^\n]*\n([\s\S]*?)(?=^### |\Z)",
@@ -662,6 +726,24 @@ def main() -> int:
                 if any(f"**{a}:**" in block or f"**{a}**" in block for a in alt):
                     continue
                 v.err("scenario-inventory.md", f"missing {field}", sid)
+        fn_field = _field(block, "Необходимые FN")
+        lex_field = _field(block, "Необходимый LEX")
+        concept_field = _field(block, "Связанные концепты")
+        frefs = re.findall(r"FN-A1-[A-Z]+-\d{2}", fn_field)
+        lrefs = re.findall(r"LEX-A1-[A-Z0-9-]+", lex_field)
+        crefs = re.findall(r"(?:GR|PHON|ORTH|PRAG)-[A-Z0-9-]+", concept_field)
+        scn_required_fns[sid] = frefs
+        scn_required_lex[sid] = lrefs
+        if len(frefs) != len(set(frefs)):
+            v.err("scenario-inventory.md", "duplicate FN reference", sid)
+        if len(lrefs) != len(set(lrefs)):
+            v.err("scenario-inventory.md", "duplicate LEX reference", sid)
+        for fid in frefs:
+            if fid not in fn_ids:
+                v.err("scenario-inventory.md", f"unknown required FN {fid}", sid)
+        for cid in crefs:
+            if cid not in concepts:
+                v.err("scenario-inventory.md", f"unknown concept {cid}", sid)
 
     # FN ↔ SCN linkage
     fn_to_scn: dict[str, set[str]] = {f["id"]: set(f["scenarios"]) for f in a1_fns}
@@ -676,6 +758,16 @@ def main() -> int:
                 )
             else:
                 scn_to_fn[s].add(fr["id"])
+    # Every FN declared as necessary by a scenario must declare that scenario.
+    # The reverse may be broader: an FN can be applicable but optional there.
+    for sid, frefs in scn_required_fns.items():
+        for fid in frefs:
+            if fid in fn_to_scn and sid not in fn_to_scn[fid]:
+                v.err(
+                    "functional-inventory.md",
+                    f"required by {sid}, but scenario absent from FN Scenarios",
+                    fid,
+                )
     # also harvest SCN → FN from scenario file
     for sid in scn_ids:
         block_m = re.search(
@@ -706,6 +798,44 @@ def main() -> int:
             sid,
         )
 
+    # The compact A1 trace table is a projection of the SCN inventory, not a
+    # second independently edited source of truth.
+    trace_rows: dict[str, tuple[set[str], set[str]]] = {}
+    for line in a1_tr.splitlines():
+        m = re.match(r"^\|\s*`(SCN-A1-[A-Z0-9-]+)`\s*\|", line)
+        if not m:
+            continue
+        cols = [c.strip() for c in line.strip("|").split("|")]
+        sid = m.group(1)
+        if sid in trace_rows:
+            v.err("docs/curriculum/a1-traceability.md", "duplicate SCN row", sid)
+            continue
+        trace_rows[sid] = (
+            set(re.findall(r"FN-A1-[A-Z]+-\d{2}", cols[1])),
+            set(re.findall(r"LEX-A1-[A-Z0-9-]+", cols[2])),
+        )
+    if set(trace_rows) != set(scn_ids):
+        v.err(
+            "docs/curriculum/a1-traceability.md",
+            "SCN row set differs from scenario inventory",
+        )
+    for sid in set(trace_rows) & set(scn_ids):
+        trace_fns, trace_lex = trace_rows[sid]
+        required_fns = set(scn_required_fns[sid])
+        required_lex = set(scn_required_lex[sid])
+        if trace_fns != required_fns:
+            v.err(
+                "docs/curriculum/a1-traceability.md",
+                f"FN projection mismatch; missing={sorted(required_fns - trace_fns)}, extra={sorted(trace_fns - required_fns)}",
+                sid,
+            )
+        if trace_lex != required_lex:
+            v.err(
+                "docs/curriculum/a1-traceability.md",
+                f"LEX projection mismatch; missing={sorted(required_lex - trace_lex)}, extra={sorted(trace_lex - required_lex)}",
+                sid,
+            )
+
     # mass-identical completion (raw)
     for text, n in completions_raw.items():
         if text and n >= 10:
@@ -730,6 +860,10 @@ def main() -> int:
     bundles = parse_lex_bundles(lex_text)
     a1_bundles = {k: b for k, b in bundles.items() if k.startswith("LEX-A1-")}
     used_lex = {x for fr in fns for x in fr["lex"]}
+    for sid, lrefs in scn_required_lex.items():
+        for lx in lrefs:
+            if lx not in bundles:
+                v.err("scenario-inventory.md", f"unknown required LEX {lx}", sid)
     for lx in used_lex:
         if lx not in bundles:
             # A1 must resolve; legacy A2+ warn-level for missing optional packs
@@ -813,6 +947,18 @@ def main() -> int:
                         "APOLOGY missing przepraszam",
                         lx,
                     )
+            related_fns = set(
+                re.findall(r"FN-A1-[A-Z]+-\d{2}", _field(block, "Related FN"))
+            )
+            related_scns = set(
+                re.findall(r"SCN-A1-[A-Z0-9-]+", _field(block, "Related SCN"))
+            )
+            for fid in related_fns:
+                if fid not in fn_ids:
+                    v.err("lexical-targets.md", f"unknown Related FN {fid}", lx)
+            for sid in related_scns:
+                if sid not in scn_ids:
+                    v.err("lexical-targets.md", f"unknown Related SCN {sid}", lx)
         else:
             for field in (
                 "Purpose",
@@ -831,6 +977,35 @@ def main() -> int:
                         continue
                     # legacy soft
                     pass
+
+    for fr in a1_fns:
+        for lx in fr["lex"]:
+            related_fns = set(
+                re.findall(
+                    r"FN-A1-[A-Z]+-\d{2}",
+                    _field(bundles.get(lx, ""), "Related FN"),
+                )
+            )
+            if fr["id"] not in related_fns:
+                v.err(
+                    "lexical-targets.md",
+                    f"bundle used by FN but Related FN omits {fr['id']}",
+                    lx,
+                )
+    for sid, lrefs in scn_required_lex.items():
+        for lx in lrefs:
+            related_scns = set(
+                re.findall(
+                    r"SCN-A1-[A-Z0-9-]+",
+                    _field(bundles.get(lx, ""), "Related SCN"),
+                )
+            )
+            if sid not in related_scns:
+                v.err(
+                    "lexical-targets.md",
+                    f"bundle required by SCN but Related SCN omits {sid}",
+                    lx,
+                )
 
     # A1 Required concept coverage via a1-traceability
     required_a1 = [
@@ -894,6 +1069,11 @@ def main() -> int:
                         )
 
     # Traceability legacy A2+ exact FN rows
+    if re.search(r"\|\s*A1\s*\|\s*`FN-A1-\d{3}`\s*\|", tr_text):
+        v.err(
+            "curriculum-traceability.md",
+            "stale numeric A1 rows must be replaced by canonical A1 trace",
+        )
     for fr in legacy_fns:
         if fr["level"] == "A1":
             continue
@@ -924,6 +1104,56 @@ def main() -> int:
         n = len(re.findall(rf"^### ({prefix}\d{{2}})\b", l1_text, re.M))
         if n < 20:
             v.err("l1-error-model.md", f"{lang} has {n} cards, need ≥20")
+
+    for cid in set(
+        re.findall(
+            r"(?<![A-Z0-9-])(?:GR|PHON|ORTH|PRAG)-[A-Z0-9-]+", l1_text
+        )
+    ):
+        if cid not in concepts:
+            v.err("l1-error-model.md", f"unresolvable concept {cid}")
+
+    err_ids = set(re.findall(r"^### (ERR-(?:UKR|RUS|BEL)-\d{2})\b", l1_text, re.M))
+    fn_a1_err = {
+        eid
+        for fr in a1_fns
+        for eid in re.findall(r"ERR-(?:UKR|RUS|BEL)-\d{2}", fr["l1"])
+    }
+    scn_trace_part = a1_tr.split("## Required A1 concepts", 1)[0]
+    scn_trace_err = set(
+        re.findall(r"ERR-(?:UKR|RUS|BEL)-\d{2}", scn_trace_part)
+    )
+    used_part = ""
+    if "## ERR used in canonical A1 chains" in a1_tr:
+        used_part = a1_tr.split("## ERR used in canonical A1 chains", 1)[1]
+        used_part = used_part.split("## ERR not selected", 1)[0]
+    used_section_err = set(
+        re.findall(r"ERR-(?:UKR|RUS|BEL)-\d{2}", used_part)
+    )
+    for eid in fn_a1_err | scn_trace_err | used_section_err:
+        if eid not in err_ids:
+            v.err("docs/curriculum/a1-traceability.md", f"unknown ERR {eid}")
+    if fn_a1_err != scn_trace_err or fn_a1_err != used_section_err:
+        v.err(
+            "docs/curriculum/a1-traceability.md",
+            "ERR sets differ between canonical FN, SCN trace and ERR-used register",
+        )
+    used_summary = re.search(
+        r"\| ERR used in A1 chains \| (\d+) \|", a1_tr
+    )
+    unused_summary = re.search(
+        r"\| ERR unused \(bank, with grouped reasons\) \| (\d+) \|", a1_tr
+    )
+    if not used_summary or int(used_summary.group(1)) != len(fn_a1_err):
+        v.err(
+            "docs/curriculum/a1-traceability.md",
+            f"ERR used summary mismatch; actual={len(fn_a1_err)}",
+        )
+    if not unused_summary or int(unused_summary.group(1)) != len(err_ids - fn_a1_err):
+        v.err(
+            "docs/curriculum/a1-traceability.md",
+            f"ERR unused summary mismatch; actual={len(err_ids - fn_a1_err)}",
+        )
 
     exam = (REQ / "07-exam-preparation-requirements.md").read_text(encoding="utf-8")
     if "standard_status" not in exam or "session_availability" not in exam:

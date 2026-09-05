@@ -5,7 +5,7 @@
 **Дата проверки внешних URL в этом файле:** 2026-09-05.  
 **Язык документа:** русский (термины CEFR / JPJO / exam — EN/PL по необходимости).
 
-Этот документ задаёт, **на чём** строится педагогическая архитектура PolishApp и **как** запрещать галлюцинации, фиктивные ссылки и ложные «нормы CEFR». Он не является syllabus, ERD или планом разработки.
+Этот документ задаёт, **на чём** строится педагогическая архитектура SŁOWARIUM и **как** запрещать галлюцинации, фиктивные ссылки и ложные «нормы CEFR». Он не является syllabus, ERD или планом разработки.
 
 Связанные артефакты: `methodology.md`, `review-checklist.md`, inventories Phase 2, пакет `docs/requirements/` (00–15).
 
@@ -157,7 +157,7 @@ Confidence: High
 
 ### 4.1 Council of Europe / CEFR
 
-| ID | Источник | URL | Раздел | Confidence | Использование в PolishApp |
+| ID | Источник | URL | Раздел | Confidence | Использование в SŁOWARIUM |
 | --- | --- | --- | --- | --- | --- |
 | SRC-CEFR-HUB | CEFR portal (CoE) | https://www.coe.int/en/web/common-european-framework-reference-languages | обзор рамки | High | Входная точка; ссылки на тома |
 | SRC-CEFR-2001 | *Common European Framework of Reference for Languages: Learning, Teaching, Assessment* | https://rm.coe.int/common-european-framework-of-reference-for-languages-learning-teaching/1680459f97 | PDF CEFR | High (доступность URL); Medium для точных page cites без повторного открытия нужной стр. | Дескрипторы навыков, принцип уровней, отсутствие предписанного глобального word count |

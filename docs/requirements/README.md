@@ -1,5 +1,7 @@
 # Система требований: платформа польского как иностранного
 
+**Рабочий бренд:** **SŁOWARIUM** (`slowarium`). Основа бренда и границы нарративного слоя: [`../brand/brand-foundation.md`](../brand/brand-foundation.md). Юридическая / trademark-проверка остаётся открытой.
+
 Статус пакета: **Proposed** — редакция 2 + Phase 2 curriculum.
 **A1 semantic reference** = **candidate for human review** (не публикация без JPJO).
 **A2–B2** = **pending semantic migration** — **не** объявлены завершёнными.

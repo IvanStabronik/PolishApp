@@ -17,30 +17,30 @@ ID функций и сценариев согласованы с A1 model (`FN-
 | A1 Supporting concepts | 22 | 0 прямых (индивидуальные причины) | n/a (allowed) |
 | A1 Extension concepts | 0 | 0 | n/a |
 | A1 LEX bundles | 21 | 21 | 100% |
-| ERR used in A1 chains | 25 | — | — |
-| ERR unused (bank, with reason) | 47 | — | — |
+| ERR used in A1 chains | 31 | — | — |
+| ERR unused (bank, with grouped reasons) | 41 | — | — |
 
 ## SCN → FN → LEX → ERR → evidence → exit
 
 | SCN | FN | LEX | ERR (fit) | Evidence | Exit |
 | --- | --- | --- | --- | --- | --- |
-| `SCN-A1-EVERYDAY-01` | FN-A1-IDENTIFY-01, FN-A1-GREET-01, FN-A1-TIME-01, FN-A1-NARRATE-01 | LEX-A1-IDENTITY, LEX-A1-GREETINGS, LEX-A1-TIME, LEX-A1-ROUTINE | ERR-UKR-18, ERR-RUS-18 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-SHOP-01` | FN-A1-TRANS-01, FN-A1-ASK-01, FN-A1-QUANT-01, FN-A1-ADDRESS-01 | LEX-A1-SERVICE, LEX-A1-MONEY | ERR-UKR-13, ERR-RUS-13 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-FOOD-01` | FN-A1-TRANS-01, FN-A1-ASK-01, FN-A1-ADDRESS-01 | LEX-A1-SERVICE | ERR-UKR-13 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-TICKET-01` | FN-A1-TRANS-01, FN-A1-TIME-01, FN-A1-ASK-01 | LEX-A1-SERVICE, LEX-A1-TRANSPORT, LEX-A1-MONEY | ERR-UKR-06, ERR-BEL-10 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-DIRECTIONS-01` | FN-A1-DIRECT-01, FN-A1-ASK-01 | LEX-A1-TRANSPORT | ERR-UKR-06, ERR-BEL-10 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-HOUSING-01` | FN-A1-LOCATE-01, FN-A1-LOCATE-02, FN-A1-REPORT-01, FN-A1-READ-01 | LEX-A1-HOUSING, LEX-A1-ADDRESS, LEX-A1-SIGNS | ERR-UKR-04, ERR-RUS-04 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-URZAD-01` | FN-A1-PURPOSE-01, FN-A1-DOCS-01, FN-A1-ADDRESS-01, FN-A1-REPAIR-01 | LEX-A1-URZAD, LEX-A1-DOCS, LEX-A1-REPAIR | ERR-UKR-18, ERR-RUS-02 | task_performance / roleplay_tv | `EXIT-A1-INSTR` |
-| `SCN-A1-MED-01` | FN-A1-HEALTH-01, FN-A1-APPOINT-01, FN-A1-TIME-01 | LEX-A1-HEALTH, LEX-A1-TIME | ERR-UKR-15, ERR-RUS-16 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-EMERGENCY-01` | FN-A1-HELP-01, FN-A1-HEALTH-01, FN-A1-PHONE-01 | LEX-A1-HELP, LEX-A1-HEALTH, LEX-A1-PHONE | ERR-UKR-15, ERR-RUS-16 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-WORK-01` | FN-A1-IDENTIFY-02, FN-A1-REQUEST-01, FN-A1-APOLOGY-01, FN-A1-CONFIRM-01 | LEX-A1-WORK, LEX-A1-POLITENESS, LEX-A1-APOLOGY | ERR-UKR-09, ERR-RUS-09 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-SCHOOL-01` | FN-A1-GREET-01, FN-A1-REPORT-01, FN-A1-PURPOSE-01 | LEX-A1-SCHOOL, LEX-A1-APOLOGY | ERR-UKR-18, ERR-BEL-18 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-PHONE-01` | FN-A1-PHONE-01, FN-A1-PHONE-02, FN-A1-REPAIR-01, FN-A1-PURPOSE-01 | LEX-A1-PHONE, LEX-A1-REPAIR | ERR-UKR-07, ERR-RUS-07 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-SMS-01` | FN-A1-CONFIRM-01, FN-A1-APOLOGY-01, FN-A1-TIME-01 | LEX-A1-TIME, LEX-A1-APOLOGY, LEX-A1-POLITENESS | ERR-UKR-01, ERR-RUS-02 | writing_rubric | `EXIT-A1-INSTR` |
-| `SCN-A1-BANK-01` | FN-A1-TRANS-01, FN-A1-ASK-01, FN-A1-DOCS-01, FN-A1-QUANT-01 | LEX-A1-BANK, LEX-A1-MONEY, LEX-A1-DOCS | ERR-UKR-22, ERR-RUS-09 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-NEIGHBOR-01` | FN-A1-GREET-01, FN-A1-REQUEST-01, FN-A1-THANKS-01 | LEX-A1-GREETINGS, LEX-A1-POLITENESS, LEX-A1-HELP | ERR-UKR-18, ERR-RUS-18 | task_performance | `EXIT-A1-INSTR` |
-| `SCN-A1-FORM-01` | FN-A1-FORM-01, FN-A1-LOCATE-02, FN-A1-IDENTIFY-01 | LEX-A1-ADDRESS, LEX-A1-DOCS, LEX-A1-IDENTITY | ERR-UKR-01, ERR-RUS-02, ERR-BEL-01 | closed_item / guided_prod | `EXIT-A1-INSTR` |
-| `SCN-A1-WRITE-SELF-01` | FN-A1-IDENTIFY-01, FN-A1-IDENTIFY-02, FN-A1-LOCATE-01, FN-A1-NARRATE-01 | LEX-A1-IDENTITY, LEX-A1-ROUTINE | ERR-UKR-01, ERR-RUS-02 | writing_task (ASM-A1-WRITE-SELF-01) | `EXIT-A1-INSTR` |
+| `SCN-A1-EVERYDAY-01` | FN-A1-IDENTIFY-01, FN-A1-LOCATE-01, FN-A1-GREET-01, FN-A1-THANKS-01, FN-A1-TIME-01, FN-A1-NARRATE-01 | LEX-A1-IDENTITY, LEX-A1-GREETINGS, LEX-A1-TIME | ERR-UKR-01, ERR-UKR-04, ERR-UKR-09, ERR-UKR-18, ERR-RUS-02, ERR-RUS-04, ERR-RUS-09, ERR-RUS-18, ERR-BEL-01, ERR-BEL-05, ERR-BEL-09, ERR-BEL-18, ERR-BEL-24 | task_performance / roleplay_tv | `EXIT-A1-INSTR` |
+| `SCN-A1-SHOP-01` | FN-A1-ADDRESS-01, FN-A1-ASK-01, FN-A1-TRANS-01, FN-A1-QUANT-01, FN-A1-CONFIRM-01, FN-A1-THANKS-01, FN-A1-GREET-01 | LEX-A1-SERVICE, LEX-A1-MONEY | ERR-UKR-02, ERR-UKR-06, ERR-UKR-13, ERR-UKR-18, ERR-UKR-22, ERR-UKR-23, ERR-RUS-06, ERR-RUS-14, ERR-RUS-18, ERR-RUS-21, ERR-BEL-06, ERR-BEL-10, ERR-BEL-14, ERR-BEL-18, ERR-BEL-21, ERR-BEL-24 | task_performance | `EXIT-A1-INSTR` |
+| `SCN-A1-FOOD-01` | FN-A1-TRANS-01, FN-A1-QUANT-01, FN-A1-ASK-01, FN-A1-ADDRESS-01, FN-A1-THANKS-01 | LEX-A1-SERVICE, LEX-A1-MONEY | ERR-UKR-13, ERR-UKR-18, ERR-UKR-22, ERR-RUS-14, ERR-RUS-18, ERR-BEL-14, ERR-BEL-18, ERR-BEL-24 | task_performance | `EXIT-A1-INSTR` |
+| `SCN-A1-TICKET-01` | FN-A1-TRANS-01, FN-A1-TIME-01, FN-A1-ASK-01, FN-A1-QUANT-01, FN-A1-READ-01, FN-A1-REPAIR-01 | LEX-A1-TRANSPORT, LEX-A1-SIGNS | ERR-UKR-06, ERR-UKR-10, ERR-UKR-22, ERR-RUS-06, ERR-RUS-10, ERR-BEL-06, ERR-BEL-10 | task_performance + reading_task | `EXIT-A1-INSTR` |
+| `SCN-A1-DIRECTIONS-01` | FN-A1-DIRECT-01, FN-A1-REPAIR-01, FN-A1-THANKS-01 | LEX-A1-TRANSPORT | ERR-UKR-10 | task_performance | `EXIT-A1-INSTR` |
+| `SCN-A1-HOUSING-01` | FN-A1-LOCATE-01, FN-A1-LOCATE-02, FN-A1-REPORT-01, FN-A1-REQUEST-01, FN-A1-PHONE-01 | LEX-A1-HOUSING, LEX-A1-ADDRESS | ERR-UKR-01, ERR-UKR-04, ERR-UKR-07, ERR-UKR-18, ERR-RUS-02, ERR-RUS-03, ERR-RUS-04, ERR-RUS-07, ERR-RUS-18, ERR-BEL-01, ERR-BEL-05, ERR-BEL-07, ERR-BEL-18, ERR-BEL-24 | task_performance | `EXIT-A1-INSTR` |
+| `SCN-A1-URZAD-01` | FN-A1-GREET-01, FN-A1-ADDRESS-01, FN-A1-PURPOSE-01, FN-A1-DOCS-01, FN-A1-IDENTIFY-01, FN-A1-REPAIR-02, FN-A1-REG-01 | LEX-A1-URZAD, LEX-A1-DOCS | ERR-UKR-01, ERR-UKR-04, ERR-UKR-18, ERR-RUS-02, ERR-RUS-04, ERR-RUS-18, ERR-BEL-01, ERR-BEL-05, ERR-BEL-18 | task_performance / roleplay_tv | `EXIT-A1-INSTR` |
+| `SCN-A1-MED-01` | FN-A1-HEALTH-01, FN-A1-APPOINT-01, FN-A1-TIME-01, FN-A1-ASK-01, FN-A1-ADDRESS-01, FN-A1-CONFIRM-01 | LEX-A1-HEALTH, LEX-A1-TIME | ERR-UKR-02, ERR-UKR-18, ERR-UKR-23, ERR-RUS-10, ERR-RUS-18, ERR-RUS-21, ERR-BEL-10, ERR-BEL-18, ERR-BEL-21 | task_performance | `EXIT-A1-INSTR` |
+| `SCN-A1-EMERGENCY-01` | FN-A1-HELP-01, FN-A1-HEALTH-01, FN-A1-LOCATE-02 | LEX-A1-HELP | ERR-UKR-01, ERR-RUS-02, ERR-RUS-03, ERR-BEL-01 | task_performance (timed) | `EXIT-A1-INSTR` |
+| `SCN-A1-WORK-01` | FN-A1-IDENTIFY-02, FN-A1-GREET-01, FN-A1-REQUEST-01, FN-A1-REFUSE-01, FN-A1-CONFIRM-01, FN-A1-APOLOGY-01, FN-A1-REG-01 | LEX-A1-WORK, LEX-A1-POLITENESS, LEX-A1-APOLOGY | ERR-UKR-09, ERR-UKR-18, ERR-RUS-09, ERR-RUS-18, ERR-BEL-09, ERR-BEL-18, ERR-BEL-24 | roleplay_tv | `EXIT-A1-INSTR` |
+| `SCN-A1-SCHOOL-01` | FN-A1-IDENTIFY-01, FN-A1-REPORT-01, FN-A1-APOLOGY-01, FN-A1-TIME-01, FN-A1-GREET-01, FN-A1-ADDRESS-01 | LEX-A1-SCHOOL, LEX-A1-APOLOGY | ERR-UKR-01, ERR-UKR-18, ERR-RUS-02, ERR-RUS-10, ERR-RUS-18, ERR-BEL-01, ERR-BEL-18 | task_performance / writing (wiadomość) | `EXIT-A1-INSTR` |
+| `SCN-A1-PHONE-01` | FN-A1-PHONE-01, FN-A1-PHONE-02, FN-A1-REPAIR-01, FN-A1-REPAIR-02, FN-A1-CONFIRM-01 | LEX-A1-PHONE, LEX-A1-REPAIR | ERR-UKR-07, ERR-RUS-07, ERR-BEL-07 | task_performance (audio) | `EXIT-A1-INSTR` |
+| `SCN-A1-SMS-01` | FN-A1-APOLOGY-01, FN-A1-CONFIRM-01, FN-A1-TIME-01, FN-A1-IDENTIFY-01 | LEX-A1-PHONE, LEX-A1-TIME, LEX-A1-POLITENESS, LEX-A1-APOLOGY | ERR-UKR-01, ERR-UKR-18, ERR-RUS-02, ERR-RUS-10, ERR-RUS-18, ERR-BEL-01, ERR-BEL-18 | writing_task | `EXIT-A1-INSTR` |
+| `SCN-A1-BANK-01` | FN-A1-PURPOSE-01, FN-A1-ASK-01, FN-A1-DOCS-01, FN-A1-QUANT-01, FN-A1-ADDRESS-01, FN-A1-REPAIR-02 | LEX-A1-BANK | ERR-UKR-02, ERR-UKR-18, ERR-UKR-22, ERR-UKR-23, ERR-RUS-18, ERR-RUS-21, ERR-BEL-10, ERR-BEL-18, ERR-BEL-21 | task_performance + ASM form-follow | `EXIT-A1-INSTR` |
+| `SCN-A1-NEIGHBOR-01` | FN-A1-GREET-01, FN-A1-THANKS-01, FN-A1-REQUEST-01, FN-A1-APOLOGY-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 | LEX-A1-GREETINGS, LEX-A1-POLITENESS | ERR-UKR-01, ERR-UKR-04, ERR-UKR-18, ERR-RUS-02, ERR-RUS-04, ERR-RUS-18, ERR-BEL-01, ERR-BEL-05, ERR-BEL-18, ERR-BEL-24 | roleplay_tv | `EXIT-A1-INSTR` |
+| `SCN-A1-FORM-01` | FN-A1-FORM-01, FN-A1-LOCATE-02, FN-A1-IDENTIFY-01 | LEX-A1-ADDRESS, LEX-A1-DOCS, LEX-A1-IDENTITY | ERR-UKR-01, ERR-RUS-02, ERR-RUS-03, ERR-BEL-01 | closed_item / guided_prod | `EXIT-A1-INSTR` |
+| `SCN-A1-WRITE-SELF-01` | FN-A1-IDENTIFY-01, FN-A1-IDENTIFY-02, FN-A1-LOCATE-01, FN-A1-NARRATE-01 | LEX-A1-IDENTITY, LEX-A1-ROUTINE | ERR-UKR-01, ERR-UKR-04, ERR-UKR-09, ERR-RUS-02, ERR-RUS-04, ERR-RUS-09, ERR-BEL-01, ERR-BEL-05, ERR-BEL-09 | writing_task (ASM) | `EXIT-A1-INSTR` |
 
 ## Required A1 concepts → FN/SCN
 
@@ -120,87 +120,64 @@ ID функций и сценариев согласованы с A1 model (`FN-
 | `GR-GEN-ADJ-01` | Supporting: род прилагательных в расширенных НР; AGR-ADJ-01 закрывает минимум. |
 | `GR-INF-COMPL-01` | Supporting: инфинитивные комплементы модалок углубляют REQUEST/REFUSE; модалки Required уже в MOD-VERB-01. |
 
-## ERR used (fit reasons)
+## ERR used in canonical A1 chains
 
-| ERR | Fit |
+| ERR | Точное соответствие |
 | --- | --- |
-| `ERR-UKR-01` | ORTH-IY-01 / FORM-01 — графемы i/y в анкете и именах. |
-| `ERR-UKR-02` | ASK-01 / CONFIRM-01 — маркер *czy* в общем вопросе службы. |
-| `ERR-UKR-04` | IDENTIFY/LOCATE — калька *u mnie jest* vs *mam* в жилье/имуществе. |
-| `ERR-UKR-06` | DIRECT/TRANSPORT — *czekać na + Acc*. |
-| `ERR-UKR-07` | PHONE-01 — *dzwonić do + Gen*. |
-| `ERR-UKR-09` | IDENTIFY-02 / WORK — конструкции места работы / *pracować w*. |
-| `ERR-UKR-13` | TRANS/QUANT — деньги, заказы, ложные друзья сервиса. |
-| `ERR-UKR-15` | HEALTH/HELP — симптомы и срочность. |
-| `ERR-UKR-18` | GREET/ADDRESS/THANKS — T–V и вежливость. |
-| `ERR-UKR-22` | BANK — ложные друзья счёта/перевода. |
-| `ERR-UKR-23` | ASK/REPORT — наличие/отсутствие. |
-| `ERR-RUS-02` | ORTH/FORM — диакритика и мягкость на письме. |
-| `ERR-RUS-04` | LOCATE — посессивные кальки жилья. |
-| `ERR-RUS-06` | TRANSPORT — rekcja ожидания/движения. |
-| `ERR-RUS-07` | PHONE — управление *dzwonić*. |
-| `ERR-RUS-09` | WORK/BANK — место работы и банковские кальки. |
-| `ERR-RUS-13` | SHOP/SERVICE — сервисные false friends рядом с UKR-13 в кассе/заказе. |
-| `ERR-RUS-16` | HEALTH — симптомы. |
-| `ERR-RUS-18` | GREET/REG — T–V. |
-| `ERR-RUS-21` | ASK — наличие. |
-| `ERR-RUS-24` | REFUSE — резкий отказ без смягчения. |
-| `ERR-BEL-01` | FORM-01 — орфография i/y и диакритика при заполнении анкеты/адреса. |
-| `ERR-BEL-10` | DIRECT/TRANSPORT — направление и предлоги. |
-| `ERR-BEL-18` | GREET/SCHOOL — регистр и ложная уверенность. |
-| `ERR-BEL-24` | REQUEST — сила просьбы / soft. |
+| `ERR-UKR-01` | `i/y` в имени, адресе, анкете и коротком письме. |
+| `ERR-UKR-02` | `czy` в общем вопросе ASK-01. |
+| `ERR-UKR-04` | `mam` вместо кальки «у мене є» в IDENTIFY/LOCATE. |
+| `ERR-UKR-06` | `czekać na + Acc` в очереди/транспорте. |
+| `ERR-UKR-07` | `dzwonić do + Gen` в PHONE. |
+| `ERR-UKR-09` | `w pracy / do pracy` в WORK/NARRATE. |
+| `ERR-UKR-10` | направление `do + Gen / na + Acc` в DIRECT. |
+| `ERR-UKR-13` | ложный друг `magazyn` в SHOP/READ. |
+| `ERR-UKR-18` | регистр `pan/pani`. |
+| `ERR-UKR-22` | числительные 5+ и Gen в QUANT. |
+| `ERR-UKR-23` | `nie ma + Gen` в ASK. |
+| `ERR-RUS-02` | `i/y` в имени, адресе и форме. |
+| `ERR-RUS-03` | мягкость и польские графемы в адресе/форме. |
+| `ERR-RUS-04` | `mam` вместо `u mnie jest` в IDENTIFY/LOCATE. |
+| `ERR-RUS-06` | `czekać na + Acc` в очереди/транспорте. |
+| `ERR-RUS-07` | `dzwonić do + Gen` в PHONE. |
+| `ERR-RUS-09` | `w pracy / do pracy` в WORK/NARRATE. |
+| `ERR-RUS-10` | дни недели с `w + Acc` в TIME/APPOINT. |
+| `ERR-RUS-14` | ложный друг `magazyn` в SHOP/READ. |
+| `ERR-RUS-18` | регистр `pan/pani`. |
+| `ERR-RUS-21` | `nie ma + Gen` в ASK. |
+| `ERR-BEL-01` | аканне и польская орфография в имени/адресе/форме. |
+| `ERR-BEL-05` | `mam` вместо кальки `у мяне ёсць` в IDENTIFY/LOCATE. |
+| `ERR-BEL-06` | `czekać na + Acc` в очереди/транспорте. |
+| `ERR-BEL-07` | `dzwonić do + Gen` в PHONE. |
+| `ERR-BEL-09` | `w pracy` в WORK/NARRATE. |
+| `ERR-BEL-10` | `czy` vs `ці` в ASK. |
+| `ERR-BEL-14` | ложный друг `magazyn` в SHOP/READ. |
+| `ERR-BEL-18` | регистр `pan/pani`. |
+| `ERR-BEL-21` | `nie ma` vs `няма` в ASK. |
+| `ERR-BEL-24` | прагматика `proszę` vs `калі ласка` в REQUEST/THANKS. |
 
-## ERR unused (allowed)
+## ERR not selected in A1 chains (allowed)
 
-| ERR | Reason |
-| --- | --- |
-| `ERR-UKR-03` | Союз *że/co* диагностируется глубже на подчинении; A1 держит SYN-SUB без форса этой карточки на каждый SCN. |
-| `ERR-UKR-05` | *podobać się* Dat — полезно в жилье, но не в Core can-do V1; банк ждёт SCN оценки квартиры. |
-| `ERR-UKR-08` | Специфичная rekcja вне текущего A1 TRANS/PHONE набора — оставить в банке. |
-| `ERR-UKR-10` | Тонкий aspect false friend — A1 aspect только LEX familiarity. |
-| `ERR-UKR-11` | Множественные calcи быта без отдельного SCN в reference slice. |
-| `ERR-UKR-12` | Орфоэпический кластер покрыт PHON cards; карточка не форсируется на FN. |
-| `ERR-UKR-14` | Письменный жанр выше минимума FORM-01. |
-| `ERR-UKR-16` | Медицинский жаргон выше HEALTH-01 списка. |
-| `ERR-UKR-17` | Соседский conflict lexicon — Extension NEIGHBOR. |
-| `ERR-UKR-19` | Длинные softeners — зона PRAG-SOFTEN A2. |
-| `ERR-UKR-20` | Славянский false friend вне PRIORITY доменов V1. |
-| `ERR-UKR-21` | Числительные людей — Supporting NUM вир. |
-| `ERR-UKR-24` | Жалоба/reklamacja — не A1 APOLOGY bundle. |
-| `ERR-RUS-01` | Параллель ORTH-IY уже закрыта UKR-01/RUS-02 контуром; карточка в банке без дубля на каждый SCN. |
-| `ERR-RUS-03` | Подчинение *что/чтобы* — калибровка A2. |
-| `ERR-RUS-05` | *podobać się* — как UKR-05. |
-| `ERR-RUS-08` | Редкая rekcja вне PHONE/TRANS. |
-| `ERR-RUS-10` | Aspect fossil — B1 remediation persona. |
-| `ERR-RUS-11` | Бытовые calques без SCN fit. |
-| `ERR-RUS-12` | PHON кластер уже в PHON-SZ-CZ. |
-| `ERR-RUS-14` | Письмо выше A1 FORM. |
-| `ERR-RUS-15` | Тело/здоровье частично покрыто RUS-16. |
-| `ERR-RUS-17` | Neighbor conflict — Extension. |
-| `ERR-RUS-19` | Softening A2. |
-| `ERR-RUS-20` | FF вне priority. |
-| `ERR-RUS-22` | Virile numerals Supporting. |
-| `ERR-RUS-23` | Availability частично RUS-21. |
-| `ERR-BEL-02` | *czy* — покрыто через UKR-02 паттерн в ASK; BEL карточка в резерве. |
-| `ERR-BEL-03` | Союзы A2. |
-| `ERR-BEL-04` | Посессив — резерв рядом с UKR-04. |
-| `ERR-BEL-05` | *podobać się* резерв. |
-| `ERR-BEL-06` | *czekać* — транспорт покрыт BEL-10. |
-| `ERR-BEL-07` | Phone rekcja — резерв к UKR-07. |
-| `ERR-BEL-08` | Редкая rekcja. |
-| `ERR-BEL-09` | Work calque — резерв. |
-| `ERR-BEL-11` | Быт FF. |
-| `ERR-BEL-12` | PHON уже в cards. |
-| `ERR-BEL-13` | Money FF — резерв к QUANT. |
-| `ERR-BEL-14` | Письмо. |
-| `ERR-BEL-15` | Med jargon. |
-| `ERR-BEL-16` | Health — частичное покрытие через сценарии без форса карточки. |
-| `ERR-BEL-17` | Neighbor conflict. |
-| `ERR-BEL-19` | Soften A2. |
-| `ERR-BEL-20` | FF вне priority. |
-| `ERR-BEL-21` | Availability резерв. |
-| `ERR-BEL-22` | Bank FF резерв. |
-| `ERR-BEL-23` | School absence lexicon резерв к REPORT. |
+| Группа | ID | Причина |
+| --- | --- | --- |
+| UKR: сложный синтаксис / rekcja | `03, 05, 08, 21` | Не являются точным fit текущих A1 FN; сохраняются для поздней спирали/диагностики. |
+| UKR: аспект | `11, 12` | Системный выбор вида выше текущего A1 formulaic exposure. |
+| UKR: лексика вне текущего SCN | `14` | `dywan` требует отдельного housing-viewing задания. |
+| UKR: орфография / фонетика | `15, 16, 17` | Банковые карточки; не назначаются FN только ради coverage. |
+| UKR: vocative / word order / formal writing | `19, 20, 24` | Нужны отдельные stimuli и review, а не механический линк. |
+| RUS: rekcja / порядок | `05, 08, 11` | Не являются точным fit текущих A1 цепей. |
+| RUS: аспект | `12, 13` | Системный выбор вида/императива выше текущего A1 scope. |
+| RUS: лексика вне текущего SCN | `15` | Пресса не входит в reference slice. |
+| RUS: фонетика / орфография | `16, 17` | Банковые карточки; требуют отдельного evidence. |
+| RUS: vocative / `po polsku` / word order | `01, 19, 20` | Возможны в A1, но не форсируются без отдельного stimulus. |
+| RUS: męskoosobowy | `22, 23` | Выше текущего A1 core. |
+| RUS: complaint | `24` | Рекламация не входит в A1 APOLOGY/REFUSE. |
+| BEL: орфография / фонетика | `02, 03, 04, 16, 17` | Банковые карточки; требуют отдельного evidence. |
+| BEL: rekcja / сложное изъяснение | `08, 11` | Не являются точным fit текущих A1 цепей. |
+| BEL: аспект | `12, 13` | Системный выбор вида выше текущего A1 scope. |
+| BEL: лексика вне текущего SCN | `15` | `dywan` требует отдельного housing-viewing задания. |
+| BEL: vocative / clitics / gender | `19, 20, 22` | Не форсируются без отдельного задания. |
+| BEL: formal e-mail | `23` | Жанр выше текущего A1 SMS/FORM scope. |
 
 ## Exit criterion pointer
 
