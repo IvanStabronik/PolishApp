@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -34,14 +34,10 @@ export function PrivacyActions() {
     })();
   }
 
-  function onDelete() {
+  function onDeleteSubmit(e: FormEvent) {
+    e.preventDefault();
     const word = t("deleteConfirmWord");
-    const typed =
-      (typeof document !== "undefined"
-        ? (document.getElementById("delete-confirm") as HTMLInputElement | null)
-            ?.value
-        : null) ?? confirm;
-    if (typed.trim() !== word) return;
+    if (confirm.trim() !== word) return;
     setPending(true);
     void (async () => {
       try {
@@ -101,11 +97,16 @@ export function PrivacyActions() {
             {t("deleteAction")}
           </Button>
         ) : (
-          <div className="mt-4 flex flex-col gap-3">
+          <form
+            className="mt-4 flex flex-col gap-3"
+            onSubmit={onDeleteSubmit}
+            data-testid="privacy-delete-form"
+          >
             <div className="field">
               <label htmlFor="delete-confirm">{t("deleteConfirmPrompt")}</label>
               <input
                 id="delete-confirm"
+                name="delete-confirm"
                 data-testid="privacy-delete-confirm-input"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
@@ -114,14 +115,15 @@ export function PrivacyActions() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Button
+                type="submit"
                 variant="danger"
-                disabled={pending || confirm !== t("deleteConfirmWord")}
-                onClick={onDelete}
+                disabled={pending || confirm.trim() !== t("deleteConfirmWord")}
                 data-testid="privacy-delete-confirm"
               >
                 {t("deleteAction")}
               </Button>
               <Button
+                type="button"
                 variant="secondary"
                 onClick={() => {
                   setConfirming(false);
@@ -131,7 +133,7 @@ export function PrivacyActions() {
                 {t("deleteCancel")}
               </Button>
             </div>
-          </div>
+          </form>
         )}
         {deleteMsg ? (
           <p

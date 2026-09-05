@@ -203,18 +203,13 @@ test.describe("Milestone 1 learner smoke", () => {
 
     // --- Delete ---
     await page.getByTestId("privacy-delete").click();
-    const confirmInput = page.getByTestId("privacy-delete-confirm-input");
-    await confirmInput.click();
-    await confirmInput.fill("");
-    await confirmInput.pressSequentially("DELETE", { delay: 20 });
-    await expect(confirmInput).toHaveValue("DELETE");
+    await page.getByTestId("privacy-delete-confirm-input").fill("DELETE");
     await expect(page.getByTestId("privacy-delete-confirm")).toBeEnabled();
-
     const deleteResponsePromise = page.waitForResponse(
       (res) => res.url().includes("/api/privacy/delete"),
       { timeout: 15_000 },
     );
-    await page.getByTestId("privacy-delete-confirm").click({ force: true });
+    await page.getByTestId("privacy-delete-confirm").click();
     const deleteResponse = await deleteResponsePromise;
     expect([200, 202]).toContain(deleteResponse.status());
     await expect(page.getByTestId("privacy-delete-status")).toBeVisible({

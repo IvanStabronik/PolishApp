@@ -27,6 +27,7 @@ function loadEnvLocal(): Record<string, string> {
 
 const envLocal = loadEnvLocal();
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
+const port = new URL(baseURL).port || "3000";
 const databaseUrl =
   process.env.DATABASE_URL ??
   envLocal.DATABASE_URL ??
@@ -39,6 +40,7 @@ const webServerEnv: Record<string, string> = {
       (entry): entry is [string, string] => typeof entry[1] === "string",
     ),
   ),
+  PORT: port,
   DATABASE_URL: databaseUrl,
   NEXT_PUBLIC_DEMO_PREVIEW: "true",
   DEMO_PREVIEW: "true",
@@ -69,7 +71,7 @@ export default defineConfig({
       use: {
         ...devices["Desktop Chrome"],
         // Prefer installed Google Chrome when Playwright's bundled browser
-        // cannot be downloaded (common on locked-down / sandboxed CI agents).
+        // cannot be downloaded (common on locked-down Windows agents).
         channel:
           process.env.PLAYWRIGHT_CHROME_CHANNEL ??
           (process.platform === "win32" ? "chrome" : undefined),
@@ -79,7 +81,9 @@ export default defineConfig({
   webServer: process.env.PLAYWRIGHT_NO_WEBSERVER
     ? undefined
     : {
-        command: process.env.CI ? "pnpm start" : "pnpm dev",
+        command: process.env.CI
+          ? `pnpm exec next start -p ${port}`
+          : `pnpm exec next dev --turbopack -p ${port}`,
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 180_000,

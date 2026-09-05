@@ -33,6 +33,7 @@ function loadEnvLocal(): Record<string, string> {
 const envLocal = loadEnvLocal();
 const baseURL =
   process.env.PLAYWRIGHT_NO_DEMO_BASE_URL ?? "http://127.0.0.1:3001";
+const port = new URL(baseURL).port || "3001";
 const databaseUrl =
   process.env.DATABASE_URL ??
   envLocal.DATABASE_URL ??
@@ -44,7 +45,7 @@ const webServerEnv: Record<string, string> = {
       (entry): entry is [string, string] => typeof entry[1] === "string",
     ),
   ),
-  PORT: "3001",
+  PORT: port,
   DATABASE_URL: databaseUrl,
   NEXT_PUBLIC_DEMO_PREVIEW: "false",
   DEMO_PREVIEW: "false",
@@ -82,7 +83,9 @@ export default defineConfig({
   webServer: process.env.PLAYWRIGHT_NO_WEBSERVER
     ? undefined
     : {
-        command: process.env.CI ? "pnpm start" : "pnpm exec next dev --turbopack -p 3001",
+        command: process.env.CI
+          ? `pnpm exec next start -p ${port}`
+          : `pnpm exec next dev --turbopack -p ${port}`,
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 180_000,
