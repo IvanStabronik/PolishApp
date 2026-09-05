@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, "feat/**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  curriculum:
+    name: Curriculum validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate curriculum
+        run: python scripts/validate-curriculum.py
+
+  build-and-test:
+    name: Lint · typecheck · unit · content · build · e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: slowarium
+          POSTGRES_PASSWORD: slowarium
+          POSTGRES_DB: slowarium_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U slowarium -d slowarium_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://slowarium:slowarium@localhost:5432/slowarium_test
+      BETTER_AUTH_SECRET: ci-test-secret-not-for-production
+      BETTER_AUTH_URL: http://127.0.0.1:3000
+      APP_URL: http://127.0.0.1:3000
+      DEMO_MODE: "true"
+      NEXT_PUBLIC_DEMO_PREVIEW: "true"
+      PLAYWRIGHT_BASE_URL: http://127.0.0.1:3000
+      CI: "true"
+
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.1
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Validate content YAML
+        run: pnpm content:validate
+
+      - name: Migrate & seed (test DB)
+        run: |
+          pnpm db:migrate
+          pnpm db:seed
+
+      - name: Build
+        run: pnpm build
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: E2E smoke
+        run: pnpm test:e2e
