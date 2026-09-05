@@ -1,9 +1,14 @@
 # A1 JPJO Review Packet — SŁOWARIUM
 
 **Статус пакета:** готов к независимому review — **review не выполнен**.
+**Review status:** `NOT_STARTED`
 **Бренд:** SŁOWARIUM · slug `slowarium`
 **Канонические entity ID не переименованы под бренд.**
 **A2–B2 semantic migration not started.**
+
+Допустимые значения `Review status`: `NOT_STARTED` · `IN_REVIEW` · `COMPLETED`.
+
+Правило verdict: положительные `APPROVE` / `APPROVE_WITH_CHANGES` **запрещены** при `Review status=NOT_STARTED`. При `IN_REVIEW` / `COMPLETED` положительный verdict допустим только с заполненными reviewer / date / rationale (и correction / severity по типу verdict).
 
 ## Frozen snapshot (не изменять без нового коммита модели)
 
@@ -20,14 +25,25 @@
 
 Связанные файлы: `docs/curriculum/*`, `docs/reviews/a1-source-verification.md`, `docs/reports/phase-2-a1-review-readiness-report.md`.
 
+## Контрольные метрики процесса
+
+| Метрика | Значение |
+| --- | ---: |
+| expert-registered blockers | **0** |
+| mandatory review items pending (`NOT_REVIEWED`) | **16** |
+| open publication gates | **blocked** (DEC-016 + pending review + open normative CLAIM) |
+
+Публикация контента **заблокирована**, пока `Review status≠COMPLETED` или есть open publication gates / expert-registered blockers.
+
 ## Инструкция ревьюеру
 
 1. **Блокирующее замечание:** verdict `REJECT` или `NEEDS_EVIDENCE` + severity `blocker`; указать entity ID и что именно ломает публикацию или переход к A2.
 2. **Split/merge:** в `proposed correction` дать целевые ID (`FN-…`/`SCN-…`), краткое обоснование и затронутые LEX/ERR; не переписывать всю модель вручную.
-3. **Ссылка на источник:** использовать Claim ID из `a1-source-verification.md` или точный URL + locus; не ссылаться на «общее знание CEFR».
+3. **Ссылка на источник:** использовать Claim ID из `a1-source-verification.md` или атомарный `SRC-*` + locus; не ссылаться на «общее знание CEFR».
 4. **Ошибка содержания vs продуктовая гипотеза:** содержание = язык/методика/норма; продукт = приоритет домена, commercial scope, UX. Гипотезу помечать `APPROVE_WITH_CHANGES` / обсуждение, не выдавать за норму.
-5. **Что блокирует A2:** незакрытые blocker по границам FN/SCN, Required-классификации, ложным exam-claim, системным L1-искажениям UKR/BEL; незавершённый DEC-016 (операционная модель reviewer) блокирует **публикацию**, но пакет review можно вести.
-6. **Запрещено:** ставить `APPROVE` от имени AI; менять snapshot counts без коммита модели.
+5. **Что блокирует A2:** незакрытые blocker по границам FN/SCN, Required-классификации, ложным exam-claim, системным L1-искажениям UKR/BEL; незавершённый DEC-016 блокирует **публикацию**, но пакет review можно вести.
+6. **Запрещено:** ставить `APPROVE` от имени AI; менять snapshot counts без коммита модели; оставлять положительный verdict без reviewer/date/rationale.
+7. При старте реального review сменить `Review status` на `IN_REVIEW`; по завершении всех 16 пунктов — `COMPLETED`.
 
 ## Reviewer matrix
 
@@ -44,7 +60,7 @@
 | `REV-009` | LEX | Достаточность 21 LEX-A1 bundle | `LEX-A1-* (21)` | lexical-targets.md | Какие пакеты нужно расширить/сжать/переименовать по смыслу? | `NOT_REVIEWED` | — | — | — | — | — |
 | `REV-010` | L1 ERR | Семантическая корректность L1 ERR mapping UKR/RUS/BEL | `31 ERR used in A1 chains` | l1-error-model.md; a1-traceability.md | Где UKR/BEL ошибочно сведены к RUS-модели? Какие ERR ложные? | `NOT_REVIEWED` | — | — | — | — | — |
 | `REV-011` | Assessment design | Completion criteria и blocking errors 30 FN | `FN-A1-* Completion / Blocking errors` | functional-inventory.md | Какие критерии ненаблюдаемы, шаблонны или педагогически слабы? | `NOT_REVIEWED` | — | — | — | — | — |
-| `REV-012` | Mastery | Calibration mastery thresholds | `ASM-005; level-exit-criteria.md; DEC-003` | 11-open-decisions.md | Можно ли публиковать числовые пороги или они остаются provisional? | `NOT_REVIEWED` | — | — | — | — | — |
+| `REV-012` | Mastery | Calibration mastery thresholds | `ASM-005; DEC-003` | 11-open-decisions.md; level-exit-criteria.md | Можно ли публиковать числовые пороги или они остаются provisional? | `NOT_REVIEWED` | — | — | — | — | — |
 | `REV-013` | ASM vs EXM | Граница внутренних ASM и официальных EXM | `ASM-A1-*; EXM-A1-*` | asm-exm-a1.md; entity-definitions.md | Нет ли смешения учебного задания с официальным экзаменом? | `NOT_REVIEWED` | — | — | — | — | — |
 | `REV-014` | Exam claims | Экзаменационные формулировки и disclaimer A1 | `EXM-A1-*; standard_status; session_availability` | 07-exam-preparation-requirements.md; CLAIM-001..005 | Корректны ли дисклеймеры? Нет ли обещания сессии 2026? | `NOT_REVIEWED` | — | — | — | — | — |
 | `REV-015` | Audience | Доступность модели для взрослой мигрантской аудитории | `SCN-A1-*; FN-A1-*` | 00-product-vision.md; scenario-inventory.md | Где сценарии/лексика недоступны или стигматизируют аудиторию? | `NOT_REVIEWED` | — | — | — | — | — |
@@ -54,10 +70,15 @@
 
 `APPROVE` · `APPROVE_WITH_CHANGES` · `REJECT` · `NEEDS_EVIDENCE` · `NOT_REVIEWED`
 
+| Verdict | Обязательные поля |
+| --- | --- |
+| `NOT_REVIEWED` | reviewer / date / rationale / correction / severity пусты (`—`) |
+| `APPROVE` | reviewer, review date, rationale |
+| `APPROVE_WITH_CHANGES` | reviewer, review date, rationale, proposed correction |
+| `REJECT` / `NEEDS_EVIDENCE` | reviewer, review date, severity, rationale |
+
 По умолчанию все строки = `NOT_REVIEWED`. Независимое одобрение AI **запрещено**.
 
 **Число review items:** 16
-
-## Blocking review items (до заполнения экспертом)
-
-Число blocker = **0 зарегистрированных** (все `NOT_REVIEWED`). Публикация контента по-прежнему блокируется DEC-016 и незакрытыми нормативными CLAIM.
+**mandatory review items pending:** 16
+**expert-registered blockers:** 0

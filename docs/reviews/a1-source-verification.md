@@ -40,14 +40,25 @@ Validator OK ≠ доказанная норма.
 
 ## Source IDs (каталог)
 
-| source ID | URL |
+| source ID | URL / path |
 | --- | --- |
 | SRC-CERT-STRUKTURA | https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/ |
 | SRC-CERT-TERMINY-2026 | https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/ |
 | SRC-DZU-217 | https://dziennikustaw.gov.pl/D2025000021701.pdf |
+| SRC-DZU-217-ZAL1 | https://dziennikustaw.gov.pl/D2025000021701.pdf (załącznik nr 1) |
 | SRC-CEFR-CV | https://www.coe.int/en/web/common-european-framework-reference-languages |
 | SRC-REQ-07 | docs/requirements/07-exam-preparation-requirements.md |
 | SRC-PRODUCT-A1 | docs/requirements/curriculum/functional-inventory.md |
+| SRC-ASM-EXM-A1 | docs/curriculum/asm-exm-a1.md |
+| SRC-DEC-003 | docs/requirements/11-open-decisions.md |
+| SRC-L1-MODEL | docs/requirements/curriculum/l1-error-model.md |
+| SRC-MIGRATION-A1 | docs/curriculum/functional-migration-a1.md |
+| SRC-PRODUCT-GRAMMAR | docs/requirements/curriculum/grammar-inventory.md |
+| SRC-PRODUCT-LEX | docs/requirements/curriculum/lexical-targets.md |
+| SRC-PRODUCT-PRAG | docs/requirements/curriculum/concept-extensions.md |
+| SRC-PRODUCT-SCN | docs/curriculum/scenario-inventory.md |
+
+Составные ID вида `SRC-A+B` **запрещены**. Несколько источников в одном claim перечисляются отдельными атомарными `SRC-*` в поле source ID.
 
 ## Claims
 
@@ -116,15 +127,15 @@ Validator OK ≠ доказанная норма.
 - **entity ID:** `A1`
 - **Точное проверяемое утверждение:** `standard_status(A1)=current` при `session_availability(A1,2026)=not_announced`.
 - **Тип утверждения:** dual_status_lock
-- **source ID:** `SRC-REQ-07+CERT`
-- **URL:** https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/ ; https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/
-- **Документ:** 07 + certyfikatpolski.pl
-- **Точное место:** Таблица статуса в 07; строка A1 dorośli + terminy 2026 без A1
+- **source ID:** `SRC-REQ-07`; `SRC-CERT-STRUKTURA`; `SRC-CERT-TERMINY-2026`
+- **URL:** docs/requirements/07-exam-preparation-requirements.md ; https://certyfikatpolski.pl/o-egzaminie/struktura-egzaminu/ ; https://certyfikatpolski.pl/terminy-sesji-egzaminacyjnych-w-2026-roku/
+- **Документ:** 07-exam-preparation-requirements.md + certyfikatpolski.pl (struktura, terminy 2026)
+- **Точное место:** Таблица статуса в 07; строка A1 dorośli на struktura; terminy 2026 без A1
 - **evidence class:** `SOURCE_INTERPRETATION`
 - **confidence:** High
 - **verification status:** `PARTIALLY_VERIFIED`
 - **дата проверки:** 2026-09-05
-- **замечание:** Операционные факты сессии/структуры VERIFIED; юридический ярлык `current` из Dz.U. §14 / załącznik — REQUIRES VERIFICATION точной статьи (см. CLAIM Dz.U.).
+- **замечание:** Операционные факты сессии/структуры VERIFIED через SRC-CERT-*; юридический ярлык `current` из Dz.U. §14 / załącznik — REQUIRES VERIFICATION точной статьи (см. CLAIM Dz.U.).
 
 ### CLAIM-006
 - **Claim ID:** `CLAIM-006`

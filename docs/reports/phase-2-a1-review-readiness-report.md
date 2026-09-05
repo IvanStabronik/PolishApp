@@ -25,11 +25,14 @@
 | `CONFLICT` | 0 |
 | **Всего claims** | **192** |
 
-## 3. Review items
+## 3. Review items и контрольные метрики
 
 - Создано review items: **16**
-- Зарегистрированных blocking (`REJECT`/`NEEDS_EVIDENCE` + blocker): **0** (ещё не заполнялось экспертом)
-- Ложных `APPROVE`: **0** (запрещены до независимого review)
+- **Review status:** `NOT_STARTED`
+- **expert-registered blockers:** **0**
+- **mandatory review items pending (`NOT_REVIEWED`):** **16**
+- **open publication gates:** **blocked** (DEC-016 + pending review + open normative CLAIM)
+- Публикация контента **заблокирована** до независимого JPJO review и закрытия gates.
 
 ## 4. Что блокирует публикацию контента
 
@@ -67,7 +70,7 @@
 
 ## 9. Почему validator не заменяет JPJO
 
-Validator проверяет наличие файлов, уникальность ID, enum статусов/verdict, разрешимость entity, совпадение snapshot counts и запрет ложных `APPROVE`.
+Validator проверяет наличие файлов, уникальность ID, полноту полей CLAIM, каталог `SRC-*`, enum статусов/verdict, разрешимость entity, совпадение snapshot/summary counts и правила заполнения verdict в зависимости от `Review status`.
 Он **не** оценивает достаточность FN, корректность L1, адекватность can-do и точность нормативной клетки.
 
 ## 10. Решение этапа

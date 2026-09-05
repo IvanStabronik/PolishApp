@@ -306,6 +306,285 @@ def lex_has_substance(block: str) -> tuple[bool, list[str]]:
     return (len(missing) == 0, missing)
 
 
+def _empty_cell(val: str) -> bool:
+    return val.strip().strip("`") in ("", "—", "-", "–", "n/a", "N/A")
+
+
+def _parse_source_catalog(src_ver: str) -> dict[str, str]:
+    catalog: dict[str, str] = {}
+    in_catalog = False
+    for line in src_ver.splitlines():
+        if line.startswith("## Source IDs"):
+            in_catalog = True
+            continue
+        if in_catalog and line.startswith("## "):
+            break
+        if not in_catalog:
+            continue
+        m = re.match(r"^\|\s*(SRC-[A-Z0-9-]+)\s*\|\s*(.+?)\s*\|$", line)
+        if m and m.group(1) != "source":
+            catalog[m.group(1)] = m.group(2).strip()
+    return catalog
+
+
+def _parse_claims(src_ver: str) -> list[dict]:
+    claims: list[dict] = []
+    parts = re.split(r"^### (CLAIM-\d+)\s*$", src_ver, flags=re.M)
+    # parts[0]=preamble, then pairs (heading_id, body)
+    for i in range(1, len(parts), 2):
+        heading = parts[i]
+        body = parts[i + 1]
+        fields: dict[str, str] = {"_heading": heading, "_body": body}
+
+        def grab(label: str) -> str | None:
+            mm = re.search(
+                rf"^- \*\*{re.escape(label)}:\*\*\s*(.*)$", body, re.M
+            )
+            return mm.group(1).strip() if mm else None
+
+        for label in (
+            "Claim ID",
+            "entity ID",
+            "Точное проверяемое утверждение",
+            "Тип утверждения",
+            "source ID",
+            "URL",
+            "Документ",
+            "Точное место",
+            "evidence class",
+            "confidence",
+            "verification status",
+            "дата проверки",
+            "замечание",
+        ):
+            fields[label] = grab(label)
+        claims.append(fields)
+    return claims
+
+
+def _source_ids_from_field(raw: str | None) -> list[str]:
+    if not raw:
+        return []
+    return re.findall(r"`(SRC-[A-Z0-9-]+)`", raw)
+
+
+def _summary_counts_from_table(text: str) -> dict[str, int]:
+    out: dict[str, int] = {}
+    for st in (
+        "VERIFIED",
+        "PARTIALLY_VERIFIED",
+        "REQUIRES_VERIFICATION",
+        "NOT_SUPPORTED",
+        "CONFLICT",
+    ):
+        m = re.search(rf"\|\s*`?{st}`?\s*\|\s*(\d+)\s*\|", text)
+        if m:
+            out[st] = int(m.group(1))
+    m = re.search(r"\|\s*\*\*Всего claims\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|", text)
+    if m:
+        out["TOTAL"] = int(m.group(1))
+    return out
+
+
+def _is_blank_review_field(val: str) -> bool:
+    return _empty_cell(val)
+
+
+REVIEW_ENTITY_GROUPS = frozenset(
+    {
+        "FN-A1-* (30)",
+        "FN-A1-*",
+        "FN-A1-* Criticality",
+        "FN-A1-* Completion / Blocking errors",
+        "SCN-A1-* (17)",
+        "SCN-A1-*",
+        "LEX-A1-* (21)",
+        "LEX-A1-*",
+        "ASM-A1-*",
+        "EXM-A1-*",
+        "GR/PHON/ORTH/PRAG Required A1 (46)",
+        "31 ERR used in A1 chains",
+        "ERR-UKR-*",
+        "ERR-BEL-*",
+        "ERR-RUS-*",
+        "UI languages",
+        "standard_status",
+        "session_availability",
+        "DEC-003",
+        "ASM-005",
+        "PRODUCT-STATUS-MODEL",
+        "A1",
+        "L1-ERR-SET-A1",
+    }
+)
+
+CLAIM_REQUIRED_LABELS = (
+    "Claim ID",
+    "entity ID",
+    "Точное проверяемое утверждение",
+    "Тип утверждения",
+    "source ID",
+    "URL",
+    "Документ",
+    "Точное место",
+    "evidence class",
+    "confidence",
+    "verification status",
+    "дата проверки",
+    "замечание",
+)
+
+CONFIDENCE_ENUM = {"High", "Medium", "Low"}
+EVIDENCE_ENUM = {
+    "NORMATIVE_DIRECT",
+    "CEFR_DIRECT",
+    "SOURCE_INTERPRETATION",
+    "PRODUCT_ANALYSIS",
+    "EXPERT_JUDGMENT_REQUIRED",
+}
+STATUS_ENUM = {
+    "VERIFIED",
+    "PARTIALLY_VERIFIED",
+    "REQUIRES_VERIFICATION",
+    "NOT_SUPPORTED",
+    "CONFLICT",
+}
+VERDICT_ENUM = {
+    "APPROVE",
+    "APPROVE_WITH_CHANGES",
+    "REJECT",
+    "NEEDS_EVIDENCE",
+    "NOT_REVIEWED",
+}
+REVIEW_STATUS_ENUM = {"NOT_STARTED", "IN_REVIEW", "COMPLETED"}
+
+
+def _validate_review_row_fields(
+    review_status: str,
+    verd: str,
+    severity: str,
+    rationale: str,
+    correction: str,
+    reviewer: str,
+    date: str,
+) -> list[str]:
+    errs: list[str] = []
+    if verd not in VERDICT_ENUM:
+        errs.append(f"invalid verdict {verd}")
+        return errs
+    if verd in ("APPROVE", "APPROVE_WITH_CHANGES") and review_status == "NOT_STARTED":
+        errs.append(
+            f"positive verdict {verd} forbidden while Review status=NOT_STARTED"
+        )
+    if verd == "NOT_REVIEWED":
+        for name, val in (
+            ("severity", reviewer),
+            ("date", date),
+            ("rationale", rationale),
+            ("correction", correction),
+            ("severity", severity),
+        ):
+            if not _is_blank_review_field(val):
+                errs.append(f"NOT_REVIEWED requires empty {name}")
+    elif verd == "APPROVE":
+        if _is_blank_review_field(reviewer):
+            errs.append("APPROVE requires reviewer")
+        if _is_blank_review_field(date):
+            errs.append("APPROVE requires review date")
+        if _is_blank_review_field(rationale):
+            errs.append("APPROVE requires rationale")
+    elif verd == "APPROVE_WITH_CHANGES":
+        if _is_blank_review_field(reviewer):
+            errs.append("APPROVE_WITH_CHANGES requires reviewer")
+        if _is_blank_review_field(date):
+            errs.append("APPROVE_WITH_CHANGES requires review date")
+        if _is_blank_review_field(rationale):
+            errs.append("APPROVE_WITH_CHANGES requires rationale")
+        if _is_blank_review_field(correction):
+            errs.append("APPROVE_WITH_CHANGES requires proposed correction")
+    elif verd in ("REJECT", "NEEDS_EVIDENCE"):
+        if _is_blank_review_field(reviewer):
+            errs.append(f"{verd} requires reviewer")
+        if _is_blank_review_field(date):
+            errs.append(f"{verd} requires review date")
+        if _is_blank_review_field(severity):
+            errs.append(f"{verd} requires severity")
+        if _is_blank_review_field(rationale):
+            errs.append(f"{verd} requires rationale")
+    return errs
+
+
+def _run_review_packet_negative_tests() -> list[str]:
+    """Synthetic regressions for review-packet integrity rules."""
+    failures: list[str] = []
+
+    # 1) missing claim field
+    body = "\n".join(
+        [
+            "- **Claim ID:** `CLAIM-X`",
+            "- **entity ID:** `A1`",
+            # missing assertion
+            "- **Тип утверждения:** t",
+            "- **source ID:** `SRC-REQ-07`",
+            "- **URL:** x",
+            "- **Документ:** x",
+            "- **Точное место:** x",
+            "- **evidence class:** `PRODUCT_ANALYSIS`",
+            "- **confidence:** High",
+            "- **verification status:** `VERIFIED`",
+            "- **дата проверки:** 2026-09-05",
+            "- **замечание:** x",
+        ]
+    )
+    fields = {lab: None for lab in CLAIM_REQUIRED_LABELS}
+    for lab in CLAIM_REQUIRED_LABELS:
+        mm = re.search(rf"^- \*\*{re.escape(lab)}:\*\*\s*(.*)$", body, re.M)
+        fields[lab] = mm.group(1).strip() if mm else None
+    if fields["Точное проверяемое утверждение"] is not None:
+        failures.append("neg-missing-field: expected assertion absent")
+
+    # 2) unknown source ID
+    catalog = {"SRC-REQ-07": "x"}
+    unknown = [s for s in ["SRC-NOPE"] if s not in catalog]
+    if not unknown:
+        failures.append("neg-unknown-source: expected unknown")
+
+    # 3) forged status summary
+    actual = {"VERIFIED": 1}
+    claimed = {"VERIFIED": 9}
+    if actual == claimed:
+        failures.append("neg-forged-summary: expected mismatch")
+
+    # 4) APPROVE_WITH_CHANGES without reviewer/date
+    e4 = _validate_review_row_fields(
+        "IN_REVIEW",
+        "APPROVE_WITH_CHANGES",
+        "—",
+        "reason",
+        "fix it",
+        "—",
+        "—",
+    )
+    if not any("requires reviewer" in x for x in e4) or not any(
+        "requires review date" in x for x in e4
+    ):
+        failures.append(f"neg-awc-fields: {e4}")
+
+    # 5) APPROVE while NOT_STARTED
+    e5 = _validate_review_row_fields(
+        "NOT_STARTED", "APPROVE", "—", "ok", "—", "Dr X", "2026-09-05"
+    )
+    if not any("NOT_STARTED" in x for x in e5):
+        failures.append(f"neg-approve-not-started: {e5}")
+
+    # 6) unknown entity token in review item
+    token = "FN-UNKNOWN-99"
+    if token in REVIEW_ENTITY_GROUPS:
+        failures.append("neg-unknown-entity: token unexpectedly allowed")
+
+    return failures
+
+
 def main() -> int:
     # Windows consoles may be cp1252; keep UTF-8 for curriculum Cyrillic/Polish.
     if hasattr(sys.stdout, "reconfigure"):
@@ -1223,60 +1502,30 @@ def main() -> int:
     jpjo = read(jpjo_path)
     ready = read(ready_path)
 
-    EVIDENCE_ENUM = {
-        "NORMATIVE_DIRECT",
-        "CEFR_DIRECT",
-        "SOURCE_INTERPRETATION",
-        "PRODUCT_ANALYSIS",
-        "EXPERT_JUDGMENT_REQUIRED",
-    }
-    STATUS_ENUM = {
-        "VERIFIED",
-        "PARTIALLY_VERIFIED",
-        "REQUIRES_VERIFICATION",
-        "NOT_SUPPORTED",
-        "CONFLICT",
-    }
-    VERDICT_ENUM = {
-        "APPROVE",
-        "APPROVE_WITH_CHANGES",
-        "REJECT",
-        "NEEDS_EVIDENCE",
-        "NOT_REVIEWED",
-    }
     META_ENTITIES = {
         "PRODUCT-STATUS-MODEL",
         "A1",
         "ASM-005",
         "L1-ERR-SET-A1",
+        "DEC-003",
     }
 
-    claim_ids = re.findall(r"^\*\*Claim ID:\*\*\s*`([^`]+)`", src_ver, re.M)
-    if not claim_ids:
-        claim_ids = re.findall(r"^- \*\*Claim ID:\*\*\s*`([^`]+)`", src_ver, re.M)
-    if len(claim_ids) != len(set(claim_ids)):
-        v.err("a1-source-verification.md", "duplicate Claim ID")
-    if len(claim_ids) < 1:
-        v.err("a1-source-verification.md", "no Claim ID entries")
-
-    for m in re.finditer(
-        r"^- \*\*evidence class:\*\*\s*`([^`]+)`", src_ver, re.M
-    ):
-        if m.group(1) not in EVIDENCE_ENUM:
+    catalog = _parse_source_catalog(src_ver)
+    if len(catalog) < 15:
+        v.err(
+            "a1-source-verification.md",
+            f"source catalog too small ({len(catalog)}); missing atomic SRC-*",
+        )
+    for forbidden in list(catalog):
+        if "+" in forbidden:
             v.err(
                 "a1-source-verification.md",
-                f"invalid evidence class {m.group(1)}",
-            )
-    for m in re.finditer(
-        r"^- \*\*verification status:\*\*\s*`([^`]+)`", src_ver, re.M
-    ):
-        if m.group(1) not in STATUS_ENUM:
-            v.err(
-                "a1-source-verification.md",
-                f"invalid verification status {m.group(1)}",
+                f"composite source ID forbidden in catalog: {forbidden}",
             )
 
-    # entity resolvability for claims
+    claims = _parse_claims(src_ver)
+    claim_ids = []
+    status_hist: collections.Counter[str] = collections.Counter()
     resolvable = set(concepts)
     resolvable.update(f["id"] for f in a1_fns)
     resolvable.update(scn_ids)
@@ -1288,50 +1537,223 @@ def main() -> int:
         re.findall(r"^### (ERR-(?:UKR|RUS|BEL)-\d{2})\b", l1_text, re.M)
     )
     resolvable.update(all_err)
-    for m in re.finditer(r"^- \*\*entity ID:\*\*\s*`([^`]+)`", src_ver, re.M):
-        ent = m.group(1)
-        # allow FN-A1-* wildcard mention in multi lists? single id expected
-        if ent in resolvable:
+
+    for cl in claims:
+        heading = cl["_heading"]
+        cid_raw = cl.get("Claim ID") or ""
+        cid_m = re.search(r"`(CLAIM-\d+)`", cid_raw)
+        cid = cid_m.group(1) if cid_m else ""
+        if not cid:
+            v.err("a1-source-verification.md", "Claim ID missing/unparseable", heading)
             continue
-        if ent.startswith("FN-A1-") and ent in {f["id"] for f in a1_fns}:
-            continue
+        if cid != heading:
+            v.err(
+                "a1-source-verification.md",
+                f"heading {heading} ≠ Claim ID {cid}",
+                cid,
+            )
+        claim_ids.append(cid)
+        for lab in CLAIM_REQUIRED_LABELS:
+            val = cl.get(lab)
+            if val is None or val.strip() == "":
+                v.err(
+                    "a1-source-verification.md",
+                    f"missing required field: {lab}",
+                    cid,
+                )
+        ent_raw = cl.get("entity ID") or ""
+        ent_m = re.search(r"`([^`]+)`", ent_raw)
+        ent = ent_m.group(1) if ent_m else ent_raw.strip("` ")
+        if ent not in resolvable:
+            v.err(
+                "a1-source-verification.md",
+                f"unresolvable entity ID {ent}",
+                cid,
+            )
+        src_ids = _source_ids_from_field(cl.get("source ID"))
+        if not src_ids:
+            v.err("a1-source-verification.md", "no atomic source ID", cid)
+        for sid in src_ids:
+            if "+" in sid:
+                v.err(
+                    "a1-source-verification.md",
+                    f"composite source ID forbidden: {sid}",
+                    cid,
+                )
+            if sid not in catalog:
+                v.err(
+                    "a1-source-verification.md",
+                    f"source ID not in catalog: {sid}",
+                    cid,
+                )
+        ev_m = re.search(r"`([^`]+)`", cl.get("evidence class") or "")
+        ev = ev_m.group(1) if ev_m else ""
+        if ev not in EVIDENCE_ENUM:
+            v.err(
+                "a1-source-verification.md",
+                f"invalid evidence class {ev}",
+                cid,
+            )
+        st_m = re.search(r"`([^`]+)`", cl.get("verification status") or "")
+        st = st_m.group(1) if st_m else ""
+        if st not in STATUS_ENUM:
+            v.err(
+                "a1-source-verification.md",
+                f"invalid verification status {st}",
+                cid,
+            )
+        else:
+            status_hist[st] += 1
+        conf = (cl.get("confidence") or "").strip()
+        if conf not in CONFIDENCE_ENUM:
+            v.err(
+                "a1-source-verification.md",
+                f"invalid confidence {conf}",
+                cid,
+            )
+
+    if len(claim_ids) != len(set(claim_ids)):
+        v.err("a1-source-verification.md", "duplicate Claim ID")
+    if len(claim_ids) != 192:
         v.err(
             "a1-source-verification.md",
-            f"unresolvable entity ID {ent}",
+            f"expected 192 claims, found {len(claim_ids)}",
         )
 
-    review_ids = re.findall(r"\| `(REV-\d+)` \|", jpjo)
-    if len(review_ids) != len(set(review_ids)):
-        v.err("a1-jpjo-review-packet.md", "duplicate Review ID")
-    if len(review_ids) < 16:
+    summarized = _summary_counts_from_table(src_ver)
+    for st, n in status_hist.items():
+        if summarized.get(st) != n:
+            v.err(
+                "a1-source-verification.md",
+                f"status summary {st}={summarized.get(st)} ≠ actual {n}",
+            )
+    for st in STATUS_ENUM:
+        if st not in status_hist and summarized.get(st, 0) not in (0, None):
+            if summarized.get(st, 0) != 0:
+                v.err(
+                    "a1-source-verification.md",
+                    f"status summary {st}={summarized.get(st)} ≠ actual 0",
+                )
+    if summarized.get("TOTAL") != len(claim_ids):
         v.err(
-            "a1-jpjo-review-packet.md",
-            f"expected ≥16 review items, found {len(review_ids)}",
+            "a1-source-verification.md",
+            f"total claims summary {summarized.get('TOTAL')} ≠ {len(claim_ids)}",
         )
 
-    for m in re.finditer(r"\| `(REV-\d+)` \|.*?\| `(APPROVE[^`]*|REJECT|NEEDS_EVIDENCE|NOT_REVIEWED|APPROVE_WITH_CHANGES)` \|", jpjo):
-        pass
+    ready_sum = _summary_counts_from_table(ready)
+    for st, n in status_hist.items():
+        if ready_sum.get(st) != n:
+            v.err(
+                "phase-2-a1-review-readiness-report.md",
+                f"status summary {st}={ready_sum.get(st)} ≠ actual {n}",
+            )
+    if ready_sum.get("TOTAL") != len(claim_ids):
+        v.err(
+            "phase-2-a1-review-readiness-report.md",
+            f"total claims summary {ready_sum.get('TOTAL')} ≠ {len(claim_ids)}",
+        )
+
+    rs_m = re.search(r"\*\*Review status:\*\*\s*`([^`]+)`", jpjo)
+    if not rs_m:
+        v.err("a1-jpjo-review-packet.md", "missing Review status")
+        review_status = "NOT_STARTED"
+    else:
+        review_status = rs_m.group(1)
+        if review_status not in REVIEW_STATUS_ENUM:
+            v.err(
+                "a1-jpjo-review-packet.md",
+                f"invalid Review status {review_status}",
+            )
+
+    review_ids = []
     verdicts = []
+    pending = 0
+    expert_blockers = 0
     for line in jpjo.splitlines():
         if not line.startswith("| `REV-"):
             continue
         cols = [c.strip() for c in line.strip("|").split("|")]
-        if len(cols) < 7:
+        if len(cols) < 12:
+            v.err(
+                "a1-jpjo-review-packet.md",
+                f"review row has {len(cols)} cols, need 12",
+            )
             continue
-        verd = cols[6].strip("` ")
+        rid = cols[0].strip("`")
+        review_ids.append(rid)
+        ent_cell = cols[3].strip("`")
+        verd = cols[6].strip("`")
+        severity = cols[7]
+        rationale = cols[8]
+        correction = cols[9]
+        reviewer = cols[10]
+        date = cols[11]
         verdicts.append(verd)
-        if verd not in VERDICT_ENUM:
+        for token in [t.strip() for t in ent_cell.split(";") if t.strip()]:
+            if token in REVIEW_ENTITY_GROUPS or token in resolvable:
+                continue
             v.err(
                 "a1-jpjo-review-packet.md",
-                f"invalid verdict {verd}",
-                cols[0].strip("`"),
+                f"unresolvable review entity token: {token}",
+                rid,
             )
-        if verd == "APPROVE":
-            v.err(
-                "a1-jpjo-review-packet.md",
-                "false APPROVE before independent JPJO review",
-                cols[0].strip("`"),
-            )
+        for msg in _validate_review_row_fields(
+            review_status, verd, severity, rationale, correction, reviewer, date
+        ):
+            v.err("a1-jpjo-review-packet.md", msg, rid)
+        if verd == "NOT_REVIEWED":
+            pending += 1
+        if verd in ("REJECT", "NEEDS_EVIDENCE") and "blocker" in severity.lower():
+            expert_blockers += 1
+
+    if len(review_ids) != len(set(review_ids)):
+        v.err("a1-jpjo-review-packet.md", "duplicate Review ID")
+    if len(review_ids) != 16:
+        v.err(
+            "a1-jpjo-review-packet.md",
+            f"expected 16 review items, found {len(review_ids)}",
+        )
+
+    # process metrics in packet + report
+    for label, val, blob, fname in (
+        (
+            "expert-registered blockers",
+            expert_blockers,
+            jpjo + "\n" + ready,
+            "review metrics",
+        ),
+        (
+            "mandatory review items pending",
+            pending,
+            jpjo + "\n" + ready,
+            "review metrics",
+        ),
+    ):
+        if not re.search(
+            rf"{re.escape(label)}[^\n]*\*\*{val}\*\*", blob, re.I
+        ) and not re.search(
+            rf"\*\*{re.escape(label)}\*\*[^\n]*\*\*{val}\*\*", blob, re.I
+        ):
+            # allow table form
+            if not re.search(
+                rf"\|\s*{re.escape(label.replace(' (`NOT_REVIEWED`)', ''))}[^\|]*\|\s*\*\*{val}\*\*",
+                blob,
+                re.I,
+            ):
+                v.err(
+                    fname,
+                    f"metric {label} must report {val}",
+                )
+
+    if not re.search(r"open publication gates[^\n]*\*\*blocked\*\*", jpjo + "\n" + ready, re.I):
+        if not re.search(r"\|\s*open publication gates\s*\|\s*\*\*blocked\*\*", jpjo + "\n" + ready, re.I):
+            v.err("review metrics", "open publication gates must be blocked")
+
+    if review_status == "NOT_STARTED" and pending != 16:
+        v.err(
+            "a1-jpjo-review-packet.md",
+            f"NOT_STARTED expects 16 pending items, found {pending}",
+        )
 
     # snapshot counts must match inventories
     if not re.search(r"\|\s*Канонические FN A1\s*\|\s*\*\*30\*\*", jpjo):
@@ -1368,7 +1790,9 @@ def main() -> int:
         )
     if re.search(
         r"A2–B2.*(заверш|готовы|complete)", ready + jpjo, re.I
-    ) and not re.search(r"не.*(заверш|готов)|not started|pending", ready + jpjo, re.I):
+    ) and not re.search(
+        r"не.*(заверш|готов)|not started|pending", ready + jpjo, re.I
+    ):
         v.err("review-packet", "A2–B2 must not be declared complete")
 
     for blob_name, blob in (
@@ -1379,9 +1803,15 @@ def main() -> int:
         if blob.startswith("\ufeff"):
             v.err(blob_name, "UTF-8 BOM is not allowed")
 
+    neg_fail = _run_review_packet_negative_tests()
+    for msg in neg_fail:
+        v.err("negative-tests", msg)
     print(
         f"Review packet: claims={len(claim_ids)}; review_items={len(review_ids)}; "
-        f"verdicts={dict(collections.Counter(verdicts))}"
+        f"Review status={review_status}; pending={pending}; "
+        f"expert_blockers={expert_blockers}; "
+        f"status_hist={dict(status_hist)}; "
+        f"negative_tests={'PASS' if not neg_fail else 'FAIL'}"
     )
 
     # distributions
