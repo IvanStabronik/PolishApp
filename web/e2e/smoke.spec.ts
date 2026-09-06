@@ -15,7 +15,7 @@ const MODULE_IDS = [
   "pierwsza-sprawa-w-urzedzie",
 ] as const;
 
-const ARTIFACT_DIR = path.join("test-results", "closed-beta-screens");
+const ARTIFACT_DIR = path.join("playwright-artifacts", "closed-beta-screens");
 
 async function assertServerReady(request: APIRequestContext): Promise<void> {
   try {
