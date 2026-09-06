@@ -116,8 +116,9 @@ export function OnboardingForm() {
         <legend className="font-display text-xl text-[var(--color-ink)]">
           {t("stepAge")}
         </legend>
-        <label className="choice-row mt-3">
+        <label className="choice-row mt-3" htmlFor="onboarding-age">
           <input
+            id="onboarding-age"
             type="checkbox"
             data-testid="onboarding-age"
             checked={ageConfirmed}
@@ -258,8 +259,9 @@ export function OnboardingForm() {
           {t("stepConsent")}
         </legend>
         <div className="mt-3 flex flex-col gap-2">
-          <label className="choice-row">
+          <label className="choice-row" htmlFor="onboarding-consent-terms">
             <input
+              id="onboarding-consent-terms"
               type="checkbox"
               data-testid="onboarding-consent-terms"
               checked={consentTerms}
@@ -268,8 +270,9 @@ export function OnboardingForm() {
             />
             <span>{t("consentTerms")}</span>
           </label>
-          <label className="choice-row">
+          <label className="choice-row" htmlFor="onboarding-consent-privacy">
             <input
+              id="onboarding-consent-privacy"
               type="checkbox"
               data-testid="onboarding-consent-privacy"
               checked={consentPrivacy}
@@ -278,8 +281,9 @@ export function OnboardingForm() {
             />
             <span>{t("consentPrivacy")}</span>
           </label>
-          <label className="choice-row">
+          <label className="choice-row" htmlFor="onboarding-consent-research">
             <input
+              id="onboarding-consent-research"
               type="checkbox"
               data-testid="onboarding-consent-research"
               checked={consentResearch}

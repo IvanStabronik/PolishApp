@@ -83,12 +83,9 @@ async function answerCurrentExercise(page: Page) {
 }
 
 async function checkOnboardingConsent(page: Page, testId: string) {
-  // Click the label text, not the input: <label><input/><span/></label> double-fires
-  // when the input is clicked, and setChecked does not always update React state.
   const box = page.getByTestId(testId);
   await expect(box).toBeVisible();
-  if (await box.isChecked()) return;
-  await page.locator(`label:has([data-testid="${testId}"]) span`).click();
+  await box.check();
   await expect(box).toBeChecked({ timeout: 5_000 });
 }
 
