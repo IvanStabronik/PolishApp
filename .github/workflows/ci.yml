@@ -94,6 +94,9 @@ jobs:
       - name: Validate content YAML
         run: pnpm content:validate
 
+      - name: M3 inventory + provenance assert
+        run: pnpm m3:assert
+
       - name: Migrate & seed (test DB)
         run: |
           pnpm db:migrate
@@ -108,8 +111,11 @@ jobs:
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: E2E learner path
+      - name: E2E M2.1 learner path
         run: pnpm test:e2e:smoke
+
+      - name: E2E M3 closed beta
+        run: pnpm test:e2e:m3
 
       - name: E2E no-preview security
         run: pnpm test:e2e:no-demo
