@@ -29,7 +29,7 @@ jobs:
   build-and-test:
     name: Lint · typecheck · unit · content · DB · build · e2e
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
 
     services:
       postgres:
@@ -49,9 +49,11 @@ jobs:
     env:
       DATABASE_URL: postgresql://slowarium:slowarium@localhost:5432/slowarium_test
       BETTER_AUTH_SECRET: ci-test-secret-not-for-production
+      INVITE_TOKEN_PEPPER: ci-invite-pepper-not-for-production
       PRIVACY_AUDIT_SECRET: ci-privacy-audit-secret-not-for-production
       BETTER_AUTH_URL: http://127.0.0.1:3000
       APP_URL: http://127.0.0.1:3000
+      BETA_MODE: "true"
       DEMO_MODE: "true"
       DEMO_PREVIEW: "true"
       PLAYWRIGHT_BASE_URL: http://127.0.0.1:3000
@@ -97,6 +99,25 @@ jobs:
       - name: M3 inventory + provenance assert
         run: pnpm m3:assert
 
+      - name: Security / config checks
+        run: |
+          set -euo pipefail
+          test -f Dockerfile
+          test -f ../docs/runbooks/deployment.md
+          test -f ../docs/runbooks/backup-restore.md
+          test -f ../docs/runbooks/beta-operator.md
+          pnpm ops:validate-env
+          set +e
+          pnpm audit --prod --audit-level=high > ../docs/reports/m4-dependency-audit.txt 2>&1
+          audit_rc=$?
+          set -e
+          echo "pnpm audit exit=$audit_rc"
+          cat ../docs/reports/m4-dependency-audit.txt
+          if [ "$audit_rc" -ne 0 ]; then
+            echo "Failing CI: production dependency audit reported high+ issues"
+            exit "$audit_rc"
+          fi
+
       - name: Migrate & seed (test DB)
         run: |
           pnpm db:migrate
@@ -117,6 +138,9 @@ jobs:
       - name: E2E M3 closed beta
         run: pnpm test:e2e:m3
 
+      - name: E2E M4 operable beta
+        run: pnpm test:e2e:m4
+
       - name: E2E no-preview security
         run: pnpm test:e2e:no-demo
         env:
@@ -128,9 +152,13 @@ jobs:
           set -euo pipefail
           test -d test-results
           test -d playwright-artifacts/closed-beta-screens
+          test -d playwright-artifacts/m4-responsive
           count=$(find playwright-artifacts/closed-beta-screens -name '*.png' | wc -l)
+          m4count=$(find playwright-artifacts/m4-responsive -name '*.png' | wc -l)
           echo "closed-beta screenshots: $count"
+          echo "m4 responsive screenshots: $m4count"
           test "$count" -ge 3
+          test "$m4count" -ge 3
           find test-results -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | head -n 20 || true
           artifact_files=$(find test-results playwright-artifacts -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | wc -l)
           echo "artifact files: $artifact_files"
@@ -138,7 +166,7 @@ jobs:
 
       - name: Whitespace / conflict markers
         working-directory: .
-        run: git diff --check 301d8a813b674f0cc6392dcb48271f08d4896fbe..HEAD
+        run: git diff --check 4a9d495d038d9af27dd26cfad823d5e1d8bd4d94..HEAD
 
       - name: Upload Playwright artifacts
         if: always()
@@ -149,5 +177,6 @@ jobs:
             web/test-results/
             web/playwright-report/
             web/playwright-artifacts/
+            docs/reports/m4-dependency-audit.txt
           if-no-files-found: error
           retention-days: 14
