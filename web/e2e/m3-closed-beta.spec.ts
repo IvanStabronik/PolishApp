@@ -90,7 +90,7 @@ test.describe("Milestone 3 closed beta core", () => {
       "DemoLearner1!",
       /\/dashboard/,
     );
-    await page.getByTestId(`module-${MODULE}`).click();
+    await page.getByTestId(`module-open-${MODULE}`).click();
     await expect(page).toHaveURL(new RegExp(`/learn/${MODULE}`));
     const lessons = page.getByTestId("module-lesson");
     await expect(lessons).toHaveCount(3);
