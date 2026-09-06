@@ -20,6 +20,7 @@ import type {
   LearnerExportInput,
 } from "./export";
 import type { DeleteAccountStore } from "./delete-account";
+import { privacyAuditSubjectId } from "./audit-id";
 
 export function createPrivacyExportStore(): ExportStore {
   return {
@@ -212,18 +213,13 @@ export function createPrivacyDeleteStore(): DeleteAccountStore {
           actorUserId: null,
           subjectUserId: null,
           action: "delete_completed",
-          details: { at, subjectHash: hashSubject(userId) },
+          details: {
+            at,
+            // HMAC subject id — never store deleted email in clear.
+            subjectHash: privacyAuditSubjectId(userId),
+          },
         });
       });
     },
   };
-}
-
-/** Minimal non-reversible marker for compliance trail (not PII). */
-function hashSubject(userId: string): string {
-  let h = 0;
-  for (let i = 0; i < userId.length; i++) {
-    h = (h * 31 + userId.charCodeAt(i)) >>> 0;
-  }
-  return `u${h.toString(16)}`;
 }

@@ -49,6 +49,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://slowarium:slowarium@localhost:5432/slowarium_test
       BETTER_AUTH_SECRET: ci-test-secret-not-for-production
+      PRIVACY_AUDIT_SECRET: ci-privacy-audit-secret-not-for-production
       BETTER_AUTH_URL: http://127.0.0.1:3000
       APP_URL: http://127.0.0.1:3000
       DEMO_MODE: "true"
@@ -116,6 +117,21 @@ jobs:
           DEMO_PREVIEW: "false"
           NEXT_PUBLIC_DEMO_PREVIEW: "false"
 
+      - name: Assert Playwright artifacts present
+        run: |
+          set -euo pipefail
+          test -d test-results
+          # Key closed-beta screenshots (success path) must exist
+          test -d test-results/closed-beta-screens
+          count=$(find test-results/closed-beta-screens -name '*.png' | wc -l)
+          echo "closed-beta screenshots: $count"
+          test "$count" -ge 3
+          # Traces / videos / failure screenshots under test-results
+          find test-results -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | head
+          artifact_files=$(find test-results -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | wc -l)
+          echo "artifact files: $artifact_files"
+          test "$artifact_files" -ge 3
+
       - name: Whitespace / conflict markers
         working-directory: .
         run: git diff --check 6ab4592716ed3bf34107322a390b337c563fca63..HEAD
@@ -128,4 +144,5 @@ jobs:
           path: |
             web/test-results/
             web/playwright-report/
-          if-no-files-found: ignore
+          if-no-files-found: error
+          retention-days: 14

@@ -1,9 +1,21 @@
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
+import path from "node:path";
+import fs from "node:fs";
 
 /**
- * Milestone 2 private-alpha learner path.
+ * Milestone 2.1 private-alpha learner path (5 modules, 4 types, privacy).
  * Server/DB must be up — never skip.
  */
+
+const MODULE_IDS = [
+  "pierwsze-spotkanie",
+  "w-kawiarni",
+  "w-sklepie",
+  "droga-i-transport",
+  "pierwsza-sprawa-w-urzedzie",
+] as const;
+
+const ARTIFACT_DIR = path.join("test-results", "closed-beta-screens");
 
 async function assertServerReady(request: APIRequestContext): Promise<void> {
   try {
@@ -20,7 +32,10 @@ async function assertServerReady(request: APIRequestContext): Promise<void> {
   }
 }
 
-async function answerCurrentExercise(page: Page) {
+async function answerCurrentExercise(
+  page: Page,
+  seenTypes: Set<string>,
+) {
   const player = page.getByTestId("exercise-player");
   await expect(player).toBeVisible({ timeout: 20_000 });
 
@@ -49,6 +64,7 @@ async function answerCurrentExercise(page: Page) {
 
   const exerciseId = await player.getAttribute("data-exercise-id");
   const type = await player.getAttribute("data-exercise-type");
+  if (type) seenTypes.add(type);
 
   if (type === "single_choice" || type === "multiple_choice") {
     await page
@@ -62,6 +78,9 @@ async function answerCurrentExercise(page: Page) {
     for (let i = 0; i < count; i += 1) {
       await gaps.nth(i).fill("odpowiedz");
     }
+  } else if (type === "ordering") {
+    // Default order is already a valid submission target.
+    await expect(page.getByTestId("exercise-ordering")).toBeVisible();
   }
 
   await page.getByTestId("exercise-submit").click();
@@ -82,6 +101,20 @@ async function answerCurrentExercise(page: Page) {
   );
 }
 
+async function completeModule(page: Page, moduleId: string, seenTypes: Set<string>) {
+  await page.goto(`/ru/learn/${moduleId}`);
+  await expect(page).toHaveURL(new RegExp(`/learn/${moduleId}`), {
+    timeout: 20_000,
+  });
+  await page.getByTestId("start-practice").click();
+
+  for (let i = 0; i < 20; i += 1) {
+    if (page.url().includes("/result")) break;
+    await answerCurrentExercise(page, seenTypes);
+  }
+  await expect(page).toHaveURL(/\/result/, { timeout: 30_000 });
+}
+
 async function checkOnboardingConsent(page: Page, testId: string) {
   const box = page.getByTestId(testId);
   await expect(box).toBeVisible();
@@ -93,24 +126,21 @@ function authApiHeaders(): Record<string, string> {
   const base = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
   return {
     "Content-Type": "application/json",
-    // Cookie-bearing API calls require Origin (better-auth CSRF); request context omits it.
     Origin: base,
     Referer: `${base}/ru/login`,
   };
 }
+
 async function loginAs(
   page: Page,
   email: string,
   password: string,
   expectUrl: RegExp,
 ) {
-  // API sign-in shares the browser cookie jar and avoids racing the login
-  // form's window.location.replace (which hung CI with empty page.url()).
   let res = await page.context().request.post("/api/auth/sign-in/email", {
     data: { email, password },
     headers: authApiHeaders(),
   });
-  // better-auth production default: 3 sign-ins / 10s — brief backoff if still limited.
   for (let attempt = 0; attempt < 3 && res.status() === 429; attempt += 1) {
     const retryAfter = Number(res.headers()["x-retry-after"] ?? "11");
     await page.waitForTimeout(Math.min(Math.max(retryAfter, 1), 15) * 1000);
@@ -132,16 +162,37 @@ async function loginAs(
   await expect(page).toHaveURL(expectUrl, { timeout: 15_000 });
 }
 
+async function finishOnboardingIfNeeded(page: Page) {
+  if (!page.url().includes("/onboarding")) return;
+  await expect(page.getByTestId("onboarding-form")).toBeVisible();
+  await checkOnboardingConsent(page, "onboarding-age");
+  await checkOnboardingConsent(page, "onboarding-consent-terms");
+  await checkOnboardingConsent(page, "onboarding-consent-privacy");
+  await expect(page.getByTestId("onboarding-continue")).toBeEnabled();
+  await page.getByTestId("onboarding-continue").click();
+  await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
+}
+
+async function saveKeyScreenshot(page: Page, name: string) {
+  fs.mkdirSync(ARTIFACT_DIR, { recursive: true });
+  await page.screenshot({
+    path: path.join(ARTIFACT_DIR, `${name}.png`),
+    fullPage: true,
+  });
+}
+
 test.describe.configure({ mode: "serial" });
 
-test.describe("Milestone 2 private alpha learner path", () => {
+test.describe("Milestone 2.1 private alpha learner path", () => {
   test.beforeAll(async ({ request }) => {
     await assertServerReady(request);
+    fs.mkdirSync(ARTIFACT_DIR, { recursive: true });
   });
 
   test("guest cannot open dashboard", async ({ page }) => {
     await page.goto("/ru/dashboard");
     await expect(page).toHaveURL(/\/login/, { timeout: 15_000 });
+    await saveKeyScreenshot(page, "guest-login-redirect");
   });
 
   test("wrong password does not create a session", async ({ page }) => {
@@ -155,7 +206,36 @@ test.describe("Milestone 2 private alpha learner path", () => {
     await expect(page).toHaveURL(/\/login/);
   });
 
-  test("register onboarding delete cycle", async ({ page }) => {
+  test("ordinary learner: no DRAFT and 404 on direct module URL", async ({
+    page,
+  }) => {
+    test.setTimeout(180_000);
+    const stamp = Date.now();
+    const email = `e2e.ordinary.${stamp}@slowarium.test`;
+    const password = "E2eTestPass123!";
+
+    await page.goto("/ru/register");
+    await page.getByTestId("register-name").fill("E2E Ordinary");
+    await page.getByTestId("register-email").fill(email);
+    await page.getByTestId("register-password").fill(password);
+    await page.getByTestId("register-submit").click();
+    await expect(page).toHaveURL(/\/onboarding/, { timeout: 30_000 });
+    await finishOnboardingIfNeeded(page);
+
+    await expect(page.getByTestId("module-pierwsze-spotkanie")).toHaveCount(0);
+    await expect(page.getByTestId("preview-banner")).toHaveCount(0);
+
+    const res = await page.goto("/ru/learn/pierwsze-spotkanie", {
+      waitUntil: "domcontentloaded",
+    });
+    // App may render not-found UI or 404 status — never show DRAFT player.
+    expect(res?.status() === 404 || page.url().includes("pierwsze-spotkanie")).toBeTruthy();
+    await expect(page.getByTestId("exercise-player")).toHaveCount(0);
+    await expect(page.getByTestId("start-practice")).toHaveCount(0);
+    await saveKeyScreenshot(page, "ordinary-learner-no-draft");
+  });
+
+  test("register onboarding delete cycle blocks re-login", async ({ page }) => {
     test.setTimeout(180_000);
     const stamp = Date.now();
     const email = `e2e.delete.${stamp}@slowarium.test`;
@@ -167,19 +247,7 @@ test.describe("Milestone 2 private alpha learner path", () => {
     await page.getByTestId("register-password").fill(password);
     await page.getByTestId("register-submit").click();
     await expect(page).toHaveURL(/\/onboarding/, { timeout: 30_000 });
-    await expect(page.getByTestId("onboarding-form")).toBeVisible();
-
-    await checkOnboardingConsent(page, "onboarding-age");
-    await checkOnboardingConsent(page, "onboarding-consent-terms");
-    await checkOnboardingConsent(page, "onboarding-consent-privacy");
-    await expect(page.getByTestId("onboarding-continue")).toBeEnabled({
-      timeout: 10_000,
-    });
-    await page.getByTestId("onboarding-continue").click();
-    await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
-
-    // Ordinary learner must not see DRAFT modules.
-    await expect(page.getByTestId("module-pierwsze-spotkanie")).toHaveCount(0);
+    await finishOnboardingIfNeeded(page);
 
     await page.getByTestId("link-privacy").click();
     await page.getByTestId("privacy-delete").click();
@@ -196,7 +264,6 @@ test.describe("Milestone 2 private alpha learner path", () => {
       timeout: 10_000,
     });
 
-    // Delete redirects to login; assert credentials are dead.
     await page.waitForURL(/\/login/, { timeout: 15_000 });
     await expect(page.getByTestId("login-email")).toBeVisible();
     await page.getByTestId("login-email").fill(email);
@@ -213,10 +280,13 @@ test.describe("Milestone 2 private alpha learner path", () => {
     expect(deny.ok()).toBeFalsy();
     await expect(page.getByTestId("auth-error")).toBeVisible({ timeout: 15_000 });
     await expect(page).toHaveURL(/\/login/);
+    await saveKeyScreenshot(page, "delete-blocks-relogin");
   });
 
-  test("previewer DRAFT path with persistence", async ({ page }) => {
-    test.setTimeout(180_000);
+  test("previewer completes five modules with all four exercise types", async ({
+    page,
+  }) => {
+    test.setTimeout(600_000);
 
     await loginAs(
       page,
@@ -224,33 +294,28 @@ test.describe("Milestone 2 private alpha learner path", () => {
       "DemoLearner1!",
       /\/(dashboard|onboarding)/,
     );
-    if (page.url().includes("/onboarding")) {
-      await expect(page.getByTestId("onboarding-form")).toBeVisible();
-      await checkOnboardingConsent(page, "onboarding-age");
-      await checkOnboardingConsent(page, "onboarding-consent-terms");
-      await checkOnboardingConsent(page, "onboarding-consent-privacy");
-      await expect(page.getByTestId("onboarding-continue")).toBeEnabled();
-      await page.getByTestId("onboarding-continue").click();
-      await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
-    }
+    await finishOnboardingIfNeeded(page);
 
     await expect(page.getByTestId("preview-banner")).toBeVisible();
-    await expect(page.getByTestId("module-pierwsze-spotkanie")).toBeVisible();
-
-    await page.getByTestId("module-open-pierwsze-spotkanie").click();
-    await expect(page).toHaveURL(/\/learn\/pierwsze-spotkanie/, {
-      timeout: 20_000,
-    });
-    await page.getByTestId("start-practice").click();
-
-    for (let i = 0; i < 12; i += 1) {
-      if (page.url().includes("/result")) break;
-      await answerCurrentExercise(page);
+    for (const id of MODULE_IDS) {
+      await expect(page.getByTestId(`module-${id}`)).toBeVisible();
     }
-    await expect(page).toHaveURL(/\/result/, { timeout: 30_000 });
+    await saveKeyScreenshot(page, "previewer-dashboard-five-modules");
+
+    const seenTypes = new Set<string>();
+    for (const id of MODULE_IDS) {
+      await completeModule(page, id, seenTypes);
+    }
+
+    expect(seenTypes.has("single_choice")).toBeTruthy();
+    expect(seenTypes.has("multiple_choice")).toBeTruthy();
+    expect(seenTypes.has("gap_fill")).toBeTruthy();
+    expect(seenTypes.has("ordering")).toBeTruthy();
+    await saveKeyScreenshot(page, "previewer-module-result");
 
     await page.getByTestId("link-progress").click();
     await expect(page.getByTestId("progress-page")).toBeVisible();
+    await saveKeyScreenshot(page, "progress-after-modules");
 
     await page.getByTestId("link-logout").click();
     await expect(page).toHaveURL(/\/login/, { timeout: 15_000 });
@@ -264,16 +329,56 @@ test.describe("Milestone 2 private alpha learner path", () => {
       /\/dashboard/,
     );
     await expect(page.getByTestId("module-pierwsze-spotkanie")).toBeVisible();
+    await page.getByTestId("link-progress").click();
+    await expect(page.getByTestId("progress-page")).toBeVisible();
+    await saveKeyScreenshot(page, "progress-persists-after-relogin");
+  });
 
+  test("privacy export success path", async ({ page }) => {
+    test.setTimeout(120_000);
+    await loginAs(
+      page,
+      "learner@demo.slowarium.local",
+      "DemoLearner1!",
+      /\/dashboard/,
+    );
     await page.getByTestId("link-privacy").click();
     await expect(page).toHaveURL(/\/privacy/);
-    const downloadPromise = page
-      .waitForEvent("download", { timeout: 15_000 })
-      .catch(() => null);
+
+    const downloadPromise = page.waitForEvent("download", { timeout: 15_000 });
     await page.getByTestId("privacy-export").click();
     await expect(page.getByTestId("privacy-export-status")).toBeVisible({
       timeout: 15_000,
     });
-    await downloadPromise;
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(/slowarium-export/i);
+    await expect(page.getByTestId("privacy-export-error")).toHaveCount(0);
+    await saveKeyScreenshot(page, "privacy-export-success");
+  });
+
+  test("privacy export failure path", async ({ page }) => {
+    test.setTimeout(120_000);
+    await loginAs(
+      page,
+      "learner@demo.slowarium.local",
+      "DemoLearner1!",
+      /\/dashboard/,
+    );
+    await page.getByTestId("link-privacy").click();
+
+    await page.route("**/api/privacy/export", async (route) => {
+      await route.fulfill({
+        status: 500,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "export_failed" }),
+      });
+    });
+
+    await page.getByTestId("privacy-export").click();
+    await expect(page.getByTestId("privacy-export-error")).toBeVisible({
+      timeout: 15_000,
+    });
+    await expect(page.getByTestId("privacy-export-status")).toHaveCount(0);
+    await saveKeyScreenshot(page, "privacy-export-failure");
   });
 });

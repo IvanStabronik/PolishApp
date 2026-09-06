@@ -9,26 +9,41 @@ export function PrivacyActions() {
   const t = useTranslations("privacy");
   const [pending, setPending] = useState(false);
   const [exportMsg, setExportMsg] = useState<string | null>(null);
+  const [exportError, setExportError] = useState(false);
   const [deleteMsg, setDeleteMsg] = useState<string | null>(null);
   const [confirm, setConfirm] = useState("");
   const [confirming, setConfirming] = useState(false);
 
   function onExport() {
     setPending(true);
+    setExportMsg(null);
+    setExportError(false);
     void (async () => {
       try {
         const res = await fetch("/api/privacy/export", { method: "POST" });
-        if (res.ok) {
-          const blob = await res.blob();
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "slowarium-export.json";
-          a.click();
-          URL.revokeObjectURL(url);
+        if (!res.ok) {
+          setExportError(true);
+          setExportMsg(t("exportFailed"));
+          return;
         }
-      } finally {
+        const blob = await res.blob();
+        if (!blob || blob.size === 0) {
+          setExportError(true);
+          setExportMsg(t("exportFailed"));
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "slowarium-export.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        setExportError(false);
         setExportMsg(t("exportDone"));
+      } catch {
+        setExportError(true);
+        setExportMsg(t("exportFailed"));
+      } finally {
         setPending(false);
       }
     })();
@@ -87,9 +102,15 @@ export function PrivacyActions() {
         </Button>
         {exportMsg ? (
           <p
-            className="mt-3 text-sm text-[var(--color-forest)]"
-            role="status"
-            data-testid="privacy-export-status"
+            className={
+              exportError
+                ? "mt-3 text-sm text-[var(--color-error)]"
+                : "mt-3 text-sm text-[var(--color-forest)]"
+            }
+            role={exportError ? "alert" : "status"}
+            data-testid={
+              exportError ? "privacy-export-error" : "privacy-export-status"
+            }
           >
             {exportMsg}
           </p>

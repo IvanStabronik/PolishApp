@@ -11,6 +11,11 @@ export type EvalResult = {
   explanation: string;
   evidenceWeight: number;
   conceptId?: string;
+  /**
+   * Pedagogical reveal after evaluation only — indexes of correct options.
+   * Never include on initial learner exercise DTO.
+   */
+  revealCorrectIndexes?: number[];
 };
 
 /** Normalize Polish learner text for closed matching (ASM-006). */
@@ -45,7 +50,11 @@ export function evaluateAnswer(
   switch (exercise.type) {
     case "single_choice": {
       const a = answer as Extract<AttemptAnswer, { type: "single_choice" }>;
-      return { ...base, correct: a.index === exercise.correctIndex };
+      return {
+        ...base,
+        correct: a.index === exercise.correctIndex,
+        revealCorrectIndexes: [exercise.correctIndex],
+      };
     }
     case "multiple_choice": {
       const a = answer as Extract<AttemptAnswer, { type: "multiple_choice" }>;
@@ -55,6 +64,7 @@ export function evaluateAnswer(
         ...base,
         correct:
           got.length === exp.length && got.every((v, i) => v === exp[i]),
+        revealCorrectIndexes: [...exercise.correctIndices],
       };
     }
     case "gap_fill": {
@@ -76,6 +86,7 @@ export function evaluateAnswer(
         correct:
           a.order.length === exercise.correctOrder.length &&
           a.order.every((v, i) => v === exercise.correctOrder[i]),
+        revealCorrectIndexes: [...exercise.correctOrder],
       };
     }
     default:

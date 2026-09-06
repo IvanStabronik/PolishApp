@@ -3,21 +3,20 @@
 import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import type { ModuleExercise } from "@/lib/content/types";
+import type {
+  EvaluationResultDto,
+  LearnerExercise,
+} from "@/lib/content/learner-dto";
 import { Button } from "@/components/ui/button";
 import { ChoiceOption } from "./choice-option";
 import { FeedbackPanel } from "./feedback-panel";
 
 type Props = {
   moduleId: string;
-  exercise: ModuleExercise;
+  /** Learner-safe DTO only — never ModuleExercise / AuthoredExercise. */
+  exercise: LearnerExercise;
   nextHref: string;
   isLast: boolean;
-};
-
-type EvalUi = {
-  correct: boolean;
-  explanation: string;
 };
 
 export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) {
@@ -27,12 +26,12 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
   const [selected, setSelected] = useState<number | null>(null);
   const [multiSelected, setMultiSelected] = useState<number[]>([]);
   const [gapValues, setGapValues] = useState<string[]>(
-    exercise.type === "gap_fill" ? exercise.gaps.map(() => "") : [],
+    exercise.type === "gap_fill" ? Array.from({ length: exercise.gapCount }, () => "") : [],
   );
   const [order, setOrder] = useState<number[]>(
     exercise.type === "ordering" ? exercise.items.map((_, i) => i) : [],
   );
-  const [result, setResult] = useState<EvalUi | null>(null);
+  const [result, setResult] = useState<EvaluationResultDto | null>(null);
   const [persistError, setPersistError] = useState<string | null>(null);
 
   function buildAnswer() {
@@ -82,6 +81,7 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
     let data: {
       correct?: boolean;
       explanation?: string;
+      revealCorrectIndexes?: number[];
       error?: string;
       reason?: string;
       persisted?: boolean;
@@ -93,10 +93,12 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
       return;
     }
 
+    // Correctness comes only from the server — never computed on the client.
     if (typeof data.correct === "boolean") {
       setResult({
         correct: data.correct,
         explanation: data.explanation ?? "",
+        revealCorrectIndexes: data.revealCorrectIndexes,
       });
     }
 
@@ -127,6 +129,14 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
     });
   }
 
+  function optionState(index: number): "idle" | "correct" | "incorrect" {
+    if (!result) return "idle";
+    const revealed = result.revealCorrectIndexes ?? [];
+    if (revealed.includes(index)) return "correct";
+    if (selected === index || multiSelected.includes(index)) return "incorrect";
+    return "idle";
+  }
+
   return (
     <div
       className="prose-narrow flex flex-col gap-5"
@@ -152,15 +162,7 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
               label={label}
               selected={selected === index}
               disabled={Boolean(result)}
-              state={
-                result
-                  ? index === exercise.correctIndex
-                    ? "correct"
-                    : selected === index
-                      ? "incorrect"
-                      : "idle"
-                  : "idle"
-              }
+              state={optionState(index)}
               onSelect={(id) => setSelected(Number(id))}
             />
           ))}
@@ -179,6 +181,7 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
               multi
               selected={multiSelected.includes(index)}
               disabled={Boolean(result)}
+              state={optionState(index)}
               onSelect={() => toggleMulti(index)}
             />
           ))}
@@ -190,7 +193,7 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
           <p className="m-0 font-display text-xl text-[var(--color-ink)]">
             {exercise.textWithGaps}
           </p>
-          {exercise.gaps.map((_, index) => (
+          {Array.from({ length: exercise.gapCount }, (_, index) => (
             <div key={index} className="field">
               <label htmlFor={`gap-${index}`}>
                 {t("gapLabel", { n: index + 1 })}
@@ -292,7 +295,7 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
               setSelected(null);
               setMultiSelected([]);
               if (exercise.type === "gap_fill") {
-                setGapValues(exercise.gaps.map(() => ""));
+                setGapValues(Array.from({ length: exercise.gapCount }, () => ""));
               }
             }}
           >

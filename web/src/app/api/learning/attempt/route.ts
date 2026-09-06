@@ -35,10 +35,15 @@ const BodySchema = z.object({
   answer: z.record(z.string(), z.unknown()),
   hinted: z.boolean().optional(),
   idempotencyKey: z.string().uuid().optional(),
-  // Explicitly ignored — never trusted:
+  // Explicitly ignored — never trusted from client:
   preview: z.boolean().optional(),
   mode: z.string().optional(),
   correct: z.boolean().optional(),
+  score: z.number().optional(),
+  contentVersion: z.union([z.string(), z.number()]).optional(),
+  contentVersionId: z.string().optional(),
+  revealCorrectIndexes: z.array(z.number()).optional(),
+  explanation: z.string().optional(),
 });
 
 const MAX_BODY = 32_768;

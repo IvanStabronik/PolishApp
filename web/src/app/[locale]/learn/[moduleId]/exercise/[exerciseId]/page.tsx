@@ -10,6 +10,7 @@ import {
   getExercise,
   isInternalPreview,
 } from "@/lib/content/load-module";
+import { toLearnerExercise } from "@/lib/content/learner-dto";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessDraftContent,
@@ -37,8 +38,11 @@ export default async function ExercisePage({ params }: Props) {
   const canDraft = canAccessDraftContent(accessCtx);
 
   const mod = getModuleById(moduleId, accessCtx);
-  const exercise = getExercise(moduleId, exerciseId, accessCtx);
-  if (!mod || !exercise) notFound();
+  const authored = getExercise(moduleId, exerciseId, accessCtx);
+  if (!mod || !authored) notFound();
+
+  // Strip answer keys before any client serialization (RSC → ExercisePlayer).
+  const exercise = toLearnerExercise(authored);
 
   const t = await getTranslations("learn");
   const ids = mod.exercises.map((ex) => ex.id);
