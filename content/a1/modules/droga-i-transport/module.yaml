@@ -39,15 +39,14 @@ lesson_files:
   - lessons/03-samodzielna-podroz.yaml
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-anna-lewandowska
-  reviewer_id: reviewer-placeholder-sergey-ivanov
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "PRODUCT ANALYSIS — city directions + ticket for first audience commute"
     - "Curriculum SCN-A1-DIRECTIONS-01 / SCN-A1-TICKET-01 / FN-A1-DIRECT-01"
     - "Common-knowledge Polish urban navigation & ticket MWUs (język ogólny)"
-  ai_assisted: false
+  ai_assisted: true
   notes: >
-    INTERNAL PREVIEW ONLY. DRAFT — not JPJO-approved, not learner-published.
-    Author and reviewer are distinct placeholders; no PUBLISHED status.
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). DRAFT — pending human review; not JPJO-approved, not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true

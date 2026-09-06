@@ -121,6 +121,59 @@ describe("content schema", () => {
       result.issues.some((i) => i.code === "AUTHOR_EQUALS_REVIEWER"),
     ).toBe(true);
   });
+
+  it("flags placeholder author_id / reviewer_id", () => {
+    const mod = baseModule({
+      provenance: {
+        originality: "created_for_product",
+        author_id: "author-placeholder-ola-nowak",
+        reviewer_id: "reviewer-placeholder-igor-savchuk",
+        sources: ["original"],
+        ai_assisted: true,
+      },
+    });
+    const result = validateContentPackage(
+      { module: mod, lessons: [] },
+      new Set([
+        "SCN-A1-EVERYDAY-01",
+        "FN-A1-IDENTIFY-01",
+        "FN-A1-GREET-01",
+        "LEX-A1-IDENTITY",
+        "GR-CAS-NOM-01",
+        "PRAG-PAN-01",
+      ]),
+    );
+    expect(
+      result.issues.filter((i) => i.code === "PLACEHOLDER_IDENTITY"),
+    ).toHaveLength(2);
+  });
+
+  it("flags non-null reviewer_id on DRAFT", () => {
+    const mod = baseModule({
+      status: "DRAFT",
+      provenance: {
+        originality: "created_for_product",
+        author_id: "system:ai-draft-slowarium",
+        reviewer_id: "human-reviewer-1",
+        sources: ["original"],
+        ai_assisted: true,
+      },
+    });
+    const result = validateContentPackage(
+      { module: mod, lessons: [] },
+      new Set([
+        "SCN-A1-EVERYDAY-01",
+        "FN-A1-IDENTIFY-01",
+        "FN-A1-GREET-01",
+        "LEX-A1-IDENTITY",
+        "GR-CAS-NOM-01",
+        "PRAG-PAN-01",
+      ]),
+    );
+    expect(
+      result.issues.some((i) => i.code === "FALSE_REVIEWER_ON_DRAFT"),
+    ).toBe(true);
+  });
 });
 
 describe("author ≠ reviewer helper", () => {

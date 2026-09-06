@@ -159,11 +159,11 @@ exercises:
       incorrect: Остальные варианты грубы или сломаны.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-DIRECT-01 / LEX-A1-TRANSPORT
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -190,11 +190,11 @@ exercises:
       incorrect: Остановку выхода нужно уточнить.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-MONEY
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -226,11 +226,11 @@ exercises:
       incorrect: Нужен предлог do.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01 / LEX-A1-TRANSPORT
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     gaps:
       - id: gap1
@@ -254,11 +254,11 @@ exercises:
       incorrect: Нужен предлог na.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TIME-01 / LEX-A1-MONEY
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     gaps:
       - id: gap1
@@ -282,11 +282,11 @@ exercises:
       incorrect: Сначала найдите остановку и линию.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-THANKS-01 / LEX-A1-TRANSPORT
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     items:
       - id: t1
@@ -319,11 +319,11 @@ exercises:
       incorrect: Остальные варианты меняют регистр.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-DIRECT-01 / LEX-A1-MONEY
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -350,11 +350,11 @@ exercises:
       incorrect: Do tramwaj не подходит.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-TRANSPORT
-      ai_assisted: false
+      ai_assisted: true
     mini_check: true
     options:
       - id: a
@@ -386,11 +386,11 @@ exercises:
       incorrect: Следуйте фактическому порядку действий.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01 / LEX-A1-MONEY
-      ai_assisted: false
+      ai_assisted: true
     mini_check: true
     items:
       - id: t1
@@ -430,11 +430,11 @@ result_metadata:
     - GR-NUM-MONEY-01
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-ola-nowak
-  reviewer_id: reviewer-placeholder-igor-savchuk
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-DIRECTIONS-01, SCN-A1-TICKET-01 /
       FN-A1-DIRECT-01, FN-A1-TRANS-01, FN-A1-ASK-01, FN-A1-TIME-01, FN-A1-THANKS-01 /
       LEX-A1-TRANSPORT, LEX-A1-MONEY
-  ai_assisted: false
+  ai_assisted: true
 visibility: internal_preview_only

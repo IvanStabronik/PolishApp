@@ -37,15 +37,14 @@ lesson_files:
   - lessons/03-samodzielne-zamowienie.yaml
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-marta-wisniewska
-  reviewer_id: reviewer-placeholder-andriy-melnyk
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "PRODUCT ANALYSIS — café / food-service transaction for first audience"
     - "Curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE"
     - "Common-knowledge Polish café order patterns (język ogólny)"
-  ai_assisted: false
+  ai_assisted: true
   notes: >
-    INTERNAL PREVIEW ONLY. DRAFT — not JPJO-approved, not learner-published.
-    Author and reviewer are distinct placeholders; no PUBLISHED status.
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). DRAFT — pending human review; not JPJO-approved, not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true

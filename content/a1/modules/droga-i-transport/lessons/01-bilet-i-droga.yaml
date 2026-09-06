@@ -210,11 +210,11 @@ exercises:
         bel: "Трымайце Przepraszam, не грубае зварот."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-DIRECT-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-dt-02
@@ -243,11 +243,11 @@ exercises:
       incorrect: "Na dworzec / w dworzec — типичная путаница предлогов."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GR-PREP-DO-NA-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-dt-03
@@ -276,11 +276,11 @@ exercises:
       incorrect: "Daj / без na ломают заказ билета."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-TRANSPORT FIX"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-dt-04
@@ -314,11 +314,11 @@ exercises:
       incorrect: "Cześć, co tam? не является указанием пути."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "SCN-A1-DIRECTIONS-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-dt-05
@@ -351,11 +351,11 @@ exercises:
       incorrect: "Miło panią poznać — формула знакомства, не билета."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "SCN-A1-TICKET-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-dt-06
@@ -385,11 +385,11 @@ exercises:
         bel: "Трымайце do, не кальку «на вакзал»."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GR-PREP-DO-NA-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-dt-07
@@ -415,11 +415,11 @@ exercises:
       incorrect: "Нужен предлог na в формуле билета."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-TRANSPORT"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-dt-08
@@ -454,11 +454,11 @@ exercises:
       incorrect: "Сначала ориентация, потом касса билетов."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "Original dialogue Do przystanku i po bilet"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-dt-09
@@ -488,11 +488,11 @@ exercises:
       incorrect: "Держите порядок шагов от старта к остановке."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-DIRECT-01"
-      ai_assisted: false
+      ai_assisted: true
 
   - id: ex-dt-10
     canonical_id: EX-A1-DT-SC-04
@@ -519,11 +519,11 @@ exercises:
       incorrect: "Na której / ty — неверная рамка или регистр."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-anna-lewandowska
-      reviewer_id: reviewer-placeholder-sergey-ivanov
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GP-A1-DT-DO-NA-BILET"
-      ai_assisted: false
+      ai_assisted: true
 
 mini_check:
   exercise_ids:
@@ -555,11 +555,11 @@ result_metadata:
     - PRAG-PAN-01
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-anna-lewandowska
-  reviewer_id: reviewer-placeholder-sergey-ivanov
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "Original SŁOWARIUM dialogue and exercises — Droga i transport DRAFT"
     - "Curriculum links: SCN-A1-DIRECTIONS-01, SCN-A1-TICKET-01, FN-A1-DIRECT-01"
-  ai_assisted: false
-  notes: INTERNAL PREVIEW ONLY — status DRAFT, not published to learners.
+  ai_assisted: true
+  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

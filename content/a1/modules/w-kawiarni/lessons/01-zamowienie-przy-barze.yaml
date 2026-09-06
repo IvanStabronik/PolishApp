@@ -217,11 +217,11 @@ exercises:
         bel: "Не пераносьце «дайце» ў рэзкі *Daj."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-SERVICE MWU poproszę + Acc"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-wk-02
@@ -254,11 +254,11 @@ exercises:
         bel: "Не пераносьце «ці ёсць» у ty-форму да бара."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-ASK-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-wk-03
@@ -288,11 +288,11 @@ exercises:
       incorrect: "Na karcie / Ja karta — кальки, не сервисная формула."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-MONEY FIX płatność"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-wk-04
@@ -327,11 +327,11 @@ exercises:
       incorrect: "Daj mi to szybko! слишком резко для первого контакта со стойкой."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "SCN-A1-FOOD-01 transaction slots"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-wk-05
@@ -364,11 +364,11 @@ exercises:
       incorrect: "Cześć, co tam? — неформальный регистр, не шаг оплаты."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-TRANS-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-wk-06
@@ -399,11 +399,11 @@ exercises:
         bel: "Трымайце Poproszę, не кальку «дайце»."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GP-A1-WK-POPROSZE-ACC"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-wk-07
@@ -430,11 +430,11 @@ exercises:
       incorrect: "Нужен глагол jest в рамке Czy jest…?"
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-ASK-01 / GR-EXIST-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-wk-08
@@ -468,11 +468,11 @@ exercises:
       incorrect: "Сначала выбор, потом закрытие выбора, затем оплата."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "Original dialogue Kawa przy barze"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-wk-09
@@ -504,11 +504,11 @@ exercises:
       incorrect: "Сначала узнайте сумму, потом назовите способ оплаты."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-QUANT-01 / LEX-A1-MONEY"
-      ai_assisted: false
+      ai_assisted: true
 
   - id: ex-wk-10
     canonical_id: EX-A1-WK-SC-04
@@ -534,11 +534,11 @@ exercises:
       incorrect: "Kawa в именительном ломает рамку заказа."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-marta-wisniewska
-      reviewer_id: reviewer-placeholder-andriy-melnyk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GP-A1-WK-POPROSZE-ACC"
-      ai_assisted: false
+      ai_assisted: true
 
 mini_check:
   exercise_ids:
@@ -568,11 +568,11 @@ result_metadata:
     - PRAG-PAN-01
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-marta-wisniewska
-  reviewer_id: reviewer-placeholder-andriy-melnyk
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "Original SŁOWARIUM dialogue and exercises — W kawiarni DRAFT"
     - "Curriculum links: SCN-A1-FOOD-01, FN-A1-TRANS-01, LEX-A1-SERVICE"
-  ai_assisted: false
-  notes: INTERNAL PREVIEW ONLY — status DRAFT, not published to learners.
+  ai_assisted: true
+  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

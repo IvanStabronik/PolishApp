@@ -161,11 +161,11 @@ exercises:
       incorrect: Неформальные варианты не подходят urzędowi.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -192,11 +192,11 @@ exercises:
       incorrect: Ty неуместно у окошка.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -228,11 +228,11 @@ exercises:
       incorrect: Нужно się.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-ADDRESS-01 / LEX-A1-URZAD
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     gaps:
       - id: gap1
@@ -256,11 +256,11 @@ exercises:
       incorrect: Нужна форма meldunku.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-GREET-01 / LEX-A1-DOCS
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     gaps:
       - id: gap1
@@ -284,11 +284,11 @@ exercises:
       incorrect: Сначала объясните цель визита.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-REG-01 / LEX-A1-URZAD
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     items:
       - id: t1
@@ -321,11 +321,11 @@ exercises:
       incorrect: Ty и сломанная реплика не подходят.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-IDENTIFY-01 / LEX-A1-DOCS
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -352,11 +352,11 @@ exercises:
       incorrect: Приказ Daj нарушает регистр.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
-      ai_assisted: false
+      ai_assisted: true
     mini_check: true
     options:
       - id: a
@@ -388,11 +388,11 @@ exercises:
       incorrect: Сначала получите результат и инструкцию.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
-      ai_assisted: false
+      ai_assisted: true
     mini_check: true
     items:
       - id: t1
@@ -432,10 +432,10 @@ result_metadata:
     - GR-CAS-ACC-01
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-ola-nowak
-  reviewer_id: reviewer-placeholder-igor-savchuk
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01, FN-A1-DOCS-01,
       FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
-  ai_assisted: false
+  ai_assisted: true
 visibility: internal_preview_only

@@ -158,11 +158,11 @@ exercises:
       incorrect: Остальные варианты не дают вежливого ясного заказа.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -189,11 +189,11 @@ exercises:
       incorrect: Кассир не должен угадывать заказ.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-QUANT-01 / LEX-A1-MONEY
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -225,11 +225,11 @@ exercises:
       incorrect: Нужно jeszcze.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-ASK-01 / LEX-A1-SERVICE
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     gaps:
       - id: gap1
@@ -253,11 +253,11 @@ exercises:
       incorrect: Нужно paragon.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-ADDRESS-01 / LEX-A1-MONEY
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     gaps:
       - id: gap1
@@ -281,11 +281,11 @@ exercises:
       incorrect: Количество уточняют до оплаты.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-CONFIRM-01 / LEX-A1-SERVICE
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     items:
       - id: t1
@@ -318,11 +318,11 @@ exercises:
       incorrect: Jeden не согласуется, ty не отвечает.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-THANKS-01 / LEX-A1-MONEY
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
     options:
       - id: a
@@ -349,11 +349,11 @@ exercises:
       incorrect: Происхождение не относится к транзакции.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE
-      ai_assisted: false
+      ai_assisted: true
     mini_check: true
     options:
       - id: a
@@ -385,11 +385,11 @@ exercises:
       incorrect: Не прощайтесь до завершения оплаты.
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-QUANT-01 / LEX-A1-MONEY
-      ai_assisted: false
+      ai_assisted: true
     mini_check: true
     items:
       - id: t1
@@ -429,11 +429,11 @@ result_metadata:
     - GR-NUM-CARD-01
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-ola-nowak
-  reviewer_id: reviewer-placeholder-igor-savchuk
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01, FN-A1-QUANT-01,
       FN-A1-ASK-01, FN-A1-ADDRESS-01, FN-A1-CONFIRM-01, FN-A1-THANKS-01 / LEX-A1-SERVICE,
       LEX-A1-MONEY
-  ai_assisted: false
+  ai_assisted: true
 visibility: internal_preview_only

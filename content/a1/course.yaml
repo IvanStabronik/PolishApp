@@ -19,13 +19,12 @@ module_slugs:
   - pierwsza-sprawa-w-urzedzie
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-ola-nowak
-  reviewer_id: reviewer-placeholder-igor-savchuk
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "Curriculum A1 inventory / SCN / FN / LEX"
-  ai_assisted: false
+  ai_assisted: true
   notes: >
-    Course entity for Milestone 3 hierarchy Course→Module→Lesson.
-    DRAFT only. Publication blocked by DEC-016.
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Course entity for Milestone 3 hierarchy Course→Module→Lesson. DRAFT only — pending human review; publication blocked by DEC-016. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true
