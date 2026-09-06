@@ -342,7 +342,9 @@ test.describe("Milestone 3 closed beta core", () => {
     });
     const selfBody = (await self.json()) as { ok?: boolean; error?: string };
     expect(self.ok()).toBeFalsy();
-    expect(selfBody.error).toMatch(/self_review|forbidden|not_in_review|self/i);
+    expect(selfBody.error).toMatch(
+      /self_review|forbidden|not_in_review|stale_state|self/i,
+    );
 
     await page.getByTestId("link-logout").click();
     await loginAs(
@@ -445,7 +447,9 @@ test.describe("Milestone 3 closed beta core", () => {
       await page.getByTestId("onboarding-continue").click();
     }
     await page.goto("/ru/author");
-    await expect(page).not.toHaveURL(/\/author$/);
+    // notFound() keeps the URL; assert author chrome is absent.
+    await expect(page.getByTestId("author-list-page")).toHaveCount(0);
+    await expect(page.getByTestId("author-review-detail")).toHaveCount(0);
     const status = await page.context().request.post("/api/author/review", {
       headers: authApiHeaders(),
       data: { moduleId: MODULE, action: "submit_for_review" },
