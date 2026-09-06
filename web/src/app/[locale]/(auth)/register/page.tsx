@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
 import { AuthFormSuspense } from "@/components/brand/auth-form-suspense";
 import { protectAuthPages } from "@/lib/auth/protect";
+import { isBetaModeEnabled } from "@/modules/admin/roles";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -14,6 +15,8 @@ export default async function RegisterPage({ params }: Props) {
   setRequestLocale(locale);
   await protectAuthPages(locale);
   const t = await getTranslations("auth");
+  const tb = await getTranslations("beta");
+  const inviteOnly = isBetaModeEnabled();
 
   return (
     <>
@@ -26,7 +29,17 @@ export default async function RegisterPage({ params }: Props) {
           {t("registerLead")}
         </p>
         <div className="mt-8">
-          <AuthFormSuspense mode="register" />
+          {inviteOnly ? (
+            <p
+              role="alert"
+              data-testid="register-invite-required"
+              className="rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-4"
+            >
+              {tb("registerBlocked")}
+            </p>
+          ) : (
+            <AuthFormSuspense mode="register" />
+          )}
         </div>
       </main>
     </>

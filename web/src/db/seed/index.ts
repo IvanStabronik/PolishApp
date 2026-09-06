@@ -1,14 +1,11 @@
-/**
- * Demo seed: Better Auth demo users + roles + LVL-A1 + all DRAFT A1 modules
- * under content/a1/modules/<slug>/module.yaml.
- * Never marks content PUBLISHED. Never claims JPJO approval.
- */
 import { and, eq } from "drizzle-orm";
 import { hashPassword } from "better-auth/crypto";
 import { randomUUID } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { DEMO_ACCOUNTS, isDemoMode } from "@/modules/auth/demo";
+import { allowDemoSeed } from "@/modules/admin/roles";
+import { seedBetaInviteSlots } from "@/modules/beta";
 import type { UserRole } from "@/lib/enums";
 import { upsertModulePackage } from "@/modules/content/import-module";
 import {
@@ -31,6 +28,7 @@ import {
 loadEnvFiles();
 
 type DemoKey = keyof typeof DEMO_ACCOUNTS;
+
 
 async function upsertDemoUser(key: DemoKey): Promise<string> {
   const db = getDb();
@@ -319,6 +317,13 @@ async function main() {
     process.exit(1);
   }
 
+  if (!allowDemoSeed()) {
+    console.log(
+      "Skipping seed (demo seed not allowed). Set DEMO_MODE=true (non-production) or FORCE_SEED=true / ALLOW_PRODUCTION_DEMO.",
+    );
+    return;
+  }
+
   if (!isDemoMode() && process.env.FORCE_SEED !== "true") {
     console.log(
       "Skipping seed (DEMO_MODE is not true). Set DEMO_MODE=true or FORCE_SEED=true.",
@@ -326,16 +331,18 @@ async function main() {
     return;
   }
 
-  console.log("Seeding demo users + roles + LVL-A1 + DRAFT A1 modules…");
+  console.log("Seeding demo users + roles + LVL-A1 + DRAFT A1 modules + beta slots…");
 
   const learnerId = await upsertDemoUser("learner");
   const authorId = await upsertDemoUser("author");
   const reviewerId = await upsertDemoUser("reviewer");
+  const adminId = await upsertDemoUser("admin");
 
   if (
     learnerId === authorId ||
     authorId === reviewerId ||
-    learnerId === reviewerId
+    learnerId === reviewerId ||
+    adminId === learnerId
   ) {
     throw new Error("Demo users must remain distinct identities");
   }
@@ -344,10 +351,28 @@ async function main() {
   await seedLearnerProfile(learnerId);
   await seedAllDraftModules(authorId, levelId);
 
+  const db = getDb();
+  const existingSlots = await db.query.betaInvites.findMany();
+  if (existingSlots.length < 15) {
+    const need = 15 - existingSlots.length;
+    const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+    const { created } = await seedBetaInviteSlots({
+      actorUserId: adminId,
+      count: need,
+      expiresAt,
+    });
+    console.log(
+      `db:seed — created ${created} beta invite slot(s); plaintext tokens discarded (never logged).`,
+    );
+  } else {
+    console.log("db:seed — beta invite slots already present (≥15).");
+  }
+
   console.log("Seed complete.");
   console.log("  learner: ", DEMO_ACCOUNTS.learner.email, DEMO_ACCOUNTS.learner.roles);
   console.log("  author:  ", DEMO_ACCOUNTS.author.email);
   console.log("  reviewer:", DEMO_ACCOUNTS.reviewer.email);
+  console.log("  admin:   ", DEMO_ACCOUNTS.admin.email);
   console.log(
     "Note: A1 modules stay DRAFT (internal preview); JPJO review pending; A2–B2 not started.",
   );

@@ -11,6 +11,7 @@ import {
 import { loadContinueLearning } from "@/modules/learning/continue-learning";
 import { Link } from "@/i18n/navigation";
 import { LinkButton } from "@/components/ui/link-button";
+import { ReportProblemButton } from "@/components/feedback/report-problem-button";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -65,6 +66,7 @@ export default async function ReviewQueuePage({ params }: Props) {
             ))
           )}
         </ul>
+        <ReportProblemButton />
         <p className="mt-8">
           <Link href="/dashboard" className="text-[var(--color-forest)]">
             ← dashboard

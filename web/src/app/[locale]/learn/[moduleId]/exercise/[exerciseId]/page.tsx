@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
 import { PreviewBanner } from "@/components/brand/preview-banner";
 import { ExercisePlayer } from "@/components/learning/exercise-player";
+import { ReportProblemButton } from "@/components/feedback/report-problem-button";
 import {
   getModuleById,
   getExercise,
@@ -73,6 +74,7 @@ export default async function ExercisePage({ params }: Props) {
             isLast={isLast}
           />
         </div>
+        <ReportProblemButton moduleId={moduleId} exerciseId={exerciseId} />
       </main>
     </>
   );

@@ -1,0 +1,317 @@
+"use client";
+
+import { useEffect, useMemo, useState, useTransition } from "react";
+import { Button } from "@/components/ui/button";
+
+type Overview = {
+  inviteCounts: Record<string, number>;
+  feedbackCount: number;
+  reviewDueCount: number;
+  learners: Array<{
+    id: string;
+    name: string;
+    email: string;
+    createdAt: string;
+    onboardingComplete: boolean;
+    lastActivityAt: string | null;
+    betaAccessRevoked: boolean;
+    attempts: number;
+  }>;
+  analytics: {
+    aggregates: Array<{ metricKey: string; valueNum: number; bucketDate: string }>;
+    recentEvents: Array<{ eventKey: string; count: number }>;
+  };
+};
+
+type InviteRow = {
+  id: string;
+  status: string;
+  useLimit: number;
+  useCount: number;
+  expiresAt: string;
+  label: string | null;
+};
+
+type FeedbackRow = {
+  id: string;
+  category: string;
+  status: string;
+  rating: number | null;
+  comment: string | null;
+  reporterUserId: string;
+  createdAt: string;
+};
+
+export function AdminBetaConsole() {
+  const [overview, setOverview] = useState<Overview | null>(null);
+  const [invites, setInvites] = useState<InviteRow[]>([]);
+  const [feedback, setFeedback] = useState<FeedbackRow[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [forbidden, setForbidden] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [createdToken, setCreatedToken] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
+
+  async function load() {
+    setLoading(true);
+    setError(null);
+    const [ov, inv, fb] = await Promise.all([
+      fetch("/api/admin/beta/overview", { credentials: "include" }),
+      fetch("/api/admin/beta/invites", { credentials: "include" }),
+      fetch("/api/admin/feedback", { credentials: "include" }),
+    ]);
+    if (ov.status === 403 || inv.status === 403) {
+      setForbidden(true);
+      setLoading(false);
+      return;
+    }
+    if (!ov.ok || !inv.ok || !fb.ok) {
+      setError("load_failed");
+      setLoading(false);
+      return;
+    }
+    setOverview((await ov.json()) as Overview);
+    const invJson = (await inv.json()) as { invites: InviteRow[] };
+    setInvites(invJson.invites);
+    const fbJson = (await fb.json()) as { feedback: FeedbackRow[] };
+    setFeedback(fbJson.feedback);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    void load();
+  }, []);
+
+  const filteredLearners = useMemo(() => {
+    if (!overview) return [];
+    const q = search.trim().toLowerCase();
+    if (!q) return overview.learners;
+    return overview.learners.filter(
+      (l) =>
+        l.email.toLowerCase().includes(q) ||
+        l.name.toLowerCase().includes(q) ||
+        l.id.includes(q),
+    );
+  }, [overview, search]);
+
+  if (forbidden) {
+    return (
+      <p data-testid="admin-beta-forbidden" role="alert">
+        Forbidden — admin role required.
+      </p>
+    );
+  }
+
+  if (loading) {
+    return <p data-testid="admin-beta-loading">Loading…</p>;
+  }
+
+  if (error || !overview) {
+    return (
+      <p data-testid="admin-beta-error" role="alert">
+        Failed to load admin beta console.
+      </p>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-10" data-testid="admin-beta-console">
+      <section>
+        <h2 className="font-display text-2xl">Invite inventory</h2>
+        <ul className="mt-2 flex flex-wrap gap-4 p-0 list-none" data-testid="invite-counts">
+          {Object.entries(overview.inviteCounts).map(([k, v]) => (
+            <li key={k} className="text-sm">
+              <strong>{k}</strong>: {v}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Button
+            type="button"
+            data-testid="admin-create-invite"
+            disabled={pending}
+            onClick={() =>
+              startTransition(async () => {
+                setCreatedToken(null);
+                const res = await fetch("/api/admin/beta/invites", {
+                  method: "POST",
+                  credentials: "include",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ expiresInDays: 14, useLimit: 1 }),
+                });
+                if (!res.ok) {
+                  setError("create_failed");
+                  return;
+                }
+                const data = (await res.json()) as { token: string };
+                setCreatedToken(data.token);
+                await load();
+              })
+            }
+          >
+            Create invite
+          </Button>
+        </div>
+        {createdToken ? (
+          <p
+            data-testid="admin-invite-token-once"
+            className="mt-3 break-all rounded border border-[var(--color-line)] bg-[var(--color-paper-sunken)] p-3 text-sm"
+          >
+            One-time token (copy now): {createdToken}
+          </p>
+        ) : null}
+        <ul className="mt-4 flex list-none flex-col gap-2 p-0" data-testid="invite-list">
+          {invites.length === 0 ? (
+            <li data-testid="invite-empty">No invites yet.</li>
+          ) : (
+            invites.map((inv) => (
+              <li
+                key={inv.id}
+                className="flex flex-wrap items-center justify-between gap-2 border border-[var(--color-line)] p-3"
+                data-testid={`invite-row-${inv.id}`}
+              >
+                <span className="text-sm">
+                  {inv.status} · uses {inv.useCount}/{inv.useLimit} ·{" "}
+                  {inv.label ?? inv.id.slice(0, 8)}
+                </span>
+                {inv.status === "pending" ? (
+                  <Button
+                    type="button"
+                    data-testid={`admin-revoke-${inv.id}`}
+                    onClick={() =>
+                      startTransition(async () => {
+                        await fetch("/api/admin/beta/invites", {
+                          method: "DELETE",
+                          credentials: "include",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ inviteId: inv.id }),
+                        });
+                        await load();
+                      })
+                    }
+                  >
+                    Revoke
+                  </Button>
+                ) : null}
+              </li>
+            ))
+          )}
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="font-display text-2xl">Beta learners</h2>
+        <input
+          data-testid="admin-learner-search"
+          className="mt-2 w-full max-w-md"
+          placeholder="Search name / email"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <p className="mt-2 text-sm text-[var(--color-graphite)]">
+          Feedback reports: {overview.feedbackCount} · Review due:{" "}
+          {overview.reviewDueCount}
+        </p>
+        <ul className="mt-4 flex list-none flex-col gap-2 p-0" data-testid="learner-list">
+          {filteredLearners.length === 0 ? (
+            <li data-testid="learner-empty">No learners match.</li>
+          ) : (
+            filteredLearners.map((l) => (
+              <li
+                key={l.id}
+                className="border border-[var(--color-line)] p-3"
+                data-testid={`learner-row-${l.id}`}
+              >
+                <p className="m-0 font-medium">{l.name}</p>
+                <p className="m-0 text-sm text-[var(--color-graphite)]">{l.email}</p>
+                <p className="m-0 mt-1 text-sm">
+                  onboarding: {l.onboardingComplete ? "yes" : "no"} · attempts:{" "}
+                  {l.attempts} · revoked: {l.betaAccessRevoked ? "yes" : "no"}
+                </p>
+                {!l.betaAccessRevoked ? (
+                  <Button
+                    type="button"
+                    className="mt-2"
+                    data-testid={`admin-deactivate-${l.id}`}
+                    onClick={() =>
+                      startTransition(async () => {
+                        await fetch("/api/admin/beta/overview", {
+                          method: "POST",
+                          credentials: "include",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ userId: l.id }),
+                        });
+                        await load();
+                      })
+                    }
+                  >
+                    Deactivate beta access
+                  </Button>
+                ) : null}
+              </li>
+            ))
+          )}
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="font-display text-2xl">Feedback inbox</h2>
+        <ul className="mt-4 flex list-none flex-col gap-2 p-0" data-testid="feedback-inbox">
+          {feedback.length === 0 ? (
+            <li data-testid="feedback-empty">Inbox empty.</li>
+          ) : (
+            feedback.map((f) => (
+              <li
+                key={f.id}
+                className="border border-[var(--color-line)] p-3"
+                data-testid={`feedback-row-${f.id}`}
+              >
+                <p className="m-0 text-sm">
+                  {f.category} · {f.status} · rating {f.rating ?? "—"}
+                </p>
+                <p className="m-0 mt-1 text-sm">{f.comment}</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {(["triaged", "resolved", "wont_fix"] as const).map((status) => (
+                    <Button
+                      key={status}
+                      type="button"
+                      data-testid={`feedback-set-${status}-${f.id}`}
+                      onClick={() =>
+                        startTransition(async () => {
+                          await fetch("/api/admin/feedback", {
+                            method: "PATCH",
+                            credentials: "include",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              feedbackId: f.id,
+                              toStatus: status,
+                            }),
+                          });
+                          await load();
+                        })
+                      }
+                    >
+                      Mark {status}
+                    </Button>
+                  ))}
+                </div>
+              </li>
+            ))
+          )}
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="font-display text-2xl">Privacy analytics (aggregates)</h2>
+        <ul className="mt-2 list-none p-0 text-sm" data-testid="analytics-aggregates">
+          {overview.analytics.recentEvents.map((e) => (
+            <li key={e.eventKey}>
+              {e.eventKey}: {e.count}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+}

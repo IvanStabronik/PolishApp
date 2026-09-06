@@ -229,6 +229,41 @@
   "errors": {
     "notFound": "Nie znaleziono strony",
     "moduleHidden": "Moduł niedostępny bez trybu DEMO_PREVIEW.",
-    "lessonMissing": "Nie znaleziono lekcji."
+    "lessonMissing": "Nie znaleziono lekcji.",
+    "maintenance": "Usługa tymczasowo niedostępna. Spróbuj ponownie później.",
+    "generic": "Coś poszło nie tak. Już nad tym pracujemy."
+  },
+  "beta": {
+    "loading": "Sprawdzamy zaproszenie…",
+    "reasonLead": "Zamknięta beta jest dostępna tylko z ważnym jednorazowym zaproszeniem.",
+    "reason_invalid": "Nie znaleziono zaproszenia",
+    "reason_expired": "Zaproszenie wygasło",
+    "reason_used": "Zaproszenie zostało już użyte",
+    "reason_revoked": "Zaproszenie zostało cofnięte",
+    "validUntil": "Ważne do {date}",
+    "name": "Imię",
+    "email": "E-mail",
+    "password": "Hasło",
+    "submit": "Przyjmij zaproszenie i utwórz konto",
+    "errorGeneric": "Nie udało się przyjąć zaproszenia.",
+    "registerBlocked": "Rejestracja bez zaproszenia jest zamknięta. Użyj linku z zaproszenia."
+  },
+  "feedback": {
+    "cta": "Zgłoś problem",
+    "title": "Opinia",
+    "category": "Kategoria",
+    "rating": "Ocena (opcjonalnie)",
+    "ratingNone": "Bez oceny",
+    "comment": "Komentarz",
+    "submit": "Wyślij",
+    "cancel": "Anuluj",
+    "thanks": "Dziękujemy — zgłoszenie przyjęte.",
+    "error": "Nie udało się wysłać zgłoszenia.",
+    "cat_bug": "Błąd",
+    "cat_confusing_content": "Niejasna treść",
+    "cat_wrong_answer": "Błędna odpowiedź",
+    "cat_translation": "Tłumaczenie",
+    "cat_UX": "Interfejs",
+    "cat_other": "Inne"
   }
 }

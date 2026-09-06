@@ -20,6 +20,12 @@ export const DEMO_ACCOUNTS = {
     name: "Demo Reviewer",
     roles: ["reviewer", "previewer"] as const satisfies readonly UserRole[],
   },
+  admin: {
+    email: "admin@demo.slowarium.local",
+    password: "DemoAdmin1!",
+    name: "Demo Admin",
+    roles: ["admin", "learner", "previewer"] as const satisfies readonly UserRole[],
+  },
 } as const;
 
 export function isDemoMode(): boolean {
