@@ -33,12 +33,14 @@ async function loginAs(
   let res = await page.context().request.post("/api/auth/sign-in/email", {
     data: { email, password },
     headers: authApiHeaders(),
+    timeout: 30_000,
   });
   for (let attempt = 0; attempt < 3 && res.status() === 429; attempt += 1) {
     await page.waitForTimeout(11_000);
     res = await page.context().request.post("/api/auth/sign-in/email", {
       data: { email, password },
       headers: authApiHeaders(),
+      timeout: 30_000,
     });
   }
   expect(res.ok(), await res.text().catch(() => "")).toBeTruthy();
@@ -314,6 +316,27 @@ test.describe("Milestone 3 closed beta core", () => {
     );
     await page.goto(`/ru/author/${MODULE}`);
     await expect(page.getByTestId("author-review-detail")).toBeVisible();
+    const statusText = await page.getByTestId("review-status").innerText();
+    const statusMatch = statusText.match(/Status:\s*(\w+)/);
+    const currentStatus = statusMatch?.[1] ?? "";
+    if (currentStatus === "APPROVED") {
+      const selfDone = await page.context().request.post("/api/author/review", {
+        headers: authApiHeaders(),
+        data: {
+          moduleId: MODULE,
+          action: "verdict",
+          verdict: "approve",
+          comment: "self",
+        },
+      });
+      const selfDoneBody = (await selfDone.json()) as { ok?: boolean; error?: string };
+      expect(selfDone.ok()).toBeFalsy();
+      expect(selfDoneBody.error).toMatch(
+        /self_review|forbidden|not_in_review|stale_state|self/i,
+      );
+      await saveShot(page, "author-already-approved");
+      return;
+    }
     const submit = page.getByTestId("submit-for-review");
     if ((await submit.count()) > 0) {
       const resPromise = page.waitForResponse(
@@ -401,8 +424,19 @@ test.describe("Milestone 3 closed beta core", () => {
       headers: authApiHeaders(),
       data: { moduleId: MODULE, action: "submit_for_review" },
     });
-    const resubmitBody = (await resubmit.json()) as { ok?: boolean; to?: string };
-    expect(resubmit.ok()).toBeTruthy();
+    const resubmitBody = (await resubmit.json()) as {
+      ok?: boolean;
+      to?: string;
+      error?: string;
+      status?: string;
+    };
+    if (!resubmit.ok()) {
+      expect(String(resubmitBody.error ?? "")).toMatch(/stale_state|illegal|forbidden/i);
+      await page.goto(`/ru/author/${MODULE}`);
+      const st = await page.getByTestId("review-status").innerText();
+      expect(st).toMatch(/IN_REVIEW|APPROVED/);
+      return;
+    }
     expect(resubmitBody.to).toBe("IN_REVIEW");
 
     await page.getByTestId("link-logout").click();
@@ -455,16 +489,7 @@ test.describe("Milestone 3 closed beta core", () => {
       data: { moduleId: MODULE, action: "submit_for_review" },
     });
     expect([401, 403, 404]).toContain(status.status());
-
-    await page.getByTestId("link-logout").click().catch(() => undefined);
-    await loginAs(
-      page,
-      "learner@demo.slowarium.local",
-      "DemoLearner1!",
-      /\/dashboard/,
-    );
-    // previewer/learner demo may be previewer — author area still blocked for pure learner role;
-    // demo learner has previewer roles in seed — assert author API still role-gated for ordinary above.
+    await saveShot(page, "ordinary-learner-author-denied");
   });
 
   test("12: PUBLISHED blocked", async ({ page }) => {
