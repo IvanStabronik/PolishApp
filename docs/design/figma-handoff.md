@@ -1,10 +1,10 @@
 # Figma handoff — SŁOWARIUM Milestone 1 UI
 
-**Product:** SŁOWARIUM (`slowarium`)  
-**Tone:** Archive of Living Speech · serious academy (not gamified SaaS)  
-**Figma file:** [SŁOWARIUM — Product Foundation](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G) ([Figma foundation](76b53c41-7623-476c-a042-7b42ca65866a))  
-**Code source of truth:** `web/src/app/globals.css`, `web/src/components/**`, `web/src/app/[locale]/**`  
-**UI locales:** `ru` | `uk` | `pl`  
+**Product:** SŁOWARIUM (`slowarium`)
+**Tone:** Archive of Living Speech · serious academy (not gamified SaaS)
+**Figma file:** [SŁOWARIUM — Product Foundation](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G) ([Figma foundation](76b53c41-7623-476c-a042-7b42ca65866a))
+**Code source of truth:** `web/src/app/globals.css`, `web/src/components/**`, `web/src/app/[locale]/**`
+**UI locales:** `ru` | `uk` | `pl`
 **L1 (separate):** `ukr` | `rus` | `bel`
 
 ---
@@ -125,6 +125,60 @@ Continue in the same file: https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
 
 Code remains source of visual truth for implemented screens under `web/src/app/[locale]/**`.
 
-## 6. Out of scope
+---
+
+## 6. Private Alpha M2 — frames updated
+
+**File (same, no parallel file):** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
+**Primary chrome locale:** RU · Polish learning phrases stay Polish
+**Breakpoints:** Desktop 1440 · Tablet 834 · Mobile 390
+
+### Components extended (`02 Components`)
+
+- Button: added `State=Hover` for Primary / Amber / Secondary / Ghost (kept Default + Disabled)
+- Feedback: added `Kind=Error` (persist failure)
+- Nav/Mobile + Nav/MobileTabs
+- ChoiceOption variants: Default / Hover / Selected / Disabled / Correct / Incorrect
+- Fixed collapsed Auto Layout heights on Input, Card, ProgressBar, Feedback, EmptyState, Modal, ExerciseShell
+
+### Auth & onboarding
+
+| Page | Frames |
+| --- | --- |
+| `03 Auth & Onboarding` | Landing · RU, Onboarding · RU (localized) |
+| `10 Auth Complete` | Login, Login · Focus, Login · Error, Register; Onboarding 01–07 (Age, UI locale, L1, Level, Goal, Weekly, Consent) |
+
+### Learning flow (`04 Learning Flow`)
+
+- Desktop / Dashboard · 5 A1 Modules (Pierwsze spotkanie, W kawiarni, W sklepie, Droga i transport, Pierwsza sprawa w urzędzie)
+- Desktop / Module, Lesson, Result
+- Exercise types: Single Choice, Multiple Choice, Gap Fill, Ordering
+- Feedback: Correct, Incorrect, Persist Error
+- Prior M1 frames kept as `M1 / *` reference
+
+### Progress / settings / privacy
+
+| Page | Frames |
+| --- | --- |
+| `05 Progress` | Desktop / Progress, Progress · Empty |
+| `07 Settings & Privacy` | Settings, Privacy Export, Delete Confirmation |
+
+### System states (`08 System States`)
+
+Empty · Loading · Error · 403 · 404 · Feedback Correct/Incorrect/Persist Error · Focus/Hover/Disabled showcase
+
+### Responsive
+
+| Page | Frames |
+| --- | --- |
+| `09 Tablet` | Login, Dashboard (5 modules), Exercise, Settings, Progress |
+| `06 Mobile` | Login, Dashboard, Module, Exercise · Single Choice, Settings, Privacy, Nav Drawer (+ top nav / tab bar) |
+
+### Locale rule used in frames
+
+- Product chrome (nav, buttons, settings, errors): Russian
+- Learning content titles / prompts / options: Polish (e.g. `Szukam ___`, module titles)
+
+## 7. Out of scope
 
 Architecture ADRs · DB schema docs · authoring CMS · certificate claims · gamification HUD · public content release before JPJO
