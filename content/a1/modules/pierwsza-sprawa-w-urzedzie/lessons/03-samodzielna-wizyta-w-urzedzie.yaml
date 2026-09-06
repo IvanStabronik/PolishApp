@@ -1,0 +1,441 @@
+kind: lesson
+canonical_id: LES-A1-UR-03
+slug: samodzielna-wizyta-w-urzedzie
+version: 1
+status: DRAFT
+title_pl: Samodzielna wizyta w urzędzie
+sort_order: 3
+situation_ru: "Вы самостоятельно проходите короткий визит: называете цель, идентифицируетесь,
+  передаёте комплект и выполняете указание."
+objective_ru: Провести официальный контакт от приветствия до завершения, не теряя pan/pani.
+curriculum_links:
+  scenarios:
+    - SCN-A1-URZAD-01
+  functions:
+    - FN-A1-PURPOSE-01
+    - FN-A1-DOCS-01
+    - FN-A1-ADDRESS-01
+    - FN-A1-GREET-01
+    - FN-A1-REG-01
+    - FN-A1-IDENTIFY-01
+  lex_bundles:
+    - LEX-A1-URZAD
+    - LEX-A1-DOCS
+  concepts:
+    - PRAG-PAN-01
+    - GR-TV-AGR-01
+    - GR-CAS-ACC-01
+    - GR-TNS-PRS-01
+dialogue:
+  title_pl: Samodzielna wizyta w urzędzie
+  turns:
+    - speaker: Urzędnik
+      text_pl: Dzień dobry. W czym mogę pomóc?
+    - speaker: Svitlana
+      text_pl: Dzień dobry. Przyszłam w sprawie meldunku.
+    - speaker: Urzędnik
+      text_pl: Jak się pani nazywa?
+    - speaker: Svitlana
+      text_pl: Nazywam się Svitlana Koval. Oto paszport, wniosek i zdjęcie.
+    - speaker: Urzędnik
+      text_pl: Dziękuję. Dokumenty są kompletne. Proszę czekać na numer.
+    - speaker: Svitlana
+      text_pl: Dobrze. Gdzie mam czekać?
+    - speaker: Urzędnik
+      text_pl: Przy okienku numer cztery.
+    - speaker: Svitlana
+      text_pl: Rozumiem. Dziękuję. Do widzenia.
+key_lines:
+  - text_pl: Przyszłam w sprawie meldunku.
+    explanation_ru: Цель визита называется сразу после приветствия.
+  - text_pl: Nazywam się…
+    explanation_ru: Идентификация по вопросу служащего.
+  - text_pl: Oto paszport, wniosek i zdjęcie.
+    explanation_ru: Передача полного перечисленного комплекта.
+  - text_pl: Gdzie mam czekać?
+    explanation_ru: Уточнение следующего действия.
+pan_pani:
+  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
+    просьбы и благодарность важнее буквального переноса форм L1.
+  form: w sprawie · nazywam się · oto dokumenty · proszę czekać
+  examples_pl: &a1
+    - Przyszłam w sprawie meldunku.
+    - Nazywam się Svitlana Koval.
+    - Gdzie mam czekać?
+  counterexamples_pl:
+    - "*Ty mi powiedz."
+    - "*Daj mi to."
+  concept_ids:
+    - PRAG-PAN-01
+  l1_notes:
+    ukr: Відпрацьовуйте польську рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać»
+      цілісно; не складайте її дослівно з українських слів.
+    rus: Отрабатывайте польскую рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać» целиком,
+      без дословной кальки с русского.
+    bel: Адпрацоўвайце польскую рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać» цалкам;
+      не складайце яе даслоўна з беларускай.
+grammar_points:
+  - id: GP-A1-UR-L3
+    title_pl: Pełny przebieg wizyty
+    summary_ru: Провести официальный контакт от приветствия до завершения, не теряя pan/pani.
+    form: Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?
+    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
+    use: "Вы самостоятельно проходите короткий визит: называете цель, идентифицируетесь, передаёте
+      комплект и выполняете указание."
+    examples_pl: *a1
+    counterexamples_pl:
+      - "*Ty daj."
+      - "*Ja nie rozumieć."
+    concept_ids:
+      - PRAG-PAN-01
+      - GR-TV-AGR-01
+      - GR-CAS-ACC-01
+    l1_notes:
+      ukr: Відпрацьовуйте польську рамку «Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?»
+        цілісно; не складайте її дослівно з українських слів.
+      rus: Отрабатывайте польскую рамку «Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?»
+        целиком, без дословной кальки с русского.
+      bel: Адпрацоўвайце польскую рамку «Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?»
+        цалкам; не складайце яе даслоўна з беларускай.
+l1_notes:
+  ukr: Відпрацьовуйте польську рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać»
+    цілісно; не складайте її дослівно з українських слів.
+  rus: Отрабатывайте польскую рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać» целиком,
+    без дословной кальки с русского.
+  bel: Адпрацоўвайце польскую рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać» цалкам;
+    не складайце яе даслоўна з беларускай.
+steps:
+  - id: step-l3-situation
+    kind: situation
+    title_ru: Ситуация
+    body_ru: "Вы самостоятельно проходите короткий визит: называете цель, идентифицируетесь, передаёте
+      комплект и выполняете указание."
+  - id: step-l3-dialogue
+    kind: dialogue
+    title_ru: Диалог
+    dialogue_ref: primary
+  - id: step-l3-key-lines
+    kind: key_lines
+    title_ru: Ключевые реплики
+  - id: step-l3-pan-pani
+    kind: pan_pani
+    title_ru: Pan / pani
+  - id: step-l3-grammar
+    kind: grammar
+    title_ru: Грамматика урока
+    grammar_point_id: GP-A1-UR-L3
+  - id: step-l3-practice
+    kind: practice
+    title_ru: Самостоятельная практика
+    exercise_ids:
+      - ex-ur-l3-01
+      - ex-ur-l3-02
+      - ex-ur-l3-03
+      - ex-ur-l3-04
+      - ex-ur-l3-05
+      - ex-ur-l3-06
+  - id: step-l3-mini-check
+    kind: mini_check
+    title_ru: Мини-проверка
+    exercise_ids: &a2
+      - ex-ur-l3-07
+      - ex-ur-l3-08
+  - id: step-l3-result
+    kind: result
+    title_ru: Результат
+exercises:
+  - id: ex-ur-l3-01
+    canonical_id: EX-A1-UR-L3-SC-01
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Выберите самостоятельное официальное начало визита.
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-PURPOSE-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+    feedback:
+      correct: Приветствие и цель сразу ориентируют служащего.
+      incorrect: Неформальные варианты не подходят urzędowi.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
+      ai_assisted: true
+    mini_check: false
+    options:
+      - id: a
+        text: Dzień dobry. Przyszłam w sprawie meldunku.
+      - id: b
+        text: Cześć, ja po meldunek.
+      - id: c
+        text: Hej, pomóż mi.
+    correct_option_id: a
+  - id: ex-ur-l3-02
+    canonical_id: EX-A1-UR-L3-MC-02
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Какие шаги входят в полный визит?
+    concept_ids:
+      - GR-TV-AGR-01
+    function_ids:
+      - FN-A1-DOCS-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: Первые три шага образуют официальный сценарий.
+      incorrect: Ty неуместно у окошка.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
+      ai_assisted: true
+    mini_check: false
+    options:
+      - id: a
+        text: Назвать цель
+      - id: b
+        text: Ответить на идентификацию
+      - id: c
+        text: Передать документы
+      - id: d
+        text: Перейти на ty
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-ur-l3-03
+    canonical_id: EX-A1-UR-L3-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Nazywam {{gap1}} Svitlana Koval."
+    concept_ids:
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-ADDRESS-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+    feedback:
+      correct: Nazywam się… — целая формула.
+      incorrect: Нужно się.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-ADDRESS-01 / LEX-A1-URZAD
+      ai_assisted: true
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - się
+        placeholder: …
+  - id: ex-ur-l3-04
+    canonical_id: EX-A1-UR-L3-GF-04
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Przyszłam w sprawie {{gap1}}."
+    concept_ids:
+      - GR-TNS-PRS-01
+    function_ids:
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: После w sprawie используется форма meldunku.
+      incorrect: Нужна форма meldunku.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-GREET-01 / LEX-A1-DOCS
+      ai_assisted: true
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - meldunku
+        placeholder: …
+  - id: ex-ur-l3-05
+    canonical_id: EX-A1-UR-L3-OR-05
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: Проведите самостоятельный визит.
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-REG-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+    feedback:
+      correct: Цель → имя → комплект → следующий шаг.
+      incorrect: Сначала объясните цель визита.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-REG-01 / LEX-A1-URZAD
+      ai_assisted: true
+    mini_check: false
+    items:
+      - id: t1
+        text: Dzień dobry. Przyszłam w sprawie meldunku.
+      - id: t2
+        text: Nazywam się Svitlana Koval.
+      - id: t3
+        text: Oto paszport, wniosek i zdjęcie.
+      - id: t4
+        text: Gdzie mam czekać?
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+  - id: ex-ur-l3-06
+    canonical_id: EX-A1-UR-L3-SC-06
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Служащий говорит «Proszę czekać na numer». Как уточнить место?
+    concept_ids:
+      - GR-TV-AGR-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: Gdzie mam czekać? нейтрально уточняет инструкцию.
+      incorrect: Ty и сломанная реплика не подходят.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-IDENTIFY-01 / LEX-A1-DOCS
+      ai_assisted: true
+    mini_check: false
+    options:
+      - id: a
+        text: Gdzie mam czekać?
+      - id: b
+        text: Gdzie ty każesz?
+      - id: c
+        text: Ja nie czekać.
+    correct_option_id: a
+  - id: ex-ur-l3-07
+    canonical_id: EX-A1-UR-L3-MC-07
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Выберите уместные признаки завершённого визита.
+    concept_ids:
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-PURPOSE-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+    feedback:
+      correct: Комплект, понимание и прощание закрывают визит.
+      incorrect: Приказ Daj нарушает регистр.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
+      ai_assisted: true
+    mini_check: true
+    options:
+      - id: a
+        text: Dokumenty są kompletne.
+      - id: b
+        text: Rozumiem.
+      - id: c
+        text: Dziękuję. Do widzenia.
+      - id: d
+        text: Daj numer.
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-ur-l3-08
+    canonical_id: EX-A1-UR-L3-OR-08
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: "Мини-проверка: восстановите официальный финал."
+    concept_ids:
+      - GR-TNS-PRS-01
+    function_ids:
+      - FN-A1-DOCS-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: Результат → инструкция → уточнение → закрытие.
+      incorrect: Сначала получите результат и инструкцию.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
+      ai_assisted: true
+    mini_check: true
+    items:
+      - id: t1
+        text: Dokumenty są kompletne.
+      - id: t2
+        text: Proszę czekać na numer.
+      - id: t3
+        text: Rozumiem. Gdzie mam czekać?
+      - id: t4
+        text: Dziękuję. Do widzenia.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+mini_check:
+  exercise_ids: *a2
+  pass_threshold: 1
+  concept_ids:
+    - PRAG-PAN-01
+    - GR-TV-AGR-01
+    - GR-CAS-ACC-01
+result_metadata:
+  title_ru: Результат урока
+  success_ru: Провести официальный контакт от приветствия до завершения, не теряя pan/pani. Результат
+    относится только к DRAFT-превью.
+  retry_ru: "Повторите опорные реплики: w sprawie · nazywam się · oto dokumenty · proszę czekać, затем
+    снова выполните мини-проверку."
+  evidence_skill: interaction
+  linked_function_ids:
+    - FN-A1-PURPOSE-01
+    - FN-A1-DOCS-01
+    - FN-A1-ADDRESS-01
+  linked_concept_ids:
+    - PRAG-PAN-01
+    - GR-TV-AGR-01
+    - GR-CAS-ACC-01
+provenance:
+  originality: created_for_product
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
+  sources:
+    - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01, FN-A1-DOCS-01,
+      FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
+  ai_assisted: true
+visibility: internal_preview_only

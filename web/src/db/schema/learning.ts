@@ -276,14 +276,17 @@ export const reviewSchedule = pgTable(
       .notNull()
       .references(() => learnerProfiles.id, { onDelete: "cascade" }),
     conceptCanonicalId: text("concept_canonical_id").notNull(),
+    /** Separates internal preview Powtórka from live learner schedule. */
+    masteryScope: text("mastery_scope").notNull().default("live"),
     dueAt: timestamp("due_at", { withTimezone: true }).notNull(),
     intervalDays: integer("interval_days").notNull().default(1),
     ...timestamps,
   },
   (table) => [
-    uniqueIndex("review_schedule_learner_concept_uidx").on(
+    uniqueIndex("review_schedule_learner_concept_scope_uidx").on(
       table.learnerProfileId,
       table.conceptCanonicalId,
+      table.masteryScope,
     ),
   ],
 );

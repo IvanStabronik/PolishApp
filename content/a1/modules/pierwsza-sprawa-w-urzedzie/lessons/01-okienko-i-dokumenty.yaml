@@ -219,11 +219,11 @@ exercises:
         bel: "Трымайце w sprawie…, не cześć да служачага."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-PURPOSE-01 / LEX-A1-URZAD MWU w sprawie"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ur-02
@@ -252,11 +252,11 @@ exercises:
       incorrect: "Разговорный / неясный регистр не закрывает слот документов."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-DOCS-01 / LEX-A1-DOCS"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ur-03
@@ -286,11 +286,11 @@ exercises:
       incorrect: "Daj / ty — недопустимы у окошка."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-DOCS MWU proszę o formularz"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ur-04
@@ -326,11 +326,11 @@ exercises:
       incorrect: "Hej, szybko… — грубый регистр для urzędu."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "SCN-A1-URZAD-01 transaction slots"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ur-05
@@ -364,11 +364,11 @@ exercises:
       incorrect: "Cześć, co tam? — неформальный регистр, не документооборот."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-DOCS-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ur-06
@@ -399,11 +399,11 @@ exercises:
         bel: "Трымайце sprawie, не кальку «справе» без прыназоўніка."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GP-A1-UR-SPRAWA-DOCS"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ur-07
@@ -430,11 +430,11 @@ exercises:
       incorrect: "Нужно Oto перед названием документа."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-DOCS MWU oto mój dowód"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ur-08
@@ -469,11 +469,11 @@ exercises:
       incorrect: "Сначала цель, потом документы и бланк, затем закрытие."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "Original dialogue Przy okienku"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ur-09
@@ -506,11 +506,11 @@ exercises:
       incorrect: "Сначала назовите цель, потом документы."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-PURPOSE-01 / FN-A1-DOCS-01"
-      ai_assisted: false
+      ai_assisted: true
 
   - id: ex-ur-10
     canonical_id: EX-A1-UR-SC-04
@@ -537,11 +537,11 @@ exercises:
       incorrect: "Називний / L1-порядок ломают рамку цели."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-tomasz-zielinski
-      reviewer_id: reviewer-placeholder-olena-shevchenko
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GP-A1-UR-SPRAWA-DOCS"
-      ai_assisted: false
+      ai_assisted: true
 
 mini_check:
   exercise_ids:
@@ -571,11 +571,11 @@ result_metadata:
     - GR-CAS-ACC-01
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-tomasz-zielinski
-  reviewer_id: reviewer-placeholder-olena-shevchenko
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "Original SŁOWARIUM dialogue and exercises — Pierwsza sprawa w urzędzie DRAFT"
     - "Curriculum links: SCN-A1-URZAD-01, FN-A1-PURPOSE-01, FN-A1-DOCS-01"
-  ai_assisted: false
-  notes: INTERNAL PREVIEW ONLY — status DRAFT, not published to learners.
+  ai_assisted: true
+  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

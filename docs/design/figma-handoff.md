@@ -91,8 +91,13 @@ Compat aliases `--color-forest*` map to navy for older component refs.
 | Progress | `/[locale]/progress` |
 | Settings | `/[locale]/settings` |
 | Privacy (export/delete) | `/[locale]/privacy` |
+| Daily plan (15 min) | `/[locale]/plan` |
+| Review queue (Powtórka) | `/[locale]/review` |
+| Kronika | `/[locale]/kronika` |
+| Author list | `/[locale]/author` |
+| Author / review detail | `/[locale]/author/[moduleId]` |
 
-Nav (signed-in): Dashboard · Learn · Progress · Settings · Privacy.
+Nav (signed-in): Dashboard · Learn · Progress · Settings · Privacy (+ plan / review / kronika from dashboard).
 
 ### Onboarding fields
 
@@ -104,28 +109,47 @@ UI locale · L1 (ukr/rus/bel **separate**) · level · goal · weekly · consent
 Зал 1 · Знакомство / Учебный модуль A1
 ```
 
-### Demo preview (Milestone 2)
+### Demo preview (Milestone 2+)
 
 Server `DEMO_PREVIEW` / `DEMO_MODE` enables private-alpha *environment*. DRAFT visibility still requires roles `previewer|author|reviewer|admin`. `NEXT_PUBLIC_DEMO_PREVIEW` alone is **not** authorization. Preview attempts write **preview** mastery scope only.
 
 ---
 
-## 4. Suggested Figma pages
+## 4. Suggested Figma pages (Milestone 3 structure)
 
-1. Foundations (color, type, focus, motion)
-2. Components
-3. Flow: Landing → Auth → Onboarding → Dashboard (5 modules) → Learn → Exercise (4 types) → Result → Progress → Settings → Privacy
-4. States: draft banner, correct/incorrect/error feedback, delete confirm, 403/404
-5. a11y: skip link, live region, focus order
-6. Breakpoints: desktop 1440 · tablet · mobile 390
+Move prior M1–M2 frames to page **`Archive / M1–M2`** (do not delete). Target pages:
 
-## 5. Private Alpha Figma sync
+1. **Foundations** — color, type, focus, motion
+2. **Components**
+3. **Learner Desktop / Tablet / Mobile** — dashboard (real content), daily plan, module, lesson, 4 exercise types, feedback, review queue, result, Kronika, settings, privacy success/error
+4. **Author & Review** — list, review detail, changes requested, approved-but-blocked
+5. **System States** — loading / empty / error / 403 / 404
+6. **Archive / M1–M2** — historical frames
 
-Continue in the same file: https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
+**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
+
+Created / ensured M3 pages (node ids):
+
+| Page | node-id |
+| --- | --- |
+| Archive / M1–M2 | `27:2` |
+| Foundations | `27:3` |
+| Components | `27:4` |
+| Learner Desktop | `27:5` |
+| Learner Tablet | `27:6` |
+| Learner Mobile | `27:7` |
+| Author & Review | `27:8` |
+| System States | `27:9` |
+
+Prior M1–M2 numbered pages (`01 Foundations` … `10 Auth Complete`) remain in-file for reference; migrate frames into `Archive / M1–M2` in a follow-up design pass without deleting history.
 
 Code remains source of visual truth for implemented screens under `web/src/app/[locale]/**`.
 
 ---
+
+## 5. Private Alpha Figma sync
+
+Continue in the same file: https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
 
 ## 6. Private Alpha M2 — frames updated
 
@@ -179,6 +203,92 @@ Empty · Loading · Error · 403 · 404 · Feedback Correct/Incorrect/Persist Er
 - Product chrome (nav, buttons, settings, errors): Russian
 - Learning content titles / prompts / options: Polish (e.g. `Szukam ___`, module titles)
 
-## 7. Out of scope
+## 7. Milestone 3 closed-beta screens (code)
 
-Architecture ADRs · DB schema docs · authoring CMS · certificate claims · gamification HUD · public content release before JPJO
+Implemented in app (sync into Learner / Author pages above):
+
+- Dashboard continue-learning + per-module %
+- `/plan` daily plan, `/review` Powtórka, `/kronika`
+- Author list + review detail (changes requested / approved-but-blocked)
+- Privacy export success **and** error states (M2.1)
+
+## 7b. Milestone 3 Figma frames (filled)
+
+**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
+**Source clones:** `04 Learning Flow`, `06 Mobile`, `08 System States`, `09 Tablet` (Archive/M1–M2 untouched).
+
+### Learner Desktop (`27:5`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Desktop · Dashboard | `30:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=30-2) |
+| M3 / Desktop · Module + Lessons | `30:44` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=30-44) |
+| M3 / Desktop · Lesson | `30:71` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=30-71) |
+| M3 / Desktop · Plan | `32:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=32-2) |
+| M3 / Desktop · Powtórka | `32:52` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=32-52) |
+| M3 / Desktop · Exercise · Single Choice | `35:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-2) |
+| M3 / Desktop · Exercise · Multiple Choice | `35:19` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-19) |
+| M3 / Desktop · Exercise · Gap Fill | `35:42` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-42) |
+| M3 / Desktop · Exercise · Ordering | `35:58` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-58) |
+| M3 / Desktop · Feedback · Correct | `35:89` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-89) |
+| M3 / Desktop · Feedback · Incorrect | `35:97` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-97) |
+| M3 / Desktop · Feedback · Persist Error | `35:105` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-105) |
+| M3 / Desktop · Kronika | `35:113` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-113) |
+
+### Learner Tablet (`27:6`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Tablet · Dashboard | `36:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-2) |
+| M3 / Tablet · Module + Lessons | `36:219` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-219) |
+| M3 / Tablet · Lesson | `40:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=40-2) |
+| M3 / Tablet · Plan | `40:18` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=40-18) |
+
+### Learner Mobile (`27:7`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Mobile · Dashboard | `36:114` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-114) |
+| M3 / Mobile · Module | `36:137` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-137) |
+| M3 / Mobile · Lesson | `41:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=41-2) |
+| M3 / Mobile · Plan | `41:20` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=41-20) |
+
+### Author & Review (`27:8`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Desktop · Author List | `34:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=34-2) |
+| M3 / Desktop · Author Review Detail | `37:33` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-33) |
+| M3 / Desktop · Changes Requested | `37:87` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-87) |
+| M3 / Desktop · Approved · Publication Blocked | `37:141` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-141) |
+
+### System States (`27:9`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Desktop · Empty | `37:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-2) |
+| M3 / Desktop · Loading | `37:8` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-8) |
+| M3 / Desktop · Error | `37:13` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-13) |
+| M3 / Desktop · 403 | `37:19` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-19) |
+| M3 / Desktop · 404 | `37:26` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-26) |
+
+### Responsive rebuild (acceptance pass)
+
+Fully rebuilt with auto-layout (not clipped desktop clones). Content width ≤ viewport; headlines/cards/CTAs visible; mobile Plan is a vertical step sequence; touch targets ≥ 44×44.
+
+| Frame | node-id | Viewport |
+| --- | --- | --- |
+| M3 / Tablet · Lesson | `40:2` | 834×1112 |
+| M3 / Tablet · Plan | `40:18` | 834×1020 |
+| M3 / Mobile · Lesson | `41:2` | 390×844 |
+| M3 / Mobile · Plan | `41:20` | 390×844 |
+
+Prior clipped clones (`36:246`, `36:255`, `36:156`, `36:165`) were replaced.
+
+### Design debt (deferred — not claimed as completed M3 work)
+
+- Foundations (`27:3`) and Components (`27:4`) M3 copies remain empty; M1–M2 foundations/components already exist in-file and remain the visual source until a dedicated design-system sync pass.
+
+## 8. Out of scope
+
+Architecture ADRs · DB schema docs · certificate claims · gamification HUD · public content release before JPJO · simulating independent JPJO decisions in-app

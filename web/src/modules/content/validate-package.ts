@@ -15,6 +15,8 @@ export type ValidationIssue = {
     | "MISSING_PROVENANCE"
     | "PUBLISHED_WITHOUT_REVIEWER"
     | "AUTHOR_EQUALS_REVIEWER"
+    | "PLACEHOLDER_IDENTITY"
+    | "FALSE_REVIEWER_ON_DRAFT"
     | "DUPLICATE_ID_VERSION"
     | "REFERENTIAL"
     | "STATUS";
@@ -63,7 +65,32 @@ function provenanceIssues(
     });
   }
 
+  const author = provenance.author_id?.trim() || "";
   const reviewer = provenance.reviewer_id?.trim() || null;
+
+  if (/placeholder/i.test(author)) {
+    issues.push({
+      code: "PLACEHOLDER_IDENTITY",
+      path: `${path}.author_id`,
+      message: 'author_id must not contain "placeholder" (use an honest system or human id)',
+    });
+  }
+  if (reviewer && /placeholder/i.test(reviewer)) {
+    issues.push({
+      code: "PLACEHOLDER_IDENTITY",
+      path: `${path}.reviewer_id`,
+      message: 'reviewer_id must not contain "placeholder" (use null until a real review exists)',
+    });
+  }
+
+  if (status === "DRAFT" && reviewer) {
+    issues.push({
+      code: "FALSE_REVIEWER_ON_DRAFT",
+      path: `${path}.reviewer_id`,
+      message: "DRAFT content must not claim a reviewer_id (set reviewer_id to null until reviewed)",
+    });
+  }
+
   if (status === "PUBLISHED" && !reviewer) {
     issues.push({
       code: "PUBLISHED_WITHOUT_REVIEWER",

@@ -15,10 +15,12 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test && playwright test -c playwright.no-demo.config.ts",
-    "test:e2e:smoke": "playwright test",
+    "test:e2e": "pnpm test:e2e:smoke && pnpm test:e2e:m3 && pnpm test:e2e:no-demo",
+    "test:e2e:smoke": "playwright test e2e/smoke.spec.ts",
+    "test:e2e:m3": "playwright test e2e/m3-closed-beta.spec.ts",
     "test:e2e:no-demo": "playwright test -c playwright.no-demo.config.ts",
     "content:validate": "tsx scripts/content-validate.ts",
+    "m3:assert": "tsx scripts/m3-assert.ts",
     "content:import": "tsx scripts/content-import.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx src/db/migrate.ts",
@@ -41,6 +43,7 @@
     "zod": "^4.1.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.55.0",
     "@tailwindcss/postcss": "^4",

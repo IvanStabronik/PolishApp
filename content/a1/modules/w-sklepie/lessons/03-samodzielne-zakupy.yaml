@@ -1,0 +1,439 @@
+kind: lesson
+canonical_id: LES-A1-WS-03
+slug: samodzielne-zakupy
+version: 1
+status: DRAFT
+title_pl: Samodzielne zakupy
+sort_order: 3
+situation_ru: Вы самостоятельно выбираете несколько товаров, корректируете количество и завершаете покупку.
+objective_ru: Провести покупку от выбора до чека, реагируя на вопрос кассира без готовой подсказки.
+curriculum_links:
+  scenarios:
+    - SCN-A1-SHOP-01
+  functions:
+    - FN-A1-TRANS-01
+    - FN-A1-QUANT-01
+    - FN-A1-ASK-01
+    - FN-A1-ADDRESS-01
+    - FN-A1-CONFIRM-01
+    - FN-A1-THANKS-01
+  lex_bundles:
+    - LEX-A1-SERVICE
+    - LEX-A1-MONEY
+  concepts:
+    - GR-CAS-ACC-01
+    - GR-NUM-MONEY-01
+    - GR-NUM-CARD-01
+    - PRAG-PAN-01
+dialogue:
+  title_pl: Samodzielne zakupy
+  turns:
+    - speaker: Kasjer
+      text_pl: Dzień dobry. Co podać?
+    - speaker: Larysa
+      text_pl: Poproszę ten chleb, mleko i trzy bułki.
+    - speaker: Kasjer
+      text_pl: Jedno mleko?
+    - speaker: Larysa
+      text_pl: Tak, jedno. I jeszcze torbę, proszę.
+    - speaker: Kasjer
+      text_pl: Razem osiemnaście złotych.
+    - speaker: Larysa
+      text_pl: Dobrze. Płacę kartą. Czy mogę dostać paragon?
+    - speaker: Kasjer
+      text_pl: Oczywiście. Proszę.
+    - speaker: Larysa
+      text_pl: Dziękuję. Do widzenia.
+key_lines:
+  - text_pl: Poproszę ten chleb, mleko i trzy bułki.
+    explanation_ru: Самостоятельный выбор нескольких товаров.
+  - text_pl: Tak, jedno.
+    explanation_ru: Короткое подтверждение количества.
+  - text_pl: I jeszcze torbę, proszę.
+    explanation_ru: Добавление последней позиции.
+  - text_pl: Czy mogę dostać paragon?
+    explanation_ru: Полная просьба о чеке.
+pan_pani:
+  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
+    просьбы и благодарность важнее буквального переноса форм L1.
+  form: Poproszę… · jeszcze… · razem… · płacę…
+  examples_pl: &a1
+    - Poproszę ten chleb i mleko.
+    - Tak, jedno.
+    - I jeszcze torbę, proszę.
+  counterexamples_pl:
+    - "*Ty mi powiedz."
+    - "*Daj mi to."
+  concept_ids:
+    - PRAG-PAN-01
+  l1_notes:
+    ukr: Відпрацьовуйте польську рамку «Poproszę… · jeszcze… · razem… · płacę…» цілісно; не складайте її
+      дослівно з українських слів.
+    rus: Отрабатывайте польскую рамку «Poproszę… · jeszcze… · razem… · płacę…» целиком, без дословной
+      кальки с русского.
+    bel: Адпрацоўвайце польскую рамку «Poproszę… · jeszcze… · razem… · płacę…» цалкам; не складайце яе
+      даслоўна з беларускай.
+grammar_points:
+  - id: GP-A1-WS-L3
+    title_pl: Pełna lista zakupów
+    summary_ru: Провести покупку от выбора до чека, реагируя на вопрос кассира без готовой подсказки.
+    form: Poproszę A, B i liczbę C. Tak, jedno/dwa. I jeszcze…
+    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
+    use: Вы самостоятельно выбираете несколько товаров, корректируете количество и завершаете покупку.
+    examples_pl: *a1
+    counterexamples_pl:
+      - "*Ty daj."
+      - "*Ja nie rozumieć."
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-NUM-MONEY-01
+      - GR-NUM-CARD-01
+    l1_notes:
+      ukr: Відпрацьовуйте польську рамку «Poproszę A, B i liczbę C. Tak, jedno/dwa. I jeszcze…» цілісно;
+        не складайте її дослівно з українських слів.
+      rus: Отрабатывайте польскую рамку «Poproszę A, B i liczbę C. Tak, jedno/dwa. I jeszcze…» целиком,
+        без дословной кальки с русского.
+      bel: Адпрацоўвайце польскую рамку «Poproszę A, B i liczbę C. Tak, jedno/dwa. I jeszcze…» цалкам; не
+        складайце яе даслоўна з беларускай.
+l1_notes:
+  ukr: Відпрацьовуйте польську рамку «Poproszę… · jeszcze… · razem… · płacę…» цілісно; не складайте її
+    дослівно з українських слів.
+  rus: Отрабатывайте польскую рамку «Poproszę… · jeszcze… · razem… · płacę…» целиком, без дословной
+    кальки с русского.
+  bel: Адпрацоўвайце польскую рамку «Poproszę… · jeszcze… · razem… · płacę…» цалкам; не складайце яе
+    даслоўна з беларускай.
+steps:
+  - id: step-l3-situation
+    kind: situation
+    title_ru: Ситуация
+    body_ru: Вы самостоятельно выбираете несколько товаров, корректируете количество и завершаете покупку.
+  - id: step-l3-dialogue
+    kind: dialogue
+    title_ru: Диалог
+    dialogue_ref: primary
+  - id: step-l3-key-lines
+    kind: key_lines
+    title_ru: Ключевые реплики
+  - id: step-l3-pan-pani
+    kind: pan_pani
+    title_ru: Pan / pani
+  - id: step-l3-grammar
+    kind: grammar
+    title_ru: Грамматика урока
+    grammar_point_id: GP-A1-WS-L3
+  - id: step-l3-practice
+    kind: practice
+    title_ru: Самостоятельная практика
+    exercise_ids:
+      - ex-ws-l3-01
+      - ex-ws-l3-02
+      - ex-ws-l3-03
+      - ex-ws-l3-04
+      - ex-ws-l3-05
+      - ex-ws-l3-06
+  - id: step-l3-mini-check
+    kind: mini_check
+    title_ru: Мини-проверка
+    exercise_ids: &a2
+      - ex-ws-l3-07
+      - ex-ws-l3-08
+  - id: step-l3-result
+    kind: result
+    title_ru: Результат
+exercises:
+  - id: ex-ws-l3-01
+    canonical_id: EX-A1-WS-L3-SC-01
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Выберите ясный заказ трёх позиций.
+    concept_ids:
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: Poproszę и союз i связывают список.
+      incorrect: Остальные варианты не дают вежливого ясного заказа.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE
+      ai_assisted: true
+    mini_check: false
+    options:
+      - id: a
+        text: Poproszę chleb, mleko i trzy bułki.
+      - id: b
+        text: Chleb mleko trzy.
+      - id: c
+        text: Daj wszystko.
+    correct_option_id: a
+  - id: ex-ws-l3-02
+    canonical_id: EX-A1-WS-L3-MC-02
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Какие действия показывают самостоятельность у кассы?
+    concept_ids:
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-QUANT-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Первые три действия закрывают информационные слоты.
+      incorrect: Кассир не должен угадывать заказ.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-SHOP-01 / FN-A1-QUANT-01 / LEX-A1-MONEY
+      ai_assisted: true
+    mini_check: false
+    options:
+      - id: a
+        text: Назвать полный список
+      - id: b
+        text: Подтвердить количество
+      - id: c
+        text: Добавить нужную торбу
+      - id: d
+        text: Ждать, пока кассир угадает
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-ws-l3-03
+    canonical_id: EX-A1-WS-L3-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: I {{gap1}} torbę, proszę."
+    concept_ids:
+      - GR-NUM-CARD-01
+    function_ids:
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: I jeszcze… добавляет позицию.
+      incorrect: Нужно jeszcze.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-SHOP-01 / FN-A1-ASK-01 / LEX-A1-SERVICE
+      ai_assisted: true
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - jeszcze
+        placeholder: …
+  - id: ex-ws-l3-04
+    canonical_id: EX-A1-WS-L3-GF-04
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Czy mogę dostać {{gap1}}?"
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-ADDRESS-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Полная просьба заканчивается названием чека.
+      incorrect: Нужно paragon.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-SHOP-01 / FN-A1-ADDRESS-01 / LEX-A1-MONEY
+      ai_assisted: true
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - paragon
+        placeholder: …
+  - id: ex-ws-l3-05
+    canonical_id: EX-A1-WS-L3-OR-05
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: Проведите самостоятельную покупку.
+    concept_ids:
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-CONFIRM-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: Список → уточнение → сумма → оплата.
+      incorrect: Количество уточняют до оплаты.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-SHOP-01 / FN-A1-CONFIRM-01 / LEX-A1-SERVICE
+      ai_assisted: true
+    mini_check: false
+    items:
+      - id: t1
+        text: Dzień dobry. Poproszę chleb, mleko i trzy bułki.
+      - id: t2
+        text: Tak, jedno mleko. I jeszcze torbę.
+      - id: t3
+        text: Ile płacę?
+      - id: t4
+        text: Płacę kartą. Poproszę paragon.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+  - id: ex-ws-l3-06
+    canonical_id: EX-A1-WS-L3-SC-06
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Кассир спрашивает «Jedno mleko?». Ответьте.
+    concept_ids:
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-THANKS-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Tak, jedno подтверждает количество mleko.
+      incorrect: Jeden не согласуется, ty не отвечает.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-SHOP-01 / FN-A1-THANKS-01 / LEX-A1-MONEY
+      ai_assisted: true
+    mini_check: false
+    options:
+      - id: a
+        text: Tak, jedno.
+      - id: b
+        text: Tak, jeden.
+      - id: c
+        text: Ty wiesz.
+    correct_option_id: a
+  - id: ex-ws-l3-07
+    canonical_id: EX-A1-WS-L3-MC-07
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Какие реплики уместны после сообщения суммы?
+    concept_ids:
+      - GR-NUM-CARD-01
+    function_ids:
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: Подтверждение, оплата и чек следуют после суммы.
+      incorrect: Происхождение не относится к транзакции.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE
+      ai_assisted: true
+    mini_check: true
+    options:
+      - id: a
+        text: Dobrze.
+      - id: b
+        text: Płacę kartą.
+      - id: c
+        text: Czy mogę dostać paragon?
+      - id: d
+        text: Skąd pan jest?
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-ws-l3-08
+    canonical_id: EX-A1-WS-L3-OR-08
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: "Мини-проверка: восстановите кассовый финал."
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-QUANT-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Сумма → принятие и оплата → чек → прощание.
+      incorrect: Не прощайтесь до завершения оплаты.
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-SHOP-01 / FN-A1-QUANT-01 / LEX-A1-MONEY
+      ai_assisted: true
+    mini_check: true
+    items:
+      - id: t1
+        text: Razem osiemnaście złotych.
+      - id: t2
+        text: Dobrze. Płacę kartą.
+      - id: t3
+        text: Czy mogę dostać paragon?
+      - id: t4
+        text: Dziękuję. Do widzenia.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+mini_check:
+  exercise_ids: *a2
+  pass_threshold: 1
+  concept_ids:
+    - GR-CAS-ACC-01
+    - GR-NUM-MONEY-01
+    - GR-NUM-CARD-01
+result_metadata:
+  title_ru: Результат урока
+  success_ru: Провести покупку от выбора до чека, реагируя на вопрос кассира без готовой подсказки.
+    Результат относится только к DRAFT-превью.
+  retry_ru: "Повторите опорные реплики: Poproszę… · jeszcze… · razem… · płacę…, затем снова выполните
+    мини-проверку."
+  evidence_skill: interaction
+  linked_function_ids:
+    - FN-A1-TRANS-01
+    - FN-A1-QUANT-01
+    - FN-A1-ASK-01
+  linked_concept_ids:
+    - GR-CAS-ACC-01
+    - GR-NUM-MONEY-01
+    - GR-NUM-CARD-01
+provenance:
+  originality: created_for_product
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
+  sources:
+    - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01, FN-A1-QUANT-01,
+      FN-A1-ASK-01, FN-A1-ADDRESS-01, FN-A1-CONFIRM-01, FN-A1-THANKS-01 / LEX-A1-SERVICE,
+      LEX-A1-MONEY
+  ai_assisted: true
+visibility: internal_preview_only

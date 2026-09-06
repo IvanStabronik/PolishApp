@@ -108,12 +108,41 @@
     "viewProgress": "Zobacz postęp",
     "openCatalog": "Katalog A1",
     "nextStep": "Następny krok",
+    "overallProgress": "Postęp ogólny: {percent}%",
+    "nextGoal": "Następny cel",
     "emptyPublished": "Brak opublikowanych modułów. W private alpha DRAFT jest dostępny tylko dla ról previewer/author/reviewer."
   },
   "learn": {
     "catalogTitle": "Skrzydło A1",
     "catalogLead": "Trasy Archiwum na poziomie A1. Szkice widać tylko w wewnętrznym preview.",
     "openModule": "Otwórz salę",
+    "sala": "Sala",
+    "lekcja": "Lekcja",
+    "proba": "Próba",
+    "powtorka": "Powtórka",
+    "kronika": "Kronika",
+    "archiwum": "Archiwum",
+    "dailyPlan": "Plan dnia (15 min)",
+    "reviewQueue": "Powtórka",
+    "planReason": {
+      "unfinishedLesson": "Kontynuuj niedokończoną lekcję",
+      "weakConcept": "Wzmocnij słaby koncept",
+      "errorReview": "Powtórz niedawny błąd",
+      "miniCheck": "Mini-sprawdzenie modułu"
+    },
+    "planGoal": {
+      "finishLesson": "Dokończ bieżącą lekcję",
+      "miniCheck": "Wykonaj mini-sprawdzenie modułu",
+      "strengthenConcept": "Wzmocnij słaby koncept",
+      "reviewErrors": "Przejrzyj niedawne błędy",
+      "openNextSala": "Otwórz następną salę, gdy będziesz gotów/gotowa"
+    },
+    "reviewReason": {
+      "scheduledDue": "Według harmonogramu powtórek",
+      "masteryReviewDue": "Mastery: czas na powtórkę",
+      "errorThreshold": "Próg błędów do powtórki"
+    },
+    "openItem": "Otwórz",
     "objective": "Cel",
     "dialogue": "Dialog",
     "keyLines": "Kluczowe kwestie",

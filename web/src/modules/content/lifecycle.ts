@@ -1,6 +1,12 @@
 import type { ContentStatus } from "@/lib/enums";
 
-/** Allowed status transitions (content-pipeline.md). DRAFT → PUBLISHED is forbidden. */
+/**
+ * Allowed status transitions (content-pipeline.md). DRAFT → PUBLISHED is forbidden.
+ *
+ * Product label **CHANGES_REQUESTED** maps to DB enum value **REJECTED**.
+ * There is no separate CHANGES_REQUESTED enum member — reviewers “request changes”
+ * by writing a `reviews` row with decision `reject` and setting status to REJECTED.
+ */
 const ALLOWED: Record<ContentStatus, readonly ContentStatus[]> = {
   DRAFT: ["IN_REVIEW", "ARCHIVED"],
   IN_REVIEW: ["APPROVED", "REJECTED", "DRAFT"],
@@ -9,6 +15,9 @@ const ALLOWED: Record<ContentStatus, readonly ContentStatus[]> = {
   REJECTED: ["DRAFT"],
   ARCHIVED: [],
 };
+
+/** DB status used when a reviewer requests changes (product: CHANGES_REQUESTED). */
+export const CHANGES_REQUESTED_DB_STATUS: ContentStatus = "REJECTED";
 
 export function canTransition(
   from: ContentStatus,

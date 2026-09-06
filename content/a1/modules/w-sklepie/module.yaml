@@ -34,17 +34,18 @@ curriculum_links:
     - PRAG-PAN-01
 lesson_files:
   - lessons/01-zakupy-przy-kasie.yaml
+  - lessons/02-ilosc-cena-i-paragon.yaml
+  - lessons/03-samodzielne-zakupy.yaml
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-piotr-kowalski
-  reviewer_id: reviewer-placeholder-natalia-bondar
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "PRODUCT ANALYSIS — shop checkout transaction for first audience"
     - "Curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01 / FN-A1-QUANT-01"
     - "Common-knowledge Polish retail dialogue patterns (język ogólny)"
-  ai_assisted: false
+  ai_assisted: true
   notes: >
-    INTERNAL PREVIEW ONLY. DRAFT — not JPJO-approved, not learner-published.
-    Author and reviewer are distinct placeholders; no PUBLISHED status.
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). DRAFT — pending human review; not JPJO-approved, not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true

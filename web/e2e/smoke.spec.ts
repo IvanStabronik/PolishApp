@@ -108,7 +108,7 @@ async function completeModule(page: Page, moduleId: string, seenTypes: Set<strin
   });
   await page.getByTestId("start-practice").click();
 
-  for (let i = 0; i < 20; i += 1) {
+  for (let i = 0; i < 40; i += 1) {
     if (page.url().includes("/result")) break;
     await answerCurrentExercise(page, seenTypes);
   }
@@ -286,7 +286,7 @@ test.describe("Milestone 2.1 private alpha learner path", () => {
   test("previewer completes five modules with all four exercise types", async ({
     page,
   }) => {
-    test.setTimeout(600_000);
+    test.setTimeout(900_000);
 
     await loginAs(
       page,

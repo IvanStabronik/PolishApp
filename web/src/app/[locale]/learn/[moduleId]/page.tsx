@@ -13,11 +13,16 @@ import {
   canAccessDraftContent,
   isPrivateAlphaPreviewEnv,
 } from "@/lib/demo";
+import { Link } from "@/i18n/navigation";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string }>;
 };
 
+/**
+ * Compatible adapter: module overview + flat start-practice (M2.1)
+ * plus real lesson list (M3). Flat exercises are derived from lessons.
+ */
 export default async function ModulePage({ params }: Props) {
   const { locale, moduleId } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
@@ -38,12 +43,13 @@ export default async function ModulePage({ params }: Props) {
   const tDash = await getTranslations("dashboard");
   const firstExercise = mod.exercises[0];
   const preview = canDraft && isInternalPreview(mod.status);
+  const lessons = [...mod.lessons].sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (
     <>
       <SiteHeader signedIn />
       {preview ? <PreviewBanner /> : null}
-      <main id="main-content" className="page-shell">
+      <main id="main-content" className="page-shell" data-testid="module-page">
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone="info">{mod.level}</Badge>
           {preview ? <Badge tone="draft">{tDash("previewBadge")}</Badge> : null}
@@ -62,6 +68,34 @@ export default async function ModulePage({ params }: Props) {
           <ModuleOverview dialogue={mod.dialogue} keyLines={mod.keyLines} />
         </div>
 
+        <section className="mt-10" data-testid="module-lessons">
+          <h2 className="font-display m-0 text-xl text-[var(--color-ink)]">
+            {t("lessons")}
+          </h2>
+          <ul className="mt-4 flex list-none flex-col gap-3 p-0">
+            {lessons.map((lesson) => (
+              <li
+                key={lesson.id}
+                className="flex flex-wrap items-center justify-between gap-3 border border-[var(--color-line)] bg-[var(--color-paper-raised)] px-4 py-3 rounded-[var(--radius-md)]"
+                data-testid="module-lesson"
+                data-lesson-id={lesson.id}
+              >
+                <div>
+                  <p className="m-0 font-medium text-[var(--color-ink)]">
+                    {lesson.titlePl}
+                  </p>
+                  <p className="m-0 text-sm text-[var(--color-graphite-muted)]">
+                    {lesson.id}
+                  </p>
+                </div>
+                <LinkButton href={`/learn/lessons/${lesson.id}`}>
+                  {t("startLesson")}
+                </LinkButton>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         {firstExercise ? (
           <div className="mt-10">
             <LinkButton
@@ -72,6 +106,15 @@ export default async function ModulePage({ params }: Props) {
             </LinkButton>
           </div>
         ) : null}
+
+        <p className="mt-6">
+          <Link
+            href={`/learn/modules/${mod.id}`}
+            className="text-sm text-[var(--color-forest)]"
+          >
+            /learn/modules/{mod.id}
+          </Link>
+        </p>
       </main>
     </>
   );

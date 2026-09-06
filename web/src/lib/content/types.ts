@@ -78,18 +78,33 @@ export type ModuleExercise =
 /** Explicit alias emphasizing server-only boundary. */
 export type AuthoredExercise = ModuleExercise;
 
-export type DraftModule = {
+/** Server-side lesson step from YAML (exercise refs only — no answer keys). */
+export type DraftLessonStep =
+  | {
+      id: string;
+      kind: "situation" | "dialogue" | "key_lines" | "pan_pani" | "grammar" | "result";
+      titleRu: string;
+      bodyRu?: string;
+      grammarPointId?: string;
+    }
+  | {
+      id: string;
+      kind: "practice" | "mini_check";
+      titleRu: string;
+      exerciseIds: string[];
+    };
+
+/**
+ * Real Course→Module→Lesson entity (canonical LES-* id).
+ * Exercises here are server-only; strip via toLearnerExercise before client.
+ */
+export type DraftLesson = {
   id: string;
-  version: string;
-  title: string;
+  slug: string;
+  sortOrder: number;
   titlePl: string;
-  level: string;
-  status: ContentStatus;
-  hallLabel: string;
-  objective: string;
   situation: string;
-  uiLocales: string[];
-  l1Applicability: LearnerL1[];
+  objective: string;
   dialogue: DialogueTurn[];
   keyLines: KeyLine[];
   pragmatics: {
@@ -103,6 +118,44 @@ export type DraftModule = {
     conceptId: string;
     l1Notes?: Partial<Record<LearnerL1, string>>;
   };
+  steps: DraftLessonStep[];
+  exercises: ModuleExercise[];
+  miniCheckExerciseIds: string[];
+};
+
+export type DraftModule = {
+  id: string;
+  canonicalId: string;
+  version: string;
+  title: string;
+  titlePl: string;
+  level: string;
+  status: ContentStatus;
+  hallLabel: string;
+  objective: string;
+  situation: string;
+  uiLocales: string[];
+  l1Applicability: LearnerL1[];
+  /** Overview from first lesson — for module card / flat adapter. */
+  dialogue: DialogueTurn[];
+  keyLines: KeyLine[];
+  pragmatics: {
+    panPani: string;
+    l1Notes?: Partial<Record<LearnerL1, string>>;
+  };
+  grammar: {
+    title: string;
+    explanation: string;
+    examples: string[];
+    conceptId: string;
+    l1Notes?: Partial<Record<LearnerL1, string>>;
+  };
+  /** Real lessons (exactly 3 for A1 closed-beta modules). */
+  lessons: DraftLesson[];
+  /**
+   * Flat adapter: union of all lesson exercises in curriculum order.
+   * Not a second inventory — derived from lessons[].
+   */
   exercises: ModuleExercise[];
   miniCheckExerciseIds: string[];
   provenance: {

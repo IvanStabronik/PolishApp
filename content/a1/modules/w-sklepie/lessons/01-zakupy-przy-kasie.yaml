@@ -207,11 +207,11 @@ exercises:
         bel: "Трымайце Poproszę, не рэзкі *Daj."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-SERVICE"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ws-02
@@ -241,11 +241,11 @@ exercises:
       incorrect: "L1-калька или ty к кассиру — ошибка."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-MONEY MWU ile to kosztuje"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ws-03
@@ -274,11 +274,11 @@ exercises:
       incorrect: "Karta / na karcie — кальки, не сервисная формула."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-MONEY COLL płacić + Ins"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ws-04
@@ -311,11 +311,11 @@ exercises:
       incorrect: "Hej, dawaj szybciej! — грубый регистр."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "SCN-A1-SHOP-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ws-05
@@ -348,11 +348,11 @@ exercises:
       incorrect: "Cześć, stary! не относится к числовым слотам покупки."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-QUANT-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ws-06
@@ -382,11 +382,11 @@ exercises:
         bel: "Трымайце kosztuje, не кальку «каштуе»."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-MONEY"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ws-07
@@ -412,11 +412,11 @@ exercises:
       incorrect: "Нужна форма kartą или gotówką."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GP-A1-WS-CENA-ILOSC"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ws-08
@@ -450,11 +450,11 @@ exercises:
       incorrect: "Сначала назовите товар, потом цену и оплату."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "Original dialogue Przy kasie w sklepie"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ws-09
@@ -485,11 +485,11 @@ exercises:
       incorrect: "Сначала количество, затем цена."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-QUANT-01"
-      ai_assisted: false
+      ai_assisted: true
 
   - id: ex-ws-10
     canonical_id: EX-A1-WS-SC-04
@@ -515,11 +515,11 @@ exercises:
       incorrect: "Инфинитив или калька ломают вопрос о цене."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-piotr-kowalski
-      reviewer_id: reviewer-placeholder-natalia-bondar
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GP-A1-WS-CENA-ILOSC"
-      ai_assisted: false
+      ai_assisted: true
 
 mini_check:
   exercise_ids:
@@ -549,11 +549,11 @@ result_metadata:
     - PRAG-PAN-01
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-piotr-kowalski
-  reviewer_id: reviewer-placeholder-natalia-bondar
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "Original SŁOWARIUM dialogue and exercises — W sklepie DRAFT"
     - "Curriculum links: SCN-A1-SHOP-01, FN-A1-TRANS-01, FN-A1-QUANT-01"
-  ai_assisted: false
-  notes: INTERNAL PREVIEW ONLY — status DRAFT, not published to learners.
+  ai_assisted: true
+  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

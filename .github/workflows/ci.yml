@@ -29,7 +29,7 @@ jobs:
   build-and-test:
     name: Lint · typecheck · unit · content · DB · build · e2e
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
 
     services:
       postgres:
@@ -94,6 +94,9 @@ jobs:
       - name: Validate content YAML
         run: pnpm content:validate
 
+      - name: M3 inventory + provenance assert
+        run: pnpm m3:assert
+
       - name: Migrate & seed (test DB)
         run: |
           pnpm db:migrate
@@ -108,8 +111,11 @@ jobs:
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: E2E learner path
+      - name: E2E M2.1 learner path
         run: pnpm test:e2e:smoke
+
+      - name: E2E M3 closed beta
+        run: pnpm test:e2e:m3
 
       - name: E2E no-preview security
         run: pnpm test:e2e:no-demo
@@ -132,7 +138,7 @@ jobs:
 
       - name: Whitespace / conflict markers
         working-directory: .
-        run: git diff --check 6ab4592716ed3bf34107322a390b337c563fca63..HEAD
+        run: git diff --check 301d8a813b674f0cc6392dcb48271f08d4896fbe..HEAD
 
       - name: Upload Playwright artifacts
         if: always()

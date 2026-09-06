@@ -220,11 +220,11 @@ exercises:
         bel: "Не стаўце «Прывітанне» замест Dzień dobry з незнаёмцам."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-GREETINGS / FN-A1-GREET-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ps-02
@@ -256,11 +256,11 @@ exercises:
         bel: "Не пераносьце «вы» ў форму wy jesteście да незнаёмкі."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "PRAG-PAN-01"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ps-03
@@ -293,11 +293,11 @@ exercises:
       incorrect: "Cześć, co tam? — слишком неформально для первого взрослого контакта."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-GREETINGS"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ps-04
@@ -331,11 +331,11 @@ exercises:
       incorrect: "Do widzenia закрывает контакт, но не называет, кто вы."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-IDENTIFY-01 / LEX-A1-IDENTITY"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ps-05
@@ -366,11 +366,11 @@ exercises:
         bel: "Не ўзорвайце «мяне клічуць» без się."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-IDENTITY MWU nazywam się"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ps-06
@@ -400,11 +400,11 @@ exercises:
         bel: "Трымайце z + форма Ukrainy, не кальку «я з Украіна»."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "LEX-A1-IDENTITY MWU jestem z"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ps-07
@@ -438,11 +438,11 @@ exercises:
       incorrect: "Сначала контакт, потом имя/происхождение, затем прощание."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "Original dialogue Spotkanie na klatce"
-      ai_assisted: false
+      ai_assisted: true
     mini_check: false
 
   - id: ex-ps-08
@@ -473,11 +473,11 @@ exercises:
       incorrect: "Сначала кто вы, потом skąd, затем где сейчас."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "FN-A1-IDENTIFY-01 completion slots"
-      ai_assisted: false
+      ai_assisted: true
 
   - id: ex-ps-09
     canonical_id: EX-A1-PS-SC-03
@@ -504,11 +504,11 @@ exercises:
       incorrect: "Без się или со сломанным порядком формула неверна."
     provenance:
       originality: created_for_product
-      author_id: author-placeholder-ola-nowak
-      reviewer_id: reviewer-placeholder-igor-savchuk
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
       sources:
         - "GP-A1-PS-NAZYWAM-JESTEM"
-      ai_assisted: false
+      ai_assisted: true
 
 mini_check:
   exercise_ids:
@@ -538,11 +538,11 @@ result_metadata:
     - PHON-CORE-01
 provenance:
   originality: created_for_product
-  author_id: author-placeholder-ola-nowak
-  reviewer_id: reviewer-placeholder-igor-savchuk
+  author_id: system:ai-draft-slowarium
+  reviewer_id: null
   sources:
     - "Original SŁOWARIUM dialogue and exercises — Pierwsze spotkanie DRAFT"
     - "Curriculum links: SCN-A1-EVERYDAY-01, FN-A1-GREET-01, FN-A1-IDENTIFY-01"
-  ai_assisted: false
-  notes: INTERNAL PREVIEW ONLY — status DRAFT, not published to learners.
+  ai_assisted: true
+  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

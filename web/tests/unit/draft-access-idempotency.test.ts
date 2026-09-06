@@ -49,6 +49,7 @@ function createFakePersistStore() {
             masteryWritten: false,
             masteryState: null,
             masteryScope: existing.masteryScope,
+            reviewDueAt: null,
             idempotentReplay: true,
             reason: "idempotent_replay",
             evaluation: existing.evaluation,
@@ -71,6 +72,7 @@ function createFakePersistStore() {
           masteryWritten: shouldWriteMastery(input.mode),
           masteryState: shouldWriteMastery(input.mode) ? "LEARNING" : null,
           masteryScope: row.masteryScope,
+          reviewDueAt: null,
           evaluation: input.evaluation,
         };
       }
@@ -82,6 +84,7 @@ function createFakePersistStore() {
         masteryWritten: shouldWriteMastery(input.mode),
         masteryState: null,
         masteryScope: masteryScopeForMode(input.mode),
+        reviewDueAt: null,
         evaluation: input.evaluation,
       };
     },
