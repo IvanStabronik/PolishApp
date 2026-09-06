@@ -82,6 +82,16 @@ async function answerCurrentExercise(page: Page) {
   );
 }
 
+async function checkOnboardingConsent(page: Page, testId: string) {
+  // Click the label text, not the input: <label><input/><span/></label> double-fires
+  // when the input is clicked, and setChecked does not always update React state.
+  const box = page.getByTestId(testId);
+  await expect(box).toBeVisible();
+  if (await box.isChecked()) return;
+  await page.locator(`label:has([data-testid="${testId}"]) span`).click();
+  await expect(box).toBeChecked({ timeout: 5_000 });
+}
+
 async function loginAs(
   page: Page,
   email: string,
@@ -92,6 +102,8 @@ async function loginAs(
   await expect(page.getByTestId("login-email")).toBeVisible({ timeout: 15_000 });
   await page.getByTestId("login-email").fill(email);
   await page.getByTestId("login-password").fill(password);
+  await expect(page.getByTestId("login-email")).toHaveValue(email);
+  await expect(page.getByTestId("login-password")).toHaveValue(password);
 
   const [res] = await Promise.all([
     page.waitForResponse(
@@ -154,9 +166,9 @@ test.describe("Milestone 2 private alpha learner path", () => {
     await expect(page).toHaveURL(/\/onboarding/, { timeout: 30_000 });
     await expect(page.getByTestId("onboarding-form")).toBeVisible();
 
-    await page.getByTestId("onboarding-age").setChecked(true);
-    await page.getByTestId("onboarding-consent-terms").setChecked(true);
-    await page.getByTestId("onboarding-consent-privacy").setChecked(true);
+    await checkOnboardingConsent(page, "onboarding-age");
+    await checkOnboardingConsent(page, "onboarding-consent-terms");
+    await checkOnboardingConsent(page, "onboarding-consent-privacy");
     await expect(page.getByTestId("onboarding-continue")).toBeEnabled({
       timeout: 10_000,
     });
@@ -211,9 +223,9 @@ test.describe("Milestone 2 private alpha learner path", () => {
     );
     if (page.url().includes("/onboarding")) {
       await expect(page.getByTestId("onboarding-form")).toBeVisible();
-      await page.getByTestId("onboarding-age").setChecked(true);
-      await page.getByTestId("onboarding-consent-terms").setChecked(true);
-      await page.getByTestId("onboarding-consent-privacy").setChecked(true);
+      await checkOnboardingConsent(page, "onboarding-age");
+      await checkOnboardingConsent(page, "onboarding-consent-terms");
+      await checkOnboardingConsent(page, "onboarding-consent-privacy");
       await expect(page.getByTestId("onboarding-continue")).toBeEnabled();
       await page.getByTestId("onboarding-continue").click();
       await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });

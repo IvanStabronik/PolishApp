@@ -44,8 +44,13 @@ export function AuthForm({ mode }: { mode: Mode }) {
     return defaultPostAuthPath(mode, locale, onboarded);
   }
 
-  async function submit() {
+  async function submit(form: HTMLFormElement) {
     setError(null);
+    const fd = new FormData(form);
+    const nextEmail = String(fd.get("email") ?? "").trim();
+    const nextPassword = String(fd.get("password") ?? "");
+    const nextName = String(fd.get("name") ?? "").trim();
+
     const endpoint =
       mode === "register"
         ? "/api/auth/sign-up/email"
@@ -54,8 +59,12 @@ export function AuthForm({ mode }: { mode: Mode }) {
     try {
       const body =
         mode === "register"
-          ? { email, password, name: name || email.split("@")[0] }
-          : { email, password };
+          ? {
+              email: nextEmail,
+              password: nextPassword,
+              name: nextName || nextEmail.split("@")[0],
+            }
+          : { email: nextEmail, password: nextPassword };
 
       const res = await fetch(endpoint, {
         method: "POST",
@@ -96,7 +105,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
       className="prose-narrow flex flex-col gap-4"
       onSubmit={(e) => {
         e.preventDefault();
-        startTransition(() => void submit());
+        const form = e.currentTarget;
+        startTransition(() => void submit(form));
       }}
     >
       {mode === "register" ? (
