@@ -1,6 +1,8 @@
 # Milestone 3 — Closed Beta Core report
 
 **Branch:** `feat/closed-beta-v3` (stacked on `feat/private-alpha-v2`)
+**PR:** https://github.com/IvanStabronik/PolishApp/pull/2
+**Green CI:** https://github.com/IvanStabronik/PolishApp/actions/runs/34036027619
 **Base for PR:** `feat/private-alpha-v2` — after PR #1 merges, retarget to the canonical default branch
 **Content status:** DRAFT / internal preview only — **not** JPJO-approved, **not** public release
 
