@@ -1,7 +1,7 @@
 # Milestone 3 — Closed Beta Core report
 
 **Branch:** `feat/closed-beta-v3`
-**PR:** https://github.com/IvanStabronik/PolishApp/pull/2 — **do not merge** until independent acceptance audit
+**PR:** https://github.com/IvanStabronik/PolishApp/pull/2 — final acceptance complete; merge into `docs/requirements-r2`
 **Base branch:** `docs/requirements-r2` (PR #1 merged at `301d8a813b674f0cc6392dcb48271f08d4896fbe`)
 **Content status:** DRAFT / internal preview only — **not** JPJO-approved, **not** public release
 
@@ -10,12 +10,10 @@
 ```
 MILESTONE 2 ACCEPTANCE FIXES: COMPLETE
 SŁOWARIUM CLOSED BETA ENGINEERING CORE: COMPLETE
-MILESTONE 3 FINAL ACCEPTANCE: PENDING RESPONSIVE DESIGN AND E2E HARDENING
+MILESTONE 3 FINAL ACCEPTANCE: COMPLETE
 PUBLIC CONTENT RELEASE: BLOCKED PENDING INDEPENDENT JPJO REVIEW
 A2–B2 SEMANTIC MIGRATION: NOT STARTED
 ```
-
-> Keep `MILESTONE 3 FINAL ACCEPTANCE: PENDING…` until the human audit closes, even if engineering gates are green.
 
 ## Delivered
 
