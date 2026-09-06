@@ -78,6 +78,7 @@ Compat aliases `--color-forest*` map to navy for older component refs.
 | --- | --- |
 | Landing | `/[locale]` |
 | Register | `/[locale]/register` |
+| Invite accept | `/[locale]/invite/[token]` |
 | Sign-in | `/[locale]/sign-in` |
 | Onboarding | `/[locale]/onboarding` |
 | Dashboard | `/[locale]/dashboard` |
@@ -96,6 +97,8 @@ Compat aliases `--color-forest*` map to navy for older component refs.
 | Kronika | `/[locale]/kronika` |
 | Author list | `/[locale]/author` |
 | Author / review detail | `/[locale]/author/[moduleId]` |
+| Admin beta control center | `/[locale]/admin/beta` |
+| Maintenance | `/[locale]/maintenance` |
 
 Nav (signed-in): Dashboard · Learn · Progress · Settings · Privacy (+ plan / review / kronika from dashboard).
 
@@ -288,6 +291,29 @@ Prior clipped clones (`36:246`, `36:255`, `36:156`, `36:165`) were replaced.
 ### Design debt (deferred — not claimed as completed M3 work)
 
 - Foundations (`27:3`) and Components (`27:4`) M3 copies remain empty; M1–M2 foundations/components already exist in-file and remain the visual source until a dedicated design-system sync pass.
+
+## 7b. Milestone 4 — Operable Closed Beta
+
+**Page:** `M4 Operable Closed Beta` (`45:2`)
+Visual language matches Cover tokens (paper / ink / graphite / raised surfaces). Mobile and tablet frames are native widths — not clipped desktop clones.
+
+| Frame | node-id | Viewport | Link |
+| --- | --- | --- | --- |
+| M4 / Desktop · Invite accept | `45:3` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-3) |
+| M4 / Mobile · Invite accept | `45:15` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-15) |
+| M4 / Desktop · Invite invalid | `45:27` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-27) |
+| M4 / Desktop · Invite expired | `45:33` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-33) |
+| M4 / Desktop · Invite used | `45:39` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-39) |
+| M4 / Desktop · Invite revoked | `45:45` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-45) |
+| M4 / Desktop · Admin beta | `45:51` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-51) |
+| M4 / Tablet · Admin beta | `45:61` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-61) |
+| M4 / Mobile · Admin beta | `45:69` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-69) |
+| M4 / Desktop · Invite management | `45:77` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-77) |
+| M4 / Desktop · Feedback form | `45:87` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-87) |
+| M4 / Mobile · Feedback form | `45:99` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-99) |
+| M4 / Desktop · Feedback inbox | `45:109` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-109) |
+| M4 / Desktop · Ops error | `45:119` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-119) |
+| M4 / Desktop · Maintenance | `45:125` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-125) |
 
 ## 8. Out of scope
 
