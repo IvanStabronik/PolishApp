@@ -214,7 +214,7 @@ Implemented in app (sync into Learner / Author pages above):
 
 ## 7b. Milestone 3 Figma frames (filled)
 
-**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G  
+**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
 **Source clones:** `04 Learning Flow` Desktop frames (Archive/M1–M2 untouched).
 
 ### Learner Desktop (`27:5`)
