@@ -151,9 +151,12 @@ test.describe("Milestone 2 private alpha learner path", () => {
     await expect(page).toHaveURL(/\/onboarding/, { timeout: 30_000 });
     await expect(page.getByTestId("onboarding-form")).toBeVisible();
 
-    await page.getByTestId("onboarding-age").check({ force: true });
-    await page.getByTestId("onboarding-consent-terms").check({ force: true });
-    await page.getByTestId("onboarding-consent-privacy").check({ force: true });
+    await page.getByTestId("onboarding-age").click();
+    await page.getByTestId("onboarding-consent-terms").click();
+    await page.getByTestId("onboarding-consent-privacy").click();
+    await expect(page.getByTestId("onboarding-age")).toBeChecked();
+    await expect(page.getByTestId("onboarding-consent-terms")).toBeChecked();
+    await expect(page.getByTestId("onboarding-consent-privacy")).toBeChecked();
     await expect(page.getByTestId("onboarding-continue")).toBeEnabled({
       timeout: 10_000,
     });
@@ -198,9 +201,9 @@ test.describe("Milestone 2 private alpha learner path", () => {
     );
     if (page.url().includes("/onboarding")) {
       await expect(page.getByTestId("onboarding-form")).toBeVisible();
-      await page.getByTestId("onboarding-age").check({ force: true });
-      await page.getByTestId("onboarding-consent-terms").check({ force: true });
-      await page.getByTestId("onboarding-consent-privacy").check({ force: true });
+      await page.getByTestId("onboarding-age").click();
+      await page.getByTestId("onboarding-consent-terms").click();
+      await page.getByTestId("onboarding-consent-privacy").click();
       await expect(page.getByTestId("onboarding-continue")).toBeEnabled();
       await page.getByTestId("onboarding-continue").click();
       await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
