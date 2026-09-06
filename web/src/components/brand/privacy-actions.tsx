@@ -64,7 +64,7 @@ export function PrivacyActions() {
         }
         // Defer hard navigation so Playwright can observe the API response first.
         window.setTimeout(() => {
-          window.location.assign("/ru");
+          window.location.assign("/ru/login");
         }, 50);
       } finally {
         setPending(false);

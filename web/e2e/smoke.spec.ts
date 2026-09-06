@@ -181,13 +181,23 @@ test.describe("Milestone 2 private alpha learner path", () => {
       timeout: 10_000,
     });
 
-    // Soft-wait for post-delete landing redirect, then assert re-login fails.
-    await page.waitForURL(/\/ru\/?$/, { timeout: 15_000 }).catch(() => undefined);
-    await page.goto("/ru/login", { waitUntil: "domcontentloaded" });
+    // Delete redirects to login; assert credentials are dead.
+    await page.waitForURL(/\/login/, { timeout: 15_000 });
+    await expect(page.getByTestId("login-email")).toBeVisible();
     await page.getByTestId("login-email").fill(email);
     await page.getByTestId("login-password").fill(password);
-    await page.getByTestId("login-submit").click();
+    const [deny] = await Promise.all([
+      page.waitForResponse(
+        (r) =>
+          r.url().includes("/api/auth/sign-in/email") &&
+          r.request().method() === "POST",
+        { timeout: 30_000 },
+      ),
+      page.getByTestId("login-submit").click(),
+    ]);
+    expect(deny.ok()).toBeFalsy();
     await expect(page.getByTestId("auth-error")).toBeVisible({ timeout: 15_000 });
+    await expect(page).toHaveURL(/\/login/);
   });
 
   test("previewer DRAFT path with persistence", async ({ page }) => {
