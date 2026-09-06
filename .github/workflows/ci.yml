@@ -121,14 +121,12 @@ jobs:
         run: |
           set -euo pipefail
           test -d test-results
-          # Key closed-beta screenshots (success path) must exist
-          test -d test-results/closed-beta-screens
-          count=$(find test-results/closed-beta-screens -name '*.png' | wc -l)
+          test -d playwright-artifacts/closed-beta-screens
+          count=$(find playwright-artifacts/closed-beta-screens -name '*.png' | wc -l)
           echo "closed-beta screenshots: $count"
           test "$count" -ge 3
-          # Traces / videos / failure screenshots under test-results
-          find test-results -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | head
-          artifact_files=$(find test-results -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | wc -l)
+          find test-results -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | head -n 20 || true
+          artifact_files=$(find test-results playwright-artifacts -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | wc -l)
           echo "artifact files: $artifact_files"
           test "$artifact_files" -ge 3
 
@@ -144,5 +142,6 @@ jobs:
           path: |
             web/test-results/
             web/playwright-report/
+            web/playwright-artifacts/
           if-no-files-found: error
           retention-days: 14
