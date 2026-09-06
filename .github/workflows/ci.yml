@@ -1,0 +1,147 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, "feat/**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  curriculum:
+    name: Curriculum validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate curriculum
+        run: python scripts/validate-curriculum.py
+
+  build-and-test:
+    name: Lint · typecheck · unit · content · DB · build · e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: slowarium
+          POSTGRES_PASSWORD: slowarium
+          POSTGRES_DB: slowarium_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U slowarium -d slowarium_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://slowarium:slowarium@localhost:5432/slowarium_test
+      BETTER_AUTH_SECRET: ci-test-secret-not-for-production
+      PRIVACY_AUDIT_SECRET: ci-privacy-audit-secret-not-for-production
+      BETTER_AUTH_URL: http://127.0.0.1:3000
+      APP_URL: http://127.0.0.1:3000
+      DEMO_MODE: "true"
+      DEMO_PREVIEW: "true"
+      PLAYWRIGHT_BASE_URL: http://127.0.0.1:3000
+      CI: "true"
+
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.1
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Validate content YAML
+        run: pnpm content:validate
+
+      - name: Migrate & seed (test DB)
+        run: |
+          pnpm db:migrate
+          pnpm db:seed
+
+      - name: DB integration tests
+        run: pnpm test:integration
+
+      - name: Production build
+        run: pnpm build
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: E2E learner path
+        run: pnpm test:e2e:smoke
+
+      - name: E2E no-preview security
+        run: pnpm test:e2e:no-demo
+        env:
+          DEMO_PREVIEW: "false"
+          NEXT_PUBLIC_DEMO_PREVIEW: "false"
+
+      - name: Assert Playwright artifacts present
+        run: |
+          set -euo pipefail
+          test -d test-results
+          test -d playwright-artifacts/closed-beta-screens
+          count=$(find playwright-artifacts/closed-beta-screens -name '*.png' | wc -l)
+          echo "closed-beta screenshots: $count"
+          test "$count" -ge 3
+          find test-results -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | head -n 20 || true
+          artifact_files=$(find test-results playwright-artifacts -type f \( -name '*.zip' -o -name '*.webm' -o -name '*.png' \) | wc -l)
+          echo "artifact files: $artifact_files"
+          test "$artifact_files" -ge 3
+
+      - name: Whitespace / conflict markers
+        working-directory: .
+        run: git diff --check 6ab4592716ed3bf34107322a390b337c563fca63..HEAD
+
+      - name: Upload Playwright artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts
+          path: |
+            web/test-results/
+            web/playwright-report/
+            web/playwright-artifacts/
+          if-no-files-found: error
+          retention-days: 14

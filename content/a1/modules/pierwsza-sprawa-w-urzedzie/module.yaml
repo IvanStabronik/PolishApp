@@ -1,0 +1,50 @@
+kind: module
+canonical_id: MOD-A1-PIERWSZA-SPRAWA-W-URZEDZIE
+slug: pierwsza-sprawa-w-urzedzie
+version: 1
+status: DRAFT
+level: A1
+title_pl: Pierwsza sprawa w urzędzie
+working_title: Pierwsza sprawa w urzędzie
+situation_ru: >
+  Первый короткий визит к окошку urzędu: поздороваться, назвать цель
+  визита, передать базовые документы и попросить бланк при необходимости.
+  Один служащий, без апелляций; регистр pan/pani обязателен.
+objective_ru: >
+  После модуля учащийся может открыть контакт в urzędzie, сказать
+  Przyszedłem/Przyszłam w sprawie…, передать dokumenty и удержать
+  официальный адрес pan/pani до закрытия визита.
+curriculum_links:
+  scenarios:
+    - SCN-A1-URZAD-01
+  functions:
+    - FN-A1-PURPOSE-01
+    - FN-A1-DOCS-01
+    - FN-A1-ADDRESS-01
+    - FN-A1-GREET-01
+    - FN-A1-REG-01
+    - FN-A1-IDENTIFY-01
+  lex_bundles:
+    - LEX-A1-URZAD
+    - LEX-A1-DOCS
+  concepts:
+    - PRAG-PAN-01
+    - GR-TV-AGR-01
+    - GR-CAS-ACC-01
+    - GR-TNS-PRS-01
+lesson_files:
+  - lessons/01-okienko-i-dokumenty.yaml
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-tomasz-zielinski
+  reviewer_id: reviewer-placeholder-olena-shevchenko
+  sources:
+    - "PRODUCT ANALYSIS — first urzęd window visit for adult newcomers"
+    - "Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / FN-A1-DOCS-01"
+    - "Common-knowledge Polish institutional register patterns (język ogólny)"
+  ai_assisted: false
+  notes: >
+    INTERNAL PREVIEW ONLY. DRAFT — not JPJO-approved, not learner-published.
+    Author and reviewer are distinct placeholders; no PUBLISHED status.
+visibility: internal_preview_only
+internal_preview_only: true

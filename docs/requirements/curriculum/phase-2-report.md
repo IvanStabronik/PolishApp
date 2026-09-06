@@ -16,7 +16,7 @@
 | `docs/requirements/curriculum/sources-and-evidence.md` | Политика доказательств и реестр источников |
 | `docs/requirements/curriculum/methodology.md` | Методическая система (смесь подходов) |
 | `docs/requirements/curriculum/review-checklist.md` | QA + чеклист методиста JPJO |
-| `docs/requirements/curriculum/curriculum-traceability.md` | Карта связей (52 цепи) |
+| `docs/requirements/curriculum/curriculum-traceability.md` | Legacy-карта A2–B2 + указатель на канонический A1 trace |
 | `docs/requirements/curriculum/phase-2-report.md` | Этот отчёт |
 
 ### Переписаны (были заглушки)
@@ -25,7 +25,7 @@
 | --- | --- |
 | `docs/requirements/curriculum/grammar-inventory.md` | 110 концептов A1–B2 |
 | `docs/requirements/curriculum/case-aspect-sequence.md` | Последовательность падежей + путь аспекта |
-| `docs/requirements/curriculum/functional-inventory.md` | 195 коммуникативных функций |
+| `docs/requirements/curriculum/functional-inventory.md` | 183 FN: 30 канонических A1 + 153 legacy A2–B2 |
 | `docs/requirements/curriculum/lexical-targets.md` | Лексическая архитектура + рабочие диапазоны |
 | `docs/requirements/curriculum/level-exit-criteria.md` | Exit criteria + 3 слоя достижения |
 | `docs/requirements/curriculum/l1-error-model.md` | 72 ошибки (24×UKR/RUS/BEL) |
@@ -51,10 +51,10 @@
 
 | Уровень | Концептов |
 | ---: | ---: |
-| A1 | 38 |
-| A2 | 28 |
-| B1 | 26 |
-| B2 | 18 |
+| A1 | 58 |
+| A2 | 26 |
+| B1 | 18 |
+| B2 | 8 |
 | **Всего** | **110** |
 
 Наличие в инвентаре ≠ полное освоение уровня.
@@ -67,13 +67,13 @@
 
 | Уровень | FN-* |
 | ---: | ---: |
-| A1 | 42 |
+| A1 | 30 |
 | A2 | 48 |
 | B1 | 55 |
 | B2 | 50 |
-| **Всего** | **195** |
+| **Всего** | **183** |
 
-Дополнительно на каждом уровне — перечни сценариев, речевых актов, жанров, прагматики, регистра, компенсаций, R/L без отдельной нумерации FN.
+Для A1 отдельно зафиксированы 17 SCN, 5 ASM и 5 EXM. A2–B2 ещё не прошли такую семантическую миграцию.
 
 ---
 
@@ -128,7 +128,7 @@
 
 1. **DEC-016** — кто именно независимый методист JPJO (контракт / партнёр / ротация) в первые 12 месяцев. Без этого нельзя публиковать контент.
 2. **DEC-007** — юридический контролёр GDPR перед публичным сбором данных/платежей.
-3. **DEC-008 / DEC-013** — имя продукта и нужна ли юрконсультация перед публикацией справки о правовых эффектах B1.
+3. **DEC-008 / DEC-013** — clearance рабочего бренда SŁOWARIUM и нужна ли юрконсультация перед публикацией справки о правовых эффектах B1.
 
 **Уже зафиксировано Phase 2 ops (не требуют выбора «да/нет» сейчас):** автор = основатель + AI pipeline; AI feedback formative; confirmed writing/speaking = человек (платная функция); placement + первый модуль free; полная траектория + exam-mode paid; **конкретные тарифы не определять**.
 

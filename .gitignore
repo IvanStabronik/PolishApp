@@ -7,8 +7,53 @@ requirements.zip
 Thumbs.db
 .vscode/
 .idea/
+.cursor/
 
 # Secrets / env
 .env
 .env.*
 !.env.example
+!**/.env.example
+
+# Dependencies
+node_modules/
+.pnpm-store/
+.tmp-deps/
+
+# Next.js / build
+.next/
+web/.next/
+web/out/
+web/build/
+**/*.tsbuildinfo
+web/next-env.d.ts
+
+# Test / coverage / Playwright
+coverage/
+web/coverage/
+playwright-report/
+web/playwright-report/
+web/test-results/
+test-results/
+web/blob-report/
+web/playwright/.cache/
+
+# Logs / debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Vercel / turbo
+.vercel
+.turbo
+
+# Misc
+*.pem
+.DS_Store
+
+# Local install noise
+pnpm-*.log
+pnpm-install*.log
+node_modules.broken/

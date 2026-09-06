@@ -1,0 +1,50 @@
+kind: module
+canonical_id: MOD-A1-W-SKLEPIE
+slug: w-sklepie
+version: 1
+status: DRAFT
+level: A1
+title_pl: W sklepie
+working_title: W sklepie
+situation_ru: >
+  Покупка нескольких простых товаров у кассы в небольшом польском магазине.
+  Витрина ограничена; кассир — взрослый незнакомец; нужна ясная транзакция
+  с количеством, ценой и способом оплаты.
+objective_ru: >
+  После модуля учащийся может назвать товар и количество, спросить цену,
+  подтвердить оплату (gotówka / karta) и вежливо закрыть контакт в регистре
+  pan/pani, не скатываясь в ty к кассиру.
+curriculum_links:
+  scenarios:
+    - SCN-A1-SHOP-01
+  functions:
+    - FN-A1-TRANS-01
+    - FN-A1-QUANT-01
+    - FN-A1-ASK-01
+    - FN-A1-ADDRESS-01
+    - FN-A1-CONFIRM-01
+    - FN-A1-THANKS-01
+  lex_bundles:
+    - LEX-A1-SERVICE
+    - LEX-A1-MONEY
+  concepts:
+    - GR-CAS-ACC-01
+    - GR-NUM-MONEY-01
+    - GR-NUM-CARD-01
+    - PRAG-PAN-01
+lesson_files:
+  - lessons/01-zakupy-przy-kasie.yaml
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-piotr-kowalski
+  reviewer_id: reviewer-placeholder-natalia-bondar
+  sources:
+    - "PRODUCT ANALYSIS — shop checkout transaction for first audience"
+    - "Curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01 / FN-A1-QUANT-01"
+    - "Common-knowledge Polish retail dialogue patterns (język ogólny)"
+  ai_assisted: false
+  notes: >
+    INTERNAL PREVIEW ONLY. DRAFT — not JPJO-approved, not learner-published.
+    Author and reviewer are distinct placeholders; no PUBLISHED status.
+visibility: internal_preview_only
+internal_preview_only: true

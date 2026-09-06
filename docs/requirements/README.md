@@ -1,8 +1,25 @@
 # Система требований: платформа польского как иностранного
 
-Статус пакета: **Proposed** — редакция 2 + Phase 2 curriculum draft (2026-09-05).  
-Целевое состояние продукта: полная web-платформа A1–B2. Порядок поставки — [10-scope-phasing-and-dependencies.md](10-scope-phasing-and-dependencies.md).  
-Педагогическая архитектура A1–B2 — [curriculum/](curriculum/) (Phase 2 draft; публикация контента только после JPJO). Набор упражнений — после Phase 3.
+**Рабочий бренд:** **SŁOWARIUM** (`slowarium`). Основа бренда и границы нарративного слоя: [`../brand/brand-foundation.md`](../brand/brand-foundation.md). Юридическая / trademark-проверка остаётся открытой.
+
+Статус пакета: **Proposed** — редакция 2 + Phase 2 curriculum.
+**A1 semantic reference** = **candidate for human review** (не публикация без JPJO).
+**A2–B2** = **pending semantic migration** — **не** объявлены завершёнными.
+Целевое состояние продукта: полная web-платформа A1–B2. Порядок поставки — [10-scope-phasing-and-dependencies.md](10-scope-phasing-and-dependencies.md).
+Педагогическая архитектура — [curriculum/](curriculum/) + эталон A1 в [`../curriculum/`](../curriculum/). Набор упражнений — после Phase 3.
+
+### Проверка целостности curriculum
+
+```bash
+python scripts/validate-curriculum.py
+```
+
+Скрипт (только stdlib) проверяет **structural integrity** и A1 anti-patterns: ID сущностей FN/SCN/ASM/EXM, prerequisites, циклы, late FN deps, Exit status, stub-фразы, A1 Required coverage, LEX substance, нормализованные completion templates.
+
+**`OK` ≠ методическая корректность и ≠ JPJO approval.**
+Отчёты: [curriculum/phase-2-integrity-report.md](curriculum/phase-2-integrity-report.md), [`../reports/phase-2-a1-model-report.md`](../reports/phase-2-a1-model-report.md).
+
+Механический генератор `rebuild_phase2_integrity.py` **удалён** и не должен возвращаться.
 
 Этот каталог задаёт проверяемую систему требований. Он не выбирает стек, не проектирует базу, не описывает API и не содержит UI-макетов.
 
@@ -47,14 +64,18 @@ docs/requirements/
     ├── methodology.md
     ├── review-checklist.md
     ├── grammar-inventory.md
+    ├── concept-extensions.md   # PHON / ORTH / PRAG + migration
     ├── case-aspect-sequence.md
     ├── functional-inventory.md
     ├── lexical-targets.md
     ├── level-exit-criteria.md
     ├── l1-error-model.md
     ├── curriculum-traceability.md
-    └── phase-2-report.md
+    ├── phase-2-report.md
+    └── phase-2-integrity-report.md
 ```
+
+Также: `scripts/validate-curriculum.py`.
 
 Существующие материалы не перезаписывались: их не было.
 
