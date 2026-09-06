@@ -138,7 +138,7 @@ jobs:
 
       - name: Whitespace / conflict markers
         working-directory: .
-        run: git diff --check 6ab4592716ed3bf34107322a390b337c563fca63..HEAD
+        run: git diff --check 301d8a813b674f0cc6392dcb48271f08d4896fbe..HEAD
 
       - name: Upload Playwright artifacts
         if: always()
