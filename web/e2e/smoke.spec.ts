@@ -1,10 +1,7 @@
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 
 /**
- * Milestone 2 private-alpha learner path (DEMO_PREVIEW on + seeded previewer):
- * register → onboarding (DB) → dashboard → DRAFT module → exercises →
- * result → progress → logout/login persistence from DB → export → delete
- *
+ * Milestone 2 private-alpha learner path.
  * Server/DB must be up — never skip.
  */
 
@@ -85,6 +82,20 @@ async function answerCurrentExercise(page: Page) {
   );
 }
 
+async function loginAs(
+  page: Page,
+  email: string,
+  password: string,
+  expectUrl: RegExp,
+) {
+  await page.goto("/ru/login");
+  await expect(page.getByTestId("login-email")).toBeVisible();
+  await page.getByTestId("login-email").fill(email);
+  await page.getByTestId("login-password").fill(password);
+  await page.getByTestId("login-submit").click();
+  await expect(page).toHaveURL(expectUrl, { timeout: 30_000 });
+}
+
 test.describe.configure({ mode: "serial" });
 
 test.describe("Milestone 2 private alpha learner path", () => {
@@ -108,103 +119,27 @@ test.describe("Milestone 2 private alpha learner path", () => {
     await expect(page).toHaveURL(/\/login/);
   });
 
-  test("full learner path: register → delete", async ({ page }) => {
-    test.setTimeout(300_000);
-
+  test("register onboarding delete cycle", async ({ page }) => {
+    test.setTimeout(180_000);
     const stamp = Date.now();
-    const email = `e2e.learner.${stamp}@slowarium.test`;
+    const email = `e2e.delete.${stamp}@slowarium.test`;
     const password = "E2eTestPass123!";
 
-    // --- Register ---
     await page.goto("/ru/register");
-    await page.getByTestId("register-name").fill("E2E Learner");
+    await page.getByTestId("register-name").fill("E2E Delete");
     await page.getByTestId("register-email").fill(email);
     await page.getByTestId("register-password").fill(password);
     await page.getByTestId("register-submit").click();
     await expect(page).toHaveURL(/\/onboarding/, { timeout: 30_000 });
 
-    // --- Onboarding → PostgreSQL ---
     await page.getByTestId("onboarding-age").check();
-    await page.getByTestId("onboarding-ui-locale").selectOption("ru");
-    await page.getByTestId("onboarding-l1-bel").check();
     await page.getByTestId("onboarding-consent-terms").check();
     await page.getByTestId("onboarding-consent-privacy").check();
     await page.getByTestId("onboarding-continue").click();
     await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
 
-    // Newly registered users are learners without previewer — may not see DRAFT.
-    // Use seeded demo previewer for DRAFT path.
-    await page.getByTestId("link-logout").click();
-    await expect(page).toHaveURL(/\/login/);
-
-    await page.getByTestId("login-email").fill("learner@demo.slowarium.local");
-    await page.getByTestId("login-password").fill("DemoLearner1!");
-    await page.getByTestId("login-submit").click();
-    await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
-    await expect(page.getByTestId("preview-banner")).toBeVisible();
-    await expect(page.getByTestId("module-pierwsze-spotkanie")).toBeVisible();
-
-    // --- Module → exercise ---
-    await page.getByTestId("module-open-pierwsze-spotkanie").click();
-    await expect(page).toHaveURL(/\/learn\/pierwsze-spotkanie/, {
-      timeout: 20_000,
-    });
-    const start = page.getByTestId("start-practice");
-    if ((await start.count()) > 0) {
-      await start.click();
-    } else {
-      // First exercise id from Pierwsze spotkanie package
-      await page.goto("/ru/learn/pierwsze-spotkanie/exercise/ex-ps-01");
-    }
-
-    for (let i = 0; i < 12; i += 1) {
-      if (page.url().includes("/result")) break;
-      await answerCurrentExercise(page);
-    }
-    await expect(page).toHaveURL(/\/result/, { timeout: 30_000 });
-
-    // --- Progress ---
-    await page.getByTestId("link-progress").click();
-    await expect(page.getByTestId("progress-page")).toBeVisible();
-
-    // --- Logout / login restores from DB ---
-    await page.getByTestId("link-logout").click();
-    await expect(page).toHaveURL(/\/login/);
-    await page.goto("/ru/dashboard");
-    await expect(page).toHaveURL(/\/login/);
-
-    await page.getByTestId("login-email").fill("learner@demo.slowarium.local");
-    await page.getByTestId("login-password").fill("DemoLearner1!");
-    await page.getByTestId("login-submit").click();
-    await expect(page).toHaveURL(/\/dashboard/, { timeout: 20_000 });
-    await expect(page.getByTestId("module-pierwsze-spotkanie")).toBeVisible();
-
-    // --- Export ---
-    await page.getByTestId("link-privacy").click();
-    await expect(page).toHaveURL(/\/privacy/);
-    const downloadPromise = page
-      .waitForEvent("download", { timeout: 15_000 })
-      .catch(() => null);
-    await page.getByTestId("privacy-export").click();
-    await expect(page.getByTestId("privacy-export-status")).toBeVisible({
-      timeout: 15_000,
-    });
-    await downloadPromise;
-
-    // --- Delete fresh account only (keep seeded demo for other tests) ---
-    await page.getByTestId("link-logout").click();
-    await page.getByTestId("login-email").fill(email);
-    await page.getByTestId("login-password").fill(password);
-    await page.getByTestId("login-submit").click();
-    // May land onboarding or dashboard depending on incomplete path
-    await page.waitForURL(/\/(dashboard|onboarding)/, { timeout: 20_000 });
-    if (page.url().includes("/onboarding")) {
-      await page.getByTestId("onboarding-age").check();
-      await page.getByTestId("onboarding-consent-terms").check();
-      await page.getByTestId("onboarding-consent-privacy").check();
-      await page.getByTestId("onboarding-continue").click();
-      await expect(page).toHaveURL(/\/dashboard/, { timeout: 20_000 });
-    }
+    // Ordinary learner must not see DRAFT modules.
+    await expect(page.getByTestId("module-pierwsze-spotkanie")).toHaveCount(0);
 
     await page.getByTestId("link-privacy").click();
     await page.getByTestId("privacy-delete").click();
@@ -218,11 +153,62 @@ test.describe("Milestone 2 private alpha learner path", () => {
     const deleteResponse = await deleteResponsePromise;
     expect([200, 202]).toContain(deleteResponse.status());
 
-    // Re-login with deleted credentials must fail
     await page.goto("/ru/login");
     await page.getByTestId("login-email").fill(email);
     await page.getByTestId("login-password").fill(password);
     await page.getByTestId("login-submit").click();
     await expect(page.getByTestId("auth-error")).toBeVisible({ timeout: 15_000 });
+  });
+
+  test("previewer DRAFT path with persistence", async ({ page }) => {
+    test.setTimeout(300_000);
+
+    await loginAs(
+      page,
+      "learner@demo.slowarium.local",
+      "DemoLearner1!",
+      /\/dashboard/,
+    );
+    await expect(page.getByTestId("preview-banner")).toBeVisible();
+    await expect(page.getByTestId("module-pierwsze-spotkanie")).toBeVisible();
+
+    await page.getByTestId("module-open-pierwsze-spotkanie").click();
+    await expect(page).toHaveURL(/\/learn\/pierwsze-spotkanie/, {
+      timeout: 20_000,
+    });
+    await page.getByTestId("start-practice").click();
+
+    for (let i = 0; i < 12; i += 1) {
+      if (page.url().includes("/result")) break;
+      await answerCurrentExercise(page);
+    }
+    await expect(page).toHaveURL(/\/result/, { timeout: 30_000 });
+
+    await page.getByTestId("link-progress").click();
+    await expect(page.getByTestId("progress-page")).toBeVisible();
+
+    await page.getByTestId("link-logout").click();
+    await expect(page).toHaveURL(/\/login/, { timeout: 15_000 });
+    await page.goto("/ru/dashboard");
+    await expect(page).toHaveURL(/\/login/);
+
+    await loginAs(
+      page,
+      "learner@demo.slowarium.local",
+      "DemoLearner1!",
+      /\/dashboard/,
+    );
+    await expect(page.getByTestId("module-pierwsze-spotkanie")).toBeVisible();
+
+    await page.getByTestId("link-privacy").click();
+    await expect(page).toHaveURL(/\/privacy/);
+    const downloadPromise = page
+      .waitForEvent("download", { timeout: 15_000 })
+      .catch(() => null);
+    await page.getByTestId("privacy-export").click();
+    await expect(page.getByTestId("privacy-export-status")).toBeVisible({
+      timeout: 15_000,
+    });
+    await downloadPromise;
   });
 });
