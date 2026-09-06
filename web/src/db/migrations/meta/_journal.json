@@ -36,6 +36,13 @@
       "when": 1757500000000,
       "tag": "0004_review_schedule_scope",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1757600000000,
+      "tag": "0005_operable_closed_beta",
+      "breakpoints": true
     }
   ]
 }
