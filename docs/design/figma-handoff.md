@@ -241,8 +241,8 @@ Implemented in app (sync into Learner / Author pages above):
 | --- | --- | --- |
 | M3 / Tablet · Dashboard | `36:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-2) |
 | M3 / Tablet · Module + Lessons | `36:219` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-219) |
-| M3 / Tablet · Lesson | `36:246` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-246) |
-| M3 / Tablet · Plan | `36:255` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-255) |
+| M3 / Tablet · Lesson | `40:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=40-2) |
+| M3 / Tablet · Plan | `40:18` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=40-18) |
 
 ### Learner Mobile (`27:7`)
 
@@ -250,8 +250,8 @@ Implemented in app (sync into Learner / Author pages above):
 | --- | --- | --- |
 | M3 / Mobile · Dashboard | `36:114` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-114) |
 | M3 / Mobile · Module | `36:137` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-137) |
-| M3 / Mobile · Lesson | `36:156` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-156) |
-| M3 / Mobile · Plan | `36:165` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-165) |
+| M3 / Mobile · Lesson | `41:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=41-2) |
+| M3 / Mobile · Plan | `41:20` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=41-20) |
 
 ### Author & Review (`27:8`)
 
@@ -272,10 +272,22 @@ Implemented in app (sync into Learner / Author pages above):
 | M3 / Desktop · 403 | `37:19` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-19) |
 | M3 / Desktop · 404 | `37:26` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-26) |
 
-### Still empty (honest)
+### Responsive rebuild (acceptance pass)
 
-- Foundations (`27:3`), Components (`27:4`) M3 copies (optional polish pass)
-- Tablet/Mobile lesson & plan are desktop clones clipped to breakpoint viewports — layout polish deferred
+Fully rebuilt with auto-layout (not clipped desktop clones). Content width ≤ viewport; headlines/cards/CTAs visible; mobile Plan is a vertical step sequence; touch targets ≥ 44×44.
+
+| Frame | node-id | Viewport |
+| --- | --- | --- |
+| M3 / Tablet · Lesson | `40:2` | 834×1112 |
+| M3 / Tablet · Plan | `40:18` | 834×1020 |
+| M3 / Mobile · Lesson | `41:2` | 390×844 |
+| M3 / Mobile · Plan | `41:20` | 390×844 |
+
+Prior clipped clones (`36:246`, `36:255`, `36:156`, `36:165`) were replaced.
+
+### Design debt (deferred — not claimed as completed M3 work)
+
+- Foundations (`27:3`) and Components (`27:4`) M3 copies remain empty; M1–M2 foundations/components already exist in-file and remain the visual source until a dedicated design-system sync pass.
 
 ## 8. Out of scope
 
