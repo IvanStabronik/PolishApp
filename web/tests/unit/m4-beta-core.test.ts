@@ -11,6 +11,7 @@ import {
   redactTokenForLogs,
 } from "@/modules/beta/token";
 import { canAccessAdminArea } from "@/modules/admin/roles";
+import { canAccessDraftContent } from "@/lib/demo";
 import {
   canTransitionFeedback,
   sanitizeFeedbackContext,
@@ -85,6 +86,21 @@ describe("roles", () => {
     expect(canAccessAdminArea(["admin"])).toBe(true);
     expect(canAccessAdminArea(["learner", "previewer"])).toBe(false);
     expect(canAccessAdminArea(["author", "reviewer"])).toBe(false);
+  });
+
+  it("closed-beta invitee roles authorize DRAFT when preview env is on", () => {
+    expect(
+      canAccessDraftContent({
+        roles: ["learner", "previewer"],
+        isPreviewEnv: true,
+      }),
+    ).toBe(true);
+    expect(
+      canAccessDraftContent({
+        roles: ["learner"],
+        isPreviewEnv: true,
+      }),
+    ).toBe(false);
   });
 });
 

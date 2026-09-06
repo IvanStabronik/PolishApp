@@ -5,7 +5,8 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { getDb, getSql } from "@/db/client";
-import { contentUnits, contentVersions, user } from "@/db/schema";
+import { contentUnits, contentVersions, user, userRoles } from "@/db/schema";
+import { canAccessDraftContent } from "@/lib/demo";
 import {
   consumeInviteForUser,
   createBetaInvite,
@@ -111,6 +112,55 @@ describe.skipIf(!hasDb)("M4 operable closed beta (postgres)", () => {
       userId: other,
     });
     expect(second.ok).toBe(false);
+  });
+
+  it("invite consume grants learner+previewer for DRAFT access", async () => {
+    const inviteeId = randomUUID();
+    await getDb().insert(user).values({
+      id: inviteeId,
+      name: "Invitee Draft",
+      email: `it.invitee.${inviteeId}@slowarium.test`,
+      emailVerified: true,
+      roleFlags: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    const created = await createBetaInvite({
+      actorUserId: adminId,
+      expiresAt: new Date(Date.now() + 86_400_000),
+      label: "it-draft-roles",
+    });
+    const consumed = await consumeInviteForUser({
+      rawToken: created.rawToken,
+      userId: inviteeId,
+    });
+    expect(consumed.ok).toBe(true);
+
+    const dbUser = await getDb().query.user.findFirst({
+      where: eq(user.id, inviteeId),
+    });
+    const flags = (dbUser?.roleFlags as string[] | null) ?? [];
+    expect(flags).toEqual(expect.arrayContaining(["learner", "previewer"]));
+
+    const roleRows = await getDb().query.userRoles.findMany({
+      where: eq(userRoles.userId, inviteeId),
+    });
+    expect(roleRows.map((r) => r.role).sort()).toEqual(["learner", "previewer"]);
+
+    expect(
+      canAccessDraftContent({
+        roles: flags as ("learner" | "previewer")[],
+        isPreviewEnv: true,
+      }),
+    ).toBe(true);
+    // Ordinary non-invite learner still denied without previewer.
+    expect(
+      canAccessDraftContent({
+        roles: ["learner"],
+        isPreviewEnv: true,
+      }),
+    ).toBe(false);
   });
 
   it("revoked and expired invites denied", async () => {

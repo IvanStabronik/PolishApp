@@ -8,12 +8,22 @@
 
 ```
 MILESTONE 3 FINAL ACCEPTANCE: COMPLETE
-SŁOWARIUM OPERABLE CLOSED BETA: COMPLETE
+SŁOWARIUM OPERABLE CLOSED BETA: BLOCKED
+  — pending CI green after invitee previewer role grant
+  — prior failure: https://github.com/IvanStabronik/PolishApp/actions/runs/34067094351
+  — PR #3 stays unmerged pending audit
 PUBLIC DEPLOYMENT: EXTERNAL BLOCKER (no provisioned URL / cloud credentials in repo)
 PUBLIC CONTENT RELEASE: BLOCKED PENDING INDEPENDENT JPJO REVIEW
 A2–B2 SEMANTIC MIGRATION: NOT STARTED
 ```
 
+## Fix in progress (invitee DRAFT access)
+
+Closed-beta invite consume previously granted only `learner`. DRAFT modules require
+`previewer|author|reviewer|admin` via `canAccessDraftContent`, so invitees hit
+`notFound()` on `/learn/{module}` (M4 e2e test 4). Fix: grant `learner`+`previewer`
+on consume (roleFlags + userRoles), matching the seeded demo learner. Ordinary
+non-invite learners remain denied without previewer.
 ## Delivered
 
 ### A Invite-only beta

@@ -89,14 +89,22 @@ test.describe("M4 operable closed beta", () => {
   test("4: lesson + exercise submit", async ({ page }) => {
     test.setTimeout(180_000);
     await loginUi(page, learnerEmail, learnerPassword);
+    // Invitee must see DRAFT module (learner+previewer). Module page is the gate.
     await page.goto(`/ru/learn/${MODULE}`);
-    await expect(page.getByTestId("start-practice").or(page.getByTestId("continue-lesson"))).toBeVisible({
-      timeout: 20_000,
-    });
-    const start = page.getByTestId("start-practice");
-    const cont = page.getByTestId("continue-lesson");
-    if (await start.count()) await start.click();
-    else await cont.click();
+    await expect(page.getByTestId("module-page")).toBeVisible({ timeout: 20_000 });
+    await expect(page.getByTestId("module-lesson").first()).toBeVisible();
+    const firstId = await page
+      .getByTestId("module-lesson")
+      .first()
+      .getAttribute("data-lesson-id");
+    expect(firstId).toMatch(/^LES-/);
+    await page.goto(`/ru/learn/lessons/${firstId}`);
+    for (let i = 0; i < 12; i += 1) {
+      if ((await page.getByTestId("exercise-player").count()) > 0) break;
+      const next = page.getByTestId("lesson-next-step");
+      if ((await next.count()) === 0) break;
+      await next.click();
+    }
     await expect(page.getByTestId("exercise-player")).toBeVisible({
       timeout: 20_000,
     });

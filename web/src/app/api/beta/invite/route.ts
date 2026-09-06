@@ -103,7 +103,7 @@ export async function POST(request: Request) {
     name: parsed.data.name?.trim() || parsed.data.email.split("@")[0]!,
     email: parsed.data.email.toLowerCase(),
     emailVerified: false,
-    roleFlags: ["learner"],
+    roleFlags: ["learner", "previewer"],
     createdAt: now,
     updatedAt: now,
   });

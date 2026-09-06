@@ -173,7 +173,9 @@ export async function consumeInviteForUser(input: {
     return { ok: false, reason: "used" };
   }
 
-  await ensureLearnerRole(input.userId);
+  // Closed-beta invitees learn DRAFT content (JPJO not approved yet), so they
+  // need the same learner+previewer pair as the seeded demo learner.
+  await ensureClosedBetaLearnerRoles(input.userId);
 
   await recordAdminEvent({
     actorUserId: input.userId,
@@ -187,23 +189,31 @@ export async function consumeInviteForUser(input: {
   return { ok: true, inviteId: found.invite.id };
 }
 
-async function ensureLearnerRole(userId: string): Promise<void> {
+/** Roles granted on invite consume — matches demo learner for DRAFT access. */
+const CLOSED_BETA_INVITEE_ROLES = [
+  "learner",
+  "previewer",
+] as const satisfies readonly UserRole[];
+
+async function ensureClosedBetaLearnerRoles(userId: string): Promise<void> {
   const db = getDb();
   const existing = await db.query.user.findFirst({ where: eq(user.id, userId) });
   if (!existing) return;
   const roles = new Set<UserRole>([
     ...((existing.roleFlags as UserRole[] | null) ?? []),
-    "learner",
+    ...CLOSED_BETA_INVITEE_ROLES,
   ]);
   await db
     .update(user)
     .set({ roleFlags: [...roles], updatedAt: new Date() })
     .where(eq(user.id, userId));
-  const hasLearner = await db.query.userRoles.findFirst({
-    where: and(eq(userRoles.userId, userId), eq(userRoles.role, "learner")),
-  });
-  if (!hasLearner) {
-    await db.insert(userRoles).values({ userId, role: "learner" });
+  for (const role of CLOSED_BETA_INVITEE_ROLES) {
+    const hasRole = await db.query.userRoles.findFirst({
+      where: and(eq(userRoles.userId, userId), eq(userRoles.role, role)),
+    });
+    if (!hasRole) {
+      await db.insert(userRoles).values({ userId, role });
+    }
   }
 }
 
