@@ -68,7 +68,11 @@ export function InviteAcceptForm({ token }: { token: string }) {
     const fd = new FormData(form);
     const res = await fetch("/api/beta/invite", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Origin: window.location.origin,
+        Referer: window.location.href,
+      },
       credentials: "include",
       body: JSON.stringify({
         token,
@@ -85,7 +89,11 @@ export function InviteAcceptForm({ token }: { token: string }) {
     // Sign in via Better Auth then go to onboarding
     const signIn = await fetch("/api/auth/sign-in/email", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Origin: window.location.origin,
+        Referer: window.location.href,
+      },
       credentials: "include",
       body: JSON.stringify({
         email: String(fd.get("email") ?? "").trim(),

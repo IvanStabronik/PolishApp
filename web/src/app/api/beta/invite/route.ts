@@ -136,6 +136,12 @@ export async function POST(request: Request) {
     eventKey: "activation_invite_to_onboarding",
     userId,
     dimensions: { stage: "registered" },
+  }).catch((err) => {
+    structuredLog("warn", "beta_register_analytics_failed", {
+      correlationId,
+      userId,
+      error: err instanceof Error ? err.message : String(err),
+    });
   });
 
   structuredLog("info", "beta_register_ok", { correlationId, userId });

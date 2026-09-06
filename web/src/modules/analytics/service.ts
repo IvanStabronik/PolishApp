@@ -7,23 +7,6 @@ import {
   type AnalyticsMetricKey,
 } from "./metrics";
 
-export async function trackAnalyticsEvent(input: {
-  eventKey: string;
-  userId?: string | null;
-  dimensions?: Record<string, unknown>;
-}): Promise<void> {
-  const db = getDb();
-  await db.insert(analyticsEvents).values({
-    eventKey: input.eventKey,
-    userId: input.userId ?? null,
-    dimensions: sanitizeAnalyticsDimensions(input.dimensions),
-  });
-
-  if (isKnownMetricKey(input.eventKey)) {
-    await bumpDailyAggregate(input.eventKey, input.dimensions);
-  }
-}
-
 async function bumpDailyAggregate(
   metricKey: AnalyticsMetricKey,
   dimensions?: Record<string, unknown>,
@@ -31,13 +14,41 @@ async function bumpDailyAggregate(
   const db = getDb();
   const dims = sanitizeAnalyticsDimensions(dimensions);
   const bucketDate = new Date().toISOString().slice(0, 10);
-  await db.insert(analyticsDailyAggregates).values({
-    metricKey,
-    bucketDate,
-    dimensions: dims,
-    valueNum: 1,
-    valueCount: 1,
-  });
+  const now = new Date();
+  try {
+    await db.insert(analyticsDailyAggregates).values({
+      metricKey,
+      bucketDate,
+      dimensions: dims,
+      valueNum: 1,
+      valueCount: 1,
+      updatedAt: now,
+      createdAt: now,
+    });
+  } catch {
+    // Aggregates must never break product flows (incl. unique dim collisions).
+  }
+}
+
+export async function trackAnalyticsEvent(input: {
+  eventKey: string;
+  userId?: string | null;
+  dimensions?: Record<string, unknown>;
+}): Promise<void> {
+  try {
+    const db = getDb();
+    await db.insert(analyticsEvents).values({
+      eventKey: input.eventKey,
+      userId: input.userId ?? null,
+      dimensions: sanitizeAnalyticsDimensions(input.dimensions),
+    });
+
+    if (isKnownMetricKey(input.eventKey)) {
+      await bumpDailyAggregate(input.eventKey, input.dimensions);
+    }
+  } catch {
+    // Telemetry is best-effort.
+  }
 }
 
 export async function listAggregateMetrics(limit = 100) {
