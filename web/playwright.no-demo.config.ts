@@ -85,8 +85,8 @@ export default defineConfig({
     ? undefined
     : {
         command: process.env.CI
-          ? `pnpm exec next start -p ${port}`
-          : `pnpm exec next dev --turbopack -p ${port}`,
+          ? `pnpm exec next start -H 127.0.0.1 -p ${port}`
+          : `pnpm exec next dev --turbopack -H 127.0.0.1 -p ${port}`,
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 180_000,

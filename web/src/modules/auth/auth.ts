@@ -48,6 +48,11 @@ export const auth = betterAuth({
     "http://127.0.0.1:3001",
   ],
   advanced: {
+    /**
+     * CI / private-alpha run on http://127.0.0.1. NODE_ENV=production during
+     * `next start` would otherwise prefer Secure cookies that browsers drop on HTTP.
+     */
+    useSecureCookies: baseURL.startsWith("https://"),
     database: {
       generateId: () => crypto.randomUUID(),
     },

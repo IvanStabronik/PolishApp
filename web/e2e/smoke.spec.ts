@@ -88,11 +88,23 @@ async function loginAs(
   password: string,
   expectUrl: RegExp,
 ) {
-  await page.goto("/ru/login");
+  await page.goto("/ru/login", { waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("login-email")).toBeVisible();
   await page.getByTestId("login-email").fill(email);
   await page.getByTestId("login-password").fill(password);
+
+  const signIn = page.waitForResponse(
+    (res) =>
+      res.url().includes("/api/auth/sign-in/email") && res.request().method() === "POST",
+    { timeout: 30_000 },
+  );
   await page.getByTestId("login-submit").click();
+  const res = await signIn;
+  expect(
+    res.ok(),
+    `sign-in failed: ${res.status()} ${await res.text().catch(() => "")}`,
+  ).toBeTruthy();
+
   await expect(page).toHaveURL(expectUrl, { timeout: 30_000 });
 }
 
@@ -152,8 +164,13 @@ test.describe("Milestone 2 private alpha learner path", () => {
     await page.getByTestId("privacy-delete-confirm").click();
     const deleteResponse = await deleteResponsePromise;
     expect([200, 202]).toContain(deleteResponse.status());
+    await expect(page.getByTestId("privacy-delete-status")).toBeVisible({
+      timeout: 10_000,
+    });
 
-    await page.goto("/ru/login");
+    // Soft-wait for post-delete landing redirect, then assert re-login fails.
+    await page.waitForURL(/\/ru\/?$/, { timeout: 15_000 }).catch(() => undefined);
+    await page.goto("/ru/login", { waitUntil: "domcontentloaded" });
     await page.getByTestId("login-email").fill(email);
     await page.getByTestId("login-password").fill(password);
     await page.getByTestId("login-submit").click();
@@ -167,8 +184,16 @@ test.describe("Milestone 2 private alpha learner path", () => {
       page,
       "learner@demo.slowarium.local",
       "DemoLearner1!",
-      /\/dashboard/,
+      /\/(dashboard|onboarding)/,
     );
+    if (page.url().includes("/onboarding")) {
+      await page.getByTestId("onboarding-age").check();
+      await page.getByTestId("onboarding-consent-terms").check();
+      await page.getByTestId("onboarding-consent-privacy").check();
+      await page.getByTestId("onboarding-continue").click();
+      await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
+    }
+
     await expect(page.getByTestId("preview-banner")).toBeVisible();
     await expect(page.getByTestId("module-pierwsze-spotkanie")).toBeVisible();
 

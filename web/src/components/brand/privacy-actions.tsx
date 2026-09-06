@@ -61,8 +61,11 @@ export function PrivacyActions() {
         }
         if (typeof window !== "undefined") {
           window.localStorage.removeItem("slowarium.uiLocale");
-          window.location.assign("/ru");
         }
+        // Defer hard navigation so Playwright can observe the API response first.
+        window.setTimeout(() => {
+          window.location.assign("/ru");
+        }, 50);
       } finally {
         setPending(false);
       }

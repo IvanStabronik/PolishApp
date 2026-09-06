@@ -3,19 +3,12 @@
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter, Link } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { safeReturnTo } from "@/modules/auth/safe-return-to";
 import { routing } from "@/i18n/routing";
 
 type Mode = "register" | "login";
-
-function toAppPath(path: string, locale: string): string {
-  const prefix = `/${locale}`;
-  if (path === prefix) return "/";
-  if (path.startsWith(`${prefix}/`)) return path.slice(prefix.length);
-  return path;
-}
 
 function defaultPostAuthPath(mode: Mode, locale: string, onboarded: boolean) {
   if (onboarded) return `/${locale}/dashboard`;
@@ -25,7 +18,6 @@ function defaultPostAuthPath(mode: Mode, locale: string, onboarded: boolean) {
 export function AuthForm({ mode }: { mode: Mode }) {
   const t = useTranslations("auth");
   const locale = useLocale();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -50,22 +42,6 @@ export function AuthForm({ mode }: { mode: Mode }) {
       /* treat as not onboarded */
     }
     return defaultPostAuthPath(mode, locale, onboarded);
-  }
-
-  function navigateTo(path: string) {
-    const safe = safeReturnTo(path);
-    if (!safe) {
-      router.push("/onboarding");
-      return;
-    }
-    const localePrefixed = routing.locales.some(
-      (l) => safe === `/${l}` || safe.startsWith(`/${l}/`),
-    );
-    if (localePrefixed) {
-      router.push(toAppPath(safe, locale) as "/dashboard");
-    } else {
-      router.push(safe as "/dashboard");
-    }
   }
 
   async function submit() {
@@ -101,9 +77,14 @@ export function AuthForm({ mode }: { mode: Mode }) {
       }
 
       const nextPath = await resolveDestination();
-      startTransition(() => {
-        navigateTo(nextPath);
-      });
+      // Hard navigation is more reliable than nested startTransition + App Router
+      // soft nav for post-auth redirects (Playwright / production CI).
+      const safe = safeReturnTo(nextPath) ?? `/${locale}/dashboard`;
+      const localePrefixed = routing.locales.some(
+        (l) => safe === `/${l}` || safe.startsWith(`/${l}/`),
+      );
+      const href = localePrefixed ? safe : `/${locale}${safe === "/" ? "" : safe}`;
+      window.location.assign(href);
     } catch {
       setError(t("errorGeneric"));
     }
