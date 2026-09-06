@@ -1,0 +1,438 @@
+kind: lesson
+canonical_id: LES-A1-WK-03
+slug: samodzielne-zamowienie
+version: 1
+status: DRAFT
+title_pl: Samodzielne zamówienie
+sort_order: 3
+situation_ru: Вы самостоятельно заказываете напиток и еду, проверяете наличие и завершаете оплату.
+objective_ru: "Провести всю транзакцию без подсказки: выбор, наличие, уточнение, цена, оплата и благодарность."
+curriculum_links:
+  scenarios:
+    - SCN-A1-FOOD-01
+  functions:
+    - FN-A1-TRANS-01
+    - FN-A1-ASK-01
+    - FN-A1-ADDRESS-01
+    - FN-A1-QUANT-01
+    - FN-A1-THANKS-01
+  lex_bundles:
+    - LEX-A1-SERVICE
+    - LEX-A1-MONEY
+  concepts:
+    - GR-CAS-ACC-01
+    - GR-PRO-DEM-01
+    - GR-NUM-MONEY-01
+    - PRAG-PAN-01
+dialogue:
+  title_pl: Samodzielne zamówienie
+  turns:
+    - speaker: Barista
+      text_pl: Dzień dobry.
+    - speaker: Alina
+      text_pl: Dzień dobry. Poproszę herbatę i kanapkę.
+    - speaker: Barista
+      text_pl: Kanapka z serem czy z szynką?
+    - speaker: Alina
+      text_pl: Z serem, proszę. Czy jest sok jabłkowy?
+    - speaker: Barista
+      text_pl: Tak, jest.
+    - speaker: Alina
+      text_pl: To poproszę też sok. Ile płacę?
+    - speaker: Barista
+      text_pl: Trzydzieści złotych. Kartą czy gotówką?
+    - speaker: Alina
+      text_pl: Kartą. Dziękuję, do widzenia.
+key_lines:
+  - text_pl: Poproszę herbatę i kanapkę.
+    explanation_ru: Две позиции можно соединить союзом i.
+  - text_pl: Czy jest sok jabłkowy?
+    explanation_ru: Самостоятельная проверка наличия.
+  - text_pl: To poproszę też sok.
+    explanation_ru: Добавление позиции после ответа.
+  - text_pl: Dziękuję, do widzenia.
+    explanation_ru: Вежливое закрытие транзакции.
+pan_pani:
+  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
+    просьбы и благодарность важнее буквального переноса форм L1.
+  form: Poproszę… · Czy jest…? · Ile płacę? · Dziękuję
+  examples_pl: &a1
+    - Poproszę herbatę i kanapkę.
+    - Czy jest sok?
+    - To poproszę też sok.
+  counterexamples_pl:
+    - "*Ty mi powiedz."
+    - "*Daj mi to."
+  concept_ids:
+    - PRAG-PAN-01
+  l1_notes:
+    ukr: Відпрацьовуйте польську рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» цілісно; не
+      складайте її дослівно з українських слів.
+    rus: Отрабатывайте польскую рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» целиком, без
+      дословной кальки с русского.
+    bel: Адпрацоўвайце польскую рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» цалкам; не
+      складайце яе даслоўна з беларускай.
+grammar_points:
+  - id: GP-A1-WK-L3
+    title_pl: Pełna transakcja w kawiarni
+    summary_ru: "Провести всю транзакцию без подсказки: выбор, наличие, уточнение, цена, оплата и
+      благодарность."
+    form: Poproszę X i Y. Czy jest Z? To poproszę też Z. Ile płacę?
+    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
+    use: Вы самостоятельно заказываете напиток и еду, проверяете наличие и завершаете оплату.
+    examples_pl: *a1
+    counterexamples_pl:
+      - "*Ty daj."
+      - "*Ja nie rozumieć."
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-PRO-DEM-01
+      - GR-NUM-MONEY-01
+    l1_notes:
+      ukr: Відпрацьовуйте польську рамку «Poproszę X i Y. Czy jest Z? To poproszę też Z. Ile płacę?»
+        цілісно; не складайте її дослівно з українських слів.
+      rus: Отрабатывайте польскую рамку «Poproszę X i Y. Czy jest Z? To poproszę też Z. Ile płacę?»
+        целиком, без дословной кальки с русского.
+      bel: Адпрацоўвайце польскую рамку «Poproszę X i Y. Czy jest Z? To poproszę też Z. Ile płacę?»
+        цалкам; не складайце яе даслоўна з беларускай.
+l1_notes:
+  ukr: Відпрацьовуйте польську рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» цілісно; не
+    складайте її дослівно з українських слів.
+  rus: Отрабатывайте польскую рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» целиком, без
+    дословной кальки с русского.
+  bel: Адпрацоўвайце польскую рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» цалкам; не
+    складайце яе даслоўна з беларускай.
+steps:
+  - id: step-l3-situation
+    kind: situation
+    title_ru: Ситуация
+    body_ru: Вы самостоятельно заказываете напиток и еду, проверяете наличие и завершаете оплату.
+  - id: step-l3-dialogue
+    kind: dialogue
+    title_ru: Диалог
+    dialogue_ref: primary
+  - id: step-l3-key-lines
+    kind: key_lines
+    title_ru: Ключевые реплики
+  - id: step-l3-pan-pani
+    kind: pan_pani
+    title_ru: Pan / pani
+  - id: step-l3-grammar
+    kind: grammar
+    title_ru: Грамматика урока
+    grammar_point_id: GP-A1-WK-L3
+  - id: step-l3-practice
+    kind: practice
+    title_ru: Самостоятельная практика
+    exercise_ids:
+      - ex-wk-l3-01
+      - ex-wk-l3-02
+      - ex-wk-l3-03
+      - ex-wk-l3-04
+      - ex-wk-l3-05
+      - ex-wk-l3-06
+  - id: step-l3-mini-check
+    kind: mini_check
+    title_ru: Мини-проверка
+    exercise_ids: &a2
+      - ex-wk-l3-07
+      - ex-wk-l3-08
+  - id: step-l3-result
+    kind: result
+    title_ru: Результат
+exercises:
+  - id: ex-wk-l3-01
+    canonical_id: EX-A1-WK-L3-SC-01
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Выберите полную реплику для заказа двух позиций.
+    concept_ids:
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: Poproszę связывает обе позиции в вежливый заказ.
+      incorrect: Остальные варианты не образуют сервисную реплику.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Poproszę herbatę i kanapkę.
+      - id: b
+        text: Herbata, kanapka, dawaj.
+      - id: c
+        text: Ja mieć herbatę.
+    correct_option_id: a
+  - id: ex-wk-l3-02
+    canonical_id: EX-A1-WK-L3-MC-02
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Какие шаги нужны для самостоятельной транзакции?
+    concept_ids:
+      - GR-PRO-DEM-01
+    function_ids:
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Первые три шага обеспечивают заказ и оплату.
+      incorrect: Переход на ty не нужен.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-FOOD-01 / FN-A1-ASK-01 / LEX-A1-MONEY
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Назвать позиции
+      - id: b
+        text: Уточнить наличие при необходимости
+      - id: c
+        text: Узнать сумму
+      - id: d
+        text: Перейти с бариста на ty
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-wk-l3-03
+    canonical_id: EX-A1-WK-L3-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Czy {{gap1}} sok jabłkowy?"
+    concept_ids:
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-ADDRESS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: Czy jest…? проверяет наличие.
+      incorrect: Нужна форма jest.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-FOOD-01 / FN-A1-ADDRESS-01 / LEX-A1-SERVICE
+      ai_assisted: false
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - jest
+        placeholder: …
+  - id: ex-wk-l3-04
+    canonical_id: EX-A1-WK-L3-GF-04
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: To poproszę {{gap1}} sok."
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-QUANT-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Też добавляет ещё одну позицию.
+      incorrect: Нужно też.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-FOOD-01 / FN-A1-QUANT-01 / LEX-A1-MONEY
+      ai_assisted: false
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - też
+        placeholder: …
+  - id: ex-wk-l3-05
+    canonical_id: EX-A1-WK-L3-OR-05
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: Соберите самостоятельный заказ.
+    concept_ids:
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-THANKS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: Заказ → наличие → добавление и цена → оплата.
+      incorrect: Не платите до окончательного состава заказа.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-FOOD-01 / FN-A1-THANKS-01 / LEX-A1-SERVICE
+      ai_assisted: false
+    mini_check: false
+    items:
+      - id: t1
+        text: Dzień dobry. Poproszę herbatę i kanapkę.
+      - id: t2
+        text: Czy jest sok jabłkowy?
+      - id: t3
+        text: To poproszę też sok. Ile płacę?
+      - id: t4
+        text: Kartą. Dziękuję, do widzenia.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+  - id: ex-wk-l3-06
+    canonical_id: EX-A1-WK-L3-SC-06
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Бариста спрашивает вид канапки. Как ответить?
+    concept_ids:
+      - GR-PRO-DEM-01
+    function_ids:
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Z serem, proszę — ясное и вежливое уточнение.
+      incorrect: Одно слово неясно, приказ с ty неуместен.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01 / LEX-A1-MONEY
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Z serem, proszę.
+      - id: b
+        text: Ser.
+      - id: c
+        text: Ty daj ser.
+    correct_option_id: a
+  - id: ex-wk-l3-07
+    canonical_id: EX-A1-WK-L3-MC-07
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Выберите уместные финальные реплики клиента.
+    concept_ids:
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: Цена, оплата и благодарность образуют финал.
+      incorrect: Приказ Daj неуместен.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-FOOD-01 / FN-A1-ASK-01 / LEX-A1-SERVICE
+      ai_assisted: false
+    mini_check: true
+    options:
+      - id: a
+        text: Ile płacę?
+      - id: b
+        text: Kartą, proszę.
+      - id: c
+        text: Dziękuję.
+      - id: d
+        text: Daj paragon!
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-wk-l3-08
+    canonical_id: EX-A1-WK-L3-OR-08
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: "Мини-проверка: восстановите последний обмен."
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-ADDRESS-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Сумма следует за вопросом, затем оплата и прощание.
+      incorrect: Сначала узнайте сумму.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-FOOD-01 / FN-A1-ADDRESS-01 / LEX-A1-MONEY
+      ai_assisted: false
+    mini_check: true
+    items:
+      - id: t1
+        text: Ile płacę?
+      - id: t2
+        text: Trzydzieści złotych.
+      - id: t3
+        text: Kartą, proszę.
+      - id: t4
+        text: Dziękuję. Do widzenia.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+mini_check:
+  exercise_ids: *a2
+  pass_threshold: 1
+  concept_ids:
+    - GR-CAS-ACC-01
+    - GR-PRO-DEM-01
+    - GR-NUM-MONEY-01
+result_metadata:
+  title_ru: Результат урока
+  success_ru: "Провести всю транзакцию без подсказки: выбор, наличие, уточнение, цена, оплата и
+    благодарность. Результат относится только к DRAFT-превью."
+  retry_ru: "Повторите опорные реплики: Poproszę… · Czy jest…? · Ile płacę? · Dziękuję, затем снова
+    выполните мини-проверку."
+  evidence_skill: interaction
+  linked_function_ids:
+    - FN-A1-TRANS-01
+    - FN-A1-ASK-01
+    - FN-A1-ADDRESS-01
+  linked_concept_ids:
+    - GR-CAS-ACC-01
+    - GR-PRO-DEM-01
+    - GR-NUM-MONEY-01
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-ola-nowak
+  reviewer_id: reviewer-placeholder-igor-savchuk
+  sources:
+    - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01, FN-A1-ASK-01,
+      FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
+  ai_assisted: false
+visibility: internal_preview_only

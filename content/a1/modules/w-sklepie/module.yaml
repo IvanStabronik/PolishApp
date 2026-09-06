@@ -34,6 +34,8 @@ curriculum_links:
     - PRAG-PAN-01
 lesson_files:
   - lessons/01-zakupy-przy-kasie.yaml
+  - lessons/02-ilosc-cena-i-paragon.yaml
+  - lessons/03-samodzielne-zakupy.yaml
 provenance:
   originality: created_for_product
   author_id: author-placeholder-piotr-kowalski

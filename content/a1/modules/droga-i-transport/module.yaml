@@ -35,6 +35,8 @@ curriculum_links:
     - PRAG-PAN-01
 lesson_files:
   - lessons/01-bilet-i-droga.yaml
+  - lessons/02-przystanki-i-czas-odjazdu.yaml
+  - lessons/03-samodzielna-podroz.yaml
 provenance:
   originality: created_for_product
   author_id: author-placeholder-anna-lewandowska

@@ -1,0 +1,433 @@
+kind: lesson
+canonical_id: LES-A1-PS-03
+slug: samodzielne-pierwsze-spotkanie
+version: 1
+status: DRAFT
+title_pl: Samodzielne pierwsze spotkanie
+sort_order: 3
+situation_ru: Вы самостоятельно начинаете и завершаете короткое знакомство с новым соседом, выбирая
+  уместный регистр.
+objective_ru: "Без подсказки провести знакомство: приветствие, имя, происхождение, встречный вопрос и прощание."
+curriculum_links:
+  scenarios:
+    - SCN-A1-EVERYDAY-01
+  functions:
+    - FN-A1-IDENTIFY-01
+    - FN-A1-GREET-01
+  lex_bundles:
+    - LEX-A1-IDENTITY
+    - LEX-A1-GREETINGS
+  concepts:
+    - GR-CAS-NOM-01
+    - GR-TNS-PRS-01
+    - PRAG-PAN-01
+    - PHON-CORE-01
+dialogue:
+  title_pl: Samodzielne pierwsze spotkanie
+  turns:
+    - speaker: Nina
+      text_pl: Dzień dobry. Jestem Nina Kowal. Nazywam się Nina.
+    - speaker: Paweł
+      text_pl: Dzień dobry. Paweł Lis. Miło panią poznać.
+    - speaker: Nina
+      text_pl: Wzajemnie. Jestem z Białorusi. A pan?
+    - speaker: Paweł
+      text_pl: Jestem z Polski, z Gdańska.
+    - speaker: Nina
+      text_pl: Dziękuję za rozmowę. Do widzenia.
+    - speaker: Paweł
+      text_pl: Do widzenia.
+key_lines:
+  - text_pl: Dzień dobry. Nazywam się…
+    explanation_ru: Самостоятельное открытие и представление одной связкой.
+  - text_pl: Jestem z… A pan?
+    explanation_ru: Происхождение плюс вежливый встречный вопрос.
+  - text_pl: Miło pana / panią poznać.
+    explanation_ru: Форма зависит от адресата.
+  - text_pl: Dziękuję za rozmowę.
+    explanation_ru: Нейтральное завершение короткого знакомства.
+pan_pani:
+  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
+    просьбы и благодарность важнее буквального переноса форм L1.
+  form: Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia
+  examples_pl: &a1
+    - Nazywam się Nina Kowal.
+    - Jestem z Białorusi. A pan?
+    - Miło pana poznać.
+  counterexamples_pl:
+    - "*Ty mi powiedz."
+    - "*Daj mi to."
+  concept_ids:
+    - PRAG-PAN-01
+  l1_notes:
+    ukr: Відпрацьовуйте польську рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» цілісно;
+      не складайте її дослівно з українських слів.
+    rus: Отрабатывайте польскую рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» целиком,
+      без дословной кальки с русского.
+    bel: Адпрацоўвайце польскую рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» цалкам;
+      не складайце яе даслоўна з беларускай.
+grammar_points:
+  - id: GP-A1-PS-L3
+    title_pl: Spójna autoprezentacja
+    summary_ru: "Без подсказки провести знакомство: приветствие, имя, происхождение, встречный вопрос и
+      прощание."
+    form: Dzień dobry. Nazywam się + imię. Jestem z + miejsce. A pan/pani?
+    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
+    use: Вы самостоятельно начинаете и завершаете короткое знакомство с новым соседом, выбирая уместный
+      регистр.
+    examples_pl: *a1
+    counterexamples_pl:
+      - "*Ty daj."
+      - "*Ja nie rozumieć."
+    concept_ids:
+      - GR-CAS-NOM-01
+      - GR-TNS-PRS-01
+      - PRAG-PAN-01
+    l1_notes:
+      ukr: Відпрацьовуйте польську рамку «Dzień dobry. Nazywam się + imię. Jestem z + miejsce. A
+        pan/pani?» цілісно; не складайте її дослівно з українських слів.
+      rus: Отрабатывайте польскую рамку «Dzień dobry. Nazywam się + imię. Jestem z + miejsce. A pan/pani?»
+        целиком, без дословной кальки с русского.
+      bel: Адпрацоўвайце польскую рамку «Dzień dobry. Nazywam się + imię. Jestem z + miejsce. A pan/pani?»
+        цалкам; не складайце яе даслоўна з беларускай.
+l1_notes:
+  ukr: Відпрацьовуйте польську рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» цілісно;
+    не складайте її дослівно з українських слів.
+  rus: Отрабатывайте польскую рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» целиком,
+    без дословной кальки с русского.
+  bel: Адпрацоўвайце польскую рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» цалкам;
+    не складайце яе даслоўна з беларускай.
+steps:
+  - id: step-l3-situation
+    kind: situation
+    title_ru: Ситуация
+    body_ru: Вы самостоятельно начинаете и завершаете короткое знакомство с новым соседом, выбирая
+      уместный регистр.
+  - id: step-l3-dialogue
+    kind: dialogue
+    title_ru: Диалог
+    dialogue_ref: primary
+  - id: step-l3-key-lines
+    kind: key_lines
+    title_ru: Ключевые реплики
+  - id: step-l3-pan-pani
+    kind: pan_pani
+    title_ru: Pan / pani
+  - id: step-l3-grammar
+    kind: grammar
+    title_ru: Грамматика урока
+    grammar_point_id: GP-A1-PS-L3
+  - id: step-l3-practice
+    kind: practice
+    title_ru: Самостоятельная практика
+    exercise_ids:
+      - ex-ps-l3-01
+      - ex-ps-l3-02
+      - ex-ps-l3-03
+      - ex-ps-l3-04
+      - ex-ps-l3-05
+      - ex-ps-l3-06
+  - id: step-l3-mini-check
+    kind: mini_check
+    title_ru: Мини-проверка
+    exercise_ids: &a2
+      - ex-ps-l3-07
+      - ex-ps-l3-08
+  - id: step-l3-result
+    kind: result
+    title_ru: Результат
+exercises:
+  - id: ex-ps-l3-01
+    canonical_id: EX-A1-PS-L3-SC-01
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Выберите лучшее самостоятельное начало знакомства с соседкой.
+    concept_ids:
+      - GR-CAS-NOM-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: Приветствие и полная рамка имени открывают контакт.
+      incorrect: Остальные варианты фамильярны или грамматически неполны.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01 / LEX-A1-IDENTITY
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Dzień dobry. Nazywam się Nina Kowal.
+      - id: b
+        text: Hej, ty! Nina.
+      - id: c
+        text: Ja Nina z domu.
+    correct_option_id: a
+  - id: ex-ps-l3-02
+    canonical_id: EX-A1-PS-L3-MC-02
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Что входит в завершённое первое знакомство?
+    concept_ids:
+      - GR-TNS-PRS-01
+    function_ids:
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-GREETINGS
+    feedback:
+      correct: Первые три шага создают законченный нейтральный контакт.
+      incorrect: Переход на ty нельзя требовать у незнакомца.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-GREET-01 / LEX-A1-GREETINGS
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Приветствие
+      - id: b
+        text: Имя
+      - id: c
+        text: Происхождение или встречный вопрос
+      - id: d
+        text: Требование перейти на ty
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-ps-l3-03
+    canonical_id: EX-A1-PS-L3-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Miło {{gap1}} poznać. (мужчину)"
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: Miło pana poznać — обращение к мужчине.
+      incorrect: Нужна форма pana.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01 / LEX-A1-IDENTITY
+      ai_assisted: false
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - pana
+        placeholder: …
+  - id: ex-ps-l3-04
+    canonical_id: EX-A1-PS-L3-GF-04
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Jestem {{gap1}} Białorusi."
+    concept_ids:
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-GREETINGS
+    feedback:
+      correct: Jestem z + форма места.
+      incorrect: Нужен предлог z.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-GREET-01 / LEX-A1-GREETINGS
+      ai_assisted: false
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - z
+        placeholder: …
+  - id: ex-ps-l3-05
+    canonical_id: EX-A1-PS-L3-OR-05
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: Постройте полный контакт.
+    concept_ids:
+      - GR-CAS-NOM-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: Приветствие → идентификация → обмен → закрытие.
+      incorrect: Не начинайте с прощания или встречного вопроса.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01 / LEX-A1-IDENTITY
+      ai_assisted: false
+    mini_check: false
+    items:
+      - id: t1
+        text: Dzień dobry.
+      - id: t2
+        text: Nazywam się Nina Kowal.
+      - id: t3
+        text: Jestem z Białorusi. A pan?
+      - id: t4
+        text: Miło pana poznać. Do widzenia.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+  - id: ex-ps-l3-06
+    canonical_id: EX-A1-PS-L3-SC-06
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Незнакомец говорит «Miło panią poznać». Как ответить?
+    concept_ids:
+      - GR-TNS-PRS-01
+    function_ids:
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-GREETINGS
+    feedback:
+      correct: Wzajemnie сохраняет нейтрально-вежливый регистр.
+      incorrect: Ty też меняет регистр, Cześć не отвечает на формулу.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-GREET-01 / LEX-A1-GREETINGS
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Wzajemnie.
+      - id: b
+        text: Ty też.
+      - id: c
+        text: Cześć.
+    correct_option_id: a
+  - id: ex-ps-l3-07
+    canonical_id: EX-A1-PS-L3-MC-07
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Выберите все грамматически целые рамки.
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: Три рамки полны и уместны.
+      incorrect: Nazywam требует się.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01 / LEX-A1-IDENTITY
+      ai_assisted: false
+    mini_check: true
+    options:
+      - id: a
+        text: Nazywam się Nina.
+      - id: b
+        text: Jestem z Polski.
+      - id: c
+        text: Skąd pani jest?
+      - id: d
+        text: Nazywam Nina.
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-ps-l3-08
+    canonical_id: EX-A1-PS-L3-OR-08
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: "Мини-проверка: восстановите финал встречи."
+    concept_ids:
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-GREETINGS
+    feedback:
+      correct: Взаимная формула → благодарность → прощание.
+      incorrect: Закрывайте контакт после взаимного ответа.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-GREET-01 / LEX-A1-GREETINGS
+      ai_assisted: false
+    mini_check: true
+    items:
+      - id: t1
+        text: Miło panią poznać.
+      - id: t2
+        text: Wzajemnie.
+      - id: t3
+        text: Dziękuję za rozmowę.
+      - id: t4
+        text: Do widzenia.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+mini_check:
+  exercise_ids: *a2
+  pass_threshold: 1
+  concept_ids:
+    - GR-CAS-NOM-01
+    - GR-TNS-PRS-01
+    - PRAG-PAN-01
+result_metadata:
+  title_ru: Результат урока
+  success_ru: "Без подсказки провести знакомство: приветствие, имя, происхождение, встречный вопрос и
+    прощание. Результат относится только к DRAFT-превью."
+  retry_ru: "Повторите опорные реплики: Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia, затем
+    снова выполните мини-проверку."
+  evidence_skill: interaction
+  linked_function_ids:
+    - FN-A1-IDENTIFY-01
+    - FN-A1-GREET-01
+  linked_concept_ids:
+    - GR-CAS-NOM-01
+    - GR-TNS-PRS-01
+    - PRAG-PAN-01
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-ola-nowak
+  reviewer_id: reviewer-placeholder-igor-savchuk
+  sources:
+    - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01,
+      FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
+  ai_assisted: false
+visibility: internal_preview_only

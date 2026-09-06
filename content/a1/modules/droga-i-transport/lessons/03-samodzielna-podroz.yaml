@@ -1,0 +1,440 @@
+kind: lesson
+canonical_id: LES-A1-DT-03
+slug: samodzielna-podroz
+version: 1
+status: DRAFT
+title_pl: Samodzielna podróż
+sort_order: 3
+situation_ru: Вы самостоятельно находите остановку, проверяете линию, покупаете билет и уточняете выход.
+objective_ru: Соединить навигацию и билет в один самостоятельный сценарий без пересадок.
+curriculum_links:
+  scenarios:
+    - SCN-A1-DIRECTIONS-01
+    - SCN-A1-TICKET-01
+  functions:
+    - FN-A1-DIRECT-01
+    - FN-A1-TRANS-01
+    - FN-A1-ASK-01
+    - FN-A1-TIME-01
+    - FN-A1-THANKS-01
+  lex_bundles:
+    - LEX-A1-TRANSPORT
+    - LEX-A1-MONEY
+  concepts:
+    - GR-MOT-BASE-01
+    - GR-PREP-DO-NA-01
+    - GR-NUM-MONEY-01
+    - GR-TIME-EXPR-01
+    - PRAG-PAN-01
+dialogue:
+  title_pl: Samodzielna podróż
+  turns:
+    - speaker: Roman
+      text_pl: Przepraszam, gdzie jest przystanek tramwajowy?
+    - speaker: Przechodnia
+      text_pl: Prosto i potem w lewo, obok banku.
+    - speaker: Roman
+      text_pl: Dziękuję. Czy tramwaj numer trzy jedzie do centrum?
+    - speaker: Przechodnia
+      text_pl: Tak, jedzie.
+    - speaker: Roman
+      text_pl: Dzień dobry. Poproszę bilet na tramwaj.
+    - speaker: Sprzedawca
+      text_pl: Cztery złote.
+    - speaker: Roman
+      text_pl: Kartą, proszę. Na którym przystanku mam wysiąść?
+    - speaker: Sprzedawca
+      text_pl: Na piątym.
+key_lines:
+  - text_pl: Gdzie jest przystanek tramwajowy?
+    explanation_ru: Самостоятельный старт навигации.
+  - text_pl: Czy tramwaj numer trzy jedzie do centrum?
+    explanation_ru: Проверка выбранной линии.
+  - text_pl: Poproszę bilet na tramwaj.
+    explanation_ru: Покупка подходящего билета.
+  - text_pl: Na którym przystanku mam wysiąść?
+    explanation_ru: Контроль конечного шага поездки.
+pan_pani:
+  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
+    просьбы и благодарность важнее буквального переноса форм L1.
+  form: gdzie · do centrum · bilet na autobus · wysiąść
+  examples_pl: &a1
+    - Gdzie jest przystanek?
+    - Czy tramwaj jedzie do centrum?
+    - Poproszę bilet na tramwaj.
+  counterexamples_pl:
+    - "*Ty mi powiedz."
+    - "*Daj mi to."
+  concept_ids:
+    - PRAG-PAN-01
+  l1_notes:
+    ukr: Відпрацьовуйте польську рамку «gdzie · do centrum · bilet na autobus · wysiąść» цілісно; не
+      складайте її дослівно з українських слів.
+    rus: Отрабатывайте польскую рамку «gdzie · do centrum · bilet na autobus · wysiąść» целиком, без
+      дословной кальки с русского.
+    bel: Адпрацоўвайце польскую рамку «gdzie · do centrum · bilet na autobus · wysiąść» цалкам; не
+      складайце яе даслоўна з беларускай.
+grammar_points:
+  - id: GP-A1-DT-L3
+    title_pl: Od drogi do przejazdu
+    summary_ru: Соединить навигацию и билет в один самостоятельный сценарий без пересадок.
+    form: Gdzie jest…? Czy X jedzie do…? Poproszę bilet na… Na którym…?
+    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
+    use: Вы самостоятельно находите остановку, проверяете линию, покупаете билет и уточняете выход.
+    examples_pl: *a1
+    counterexamples_pl:
+      - "*Ty daj."
+      - "*Ja nie rozumieć."
+    concept_ids:
+      - GR-MOT-BASE-01
+      - GR-PREP-DO-NA-01
+      - GR-NUM-MONEY-01
+    l1_notes:
+      ukr: Відпрацьовуйте польську рамку «Gdzie jest…? Czy X jedzie do…? Poproszę bilet na… Na którym…?»
+        цілісно; не складайте її дослівно з українських слів.
+      rus: Отрабатывайте польскую рамку «Gdzie jest…? Czy X jedzie do…? Poproszę bilet na… Na którym…?»
+        целиком, без дословной кальки с русского.
+      bel: Адпрацоўвайце польскую рамку «Gdzie jest…? Czy X jedzie do…? Poproszę bilet na… Na którym…?»
+        цалкам; не складайце яе даслоўна з беларускай.
+l1_notes:
+  ukr: Відпрацьовуйте польську рамку «gdzie · do centrum · bilet na autobus · wysiąść» цілісно; не
+    складайте її дослівно з українських слів.
+  rus: Отрабатывайте польскую рамку «gdzie · do centrum · bilet na autobus · wysiąść» целиком, без
+    дословной кальки с русского.
+  bel: Адпрацоўвайце польскую рамку «gdzie · do centrum · bilet na autobus · wysiąść» цалкам; не
+    складайце яе даслоўна з беларускай.
+steps:
+  - id: step-l3-situation
+    kind: situation
+    title_ru: Ситуация
+    body_ru: Вы самостоятельно находите остановку, проверяете линию, покупаете билет и уточняете выход.
+  - id: step-l3-dialogue
+    kind: dialogue
+    title_ru: Диалог
+    dialogue_ref: primary
+  - id: step-l3-key-lines
+    kind: key_lines
+    title_ru: Ключевые реплики
+  - id: step-l3-pan-pani
+    kind: pan_pani
+    title_ru: Pan / pani
+  - id: step-l3-grammar
+    kind: grammar
+    title_ru: Грамматика урока
+    grammar_point_id: GP-A1-DT-L3
+  - id: step-l3-practice
+    kind: practice
+    title_ru: Самостоятельная практика
+    exercise_ids:
+      - ex-dt-l3-01
+      - ex-dt-l3-02
+      - ex-dt-l3-03
+      - ex-dt-l3-04
+      - ex-dt-l3-05
+      - ex-dt-l3-06
+  - id: step-l3-mini-check
+    kind: mini_check
+    title_ru: Мини-проверка
+    exercise_ids: &a2
+      - ex-dt-l3-07
+      - ex-dt-l3-08
+  - id: step-l3-result
+    kind: result
+    title_ru: Результат
+exercises:
+  - id: ex-dt-l3-01
+    canonical_id: EX-A1-DT-L3-SC-01
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Выберите правильный первый вопрос о местоположении.
+    concept_ids:
+      - GR-MOT-BASE-01
+    function_ids:
+      - FN-A1-DIRECT-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: Przepraszam + gdzie jest… открывает вежливый контакт.
+      incorrect: Остальные варианты грубы или сломаны.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-DIRECT-01 / LEX-A1-TRANSPORT
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Przepraszam, gdzie jest przystanek?
+      - id: b
+        text: Ej, przystanek gdzie?
+      - id: c
+        text: Ty pokaż przystanek.
+    correct_option_id: a
+  - id: ex-dt-l3-02
+    canonical_id: EX-A1-DT-L3-MC-02
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Какие шаги входят в самостоятельную поездку?
+    concept_ids:
+      - GR-PREP-DO-NA-01
+    function_ids:
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Первые три шага необходимы до поездки.
+      incorrect: Остановку выхода нужно уточнить.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-MONEY
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Найти остановку
+      - id: b
+        text: Проверить линию
+      - id: c
+        text: Купить билет
+      - id: d
+        text: Игнорировать остановку выхода
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-dt-l3-03
+    canonical_id: EX-A1-DT-L3-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Czy tramwaj jedzie {{gap1}} centrum?"
+    concept_ids:
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: Jedzie do + цель.
+      incorrect: Нужен предлог do.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01 / LEX-A1-TRANSPORT
+      ai_assisted: false
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - do
+        placeholder: …
+  - id: ex-dt-l3-04
+    canonical_id: EX-A1-DT-L3-GF-04
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Poproszę bilet {{gap1}} tramwaj."
+    concept_ids:
+      - GR-TIME-EXPR-01
+    function_ids:
+      - FN-A1-TIME-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Bilet na + транспорт.
+      incorrect: Нужен предлог na.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TIME-01 / LEX-A1-MONEY
+      ai_assisted: false
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - na
+        placeholder: …
+  - id: ex-dt-l3-05
+    canonical_id: EX-A1-DT-L3-OR-05
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: Проведите маршрут и покупку.
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-THANKS-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: Локация → линия → билет → выход.
+      incorrect: Сначала найдите остановку и линию.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-THANKS-01 / LEX-A1-TRANSPORT
+      ai_assisted: false
+    mini_check: false
+    items:
+      - id: t1
+        text: Przepraszam, gdzie jest przystanek?
+      - id: t2
+        text: Czy tramwaj numer trzy jedzie do centrum?
+      - id: t3
+        text: Poproszę bilet na tramwaj.
+      - id: t4
+        text: Na którym przystanku mam wysiąść?
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+  - id: ex-dt-l3-06
+    canonical_id: EX-A1-DT-L3-SC-06
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: Получили указание «prosto i w lewo». Как закрыть контакт?
+    concept_ids:
+      - GR-MOT-BASE-01
+    function_ids:
+      - FN-A1-DIRECT-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Dziękuję уместно завершает короткую помощь.
+      incorrect: Остальные варианты меняют регистр.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-DIRECT-01 / LEX-A1-MONEY
+      ai_assisted: false
+    mini_check: false
+    options:
+      - id: a
+        text: Dziękuję.
+      - id: b
+        text: No dobra, ty.
+      - id: c
+        text: Cześć.
+    correct_option_id: a
+  - id: ex-dt-l3-07
+    canonical_id: EX-A1-DT-L3-MC-07
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: Выберите корректные транспортные рамки.
+    concept_ids:
+      - GR-PREP-DO-NA-01
+    function_ids:
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: Три рамки соответствуют цели, билету и выходу.
+      incorrect: Do tramwaj не подходит.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-TRANSPORT
+      ai_assisted: false
+    mini_check: true
+    options:
+      - id: a
+        text: do centrum
+      - id: b
+        text: bilet na tramwaj
+      - id: c
+        text: na piątym przystanku
+      - id: d
+        text: do tramwaj
+    correct_option_ids:
+      - a
+      - b
+      - c
+  - id: ex-dt-l3-08
+    canonical_id: EX-A1-DT-L3-OR-08
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: "Мини-проверка: восстановите поездку."
+    concept_ids:
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: Остановка → линия → билет → выход.
+      incorrect: Следуйте фактическому порядку действий.
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-ola-nowak
+      reviewer_id: reviewer-placeholder-igor-savchuk
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01 / LEX-A1-MONEY
+      ai_assisted: false
+    mini_check: true
+    items:
+      - id: t1
+        text: Znajduję przystanek.
+      - id: t2
+        text: Sprawdzam tramwaj do centrum.
+      - id: t3
+        text: Kupuję bilet na tramwaj.
+      - id: t4
+        text: Wysiadam na piątym przystanku.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+mini_check:
+  exercise_ids: *a2
+  pass_threshold: 1
+  concept_ids:
+    - GR-MOT-BASE-01
+    - GR-PREP-DO-NA-01
+    - GR-NUM-MONEY-01
+result_metadata:
+  title_ru: Результат урока
+  success_ru: Соединить навигацию и билет в один самостоятельный сценарий без пересадок. Результат
+    относится только к DRAFT-превью.
+  retry_ru: "Повторите опорные реплики: gdzie · do centrum · bilet na autobus · wysiąść, затем снова
+    выполните мини-проверку."
+  evidence_skill: interaction
+  linked_function_ids:
+    - FN-A1-DIRECT-01
+    - FN-A1-TRANS-01
+    - FN-A1-ASK-01
+  linked_concept_ids:
+    - GR-MOT-BASE-01
+    - GR-PREP-DO-NA-01
+    - GR-NUM-MONEY-01
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-ola-nowak
+  reviewer_id: reviewer-placeholder-igor-savchuk
+  sources:
+    - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-DIRECTIONS-01, SCN-A1-TICKET-01 /
+      FN-A1-DIRECT-01, FN-A1-TRANS-01, FN-A1-ASK-01, FN-A1-TIME-01, FN-A1-THANKS-01 /
+      LEX-A1-TRANSPORT, LEX-A1-MONEY
+  ai_assisted: false
+visibility: internal_preview_only

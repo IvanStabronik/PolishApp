@@ -30,6 +30,8 @@ curriculum_links:
     - PHON-CORE-01
 lesson_files:
   - lessons/01-powitanie-i-przedstawienie.yaml
+  - lessons/02-pytania-o-imie-i-pochodzenie.yaml
+  - lessons/03-samodzielne-pierwsze-spotkanie.yaml
 provenance:
   originality: created_for_product
   author_id: author-placeholder-ola-nowak

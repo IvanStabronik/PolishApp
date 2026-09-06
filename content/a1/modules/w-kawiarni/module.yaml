@@ -33,6 +33,8 @@ curriculum_links:
     - PRAG-PAN-01
 lesson_files:
   - lessons/01-zamowienie-przy-barze.yaml
+  - lessons/02-rozmiar-dodatki-i-platnosc.yaml
+  - lessons/03-samodzielne-zamowienie.yaml
 provenance:
   originality: created_for_product
   author_id: author-placeholder-marta-wisniewska

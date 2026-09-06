@@ -116,9 +116,13 @@ function mapExercise(ex: PackageExercise): ModuleExercise {
 
 function packageToDraftModule(pkg: ContentPackage, hallIndex: number): DraftModule {
   const mod = pkg.module;
-  const lesson = pkg.lessons[0]!;
-  const exercises = lesson.exercises.map(mapExercise);
-  const miniIds = new Set(lesson.mini_check.exercise_ids);
+  const overviewLesson = pkg.lessons[0]!;
+  const exercises = pkg.lessons.flatMap((lesson) =>
+    lesson.exercises.map(mapExercise),
+  );
+  const miniIds = new Set(
+    pkg.lessons.flatMap((lesson) => lesson.mini_check.exercise_ids),
+  );
 
   return {
     id: mod.slug,
@@ -132,25 +136,25 @@ function packageToDraftModule(pkg: ContentPackage, hallIndex: number): DraftModu
     situation: mod.situation_ru,
     uiLocales: ["ru", "uk", "pl"],
     l1Applicability: ["ukr", "rus", "bel"] as LearnerL1[],
-    dialogue: lesson.dialogue.turns.map((t) => ({
+    dialogue: overviewLesson.dialogue.turns.map((t) => ({
       speaker: t.speaker,
       pl: t.text_pl,
       glossRu: "",
     })),
-    keyLines: lesson.key_lines.map((k) => ({
+    keyLines: overviewLesson.key_lines.map((k) => ({
       pl: k.text_pl,
       explanation: k.explanation_ru,
     })),
     pragmatics: {
-      panPani: lesson.pan_pani.summary_ru,
-      l1Notes: lesson.pan_pani.l1_notes,
+      panPani: overviewLesson.pan_pani.summary_ru,
+      l1Notes: overviewLesson.pan_pani.l1_notes,
     },
     grammar: {
-      title: lesson.grammar_points[0]?.title_pl ?? "Grammar",
-      explanation: lesson.grammar_points[0]?.summary_ru ?? "",
-      examples: lesson.grammar_points[0]?.examples_pl ?? [],
-      conceptId: lesson.grammar_points[0]?.concept_ids[0] ?? "",
-      l1Notes: lesson.grammar_points[0]?.l1_notes,
+      title: overviewLesson.grammar_points[0]?.title_pl ?? "Grammar",
+      explanation: overviewLesson.grammar_points[0]?.summary_ru ?? "",
+      examples: overviewLesson.grammar_points[0]?.examples_pl ?? [],
+      conceptId: overviewLesson.grammar_points[0]?.concept_ids[0] ?? "",
+      l1Notes: overviewLesson.grammar_points[0]?.l1_notes,
     },
     exercises,
     miniCheckExerciseIds: [...miniIds],

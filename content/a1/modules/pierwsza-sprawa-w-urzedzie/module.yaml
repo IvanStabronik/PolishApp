@@ -34,6 +34,8 @@ curriculum_links:
     - GR-TNS-PRS-01
 lesson_files:
   - lessons/01-okienko-i-dokumenty.yaml
+  - lessons/02-brakujacy-dokument-i-formularz.yaml
+  - lessons/03-samodzielna-wizyta-w-urzedzie.yaml
 provenance:
   originality: created_for_product
   author_id: author-placeholder-tomasz-zielinski
