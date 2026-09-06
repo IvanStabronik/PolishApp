@@ -212,6 +212,34 @@ Implemented in app (sync into Learner / Author pages above):
 - Author list + review detail (changes requested / approved-but-blocked)
 - Privacy export success **and** error states (M2.1)
 
+## 7b. Milestone 3 Figma frames (filled)
+
+**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G  
+**Source clones:** `04 Learning Flow` Desktop frames (Archive/M1–M2 untouched).
+
+### Learner Desktop (`27:5`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Desktop · Dashboard | `30:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=30-2) |
+| M3 / Desktop · Module + Lessons | `30:44` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=30-44) |
+| M3 / Desktop · Lesson | `30:71` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=30-71) |
+| M3 / Desktop · Plan | `32:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=32-2) |
+| M3 / Desktop · Powtórka | `32:52` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=32-52) |
+
+### Author & Review (`27:8`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Desktop · Author List | _(pending write)_ | — |
+
+### Still empty (honest)
+
+- Learner Desktop: 4 exercises, Kronika, result/feedback polish
+- Learner Tablet (`27:6`), Learner Mobile (`27:7`)
+- Author: review detail / changes_requested / approved-but-blocked
+- System States (`27:9`), Foundations (`27:3`), Components (`27:4`) M3 copies
+
 ## 8. Out of scope
 
 Architecture ADRs · DB schema docs · certificate claims · gamification HUD · public content release before JPJO · simulating independent JPJO decisions in-app
