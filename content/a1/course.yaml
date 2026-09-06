@@ -1,0 +1,31 @@
+# content/a1/course.yaml
+# Course container for A1 closed-beta segment (DRAFT).
+kind: course
+canonical_id: CRS-A1-CLOSED-BETA
+slug: a1-closed-beta
+version: 1
+status: DRAFT
+level: A1
+title_pl: Kurs A1 — zamknięta beta
+working_title: A1 Closed Beta Course
+objective_ru: >
+  Связный сегмент A1: 5 залов × 3 урока. Внутренний preview / closed beta.
+  Не публикация и не одобрение JPJO.
+module_slugs:
+  - pierwsze-spotkanie
+  - w-kawiarni
+  - w-sklepie
+  - droga-i-transport
+  - pierwsza-sprawa-w-urzedzie
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-ola-nowak
+  reviewer_id: reviewer-placeholder-igor-savchuk
+  sources:
+    - "Curriculum A1 inventory / SCN / FN / LEX"
+  ai_assisted: false
+  notes: >
+    Course entity for Milestone 3 hierarchy Course→Module→Lesson.
+    DRAFT only. Publication blocked by DEC-016.
+visibility: internal_preview_only
+internal_preview_only: true

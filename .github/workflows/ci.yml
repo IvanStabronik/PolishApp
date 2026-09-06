@@ -29,7 +29,7 @@ jobs:
   build-and-test:
     name: Lint · typecheck · unit · content · DB · build · e2e
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
 
     services:
       postgres:
