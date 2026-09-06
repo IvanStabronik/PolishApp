@@ -104,20 +104,27 @@ UI locale · L1 (ukr/rus/bel **separate**) · level · goal · weekly · consent
 Зал 1 · Знакомство / Учебный модуль A1
 ```
 
-### Demo preview
+### Demo preview (Milestone 2)
 
-`DEMO_PREVIEW` / `NEXT_PUBLIC_DEMO_PREVIEW` = `true`|`1` → DRAFT catalog + banner. Preview attempts must not write live mastery.
+Server `DEMO_PREVIEW` / `DEMO_MODE` enables private-alpha *environment*. DRAFT visibility still requires roles `previewer|author|reviewer|admin`. `NEXT_PUBLIC_DEMO_PREVIEW` alone is **not** authorization. Preview attempts write **preview** mastery scope only.
 
 ---
 
 ## 4. Suggested Figma pages
 
-1. Foundations (color, type, focus, motion)  
-2. Components  
-3. Flow: Landing → Auth → Onboarding → Dashboard → Learn → Exercise → Result → Progress → Settings → Privacy  
-4. States: draft banner, correct/incorrect feedback, delete confirm  
-5. a11y: skip link, live region, focus order  
+1. Foundations (color, type, focus, motion)
+2. Components
+3. Flow: Landing → Auth → Onboarding → Dashboard (5 modules) → Learn → Exercise (4 types) → Result → Progress → Settings → Privacy
+4. States: draft banner, correct/incorrect/error feedback, delete confirm, 403/404
+5. a11y: skip link, live region, focus order
+6. Breakpoints: desktop 1440 · tablet · mobile 390
 
-## 5. Out of scope
+## 5. Private Alpha Figma sync
 
-Architecture ADRs · DB schema docs · authoring CMS · certificate claims · gamification HUD
+Continue in the same file: https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
+
+Code remains source of visual truth for implemented screens under `web/src/app/[locale]/**`.
+
+## 6. Out of scope
+
+Architecture ADRs · DB schema docs · authoring CMS · certificate claims · gamification HUD · public content release before JPJO
