@@ -77,14 +77,14 @@ export function AuthForm({ mode }: { mode: Mode }) {
       }
 
       const nextPath = await resolveDestination();
-      // Hard navigation is more reliable than nested startTransition + App Router
-      // soft nav for post-auth redirects (Playwright / production CI).
+      // Full document navigation (replace) so the session cookie is on the next
+      // document request. Prefer absolute same-origin URL for Playwright stability.
       const safe = safeReturnTo(nextPath) ?? `/${locale}/dashboard`;
       const localePrefixed = routing.locales.some(
         (l) => safe === `/${l}` || safe.startsWith(`/${l}/`),
       );
       const href = localePrefixed ? safe : `/${locale}${safe === "/" ? "" : safe}`;
-      window.location.assign(href);
+      window.location.replace(href);
     } catch {
       setError(t("errorGeneric"));
     }

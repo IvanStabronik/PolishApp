@@ -37,8 +37,18 @@ test.describe("no-preview security gate", () => {
     await page.goto("/ru/login");
     await page.getByTestId("login-email").fill("learner@demo.slowarium.local");
     await page.getByTestId("login-password").fill("DemoLearner1!");
-    await page.getByTestId("login-submit").click();
-    await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
+    const [res] = await Promise.all([
+      page.waitForResponse(
+        (r) =>
+          r.url().includes("/api/auth/sign-in/email") &&
+          r.request().method() === "POST",
+        { timeout: 30_000 },
+      ),
+      page.getByTestId("login-submit").click(),
+    ]);
+    expect(res.ok()).toBeTruthy();
+    await page.goto("/ru/dashboard", { waitUntil: "domcontentloaded" });
+    await expect(page).toHaveURL(/\/dashboard/, { timeout: 15_000 });
     await expect(page.getByTestId("preview-banner")).toHaveCount(0);
     await expect(page.getByTestId("module-pierwsze-spotkanie")).toHaveCount(0);
 
