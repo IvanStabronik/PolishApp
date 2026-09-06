@@ -214,8 +214,8 @@ Implemented in app (sync into Learner / Author pages above):
 
 ## 7b. Milestone 3 Figma frames (filled)
 
-**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
-**Source clones:** `04 Learning Flow` Desktop frames (Archive/M1–M2 untouched).
+**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G  
+**Source clones:** `04 Learning Flow`, `06 Mobile`, `08 System States`, `09 Tablet` (Archive/M1–M2 untouched).
 
 ### Learner Desktop (`27:5`)
 
@@ -226,19 +226,56 @@ Implemented in app (sync into Learner / Author pages above):
 | M3 / Desktop · Lesson | `30:71` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=30-71) |
 | M3 / Desktop · Plan | `32:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=32-2) |
 | M3 / Desktop · Powtórka | `32:52` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=32-52) |
+| M3 / Desktop · Exercise · Single Choice | `35:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-2) |
+| M3 / Desktop · Exercise · Multiple Choice | `35:19` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-19) |
+| M3 / Desktop · Exercise · Gap Fill | `35:42` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-42) |
+| M3 / Desktop · Exercise · Ordering | `35:58` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-58) |
+| M3 / Desktop · Feedback · Correct | `35:89` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-89) |
+| M3 / Desktop · Feedback · Incorrect | `35:97` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-97) |
+| M3 / Desktop · Feedback · Persist Error | `35:105` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-105) |
+| M3 / Desktop · Kronika | `35:113` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=35-113) |
+
+### Learner Tablet (`27:6`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Tablet · Dashboard | `36:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-2) |
+| M3 / Tablet · Module + Lessons | `36:219` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-219) |
+| M3 / Tablet · Lesson | `36:246` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-246) |
+| M3 / Tablet · Plan | `36:255` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-255) |
+
+### Learner Mobile (`27:7`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Mobile · Dashboard | `36:114` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-114) |
+| M3 / Mobile · Module | `36:137` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-137) |
+| M3 / Mobile · Lesson | `36:156` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-156) |
+| M3 / Mobile · Plan | `36:165` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=36-165) |
 
 ### Author & Review (`27:8`)
 
 | Frame | node-id | Link |
 | --- | --- | --- |
 | M3 / Desktop · Author List | `34:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=34-2) |
+| M3 / Desktop · Author Review Detail | `37:33` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-33) |
+| M3 / Desktop · Changes Requested | `37:87` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-87) |
+| M3 / Desktop · Approved · Publication Blocked | `37:141` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-141) |
+
+### System States (`27:9`)
+
+| Frame | node-id | Link |
+| --- | --- | --- |
+| M3 / Desktop · Empty | `37:2` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-2) |
+| M3 / Desktop · Loading | `37:8` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-8) |
+| M3 / Desktop · Error | `37:13` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-13) |
+| M3 / Desktop · 403 | `37:19` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-19) |
+| M3 / Desktop · 404 | `37:26` | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=37-26) |
 
 ### Still empty (honest)
 
-- Learner Desktop: 4 exercises, Kronika, result/feedback polish
-- Learner Tablet (`27:6`), Learner Mobile (`27:7`)
-- Author: review detail / changes_requested / approved-but-blocked
-- System States (`27:9`), Foundations (`27:3`), Components (`27:4`) M3 copies
+- Foundations (`27:3`), Components (`27:4`) M3 copies (optional polish pass)
+- Tablet/Mobile lesson & plan are desktop clones clipped to breakpoint viewports — layout polish deferred
 
 ## 8. Out of scope
 
