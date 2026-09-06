@@ -15,6 +15,8 @@ if (!secret && process.env.NODE_ENV === "production") {
   throw new Error("BETTER_AUTH_SECRET is required in production");
 }
 
+const isCi = process.env.CI === "true" || process.env.CI === "1";
+
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -47,6 +49,13 @@ export const auth = betterAuth({
     "http://localhost:3001",
     "http://127.0.0.1:3001",
   ],
+  /**
+   * better-auth enables rate limits in production (3 sign-in/sign-up per 10s).
+   * CI E2E hammers /sign-in from one runner IP and trips 429s; disable there only.
+   */
+  rateLimit: {
+    enabled: isCi ? false : undefined,
+  },
   advanced: {
     /**
      * CI / private-alpha run on http://127.0.0.1. NODE_ENV=production during

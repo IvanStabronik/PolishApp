@@ -89,6 +89,15 @@ async function checkOnboardingConsent(page: Page, testId: string) {
   await expect(box).toBeChecked({ timeout: 5_000 });
 }
 
+function authApiHeaders(): Record<string, string> {
+  const base = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
+  return {
+    "Content-Type": "application/json",
+    // Cookie-bearing API calls require Origin (better-auth CSRF); request context omits it.
+    Origin: base,
+    Referer: `${base}/ru/login`,
+  };
+}
 async function loginAs(
   page: Page,
   email: string,
@@ -97,10 +106,19 @@ async function loginAs(
 ) {
   // API sign-in shares the browser cookie jar and avoids racing the login
   // form's window.location.replace (which hung CI with empty page.url()).
-  const res = await page.context().request.post("/api/auth/sign-in/email", {
+  let res = await page.context().request.post("/api/auth/sign-in/email", {
     data: { email, password },
-    headers: { "Content-Type": "application/json" },
+    headers: authApiHeaders(),
   });
+  // better-auth production default: 3 sign-ins / 10s — brief backoff if still limited.
+  for (let attempt = 0; attempt < 3 && res.status() === 429; attempt += 1) {
+    const retryAfter = Number(res.headers()["x-retry-after"] ?? "11");
+    await page.waitForTimeout(Math.min(Math.max(retryAfter, 1), 15) * 1000);
+    res = await page.context().request.post("/api/auth/sign-in/email", {
+      data: { email, password },
+      headers: authApiHeaders(),
+    });
+  }
   expect(
     res.ok(),
     `sign-in failed: ${res.status()} ${await res.text().catch(() => "")}`,
