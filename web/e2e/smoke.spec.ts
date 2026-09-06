@@ -211,18 +211,15 @@ test.describe("Milestone 2.1 private alpha learner path", () => {
     page,
   }) => {
     test.setTimeout(180_000);
-    const stamp = Date.now();
-    const email = `e2e.ordinary.${stamp}@slowarium.test`;
-    const password = "E2eTestPass123!";
-
-    await registerLearner(page, {
-      name: "E2E Ordinary",
-      email,
-      password,
-    });
-    if (page.url().includes("/onboarding")) {
-      await finishOnboardingIfNeeded(page);
-    }
+    // Non-invite learner-only account (no previewer). Invitees get previewer and
+    // may see DRAFT; this matrix must stay denied for ordinary learners.
+    await loginAs(
+      page,
+      "ordinary@demo.slowarium.local",
+      "DemoOrdinary1!",
+      /\/(dashboard|onboarding)/,
+    );
+    await finishOnboardingIfNeeded(page);
 
     await expect(page.getByTestId("module-pierwsze-spotkanie")).toHaveCount(0);
     await expect(page.getByTestId("preview-banner")).toHaveCount(0);

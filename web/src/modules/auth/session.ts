@@ -37,7 +37,7 @@ function seededDemoHasPreviewer(email: string): boolean {
   const normalized = email.trim().toLowerCase();
   for (const account of Object.values(DEMO_ACCOUNTS)) {
     if (account.email.toLowerCase() === normalized) {
-      return account.roles.includes("previewer");
+      return (account.roles as readonly UserRole[]).includes("previewer");
     }
   }
   return false;

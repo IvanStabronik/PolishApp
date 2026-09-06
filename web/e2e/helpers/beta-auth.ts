@@ -56,8 +56,9 @@ export async function adminCreateInvite(
 }
 
 /**
- * Register a learner. When BETA_MODE is on (CI M4), uses invite acceptance.
- * When off, uses open /register form.
+ * Register a learner. When BETA_MODE is on (CI), uses invite acceptance
+ * (grants learner+previewer for DRAFT learning). When off, uses open /register.
+ * For DRAFT-denied ordinary learners, use seeded ordinary@demo… instead.
  */
 export async function registerLearner(
   page: Page,

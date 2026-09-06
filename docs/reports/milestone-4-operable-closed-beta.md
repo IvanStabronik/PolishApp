@@ -23,7 +23,11 @@ Closed-beta invite consume previously granted only `learner`. DRAFT modules requ
 `previewer|author|reviewer|admin` via `canAccessDraftContent`, so invitees hit
 `notFound()` on `/learn/{module}` (M4 e2e test 4). Fix: grant `learner`+`previewer`
 on consume (roleFlags + userRoles), matching the seeded demo learner. Ordinary
-non-invite learners remain denied without previewer.
+non-invite learners remain denied without previewer (seeded `ordinary@demo…` for
+M2.1 DRAFT denial).
+
+CI after role grant: https://github.com/IvanStabronik/PolishApp/actions/runs/34067545957
+(failed M2.1 ordinary-learner matrix because CI `registerLearner` used invite flow).
 ## Delivered
 
 ### A Invite-only beta

@@ -334,6 +334,7 @@ async function main() {
   console.log("Seeding demo users + roles + LVL-A1 + DRAFT A1 modules + beta slots…");
 
   const learnerId = await upsertDemoUser("learner");
+  const ordinaryId = await upsertDemoUser("ordinaryLearner");
   const authorId = await upsertDemoUser("author");
   const reviewerId = await upsertDemoUser("reviewer");
   const adminId = await upsertDemoUser("admin");
@@ -342,7 +343,9 @@ async function main() {
     learnerId === authorId ||
     authorId === reviewerId ||
     learnerId === reviewerId ||
-    adminId === learnerId
+    adminId === learnerId ||
+    ordinaryId === learnerId ||
+    ordinaryId === adminId
   ) {
     throw new Error("Demo users must remain distinct identities");
   }
@@ -370,6 +373,11 @@ async function main() {
 
   console.log("Seed complete.");
   console.log("  learner: ", DEMO_ACCOUNTS.learner.email, DEMO_ACCOUNTS.learner.roles);
+  console.log(
+    "  ordinary:",
+    DEMO_ACCOUNTS.ordinaryLearner.email,
+    DEMO_ACCOUNTS.ordinaryLearner.roles,
+  );
   console.log("  author:  ", DEMO_ACCOUNTS.author.email);
   console.log("  reviewer:", DEMO_ACCOUNTS.reviewer.email);
   console.log("  admin:   ", DEMO_ACCOUNTS.admin.email);
