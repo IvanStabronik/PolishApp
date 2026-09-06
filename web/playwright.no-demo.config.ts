@@ -74,8 +74,9 @@ export default defineConfig({
       name: "chromium-no-demo",
       use: {
         ...devices["Desktop Chrome"],
-        ...(process.env.PLAYWRIGHT_CHROME_CHANNEL
-          ? { channel: process.env.PLAYWRIGHT_CHROME_CHANNEL }
+        // Windows CI/local often lacks bundled Chromium; use system Chrome.
+        ...(process.platform === "win32" || process.env.PLAYWRIGHT_CHROME_CHANNEL
+          ? { channel: process.env.PLAYWRIGHT_CHROME_CHANNEL || "chrome" }
           : {}),
       },
     },

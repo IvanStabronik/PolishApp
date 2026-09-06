@@ -49,8 +49,19 @@ export function PrivacyActions() {
         if (!res.ok && res.status !== 202) return;
         setDeleteMsg(t("deleteDone"));
         setConfirming(false);
+        try {
+          await fetch("/api/auth/sign-out", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: "{}",
+          });
+        } catch {
+          /* ignore */
+        }
         if (typeof window !== "undefined") {
-          window.localStorage.removeItem("slowarium.onboarding");
+          window.localStorage.removeItem("slowarium.uiLocale");
+          window.location.assign("/ru");
         }
       } finally {
         setPending(false);

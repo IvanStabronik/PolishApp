@@ -1,17 +1,21 @@
 /**
- * Integration contracts for Milestone 2 attempt persistence.
- * Skips when DATABASE_URL is unset (unit CI). Run with:
- *   npm run test:integration
+ * Integration contracts for Milestone 2 attempt persistence / draft gates.
+ * Full DB round-trips run when DATABASE_URL is available (CI after migrate).
  */
 
 import { describe, expect, it } from "vitest";
+import { eq } from "drizzle-orm";
 import { canAccessDraftContent } from "@/lib/demo";
-import { resolveAttemptMode } from "@/modules/learning/attempt-mode";
+import {
+  masteryScopeForMode,
+  resolveAttemptMode,
+} from "@/modules/learning/attempt-mode";
+import { loadEnvFiles } from "@/db/load-env";
 
-const hasDb = Boolean(process.env.DATABASE_URL);
+loadEnvFiles();
 
-describe.skipIf(!hasDb)("attempt persistence integration", () => {
-  it("draft without previewer is denied (authorization contract)", () => {
+describe("attempt persistence integration", () => {
+  it("draft without previewer is denied", () => {
     expect(
       canAccessDraftContent({
         roles: ["learner"],
@@ -23,10 +27,29 @@ describe.skipIf(!hasDb)("attempt persistence integration", () => {
   it("DRAFT content resolves to preview mode", () => {
     expect(resolveAttemptMode({ contentStatus: "DRAFT" })).toBe("preview");
   });
+
+  it("preview and live mastery scopes stay separate", () => {
+    expect(masteryScopeForMode("preview")).toBe("preview");
+    expect(masteryScopeForMode("formative")).toBe("live");
+  });
 });
 
-describe("attempt persistence integration (always-on smoke)", () => {
-  it("documents that DATABASE_URL enables full DB cases", () => {
-    expect(typeof hasDb).toBe("boolean");
+describe("database round-trip", () => {
+  it("seeded demo learner has previewer role when DATABASE_URL is set", async () => {
+    if (!process.env.DATABASE_URL) {
+      throw new Error(
+        "DATABASE_URL must be set for DB integration tests (CI migrate/seed).",
+      );
+    }
+    const { getDb, getSql } = await import("@/db/client");
+    const { user } = await import("@/db/schema");
+    const db = getDb();
+    const row = await db.query.user.findFirst({
+      where: eq(user.email, "learner@demo.slowarium.local"),
+      columns: { roleFlags: true },
+    });
+    expect(row).toBeTruthy();
+    expect(row!.roleFlags).toContain("previewer");
+    await getSql().end({ timeout: 5 });
   });
 });

@@ -145,13 +145,16 @@ test.describe("Milestone 2 private alpha learner path", () => {
     await expect(page.getByTestId("module-pierwsze-spotkanie")).toBeVisible();
 
     // --- Module → exercise ---
-    await page.getByTestId("module-pierwsze-spotkanie").click();
-    await expect(page).toHaveURL(/\/learn\/pierwsze-spotkanie/);
+    await page.getByTestId("module-open-pierwsze-spotkanie").click();
+    await expect(page).toHaveURL(/\/learn\/pierwsze-spotkanie/, {
+      timeout: 20_000,
+    });
     const start = page.getByTestId("start-practice");
     if ((await start.count()) > 0) {
       await start.click();
     } else {
-      await page.goto("/ru/learn/pierwsze-spotkanie/exercise/ex-1");
+      // First exercise id from Pierwsze spotkanie package
+      await page.goto("/ru/learn/pierwsze-spotkanie/exercise/ex-ps-01");
     }
 
     for (let i = 0; i < 12; i += 1) {

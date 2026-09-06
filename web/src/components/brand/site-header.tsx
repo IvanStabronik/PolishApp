@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { BrandMark } from "./brand-mark";
+import { signOut as betterAuthSignOut } from "@/modules/auth/auth-client";
 
 const LINKS = [
   { href: "/dashboard" as const, key: "dashboard" as const, testId: "link-dashboard" },
@@ -20,12 +21,15 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
 
   async function signOut() {
     try {
+      await betterAuthSignOut();
+    } catch {
+      // Fallback: explicit JSON body for Better Auth content-type checks
       await fetch("/api/auth/sign-out", {
         method: "POST",
         credentials: "include",
-      });
-    } catch {
-      /* still redirect — server session may already be gone */
+        headers: { "Content-Type": "application/json" },
+        body: "{}",
+      }).catch(() => undefined);
     }
     router.push("/login");
     router.refresh();
