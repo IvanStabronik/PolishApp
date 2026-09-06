@@ -1,7 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { DualModuleLabel } from "@/components/dual-module-label";
 import { getA1Catalog } from "@/modules/content";
 import { isInternalPreview } from "@/lib/content/load-module";
@@ -16,7 +15,7 @@ export default async function A1CatalogPage({ params }: Props) {
   const modules = await getA1Catalog();
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8" data-testid="a1-catalog">
       <header>
         <h1 className="font-display m-0 text-3xl">{t("catalogTitle")}</h1>
         <p className="mt-2 max-w-2xl text-[var(--color-graphite)]">
@@ -25,15 +24,13 @@ export default async function A1CatalogPage({ params }: Props) {
       </header>
 
       {modules.length === 0 ? (
-        <Card>
-          <p className="m-0 text-[var(--color-graphite)]">
-            Set DEMO_PREVIEW=true for internal DRAFT catalog preview.
-          </p>
-        </Card>
+        <p className="m-0 text-[var(--color-graphite)]" data-testid="catalog-empty">
+          {t("catalogEmptyDraft")}
+        </p>
       ) : (
-        <ul className="m-0 flex list-none flex-col gap-4 p-0">
+        <ul className="m-0 flex list-none flex-col gap-6 p-0">
           {modules.map((mod) => (
-            <Card as="li" key={mod.id}>
+            <li key={mod.id} className="border-b border-[var(--color-line)] pb-6">
               <DualModuleLabel lore={mod.lore} />
               <h2 className="font-display mt-2 mb-1 text-2xl text-[var(--color-ink)]">
                 {mod.titlePl}
@@ -50,7 +47,7 @@ export default async function A1CatalogPage({ params }: Props) {
                   <Button variant="secondary">{t("lessons")}</Button>
                 </Link>
               </div>
-            </Card>
+            </li>
           ))}
         </ul>
       )}

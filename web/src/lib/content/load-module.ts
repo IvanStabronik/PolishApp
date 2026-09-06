@@ -1,9 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
-import { isDemoPreviewEnabled } from "@/lib/demo";
-import type { ContentStatus, LearnerL1 } from "@/lib/enums";
+import type { ContentStatus, LearnerL1, UserRole } from "@/lib/enums";
 import {
-  defaultModuleDir,
+  canAccessDraftContent,
+  isPrivateAlphaPreviewEnv,
+} from "@/lib/demo";
+import {
   loadModulePackage,
   resolveContentRoot,
 } from "@/modules/content/load-package";
@@ -17,21 +19,19 @@ import type {
   OrderingExercise,
 } from "./types";
 
-function resolveModuleDir(): string {
+function resolveModulesRoot(): string {
   const candidates = [
-    path.resolve(process.cwd(), "..", "content", "a1", "modules", "pierwsze-spotkanie"),
-    path.resolve(process.cwd(), "content", "a1", "modules", "pierwsze-spotkanie"),
-    path.resolve(process.cwd(), "..", "..", "content", "a1", "modules", "pierwsze-spotkanie"),
+    path.resolve(process.cwd(), "..", "content", "a1", "modules"),
+    path.resolve(process.cwd(), "content", "a1", "modules"),
+    path.resolve(process.cwd(), "..", "..", "content", "a1", "modules"),
   ];
   for (const candidate of candidates) {
-    if (fs.existsSync(path.join(candidate, "module.yaml"))) return candidate;
+    if (fs.existsSync(candidate)) return candidate;
   }
   try {
-    return defaultModuleDir(resolveContentRoot(process.cwd()));
+    return path.join(resolveContentRoot(process.cwd()), "content", "a1", "modules");
   } catch {
-    throw new Error(
-      `Module YAML not found. Tried:\n${candidates.join("\n")}`,
-    );
+    throw new Error(`Modules root not found. Tried:\n${candidates.join("\n")}`);
   }
 }
 
@@ -114,7 +114,7 @@ function mapExercise(ex: PackageExercise): ModuleExercise {
   }
 }
 
-function packageToDraftModule(pkg: ContentPackage): DraftModule {
+function packageToDraftModule(pkg: ContentPackage, hallIndex: number): DraftModule {
   const mod = pkg.module;
   const lesson = pkg.lessons[0]!;
   const exercises = lesson.exercises.map(mapExercise);
@@ -127,7 +127,7 @@ function packageToDraftModule(pkg: ContentPackage): DraftModule {
     titlePl: mod.title_pl,
     level: mod.level,
     status: mod.status,
-    hallLabel: "Зал 1 · Знакомство",
+    hallLabel: `Зал ${hallIndex} · ${mod.working_title}`,
     objective: mod.objective_ru,
     situation: mod.situation_ru,
     uiLocales: ["ru", "uk", "pl"],
@@ -164,51 +164,109 @@ function packageToDraftModule(pkg: ContentPackage): DraftModule {
   };
 }
 
-let cached: DraftModule | null = null;
+let cache: DraftModule[] | null = null;
 
-export function loadDraftModuleFromYaml(): DraftModule {
-  if (cached) return cached;
-  const moduleDir = resolveModuleDir();
-  const result = loadModulePackage(moduleDir);
-  // Learner fallback tolerates semantic warnings if the package parsed.
-  if (!result.package) {
-    const detail = result.issues.map((i) => `${i.path}: ${i.message}`).join("\n");
-    throw new Error(`Failed to load module package at ${moduleDir}\n${detail}`);
+export function loadAllModulesFromYaml(): DraftModule[] {
+  if (cache) return cache;
+  const root = resolveModulesRoot();
+  const dirs = fs
+    .readdirSync(root, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name)
+    .sort();
+
+  const modules: DraftModule[] = [];
+  let hall = 1;
+  for (const dir of dirs) {
+    const moduleDir = path.join(root, dir);
+    if (!fs.existsSync(path.join(moduleDir, "module.yaml"))) continue;
+    const result = loadModulePackage(moduleDir);
+    if (!result.package) continue;
+    modules.push(packageToDraftModule(result.package, hall));
+    hall += 1;
   }
-  cached = packageToDraftModule(result.package);
-  return cached;
+  cache = modules;
+  return modules;
 }
 
-export function listPreviewModules(): DraftModule[] {
-  const mod = loadDraftModuleFromYaml();
-  if (mod.status === "PUBLISHED") return [mod];
-  if (mod.status === "DRAFT" && isDemoPreviewEnabled()) return [mod];
-  return [];
+/** @deprecated Prefer loadAllModulesFromYaml */
+export function loadDraftModuleFromYaml(): DraftModule {
+  const all = loadAllModulesFromYaml();
+  const first = all[0];
+  if (!first) throw new Error("No modules found under content/a1/modules");
+  return first;
 }
 
-export function getModuleById(moduleId: string): DraftModule | null {
-  const mod = loadDraftModuleFromYaml();
-  const aliases = new Set([
-    mod.id,
-    "mod-pierwsze-spotkanie",
-    "MOD-A1-PIERWSZE-SPOTKANIE",
-  ]);
-  if (!aliases.has(moduleId)) return null;
-  if (mod.status === "DRAFT" && !isDemoPreviewEnabled()) return null;
+export type ContentAccessContext = {
+  roles?: readonly UserRole[];
+  email?: string | null;
+  /** When omitted, uses isPrivateAlphaPreviewEnv(). */
+  isPreviewEnv?: boolean;
+};
+
+function allowDraft(ctx?: ContentAccessContext): boolean {
+  return canAccessDraftContent({
+    roles: ctx?.roles ?? [],
+    email: ctx?.email,
+    isPreviewEnv: ctx?.isPreviewEnv ?? isPrivateAlphaPreviewEnv(),
+  });
+}
+
+function findModuleRaw(moduleId: string): DraftModule | null {
+  return (
+    loadAllModulesFromYaml().find((m) => {
+      const aliases = new Set([m.id, `mod-${m.id}`, m.id.toUpperCase()]);
+      if (m.id === "pierwsze-spotkanie") {
+        aliases.add("mod-pierwsze-spotkanie");
+        aliases.add("MOD-A1-PIERWSZE-SPOTKANIE");
+      }
+      return aliases.has(moduleId) || m.id === moduleId;
+    }) ?? null
+  );
+}
+
+/** Resolve module without visibility gate (for 403 vs 404 authorization). */
+export function peekModuleById(moduleId: string): DraftModule | null {
+  return findModuleRaw(moduleId);
+}
+
+export function listPreviewModules(ctx?: ContentAccessContext): DraftModule[] {
+  return loadAllModulesFromYaml().filter((mod) => {
+    if (mod.status === "PUBLISHED") return true;
+    if (isInternalPreview(mod.status)) return allowDraft(ctx);
+    return false;
+  });
+}
+
+export function getModuleById(
+  moduleId: string,
+  ctx?: ContentAccessContext,
+): DraftModule | null {
+  const mod = findModuleRaw(moduleId);
+  if (!mod) return null;
+  if (isInternalPreview(mod.status) && !allowDraft(ctx)) return null;
   return mod;
 }
 
 export function getExercise(
   moduleId: string,
   exerciseId: string,
+  ctx?: ContentAccessContext,
 ): ModuleExercise | null {
-  const mod = getModuleById(moduleId);
+  const mod = getModuleById(moduleId, ctx);
   if (!mod) return null;
-  return mod.exercises.find((ex) => ex.id === exerciseId) ?? null;
+  return (
+    mod.exercises.find(
+      (ex) => ex.id === exerciseId || ex.canonicalId === exerciseId,
+    ) ?? null
+  );
 }
 
-export function getModuleExerciseIds(moduleId: string): string[] {
-  const mod = getModuleById(moduleId);
+export function getModuleExerciseIds(
+  moduleId: string,
+  ctx?: ContentAccessContext,
+): string[] {
+  const mod = getModuleById(moduleId, ctx);
   if (!mod) return [];
   return mod.exercises.map((ex) => ex.id);
 }

@@ -5,8 +5,15 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
 import { PreviewBanner } from "@/components/brand/preview-banner";
 import { LinkButton } from "@/components/ui/link-button";
-import { getModuleById } from "@/lib/content/load-module";
-import { isDemoPreviewEnabled } from "@/lib/demo";
+import {
+  getModuleById,
+  isInternalPreview,
+} from "@/lib/content/load-module";
+import { protectApp } from "@/lib/auth/protect";
+import {
+  canAccessDraftContent,
+  isPrivateAlphaPreviewEnv,
+} from "@/lib/demo";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string }>;
@@ -17,12 +24,22 @@ export default async function ResultPage({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const mod = getModuleById(moduleId);
+  const session = await protectApp(
+    locale,
+    `/${locale}/learn/${moduleId}/result`,
+  );
+  const accessCtx = {
+    roles: session.roles,
+    email: session.user.email,
+    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+  };
+  const canDraft = canAccessDraftContent(accessCtx);
+
+  const mod = getModuleById(moduleId, accessCtx);
   if (!mod) notFound();
 
   const t = await getTranslations("learn");
-  const showDraftBanner =
-    mod.status === "DRAFT" || isDemoPreviewEnabled();
+  const showDraftBanner = canDraft && isInternalPreview(mod.status);
 
   return (
     <>
@@ -43,9 +60,11 @@ export default async function ResultPage({ params }: Props) {
         <p className="mt-2 text-sm text-[var(--color-graphite)]">
           {t("masteryHint")}
         </p>
-        <p className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-warning)] bg-[var(--color-warning-bg)] px-4 py-3 text-sm text-[var(--color-warning)]">
-          {t("previewNoMastery")}
-        </p>
+        {showDraftBanner ? (
+          <p className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-warning)] bg-[var(--color-warning-bg)] px-4 py-3 text-sm text-[var(--color-warning)]">
+            {t("previewNoMastery")}
+          </p>
+        ) : null}
         <div className="mt-8 flex flex-wrap gap-3">
           <LinkButton href={`/learn/${mod.id}`}>{t("backToModule")}</LinkButton>
           <LinkButton href="/dashboard" variant="secondary">

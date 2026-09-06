@@ -27,9 +27,9 @@ jobs:
         run: python scripts/validate-curriculum.py
 
   build-and-test:
-    name: Lint · typecheck · unit · content · build · e2e
+    name: Lint · typecheck · unit · content · DB · build · e2e
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     services:
       postgres:
@@ -52,7 +52,7 @@ jobs:
       BETTER_AUTH_URL: http://127.0.0.1:3000
       APP_URL: http://127.0.0.1:3000
       DEMO_MODE: "true"
-      NEXT_PUBLIC_DEMO_PREVIEW: "true"
+      DEMO_PREVIEW: "true"
       PLAYWRIGHT_BASE_URL: http://127.0.0.1:3000
       CI: "true"
 
@@ -63,6 +63,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -96,11 +98,34 @@ jobs:
           pnpm db:migrate
           pnpm db:seed
 
-      - name: Build
+      - name: DB integration tests
+        run: pnpm test:integration
+
+      - name: Production build
         run: pnpm build
 
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: E2E smoke
-        run: pnpm test:e2e
+      - name: E2E learner path
+        run: pnpm test:e2e:smoke
+
+      - name: E2E no-preview security
+        run: pnpm test:e2e:no-demo
+        env:
+          DEMO_PREVIEW: "false"
+          NEXT_PUBLIC_DEMO_PREVIEW: "false"
+
+      - name: Whitespace / conflict markers
+        working-directory: .
+        run: git diff --check 6ab4592716ed3bf34107322a390b337c563fca63..HEAD
+
+      - name: Upload Playwright artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts
+          path: |
+            web/test-results/
+            web/playwright-report/
+          if-no-files-found: ignore

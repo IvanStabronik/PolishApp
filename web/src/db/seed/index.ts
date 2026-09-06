@@ -1,15 +1,17 @@
 /**
- * Demo seed: Better Auth demo users + roles + LVL-A1 + DRAFT Pierwsze spotkanie.
+ * Demo seed: Better Auth demo users + roles + LVL-A1 + all DRAFT A1 modules
+ * under content/a1/modules/<slug>/module.yaml.
  * Never marks content PUBLISHED. Never claims JPJO approval.
  */
 import { and, eq } from "drizzle-orm";
 import { hashPassword } from "better-auth/crypto";
 import { randomUUID } from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
 import { DEMO_ACCOUNTS, isDemoMode } from "@/modules/auth/demo";
 import type { UserRole } from "@/lib/enums";
 import { upsertModulePackage } from "@/modules/content/import-module";
 import {
-  defaultModuleDir,
   loadModulePackage,
   resolveContentRoot,
 } from "@/modules/content/load-package";
@@ -209,10 +211,15 @@ async function seedDraftPlaceholders(
   );
 }
 
-async function seedDraftModule(authorId: string, levelId: string) {
-  let moduleDir: string;
+async function seedAllDraftModules(authorId: string, levelId: string) {
+  let modulesRoot: string;
   try {
-    moduleDir = defaultModuleDir(resolveContentRoot(process.cwd()));
+    modulesRoot = path.join(
+      resolveContentRoot(process.cwd()),
+      "content",
+      "a1",
+      "modules",
+    );
   } catch (err) {
     console.warn(
       `db:seed — content root missing (${err instanceof Error ? err.message : String(err)}); using placeholders.`,
@@ -221,45 +228,63 @@ async function seedDraftModule(authorId: string, levelId: string) {
     return;
   }
 
-  const loaded = loadModulePackage(moduleDir);
-  if (!loaded.ok || !loaded.package) {
-    console.warn(
-      `db:seed — content package invalid at ${moduleDir}; using placeholders.`,
-    );
-    for (const issue of loaded.issues) {
-      console.warn(`  [${issue.code}] ${issue.path}: ${issue.message}`);
-    }
+  if (!fs.existsSync(modulesRoot)) {
     await seedDraftPlaceholders(authorId, levelId);
     return;
   }
 
-  const pkg = loaded.package;
-  const draftPkg = {
-    module: { ...pkg.module, status: "DRAFT" as const },
-    lessons: pkg.lessons.map((l) => ({
-      ...l,
-      status: "DRAFT" as const,
-      exercises: l.exercises.map((e) => ({ ...e, status: "DRAFT" as const })),
-    })),
-  };
+  const dirs = fs
+    .readdirSync(modulesRoot, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name)
+    .sort();
 
-  const result = await upsertModulePackage(getDb(), draftPkg, {
-    authorUserId: authorId,
-  });
+  let imported = 0;
+  for (const dir of dirs) {
+    const moduleDir = path.join(modulesRoot, dir);
+    if (!fs.existsSync(path.join(moduleDir, "module.yaml"))) continue;
 
-  // Link module to LVL-A1 when import did not set levelId.
-  await getDb()
-    .update(modules)
-    .set({
-      levelId,
-      slug: pkg.module.slug ?? "pierwsze-spotkanie",
-      updatedAt: new Date(),
-    })
-    .where(eq(modules.id, result.moduleId));
+    const loaded = loadModulePackage(moduleDir);
+    if (!loaded.ok || !loaded.package) {
+      console.warn(`db:seed — skip invalid package at ${moduleDir}`);
+      for (const issue of loaded.issues) {
+        console.warn(`  [${issue.code}] ${issue.path}: ${issue.message}`);
+      }
+      continue;
+    }
 
-  console.log(
-    `imported ${pkg.module.canonical_id} as DRAFT (module=${result.moduleId}, lessons=${result.lessonCount}, exercises=${result.exerciseCount})`,
-  );
+    const pkg = loaded.package;
+    const draftPkg = {
+      module: { ...pkg.module, status: "DRAFT" as const },
+      lessons: pkg.lessons.map((l) => ({
+        ...l,
+        status: "DRAFT" as const,
+        exercises: l.exercises.map((e) => ({ ...e, status: "DRAFT" as const })),
+      })),
+    };
+
+    const result = await upsertModulePackage(getDb(), draftPkg, {
+      authorUserId: authorId,
+    });
+
+    await getDb()
+      .update(modules)
+      .set({
+        levelId,
+        slug: pkg.module.slug ?? dir,
+        updatedAt: new Date(),
+      })
+      .where(eq(modules.id, result.moduleId));
+
+    console.log(
+      `imported ${pkg.module.canonical_id} as DRAFT (module=${result.moduleId}, lessons=${result.lessonCount}, exercises=${result.exerciseCount})`,
+    );
+    imported += 1;
+  }
+
+  if (imported === 0) {
+    await seedDraftPlaceholders(authorId, levelId);
+  }
 }
 
 async function main() {
@@ -275,7 +300,7 @@ async function main() {
     return;
   }
 
-  console.log("Seeding demo users + roles + LVL-A1 + DRAFT Pierwsze spotkanie…");
+  console.log("Seeding demo users + roles + LVL-A1 + DRAFT A1 modules…");
 
   const learnerId = await upsertDemoUser("learner");
   const authorId = await upsertDemoUser("author");
@@ -291,14 +316,14 @@ async function main() {
 
   const levelId = await seedLevelA1();
   await seedLearnerProfile(learnerId);
-  await seedDraftModule(authorId, levelId);
+  await seedAllDraftModules(authorId, levelId);
 
   console.log("Seed complete.");
-  console.log("  learner: ", DEMO_ACCOUNTS.learner.email);
+  console.log("  learner: ", DEMO_ACCOUNTS.learner.email, DEMO_ACCOUNTS.learner.roles);
   console.log("  author:  ", DEMO_ACCOUNTS.author.email);
   console.log("  reviewer:", DEMO_ACCOUNTS.reviewer.email);
   console.log(
-    "Note: Pierwsze spotkanie stays DRAFT (internal preview); JPJO review pending; A2–B2 not started.",
+    "Note: A1 modules stay DRAFT (internal preview); JPJO review pending; A2–B2 not started.",
   );
 
   await getSql().end({ timeout: 5 });

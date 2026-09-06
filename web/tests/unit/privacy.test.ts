@@ -25,17 +25,28 @@ const sampleInput: LearnerExportInput = {
   consents: [
     { key: "privacy", granted: true, grantedAt: "2026-09-01T00:00:00.000Z" },
   ],
+  mastery: [
+    {
+      conceptCanonicalId: "PRAG-PAN-01",
+      state: "LEARNING",
+      masteryScope: "preview",
+      updatedAt: "2026-09-05T10:00:00.000Z",
+      explanationSnapshot: null,
+    },
+  ],
   evidence: [],
   attempts: [],
   voiceFileIds: [],
 };
 
 describe("privacy export", () => {
-  it("builds a versioned machine-readable document", () => {
+  it("builds a versioned machine-readable document with mastery", () => {
     const doc = buildLearnerExport(sampleInput);
     expect(doc.product).toBe("SŁOWARIUM");
-    expect(doc.format).toBe("slowarium.learner-export.v1");
+    expect(doc.format).toBe("slowarium.learner-export.v2");
+    expect(doc.schemaVersion).toBe(2);
     expect(doc.userId).toBe("user-1");
+    expect(doc.mastery).toHaveLength(1);
     expect(doc.profile.l1).toBe("ukr");
   });
 
@@ -45,24 +56,22 @@ describe("privacy export", () => {
       writeAudit: vi.fn(async () => undefined),
     };
     const json = await exportLearnerData(store, "user-1");
-    expect(json).toContain("slowarium.learner-export.v1");
+    expect(json).toContain("slowarium.learner-export.v2");
+    expect(json).not.toMatch(/password|accessToken|refreshToken/i);
     expect(store.writeAudit).toHaveBeenCalledTimes(2);
   });
 });
 
 describe("privacy delete-account", () => {
-  it("revokes sessions, deletes artifacts, anonymizes, audits", async () => {
+  it("runs a single transactional delete", async () => {
     const store: DeleteAccountStore = {
-      anonymizeUser: vi.fn(async () => undefined),
-      deleteLearnerArtifacts: vi.fn(async () => undefined),
-      revokeSessions: vi.fn(async () => undefined),
-      writeAudit: vi.fn(async () => undefined),
+      deleteAccountTransactional: vi.fn(async () => undefined),
     };
     const result = await deleteLearnerAccount(store, "user-1");
     expect(result.status).toBe("deleted");
-    expect(store.revokeSessions).toHaveBeenCalledWith("user-1");
-    expect(store.deleteLearnerArtifacts).toHaveBeenCalledWith("user-1");
-    expect(store.anonymizeUser).toHaveBeenCalled();
-    expect(store.writeAudit).toHaveBeenCalledTimes(2);
+    expect(store.deleteAccountTransactional).toHaveBeenCalledWith(
+      "user-1",
+      expect.any(String),
+    );
   });
 });

@@ -25,12 +25,10 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
         credentials: "include",
       });
     } catch {
-      /* ignore network errors — still clear local marker */
-    }
-    if (typeof window !== "undefined") {
-      window.sessionStorage.removeItem("slowarium.demoSession");
+      /* still redirect — server session may already be gone */
     }
     router.push("/login");
+    router.refresh();
   }
 
   return (
@@ -66,7 +64,7 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
               <button
                 type="button"
                 data-testid="link-logout"
-                onClick={signOut}
+                onClick={() => void signOut()}
                 className="cursor-pointer border-0 bg-transparent p-0 text-sm font-medium text-[var(--color-graphite)] hover:text-[var(--color-ink)]"
               >
                 {t("signOut")}

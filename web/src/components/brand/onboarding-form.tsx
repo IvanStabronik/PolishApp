@@ -36,31 +36,69 @@ export function OnboardingForm() {
       setError(t("validation"));
       return;
     }
-    startTransition(() => {
-      if (typeof window !== "undefined") {
-        window.localStorage.setItem(
-          "slowarium.onboarding",
-          JSON.stringify({
-            ageConfirmed18: true,
+
+    startTransition(async () => {
+      try {
+        const res = await fetch("/api/profile/onboarding", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
             uiLocale,
             l1,
             level,
             goal,
-            weeklyMinutes: Number(weekly),
+            weeklyGoal: Number(weekly),
+            ageConfirmed18: true,
             consents: {
               terms: consentTerms,
               privacy: consentPrivacy,
               research: consentResearch,
             },
-            at: Date.now(),
           }),
-        );
-      }
-      // Switch UI locale if the learner picked a different menu language.
-      if (uiLocale !== locale) {
-        router.replace("/dashboard", { locale: uiLocale });
-      } else {
-        router.push("/dashboard");
+        });
+
+        if (!res.ok) {
+          let detail = t("validation");
+          try {
+            const payload = (await res.json()) as { error?: string };
+            if (payload.error) detail = payload.error;
+          } catch {
+            /* ignore */
+          }
+          setError(detail);
+          return;
+        }
+
+        // Optional UI-prefs cache — DB remains source of truth.
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(
+            "slowarium.onboarding",
+            JSON.stringify({
+              ageConfirmed18: true,
+              uiLocale,
+              l1,
+              level,
+              goal,
+              weeklyGoal: Number(weekly),
+              weeklyMinutes: Number(weekly),
+              consents: {
+                terms: consentTerms,
+                privacy: consentPrivacy,
+                research: consentResearch,
+              },
+              at: Date.now(),
+            }),
+          );
+        }
+
+        if (uiLocale !== locale) {
+          router.replace("/dashboard", { locale: uiLocale });
+        } else {
+          router.push("/dashboard");
+        }
+      } catch {
+        setError(t("validation"));
       }
     });
   }

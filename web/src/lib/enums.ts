@@ -33,7 +33,13 @@ export const EXERCISE_TYPES = [
 ] as const;
 export type ExerciseType = (typeof EXERCISE_TYPES)[number];
 
-export const USER_ROLES = ["learner", "author", "reviewer", "admin"] as const;
+export const USER_ROLES = [
+  "learner",
+  "previewer",
+  "author",
+  "reviewer",
+  "admin",
+] as const;
 export type UserRole = (typeof USER_ROLES)[number];
 
 export const CONCEPT_KINDS = [

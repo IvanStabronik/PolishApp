@@ -1,36 +1,49 @@
 import { expect, test, type APIRequestContext } from "@playwright/test";
 
 /**
- * Product gate: without DEMO_PREVIEW / NEXT_PUBLIC_DEMO_PREVIEW,
- * DRAFT Pierwsze spotkanie must not appear in the learner catalog.
- *
- * Booted via playwright.no-demo.config.ts (port 3001, preview env false).
+ * Without DEMO_PREVIEW, DRAFT must stay hidden even for signed-in previewers.
+ * Booted via playwright.no-demo.config.ts (separate port).
+ * Server must be up — never skip.
  */
 
-async function isServerReady(request: APIRequestContext): Promise<boolean> {
+async function assertServerReady(request: APIRequestContext): Promise<void> {
   try {
-    const res = await request.get("/", { timeout: 5_000 });
-    return res.status() < 500;
-  } catch {
-    return false;
+    const res = await request.get("/", { timeout: 10_000 });
+    if (res.status() >= 500) {
+      throw new Error(`App returned ${res.status()}`);
+    }
+  } catch (err) {
+    throw new Error(
+      `No-preview server not ready: ${
+        err instanceof Error ? err.message : String(err)
+      }`,
+    );
   }
 }
 
-test.describe("DEMO_PREVIEW off gate", () => {
+test.describe("no-preview security gate", () => {
   test.beforeAll(async ({ request }) => {
-    const ready = await isServerReady(request);
-    test.skip(
-      !ready,
-      "No-demo Playwright server is not ready (expected on :3001). Run via `pnpm test:e2e` or playwright.no-demo.config.ts.",
-    );
+    await assertServerReady(request);
   });
 
-  test("draft module is not listed and preview banner is absent", async ({
+  test("guest is redirected from dashboard", async ({ page }) => {
+    await page.goto("/ru/dashboard");
+    await expect(page).toHaveURL(/\/login/, { timeout: 15_000 });
+  });
+
+  test("previewer still cannot see DRAFT when preview env is off", async ({
     page,
   }) => {
-    await page.goto("/ru/dashboard");
-    await expect(page.getByTestId("dashboard-page")).toBeVisible();
+    await page.goto("/ru/login");
+    await page.getByTestId("login-email").fill("learner@demo.slowarium.local");
+    await page.getByTestId("login-password").fill("DemoLearner1!");
+    await page.getByTestId("login-submit").click();
+    await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
     await expect(page.getByTestId("preview-banner")).toHaveCount(0);
     await expect(page.getByTestId("module-pierwsze-spotkanie")).toHaveCount(0);
+
+    await page.goto("/ru/learn/pierwsze-spotkanie");
+    // 404 or empty — must not render DRAFT exercise player
+    await expect(page.getByTestId("exercise-player")).toHaveCount(0);
   });
 });

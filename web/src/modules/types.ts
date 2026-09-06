@@ -14,7 +14,7 @@ export type OnboardingInput = {
   l1: LearnerL1;
   level: "a0" | "a1" | "a2";
   goal: "life" | "exam" | "study";
-  weeklyGoal: "3" | "5" | "8";
+  weeklyGoal: number;
   consentTerms: boolean;
   consentPrivacy: boolean;
   consentResearch: boolean;

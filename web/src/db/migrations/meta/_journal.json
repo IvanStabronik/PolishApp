@@ -15,6 +15,20 @@
       "when": 1757110000000,
       "tag": "0001_account_issuer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757200000000,
+      "tag": "0002_previewer_role",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1757300000000,
+      "tag": "0003_attempt_idempotency",
+      "breakpoints": true
     }
   ]
 }

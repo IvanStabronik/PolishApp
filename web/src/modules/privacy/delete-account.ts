@@ -1,12 +1,13 @@
 /**
- * FUN-211 — account deletion / anonymization (server-side).
- * Removes or anonymizes PII and learning artifacts; login must fail afterwards.
+ * FUN-211 — account deletion (server-side).
+ * Prefer hard-delete: sessions + accounts + learner cascade + user.
+ * Audit events must not store PII (email, name, tokens).
  */
 
 export type DeleteAccountResult = {
   userId: string;
   status: "deleted";
-  anonymizedAt: string;
+  deletedAt: string;
   retained: {
     /** Payment/legal facts only — no PII learning content. */
     paymentFactsKept: boolean;
@@ -14,19 +15,16 @@ export type DeleteAccountResult = {
 };
 
 export type DeleteAccountStore = {
-  /** Soft-delete / anonymize user row; invalidate sessions. */
-  anonymizeUser(userId: string, at: string): Promise<void>;
-  deleteLearnerArtifacts(userId: string): Promise<void>;
-  revokeSessions(userId: string): Promise<void>;
-  writeAudit(event: {
-    userId: string;
-    action: "delete_requested" | "delete_completed";
-    at: string;
-  }): Promise<void>;
+  /**
+   * Single transactional wipe:
+   * sessions, OAuth/credential accounts, learner profile (cascade), user row.
+   * Then write a minimal non-PII audit record.
+   */
+  deleteAccountTransactional(userId: string, at: string): Promise<void>;
 };
 
 /**
- * Server entry: revoke sessions, wipe learner artifacts, anonymize account.
+ * Server entry: wipe identity + learner artifacts in one store transaction.
  * Caller must verify the authenticated user owns `userId`.
  */
 export async function deleteLearnerAccount(
@@ -36,16 +34,12 @@ export async function deleteLearnerAccount(
   now = new Date(),
 ): Promise<DeleteAccountResult> {
   const at = now.toISOString();
-  await store.writeAudit({ userId, action: "delete_requested", at });
-  await store.revokeSessions(userId);
-  await store.deleteLearnerArtifacts(userId);
-  await store.anonymizeUser(userId, at);
-  await store.writeAudit({ userId, action: "delete_completed", at });
+  await store.deleteAccountTransactional(userId, at);
 
   return {
     userId,
     status: "deleted",
-    anonymizedAt: at,
+    deletedAt: at,
     retained: {
       paymentFactsKept: options.keepPaymentFacts ?? false,
     },

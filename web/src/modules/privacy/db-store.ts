@@ -5,12 +5,15 @@
 import { eq } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import {
+  account,
   attempts,
+  conceptMastery,
   evidenceRecords,
   learnerProfiles,
   privacyAudit,
   session,
   user,
+  userRoles,
 } from "@/db/schema";
 import type {
   ExportStore,
@@ -22,11 +25,11 @@ export function createPrivacyExportStore(): ExportStore {
   return {
     async loadLearnerExportInput(userId: string): Promise<LearnerExportInput | null> {
       const db = getDb();
-      const account = await db.query.user.findFirst({
+      const accountRow = await db.query.user.findFirst({
         where: eq(user.id, userId),
         columns: { id: true, email: true },
       });
-      if (!account) return null;
+      if (!accountRow) return null;
 
       const profile = await db.query.learnerProfiles.findFirst({
         where: eq(learnerProfiles.userId, userId),
@@ -40,6 +43,7 @@ export function createPrivacyExportStore(): ExportStore {
               exerciseId: attempts.exerciseId,
               correct: attempts.correct,
               mode: attempts.mode,
+              masteryScope: attempts.masteryScope,
               response: attempts.response,
               createdAt: attempts.createdAt,
             })
@@ -59,6 +63,19 @@ export function createPrivacyExportStore(): ExportStore {
             })
             .from(evidenceRecords)
             .where(eq(evidenceRecords.learnerProfileId, profileId))
+        : [];
+
+      const masteryRows = profileId
+        ? await db
+            .select({
+              conceptCanonicalId: conceptMastery.conceptCanonicalId,
+              state: conceptMastery.state,
+              masteryScope: conceptMastery.masteryScope,
+              updatedAt: conceptMastery.updatedAt,
+              explanationSnapshot: conceptMastery.explanationSnapshot,
+            })
+            .from(conceptMastery)
+            .where(eq(conceptMastery.learnerProfileId, profileId))
         : [];
 
       const consents = profile?.consents ?? { ageConfirmed18: false };
@@ -88,8 +105,8 @@ export function createPrivacyExportStore(): ExportStore {
       ];
 
       return {
-        userId: account.id,
-        email: account.email,
+        userId: accountRow.id,
+        email: accountRow.email,
         exportedAt: new Date().toISOString(),
         profile: {
           uiLocale: profile?.uiLocale ?? "ru",
@@ -98,8 +115,16 @@ export function createPrivacyExportStore(): ExportStore {
           goals: profile?.goals ?? {},
           weeklyMinutes: profile?.weeklyMinutes ?? null,
           ageConfirmed18: profile?.ageConfirmed18 ?? false,
+          consents,
         },
         consents: consentRows,
+        mastery: masteryRows.map((m) => ({
+          conceptCanonicalId: m.conceptCanonicalId,
+          state: m.state,
+          masteryScope: m.masteryScope,
+          updatedAt: m.updatedAt.toISOString(),
+          explanationSnapshot: m.explanationSnapshot ?? null,
+        })),
         evidence: evidenceRows.map((e) => ({
           id: e.id,
           conceptCanonicalId: e.conceptCanonicalId,
@@ -113,7 +138,9 @@ export function createPrivacyExportStore(): ExportStore {
           exerciseId: a.exerciseId ?? "",
           correct: a.correct,
           mode: a.mode,
-          response: a.response,
+          masteryScope: a.masteryScope,
+          // Strip any accidental token-like keys from response blobs.
+          response: sanitizeExportResponse(a.response),
           createdAt: a.createdAt.toISOString(),
         })),
         voiceFileIds: [],
@@ -132,45 +159,71 @@ export function createPrivacyExportStore(): ExportStore {
   };
 }
 
+function sanitizeExportResponse(
+  response: Record<string, unknown> | null | undefined,
+): Record<string, unknown> {
+  if (!response || typeof response !== "object") return {};
+  const blocked = new Set([
+    "password",
+    "token",
+    "accessToken",
+    "refreshToken",
+    "idToken",
+    "secret",
+  ]);
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(response)) {
+    if (blocked.has(key)) continue;
+    out[key] = value;
+  }
+  return out;
+}
+
 export function createPrivacyDeleteStore(): DeleteAccountStore {
   return {
-    async revokeSessions(userId: string) {
+    async deleteAccountTransactional(userId: string, at: string) {
       const db = getDb();
-      await db.delete(session).where(eq(session.userId, userId));
-    },
+      await db.transaction(async (tx) => {
+        // Audit first while user FK still resolves; store no PII.
+        await tx.insert(privacyAudit).values({
+          actorUserId: userId,
+          subjectUserId: userId,
+          action: "delete_requested",
+          details: { at },
+        });
 
-    async deleteLearnerArtifacts(userId: string) {
-      const db = getDb();
-      // learner_profiles cascade deletes attempts, evidence, mastery, etc.
-      await db.delete(learnerProfiles).where(eq(learnerProfiles.userId, userId));
-    },
+        await tx.delete(session).where(eq(session.userId, userId));
+        await tx.delete(account).where(eq(account.userId, userId));
+        await tx.delete(userRoles).where(eq(userRoles.userId, userId));
+        // Cascades attempts, evidence, mastery, enrollments, etc.
+        await tx
+          .delete(learnerProfiles)
+          .where(eq(learnerProfiles.userId, userId));
 
-    async anonymizeUser(userId: string, at: string) {
-      const db = getDb();
-      const tombstone = `deleted+${userId}@deleted.slowarium.local`;
-      await db
-        .update(user)
-        .set({
-          name: "Deleted user",
-          email: tombstone,
-          image: null,
-          emailVerified: false,
-          roleFlags: [],
-          updatedAt: new Date(at),
-        })
-        .where(eq(user.id, userId));
-    },
+        // Clear FK on prior audit rows, then hard-delete user.
+        await tx
+          .update(privacyAudit)
+          .set({ actorUserId: null, subjectUserId: null })
+          .where(eq(privacyAudit.subjectUserId, userId));
 
-    async writeAudit(event) {
-      const db = getDb();
-      // After anonymize, user row still exists — FK ok. On delete_completed after
-      // anonymize, still attribute to subject for compliance trail.
-      await db.insert(privacyAudit).values({
-        actorUserId: event.userId,
-        subjectUserId: event.userId,
-        action: event.action,
-        details: { at: event.at },
+        await tx.delete(user).where(eq(user.id, userId));
+
+        await tx.insert(privacyAudit).values({
+          actorUserId: null,
+          subjectUserId: null,
+          action: "delete_completed",
+          details: { at, subjectHash: hashSubject(userId) },
+        });
       });
     },
   };
+}
+
+/** Minimal non-reversible marker for compliance trail (not PII). */
+function hashSubject(userId: string): string {
+  let h = 0;
+  for (let i = 0; i < userId.length; i++) {
+    h = (h * 31 + userId.charCodeAt(i)) >>> 0;
+  }
+  return `u${h.toString(16)}`;
 }

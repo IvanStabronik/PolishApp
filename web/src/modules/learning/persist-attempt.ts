@@ -1,11 +1,12 @@
 /**
- * Persist learning attempts → evidence → concept_mastery (ADR-006).
- * Never marks content PUBLISHED. Preview mode may store rows but skips mastery.
+ * Persist learning attempts → answers → evidence → scoped mastery (ADR-006).
+ * Atomic transaction + idempotency key. Never marks content PUBLISHED.
  */
 
 import { and, desc, eq } from "drizzle-orm";
 import { getDb, type Db } from "@/db/client";
 import {
+  attemptAnswers,
   attempts,
   conceptMastery,
   evidenceRecords,
@@ -18,8 +19,10 @@ import type { ModuleExercise } from "@/lib/content/types";
 import type { EvalResult } from "@/modules/assessment/evaluate";
 import {
   assertNoContentPublish,
+  masteryScopeForMode,
   shouldWriteMastery,
   type AttemptMode,
+  type MasteryScope,
 } from "./attempt-mode";
 import {
   recomputeMastery,
@@ -38,6 +41,7 @@ export type PersistAttemptInput = {
   mode: AttemptMode;
   exerciseType: ModuleExercise["type"];
   hinted?: boolean;
+  idempotencyKey?: string | null;
 };
 
 export type PersistAttemptResult = {
@@ -45,7 +49,14 @@ export type PersistAttemptResult = {
   attemptId: string | null;
   masteryWritten: boolean;
   masteryState: MasteryStateName | null;
+  masteryScope: MasteryScope | null;
+  /** True when the same Idempotency-Key was replayed. */
+  replayed?: boolean;
+  /** @deprecated alias of replayed */
+  idempotentReplay?: boolean;
   reason?: string;
+  evaluation?: EvalResult;
+  mode?: AttemptMode;
 };
 
 const UUID_RE =
@@ -74,9 +85,6 @@ export async function getOrCreateLearnerProfile(
   return inserted!;
 }
 
-/**
- * Resolve exercise row by UUID or curriculum canonical id (EX-…).
- */
 export async function resolveExerciseRow(
   db: Db,
   exerciseId: string,
@@ -108,9 +116,6 @@ export async function resolveExerciseRow(
   return byCanonical ?? null;
 }
 
-/**
- * Resolve a content_version_id from module slug / canonical / alias.
- */
 export async function resolveModuleContentVersionId(
   db: Db,
   moduleId: string,
@@ -150,6 +155,7 @@ async function loadEvidenceForMastery(
   db: Db,
   learnerProfileId: string,
   conceptCanonicalId: string,
+  scope: MasteryScope,
 ): Promise<MasteryEvidence[]> {
   const rows = await db
     .select({
@@ -168,6 +174,7 @@ async function loadEvidenceForMastery(
       and(
         eq(evidenceRecords.learnerProfileId, learnerProfileId),
         eq(evidenceRecords.conceptCanonicalId, conceptCanonicalId),
+        eq(attempts.masteryScope, scope),
       ),
     )
     .orderBy(desc(evidenceRecords.createdAt));
@@ -193,9 +200,64 @@ async function loadEvidenceForMastery(
   });
 }
 
+function evaluationFromAttemptResponse(
+  response: Record<string, unknown>,
+  correct: boolean | null,
+): EvalResult | null {
+  const evaluation = response.evaluation;
+  if (evaluation && typeof evaluation === "object") {
+    const e = evaluation as Record<string, unknown>;
+    if (typeof e.correct === "boolean" && typeof e.explanation === "string") {
+      return {
+        correct: e.correct,
+        explanation: e.explanation,
+        evidenceWeight:
+          typeof e.evidenceWeight === "number" ? e.evidenceWeight : 0.6,
+        conceptId:
+          typeof e.conceptId === "string" ? e.conceptId : undefined,
+      };
+    }
+  }
+  if (correct === null) return null;
+  return {
+    correct,
+    explanation: "",
+    evidenceWeight: 0.6,
+  };
+}
+
+function replayResult(
+  existing: {
+    id: string;
+    correct: boolean | null;
+    mode: string;
+    masteryScope: string;
+    response: Record<string, unknown>;
+  },
+  fallback: EvalResult,
+  scope: MasteryScope,
+): PersistAttemptResult {
+  const priorEval = evaluationFromAttemptResponse(
+    existing.response,
+    existing.correct,
+  );
+  return {
+    persisted: true,
+    attemptId: existing.id,
+    masteryWritten: false,
+    masteryState: null,
+    masteryScope: (existing.masteryScope as MasteryScope) ?? scope,
+    replayed: true,
+    idempotentReplay: true,
+    reason: "idempotent_replay",
+    evaluation: priorEval ?? fallback,
+    mode: existing.mode as AttemptMode,
+  };
+}
+
 /**
- * Write attempt (+ evidence) and optionally recompute concept_mastery.
- * Requires contentVersionId (FUN-172). Returns persisted:false when missing.
+ * Write attempt (+ answers + evidence) and optionally recompute concept_mastery.
+ * Wrapped in a DB transaction. Idempotent when idempotencyKey is provided.
  */
 export async function persistLearningAttempt(
   input: PersistAttemptInput,
@@ -209,91 +271,173 @@ export async function persistLearningAttempt(
       attemptId: null,
       masteryWritten: false,
       masteryState: null,
+      masteryScope: null,
       reason: "missing_content_version",
     };
   }
 
-  const profile = await getOrCreateLearnerProfile(db, input.userId);
+  const scope = masteryScopeForMode(input.mode);
   const writeMastery = shouldWriteMastery(input.mode);
   const conceptId = input.evaluation.conceptId;
   const resultLabel = input.evaluation.correct ? "correct" : "incorrect";
+  const idempotencyKey = input.idempotencyKey?.trim() || null;
 
-  const [attemptRow] = await db
-    .insert(attempts)
-    .values({
-      learnerProfileId: profile.id,
-      exerciseId: input.exerciseUuid,
-      contentVersionId: input.contentVersionId,
+  return db.transaction(async (tx) => {
+    const profile = await getOrCreateLearnerProfile(
+      tx as unknown as Db,
+      input.userId,
+    );
+
+    if (idempotencyKey) {
+      const existing = await tx.query.attempts.findFirst({
+        where: and(
+          eq(attempts.learnerProfileId, profile.id),
+          eq(attempts.idempotencyKey, idempotencyKey),
+        ),
+      });
+      if (existing) {
+        return replayResult(
+          {
+            id: existing.id,
+            correct: existing.correct,
+            mode: existing.mode,
+            masteryScope: existing.masteryScope,
+            response: existing.response as Record<string, unknown>,
+          },
+          input.evaluation,
+          scope,
+        );
+      }
+    }
+
+    let attemptId: string;
+    try {
+      const [attemptRow] = await tx
+        .insert(attempts)
+        .values({
+          learnerProfileId: profile.id,
+          exerciseId: input.exerciseUuid,
+          contentVersionId: input.contentVersionId!,
+          response: {
+            type: input.answer.type,
+            answer: input.answer,
+            moduleId: input.moduleId,
+            exerciseCanonicalId: input.exerciseCanonicalId,
+            evidenceWeight: input.evaluation.evidenceWeight,
+            evaluation: input.evaluation,
+          },
+          correct: input.evaluation.correct,
+          hinted: Boolean(input.hinted),
+          mode: input.mode,
+          idempotencyKey,
+          masteryScope: scope,
+        })
+        .returning({ id: attempts.id });
+      attemptId = attemptRow!.id;
+    } catch (err) {
+      if (idempotencyKey) {
+        const existing = await tx.query.attempts.findFirst({
+          where: and(
+            eq(attempts.learnerProfileId, profile.id),
+            eq(attempts.idempotencyKey, idempotencyKey),
+          ),
+        });
+        if (existing) {
+          return replayResult(
+            {
+              id: existing.id,
+              correct: existing.correct,
+              mode: existing.mode,
+              masteryScope: existing.masteryScope,
+              response: existing.response as Record<string, unknown>,
+            },
+            input.evaluation,
+            scope,
+          );
+        }
+      }
+      throw err;
+    }
+
+    await tx.insert(attemptAnswers).values({
+      attemptId,
       response: {
         type: input.answer.type,
         answer: input.answer,
-        moduleId: input.moduleId,
-        exerciseCanonicalId: input.exerciseCanonicalId,
-        evidenceWeight: input.evaluation.evidenceWeight,
       },
       correct: input.evaluation.correct,
-      hinted: Boolean(input.hinted),
-      mode: input.mode,
-    })
-    .returning({ id: attempts.id });
-
-  const attemptId = attemptRow!.id;
-
-  if (conceptId) {
-    await db.insert(evidenceRecords).values({
-      attemptId,
-      learnerProfileId: profile.id,
-      conceptCanonicalId: conceptId,
-      skill: input.exerciseType,
-      weight: String(input.evaluation.evidenceWeight),
-      hinted: Boolean(input.hinted),
-      examLike: input.mode === "summative",
-      result: resultLabel,
+      sortOrder: 0,
     });
-  }
 
-  if (!writeMastery || !conceptId) {
+    if (conceptId) {
+      await tx.insert(evidenceRecords).values({
+        attemptId,
+        learnerProfileId: profile.id,
+        conceptCanonicalId: conceptId,
+        skill: input.exerciseType,
+        weight: String(input.evaluation.evidenceWeight),
+        hinted: Boolean(input.hinted),
+        examLike: input.mode === "summative",
+        result: resultLabel,
+      });
+    }
+
+    if (!writeMastery || !conceptId) {
+      return {
+        persisted: true,
+        attemptId,
+        masteryWritten: false,
+        masteryState: null,
+        masteryScope: scope,
+        reason: writeMastery ? "no_concept" : "preview_mode",
+        evaluation: input.evaluation,
+        mode: input.mode,
+      };
+    }
+
+    const evidence = await loadEvidenceForMastery(
+      tx as unknown as Db,
+      profile.id,
+      conceptId,
+      scope,
+    );
+    const snapshot = recomputeMastery(conceptId, evidence);
+    const existingMastery = await tx.query.conceptMastery.findFirst({
+      where: and(
+        eq(conceptMastery.learnerProfileId, profile.id),
+        eq(conceptMastery.conceptCanonicalId, conceptId),
+        eq(conceptMastery.masteryScope, scope),
+      ),
+      columns: { id: true },
+    });
+
+    if (existingMastery) {
+      await tx
+        .update(conceptMastery)
+        .set({
+          state: snapshot.state,
+          explanationSnapshot: snapshot.explanation,
+          updatedAt: new Date(),
+        })
+        .where(eq(conceptMastery.id, existingMastery.id));
+    } else {
+      await tx.insert(conceptMastery).values({
+        learnerProfileId: profile.id,
+        conceptCanonicalId: conceptId,
+        masteryScope: scope,
+        state: snapshot.state,
+        explanationSnapshot: snapshot.explanation,
+      });
+    }
+
     return {
       persisted: true,
       attemptId,
-      masteryWritten: false,
-      masteryState: null,
-      reason: writeMastery ? "no_concept" : "preview_mode",
+      masteryWritten: true,
+      masteryState: snapshot.state,
+      masteryScope: scope,
+      evaluation: input.evaluation,
+      mode: input.mode,
     };
-  }
-
-  const evidence = await loadEvidenceForMastery(db, profile.id, conceptId);
-  const snapshot = recomputeMastery(conceptId, evidence);
-  const existing = await db.query.conceptMastery.findFirst({
-    where: and(
-      eq(conceptMastery.learnerProfileId, profile.id),
-      eq(conceptMastery.conceptCanonicalId, conceptId),
-    ),
-    columns: { id: true },
   });
-
-  if (existing) {
-    await db
-      .update(conceptMastery)
-      .set({
-        state: snapshot.state,
-        explanationSnapshot: snapshot.explanation,
-        updatedAt: new Date(),
-      })
-      .where(eq(conceptMastery.id, existing.id));
-  } else {
-    await db.insert(conceptMastery).values({
-      learnerProfileId: profile.id,
-      conceptCanonicalId: conceptId,
-      state: snapshot.state,
-      explanationSnapshot: snapshot.explanation,
-    });
-  }
-
-  return {
-    persisted: true,
-    attemptId,
-    masteryWritten: true,
-    masteryState: snapshot.state,
-  };
 }

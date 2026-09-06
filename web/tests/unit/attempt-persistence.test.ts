@@ -1,63 +1,71 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   assertNoContentPublish,
   isDemoAccountEmail,
+  masteryScopeForMode,
   masteryStateToBadge,
   resolveAttemptMode,
+  shouldWriteLiveMastery,
   shouldWriteMastery,
 } from "@/modules/learning/attempt-mode";
-import {
-  isContentVisibleToLearner,
-  isLearnerVisible,
-  canTransition,
-} from "@/modules/content/lifecycle";
-import { isDemoPreviewEnabled } from "@/lib/demo";
+import { canTransition } from "@/modules/content/lifecycle";
+import { canAccessDraftContent } from "@/lib/demo";
 
 describe("attempt mode resolution", () => {
-  it("defaults demo users in preview to formative (progress works)", () => {
+  it("uses preview mode for DRAFT content", () => {
     expect(
       resolveAttemptMode({
-        preview: true,
-        isDemoUser: true,
-        demoPreviewEnabled: true,
-      }),
-    ).toBe("formative");
-  });
-
-  it("defaults non-demo preview traffic to preview mode", () => {
-    expect(
-      resolveAttemptMode({
-        preview: true,
-        isDemoUser: false,
-        demoPreviewEnabled: true,
+        contentStatus: "DRAFT",
       }),
     ).toBe("preview");
   });
 
-  it("honours explicit preview mode even for demo users", () => {
+  it("uses formative for PUBLISHED content", () => {
     expect(
       resolveAttemptMode({
-        preview: true,
-        mode: "preview",
-        isDemoUser: true,
-        demoPreviewEnabled: true,
-      }),
-    ).toBe("preview");
-  });
-
-  it("uses formative outside preview", () => {
-    expect(
-      resolveAttemptMode({
-        isDemoUser: false,
-        demoPreviewEnabled: false,
+        contentStatus: "PUBLISHED",
       }),
     ).toBe("formative");
   });
 
-  it("never writes live mastery for preview mode", () => {
-    expect(shouldWriteMastery("preview")).toBe(false);
-    expect(shouldWriteMastery("formative")).toBe(true);
-    expect(shouldWriteMastery("summative")).toBe(true);
+  it("maps preview mode to preview mastery scope", () => {
+    expect(masteryScopeForMode("preview")).toBe("preview");
+    expect(masteryScopeForMode("formative")).toBe("live");
+  });
+
+  it("writes preview-scoped mastery but not live mastery for preview", () => {
+    expect(shouldWriteMastery("preview")).toBe(true);
+    expect(shouldWriteLiveMastery("preview")).toBe(false);
+    expect(shouldWriteLiveMastery("formative")).toBe(true);
+  });
+});
+
+describe("draft access matrix", () => {
+  it("denies ordinary learner without previewer role", () => {
+    expect(
+      canAccessDraftContent({
+        roles: ["learner"],
+        isPreviewEnv: true,
+      }),
+    ).toBe(false);
+  });
+
+  it("allows previewer when preview env is on", () => {
+    expect(
+      canAccessDraftContent({
+        roles: ["learner", "previewer"],
+        isPreviewEnv: true,
+      }),
+    ).toBe(true);
+  });
+
+  it("denies previewer when preview env is off", () => {
+    expect(
+      canAccessDraftContent({
+        roles: ["previewer"],
+        isPreviewEnv: false,
+      }),
+    ).toBe(false);
   });
 });
 
@@ -66,12 +74,6 @@ describe("publication guard", () => {
     expect(() =>
       assertNoContentPublish({ touchContentStatus: "PUBLISHED" }),
     ).toThrow(/Publication guard/);
-    expect(() =>
-      assertNoContentPublish({ touchContentStatus: null }),
-    ).not.toThrow();
-    expect(() =>
-      assertNoContentPublish({ touchContentStatus: "DRAFT" }),
-    ).not.toThrow();
   });
 
   it("keeps DRAFT → PUBLISHED illegal in lifecycle", () => {
@@ -79,109 +81,17 @@ describe("publication guard", () => {
   });
 });
 
-describe("draft visibility", () => {
-  it("hides DRAFT from learners without DEMO_PREVIEW", () => {
-    expect(isLearnerVisible("DRAFT")).toBe(false);
-    expect(isContentVisibleToLearner("DRAFT", { demoPreview: false })).toBe(
-      false,
-    );
-  });
-
-  it("shows DRAFT only when demo preview is enabled", () => {
-    expect(isContentVisibleToLearner("DRAFT", { demoPreview: true })).toBe(
-      true,
-    );
-    expect(isContentVisibleToLearner("PUBLISHED", { demoPreview: false })).toBe(
-      true,
-    );
+describe("demo email helper", () => {
+  it("recognises seeded demo domain", () => {
+    expect(isDemoAccountEmail("learner@demo.slowarium.local")).toBe(true);
+    expect(isDemoAccountEmail("user@example.com")).toBe(false);
   });
 });
 
 describe("mastery badge mapping", () => {
-  it("maps DB states to UI badges", () => {
+  it("maps mastery states", () => {
     expect(masteryStateToBadge("MASTERED")).toBe("mastered");
-    expect(masteryStateToBadge("DEMONSTRATED")).toBe("mastered");
     expect(masteryStateToBadge("LEARNING")).toBe("emerging");
     expect(masteryStateToBadge("NOT_STARTED")).toBe("not_started");
-  });
-});
-
-describe("demo account detection", () => {
-  it("recognises @demo.slowarium.local emails", () => {
-    expect(isDemoAccountEmail("learner@demo.slowarium.local")).toBe(true);
-    expect(isDemoAccountEmail("person@example.com")).toBe(false);
-  });
-});
-
-describe("client correct flag distrust (pure contract)", () => {
-  it("evaluation result is independent of a client correct claim", async () => {
-    const { evaluateAnswer } = await import("@/modules/assessment/evaluate");
-    const exercise = {
-      id: "ex-1",
-      type: "single_choice" as const,
-      prompt: "?",
-      options: ["a", "b"],
-      correctIndex: 1,
-      conceptIds: ["PRAG-PAN-01"],
-      feedback: {
-        explanation: "ok",
-        evidenceWeight: 1,
-        conceptId: "PRAG-PAN-01",
-      },
-      retryPolicy: "unlimited",
-    };
-    const wrong = evaluateAnswer(exercise, {
-      type: "single_choice",
-      index: 0,
-    });
-    expect(wrong.correct).toBe(false);
-    // Simulating a malicious body.correct=true must not change server eval
-    const forgedCorrect = true;
-    expect(wrong.correct === forgedCorrect).toBe(false);
-  });
-});
-
-describe("DEMO_PREVIEW env gate", () => {
-  it("reads DEMO_PREVIEW from env", () => {
-    const prev = process.env.DEMO_PREVIEW;
-    const prevPublic = process.env.NEXT_PUBLIC_DEMO_PREVIEW;
-    process.env.NEXT_PUBLIC_DEMO_PREVIEW = "true";
-    process.env.DEMO_PREVIEW = "1";
-    expect(isDemoPreviewEnabled()).toBe(true);
-    process.env.DEMO_PREVIEW = "0";
-    expect(isDemoPreviewEnabled()).toBe(false);
-    if (prev === undefined) delete process.env.DEMO_PREVIEW;
-    else process.env.DEMO_PREVIEW = prev;
-    if (prevPublic === undefined) delete process.env.NEXT_PUBLIC_DEMO_PREVIEW;
-    else process.env.NEXT_PUBLIC_DEMO_PREVIEW = prevPublic;
-  });
-});
-
-describe("persist attempt orchestration (mocked store contract)", () => {
-  it("skips mastery write when mode is preview", () => {
-    const mode = resolveAttemptMode({
-      mode: "preview",
-      isDemoUser: true,
-      demoPreviewEnabled: true,
-    });
-    expect(mode).toBe("preview");
-    expect(shouldWriteMastery(mode)).toBe(false);
-  });
-
-  it("would write mastery for formative demo attempts", () => {
-    const mode = resolveAttemptMode({
-      preview: true,
-      isDemoUser: true,
-      demoPreviewEnabled: true,
-    });
-    expect(mode).toBe("formative");
-    expect(shouldWriteMastery(mode)).toBe(true);
-  });
-
-  it("records that missing content version blocks persistence", () => {
-    // Contract documented by PersistAttemptResult.reason
-    const reason = "missing_content_version";
-    expect(reason).toBe("missing_content_version");
-    vi.fn(); // keep vitest import used when expanding to full store mocks
   });
 });

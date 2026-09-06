@@ -5,8 +5,16 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
 import { PreviewBanner } from "@/components/brand/preview-banner";
 import { ExercisePlayer } from "@/components/learning/exercise-player";
-import { getModuleById, getExercise } from "@/lib/content/load-module";
-import { isDemoPreviewEnabled } from "@/lib/demo";
+import {
+  getModuleById,
+  getExercise,
+  isInternalPreview,
+} from "@/lib/content/load-module";
+import { protectApp } from "@/lib/auth/protect";
+import {
+  canAccessDraftContent,
+  isPrivateAlphaPreviewEnv,
+} from "@/lib/demo";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string; exerciseId: string }>;
@@ -17,8 +25,19 @@ export default async function ExercisePage({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const mod = getModuleById(moduleId);
-  const exercise = getExercise(moduleId, exerciseId);
+  const session = await protectApp(
+    locale,
+    `/${locale}/learn/${moduleId}/exercise/${exerciseId}`,
+  );
+  const accessCtx = {
+    roles: session.roles,
+    email: session.user.email,
+    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+  };
+  const canDraft = canAccessDraftContent(accessCtx);
+
+  const mod = getModuleById(moduleId, accessCtx);
+  const exercise = getExercise(moduleId, exerciseId, accessCtx);
   if (!mod || !exercise) notFound();
 
   const t = await getTranslations("learn");
@@ -28,8 +47,7 @@ export default async function ExercisePage({ params }: Props) {
   const nextHref = isLast
     ? `/learn/${moduleId}/result`
     : `/learn/${moduleId}/exercise/${ids[index + 1]}`;
-  const showDraftBanner =
-    mod.status === "DRAFT" || isDemoPreviewEnabled();
+  const showDraftBanner = canDraft && isInternalPreview(mod.status);
 
   return (
     <>

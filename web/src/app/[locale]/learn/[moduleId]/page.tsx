@@ -8,7 +8,11 @@ import { ModuleOverview } from "@/components/learning/module-overview";
 import { LinkButton } from "@/components/ui/link-button";
 import { Badge } from "@/components/ui/badge";
 import { getModuleById, isInternalPreview } from "@/lib/content/load-module";
-import { isDemoPreviewEnabled } from "@/lib/demo";
+import { protectApp } from "@/lib/auth/protect";
+import {
+  canAccessDraftContent,
+  isPrivateAlphaPreviewEnv,
+} from "@/lib/demo";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string }>;
@@ -19,13 +23,21 @@ export default async function ModulePage({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const mod = getModuleById(moduleId);
+  const session = await protectApp(locale, `/${locale}/learn/${moduleId}`);
+  const accessCtx = {
+    roles: session.roles,
+    email: session.user.email,
+    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+  };
+  const canDraft = canAccessDraftContent(accessCtx);
+
+  const mod = getModuleById(moduleId, accessCtx);
   if (!mod) notFound();
 
   const t = await getTranslations("learn");
   const tDash = await getTranslations("dashboard");
   const firstExercise = mod.exercises[0];
-  const preview = isDemoPreviewEnabled() && isInternalPreview(mod.status);
+  const preview = canDraft && isInternalPreview(mod.status);
 
   return (
     <>

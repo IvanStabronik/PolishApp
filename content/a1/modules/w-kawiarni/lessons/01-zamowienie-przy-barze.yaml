@@ -1,0 +1,578 @@
+kind: lesson
+canonical_id: LES-A1-WK-01
+slug: zamowienie-przy-barze
+version: 1
+status: DRAFT
+title_pl: Zamówienie przy barze
+sort_order: 1
+situation_ru: >
+  Вы стоите у стойки в небольшой кофейне в Польше. Нужно заказать кофе
+  или чай, уточнить размер или наличие и оплатить заказ. Бариста — взрослый
+  незнакомец; темы знакомые, речь спокойная.
+objective_ru: >
+  Поздороваться, заказать позицию (Poproszę…), спросить о наличии, подтвердить
+  оплату и поблагодарить — удерживая pan/pani вместо ty.
+curriculum_links:
+  scenarios:
+    - SCN-A1-FOOD-01
+  functions:
+    - FN-A1-TRANS-01
+    - FN-A1-ASK-01
+    - FN-A1-ADDRESS-01
+    - FN-A1-QUANT-01
+    - FN-A1-THANKS-01
+  lex_bundles:
+    - LEX-A1-SERVICE
+    - LEX-A1-MONEY
+  concepts:
+    - GR-CAS-ACC-01
+    - GR-PRO-DEM-01
+    - GR-NUM-MONEY-01
+    - PRAG-PAN-01
+dialogue:
+  title_pl: Kawa przy barze
+  turns:
+    - speaker: Barista
+      text_pl: Dzień dobry. W czym mogę pomóc?
+    - speaker: Iryna
+      text_pl: Dzień dobry. Poproszę kawę latte.
+    - speaker: Barista
+      text_pl: Dużą czy małą?
+    - speaker: Iryna
+      text_pl: Dużą, proszę. Czy jest też herbata?
+    - speaker: Barista
+      text_pl: Tak, jest. Coś jeszcze?
+    - speaker: Iryna
+      text_pl: Nie, to wszystko. Ile płacę?
+    - speaker: Barista
+      text_pl: Osiemnaście złotych. Kartą czy gotówką?
+    - speaker: Iryna
+      text_pl: Kartą, proszę. Dziękuję.
+    - speaker: Barista
+      text_pl: Proszę bardzo. Miłego dnia!
+    - speaker: Iryna
+      text_pl: Wzajemnie. Do widzenia.
+key_lines:
+  - text_pl: Poproszę kawę latte.
+    explanation_ru: >
+      Базовая рамка заказа: Poproszę + винительный (Biernik). Не калькируйте
+      «дайте мне» как резкое *Daj mi… к незнакомцу за стойкой.
+  - text_pl: Dużą czy małą?
+    explanation_ru: >
+      Уточнение размера; ответ часто повторяет форму прилагательного
+      (Dużą, proszę) в согласовании с подразумеваемым существительным.
+  - text_pl: Czy jest też herbata?
+    explanation_ru: >
+      Вопрос о наличии: Czy jest…? — безопасный A1-шаблон для меню/стойки.
+  - text_pl: Ile płacę? / Kartą, proszę.
+    explanation_ru: >
+      Цена и способ оплаты: Ile płacę? + kartą / gotówką (творительный в формуле оплаты).
+pan_pani:
+  summary_ru: >
+    К баристе-незнакомцу по умолчанию — pan/pani и вежливые формулы заказа
+    (Poproszę…, Czy jest…?). Форма ty и *Daj… уместны только с друзьями
+    или после явного перехода на «ты».
+  form: "Poproszę… · Czy mogę poprosić o…? · Ile pan / pani płaci? (от персонала)"
+  examples_pl:
+    - Poproszę kawę.
+    - Czy jest herbata?
+    - Kartą, proszę.
+  counterexamples_pl:
+    - "*Daj kawę." # резко к незнакомцу
+    - "*Możno mnie latte?" # калька «можно мне»
+  concept_ids:
+    - PRAG-PAN-01
+  l1_notes:
+    ukr: >
+      Українське «дайте / можна мені» не переносьте як *Daj / *Można mnie.
+      У кавʼярні тримайте Poproszę + biernik і pan/pani до персоналу;
+      «ти» лише якщо бариста сам запропонував.
+    rus: >
+      «Можно мне кофе» часто даёт *Możno mnie kawę. Польская рамка —
+      Poproszę kawę. Не используйте ty к баристе-незнакомцу; kartą —
+      творительный в формуле оплаты, не «на карте».
+    bel: >
+      Не калькуйце «дайце кавы» ў рэзкі *Daj. Poproszę… + pan/pani —
+      асобны польскі сэрвісны рэгістр; не спадзявайцеся на бел. «вы»
+      як wy + 2 л. мн. да бара.
+grammar_points:
+  - id: GP-A1-WK-POPROSZE-ACC
+    title_pl: Poproszę + Biernik
+    summary_ru: >
+      Заказ позиции: Poproszę + объект в винительном (kawę, herbatę, bułkę).
+    form: >
+      Poproszę + Acc (kawę, herbatę, kanapkę). Uściślenie: dużą / małą.
+      Płatność: kartą / gotówką (Narzędnik w formule).
+    meaning: >
+      Вежливо назвать выбор и закрыть платёжный слот транзакции.
+    use: >
+      Стойка кофейни, простой заказ без аллерго-консультации; затем
+      Ile płacę? / Kartą, proszę.
+    examples_pl:
+      - Poproszę kawę latte.
+      - Poproszę herbatę.
+      - Kartą, proszę.
+    counterexamples_pl:
+      - "*Poproszę kawa." # без Acc
+      - "*Daj mi latte." # неверный регистр
+      - "*Płacę karta." # без Ins
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-NUM-MONEY-01
+    l1_notes:
+      ukr: >
+        Не лишайте називний (*kawa) після Poproszę. «Кавою / картою» —
+        не плутайте з польським kartą (Ins оплати).
+      rus: >
+        «Кофе» после Poproszę → kawę (Acc), не *kawa. Оплата: kartą,
+        не *na karte / *karta.
+      bel: >
+        Трымайце Acc пасля Poproszę; аканне ў назвах напояў на пісьме
+        не пераносіце. Kartą — цэлая формула, не збірайце з бел. «картай».
+l1_notes:
+  ukr: >
+    Урок про замовлення в кавʼярні: Poproszę + biernik, питання Czy jest…?,
+    оплата kartą/gotówką. Не калькуйте «дайте / можна мені»; pan/pani до
+    персоналу обовʼязковий на першому контакті.
+  rus: >
+    Фокус: заказ без кальки «можно мне» и без ty к баристе. Запомните
+    Acc после Poproszę и творительный в kartą / gotówką; числа цены
+    слушайте как целый слот Ile płacę?
+  bel: >
+    Асобны акцэнт BEL: не капіюйце рускія нотаткі і не спадзявайцеся на
+    «і так зразумеюць». Poproszę… / Czy jest… / Kartą, proszę — асобныя
+    польскія рамкі; пісьмо без акання ў назвах напояў.
+steps:
+  - id: step-situation
+    kind: situation
+    title_ru: Ситуация
+    body_ru: >
+      Короткий заказ у стойки: поздороваться, назвать напиток, уточнить
+      размер или наличие, оплатить и попрощаться.
+  - id: step-dialogue
+    kind: dialogue
+    title_ru: Диалог
+    dialogue_ref: primary
+  - id: step-key-lines
+    kind: key_lines
+    title_ru: Ключевые реплики
+  - id: step-pan-pani
+    kind: pan_pani
+    title_ru: Pan / pani
+  - id: step-grammar
+    kind: grammar
+    title_ru: Грамматика урока
+    grammar_point_id: GP-A1-WK-POPROSZE-ACC
+  - id: step-practice
+    kind: practice
+    title_ru: Практика
+    exercise_ids:
+      - ex-wk-01
+      - ex-wk-02
+      - ex-wk-03
+      - ex-wk-04
+      - ex-wk-05
+      - ex-wk-06
+      - ex-wk-07
+      - ex-wk-08
+  - id: step-mini-check
+    kind: mini_check
+    title_ru: Мини-проверка
+    exercise_ids:
+      - ex-wk-09
+      - ex-wk-10
+  - id: step-result
+    kind: result
+    title_ru: Результат
+exercises:
+  - id: ex-wk-01
+    canonical_id: EX-A1-WK-SC-01
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: "Как вежливо заказать кофе у стойки?"
+    options:
+      - id: a
+        text: Poproszę kawę.
+      - id: b
+        text: Daj kawę.
+      - id: c
+        text: Możno mnie kawa?
+    correct_option_id: a
+    concept_ids:
+      - GR-CAS-ACC-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-ADDRESS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Poproszę kawę — вежливая рамка заказа + Acc."
+      incorrect: "Daj / Możno mnie — неверный регистр или калька."
+      hint: "Ищите формулу Poproszę + объект."
+      l1:
+        ukr: "Не ставте «дайте» як *Daj до незнайомого баристи."
+        rus: "Не калькируйте «можно мне» как *Możno mnie."
+        bel: "Не пераносьце «дайце» ў рэзкі *Daj."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "LEX-A1-SERVICE MWU poproszę + Acc"
+      ai_assisted: false
+    mini_check: false
+
+  - id: ex-wk-02
+    canonical_id: EX-A1-WK-SC-02
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: "Как спросить, есть ли чай?"
+    options:
+      - id: a
+        text: Czy jest herbata?
+      - id: b
+        text: Jest herbata, tak?
+      - id: c
+        text: Ty masz herbatę?
+    correct_option_id: a
+    concept_ids:
+      - GR-PRO-DEM-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Czy jest…? — стандартный вопрос о наличии."
+      incorrect: "Ty + 2 л. слишком фамильярно; разговорный tag не заменяет czy."
+      l1:
+        ukr: "Тримайте Czy jest…?, не «ти маєш»."
+        rus: "Не используйте ty к персоналу; формула Czy jest…?"
+        bel: "Не пераносьце «ці ёсць» у ty-форму да бара."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "FN-A1-ASK-01"
+      ai_assisted: false
+    mini_check: false
+
+  - id: ex-wk-03
+    canonical_id: EX-A1-WK-SC-03
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: "Как ответить на вопрос «Kartą czy gotówką?»"
+    options:
+      - id: a
+        text: Kartą, proszę.
+      - id: b
+        text: Na karcie.
+      - id: c
+        text: Ja karta.
+    correct_option_id: a
+    concept_ids:
+      - GR-NUM-MONEY-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-QUANT-01
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: "Kartą, proszę — творительный в формуле оплаты."
+      incorrect: "Na karcie / Ja karta — кальки, не сервисная формула."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "LEX-A1-MONEY FIX płatność"
+      ai_assisted: false
+    mini_check: false
+
+  - id: ex-wk-04
+    canonical_id: EX-A1-WK-MC-01
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: "Отметьте уместные реплики клиента в кофейне."
+    options:
+      - id: a
+        text: Poproszę kawę latte.
+      - id: b
+        text: Ile płacę?
+      - id: c
+        text: Daj mi to szybko!
+      - id: d
+        text: Dziękuję. Do widzenia.
+    correct_option_ids:
+      - a
+      - b
+      - d
+    concept_ids:
+      - PRAG-PAN-01
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-THANKS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Заказ, вопрос о цене и вежливое закрытие — уместны."
+      incorrect: "Daj mi to szybko! слишком резко для первого контакта со стойкой."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "SCN-A1-FOOD-01 transaction slots"
+      ai_assisted: false
+    mini_check: false
+
+  - id: ex-wk-05
+    canonical_id: EX-A1-WK-MC-02
+    version: 1
+    type: multiple_choice
+    status: DRAFT
+    prompt: "Какие фразы помогают довести заказ до оплаты?"
+    options:
+      - id: a
+        text: Dużą, proszę.
+      - id: b
+        text: Nie, to wszystko.
+      - id: c
+        text: Cześć, co tam?
+      - id: d
+        text: Kartą, proszę.
+    correct_option_ids:
+      - a
+      - b
+      - d
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-THANKS-01
+    feedback:
+      correct: "Размер, закрытие выбора и оплата — слоты транзакции."
+      incorrect: "Cześć, co tam? — неформальный регистр, не шаг оплаты."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "FN-A1-TRANS-01"
+      ai_assisted: false
+    mini_check: false
+
+  - id: ex-wk-06
+    canonical_id: EX-A1-WK-GF-01
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: {{gap1}} kawę latte."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - Poproszę
+          - poproszę
+        placeholder: "…"
+    concept_ids:
+      - GR-CAS-ACC-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Poproszę — опорная рамка заказа."
+      incorrect: "Нужна форма Poproszę перед объектом в Acc."
+      l1:
+        ukr: "Не ставте *Daj / *Proszę kawa без рамки Poproszę + Acc."
+        rus: "Не пишите *Daj kawę вместо Poproszę."
+        bel: "Трымайце Poproszę, не кальку «дайце»."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "GP-A1-WK-POPROSZE-ACC"
+      ai_assisted: false
+    mini_check: false
+
+  - id: ex-wk-07
+    canonical_id: EX-A1-WK-GF-02
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Дополните: Czy {{gap1}} herbata?"
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - jest
+          - Jest
+        placeholder: "…"
+    concept_ids:
+      - GR-EXIST-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Czy jest…? — вопрос о наличии."
+      incorrect: "Нужен глагол jest в рамке Czy jest…?"
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "FN-A1-ASK-01 / GR-EXIST-01"
+      ai_assisted: false
+    mini_check: false
+
+  - id: ex-wk-08
+    canonical_id: EX-A1-WK-OR-01
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: "Расставьте шаги заказа в логичном порядке."
+    items:
+      - id: t1
+        text: Dzień dobry. Poproszę kawę latte.
+      - id: t2
+        text: Dużą, proszę. Czy jest też herbata?
+      - id: t3
+        text: Nie, to wszystko. Ile płacę?
+      - id: t4
+        text: Kartą, proszę. Dziękuję. Do widzenia.
+    correct_order:
+      - t1
+      - t2
+      - t3
+      - t4
+    concept_ids:
+      - PRAG-PAN-01
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-THANKS-01
+    feedback:
+      correct: "Приветствие+заказ → уточнение → цена → оплата+прощание."
+      incorrect: "Сначала выбор, потом закрытие выбора, затем оплата."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "Original dialogue Kawa przy barze"
+      ai_assisted: false
+    mini_check: false
+
+  - id: ex-wk-09
+    canonical_id: EX-A1-WK-OR-02
+    version: 1
+    type: ordering
+    status: DRAFT
+    prompt: "Соберите слоты оплаты после заказа."
+    items:
+      - id: s1
+        text: Ile płacę?
+      - id: s2
+        text: Kartą, proszę.
+      - id: s3
+        text: Dziękuję.
+    correct_order:
+      - s1
+      - s2
+      - s3
+    concept_ids:
+      - GR-NUM-MONEY-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-QUANT-01
+      - FN-A1-THANKS-01
+    mini_check: true
+    feedback:
+      correct: "Вопрос о сумме → способ оплаты → благодарность."
+      incorrect: "Сначала узнайте сумму, потом назовите способ оплаты."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "FN-A1-QUANT-01 / LEX-A1-MONEY"
+      ai_assisted: false
+
+  - id: ex-wk-10
+    canonical_id: EX-A1-WK-SC-04
+    version: 1
+    type: single_choice
+    status: DRAFT
+    prompt: "Выберите корректную формулу заказа."
+    options:
+      - id: a
+        text: Poproszę kawę.
+      - id: b
+        text: Poproszę kawa.
+      - id: c
+        text: Ja chcę kawa.
+    correct_option_id: a
+    concept_ids:
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-TRANS-01
+    mini_check: true
+    feedback:
+      correct: "Poproszę kawę — Acc после Poproszę."
+      incorrect: "Kawa в именительном ломает рамку заказа."
+    provenance:
+      originality: created_for_product
+      author_id: author-placeholder-marta-wisniewska
+      reviewer_id: reviewer-placeholder-andriy-melnyk
+      sources:
+        - "GP-A1-WK-POPROSZE-ACC"
+      ai_assisted: false
+
+mini_check:
+  exercise_ids:
+    - ex-wk-09
+    - ex-wk-10
+  pass_threshold: 1
+  concept_ids:
+    - GR-CAS-ACC-01
+    - GR-NUM-MONEY-01
+    - PRAG-PAN-01
+result_metadata:
+  title_ru: Результат урока
+  success_ru: >
+    Мини-проверка пройдена. Вы можете заказать напиток, уточнить наличие
+    и оплатить заказ в коротком диалоге у стойки (DRAFT preview).
+  retry_ru: >
+    Повторите Poproszę + Acc, Czy jest…? и Kartą, proszę, затем пройдите
+    мини-проверку снова.
+  evidence_skill: interaction
+  linked_function_ids:
+    - FN-A1-TRANS-01
+    - FN-A1-ASK-01
+    - FN-A1-THANKS-01
+  linked_concept_ids:
+    - GR-CAS-ACC-01
+    - GR-NUM-MONEY-01
+    - PRAG-PAN-01
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-marta-wisniewska
+  reviewer_id: reviewer-placeholder-andriy-melnyk
+  sources:
+    - "Original SŁOWARIUM dialogue and exercises — W kawiarni DRAFT"
+    - "Curriculum links: SCN-A1-FOOD-01, FN-A1-TRANS-01, LEX-A1-SERVICE"
+  ai_assisted: false
+  notes: INTERNAL PREVIEW ONLY — status DRAFT, not published to learners.
+visibility: internal_preview_only

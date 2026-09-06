@@ -50,7 +50,6 @@ export function PrivacyActions() {
         setDeleteMsg(t("deleteDone"));
         setConfirming(false);
         if (typeof window !== "undefined") {
-          window.sessionStorage.removeItem("slowarium.demoSession");
           window.localStorage.removeItem("slowarium.onboarding");
         }
       } finally {

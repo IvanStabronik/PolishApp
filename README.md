@@ -5,19 +5,20 @@ Web platform for adults with L1 Ukrainian / Russian / Belarusian who need system
 
 Working phrase: **Od podobnych słów do własnego głosu**.
 
-## Status (foundation v1)
+## Status (private alpha v2)
 
 | Gate | Status |
 | --- | --- |
-| First module (*Pierwsze spotkanie*) | **DRAFT** / internal preview only |
+| Five A1 DRAFT modules | **internal preview only** (previewer / author / reviewer) |
+| Auth / onboarding / attempts | **PostgreSQL** via Better Auth (no client fake session) |
 | Public content release | **BLOCKED** pending independent JPJO review |
 | A2–B2 semantic migration | **NOT STARTED** |
 
-These banners are product truth for this branch. Structural CI green ≠ pedagogical approval.
+Structural CI green ≠ pedagogical approval. Preview mastery is marked as internal aproba — not a certificate.
 
 ## Branch
 
-Active foundation work lives on **`feat/platform-foundation-v1`**.
+Active private-alpha work: **`feat/private-alpha-v2`** (from foundation `6ab4592`).
 
 Curriculum structural baseline: branch **`docs/phase-2-integrity-fix`** (see also `docs/requirements/curriculum/phase-2-integrity-report.md`).
 
@@ -93,11 +94,13 @@ python scripts/validate-curriculum.py
 
 Seeded when `DEMO_MODE=true` / after `pnpm db:seed` (local only):
 
-| Role | Email | Password |
-| --- | --- | --- |
-| Learner | `learner@demo.slowarium.local` | `DemoLearner1!` |
-| Author | `author@demo.slowarium.local` | `DemoAuthor1!` |
-| Reviewer | `reviewer@demo.slowarium.local` | `DemoReviewer1!` |
+| Role | Email | Password | Notes |
+| --- | --- | --- | --- |
+| Learner + previewer | `learner@demo.slowarium.local` | `DemoLearner1!` | Sees DRAFT in private alpha |
+| Author + previewer | `author@demo.slowarium.local` | `DemoAuthor1!` | Content authoring |
+| Reviewer + previewer | `reviewer@demo.slowarium.local` | `DemoReviewer1!` | Distinct from author |
+
+Ordinary registered learners **without** `previewer`/`author`/`reviewer` do **not** see DRAFT.
 
 Author and reviewer are **different accounts** (self-review of content is prohibited).
 
@@ -121,7 +124,8 @@ See `.env.example` / `web/.env.example`:
 - `BETTER_AUTH_SECRET=…`
 - `BETTER_AUTH_URL=http://localhost:3000`
 - `DEMO_MODE=true`
-- `NEXT_PUBLIC_DEMO_PREVIEW=true`
+- `DEMO_PREVIEW=true` (server-side preview env; **not** an auth substitute)
+- `NEXT_PUBLIC_DEMO_PREVIEW` is **not** used for DRAFT authorization
 
 ## Docs
 

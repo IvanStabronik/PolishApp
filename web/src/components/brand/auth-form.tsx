@@ -1,20 +1,72 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { safeReturnTo } from "@/modules/auth/safe-return-to";
+import { routing } from "@/i18n/routing";
 
 type Mode = "register" | "login";
 
+function toAppPath(path: string, locale: string): string {
+  const prefix = `/${locale}`;
+  if (path === prefix) return "/";
+  if (path.startsWith(`${prefix}/`)) return path.slice(prefix.length);
+  return path;
+}
+
+function defaultPostAuthPath(mode: Mode, locale: string, onboarded: boolean) {
+  if (onboarded) return `/${locale}/dashboard`;
+  return `/${locale}/onboarding`;
+}
+
 export function AuthForm({ mode }: { mode: Mode }) {
   const t = useTranslations("auth");
+  const locale = useLocale();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+
+  async function resolveDestination(): Promise<string> {
+    const fromQuery = safeReturnTo(searchParams.get("returnTo"));
+    if (fromQuery) return fromQuery;
+
+    let onboarded = false;
+    try {
+      const res = await fetch("/api/profile", { credentials: "include" });
+      if (res.ok) {
+        const data = (await res.json()) as {
+          profile?: { onboardingComplete?: boolean } | null;
+        };
+        onboarded = Boolean(data.profile?.onboardingComplete);
+      }
+    } catch {
+      /* treat as not onboarded */
+    }
+    return defaultPostAuthPath(mode, locale, onboarded);
+  }
+
+  function navigateTo(path: string) {
+    const safe = safeReturnTo(path);
+    if (!safe) {
+      router.push("/onboarding");
+      return;
+    }
+    const localePrefixed = routing.locales.some(
+      (l) => safe === `/${l}` || safe.startsWith(`/${l}/`),
+    );
+    if (localePrefixed) {
+      router.push(toAppPath(safe, locale) as "/dashboard");
+    } else {
+      router.push(safe as "/dashboard");
+    }
+  }
 
   async function submit() {
     setError(null);
@@ -37,35 +89,23 @@ export function AuthForm({ mode }: { mode: Mode }) {
       });
 
       if (!res.ok) {
-        // Milestone 1: allow local demo session when Better Auth rejects
-        // (e.g. origin mismatch 127.0.0.1 vs localhost) so e2e can proceed.
-        const fallbackOk = await tryDemoSession(mode, email, password, name);
-        if (!fallbackOk) {
-          let detail = t("errorGeneric");
-          try {
-            const payload = (await res.json()) as { message?: string };
-            if (payload.message) detail = payload.message;
-          } catch {
-            /* ignore */
-          }
-          setError(detail);
-          return;
+        let detail = t("errorGeneric");
+        try {
+          const payload = (await res.json()) as { message?: string };
+          if (payload.message) detail = payload.message;
+        } catch {
+          /* ignore */
         }
-      } else if (typeof window !== "undefined") {
-        window.sessionStorage.setItem(
-          "slowarium.demoSession",
-          JSON.stringify({ email, at: Date.now() }),
-        );
-      }
-
-      router.push(mode === "register" ? "/onboarding" : "/dashboard");
-    } catch {
-      const fallbackOk = await tryDemoSession(mode, email, password, name);
-      if (!fallbackOk) {
-        setError(t("errorGeneric"));
+        setError(detail);
         return;
       }
-      router.push(mode === "register" ? "/onboarding" : "/dashboard");
+
+      const nextPath = await resolveDestination();
+      startTransition(() => {
+        navigateTo(nextPath);
+      });
+    } catch {
+      setError(t("errorGeneric"));
     }
   }
 
@@ -138,7 +178,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
       >
         {mode === "register" ? t("submitRegister") : t("submitSignIn")}
       </Button>
-      <p className="m-0 text-sm text-[var(--color-graphite)]">{t("stubNote")}</p>
+      <p className="m-0 text-sm text-[var(--color-graphite)]">{t("helpNote")}</p>
       <p className="m-0 text-sm">
         {mode === "register" ? (
           <>
@@ -158,21 +198,4 @@ export function AuthForm({ mode }: { mode: Mode }) {
       </p>
     </form>
   );
-}
-
-/** Local demo fallback when /api/auth is unavailable or origin-blocked. */
-async function tryDemoSession(
-  mode: Mode,
-  email: string,
-  password: string,
-  name: string,
-): Promise<boolean> {
-  if (!email || !password) return false;
-  if (typeof window !== "undefined") {
-    window.sessionStorage.setItem(
-      "slowarium.demoSession",
-      JSON.stringify({ email, name, mode, at: Date.now() }),
-    );
-  }
-  return true;
 }

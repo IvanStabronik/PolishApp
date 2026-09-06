@@ -31,6 +31,7 @@ export type ConsentSnapshot = {
   ageConfirmed18: boolean;
   termsAcceptedAt?: string;
   privacyAcceptedAt?: string;
+  researchAcceptedAt?: string;
   marketingOptIn?: boolean;
 };
 
@@ -141,6 +142,10 @@ export const attempts = pgTable(
     correct: boolean("correct"),
     hinted: boolean("hinted").notNull().default(false),
     mode: attemptModeEnum("mode").notNull().default("formative"),
+    /** Client idempotency key — unique per learner when set. */
+    idempotencyKey: text("idempotency_key"),
+    /** preview = internal aproba; live = future published mastery. */
+    masteryScope: text("mastery_scope").notNull().default("live"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .defaultNow()
       .notNull(),
@@ -148,6 +153,10 @@ export const attempts = pgTable(
   (table) => [
     index("attempts_learner_profile_id_idx").on(table.learnerProfileId),
     index("attempts_learning_session_id_idx").on(table.learningSessionId),
+    uniqueIndex("attempts_learner_idempotency_uidx").on(
+      table.learnerProfileId,
+      table.idempotencyKey,
+    ),
   ],
 );
 
@@ -209,6 +218,8 @@ export const conceptMastery = pgTable(
       .notNull()
       .references(() => learnerProfiles.id, { onDelete: "cascade" }),
     conceptCanonicalId: text("concept_canonical_id").notNull(),
+    /** Separates internal preview mastery from live learner mastery. */
+    masteryScope: text("mastery_scope").notNull().default("live"),
     state: masteryStateEnum("state").notNull().default("NOT_STARTED"),
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .defaultNow()
@@ -219,9 +230,10 @@ export const conceptMastery = pgTable(
     >(),
   },
   (table) => [
-    uniqueIndex("concept_mastery_learner_concept_uidx").on(
+    uniqueIndex("concept_mastery_learner_concept_scope_uidx").on(
       table.learnerProfileId,
       table.conceptCanonicalId,
+      table.masteryScope,
     ),
   ],
 );

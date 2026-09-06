@@ -6,8 +6,12 @@ import { SiteHeader } from "@/components/brand/site-header";
 import { PreviewBanner } from "@/components/brand/preview-banner";
 import { ModuleCard } from "@/components/learning/module-card";
 import { listPreviewModules } from "@/lib/content/load-module";
-import { isDemoPreviewEnabled } from "@/lib/demo";
+import {
+  canAccessDraftContent,
+  isPrivateAlphaPreviewEnv,
+} from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
+import { protectApp } from "@/lib/auth/protect";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -15,20 +19,44 @@ export default async function DashboardPage({ params }: Props) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+
+  const session = await protectApp(locale, `/${locale}/dashboard`);
   const t = await getTranslations("dashboard");
-  const modules = listPreviewModules();
-  const preview = isDemoPreviewEnabled();
+
+  const showPreview = canAccessDraftContent({
+    roles: session.roles,
+    email: session.user.email,
+    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+  });
+
+  const modules = listPreviewModules({
+    roles: session.roles,
+    email: session.user.email,
+    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+  });
+
+  const displayName = session.user.name || session.user.email;
 
   return (
     <>
       <SiteHeader signedIn />
-      {preview ? <PreviewBanner /> : null}
+      {showPreview ? <PreviewBanner /> : null}
       <main id="main-content" className="page-shell" data-testid="dashboard-page">
         <h1 className="font-display text-3xl text-[var(--color-ink)]">
           {t("title")}
         </h1>
-        <p className="mt-1 text-lg text-[var(--color-graphite)]">{t("welcome")}</p>
+        <p className="mt-1 text-lg text-[var(--color-graphite)]">
+          {t("welcomeName", { name: displayName })}
+        </p>
         <p className="mt-2 max-w-xl text-[var(--color-graphite)]">{t("lead")}</p>
+        {showPreview ? (
+          <p
+            className="mt-3 max-w-xl text-sm text-[var(--color-amber-deep)]"
+            data-testid="preview-status"
+          >
+            {t("previewStatus")}
+          </p>
+        ) : null}
 
         <section className="mt-10" aria-labelledby="modules-heading">
           <div className="flex flex-wrap items-end justify-between gap-3">

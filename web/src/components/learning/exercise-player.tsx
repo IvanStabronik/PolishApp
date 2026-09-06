@@ -15,6 +15,11 @@ type Props = {
   isLast: boolean;
 };
 
+type EvalUi = {
+  correct: boolean;
+  explanation: string;
+};
+
 export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) {
   const t = useTranslations("learn");
   const router = useRouter();
@@ -27,10 +32,8 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
   const [order, setOrder] = useState<number[]>(
     exercise.type === "ordering" ? exercise.items.map((_, i) => i) : [],
   );
-  const [result, setResult] = useState<{
-    correct: boolean;
-    explanation: string;
-  } | null>(null);
+  const [result, setResult] = useState<EvalUi | null>(null);
+  const [persistError, setPersistError] = useState<string | null>(null);
 
   function buildAnswer() {
     switch (exercise.type) {
@@ -59,22 +62,51 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
   }
 
   async function onSubmit() {
+    setPersistError(null);
     const answer = buildAnswer();
+    const idempotencyKey = crypto.randomUUID();
     const res = await fetch("/api/learning/attempt", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Idempotency-Key": idempotencyKey,
+      },
       body: JSON.stringify({
         moduleId,
         exerciseId: exercise.id,
         answer,
-        preview: true,
+        idempotencyKey,
       }),
     });
-    const data = (await res.json()) as {
-      correct: boolean;
-      explanation: string;
+
+    let data: {
+      correct?: boolean;
+      explanation?: string;
+      error?: string;
+      reason?: string;
+      persisted?: boolean;
     };
-    setResult({ correct: data.correct, explanation: data.explanation });
+    try {
+      data = (await res.json()) as typeof data;
+    } catch {
+      setPersistError(t("persistError"));
+      return;
+    }
+
+    if (typeof data.correct === "boolean") {
+      setResult({
+        correct: data.correct,
+        explanation: data.explanation ?? "",
+      });
+    }
+
+    if (!res.ok || data.persisted === false || data.error) {
+      setPersistError(
+        data.reason === "missing_content_version"
+          ? t("persistErrorMissingVersion")
+          : t("persistError"),
+      );
+    }
   }
 
   function toggleMulti(index: number) {
@@ -223,6 +255,16 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
         message={result?.explanation ?? ""}
       />
 
+      {persistError ? (
+        <p
+          role="alert"
+          data-testid="exercise-persist-error"
+          className="m-0 rounded-[var(--radius-md)] border border-[var(--color-error)] bg-[var(--color-error-bg)] px-4 py-3 text-sm text-[var(--color-error)]"
+        >
+          {persistError}
+        </p>
+      ) : null}
+
       <div className="flex flex-wrap gap-3">
         {!result ? (
           <Button
@@ -246,6 +288,7 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
             data-testid="exercise-retry"
             onClick={() => {
               setResult(null);
+              setPersistError(null);
               setSelected(null);
               setMultiSelected([]);
               if (exercise.type === "gap_fill") {

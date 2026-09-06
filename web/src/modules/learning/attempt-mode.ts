@@ -1,43 +1,75 @@
 /**
  * Attempt mode + publication guards (pure — safe for unit tests).
- * Preview attempts may be stored; only non-preview modes feed live mastery.
+ * Server decides mode from content status; client preview/mode are never authoritative.
  */
+
+import type { ContentStatus } from "@/lib/enums";
 
 export type AttemptMode = "formative" | "summative" | "preview";
 
+export type MasteryScope = "preview" | "live";
+
 export type ResolveAttemptModeInput = {
-  /** Client preview flag (exercise player / internal preview). */
+  /** Content lifecycle status — sole authority for preview vs live. */
+  contentStatus?: ContentStatus | null;
+  /**
+   * @deprecated Client flags are ignored. Kept for call-site compatibility.
+   */
   preview?: boolean;
-  /** Optional explicit mode from client; summative ignored unless allowSummative. */
+  /** @deprecated Client mode is ignored unless allowClientMode (tests only). */
   mode?: AttemptMode;
-  isDemoUser: boolean;
-  demoPreviewEnabled: boolean;
+  isDemoUser?: boolean;
+  demoPreviewEnabled?: boolean;
   allowSummative?: boolean;
+  /** Test-only: honour explicit client mode. */
+  allowClientMode?: boolean;
 };
 
 /**
  * Resolve attempt mode for persistence.
- * - Demo users in DEMO_PREVIEW default to formative (progress works in demo).
- * - Other preview traffic defaults to preview (stored, but no live mastery).
- * - Never promotes content to PUBLISHED (orthogonal — see assertNoContentPublish).
+ * - DRAFT / IN_REVIEW / APPROVED → preview (stored, no live mastery)
+ * - PUBLISHED → formative (or summative when allowSummative)
+ * - Client preview/mode/correct are never trusted
  */
 export function resolveAttemptMode(input: ResolveAttemptModeInput): AttemptMode {
-  if (input.mode === "summative") {
-    return input.allowSummative ? "summative" : "formative";
+  if (input.allowClientMode && input.mode) {
+    if (input.mode === "summative") {
+      return input.allowSummative ? "summative" : "formative";
+    }
+    return input.mode;
   }
-  if (input.mode === "preview") return "preview";
-  if (input.mode === "formative") return "formative";
 
-  const previewContext =
-    Boolean(input.preview) || input.demoPreviewEnabled;
-
-  if (previewContext) {
-    return input.isDemoUser ? "formative" : "preview";
+  const status = input.contentStatus;
+  if (
+    status === "DRAFT" ||
+    status === "IN_REVIEW" ||
+    status === "APPROVED"
+  ) {
+    return "preview";
   }
-  return "formative";
+
+  if (status === "PUBLISHED") {
+    if (input.mode === "summative" && input.allowSummative) {
+      return "summative";
+    }
+    return "formative";
+  }
+
+  // Unknown / missing status: treat as preview (safe default for private alpha).
+  return "preview";
+}
+
+export function masteryScopeForMode(mode: AttemptMode): MasteryScope {
+  return mode === "preview" ? "preview" : "live";
 }
 
 export function shouldWriteMastery(mode: AttemptMode): boolean {
+  // Preview attempts still write preview-scoped mastery for private-alpha UX.
+  return mode === "formative" || mode === "summative" || mode === "preview";
+}
+
+/** Live (non-preview) mastery only. */
+export function shouldWriteLiveMastery(mode: AttemptMode): boolean {
   return mode !== "preview";
 }
 

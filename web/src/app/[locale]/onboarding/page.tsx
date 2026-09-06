@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
 import { OnboardingForm } from "@/components/brand/onboarding-form";
+import { protectOnboarding } from "@/lib/auth/protect";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -11,6 +12,7 @@ export default async function OnboardingPage({ params }: Props) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  await protectOnboarding(locale);
   const t = await getTranslations("onboarding");
 
   return (

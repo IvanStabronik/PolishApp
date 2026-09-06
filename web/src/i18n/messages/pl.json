@@ -56,7 +56,7 @@
     "submitSignIn": "Zaloguj się",
     "haveAccount": "Masz już konto?",
     "needAccount": "Nie masz konta?",
-    "stubNote": "Uwierzytelnianie serwerowe działa przez Better Auth; gdy baza jest niedostępna, sesja demo jest lokalna.",
+    "helpNote": "Logowanie odbywa się przez serwerową autentycację Better Auth. W razie błędu sprawdź e-mail, hasło i dostępność usługi.",
     "errorGeneric": "Nie udało się zalogować. Sprawdź dane lub spróbuj ponownie."
   },
   "onboarding": {
@@ -98,14 +98,17 @@
   "dashboard": {
     "title": "Gabinet",
     "welcome": "Witamy w Archiwum",
+    "welcomeName": "Dzień dobry, {name}",
     "lead": "Kolejny krok wynika z Twojej trajektorii — nie z XP.",
     "modulesHeading": "Moduły A1",
     "previewBadge": "Wewnętrzny podgląd",
+    "previewStatus": "Tryb aprobaty wewnętrznej: DRAFT widoczny dla roli previewer. To nie certyfikat i nie zatwierdzenie JPJO.",
+    "currentRoute": "Cel trasy: {goal}",
     "continueLearning": "Kontynuuj naukę",
     "viewProgress": "Zobacz postęp",
     "openCatalog": "Katalog A1",
     "nextStep": "Następny krok",
-    "emptyPublished": "Brak opublikowanych modułów. W trybie demo dostępny jest szkic pierwszej sali."
+    "emptyPublished": "Brak opublikowanych modułów. W private alpha DRAFT jest dostępny tylko dla ról previewer/author/reviewer."
   },
   "learn": {
     "catalogTitle": "Skrzydło A1",
@@ -141,7 +144,10 @@
     "toProgress": "Do postępu",
     "toDashboard": "Do gabinetu",
     "masteryHint": "Pieczęcie wiedzy pojawią się po wystarczających evidence.",
-    "previewNoMastery": "Tryb wewnętrznego podglądu: próby nie zapisują się do żywego concept mastery uczących się."
+    "previewNoMastery": "Tryb wewnętrznego podglądu: próby nie zapisują się do żywego concept mastery uczących się.",
+    "persistError": "Odpowiedź sprawdzona, ale nie udało się zapisać próby. Spróbuj ponownie później.",
+    "persistErrorMissingVersion": "Odpowiedź sprawdzona, ale wersja treści jest niedostępna — próba nie została zapisana.",
+    "catalogEmptyDraft": "Brak opublikowanych modułów. Szkice widzą tylko previewer / author / reviewer / admin."
   },
   "progress": {
     "title": "Postęp",
@@ -165,7 +171,10 @@
     "weeklyGoal": "Budżet tygodniowy",
     "goal": "Cel",
     "save": "Zapisz ustawienia",
-    "saved": "Zapisano (stub)."
+    "saved": "Zapisano w profilu.",
+    "loading": "Ładowanie profilu…",
+    "loadError": "Nie udało się wczytać profilu z serwera.",
+    "saveError": "Nie udało się zapisać zmian."
   },
   "privacy": {
     "title": "Prywatność i dane",

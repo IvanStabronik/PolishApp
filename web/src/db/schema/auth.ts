@@ -24,7 +24,7 @@ export const user = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
-  /** Combined role flags: learner | author | reviewer | admin */
+  /** Combined role flags: learner | previewer | author | reviewer | admin */
   roleFlags: jsonb("role_flags").$type<UserRole[]>().notNull().default([]),
   createdAt: timestamp("created_at", { withTimezone: true })
     .defaultNow()

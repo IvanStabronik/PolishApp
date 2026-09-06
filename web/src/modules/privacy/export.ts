@@ -1,6 +1,7 @@
 /**
  * FUN-210 — learner data export (server-side).
- * Builds a machine-readable payload; never includes other users' data.
+ * Builds a machine-readable payload; never includes other users' data,
+ * password hashes, or auth tokens.
  */
 
 export type ConsentSnapshot = {
@@ -23,8 +24,17 @@ export type AttemptExportRow = {
   exerciseId: string;
   correct: boolean | null;
   mode: string;
+  masteryScope?: string;
   response: unknown;
   createdAt: string;
+};
+
+export type MasteryExportRow = {
+  conceptCanonicalId: string;
+  state: string;
+  masteryScope: string;
+  updatedAt: string;
+  explanationSnapshot: unknown;
 };
 
 export type LearnerExportInput = {
@@ -38,17 +48,19 @@ export type LearnerExportInput = {
     goals: unknown;
     weeklyMinutes: number | null;
     ageConfirmed18: boolean;
+    consents?: unknown;
   };
   consents: ConsentSnapshot[];
+  mastery: MasteryExportRow[];
   evidence: EvidenceExportRow[];
   attempts: AttemptExportRow[];
   voiceFileIds: string[];
 };
 
 export type LearnerExportDocument = LearnerExportInput & {
-  schemaVersion: 1;
+  schemaVersion: 2;
   product: "SŁOWARIUM";
-  format: "slowarium.learner-export.v1";
+  format: "slowarium.learner-export.v2";
 };
 
 /** Pure builder — call only after ownership check on the server. */
@@ -56,9 +68,9 @@ export function buildLearnerExport(
   input: LearnerExportInput,
 ): LearnerExportDocument {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     product: "SŁOWARIUM",
-    format: "slowarium.learner-export.v1",
+    format: "slowarium.learner-export.v2",
     ...input,
   };
 }

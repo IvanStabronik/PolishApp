@@ -1,32 +1,26 @@
 /**
- * Learner-facing content facade.
- * Tries DB-backed content when available; falls back to file-based YAML
- * at ../../content/a1/modules/pierwsze-spotkanie/module.yaml (relative to web/).
+ * Learner-facing content facade — YAML only (no mockContent for learners).
  */
 
-import { isDemoPreviewEnabled } from "@/lib/demo";
 import {
   getModuleById as getYamlModule,
   listPreviewModules,
-  loadDraftModuleFromYaml,
+  loadAllModulesFromYaml,
+  type ContentAccessContext,
 } from "@/lib/content/load-module";
 import type { DraftModule } from "@/lib/content/types";
-import {
-  mockContent,
-  type LessonDetail,
-  type ModuleSummary,
-  type LoreLabel,
-} from "@/lib/mocks/content";
+import type { LessonDetail, LoreLabel, ModuleSummary } from "@/lib/mocks/content";
+import { getRequestSession } from "@/modules/auth/session";
+import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
 
 export type CatalogModule = ModuleSummary & {
-  /** Raw YAML draft when loaded from files */
   draft?: DraftModule;
 };
 
-function draftToSummary(mod: DraftModule): CatalogModule {
+function draftToSummary(mod: DraftModule, hall: number): CatalogModule {
   const lore: LoreLabel = {
-    hall: 1,
-    loreTitle: "Знакомство",
+    hall,
+    loreTitle: mod.title,
     academicCode: mod.level || "A1",
   };
   return {
@@ -40,58 +34,56 @@ function draftToSummary(mod: DraftModule): CatalogModule {
   };
 }
 
-/** List A1 catalog — YAML fallback when DB empty / DEMO_PREVIEW. */
+async function resolveAccessContext(): Promise<ContentAccessContext> {
+  const session = await getRequestSession();
+  return {
+    roles: session?.roles ?? [],
+    email: session?.user.email,
+    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+  };
+}
+
 export async function getA1Catalog(): Promise<CatalogModule[]> {
-  try {
-    const yamlMods = listPreviewModules().map(draftToSummary);
-    if (yamlMods.length > 0) return yamlMods;
-  } catch {
-    // fall through to mock
-  }
-  return mockContent.listA1Modules(isDemoPreviewEnabled());
+  const ctx = await resolveAccessContext();
+  return listPreviewModules(ctx).map((mod, i) => draftToSummary(mod, i + 1));
 }
 
 export async function getModuleById(
   moduleId: string,
 ): Promise<CatalogModule | null> {
-  try {
-    const yaml = getYamlModule(moduleId);
-    if (yaml) return draftToSummary(yaml);
-  } catch {
-    // fall through
-  }
-  const mock = mockContent.getModule(moduleId);
-  return mock ?? null;
+  const ctx = await resolveAccessContext();
+  const yaml = getYamlModule(moduleId, ctx);
+  if (!yaml) return null;
+  const all = listPreviewModules(ctx);
+  const hall = Math.max(1, all.findIndex((m) => m.id === yaml.id) + 1);
+  return draftToSummary(yaml, hall);
 }
 
 export async function listModuleLessons(
   moduleId: string,
 ): Promise<LessonDetail[]> {
-  try {
-    const yaml = getYamlModule(moduleId);
-    if (yaml) {
-      return [yamlLessonToDetail(yaml)];
-    }
-  } catch {
-    // fall through
-  }
-  return mockContent.listLessonsForModule(moduleId);
+  const ctx = await resolveAccessContext();
+  const yaml = getYamlModule(moduleId, ctx);
+  if (!yaml) return [];
+  return [yamlLessonToDetail(yaml)];
 }
 
 export async function getLessonById(
   lessonId: string,
 ): Promise<LessonDetail | null> {
-  try {
-    const mod = loadDraftModuleFromYaml();
+  const ctx = await resolveAccessContext();
+  for (const mod of loadAllModulesFromYaml()) {
     const derivedId = `les-${mod.id}`;
-    if (lessonId === derivedId || lessonId === "les-powitanie") {
-      const visible = getYamlModule(mod.id);
+    if (lessonId === derivedId) {
+      const visible = getYamlModule(mod.id, ctx);
       if (visible) return yamlLessonToDetail(visible);
     }
-  } catch {
-    // fall through
   }
-  return mockContent.getLesson(lessonId) ?? null;
+  if (lessonId === "les-powitanie") {
+    const visible = getYamlModule("pierwsze-spotkanie", ctx);
+    if (visible) return yamlLessonToDetail(visible);
+  }
+  return null;
 }
 
 function yamlLessonToDetail(mod: DraftModule): LessonDetail {
@@ -113,9 +105,7 @@ function yamlLessonToDetail(mod: DraftModule): LessonDetail {
   const exerciseSteps = mod.exercises
     .filter((ex) => ex.type === "single_choice")
     .map((ex) => {
-      if (ex.type !== "single_choice") {
-        throw new Error("unreachable");
-      }
+      if (ex.type !== "single_choice") throw new Error("unreachable");
       return {
         id: ex.id,
         kind: "exercise" as const,
@@ -125,7 +115,7 @@ function yamlLessonToDetail(mod: DraftModule): LessonDetail {
           id: String(i),
           label,
         })),
-        correctOptionId: String(ex.correctIndex),
+        correctOptionId: "",
         feedbackCorrect: ex.feedback.explanation,
         feedbackIncorrect: ex.feedback.explanation,
         conceptId: ex.conceptIds[0] ?? "",
@@ -140,4 +130,8 @@ function yamlLessonToDetail(mod: DraftModule): LessonDetail {
   };
 }
 
-export { loadDraftModuleFromYaml, listPreviewModules };
+export {
+  listPreviewModules,
+  loadAllModulesFromYaml,
+  loadDraftModuleFromYaml,
+} from "@/lib/content/load-module";

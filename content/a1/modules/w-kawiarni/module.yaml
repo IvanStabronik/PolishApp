@@ -1,0 +1,49 @@
+kind: module
+canonical_id: MOD-A1-W-KAWIARNI
+slug: w-kawiarni
+version: 1
+status: DRAFT
+level: A1
+title_pl: W kawiarni
+working_title: W kawiarni
+situation_ru: >
+  Короткий заказ напитка или простого блюда у стойки в польской кофейне.
+  Меню с понятными позициями; кассир или бариста — взрослый незнакомец;
+  нужна вежливая транзакция без сложной рекламации.
+objective_ru: >
+  После модуля учащийся может поздороваться, заказать позицию формулой
+  Poproszę…, уточнить наличие или размер, подтвердить оплату и закрыть
+  контакт dziękuję / do widzenia в регистре pan/pani.
+curriculum_links:
+  scenarios:
+    - SCN-A1-FOOD-01
+  functions:
+    - FN-A1-TRANS-01
+    - FN-A1-ASK-01
+    - FN-A1-ADDRESS-01
+    - FN-A1-QUANT-01
+    - FN-A1-THANKS-01
+  lex_bundles:
+    - LEX-A1-SERVICE
+    - LEX-A1-MONEY
+  concepts:
+    - GR-CAS-ACC-01
+    - GR-PRO-DEM-01
+    - GR-NUM-MONEY-01
+    - PRAG-PAN-01
+lesson_files:
+  - lessons/01-zamowienie-przy-barze.yaml
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-marta-wisniewska
+  reviewer_id: reviewer-placeholder-andriy-melnyk
+  sources:
+    - "PRODUCT ANALYSIS — café / food-service transaction for first audience"
+    - "Curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE"
+    - "Common-knowledge Polish café order patterns (język ogólny)"
+  ai_assisted: false
+  notes: >
+    INTERNAL PREVIEW ONLY. DRAFT — not JPJO-approved, not learner-published.
+    Author and reviewer are distinct placeholders; no PUBLISHED status.
+visibility: internal_preview_only
+internal_preview_only: true

@@ -6,19 +6,19 @@ export const DEMO_ACCOUNTS = {
     email: "learner@demo.slowarium.local",
     password: "DemoLearner1!",
     name: "Demo Learner",
-    roles: ["learner"] as const satisfies readonly UserRole[],
+    roles: ["learner", "previewer"] as const satisfies readonly UserRole[],
   },
   author: {
     email: "author@demo.slowarium.local",
     password: "DemoAuthor1!",
     name: "Demo Author",
-    roles: ["author", "learner"] as const satisfies readonly UserRole[],
+    roles: ["author", "learner", "previewer"] as const satisfies readonly UserRole[],
   },
   reviewer: {
     email: "reviewer@demo.slowarium.local",
     password: "DemoReviewer1!",
     name: "Demo Reviewer",
-    roles: ["reviewer"] as const satisfies readonly UserRole[],
+    roles: ["reviewer", "previewer"] as const satisfies readonly UserRole[],
   },
 } as const;
 

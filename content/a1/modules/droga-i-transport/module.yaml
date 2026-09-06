@@ -1,0 +1,51 @@
+kind: module
+canonical_id: MOD-A1-DROGA-I-TRANSPORT
+slug: droga-i-transport
+version: 1
+status: DRAFT
+level: A1
+title_pl: Droga i transport
+working_title: Droga i transport
+situation_ru: >
+  Взрослый новичок в городе спрашивает дорогу до остановки и покупает
+  простой билет на автобус или трамвай. Контакт короткий, речь ясная;
+  без пересадок и сложного маршрутного планирования.
+objective_ru: >
+  После модуля учащийся может спросить, как дойти до przystanku, понять
+  базовые ориентиры (prosto / w lewo / w prawo), заказать bilet и уточнить
+  время отправления в регистре pan/pani.
+curriculum_links:
+  scenarios:
+    - SCN-A1-DIRECTIONS-01
+    - SCN-A1-TICKET-01
+  functions:
+    - FN-A1-DIRECT-01
+    - FN-A1-TRANS-01
+    - FN-A1-ASK-01
+    - FN-A1-TIME-01
+    - FN-A1-THANKS-01
+  lex_bundles:
+    - LEX-A1-TRANSPORT
+    - LEX-A1-MONEY
+  concepts:
+    - GR-MOT-BASE-01
+    - GR-PREP-DO-NA-01
+    - GR-NUM-MONEY-01
+    - GR-TIME-EXPR-01
+    - PRAG-PAN-01
+lesson_files:
+  - lessons/01-bilet-i-droga.yaml
+provenance:
+  originality: created_for_product
+  author_id: author-placeholder-anna-lewandowska
+  reviewer_id: reviewer-placeholder-sergey-ivanov
+  sources:
+    - "PRODUCT ANALYSIS — city directions + ticket for first audience commute"
+    - "Curriculum SCN-A1-DIRECTIONS-01 / SCN-A1-TICKET-01 / FN-A1-DIRECT-01"
+    - "Common-knowledge Polish urban navigation & ticket MWUs (język ogólny)"
+  ai_assisted: false
+  notes: >
+    INTERNAL PREVIEW ONLY. DRAFT — not JPJO-approved, not learner-published.
+    Author and reviewer are distinct placeholders; no PUBLISHED status.
+visibility: internal_preview_only
+internal_preview_only: true

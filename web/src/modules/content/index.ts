@@ -9,6 +9,9 @@ export {
   getModuleById,
   listModuleLessons,
   getLessonById,
-  loadDraftModuleFromYaml,
   listPreviewModules,
 } from "./learner-content";
+export {
+  loadDraftModuleFromYaml,
+  loadAllModulesFromYaml,
+} from "@/lib/content/load-module";
