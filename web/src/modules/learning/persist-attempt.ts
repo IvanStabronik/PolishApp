@@ -13,6 +13,7 @@ import {
   exercises,
   learnerProfiles,
   modules,
+  reviewSchedule,
 } from "@/db/schema";
 import type { AttemptAnswer } from "@/lib/content/evaluate-yaml";
 import type { ModuleExercise } from "@/lib/content/types";
@@ -29,10 +30,12 @@ import {
   type EvidenceRecord as MasteryEvidence,
   type MasteryStateName,
 } from "@/modules/progress/mastery";
+import { nextReviewDueAt } from "./review-queue";
 
 export type PersistAttemptInput = {
   userId: string;
   moduleId: string;
+  lessonId?: string | null;
   exerciseCanonicalId: string | null;
   exerciseUuid: string | null;
   contentVersionId: string | null;
@@ -50,6 +53,7 @@ export type PersistAttemptResult = {
   masteryWritten: boolean;
   masteryState: MasteryStateName | null;
   masteryScope: MasteryScope | null;
+  reviewDueAt: string | null;
   /** True when the same Idempotency-Key was replayed. */
   replayed?: boolean;
   /** @deprecated alias of replayed */
@@ -247,6 +251,7 @@ function replayResult(
     masteryWritten: false,
     masteryState: null,
     masteryScope: (existing.masteryScope as MasteryScope) ?? scope,
+    reviewDueAt: null,
     replayed: true,
     idempotentReplay: true,
     reason: "idempotent_replay",
@@ -272,6 +277,7 @@ export async function persistLearningAttempt(
       masteryWritten: false,
       masteryState: null,
       masteryScope: null,
+      reviewDueAt: null,
       reason: "missing_content_version",
     };
   }
@@ -322,6 +328,7 @@ export async function persistLearningAttempt(
             type: input.answer.type,
             answer: input.answer,
             moduleId: input.moduleId,
+            lessonId: input.lessonId ?? null,
             exerciseCanonicalId: input.exerciseCanonicalId,
             evidenceWeight: input.evaluation.evidenceWeight,
             evaluation: input.evaluation,
@@ -382,6 +389,32 @@ export async function persistLearningAttempt(
       });
     }
 
+    let reviewDueAt: string | null = null;
+    if (conceptId) {
+      const priorEvidence = await loadEvidenceForMastery(
+        tx as unknown as Db,
+        profile.id,
+        conceptId,
+        scope,
+      );
+      const priorErrors = priorEvidence.filter(
+        (e) => e.result === "incorrect",
+      ).length;
+      // Exclude the row we just inserted from "prior" for interval choice:
+      const priorErrorCount = Math.max(
+        0,
+        priorErrors - (input.evaluation.correct ? 0 : 1),
+      );
+      reviewDueAt = await upsertReviewSchedule(
+        tx as unknown as Db,
+        profile.id,
+        conceptId,
+        scope,
+        input.evaluation.correct,
+        priorErrorCount,
+      );
+    }
+
     if (!writeMastery || !conceptId) {
       return {
         persisted: true,
@@ -389,6 +422,7 @@ export async function persistLearningAttempt(
         masteryWritten: false,
         masteryState: null,
         masteryScope: scope,
+        reviewDueAt,
         reason: writeMastery ? "no_concept" : "preview_mode",
         evaluation: input.evaluation,
         mode: input.mode,
@@ -436,8 +470,54 @@ export async function persistLearningAttempt(
       masteryWritten: true,
       masteryState: snapshot.state,
       masteryScope: scope,
+      reviewDueAt,
       evaluation: input.evaluation,
       mode: input.mode,
     };
   });
+}
+
+/**
+ * Upsert review_schedule in the same transaction as attempt/evidence/mastery.
+ * Idempotent replays never reach here (early return before insert).
+ * Correct → +2d (if prior errors ≥2) or +4d; incorrect → +0.5d.
+ */
+async function upsertReviewSchedule(
+  db: Db,
+  learnerProfileId: string,
+  conceptCanonicalId: string,
+  masteryScope: MasteryScope,
+  correct: boolean,
+  priorErrorCount: number,
+): Promise<string> {
+  const now = new Date();
+  const dueAt = nextReviewDueAt(now, correct, priorErrorCount);
+  const intervalDays = correct ? (priorErrorCount >= 2 ? 2 : 4) : 1;
+  const existing = await db.query.reviewSchedule.findFirst({
+    where: and(
+      eq(reviewSchedule.learnerProfileId, learnerProfileId),
+      eq(reviewSchedule.conceptCanonicalId, conceptCanonicalId),
+      eq(reviewSchedule.masteryScope, masteryScope),
+    ),
+    columns: { id: true },
+  });
+  if (existing) {
+    await db
+      .update(reviewSchedule)
+      .set({
+        dueAt,
+        intervalDays,
+        updatedAt: now,
+      })
+      .where(eq(reviewSchedule.id, existing.id));
+  } else {
+    await db.insert(reviewSchedule).values({
+      learnerProfileId,
+      conceptCanonicalId,
+      masteryScope,
+      dueAt,
+      intervalDays,
+    });
+  }
+  return dueAt.toISOString();
 }

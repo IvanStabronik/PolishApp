@@ -11,6 +11,8 @@ import {
 } from "@/modules/content/load-package";
 import type { ContentPackage, Exercise as PackageExercise } from "@/modules/content/schemas";
 import type {
+  DraftLesson,
+  DraftLessonStep,
   DraftModule,
   ModuleExercise,
   SingleChoiceExercise,
@@ -18,6 +20,7 @@ import type {
   GapFillExercise,
   OrderingExercise,
 } from "./types";
+import type { Lesson as PackageLesson, LessonStep as PackageLessonStep } from "@/modules/content/schemas";
 
 function resolveModulesRoot(): string {
   const candidates = [
@@ -114,18 +117,86 @@ function mapExercise(ex: PackageExercise): ModuleExercise {
   }
 }
 
+function mapLessonStep(step: PackageLessonStep): DraftLessonStep {
+  switch (step.kind) {
+    case "practice":
+    case "mini_check":
+      return {
+        id: step.id,
+        kind: step.kind,
+        titleRu: step.title_ru,
+        exerciseIds: [...step.exercise_ids],
+      };
+    case "situation":
+      return {
+        id: step.id,
+        kind: step.kind,
+        titleRu: step.title_ru,
+        bodyRu: step.body_ru,
+      };
+    case "grammar":
+      return {
+        id: step.id,
+        kind: step.kind,
+        titleRu: step.title_ru,
+        grammarPointId: step.grammar_point_id,
+      };
+    default:
+      return {
+        id: step.id,
+        kind: step.kind,
+        titleRu: step.title_ru,
+      };
+  }
+}
+
+function packageLessonToDraft(lesson: PackageLesson): DraftLesson {
+  return {
+    id: lesson.canonical_id,
+    slug: lesson.slug,
+    sortOrder: lesson.sort_order,
+    titlePl: lesson.title_pl,
+    situation: lesson.situation_ru,
+    objective: lesson.objective_ru,
+    dialogue: lesson.dialogue.turns.map((t) => ({
+      speaker: t.speaker,
+      pl: t.text_pl,
+      glossRu: "",
+    })),
+    keyLines: lesson.key_lines.map((k) => ({
+      pl: k.text_pl,
+      explanation: k.explanation_ru,
+    })),
+    pragmatics: {
+      panPani: lesson.pan_pani.summary_ru,
+      l1Notes: lesson.pan_pani.l1_notes,
+    },
+    grammar: {
+      title: lesson.grammar_points[0]?.title_pl ?? "Grammar",
+      explanation: lesson.grammar_points[0]?.summary_ru ?? "",
+      examples: lesson.grammar_points[0]?.examples_pl ?? [],
+      conceptId: lesson.grammar_points[0]?.concept_ids[0] ?? "",
+      l1Notes: lesson.grammar_points[0]?.l1_notes,
+    },
+    steps: lesson.steps.map(mapLessonStep),
+    exercises: lesson.exercises.map(mapExercise),
+    miniCheckExerciseIds: [...lesson.mini_check.exercise_ids],
+  };
+}
+
 function packageToDraftModule(pkg: ContentPackage, hallIndex: number): DraftModule {
   const mod = pkg.module;
-  const overviewLesson = pkg.lessons[0]!;
-  const exercises = pkg.lessons.flatMap((lesson) =>
-    lesson.exercises.map(mapExercise),
-  );
-  const miniIds = new Set(
-    pkg.lessons.flatMap((lesson) => lesson.mini_check.exercise_ids),
-  );
+  const lessons = [...pkg.lessons]
+    .sort((a, b) => a.sort_order - b.sort_order)
+    .map(packageLessonToDraft);
+  const overviewLesson = lessons[0]!;
+  /** Flat adapter derived from lessons — not a second inventory. */
+  const exercises = lessons.flatMap((lesson) => lesson.exercises);
+  const miniIds = new Set(lessons.flatMap((lesson) => lesson.miniCheckExerciseIds));
 
   return {
     id: mod.slug,
+    canonicalId: mod.canonical_id,
     version: String(mod.version),
     title: mod.working_title,
     titlePl: mod.title_pl,
@@ -136,26 +207,11 @@ function packageToDraftModule(pkg: ContentPackage, hallIndex: number): DraftModu
     situation: mod.situation_ru,
     uiLocales: ["ru", "uk", "pl"],
     l1Applicability: ["ukr", "rus", "bel"] as LearnerL1[],
-    dialogue: overviewLesson.dialogue.turns.map((t) => ({
-      speaker: t.speaker,
-      pl: t.text_pl,
-      glossRu: "",
-    })),
-    keyLines: overviewLesson.key_lines.map((k) => ({
-      pl: k.text_pl,
-      explanation: k.explanation_ru,
-    })),
-    pragmatics: {
-      panPani: overviewLesson.pan_pani.summary_ru,
-      l1Notes: overviewLesson.pan_pani.l1_notes,
-    },
-    grammar: {
-      title: overviewLesson.grammar_points[0]?.title_pl ?? "Grammar",
-      explanation: overviewLesson.grammar_points[0]?.summary_ru ?? "",
-      examples: overviewLesson.grammar_points[0]?.examples_pl ?? [],
-      conceptId: overviewLesson.grammar_points[0]?.concept_ids[0] ?? "",
-      l1Notes: overviewLesson.grammar_points[0]?.l1_notes,
-    },
+    dialogue: overviewLesson.dialogue,
+    keyLines: overviewLesson.keyLines,
+    pragmatics: overviewLesson.pragmatics,
+    grammar: overviewLesson.grammar,
+    lessons,
     exercises,
     miniCheckExerciseIds: [...miniIds],
     provenance: {
@@ -264,6 +320,44 @@ export function getExercise(
       (ex) => ex.id === exerciseId || ex.canonicalId === exerciseId,
     ) ?? null
   );
+}
+
+export function getLessonFromModule(
+  moduleId: string,
+  lessonId: string,
+  ctx?: ContentAccessContext,
+): DraftLesson | null {
+  const mod = getModuleById(moduleId, ctx);
+  if (!mod) return null;
+  return (
+    mod.lessons.find(
+      (l) =>
+        l.id === lessonId ||
+        l.slug === lessonId ||
+        `les-${mod.id}` === lessonId,
+    ) ?? null
+  );
+}
+
+export function findLessonById(
+  lessonId: string,
+  ctx?: ContentAccessContext,
+): { module: DraftModule; lesson: DraftLesson } | null {
+  for (const mod of listPreviewModules(ctx)) {
+    const lesson = mod.lessons.find((l) => l.id === lessonId || l.slug === lessonId);
+    if (lesson) return { module: mod, lesson };
+    // Legacy synthetic id → first lesson (compatible adapter, not a second inventory)
+    if (lessonId === `les-${mod.id}` && mod.lessons.length > 0) {
+      const first = [...mod.lessons].sort((a, b) => a.sortOrder - b.sortOrder)[0]!;
+      return { module: mod, lesson: first };
+    }
+  }
+  if (lessonId === "les-powitanie") {
+    const mod = getModuleById("pierwsze-spotkanie", ctx);
+    const lesson = mod?.lessons[0];
+    if (mod && lesson) return { module: mod, lesson };
+  }
+  return null;
 }
 
 export function getModuleExerciseIds(

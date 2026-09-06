@@ -8,6 +8,7 @@
  * 4. Mini-check at module end when lesson practice is complete
  *
  * Preview and live scopes are never mixed — caller passes masteryScope.
+ * Reasons are i18n keys (learn.planReason.*) — never English internal strings in UI.
  */
 
 import type { MasteryScope } from "./attempt-mode";
@@ -19,9 +20,7 @@ export type DailyPlanInput = {
     id: string;
     title: string;
     lessonIds: string[];
-    /** First incomplete lesson id, or null if all done / none started */
     unfinishedLessonId: string | null;
-    /** True when all non-mini-check exercises done and mini-check remains */
     miniCheckReady: boolean;
     miniCheckExerciseIds: string[];
   }>;
@@ -30,12 +29,15 @@ export type DailyPlanInput = {
     state: string;
     errorCount: number;
     masteryScope: MasteryScope;
+    href?: string | null;
   }>;
   recentErrors: Array<{
     exerciseId: string;
     conceptCanonicalId: string | null;
     at: string;
     masteryScope: MasteryScope;
+    href?: string | null;
+    moduleId?: string | null;
   }>;
 };
 
@@ -46,27 +48,31 @@ export type DailyPlanItem =
       lessonId: string;
       title: string;
       minutes: number;
-      reason: string;
+      reasonKey: "unfinishedLesson";
+      href: string;
     }
   | {
       kind: "weak_concept";
       conceptCanonicalId: string;
       minutes: number;
-      reason: string;
+      reasonKey: "weakConcept";
+      href: string | null;
     }
   | {
       kind: "error_review";
       exerciseId: string;
       conceptCanonicalId: string | null;
       minutes: number;
-      reason: string;
+      reasonKey: "errorReview";
+      href: string | null;
     }
   | {
       kind: "mini_check";
       moduleId: string;
       exerciseIds: string[];
       minutes: number;
-      reason: string;
+      reasonKey: "miniCheck";
+      href: string;
     };
 
 export type DailyPlan = {
@@ -74,6 +80,13 @@ export type DailyPlan = {
   masteryScope: MasteryScope;
   generatedAt: string;
   items: DailyPlanItem[];
+  nextGoalKey:
+    | "finishLesson"
+    | "miniCheck"
+    | "strengthenConcept"
+    | "reviewErrors"
+    | "openNextSala";
+  /** @deprecated use nextGoalKey + i18n */
   nextGoal: string;
 };
 
@@ -98,7 +111,6 @@ export function buildDailyPlan(input: DailyPlanInput): DailyPlan {
     return use;
   };
 
-  // 1. Unfinished lesson
   for (const mod of input.modules) {
     if (remaining <= 0) break;
     if (!mod.unfinishedLessonId) continue;
@@ -110,12 +122,12 @@ export function buildDailyPlan(input: DailyPlanInput): DailyPlan {
       lessonId: mod.unfinishedLessonId,
       title: mod.title,
       minutes,
-      reason: "Continue unfinished lesson before starting new material",
+      reasonKey: "unfinishedLesson",
+      href: `/learn/lessons/${mod.unfinishedLessonId}`,
     });
     break;
   }
 
-  // 2. Weak concepts (same scope only)
   const weak = input.weakConcepts
     .filter((c) => c.masteryScope === scope)
     .filter((c) => isWeakConcept(c.state, c.errorCount))
@@ -128,12 +140,12 @@ export function buildDailyPlan(input: DailyPlanInput): DailyPlan {
       kind: "weak_concept",
       conceptCanonicalId: c.conceptCanonicalId,
       minutes,
-      reason: `Weak concept (${c.state}, errors=${c.errorCount})`,
+      reasonKey: "weakConcept",
+      href: c.href ?? null,
     });
     if (items.filter((i) => i.kind === "weak_concept").length >= 2) break;
   }
 
-  // 3. Error review
   const errors = input.recentErrors
     .filter((e) => e.masteryScope === scope)
     .slice(0, 3);
@@ -146,42 +158,45 @@ export function buildDailyPlan(input: DailyPlanInput): DailyPlan {
       exerciseId: e.exerciseId,
       conceptCanonicalId: e.conceptCanonicalId,
       minutes,
-      reason: "Revisit a recent incorrect attempt",
+      reasonKey: "errorReview",
+      href: e.href ?? null,
     });
   }
 
-  // 4. Mini-check at module end
   for (const mod of input.modules) {
     if (remaining <= 0) break;
     if (!mod.miniCheckReady || mod.miniCheckExerciseIds.length === 0) continue;
     const minutes = take(5);
     if (minutes <= 0) break;
+    const first = mod.miniCheckExerciseIds[0]!;
     items.push({
       kind: "mini_check",
       moduleId: mod.id,
       exerciseIds: [...mod.miniCheckExerciseIds],
       minutes,
-      reason: "Module practice complete — run mini-check",
+      reasonKey: "miniCheck",
+      href: `/learn/${mod.id}/exercise/${first}`,
     });
     break;
   }
 
-  const nextGoal =
+  const nextGoalKey: DailyPlan["nextGoalKey"] =
     items[0]?.kind === "unfinished_lesson"
-      ? `Finish lesson in ${items[0].title}`
+      ? "finishLesson"
       : items[0]?.kind === "mini_check"
-        ? "Complete module mini-check"
+        ? "miniCheck"
         : items[0]?.kind === "weak_concept"
-          ? `Strengthen ${items[0].conceptCanonicalId}`
+          ? "strengthenConcept"
           : items[0]?.kind === "error_review"
-            ? "Review yesterday’s errors"
-            : "Open the next Sala when ready";
+            ? "reviewErrors"
+            : "openNextSala";
 
   return {
     targetMinutes: TARGET,
     masteryScope: scope,
     generatedAt: input.now.toISOString(),
     items,
-    nextGoal,
+    nextGoalKey,
+    nextGoal: nextGoalKey,
   };
 }

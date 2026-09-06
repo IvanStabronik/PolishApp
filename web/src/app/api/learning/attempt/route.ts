@@ -31,6 +31,7 @@ export const runtime = "nodejs";
 
 const BodySchema = z.object({
   moduleId: z.string().min(1).max(200),
+  lessonId: z.string().min(1).max(200).optional(),
   exerciseId: z.string().min(1).max(200),
   answer: z.record(z.string(), z.unknown()),
   hinted: z.boolean().optional(),
@@ -144,6 +145,7 @@ export async function POST(request: Request) {
       {
         userId: session.user.id,
         moduleId: body.moduleId,
+        lessonId: body.lessonId ?? null,
         exerciseCanonicalId:
           exerciseRow?.canonicalId ?? exercise.canonicalId ?? null,
         exerciseUuid: exerciseRow?.id ?? null,
@@ -181,12 +183,14 @@ export async function POST(request: Request) {
       masteryScope: persistResult.masteryScope,
       masteryWritten: persistResult.masteryWritten,
       masteryState: persistResult.masteryState,
+      reviewDueAt: persistResult.reviewDueAt,
       persisted: true,
       replayed: Boolean(persistResult.replayed ?? persistResult.idempotentReplay),
       idempotentReplay: Boolean(
         persistResult.replayed ?? persistResult.idempotentReplay,
       ),
       attemptId: persistResult.attemptId,
+      lessonId: body.lessonId ?? null,
       exerciseCanonicalId:
         exerciseRow?.canonicalId ?? exercise.canonicalId ?? body.exerciseId,
       exerciseUuid: exerciseRow?.id ?? null,

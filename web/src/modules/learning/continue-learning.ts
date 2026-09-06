@@ -1,5 +1,6 @@
 /**
  * Continue-learning dashboard snapshot from Postgres + YAML catalog.
+ * Progress and plan use real LES-* lesson ids — no synthetic les-${mod.id}.
  */
 
 import { and, desc, eq } from "drizzle-orm";
@@ -10,6 +11,7 @@ import {
   learnerProfiles,
   moduleProgress,
   modules,
+  reviewSchedule,
 } from "@/db/schema";
 import {
   listPreviewModules,
@@ -27,10 +29,12 @@ export type ContinueLearningSnapshot = {
     titlePl: string;
     percent: number;
     lessonsTotal: number;
+    lessonsCompleted: number;
     continueHref: string | null;
   }>;
   lastPoint: {
     moduleId: string;
+    lessonId: string | null;
     exerciseId: string | null;
     at: string;
   } | null;
@@ -39,6 +43,17 @@ export type ContinueLearningSnapshot = {
   dailyPlan: DailyPlan;
   reviewQueue: ReviewQueue;
 };
+
+function exerciseDone(
+  attempted: Set<string>,
+  exerciseId: string,
+  canonicalId?: string,
+): boolean {
+  return (
+    attempted.has(exerciseId) ||
+    (canonicalId != null && attempted.has(canonicalId))
+  );
+}
 
 export async function loadContinueLearning(
   userId: string,
@@ -58,10 +73,29 @@ export async function loadContinueLearning(
   const errorByConcept = new Map<string, number>();
   const recentErrors: Array<{
     exerciseId: string;
+    moduleId: string | null;
     conceptCanonicalId: string | null;
     at: string;
     masteryScope: MasteryScope;
   }> = [];
+  const conceptToExercise = new Map<
+    string,
+    { moduleId: string; exerciseId: string }
+  >();
+
+  for (const mod of catalog) {
+    for (const lesson of mod.lessons) {
+      for (const ex of lesson.exercises) {
+        const concept = ex.conceptIds[0];
+        if (concept && !conceptToExercise.has(concept)) {
+          conceptToExercise.set(concept, {
+            moduleId: mod.id,
+            exerciseId: ex.id,
+          });
+        }
+      }
+    }
+  }
 
   if (profile) {
     const recent = await db
@@ -80,13 +114,13 @@ export async function loadContinueLearning(
         ),
       )
       .orderBy(desc(attempts.createdAt))
-      .limit(50);
+      .limit(80);
 
     for (const row of recent) {
       const response = row.response as {
         moduleId?: string;
+        lessonId?: string;
         exerciseCanonicalId?: string;
-        answer?: { type?: string };
         evaluation?: { conceptId?: string };
       };
       const exerciseId =
@@ -95,10 +129,13 @@ export async function loadContinueLearning(
           : null;
       const moduleId =
         typeof response.moduleId === "string" ? response.moduleId : null;
+      const lessonId =
+        typeof response.lessonId === "string" ? response.lessonId : null;
       if (exerciseId) attemptedExerciseIds.add(exerciseId);
       if (!lastPoint && moduleId) {
         lastPoint = {
           moduleId,
+          lessonId,
           exerciseId,
           at: row.createdAt.toISOString(),
         };
@@ -116,6 +153,7 @@ export async function loadContinueLearning(
         }
         recentErrors.push({
           exerciseId,
+          moduleId,
           conceptCanonicalId: conceptId,
           at: row.createdAt.toISOString(),
           masteryScope: row.masteryScope as MasteryScope,
@@ -125,27 +163,39 @@ export async function loadContinueLearning(
   }
 
   const perModule = catalog.map((mod) => {
-    const total = Math.max(1, mod.exercises.length);
-    const done = mod.exercises.filter(
-      (ex) =>
-        attemptedExerciseIds.has(ex.id) ||
-        (ex.canonicalId && attemptedExerciseIds.has(ex.canonicalId)),
+    const lessons = [...mod.lessons].sort((a, b) => a.sortOrder - b.sortOrder);
+    const lessonsCompleted = lessons.filter((lesson) =>
+      lesson.exercises.every((ex) =>
+        exerciseDone(attemptedExerciseIds, ex.id, ex.canonicalId),
+      ),
     ).length;
-    const percent = Math.min(100, Math.round((done / total) * 100));
-    const next = mod.exercises.find(
-      (ex) =>
-        !attemptedExerciseIds.has(ex.id) &&
-        !(ex.canonicalId && attemptedExerciseIds.has(ex.canonicalId)),
+    const totalExercises = Math.max(1, mod.exercises.length);
+    const doneExercises = mod.exercises.filter((ex) =>
+      exerciseDone(attemptedExerciseIds, ex.id, ex.canonicalId),
+    ).length;
+    const percent = Math.min(
+      100,
+      Math.round((doneExercises / totalExercises) * 100),
     );
+
+    const unfinishedLesson =
+      lessons.find(
+        (lesson) =>
+          !lesson.exercises.every((ex) =>
+            exerciseDone(attemptedExerciseIds, ex.id, ex.canonicalId),
+          ),
+      ) ?? null;
+
     return {
       moduleId: mod.id,
       title: mod.title,
       titlePl: mod.titlePl,
       percent,
-      lessonsTotal: 3,
-      continueHref: next
-        ? `/learn/${mod.id}/exercise/${next.id}`
-        : `/learn/${mod.id}`,
+      lessonsTotal: lessons.length,
+      lessonsCompleted,
+      continueHref: unfinishedLesson
+        ? `/learn/lessons/${unfinishedLesson.id}`
+        : `/learn/modules/${mod.id}`,
     };
   });
 
@@ -176,30 +226,49 @@ export async function loadContinueLearning(
         )
     : [];
 
+  const scheduleRows = profile
+    ? await db
+        .select({
+          conceptCanonicalId: reviewSchedule.conceptCanonicalId,
+          dueAt: reviewSchedule.dueAt,
+          masteryScope: reviewSchedule.masteryScope,
+        })
+        .from(reviewSchedule)
+        .where(
+          and(
+            eq(reviewSchedule.learnerProfileId, profile.id),
+            eq(reviewSchedule.masteryScope, masteryScope),
+          ),
+        )
+    : [];
+
   const dailyPlan = buildDailyPlan({
     now: new Date(),
     masteryScope,
     modules: catalog.map((mod) => {
-      const unfinished = mod.exercises.find(
-        (ex) =>
-          !attemptedExerciseIds.has(ex.id) &&
-          !(ex.canonicalId && attemptedExerciseIds.has(ex.canonicalId)) &&
-          !mod.miniCheckExerciseIds.includes(ex.id),
+      const lessons = [...mod.lessons].sort((a, b) => a.sortOrder - b.sortOrder);
+      const unfinished = lessons.find(
+        (lesson) =>
+          !lesson.exercises.every((ex) =>
+            exerciseDone(attemptedExerciseIds, ex.id, ex.canonicalId),
+          ),
       );
-      const practiceDone = mod.exercises
-        .filter((ex) => !mod.miniCheckExerciseIds.includes(ex.id))
-        .every(
-          (ex) =>
-            attemptedExerciseIds.has(ex.id) ||
-            (ex.canonicalId != null &&
-              attemptedExerciseIds.has(ex.canonicalId)),
-        );
+      const practiceDone = lessons.every((lesson) =>
+        lesson.exercises
+          .filter((ex) => !lesson.miniCheckExerciseIds.includes(ex.id))
+          .every((ex) =>
+            exerciseDone(attemptedExerciseIds, ex.id, ex.canonicalId),
+          ),
+      );
+      const miniPending = mod.miniCheckExerciseIds.some(
+        (id) => !attemptedExerciseIds.has(id),
+      );
       return {
         id: mod.id,
         title: mod.titlePl,
-        lessonIds: [`les-${mod.id}-1`, `les-${mod.id}-2`, `les-${mod.id}-3`],
-        unfinishedLessonId: unfinished ? `les-${mod.id}` : null,
-        miniCheckReady: practiceDone && mod.miniCheckExerciseIds.length > 0,
+        lessonIds: lessons.map((l) => l.id),
+        unfinishedLessonId: unfinished?.id ?? null,
+        miniCheckReady: practiceDone && miniPending,
         miniCheckExerciseIds: mod.miniCheckExerciseIds,
       };
     }),
@@ -208,24 +277,41 @@ export async function loadContinueLearning(
       state: m.state,
       errorCount: errorByConcept.get(m.conceptCanonicalId) ?? 0,
       masteryScope: m.masteryScope as MasteryScope,
+      href: conceptToExercise.has(m.conceptCanonicalId)
+        ? `/learn/${conceptToExercise.get(m.conceptCanonicalId)!.moduleId}/exercise/${conceptToExercise.get(m.conceptCanonicalId)!.exerciseId}`
+        : null,
     })),
-    recentErrors: recentErrors.slice(0, 5),
+    recentErrors: recentErrors.slice(0, 5).map((e) => ({
+      ...e,
+      href: e.moduleId
+        ? `/learn/${e.moduleId}/exercise/${e.exerciseId}`
+        : null,
+    })),
   });
 
   const reviewQueue = buildReviewQueue({
     now: new Date(),
     masteryScope,
-    scheduled: [],
+    scheduled: scheduleRows.map((row) => ({
+      conceptCanonicalId: row.conceptCanonicalId,
+      dueAt: row.dueAt.toISOString(),
+      masteryScope: row.masteryScope as MasteryScope,
+      href: conceptToExercise.has(row.conceptCanonicalId)
+        ? `/learn/${conceptToExercise.get(row.conceptCanonicalId)!.moduleId}/exercise/${conceptToExercise.get(row.conceptCanonicalId)!.exerciseId}`
+        : null,
+    })),
     mastery: masteryRows.map((m) => ({
       conceptCanonicalId: m.conceptCanonicalId,
       state: m.state,
       errorCount: errorByConcept.get(m.conceptCanonicalId) ?? 0,
       lastAttemptAt: m.updatedAt.toISOString(),
       masteryScope: m.masteryScope as MasteryScope,
+      href: conceptToExercise.has(m.conceptCanonicalId)
+        ? `/learn/${conceptToExercise.get(m.conceptCanonicalId)!.moduleId}/exercise/${conceptToExercise.get(m.conceptCanonicalId)!.exerciseId}`
+        : null,
     })),
   });
 
-  // Best-effort module_progress sync (ignore conflicts).
   if (profile) {
     for (const row of perModule) {
       try {
@@ -244,7 +330,7 @@ export async function loadContinueLearning(
           await db
             .update(moduleProgress)
             .set({
-              lessonsCompleted: Math.floor((row.percent / 100) * 3),
+              lessonsCompleted: row.lessonsCompleted,
               percentComplete: row.percent,
               state: row.percent >= 100 ? "completed" : "in_progress",
               updatedAt: new Date(),
@@ -254,7 +340,7 @@ export async function loadContinueLearning(
           await db.insert(moduleProgress).values({
             learnerProfileId: profile.id,
             moduleId: modRow.id,
-            lessonsCompleted: Math.floor((row.percent / 100) * 3),
+            lessonsCompleted: row.lessonsCompleted,
             percentComplete: row.percent,
             state: row.percent >= 100 ? "completed" : "in_progress",
           });

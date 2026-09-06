@@ -14,7 +14,10 @@ export async function getNextLearningStep() {
   if (!first) {
     return { kind: "empty" as const };
   }
-  const lessonId = first.lessonIds[0] ?? `les-${first.id}`;
+  const lessonId = first.lessonIds[0];
+  if (!lessonId) {
+    return { kind: "empty" as const };
+  }
   const session = await getRequestSession();
   const canDraft = canAccessDraftContent({
     roles: session?.roles ?? [],
@@ -26,8 +29,8 @@ export async function getNextLearningStep() {
     moduleId: first.id,
     lessonId,
     dualLore: first.lore,
-    /** Prefer YAML module path when draft package is present */
-    moduleHref: `/learn/${first.id}`,
+    moduleHref: `/learn/modules/${first.id}`,
+    lessonHref: `/learn/lessons/${lessonId}`,
     preview: canDraft,
   };
 }

@@ -10,6 +10,7 @@ import {
 } from "@/lib/demo";
 import { loadContinueLearning } from "@/modules/learning/continue-learning";
 import { Link } from "@/i18n/navigation";
+import { LinkButton } from "@/components/ui/link-button";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -35,22 +36,43 @@ export default async function DailyPlanPage({ params }: Props) {
         <h1 className="font-display text-3xl text-[var(--color-ink)]">
           {t("dailyPlan")}
         </h1>
-        <p className="mt-2 text-[var(--color-graphite)]">{plan.nextGoal}</p>
+        <p className="mt-2 text-[var(--color-graphite)]">
+          {t(`planGoal.${plan.nextGoalKey}`)}
+        </p>
         <ol className="mt-8 flex list-decimal flex-col gap-4 pl-5">
           {plan.items.length === 0 ? (
             <li className="text-[var(--color-graphite)]">—</li>
           ) : (
-            plan.items.map((item, i) => (
-              <li key={`${item.kind}-${i}`} data-testid={`plan-item-${item.kind}`}>
-                <span className="font-medium text-[var(--color-ink)]">
-                  {item.kind}
-                </span>
-                <span className="text-[var(--color-graphite)]">
-                  {" "}
-                  · {item.minutes} min — {item.reason}
-                </span>
-              </li>
-            ))
+            plan.items.map((item, i) => {
+              const href =
+                "href" in item && typeof item.href === "string"
+                  ? item.href
+                  : null;
+              return (
+                <li
+                  key={`${item.kind}-${i}`}
+                  data-testid={`plan-item-${item.kind}`}
+                  data-lesson-id={
+                    item.kind === "unfinished_lesson" ? item.lessonId : undefined
+                  }
+                >
+                  <span className="font-medium text-[var(--color-ink)]">
+                    {t(`planReason.${item.reasonKey}`)}
+                  </span>
+                  <span className="text-[var(--color-graphite)]">
+                    {" "}
+                    · {item.minutes} min
+                  </span>
+                  {href ? (
+                    <div className="mt-2">
+                      <LinkButton href={href} data-testid={`plan-cta-${item.kind}`}>
+                        {t("openItem")}
+                      </LinkButton>
+                    </div>
+                  ) : null}
+                </li>
+              );
+            })
           )}
         </ol>
         <p className="mt-8">

@@ -10,6 +10,7 @@ import {
 } from "@/lib/demo";
 import { loadContinueLearning } from "@/modules/learning/continue-learning";
 import { Link } from "@/i18n/navigation";
+import { LinkButton } from "@/components/ui/link-button";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -44,13 +45,22 @@ export default async function ReviewQueuePage({ params }: Props) {
                 key={item.conceptCanonicalId}
                 className="border border-[var(--color-line)] bg-[var(--color-paper-raised)] px-4 py-3 rounded-[var(--radius-md)]"
                 data-testid="review-item"
+                data-concept-id={item.conceptCanonicalId}
+                data-due-at={item.dueAt}
               >
                 <p className="m-0 font-medium text-[var(--color-ink)]">
                   {item.conceptCanonicalId}
                 </p>
                 <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
-                  {item.source} · errors={item.errorCount} · {item.reason}
+                  {t(`reviewReason.${item.reasonKey}`)} · {item.dueAt}
                 </p>
+                {item.href ? (
+                  <div className="mt-2">
+                    <LinkButton href={item.href} data-testid="review-item-cta">
+                      {t("openItem")}
+                    </LinkButton>
+                  </div>
+                ) : null}
               </li>
             ))
           )}

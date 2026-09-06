@@ -124,6 +124,25 @@
     "archiwum": "Архив",
     "dailyPlan": "План дня (15 мин)",
     "reviewQueue": "Повторение",
+    "planReason": {
+      "unfinishedLesson": "Продолжить незавершённый урок",
+      "weakConcept": "Укрепить слабый концепт",
+      "errorReview": "Повторить недавнюю ошибку",
+      "miniCheck": "Мини-проверка модуля"
+    },
+    "planGoal": {
+      "finishLesson": "Завершить текущий урок",
+      "miniCheck": "Пройти мини-проверку модуля",
+      "strengthenConcept": "Укрепить слабый концепт",
+      "reviewErrors": "Разобрать недавние ошибки",
+      "openNextSala": "Открыть следующий зал, когда будете готовы"
+    },
+    "reviewReason": {
+      "scheduledDue": "По расписанию повторения",
+      "masteryReviewDue": "Mastery: пора повторить",
+      "errorThreshold": "Порог ошибок для повторения"
+    },
+    "openItem": "Открыть",
     "objective": "Цель",
     "dialogue": "Диалог",
     "keyLines": "Ключевые реплики",

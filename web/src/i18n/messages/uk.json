@@ -124,6 +124,25 @@
     "archiwum": "Архів",
     "dailyPlan": "План дня (15 хв)",
     "reviewQueue": "Повторення",
+    "planReason": {
+      "unfinishedLesson": "Продовжити незавершений урок",
+      "weakConcept": "Зміцнити слабкий концепт",
+      "errorReview": "Повторити нещодавню помилку",
+      "miniCheck": "Міні-перевірка модуля"
+    },
+    "planGoal": {
+      "finishLesson": "Завершити поточний урок",
+      "miniCheck": "Пройти міні-перевірку модуля",
+      "strengthenConcept": "Зміцнити слабкий концепт",
+      "reviewErrors": "Розібрати нещодавні помилки",
+      "openNextSala": "Відкрити наступну залу, коли будете готові"
+    },
+    "reviewReason": {
+      "scheduledDue": "За розкладом повторення",
+      "masteryReviewDue": "Mastery: час повторити",
+      "errorThreshold": "Поріг помилок для повторення"
+    },
+    "openItem": "Відкрити",
     "objective": "Мета",
     "dialogue": "Діалог",
     "keyLines": "Ключові репліки",

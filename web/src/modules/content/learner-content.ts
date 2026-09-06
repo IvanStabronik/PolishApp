@@ -1,14 +1,18 @@
 /**
  * Learner-facing content facade — YAML only (no mockContent for learners).
+ * Preserves Course → Module → Lesson → Step → Exercise with real LES-* ids.
+ * Client DTOs are learner-safe (no answer keys).
  */
 
 import {
+  findLessonById,
   getModuleById as getYamlModule,
   listPreviewModules,
   loadAllModulesFromYaml,
   type ContentAccessContext,
 } from "@/lib/content/load-module";
-import type { DraftModule } from "@/lib/content/types";
+import { toLearnerExercise } from "@/lib/content/learner-dto";
+import type { DraftLesson, DraftModule } from "@/lib/content/types";
 import type { LessonDetail, LoreLabel, ModuleSummary } from "@/lib/mocks/content";
 import { getRequestSession } from "@/modules/auth/session";
 import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
@@ -29,7 +33,7 @@ function draftToSummary(mod: DraftModule, hall: number): CatalogModule {
     lore,
     titlePl: mod.titlePl,
     summary: mod.situation || mod.objective,
-    lessonIds: [`les-${mod.id}`],
+    lessonIds: mod.lessons.map((l) => l.id),
     draft: mod,
   };
 }
@@ -65,68 +69,93 @@ export async function listModuleLessons(
   const ctx = await resolveAccessContext();
   const yaml = getYamlModule(moduleId, ctx);
   if (!yaml) return [];
-  return [yamlLessonToDetail(yaml)];
+  return yaml.lessons
+    .slice()
+    .sort((a, b) => a.sortOrder - b.sortOrder)
+    .map((lesson) => draftLessonToDetail(yaml, lesson));
 }
 
 export async function getLessonById(
   lessonId: string,
 ): Promise<LessonDetail | null> {
   const ctx = await resolveAccessContext();
-  for (const mod of loadAllModulesFromYaml()) {
-    const derivedId = `les-${mod.id}`;
-    if (lessonId === derivedId) {
-      const visible = getYamlModule(mod.id, ctx);
-      if (visible) return yamlLessonToDetail(visible);
-    }
-  }
-  if (lessonId === "les-powitanie") {
-    const visible = getYamlModule("pierwsze-spotkanie", ctx);
-    if (visible) return yamlLessonToDetail(visible);
-  }
-  return null;
+  const found = findLessonById(lessonId, ctx);
+  if (!found) return null;
+  return draftLessonToDetail(found.module, found.lesson);
 }
 
-function yamlLessonToDetail(mod: DraftModule): LessonDetail {
-  const theorySteps = [
-    {
-      id: "th-situation",
-      kind: "theory" as const,
-      title: "Sytuacja",
-      body: mod.situation,
-    },
-    {
-      id: "th-objective",
-      kind: "theory" as const,
-      title: "Cel",
-      body: mod.objective,
-    },
-  ];
+/**
+ * Expand YAML lesson steps into learner-safe theory + exercise steps.
+ * Practice/mini_check steps expand to one player step per exercise.
+ */
+function draftLessonToDetail(
+  mod: DraftModule,
+  lesson: DraftLesson,
+): LessonDetail {
+  const byId = new Map(lesson.exercises.map((ex) => [ex.id, ex]));
+  const steps: LessonDetail["steps"] = [];
 
-  const exerciseSteps = mod.exercises
-    .filter((ex) => ex.type === "single_choice")
-    .map((ex) => {
-      if (ex.type !== "single_choice") throw new Error("unreachable");
-      return {
-        id: ex.id,
-        kind: "exercise" as const,
-        title: ex.prompt.slice(0, 48),
-        promptPl: ex.prompt,
-        options: ex.options.map((label, i) => ({
-          id: String(i),
-          label,
-        })),
-        correctOptionId: "",
-        feedbackCorrect: ex.feedback.explanation,
-        feedbackIncorrect: ex.feedback.explanation,
-        conceptId: ex.conceptIds[0] ?? "",
-      };
-    });
+  for (const step of lesson.steps) {
+    if (step.kind === "situation") {
+      steps.push({
+        id: step.id,
+        kind: "theory",
+        title: step.titleRu,
+        body: step.bodyRu ?? lesson.situation,
+      });
+      continue;
+    }
+    if (
+      step.kind === "dialogue" ||
+      step.kind === "key_lines" ||
+      step.kind === "pan_pani" ||
+      step.kind === "grammar" ||
+      step.kind === "result"
+    ) {
+      let body = "";
+      if (step.kind === "dialogue") {
+        body = lesson.dialogue
+          .map((t) => `${t.speaker}: ${t.pl}`)
+          .join("\n");
+      } else if (step.kind === "key_lines") {
+        body = lesson.keyLines
+          .map((k) => `${k.pl}\n${k.explanation}`)
+          .join("\n\n");
+      } else if (step.kind === "pan_pani") {
+        body = lesson.pragmatics.panPani;
+      } else if (step.kind === "grammar") {
+        body = `${lesson.grammar.title}\n${lesson.grammar.explanation}\n${lesson.grammar.examples.join("\n")}`;
+      } else {
+        body = lesson.objective;
+      }
+      steps.push({
+        id: step.id,
+        kind: "theory",
+        title: step.titleRu,
+        body,
+      });
+      continue;
+    }
+    if (step.kind === "practice" || step.kind === "mini_check") {
+      for (const exerciseId of step.exerciseIds) {
+        const authored = byId.get(exerciseId);
+        if (!authored) continue;
+        steps.push({
+          id: authored.id,
+          kind: "exercise",
+          title: authored.prompt.slice(0, 64),
+          exercise: toLearnerExercise(authored),
+        });
+      }
+    }
+  }
 
   return {
-    id: `les-${mod.id}`,
+    id: lesson.id,
     moduleId: mod.id,
-    title: mod.titlePl,
-    steps: [...theorySteps, ...exerciseSteps],
+    title: lesson.titlePl,
+    sortOrder: lesson.sortOrder,
+    steps,
   };
 }
 

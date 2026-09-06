@@ -13,6 +13,7 @@ export type ReviewQueueInput = {
     conceptCanonicalId: string;
     dueAt: string;
     masteryScope: MasteryScope;
+    href?: string | null;
   }>;
   mastery: Array<{
     conceptCanonicalId: string;
@@ -20,6 +21,7 @@ export type ReviewQueueInput = {
     errorCount: number;
     lastAttemptAt: string | null;
     masteryScope: MasteryScope;
+    href?: string | null;
   }>;
 };
 
@@ -30,7 +32,8 @@ export type ReviewQueueItem = {
   errorCount: number;
   lastAttemptAt: string | null;
   masteryState: string;
-  reason: string;
+  reasonKey: "scheduledDue" | "masteryReviewDue" | "errorThreshold";
+  href: string | null;
 };
 
 export type ReviewQueue = {
@@ -55,7 +58,8 @@ export function buildReviewQueue(input: ReviewQueueInput): ReviewQueue {
       errorCount: 0,
       lastAttemptAt: null,
       masteryState: "REVIEW_DUE",
-      reason: "Scheduled review is due",
+      reasonKey: "scheduledDue",
+      href: row.href ?? null,
     });
   }
 
@@ -65,6 +69,8 @@ export function buildReviewQueue(input: ReviewQueueInput): ReviewQueue {
     const existing = byConcept.get(m.conceptCanonicalId);
     const source: ReviewQueueItem["source"] =
       m.state === "REVIEW_DUE" ? "weak_mastery" : "error_threshold";
+    const reasonKey: ReviewQueueItem["reasonKey"] =
+      m.state === "REVIEW_DUE" ? "masteryReviewDue" : "errorThreshold";
     const item: ReviewQueueItem = {
       conceptCanonicalId: m.conceptCanonicalId,
       source: existing?.source === "schedule" ? "schedule" : source,
@@ -72,10 +78,8 @@ export function buildReviewQueue(input: ReviewQueueInput): ReviewQueue {
       errorCount: Math.max(existing?.errorCount ?? 0, m.errorCount),
       lastAttemptAt: m.lastAttemptAt,
       masteryState: m.state,
-      reason:
-        m.state === "REVIEW_DUE"
-          ? "Mastery marked REVIEW_DUE"
-          : `Explainable threshold: state=${m.state}, errors=${m.errorCount}`,
+      reasonKey: existing?.source === "schedule" ? "scheduledDue" : reasonKey,
+      href: existing?.href ?? m.href ?? null,
     };
     byConcept.set(m.conceptCanonicalId, item);
   }
@@ -95,6 +99,8 @@ export function buildReviewQueue(input: ReviewQueueInput): ReviewQueue {
 /**
  * After a review answer: bump due date on correct, pull sooner on incorrect.
  * Deterministic intervals — not an AI score.
+ * Correct + priorErrorCount ≥ 2 → +2 days; correct otherwise → +4 days;
+ * incorrect → +0.5 days.
  */
 export function nextReviewDueAt(
   now: Date,

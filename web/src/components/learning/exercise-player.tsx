@@ -13,13 +13,24 @@ import { FeedbackPanel } from "./feedback-panel";
 
 type Props = {
   moduleId: string;
+  /** Real lesson id when playing inside a lesson (persisted on attempt). */
+  lessonId?: string;
   /** Learner-safe DTO only — never ModuleExercise / AuthoredExercise. */
   exercise: LearnerExercise;
   nextHref: string;
   isLast: boolean;
+  /** When set, called instead of router.push(nextHref) after feedback. */
+  onNext?: (result: { correct: boolean }) => void;
 };
 
-export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) {
+export function ExercisePlayer({
+  moduleId,
+  lessonId,
+  exercise,
+  nextHref,
+  isLast,
+  onNext,
+}: Props) {
   const t = useTranslations("learn");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -72,6 +83,7 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
       },
       body: JSON.stringify({
         moduleId,
+        lessonId: lessonId ?? undefined,
         exerciseId: exercise.id,
         answer,
         idempotencyKey,
@@ -279,7 +291,13 @@ export function ExercisePlayer({ moduleId, exercise, nextHref, isLast }: Props) 
           </Button>
         ) : (
           <Button
-            onClick={() => router.push(nextHref)}
+            onClick={() => {
+              if (onNext && result) {
+                onNext({ correct: result.correct });
+                return;
+              }
+              router.push(nextHref);
+            }}
             data-testid="exercise-next"
           >
             {isLast ? t("finishLesson") : t("nextStep")}

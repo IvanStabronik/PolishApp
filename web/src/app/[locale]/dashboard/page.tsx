@@ -74,7 +74,7 @@ export default async function DashboardPage({ params }: Props) {
             {t("overallProgress", { percent: snapshot.overallPercent })}
           </p>
           <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
-            {t("nextGoal")}: {snapshot.nextGoal}
+            {t("nextGoal")}: {tLearn(`planGoal.${snapshot.dailyPlan.nextGoalKey}`)}
           </p>
           {snapshot.continueCta ? (
             <div className="mt-4">
