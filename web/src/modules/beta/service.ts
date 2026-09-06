@@ -1,4 +1,4 @@
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, gt, isNull, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { betaInvites, user, userRoles } from "@/db/schema";
 import type { UserRole } from "@/lib/enums";
@@ -161,9 +161,9 @@ export async function consumeInviteForUser(input: {
       and(
         eq(betaInvites.id, found.invite.id),
         eq(betaInvites.status, "pending"),
-        sql`${betaInvites.revokedAt} IS NULL`,
-        sql`${betaInvites.acceptedAt} IS NULL`,
-        sql`${betaInvites.expiresAt} > ${now}`,
+        isNull(betaInvites.revokedAt),
+        isNull(betaInvites.acceptedAt),
+        gt(betaInvites.expiresAt, now),
         sql`${betaInvites.useCount} < ${betaInvites.useLimit}`,
       ),
     )
