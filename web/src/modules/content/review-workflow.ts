@@ -1,16 +1,27 @@
 /**
  * Author/reviewer content workflow (CNT-020).
  * PUBLISHED blocked until DEC-016 / JPJO publication gates close.
+ *
+ * Product CHANGES_REQUESTED → DB status REJECTED (see lifecycle.ts).
  */
 
 import {
   assertAuthorNotReviewer,
   assertTransition,
   canTransition,
+  CHANGES_REQUESTED_DB_STATUS,
 } from "@/modules/content/lifecycle";
 import type { ContentStatus } from "@/lib/enums";
 
 export type ReviewVerdict = "approve" | "request_changes";
+
+export type ReviewRecordView = {
+  id: string;
+  decision: "approve" | "reject";
+  comment: string | null;
+  reviewerUserId: string;
+  createdAt: string;
+};
 
 export type ContentVersionView = {
   id: string;
@@ -18,9 +29,11 @@ export type ContentVersionView = {
   title: string;
   status: ContentStatus;
   authorId: string;
+  reviewerId?: string | null;
   version: number;
   provenanceNotes: string;
   curriculumLinks: string[];
+  reviews?: ReviewRecordView[];
 };
 
 export type ReviewTransitionInput = {
@@ -72,7 +85,9 @@ export function submitForReview(
 
 /**
  * Reviewer verdict: approve → APPROVED, request_changes → REJECTED
- * (product label: changes requested). Author cannot approve own version.
+ * (product label: CHANGES_REQUESTED — DB enum has no separate value).
+ * Author cannot approve own version.
+ * request_changes requires a non-empty comment.
  * PUBLISHED is never applied here — gated by DEC-016.
  */
 export function applyReviewVerdict(
@@ -90,7 +105,11 @@ export function applyReviewVerdict(
     return fail(input.version.status, "not_in_review");
   }
   const verdict = input.verdict ?? "request_changes";
-  const to: ContentStatus = verdict === "approve" ? "APPROVED" : "REJECTED";
+  if (verdict === "request_changes" && !input.comment?.trim()) {
+    return fail(input.version.status, "comment_required");
+  }
+  const to: ContentStatus =
+    verdict === "approve" ? "APPROVED" : CHANGES_REQUESTED_DB_STATUS;
   return apply(input, to, verdict === "approve" ? "approve" : "request_changes");
 }
 
@@ -152,14 +171,26 @@ function fail(
 }
 
 export function buildReviewPacketMarkdown(version: ContentVersionView): string {
+  const reviewLines =
+    version.reviews && version.reviews.length > 0
+      ? version.reviews.map(
+          (r) =>
+            `- ${r.decision} by ${r.reviewerUserId} (${r.createdAt}): ${r.comment ?? "—"}`,
+        )
+      : ["- —"];
+
   return [
     `# Review packet — ${version.title}`,
     "",
     `- Version id: ${version.id}`,
     `- Module: ${version.moduleId}`,
     `- Status: ${version.status}`,
-    `- Author: ${version.authorId}`,
+    `- Author: ${version.authorId || "—"}`,
+    `- Reviewer: ${version.reviewerId ?? "—"}`,
     `- Curriculum links: ${version.curriculumLinks.join(", ") || "—"}`,
+    "",
+    "## Decisions / comments",
+    ...reviewLines,
     "",
     "## Provenance",
     version.provenanceNotes || "—",
@@ -167,6 +198,7 @@ export function buildReviewPacketMarkdown(version: ContentVersionView): string {
     "## Publication",
     "PUBLISHED is blocked pending independent JPJO review (DEC-016).",
     "This packet does not simulate an independent expert decision.",
+    "REJECTED is the DB equivalent of CHANGES_REQUESTED.",
     "",
   ].join("\n");
 }
@@ -175,10 +207,22 @@ export function buildReviewPacketJson(version: ContentVersionView): string {
   return JSON.stringify(
     {
       format: "slowarium.review-packet.v1",
-      ...version,
+      id: version.id,
+      moduleId: version.moduleId,
+      title: version.title,
+      status: version.status,
+      authorId: version.authorId,
+      reviewerId: version.reviewerId ?? null,
+      version: version.version,
+      provenanceNotes: version.provenanceNotes,
+      curriculumLinks: version.curriculumLinks,
+      reviews: version.reviews ?? [],
       publication: {
         published: false,
         blockedReason: "DEC-016 / JPJO gates open",
+      },
+      notes: {
+        changesRequestedDbStatus: CHANGES_REQUESTED_DB_STATUS,
       },
     },
     null,

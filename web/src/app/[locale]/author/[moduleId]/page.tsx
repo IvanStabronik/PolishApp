@@ -15,6 +15,8 @@ import { getModuleById } from "@/lib/content/load-module";
 import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
 import { ReviewActions } from "@/components/author/review-actions";
+import { loadModuleReviewState } from "@/modules/content/persist-review-transition";
+import { CHANGES_REQUESTED_DB_STATUS } from "@/modules/content/lifecycle";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string }>;
@@ -36,16 +38,22 @@ export default async function AuthorReviewDetailPage({ params }: Props) {
   });
   if (!mod) notFound();
 
-  const version: ContentVersionView = {
-    id: `ver-${mod.id}-${mod.version}`,
-    moduleId: mod.id,
-    title: mod.titlePl,
-    status: mod.status,
-    authorId: mod.provenance.authorId,
-    version: Number(mod.version) || 1,
-    provenanceNotes: mod.provenance.notes ?? "",
-    curriculumLinks: mod.provenance.sources,
-  };
+  const dbState = await loadModuleReviewState(moduleId);
+
+  const version: ContentVersionView = dbState
+    ? dbState.view
+    : {
+        id: `ver-${mod.id}-${mod.version}`,
+        moduleId: mod.id,
+        title: mod.titlePl,
+        status: mod.status,
+        authorId: mod.provenance.authorId,
+        reviewerId: null,
+        version: Number(mod.version) || 1,
+        provenanceNotes: mod.provenance.notes ?? "",
+        curriculumLinks: mod.provenance.sources,
+        reviews: [],
+      };
 
   const isReviewer = canAccessReviewerArea(session.roles);
   const approvedBlocked =
@@ -56,6 +64,11 @@ export default async function AuthorReviewDetailPage({ params }: Props) {
           actorRoles: session.roles,
         })
       : null;
+
+  const canSubmit =
+    version.status === "DRAFT" ||
+    version.status === CHANGES_REQUESTED_DB_STATUS;
+  const canReview = isReviewer && version.status === "IN_REVIEW";
 
   return (
     <>
@@ -73,6 +86,12 @@ export default async function AuthorReviewDetailPage({ params }: Props) {
           data-testid="review-status"
         >
           Status: {version.status}
+          {dbState ? " (DB)" : " (YAML fallback)"}
+        </p>
+        <p className="mt-2 text-sm text-[var(--color-graphite)]">
+          Version id: {version.id}
+          {version.authorId ? ` · Author: ${version.authorId}` : null}
+          {version.reviewerId ? ` · Reviewer: ${version.reviewerId}` : null}
         </p>
         <p className="mt-2 text-sm text-[var(--color-graphite)]">
           Exercises (answers visible to reviewer): {mod.exercises.length}
@@ -87,18 +106,20 @@ export default async function AuthorReviewDetailPage({ params }: Props) {
             not simulate an independent expert decision.
           </p>
         ) : null}
-        {version.status === "REJECTED" ? (
+        {version.status === CHANGES_REQUESTED_DB_STATUS ? (
           <p
             className="mt-4 text-sm text-[var(--color-burgundy)]"
             data-testid="changes-requested"
           >
-            Changes requested (REJECTED → author revises in DRAFT).
+            Changes requested (DB status REJECTED = CHANGES_REQUESTED). Author
+            revises and resubmits.
           </p>
         ) : null}
         <ReviewActions
           moduleId={moduleId}
-          canSubmit={version.status === "DRAFT"}
-          canReview={isReviewer && version.status === "IN_REVIEW"}
+          status={version.status}
+          canSubmit={canSubmit}
+          canReview={canReview}
         />
         <pre
           className="mt-8 overflow-auto rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-4 text-xs"

@@ -69,6 +69,18 @@ describe("review workflow auth", () => {
     expect(approved.to).toBe("APPROVED");
   });
 
+  it("requires a comment when requesting changes", () => {
+    const res = applyReviewVerdict({
+      version: { ...version, status: "IN_REVIEW" },
+      actorId: "reviewer-1",
+      actorRoles: ["reviewer"],
+      verdict: "request_changes",
+      comment: "   ",
+    });
+    expect(res.ok).toBe(false);
+    expect(res.error).toBe("comment_required");
+  });
+
   it("blocks PUBLISHED while DEC-016 gates are open", () => {
     const res = attemptPublish({
       version: { ...version, status: "APPROVED" },

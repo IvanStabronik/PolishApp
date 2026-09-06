@@ -12,6 +12,7 @@ import {
 import { listPreviewModules } from "@/lib/content/load-module";
 import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
+import { loadModuleReviewState } from "@/modules/content/persist-review-transition";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -30,16 +31,24 @@ export default async function AuthorListPage({ params }: Props) {
     isPreviewEnv: isPrivateAlphaPreviewEnv(),
   });
 
-  const versions: ContentVersionView[] = modules.map((m) => ({
-    id: `ver-${m.id}-${m.version}`,
-    moduleId: m.id,
-    title: m.titlePl,
-    status: m.status,
-    authorId: m.provenance.authorId,
-    version: Number(m.version) || 1,
-    provenanceNotes: m.provenance.notes ?? "",
-    curriculumLinks: m.provenance.sources,
-  }));
+  const versions: ContentVersionView[] = await Promise.all(
+    modules.map(async (m) => {
+      const dbState = await loadModuleReviewState(m.id);
+      if (dbState) return dbState.view;
+      return {
+        id: `ver-${m.id}-${m.version}`,
+        moduleId: m.id,
+        title: m.titlePl,
+        status: m.status,
+        authorId: m.provenance.authorId,
+        reviewerId: null,
+        version: Number(m.version) || 1,
+        provenanceNotes: m.provenance.notes ?? "",
+        curriculumLinks: m.provenance.sources,
+        reviews: [],
+      };
+    }),
+  );
 
   return (
     <>
@@ -50,6 +59,7 @@ export default async function AuthorListPage({ params }: Props) {
         </h1>
         <p className="mt-2 text-[var(--color-graphite)]">
           DRAFT workflow only. PUBLISHED blocked pending JPJO / DEC-016.
+          Status from content_versions when seeded.
         </p>
         <ul className="mt-8 flex list-none flex-col gap-4 p-0">
           {versions.map((v) => (
