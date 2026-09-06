@@ -1,10 +1,10 @@
 # Milestone 2 — Private Alpha report
 
-**Branch:** `feat/private-alpha-v2`  
-**Baseline:** `6ab4592716ed3bf34107322a390b337c563fca63`  
-**Final SHA:** `f4d610ed88fc02286628d5c503f39fb61f3ba97e`  
-**PR:** https://github.com/IvanStabronik/PolishApp/pull/1  
-**Green CI:** https://github.com/IvanStabronik/PolishApp/actions/runs/34032602611  
+**Branch:** `feat/private-alpha-v2`
+**Baseline:** `6ab4592716ed3bf34107322a390b337c563fca63`
+**Final SHA:** (see HEAD after this docs commit; functional green run on `f4d610ed88fc02286628d5c503f39fb61f3ba97e`)
+**PR:** https://github.com/IvanStabronik/PolishApp/pull/1
+**Green CI (functional):** https://github.com/IvanStabronik/PolishApp/actions/runs/34032602611
 **Figma:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G
 
 ## Delivered
