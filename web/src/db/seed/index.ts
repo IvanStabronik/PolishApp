@@ -48,6 +48,32 @@ async function upsertDemoUser(key: DemoKey): Promise<string> {
       })
       .where(eq(user.id, existing.id));
     await syncUserRoles(existing.id, demo.roles);
+
+    const passwordHash = await hashPassword(demo.password);
+    const cred = await db.query.account.findFirst({
+      where: and(
+        eq(account.userId, existing.id),
+        eq(account.providerId, "credential"),
+      ),
+    });
+    if (cred) {
+      await db
+        .update(account)
+        .set({ password: passwordHash, updatedAt: new Date() })
+        .where(eq(account.id, cred.id));
+    } else {
+      const now = new Date();
+      await db.insert(account).values({
+        id: randomUUID(),
+        accountId: existing.id,
+        providerId: "credential",
+        issuer: "local:credential",
+        userId: existing.id,
+        password: passwordHash,
+        createdAt: now,
+        updatedAt: now,
+      });
+    }
     return existing.id;
   }
 

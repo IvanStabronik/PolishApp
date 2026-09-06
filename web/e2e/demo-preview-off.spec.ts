@@ -34,18 +34,13 @@ test.describe("no-preview security gate", () => {
   test("previewer still cannot see DRAFT when preview env is off", async ({
     page,
   }) => {
-    await page.goto("/ru/login");
-    await page.getByTestId("login-email").fill("learner@demo.slowarium.local");
-    await page.getByTestId("login-password").fill("DemoLearner1!");
-    const [res] = await Promise.all([
-      page.waitForResponse(
-        (r) =>
-          r.url().includes("/api/auth/sign-in/email") &&
-          r.request().method() === "POST",
-        { timeout: 30_000 },
-      ),
-      page.getByTestId("login-submit").click(),
-    ]);
+    const res = await page.context().request.post("/api/auth/sign-in/email", {
+      data: {
+        email: "learner@demo.slowarium.local",
+        password: "DemoLearner1!",
+      },
+      headers: { "Content-Type": "application/json" },
+    });
     expect(res.ok()).toBeTruthy();
     await page.goto("/ru/dashboard", { waitUntil: "domcontentloaded" });
     await expect(page).toHaveURL(/\/dashboard/, { timeout: 15_000 });

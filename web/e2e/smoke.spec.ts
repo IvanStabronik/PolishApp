@@ -95,29 +95,17 @@ async function loginAs(
   password: string,
   expectUrl: RegExp,
 ) {
-  await page.goto("/ru/login", { waitUntil: "domcontentloaded" });
-  await expect(page.getByTestId("login-email")).toBeVisible({ timeout: 15_000 });
-  await page.getByTestId("login-email").fill(email);
-  await page.getByTestId("login-password").fill(password);
-  await expect(page.getByTestId("login-email")).toHaveValue(email);
-  await expect(page.getByTestId("login-password")).toHaveValue(password);
-
-  const [res] = await Promise.all([
-    page.waitForResponse(
-      (r) =>
-        r.url().includes("/api/auth/sign-in/email") &&
-        r.request().method() === "POST",
-      { timeout: 30_000 },
-    ),
-    page.getByTestId("login-submit").click(),
-  ]);
+  // API sign-in shares the browser cookie jar and avoids racing the login
+  // form's window.location.replace (which hung CI with empty page.url()).
+  const res = await page.context().request.post("/api/auth/sign-in/email", {
+    data: { email, password },
+    headers: { "Content-Type": "application/json" },
+  });
   expect(
     res.ok(),
     `sign-in failed: ${res.status()} ${await res.text().catch(() => "")}`,
   ).toBeTruthy();
 
-  // Client `location.assign` can leave Playwright with an empty page.url() in CI
-  // even after the dashboard paints. Drive navigation from the test once cookies exist.
   await page.goto("/ru/dashboard", { waitUntil: "domcontentloaded" });
   if (/\/onboarding/.test(page.url())) {
     await expect(page).toHaveURL(/\/onboarding/);
