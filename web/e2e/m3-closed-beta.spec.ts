@@ -74,6 +74,14 @@ async function axeSmoke(page: Page, name: string) {
   expect(serious, `${name}: ${JSON.stringify(serious)}`).toEqual([]);
 }
 
+/** Deliberately wrong payload for any exercise type — never treated as correct. */
+function wrongAnswer(type: string | null): Record<string, unknown> {
+  if (type === "multiple_choice") return { type, indices: [99] };
+  if (type === "gap_fill") return { type, values: ["__e2e_wrong__"] };
+  if (type === "ordering") return { type, order: [9, 8, 7, 6] };
+  return { type: type ?? "single_choice", index: 99 };
+}
+
 test.describe.configure({ mode: "serial" });
 
 test.describe("Milestone 3 closed beta core", () => {
@@ -123,7 +131,6 @@ test.describe("Milestone 3 closed beta core", () => {
     expect(firstId).toMatch(/^LES-/);
     await page.goto(`/ru/learn/lessons/${firstId}`);
     await expect(page).toHaveURL(new RegExp(`/learn/lessons/${firstId}`));
-    // Advance theory until exercise player
     for (let i = 0; i < 12; i += 1) {
       if ((await page.getByTestId("exercise-player").count()) > 0) break;
       const next = page.getByTestId("lesson-next-step");
@@ -144,7 +151,9 @@ test.describe("Milestone 3 closed beta core", () => {
       for (let i = 0; i < n; i += 1) await gaps.nth(i).fill("odpowiedz");
     }
     const attemptPromise = page.waitForResponse(
-      (r) => r.url().includes("/api/learning/attempt") && r.request().method() === "POST",
+      (r) =>
+        r.url().includes("/api/learning/attempt") &&
+        r.request().method() === "POST",
       { timeout: 30_000 },
     );
     await page.getByTestId("exercise-submit").click();
@@ -201,19 +210,18 @@ test.describe("Milestone 3 closed beta core", () => {
     await page.goto("/ru/plan");
     await expect(page.getByTestId("daily-plan-page")).toBeVisible();
     const item = page.getByTestId("plan-item-unfinished_lesson");
-    if ((await item.count()) > 0) {
-      const lessonId = await item.getAttribute("data-lesson-id");
-      expect(lessonId).toMatch(/^LES-/);
-      const cta = page.getByTestId("plan-cta-unfinished_lesson");
-      await expect(cta).toBeVisible();
-      const href = await cta.getAttribute("href");
-      expect(href).toContain(`/learn/lessons/${lessonId}`);
-    }
+    await expect(item).toBeVisible();
+    const lessonId = await item.getAttribute("data-lesson-id");
+    expect(lessonId).toMatch(/^LES-/);
+    const cta = page.getByTestId("plan-cta-unfinished_lesson");
+    await expect(cta).toBeVisible();
+    const href = await cta.getAttribute("href");
+    expect(href).toContain(`/learn/lessons/${lessonId}`);
     await axeSmoke(page, "plan");
     await saveShot(page, "daily-plan");
   });
 
-  test("5–6: incorrect attempt → Powtórka → due date updates", async ({
+  test("5–6: Powtórka item → CTA exercise → attempt updates schedule", async ({
     page,
   }) => {
     test.setTimeout(180_000);
@@ -223,7 +231,8 @@ test.describe("Milestone 3 closed beta core", () => {
       "DemoLearner1!",
       /\/dashboard/,
     );
-    // Force incorrect attempt via API using known exercise from module stream
+
+    // Seed an incorrect attempt so a concept appears on Powtórka (documented wrong).
     await page.goto(`/ru/learn/${MODULE}`);
     await page.getByTestId("start-practice").click();
     await expect(page.getByTestId("exercise-player")).toBeVisible({
@@ -235,10 +244,7 @@ test.describe("Milestone 3 closed beta core", () => {
     const type = await page
       .getByTestId("exercise-player")
       .getAttribute("data-exercise-type");
-    let answer: Record<string, unknown> = { type: "single_choice", index: 99 };
-    if (type === "multiple_choice") answer = { type, indices: [99] };
-    if (type === "gap_fill") answer = { type, values: ["xxx"] };
-    if (type === "ordering") answer = { type, order: [9, 8, 7] };
+    const answer = wrongAnswer(type);
     const key = crypto.randomUUID();
     const res1 = await page.context().request.post("/api/learning/attempt", {
       headers: { ...authApiHeaders(), "Idempotency-Key": key },
@@ -256,20 +262,72 @@ test.describe("Milestone 3 closed beta core", () => {
 
     await page.goto("/ru/review");
     await expect(page.getByTestId("review-queue-page")).toBeVisible();
-    await expect(page.getByTestId("review-item").first()).toBeVisible({
-      timeout: 15_000,
-    });
-    const dueBefore = await page
-      .getByTestId("review-item")
-      .first()
-      .getAttribute("data-due-at");
-    await axeSmoke(page, "review");
-    await saveShot(page, "powtorka-queue");
+    const reviewItem = page.getByTestId("review-item").first();
+    await expect(reviewItem).toBeVisible({ timeout: 15_000 });
+    const dueBefore = await reviewItem.getAttribute("data-due-at");
+    expect(dueBefore).toBeTruthy();
+    const conceptId = await reviewItem.getAttribute("data-concept-id");
+    expect(conceptId).toBeTruthy();
 
-    // Replay same idempotency key must not move schedule
+    const cta = page.getByTestId("review-item-cta").first();
+    await expect(cta).toBeVisible();
+    const href = await cta.getAttribute("href");
+    expect(href).toMatch(/\/learn\/[^/]+\/exercise\//);
+    const hrefMatch = href!.match(/\/learn\/([^/]+)\/exercise\/([^/?#]+)/);
+    expect(hrefMatch?.[1]).toBeTruthy();
+    expect(hrefMatch?.[2]).toBeTruthy();
+    const ctaModuleId = hrefMatch![1]!;
+    const ctaExerciseId = hrefMatch![2]!;
+
+    await cta.click();
+    await expect(page).toHaveURL(
+      new RegExp(`/learn/${ctaModuleId}/exercise/${ctaExerciseId}`),
+      { timeout: 20_000 },
+    );
+    await expect(page.getByTestId("exercise-player")).toBeVisible({
+      timeout: 20_000,
+    });
+    const openedExerciseId = await page
+      .getByTestId("exercise-player")
+      .getAttribute("data-exercise-id");
+    expect(openedExerciseId).toBe(ctaExerciseId);
+    const openedType = await page
+      .getByTestId("exercise-player")
+      .getAttribute("data-exercise-type");
+
+    // Submit another documented-wrong attempt; assert schedule movement only
+    // (do not claim a random option is "correct").
+    await page.waitForTimeout(50);
+    const key2 = crypto.randomUUID();
+    const res2 = await page.context().request.post("/api/learning/attempt", {
+      headers: { ...authApiHeaders(), "Idempotency-Key": key2 },
+      data: {
+        moduleId: ctaModuleId,
+        exerciseId: openedExerciseId,
+        answer: wrongAnswer(openedType),
+        idempotencyKey: key2,
+      },
+    });
+    const j2 = (await res2.json()) as {
+      persisted?: boolean;
+      reviewDueAt?: string | null;
+      correct?: boolean;
+    };
+    expect(res2.ok()).toBeTruthy();
+    expect(j2.persisted).toBe(true);
+    expect(j2.correct).toBe(false);
+    expect(j2.reviewDueAt).toBeTruthy();
+    expect(j2.reviewDueAt).not.toBe(dueBefore);
+
+    // Idempotent replay must not move schedule again.
     const resReplay = await page.context().request.post("/api/learning/attempt", {
-      headers: { ...authApiHeaders(), "Idempotency-Key": key },
-      data: { moduleId: MODULE, exerciseId, answer, idempotencyKey: key },
+      headers: { ...authApiHeaders(), "Idempotency-Key": key2 },
+      data: {
+        moduleId: ctaModuleId,
+        exerciseId: openedExerciseId,
+        answer: wrongAnswer(openedType),
+        idempotencyKey: key2,
+      },
     });
     const jReplay = (await resReplay.json()) as {
       replayed?: boolean;
@@ -278,36 +336,23 @@ test.describe("Milestone 3 closed beta core", () => {
     expect(jReplay.replayed).toBe(true);
     expect(jReplay.reviewDueAt).toBeNull();
 
-    // Correct follow-up with new key → new due date
-    const key2 = crypto.randomUUID();
-    let correctAnswer: Record<string, unknown> = {
-      type: "single_choice",
-      index: 0,
-    };
-    if (type === "multiple_choice") correctAnswer = { type, indices: [0] };
-    if (type === "gap_fill") correctAnswer = { type, values: ["a"] };
-    if (type === "ordering") correctAnswer = { type, order: [0, 1, 2] };
-    const res2 = await page.context().request.post("/api/learning/attempt", {
-      headers: { ...authApiHeaders(), "Idempotency-Key": key2 },
-      data: {
-        moduleId: MODULE,
-        exerciseId,
-        answer: correctAnswer,
-        idempotencyKey: key2,
-      },
-    });
-    const j2 = (await res2.json()) as { reviewDueAt?: string | null };
-    expect(res2.ok()).toBeTruthy();
-    expect(j2.reviewDueAt).toBeTruthy();
-    if (dueBefore && j2.reviewDueAt) {
-      expect(j2.reviewDueAt).not.toBe(dueBefore);
-    }
+    await page.goto("/ru/review");
+    const dueAfter = await page
+      .getByTestId("review-item")
+      .first()
+      .getAttribute("data-due-at");
+    expect(dueAfter).toBeTruthy();
+    expect(dueAfter).not.toBe(dueBefore);
+
+    await axeSmoke(page, "review");
+    await saveShot(page, "powtorka-queue");
   });
 
-  test("7–10: author submit, reviewer changes, resubmit+approve, self-review ban", async ({
+  test("7–10: author submit → changes → resubmit → approve + self-review ban", async ({
     page,
   }) => {
     test.setTimeout(180_000);
+    // Fresh CI DB after migrate+seed starts DRAFT — no early exit on APPROVED.
     await loginAs(
       page,
       "author@demo.slowarium.local",
@@ -316,44 +361,28 @@ test.describe("Milestone 3 closed beta core", () => {
     );
     await page.goto(`/ru/author/${MODULE}`);
     await expect(page.getByTestId("author-review-detail")).toBeVisible();
-    const statusText = await page.getByTestId("review-status").innerText();
-    const statusMatch = statusText.match(/Status:\s*(\w+)/);
-    const currentStatus = statusMatch?.[1] ?? "";
-    if (currentStatus === "APPROVED") {
-      const selfDone = await page.context().request.post("/api/author/review", {
-        headers: authApiHeaders(),
-        data: {
-          moduleId: MODULE,
-          action: "verdict",
-          verdict: "approve",
-          comment: "self",
-        },
-      });
-      const selfDoneBody = (await selfDone.json()) as { ok?: boolean; error?: string };
-      expect(selfDone.ok()).toBeFalsy();
-      expect(selfDoneBody.error).toMatch(
-        /self_review|forbidden|not_in_review|stale_state|self/i,
-      );
-      await saveShot(page, "author-already-approved");
-      return;
-    }
+    await expect(page.getByTestId("review-status")).toContainText(/DRAFT|REJECTED/);
+
     const submit = page.getByTestId("submit-for-review");
-    if ((await submit.count()) > 0) {
-      const resPromise = page.waitForResponse(
-        (r) => r.url().includes("/api/author/review"),
-        { timeout: 20_000 },
-      );
-      await submit.click();
-      const res = await resPromise;
-      const body = (await res.json()) as { ok?: boolean; to?: string; status?: string };
-      expect(res.ok()).toBeTruthy();
-      expect(body.ok).toBe(true);
-      expect(body.to ?? body.status).toMatch(/IN_REVIEW/);
-    }
+    await expect(submit).toBeVisible();
+    const submitPromise = page.waitForResponse(
+      (r) =>
+        r.url().includes("/api/author/review") && r.request().method() === "POST",
+      { timeout: 20_000 },
+    );
+    await submit.click();
+    const submitRes = await submitPromise;
+    const submitBody = (await submitRes.json()) as {
+      ok?: boolean;
+      to?: string;
+      status?: string;
+    };
+    expect(submitRes.ok()).toBeTruthy();
+    expect(submitBody.ok).toBe(true);
+    expect(submitBody.to ?? submitBody.status).toMatch(/IN_REVIEW/);
     await saveShot(page, "author-submitted");
     await axeSmoke(page, "author");
 
-    // Self-review forbidden
     const self = await page.context().request.post("/api/author/review", {
       headers: authApiHeaders(),
       data: {
@@ -377,39 +406,23 @@ test.describe("Milestone 3 closed beta core", () => {
       /\/dashboard/,
     );
     await page.goto(`/ru/author/${MODULE}`);
-    const changes = page.getByTestId("request-changes");
-    if ((await changes.count()) > 0) {
-      // UI may require comment field
-      const comment = page.getByTestId("review-comment");
-      if ((await comment.count()) > 0) {
-        await comment.fill("Please revise dialogue register.");
-      }
-      const resPromise = page.waitForResponse(
-        (r) => r.url().includes("/api/author/review"),
-        { timeout: 20_000 },
-      );
-      await changes.click();
-      const res = await resPromise;
-      const body = (await res.json()) as { ok?: boolean; to?: string; error?: string };
-      if (!body.ok && body.error === "comment_required") {
-        // API-level request with comment
-        const api = await page.context().request.post("/api/author/review", {
-          headers: authApiHeaders(),
-          data: {
-            moduleId: MODULE,
-            action: "verdict",
-            verdict: "request_changes",
-            comment: "Please revise dialogue register.",
-          },
-        });
-        const apiBody = (await api.json()) as { ok?: boolean; to?: string };
-        expect(api.ok()).toBeTruthy();
-        expect(apiBody.to).toBe("REJECTED");
-      } else {
-        expect(body.ok).toBe(true);
-        expect(body.to).toBe("REJECTED");
-      }
-    }
+    await expect(page.getByTestId("request-changes")).toBeVisible();
+    await page.getByTestId("review-comment").fill("Please revise dialogue register.");
+    const changesPromise = page.waitForResponse(
+      (r) =>
+        r.url().includes("/api/author/review") && r.request().method() === "POST",
+      { timeout: 20_000 },
+    );
+    await page.getByTestId("request-changes").click();
+    const changesRes = await changesPromise;
+    const changesBody = (await changesRes.json()) as {
+      ok?: boolean;
+      to?: string;
+      error?: string;
+    };
+    expect(changesRes.ok()).toBeTruthy();
+    expect(changesBody.ok).toBe(true);
+    expect(changesBody.to).toBe("REJECTED");
     await saveShot(page, "changes-requested");
 
     await page.getByTestId("link-logout").click();
@@ -419,7 +432,6 @@ test.describe("Milestone 3 closed beta core", () => {
       "DemoAuthor1!",
       /\/dashboard/,
     );
-    // Resubmit
     const resubmit = await page.context().request.post("/api/author/review", {
       headers: authApiHeaders(),
       data: { moduleId: MODULE, action: "submit_for_review" },
@@ -428,15 +440,9 @@ test.describe("Milestone 3 closed beta core", () => {
       ok?: boolean;
       to?: string;
       error?: string;
-      status?: string;
     };
-    if (!resubmit.ok()) {
-      expect(String(resubmitBody.error ?? "")).toMatch(/stale_state|illegal|forbidden/i);
-      await page.goto(`/ru/author/${MODULE}`);
-      const st = await page.getByTestId("review-status").innerText();
-      expect(st).toMatch(/IN_REVIEW|APPROVED/);
-      return;
-    }
+    expect(resubmit.ok()).toBeTruthy();
+    expect(resubmitBody.ok).toBe(true);
     expect(resubmitBody.to).toBe("IN_REVIEW");
 
     await page.getByTestId("link-logout").click();
@@ -460,11 +466,10 @@ test.describe("Milestone 3 closed beta core", () => {
     expect(approveBody.to).toBe("APPROVED");
   });
 
-  test("11: ordinary learner + previewer cannot enter author area", async ({
+  test("11: ordinary learner denied; previewer denied author, DRAFT still available", async ({
     page,
   }) => {
-    test.setTimeout(120_000);
-    // Register ordinary learner
+    test.setTimeout(180_000);
     const stamp = Date.now();
     const email = `e2e.m3.ord.${stamp}@slowarium.test`;
     const password = "E2eTestPass123!";
@@ -481,15 +486,40 @@ test.describe("Milestone 3 closed beta core", () => {
       await page.getByTestId("onboarding-continue").click();
     }
     await page.goto("/ru/author");
-    // notFound() keeps the URL; assert author chrome is absent.
     await expect(page.getByTestId("author-list-page")).toHaveCount(0);
     await expect(page.getByTestId("author-review-detail")).toHaveCount(0);
-    const status = await page.context().request.post("/api/author/review", {
+    const ordinaryApi = await page.context().request.post("/api/author/review", {
       headers: authApiHeaders(),
       data: { moduleId: MODULE, action: "submit_for_review" },
     });
-    expect([401, 403, 404]).toContain(status.status());
+    expect([401, 403, 404]).toContain(ordinaryApi.status());
     await saveShot(page, "ordinary-learner-author-denied");
+
+    // Clear session before previewer login (404 author page may lack logout chrome).
+    await page.context().clearCookies();
+    await page.goto("/ru/login", { waitUntil: "domcontentloaded" });
+
+    // Demo learner includes previewer role — author chrome must stay unavailable,
+    // while DRAFT learner catalog remains reachable under DEMO_PREVIEW.
+    await loginAs(
+      page,
+      "learner@demo.slowarium.local",
+      "DemoLearner1!",
+      /\/dashboard/,
+    );
+    await page.goto("/ru/author");
+    await expect(page.getByTestId("author-list-page")).toHaveCount(0);
+    await expect(page.getByTestId("author-review-detail")).toHaveCount(0);
+    const previewerApi = await page.context().request.post("/api/author/review", {
+      headers: authApiHeaders(),
+      data: { moduleId: MODULE, action: "submit_for_review" },
+    });
+    expect([401, 403, 404]).toContain(previewerApi.status());
+
+    await page.goto(`/ru/learn/${MODULE}`);
+    await expect(page.getByTestId("module-lesson").first()).toBeVisible();
+    await expect(page.getByTestId("module-lesson")).toHaveCount(3);
+    await saveShot(page, "previewer-draft-learner-ok");
   });
 
   test("12: PUBLISHED blocked", async ({ page }) => {
@@ -500,7 +530,6 @@ test.describe("Milestone 3 closed beta core", () => {
       "DemoReviewer1!",
       /\/dashboard/,
     );
-    // Prefer admin if available; reviewer/admin path
     const pub = await page.context().request.post("/api/author/review", {
       headers: authApiHeaders(),
       data: { moduleId: MODULE, action: "publish" },
@@ -511,9 +540,7 @@ test.describe("Milestone 3 closed beta core", () => {
       /publication_gates|forbidden_publish|not_approved|illegal/i,
     );
     await page.goto(`/ru/author/${MODULE}`);
-    if ((await page.getByTestId("approved-but-blocked").count()) > 0) {
-      await expect(page.getByTestId("approved-but-blocked")).toBeVisible();
-    }
+    await expect(page.getByTestId("approved-but-blocked")).toBeVisible();
     await saveShot(page, "published-blocked");
   });
 });

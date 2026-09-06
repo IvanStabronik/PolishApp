@@ -64,7 +64,8 @@ export default defineConfig({
     baseURL,
     trace: "on",
     screenshot: "on",
-    video: "on",
+    // Video needs Playwright ffmpeg; CI installs it. Local Windows may lack the binary.
+    video: process.env.CI ? "on" : "off",
   },
   projects: [
     {

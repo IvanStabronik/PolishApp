@@ -68,7 +68,7 @@ export default defineConfig({
     baseURL,
     trace: "on",
     screenshot: "on",
-    video: "on",
+    video: process.env.CI ? "on" : "off",
   },
   projects: [
     {
