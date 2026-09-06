@@ -4,20 +4,13 @@ import { defineConfig } from "vitest/config";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 
+/** Run after migrate+seed: `pnpm test:integration` */
 export default defineConfig({
   test: {
     environment: "node",
-    include: [
-      "src/**/*.test.ts",
-      "tests/unit/**/*.test.ts",
-    ],
-    exclude: [
-      "node_modules",
-      ".next",
-      "e2e",
-      "tests/e2e",
-      "tests/integration/**",
-    ],
+    include: ["tests/integration/**/*.test.ts"],
+    exclude: ["node_modules", ".next"],
+    fileParallelism: false,
   },
   resolve: {
     alias: {
