@@ -124,6 +124,9 @@ export default async function AuthorReviewDetailPage({ params }: Props) {
         <pre
           className="mt-8 overflow-auto rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-4 text-xs"
           data-testid="review-packet-json"
+          tabIndex={0}
+          role="region"
+          aria-label="Review packet JSON"
         >
           {buildReviewPacketJson(version)}
         </pre>
