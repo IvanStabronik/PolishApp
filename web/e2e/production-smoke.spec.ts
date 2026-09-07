@@ -107,6 +107,7 @@ test.describe("M5 production smoke", () => {
     const csp = res.headers()["content-security-policy"] ?? "";
     expect(csp).toContain("default-src 'self'");
     expect(csp).toContain("frame-ancestors 'none'");
+    expect(csp).not.toContain("unsafe-eval");
     expect(res.headers()["x-content-type-options"]).toBe("nosniff");
     expect(res.headers()["x-frame-options"]).toBe("DENY");
   });

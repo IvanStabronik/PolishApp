@@ -4,7 +4,14 @@ export function authUsesSecureCookies(url: string): boolean {
   return url.startsWith("https://");
 }
 
-/** Exported for unit tests — Better Auth builtin limiter is off in CI. */
-export function authBuiltinRateLimitEnabled(ci: boolean): boolean {
-  return !ci;
+/**
+ * Better Auth builtin limiter config value.
+ * - CI: forced off (E2E shares one runner IP; app-level Postgres limits still apply)
+ * - non-CI: `undefined` so Better Auth keeps its own prod/dev defaults
+ *   (do not force `true` — that throttles local `next dev`)
+ */
+export function authBuiltinRateLimitEnabled(
+  ci: boolean,
+): boolean | undefined {
+  return ci ? false : undefined;
 }

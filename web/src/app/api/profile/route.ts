@@ -5,6 +5,11 @@ import { db } from "@/db/client";
 import { learnerProfiles } from "@/db/schema";
 import { LEARNER_L1, UI_LOCALES } from "@/lib/enums";
 import { getRequestSession } from "@/modules/auth/session";
+import {
+  assertSameOrigin,
+  getCorrelationId,
+  publicErrorBody,
+} from "@/modules/ops/runtime";
 
 const patchSchema = z
   .object({
@@ -59,6 +64,13 @@ export async function GET() {
 }
 
 export async function PATCH(request: Request) {
+  const correlationId = getCorrelationId(request);
+  if (!assertSameOrigin(request)) {
+    return NextResponse.json(publicErrorBody("origin_rejected", correlationId), {
+      status: 403,
+    });
+  }
+
   const session = await getRequestSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });

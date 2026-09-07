@@ -1,5 +1,6 @@
 /**
  * M5 security integration — rate limits + origin rejection on privacy/onboarding.
+ * Includes HTTP handler-level negative cases (not just primitives).
  */
 import { afterAll, describe, expect, it } from "vitest";
 import { randomUUID } from "node:crypto";
@@ -48,5 +49,83 @@ describe.skipIf(!hasDb)("M5 security controls (postgres)", () => {
       headers: { Origin: "https://attacker.test" },
     });
     expect(assertSameOrigin(bad)).toBe(false);
+  });
+
+  it("privacy export HTTP handler rejects foreign Origin before auth", async () => {
+    process.env.BETTER_AUTH_URL = "http://127.0.0.1:3000";
+    process.env.APP_URL = "http://127.0.0.1:3000";
+    const { POST } = await import("@/app/api/privacy/export/route");
+    const res = await POST(
+      new Request("http://127.0.0.1:3000/api/privacy/export", {
+        method: "POST",
+        headers: { Origin: "https://evil.example" },
+      }),
+    );
+    expect(res.status).toBe(403);
+    const body = (await res.json()) as { error?: string };
+    expect(body.error).toBe("origin_rejected");
+  });
+
+  it("privacy export HTTP handler rate-limits by client IP", async () => {
+    process.env.BETTER_AUTH_URL = "http://127.0.0.1:3000";
+    process.env.APP_URL = "http://127.0.0.1:3000";
+    const { POST } = await import("@/app/api/privacy/export/route");
+    const ip = `m5-http-rl-${randomUUID().slice(0, 8)}`;
+    let lastStatus = 0;
+    for (let i = 0; i < 6; i++) {
+      const res = await POST(
+        new Request("http://127.0.0.1:3000/api/privacy/export", {
+          method: "POST",
+          headers: {
+            Origin: "http://127.0.0.1:3000",
+            "x-forwarded-for": ip,
+          },
+        }),
+      );
+      lastStatus = res.status;
+      // First hits may be 401 (no session) — rate limit fires at 6th with limit=5.
+      if (i < 5) {
+        expect([401, 429]).toContain(res.status);
+      }
+    }
+    expect(lastStatus).toBe(429);
+  });
+
+  it("onboarding HTTP handler rejects foreign Origin", async () => {
+    process.env.BETTER_AUTH_URL = "http://127.0.0.1:3000";
+    process.env.APP_URL = "http://127.0.0.1:3000";
+    const { POST } = await import("@/app/api/profile/onboarding/route");
+    const res = await POST(
+      new Request("http://127.0.0.1:3000/api/profile/onboarding", {
+        method: "POST",
+        headers: {
+          Origin: "https://evil.example",
+          "Content-Type": "application/json",
+        },
+        body: "{}",
+      }),
+    );
+    expect(res.status).toBe(403);
+  });
+
+  it("learning attempt HTTP handler rejects foreign Origin", async () => {
+    process.env.BETTER_AUTH_URL = "http://127.0.0.1:3000";
+    process.env.APP_URL = "http://127.0.0.1:3000";
+    const { POST } = await import("@/app/api/learning/attempt/route");
+    const res = await POST(
+      new Request("http://127.0.0.1:3000/api/learning/attempt", {
+        method: "POST",
+        headers: {
+          Origin: "https://evil.example",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          moduleId: "x",
+          exerciseId: "y",
+          answer: {},
+        }),
+      }),
+    );
+    expect(res.status).toBe(403);
   });
 });

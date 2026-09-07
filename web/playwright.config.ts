@@ -45,6 +45,8 @@ const webServerEnv: Record<string, string> = {
   NEXT_PUBLIC_DEMO_PREVIEW: "true",
   DEMO_PREVIEW: "true",
   DEMO_MODE: "true",
+  // Closed-beta e2e must always exercise invite-only registration.
+  BETA_MODE: "true",
   // CI `next start` is NODE_ENV=production; allow demo seed only for test runners.
   ALLOW_PRODUCTION_DEMO: process.env.CI ? "true" : (process.env.ALLOW_PRODUCTION_DEMO ?? ""),
   // Match PLAYWRIGHT_BASE_URL (127.0.0.1) so Better Auth origin checks pass.

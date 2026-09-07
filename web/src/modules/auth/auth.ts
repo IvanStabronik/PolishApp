@@ -56,10 +56,9 @@ export const auth = betterAuth({
    * better-auth enables rate limits in production by default.
    * CI E2E hammers /sign-in from one runner IP — disable builtin there only.
    * App-level Postgres rate limits still apply in `api/auth/[...all]`.
-   * Use `undefined` (not `true`) outside CI so dev `next dev` is not throttled.
    */
   rateLimit: {
-    enabled: isCi ? false : undefined,
+    enabled: authBuiltinRateLimitEnabled(isCi),
   },
   advanced: {
     /**

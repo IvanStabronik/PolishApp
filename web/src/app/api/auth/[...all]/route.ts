@@ -36,14 +36,13 @@ export async function POST(request: Request) {
 
     const bucket =
       kind === "login" ? RATE_LIMIT_BUCKETS.login : RATE_LIMIT_BUCKETS.register;
-    const isTestLike =
-      process.env.CI === "true" ||
-      process.env.CI === "1" ||
-      process.env.DEMO_MODE === "true" ||
-      process.env.ALLOW_PRODUCTION_DEMO === "true";
+    // Inflate only under CI runners — never because DEMO_MODE /
+    // ALLOW_PRODUCTION_DEMO is set (those flags must not weaken prod limits).
+    const isCiRunner =
+      process.env.CI === "true" || process.env.CI === "1";
     const rl = await consumeRateLimit({
       bucketKey: `${bucket}:${clientIpFromRequest(request)}`,
-      limit: isTestLike ? 200 : kind === "login" ? 30 : 10,
+      limit: isCiRunner ? 200 : kind === "login" ? 30 : 10,
       windowMs: 60_000,
     });
     if (!rl.allowed) {

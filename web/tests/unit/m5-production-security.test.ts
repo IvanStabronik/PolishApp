@@ -17,6 +17,31 @@ import {
 import { canAccessDraftContent } from "@/lib/demo";
 import { RATE_LIMIT_BUCKETS } from "@/modules/ops/runtime";
 
+const ORIGIN_ENV_KEYS = [
+  "BETTER_AUTH_URL",
+  "NEXT_PUBLIC_APP_URL",
+  "APP_URL",
+  "TRUSTED_ORIGINS",
+] as const;
+
+const savedOriginEnv: Record<string, string | undefined> = {};
+
+afterEach(() => {
+  for (const key of ORIGIN_ENV_KEYS) {
+    if (key in savedOriginEnv) {
+      const prev = savedOriginEnv[key];
+      if (prev === undefined) delete process.env[key];
+      else process.env[key] = prev;
+      delete savedOriginEnv[key];
+    }
+  }
+});
+
+function setOriginEnv(key: (typeof ORIGIN_ENV_KEYS)[number], value: string) {
+  if (!(key in savedOriginEnv)) savedOriginEnv[key] = process.env[key];
+  process.env[key] = value;
+}
+
 describe("M5 production env validation", () => {
   const base = {
     DATABASE_URL: "postgresql://u:p@localhost:5432/db",
@@ -28,10 +53,6 @@ describe("M5 production env validation", () => {
     DEMO_PREVIEW: "false",
     NODE_ENV: "production" as const,
   };
-
-  afterEach(() => {
-    // no shared mutable env beyond function args
-  });
 
   it("accepts strict private-beta production env", () => {
     expect(() => validateRuntimeEnv(base)).not.toThrow();
@@ -50,7 +71,8 @@ describe("M5 production env validation", () => {
   });
 
   it("rejects missing INVITE_TOKEN_PEPPER in production", () => {
-    const { INVITE_TOKEN_PEPPER: _, ...rest } = base;
+    const rest = { ...base };
+    delete (rest as { INVITE_TOKEN_PEPPER?: string }).INVITE_TOKEN_PEPPER;
     expect(() => validateRuntimeEnv(rest)).toThrow(/INVITE_TOKEN_PEPPER/);
   });
 
@@ -72,8 +94,8 @@ describe("M5 production env validation", () => {
 
 describe("M5 CSRF / origin protection", () => {
   it("rejects foreign Origin", () => {
-    process.env.BETTER_AUTH_URL = "https://beta.example.com";
-    process.env.NEXT_PUBLIC_APP_URL = "https://beta.example.com";
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NEXT_PUBLIC_APP_URL", "https://beta.example.com");
     const req = new Request("https://beta.example.com/api/privacy/export", {
       method: "POST",
       headers: { Origin: "https://evil.example" },
@@ -82,7 +104,7 @@ describe("M5 CSRF / origin protection", () => {
   });
 
   it("allows trusted Origin", () => {
-    process.env.BETTER_AUTH_URL = "https://beta.example.com";
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
     const req = new Request("https://beta.example.com/api/privacy/export", {
       method: "POST",
       headers: { Origin: "https://beta.example.com" },
@@ -91,8 +113,8 @@ describe("M5 CSRF / origin protection", () => {
   });
 
   it("TRUSTED_ORIGINS extends allow-list", () => {
-    process.env.BETTER_AUTH_URL = "https://beta.example.com";
-    process.env.TRUSTED_ORIGINS = "https://custom.example";
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("TRUSTED_ORIGINS", "https://custom.example");
     expect(resolveTrustedOrigins()).toContain("https://custom.example");
   });
 });
@@ -126,8 +148,8 @@ describe("M5 auth cookie + builtin rate limit flags", () => {
     expect(authUsesSecureCookies("http://127.0.0.1:3000")).toBe(false);
   });
 
-  it("enables Better Auth rate limit outside CI", () => {
-    expect(authBuiltinRateLimitEnabled(false)).toBe(true);
+  it("disables Better Auth builtin rate limit only in CI (undefined outside)", () => {
+    expect(authBuiltinRateLimitEnabled(false)).toBeUndefined();
     expect(authBuiltinRateLimitEnabled(true)).toBe(false);
   });
 });
