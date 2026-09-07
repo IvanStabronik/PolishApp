@@ -9,7 +9,7 @@
 ```
 MILESTONE 3 FINAL ACCEPTANCE: COMPLETE
 SŁOWARIUM OPERABLE CLOSED BETA: PENDING FINAL ACCEPTANCE
-  — Analytics dimensions_key upgrade-path fix (MD5 canonical JSON + migration 0007)
+  — CI green: https://github.com/IvanStabronik/PolishApp/actions/runs/34113707670
   — PR #3 stays unmerged pending final re-audit
 PUBLIC DEPLOYMENT: EXTERNAL BLOCKER
 PUBLIC CONTENT RELEASE: BLOCKED PENDING INDEPENDENT JPJO REVIEW
@@ -66,10 +66,10 @@ Ordinary non-invite learners stay denied without previewer.
 
 ## CI
 
-**Final green CI (dimensions_key upgrade-path fix):** _pending push — fill after green_
+**Final green CI (dimensions_key upgrade-path fix):** https://github.com/IvanStabronik/PolishApp/actions/runs/34113707670
 
-- SHA: _pending_
-- Artifacts: `playwright-artifacts`
+- SHA: `a43a4fa2656d319ea2712e3ad131395723b80dae`
+- Artifacts: `playwright-artifacts` (run 34113707670)
 
 | Suite | Result |
 | --- | --- |
