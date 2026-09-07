@@ -12,10 +12,23 @@
 8. [ ] Run production smoke: `BASE_URL=https://… pnpm test:e2e:production`
 9. [ ] Confirm DEMO_MODE/DEMO_PREVIEW remain false; BETA_MODE true
 
-## Automatic deploy
+## Ready-for-credentials checklist (Railway)
 
-**Disabled** until Railway (or other) credentials + environment protection rules exist.
-Workflow: `.github/workflows/deploy.yml` is `workflow_dispatch` only and requires secrets.
+Operators must complete this before claiming a live private beta URL. Until then status stays **EXTERNAL ACCESS REQUIRED**.
+
+1. [ ] Railway project + managed Postgres provisioned
+2. [ ] GitHub Environment `private-beta` created with required reviewers (recommended)
+3. [ ] Secrets set: `DATABASE_URL`, `BETTER_AUTH_SECRET`, `INVITE_TOKEN_PEPPER`, `BASE_URL` (https)
+4. [ ] Deploy transport: `DEPLOY_WEBHOOK_URL` **or** `RAILWAY_TOKEN` (+ service/project IDs as needed)
+5. [ ] Optional smoke fixtures: `PROD_SMOKE_ADMIN_EMAIL`, `PROD_SMOKE_ADMIN_PASSWORD`, `PROD_SMOKE_ALLOW_DESTRUCTIVE=true` only on known hosts
+6. [ ] Service env matches `web/.env.production.example` (`BETA_MODE=true`, `DEMO_*=false`)
+7. [ ] Image built from Dockerfile at a known git SHA; migrate job uses `pnpm db:migrate` (advisory lock)
+8. [ ] Manual `workflow_dispatch` of `.github/workflows/deploy.yml` with `confirm_environment=private-beta`
+9. [ ] `GET /api/health` + `GET /api/ready` green on `BASE_URL`
+10. [ ] `BASE_URL=… pnpm test:e2e:production` green (including CSRF negatives)
+11. [ ] Only then update M5 report status to `SŁOWARIUM DEPLOYED PRIVATE BETA: COMPLETE` with the real URL
+
+Dry-run without secrets: the deploy workflow **fails closed** at the Guardrails job (expected). Do not weaken that gate.
 
 ## Rollback checklist (app)
 

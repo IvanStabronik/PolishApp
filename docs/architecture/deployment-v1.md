@@ -61,6 +61,10 @@ Optional:
 
 Cookies: `useSecureCookies` when base URL is `https://`.
 
+CSRF: mutating APIs use `assertSameOrigin`. Browser cookie sessions must present a trusted `Origin` (or trusted `Referer` / `Sec-Fetch-Site: same-origin|none`). Non-browser clients without cookies may omit `Origin` but still need a valid session.
+
+CSP honesty: production CSP omits `unsafe-eval` on `script-src` but still allows `unsafe-inline` for scripts/styles (Next.js App Router constraint). Do not claim a nonce-only CSP.
+
 ## Provider notes (Railway)
 
 Manual (external) steps — see M5 report:

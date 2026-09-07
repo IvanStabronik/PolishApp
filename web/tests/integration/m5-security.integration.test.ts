@@ -128,4 +128,84 @@ describe.skipIf(!hasDb)("M5 security controls (postgres)", () => {
     );
     expect(res.status).toBe(403);
   });
+
+  it("privacy delete HTTP handler rejects cookie session without Origin", async () => {
+    process.env.BETTER_AUTH_URL = "http://127.0.0.1:3000";
+    process.env.APP_URL = "http://127.0.0.1:3000";
+    const { POST } = await import("@/app/api/privacy/delete/route");
+    const res = await POST(
+      new Request("http://127.0.0.1:3000/api/privacy/delete", {
+        method: "POST",
+        headers: {
+          Cookie: "better-auth.session_token=forged",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ confirm: "DELETE" }),
+      }),
+    );
+    expect(res.status).toBe(403);
+    const body = (await res.json()) as { error?: string };
+    expect(body.error).toBe("origin_rejected");
+  });
+
+  it("privacy delete HTTP handler rate-limits by client IP", async () => {
+    process.env.BETTER_AUTH_URL = "http://127.0.0.1:3000";
+    process.env.APP_URL = "http://127.0.0.1:3000";
+    const { POST } = await import("@/app/api/privacy/delete/route");
+    const ip = `m5-del-rl-${randomUUID().slice(0, 8)}`;
+    let lastStatus = 0;
+    for (let i = 0; i < 4; i++) {
+      const res = await POST(
+        new Request("http://127.0.0.1:3000/api/privacy/delete", {
+          method: "POST",
+          headers: {
+            Origin: "http://127.0.0.1:3000",
+            "Content-Type": "application/json",
+            "x-forwarded-for": ip,
+          },
+          body: JSON.stringify({ confirm: "DELETE" }),
+        }),
+      );
+      lastStatus = res.status;
+      if (i < 3) {
+        // No session → 401; confirmation still counted toward rate limit.
+        expect([400, 401, 429]).toContain(res.status);
+      }
+    }
+    expect(lastStatus).toBe(429);
+  });
+
+  it("profile PATCH HTTP handler rejects foreign Origin", async () => {
+    process.env.BETTER_AUTH_URL = "http://127.0.0.1:3000";
+    process.env.APP_URL = "http://127.0.0.1:3000";
+    const { PATCH } = await import("@/app/api/profile/route");
+    const res = await PATCH(
+      new Request("http://127.0.0.1:3000/api/profile", {
+        method: "PATCH",
+        headers: {
+          Origin: "https://evil.example",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ preferredLocale: "ru" }),
+      }),
+    );
+    expect(res.status).toBe(403);
+  });
+
+  it("author review HTTP handler rejects foreign Origin", async () => {
+    process.env.BETTER_AUTH_URL = "http://127.0.0.1:3000";
+    process.env.APP_URL = "http://127.0.0.1:3000";
+    const { POST } = await import("@/app/api/author/review/route");
+    const res = await POST(
+      new Request("http://127.0.0.1:3000/api/author/review", {
+        method: "POST",
+        headers: {
+          Origin: "https://evil.example",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action: "approve", moduleId: "x" }),
+      }),
+    );
+    expect(res.status).toBe(403);
+  });
 });

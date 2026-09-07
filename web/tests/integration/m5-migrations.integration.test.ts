@@ -98,4 +98,25 @@ describe.skipIf(!hasDb)("M5 migrations (postgres)", () => {
     const after = await sql`select count(*)::int as c from drizzle.__drizzle_migrations`;
     expect(Number(after[0]?.c ?? 0)).toBe(countBefore);
   });
+
+  it("advisory lock blocks concurrent migrate acquire (try_lock)", async () => {
+    const sql = getSql();
+    const MIGRATE_LOCK_KEY = 784512309;
+    // Hold the same lock the migrator uses; a second session must not try_lock.
+    await sql`select pg_advisory_lock(${MIGRATE_LOCK_KEY})`;
+    try {
+      const { default: postgres } = await import("postgres");
+      const url = process.env.DATABASE_URL;
+      expect(url).toBeTruthy();
+      const other = postgres(url!, { max: 1 });
+      try {
+        const rows = await other`select pg_try_advisory_lock(${MIGRATE_LOCK_KEY}) as ok`;
+        expect(rows[0]?.ok).toBe(false);
+      } finally {
+        await other.end({ timeout: 5 });
+      }
+    } finally {
+      await sql`select pg_advisory_unlock(${MIGRATE_LOCK_KEY})`;
+    }
+  });
 });

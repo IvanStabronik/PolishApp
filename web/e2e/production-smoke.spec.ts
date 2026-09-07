@@ -137,6 +137,37 @@ test.describe("M5 production smoke", () => {
     expect(body.error).toBe("origin_rejected");
   });
 
+  test("CSRF rejects cookie-bearing request with no Origin", async ({
+    request,
+  }) => {
+    const res = await request.post("/api/privacy/export", {
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: "better-auth.session_token=not-a-real-session",
+        // Deliberately omit Origin / Referer / Sec-Fetch-Site
+      },
+    });
+    expect(res.status()).toBe(403);
+    const body = (await res.json()) as { error?: string };
+    expect(body.error).toBe("origin_rejected");
+  });
+
+  test("security headers include HSTS only expectation for https hosts", async ({
+    request,
+  }) => {
+    const res = await request.get("/ru/login");
+    expect(res.ok()).toBeTruthy();
+    const hsts = res.headers()["strict-transport-security"];
+    const host = new URL(baseURL).hostname;
+    if (host !== "localhost" && host !== "127.0.0.1") {
+      expect(hsts).toMatch(/max-age=/);
+    }
+    // CSP honesty: style/script may use unsafe-inline; production must not use unsafe-eval.
+    const csp = res.headers()["content-security-policy"] ?? "";
+    expect(csp).toContain("unsafe-inline");
+    expect(csp).not.toContain("unsafe-eval");
+  });
+
   test("public DRAFT module route does not expose curriculum to guests", async ({
     page,
   }) => {

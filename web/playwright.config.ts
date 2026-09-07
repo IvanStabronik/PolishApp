@@ -52,6 +52,19 @@ const webServerEnv: Record<string, string> = {
   // Match PLAYWRIGHT_BASE_URL (127.0.0.1) so Better Auth origin checks pass.
   BETTER_AUTH_URL: baseURL,
   NEXT_PUBLIC_APP_URL: baseURL,
+  // Production boot validation requires these; use CI-safe defaults when unset.
+  BETTER_AUTH_SECRET:
+    process.env.BETTER_AUTH_SECRET ??
+    envLocal.BETTER_AUTH_SECRET ??
+    "ci-test-secret-not-for-production",
+  INVITE_TOKEN_PEPPER:
+    process.env.INVITE_TOKEN_PEPPER ??
+    envLocal.INVITE_TOKEN_PEPPER ??
+    "ci-invite-pepper-not-for-production",
+  PRIVACY_AUDIT_SECRET:
+    process.env.PRIVACY_AUDIT_SECRET ??
+    envLocal.PRIVACY_AUDIT_SECRET ??
+    "ci-privacy-audit-secret-not-for-production",
 };
 
 export default defineConfig({

@@ -22,12 +22,12 @@ Before declaring any milestone/stage ready for human audit, run adversarial mult
 | Area | Evidence |
 | --- | --- |
 | Portable production image | `web/Dockerfile`, `.dockerignore`, Next standalone via `DOCKER_BUILD=1` |
-| Boot env validation | `web/src/instrumentation.ts` + Zod `validateRuntimeEnv` (prod forbids DEMO_*, requires pepper + https URL) |
+| Boot env validation | `web/src/instrumentation.ts` + Zod `validateRuntimeEnv` (prod forbids DEMO_*, requires pepper + https URL; loopback http allowed for local containers) |
 | Health / ready | `/api/health` liveness (no DB/secrets); `/api/ready` Postgres |
-| Separate migrate | `pnpm db:migrate` + advisory lock; **not** in container CMD |
-| Security | Origin CSRF on auth/privacy/onboarding; Postgres rate limits on login/register/invite/onboarding/privacy; HSTS in prod; CSP without `unsafe-eval` in production builds; public error bodies; log redaction |
-| Ops docs | `docs/architecture/deployment-v1.md`, `docs/operations/*` |
-| Production smoke | `playwright.production.config.ts` + `e2e/production-smoke.spec.ts` (requires `BASE_URL`; no webServer) |
+| Separate migrate | `pnpm db:migrate` + advisory lock; **not** in container CMD; concurrent acquire blocked (`pg_try_advisory_lock` tested) |
+| Security | Origin CSRF on auth/privacy/onboarding/learning/profile/author; cookie-session requests without Origin rejected; Postgres rate limits on login/register/invite/onboarding/privacy; HSTS in prod; CSP without `unsafe-eval` in production builds (**`unsafe-inline` still required** for Next script/style); public error bodies; log redaction; production hosts do not hardcode loopback Origins |
+| Ops docs | `docs/architecture/deployment-v1.md`, `docs/operations/*` incl. ready-for-credentials checklist |
+| Production smoke | `playwright.production.config.ts` + `e2e/production-smoke.spec.ts` (requires `BASE_URL`; no webServer; CSRF missing-Origin + foreign Origin negatives) |
 | Deploy workflow | `.github/workflows/deploy.yml` — `workflow_dispatch` only; fails closed without secrets |
 
 ## Migration / rollback
@@ -41,8 +41,11 @@ Before declaring any milestone/stage ready for human audit, run adversarial mult
 
 - Unit: `tests/unit/m5-production-security.test.ts`
 - Integration: `tests/integration/m5-security.integration.test.ts` (+ prior M4 invite/deactivate/privacy suites)
+- Origin policy: browser cookie sessions require trusted Origin / Referer / same-origin Sec-Fetch-Site; non-browser clients without cookies may omit Origin (auth still required)
 
 ## External manual actions (Railway)
+
+See **Ready-for-credentials checklist** in `docs/operations/release-and-rollback.md`. Summary:
 
 1. Create Railway project + managed Postgres.
 2. Add GitHub Environment `private-beta` with secrets: `DATABASE_URL`, `BETTER_AUTH_SECRET`, `INVITE_TOKEN_PEPPER`, `BASE_URL`, optional `DEPLOY_WEBHOOK_URL` / `RAILWAY_TOKEN`, smoke admin fixtures.
@@ -64,10 +67,13 @@ A2–B2 SEMANTIC MIGRATION: NOT STARTED
 
 | Suite | Result |
 | --- | --- |
-| Unit (`pnpm test`) | 98 passed, 0 skipped |
-| Integration (`pnpm test:integration`) | 50 passed, 0 skipped |
+| Unit (`pnpm test`) | 108 passed, 0 skipped |
+| Integration (`pnpm test:integration`) | 55 passed, 0 skipped |
 | Smoke E2E (`pnpm test:e2e:smoke`) | 7 passed, 0 skipped |
-| Typecheck / lint / build / content:validate | pass |
+| M3 E2E | 8 passed, 0 skipped |
+| M4 E2E | 11 passed, 0 skipped |
+| no-demo E2E | 2 passed, 0 skipped |
+| Typecheck / lint / build / content:validate / migrate+seed / `git diff --check` | pass |
 | Production smoke vs live URL | **N/A — EXTERNAL ACCESS REQUIRED** |
 
 CI will additionally run M3/M4 e2e, no-demo suite, clean-DB migrate smoke, and `git diff --check`.
@@ -87,10 +93,14 @@ No public content launch, no DRAFT publication, no fake JPJO, no A2–B2, no pay
 | Deploy `guard` job lacked `environment: private-beta` (env secrets invisible) | **Fixed** |
 | Invite redeem hard-coded bucket string (drift vs catalog) | **Fixed** — uses `RATE_LIMIT_BUCKETS.inviteRedeem` |
 | CSRF origin missing on `/api/learning/attempt`, `/api/profile` PATCH, `/api/author/review` | **Fixed** |
-| Security tests only exercised primitives, not HTTP handlers | **Fixed** — integration hits privacy/onboarding/attempt handlers |
+| Security tests only exercised primitives, not HTTP handlers | **Fixed** — integration hits privacy/onboarding/attempt/profile/author handlers |
 | Production smoke CSP did not assert no `unsafe-eval` | **Fixed** |
 | Playwright e2e reused wrong host on :3000 / local `.env.local` missing `BETA_MODE` (open register UI) | **Fixed** — pin `BETA_MODE=true` in Playwright webServer env; use free port for local runs |
 | no-demo e2e sent Origin from `PLAYWRIGHT_BASE_URL` while server was on `:3001` | **Fixed** — use Playwright `baseURL` fixture |
-| Missing `Origin` still allowed (non-browser / SameSite defense) | **Deferred** — documented; browser CSRF sends Origin |
+| Missing `Origin` still allowed on cookie-session mutating requests | **Fixed** — reject Cookie without Origin/Referer/same-origin Sec-Fetch-Site; document non-browser exception |
+| Production trusted-origin list hardcoded loopback even on https hosts | **Fixed** — loopback hardcoded only for non-prod or loopback public URL |
+| Privacy delete rate-limit + profile/author Origin HTTP negatives thin | **Fixed** |
+| Migrate advisory-lock concurrency untested | **Fixed** — `pg_try_advisory_lock` blocked while held |
+| CSP docs implied stronger than `unsafe-inline` reality | **Fixed** — report + deployment-v1 honesty notes |
 | Live Railway URL + production smoke | **Blocked** — EXTERNAL ACCESS REQUIRED |
 | `SŁOWARIUM DEPLOYED PRIVATE BETA: COMPLETE` | **Not claimed** |

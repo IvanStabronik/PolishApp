@@ -204,27 +204,84 @@ export function resolveTrustedOrigins(
       }
     }
   }
-  // Local/dev + Playwright ports always allowed for non-prod tooling.
-  allowed.add("http://localhost:3000");
-  allowed.add("http://127.0.0.1:3000");
-  allowed.add("http://localhost:3001");
-  allowed.add("http://127.0.0.1:3001");
+
+  // Loopback Playwright ports: only when not a real public production host.
+  // CI `next start` is NODE_ENV=production but BETTER_AUTH_URL is loopback —
+  // those origins are already added from env above. Hardcoded loopback must
+  // not remain on a public https private-beta host (stolen-cookie Origin spoof).
+  if (shouldAllowHardcodedLoopbackOrigins(env)) {
+    allowed.add("http://localhost:3000");
+    allowed.add("http://127.0.0.1:3000");
+    allowed.add("http://localhost:3001");
+    allowed.add("http://127.0.0.1:3001");
+  }
   return [...allowed];
 }
 
-/** CSRF / origin check for mutating browser API requests. */
+function shouldAllowHardcodedLoopbackOrigins(
+  env: NodeJS.ProcessEnv,
+): boolean {
+  if ((env.NODE_ENV ?? process.env.NODE_ENV) !== "production") return true;
+  for (const key of ["BETTER_AUTH_URL", "NEXT_PUBLIC_APP_URL", "APP_URL"]) {
+    const v = env[key];
+    if (!v) continue;
+    try {
+      if (isLoopbackHost(new URL(v).hostname)) return true;
+    } catch {
+      /* ignore */
+    }
+  }
+  return false;
+}
+
+/**
+ * CSRF / origin check for mutating cookie-session API requests.
+ *
+ * Browser clients: modern same-origin fetch/XHR always send `Origin`. Cross-site
+ * POSTs send the attacker origin and must fail the allow-list.
+ *
+ * Missing `Origin`:
+ * - `Sec-Fetch-Site: same-origin` | `none` → allow (Fetch Metadata).
+ * - `Sec-Fetch-Site: cross-site` | `same-site` → reject.
+ * - Cookie present → require trusted `Origin`, trusted `Referer`, or same-origin
+ *   Sec-Fetch-Site (secure default for ambient browser sessions).
+ * - No Cookie → allow (non-browser / server clients); auth still required
+ *   separately — there is no ambient session cookie to forge via CSRF.
+ */
 export function assertSameOrigin(request: Request): boolean {
+  const allowed = new Set(resolveTrustedOrigins());
   const origin = request.headers.get("origin");
-  if (!origin) {
-    // Non-browser clients (e2e/server) may omit Origin; require auth session separately.
+
+  if (origin) {
+    try {
+      return allowed.has(new URL(origin).origin);
+    } catch {
+      return false;
+    }
+  }
+
+  const secFetchSite = request.headers.get("sec-fetch-site")?.toLowerCase();
+  if (secFetchSite === "same-origin" || secFetchSite === "none") {
     return true;
   }
-  const allowed = new Set(resolveTrustedOrigins());
-  try {
-    return allowed.has(new URL(origin).origin);
-  } catch {
+  if (secFetchSite === "cross-site" || secFetchSite === "same-site") {
     return false;
   }
+
+  const cookie = request.headers.get("cookie");
+  if (cookie && cookie.trim().length > 0) {
+    const referer = request.headers.get("referer");
+    if (referer) {
+      try {
+        return allowed.has(new URL(referer).origin);
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  return true;
 }
 
 /** Rate-limit bucket prefixes for security-sensitive routes. */

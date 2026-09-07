@@ -22,6 +22,7 @@ const ORIGIN_ENV_KEYS = [
   "NEXT_PUBLIC_APP_URL",
   "APP_URL",
   "TRUSTED_ORIGINS",
+  "NODE_ENV",
 ] as const;
 
 const savedOriginEnv: Record<string, string | undefined> = {};
@@ -30,8 +31,9 @@ afterEach(() => {
   for (const key of ORIGIN_ENV_KEYS) {
     if (key in savedOriginEnv) {
       const prev = savedOriginEnv[key];
-      if (prev === undefined) delete process.env[key];
-      else process.env[key] = prev;
+      const env = process.env as Record<string, string | undefined>;
+      if (prev === undefined) delete env[key];
+      else env[key] = prev;
       delete savedOriginEnv[key];
     }
   }
@@ -39,7 +41,12 @@ afterEach(() => {
 
 function setOriginEnv(key: (typeof ORIGIN_ENV_KEYS)[number], value: string) {
   if (!(key in savedOriginEnv)) savedOriginEnv[key] = process.env[key];
-  process.env[key] = value;
+  (process.env as Record<string, string | undefined>)[key] = value;
+}
+
+function clearOriginEnv(key: (typeof ORIGIN_ENV_KEYS)[number]) {
+  if (!(key in savedOriginEnv)) savedOriginEnv[key] = process.env[key];
+  delete (process.env as Record<string, string | undefined>)[key];
 }
 
 describe("M5 production env validation", () => {
@@ -90,12 +97,34 @@ describe("M5 production env validation", () => {
       validateRuntimeEnv({ ...base, BETA_MODE: "false" }),
     ).toThrow(/BETA_MODE/);
   });
+
+  it("allows loopback http public URL in production containers", () => {
+    expect(() =>
+      validateRuntimeEnv({
+        ...base,
+        BETTER_AUTH_URL: "http://127.0.0.1:3000",
+      }),
+    ).not.toThrow();
+  });
+
+  it("rejects production when no public URL is configured", () => {
+    const rest = { ...base };
+    delete (rest as { BETTER_AUTH_URL?: string }).BETTER_AUTH_URL;
+    expect(() => validateRuntimeEnv(rest)).toThrow(/BETTER_AUTH_URL|APP_URL/);
+  });
+
+  it("rejects short BETTER_AUTH_SECRET", () => {
+    expect(() =>
+      validateRuntimeEnv({ ...base, BETTER_AUTH_SECRET: "too-short" }),
+    ).toThrow(/BETTER_AUTH_SECRET/);
+  });
 });
 
 describe("M5 CSRF / origin protection", () => {
   it("rejects foreign Origin", () => {
     setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
     setOriginEnv("NEXT_PUBLIC_APP_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
     const req = new Request("https://beta.example.com/api/privacy/export", {
       method: "POST",
       headers: { Origin: "https://evil.example" },
@@ -105,6 +134,7 @@ describe("M5 CSRF / origin protection", () => {
 
   it("allows trusted Origin", () => {
     setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
     const req = new Request("https://beta.example.com/api/privacy/export", {
       method: "POST",
       headers: { Origin: "https://beta.example.com" },
@@ -114,8 +144,87 @@ describe("M5 CSRF / origin protection", () => {
 
   it("TRUSTED_ORIGINS extends allow-list", () => {
     setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
     setOriginEnv("TRUSTED_ORIGINS", "https://custom.example");
     expect(resolveTrustedOrigins()).toContain("https://custom.example");
+  });
+
+  it("rejects missing Origin when Cookie session is present", () => {
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
+    const req = new Request("https://beta.example.com/api/privacy/export", {
+      method: "POST",
+      headers: { Cookie: "better-auth.session_token=abc" },
+    });
+    expect(assertSameOrigin(req)).toBe(false);
+  });
+
+  it("allows missing Origin for non-browser clients without Cookie", () => {
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
+    const req = new Request("https://beta.example.com/api/privacy/export", {
+      method: "POST",
+    });
+    expect(assertSameOrigin(req)).toBe(true);
+  });
+
+  it("allows missing Origin when Sec-Fetch-Site is same-origin", () => {
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
+    const req = new Request("https://beta.example.com/api/privacy/export", {
+      method: "POST",
+      headers: {
+        Cookie: "better-auth.session_token=abc",
+        "Sec-Fetch-Site": "same-origin",
+      },
+    });
+    expect(assertSameOrigin(req)).toBe(true);
+  });
+
+  it("rejects missing Origin when Sec-Fetch-Site is cross-site", () => {
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
+    const req = new Request("https://beta.example.com/api/privacy/export", {
+      method: "POST",
+      headers: {
+        Cookie: "better-auth.session_token=abc",
+        "Sec-Fetch-Site": "cross-site",
+      },
+    });
+    expect(assertSameOrigin(req)).toBe(false);
+  });
+
+  it("allows missing Origin with Cookie when Referer is trusted", () => {
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
+    const req = new Request("https://beta.example.com/api/privacy/export", {
+      method: "POST",
+      headers: {
+        Cookie: "better-auth.session_token=abc",
+        Referer: "https://beta.example.com/ru/settings",
+      },
+    });
+    expect(assertSameOrigin(req)).toBe(true);
+  });
+
+  it("production https host does not hardcode loopback Origins", () => {
+    setOriginEnv("BETTER_AUTH_URL", "https://beta.example.com");
+    setOriginEnv("NODE_ENV", "production");
+    clearOriginEnv("NEXT_PUBLIC_APP_URL");
+    clearOriginEnv("APP_URL");
+    clearOriginEnv("TRUSTED_ORIGINS");
+    const origins = resolveTrustedOrigins();
+    expect(origins).toContain("https://beta.example.com");
+    expect(origins).not.toContain("http://localhost:3000");
+    expect(origins).not.toContain("http://127.0.0.1:3000");
+  });
+
+  it("loopback production tooling still allows Playwright ports via env", () => {
+    setOriginEnv("BETTER_AUTH_URL", "http://127.0.0.1:3000");
+    setOriginEnv("NODE_ENV", "production");
+    const origins = resolveTrustedOrigins();
+    expect(origins).toContain("http://127.0.0.1:3000");
+    expect(origins).toContain("http://localhost:3000");
   });
 });
 
