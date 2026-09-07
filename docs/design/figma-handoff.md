@@ -290,7 +290,7 @@ Prior clipped clones (`36:246`, `36:255`, `36:156`, `36:165`) were replaced.
 
 ### Design debt (deferred — not claimed as completed M3 work)
 
-- Foundations (`27:3`) and Components (`27:4`) M3 copies remain empty; M1–M2 foundations/components already exist in-file and remain the visual source until a dedicated design-system sync pass.
+- Components (`27:4`) M3 copies remain empty; M1–M2 foundations/components already exist in-file. Foundations (`27:3`) filled in Visual System v2 polish with token board `64:6`.
 
 ## 7b. Milestone 4 — Operable Closed Beta
 
@@ -338,14 +338,27 @@ Note: long desktop Admin beta content may require vertical scrolling inside the 
 | VS2 / Desktop · Dashboard | `59:2` | 1440×1100 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=59-2) |
 | VS2 / Desktop · Lesson shell | `60:36` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=60-36) |
 | VS2 / Desktop · Admin beta | `60:2` | 1440×1200 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=60-2) |
+| VS2 / Tablet · Login | `65:24` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=65-24) |
+| VS2 / Tablet · Invite accept | `65:72` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=65-72) |
+| VS2 / Tablet · Dashboard | `66:26` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-26) |
+| VS2 / Tablet · Lesson shell | `66:83` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-83) |
+| VS2 / Tablet · Admin beta | `66:132` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-132) |
+| VS2 / Mobile · Login | `65:2` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=65-2) |
+| VS2 / Mobile · Invite accept | `65:47` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=65-47) |
+| VS2 / Mobile · Dashboard | `66:2` | 390×1100 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-2) |
+| VS2 / Mobile · Lesson shell | `66:60` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-60) |
+| VS2 / Mobile · Admin beta | `66:106` | 390×1100 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-106) |
+
+**Foundations (filled):** `VS2 / Foundations · Slowarium tokens` (`64:6`) on page Foundations (`27:3`) — color swatches, type, space/radius, focus ring.
 
 **Code kit raises (this stream):**
-- Auth split shell (`AuthShell`) for login / register / invite
-- Elevation + paper grain tokens in `globals.css`
-- Button via CVA + `@radix-ui/react-slot` (Slowarium colors, not Radix Themes defaults)
-- Dashboard continue panel + progress rail; lesson shell rail; admin metric tiles / surface panels
+- Auth split shell (`AuthShell`) for login / register / invite — md+ split, compact mobile atmosphere
+- Elevation + paper grain tokens in `globals.css`; `overflow-x: clip`; responsive `page-shell` gutters
+- Button via CVA + `@radix-ui/react-slot` (touch floor ≥44px all sizes)
+- Site header nav links ≥44px; choice options ≥44px
+- Dashboard continue panel + progress rail; lesson shell sticky chrome (mobile); admin metric tiles / divider rows / loading skeleton
 
-**Still to polish:** tablet/mobile VS2 frames; Foundations `27:3` fill from primitives; Code Connect mappings; deeper component variant sync from Figma `02 Components`.
+**Still optional:** Code Connect mappings; deeper component variant sync from Figma `02 Components`.
 
 ## 8. Out of scope
 

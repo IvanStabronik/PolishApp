@@ -56,12 +56,14 @@ export function LessonPlayer({ lesson, moduleHref }: LessonPlayerProps) {
   if (!step) return null;
 
   const shellChrome = (
-    <div className="lesson-shell mb-6 max-w-[var(--prose-max)]">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <p className="m-0 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-graphite-muted)]">
+    <div className="lesson-shell sticky top-0 z-[2] -mx-1 mb-5 bg-[color-mix(in_srgb,var(--color-paper)_92%,transparent)] px-1 py-2 backdrop-blur-sm sm:static sm:mx-0 sm:mb-6 sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <p className="m-0 max-w-[70%] truncate text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-graphite-muted)]">
           {lesson.title}
         </p>
-        <p className="m-0 text-sm text-[var(--color-graphite)]">{stepLabel}</p>
+        <p className="m-0 shrink-0 text-sm tabular-nums text-[var(--color-graphite)]">
+          {stepLabel}
+        </p>
       </div>
       <div
         className="lesson-shell__rail"
@@ -81,20 +83,28 @@ export function LessonPlayer({ lesson, moduleHref }: LessonPlayerProps) {
 
   if (step.kind === "theory") {
     return (
-      <section className="prose-narrow" data-testid="lesson-theory-step">
+      <section className="prose-narrow w-full min-w-0" data-testid="lesson-theory-step">
         {shellChrome}
         <p className="m-0 text-sm text-[var(--color-graphite)]">{t("theory")}</p>
-        <h1 className="mt-2 font-display text-3xl text-[var(--color-ink)]">
+        <h1 className="mt-1 font-display text-[clamp(1.5rem,4vw,1.875rem)] text-[var(--color-ink)] sm:text-3xl">
           {step.title}
         </h1>
-        <div className="mt-4 whitespace-pre-wrap text-[var(--color-ink-soft)]">
+        <div className="mt-3 whitespace-pre-wrap text-[var(--color-ink-soft)] sm:mt-4">
           {step.body}
         </div>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Button onClick={() => goNext()} data-testid="lesson-next-step">
+        <div className="mt-5 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-3">
+          <Button
+            onClick={() => goNext()}
+            data-testid="lesson-next-step"
+            className="w-full sm:w-auto"
+          >
             {t("nextStep")}
           </Button>
-          <Button variant="ghost" onClick={() => router.push(moduleHref)}>
+          <Button
+            variant="ghost"
+            onClick={() => router.push(moduleHref)}
+            className="w-full sm:w-auto"
+          >
             {t("backToModule")}
           </Button>
         </div>
@@ -108,14 +118,14 @@ export function LessonPlayer({ lesson, moduleHref }: LessonPlayerProps) {
     <section
       data-testid="lesson-exercise-step"
       data-lesson-id={lesson.id}
-      className="prose-narrow"
+      className="prose-narrow w-full min-w-0"
     >
       {shellChrome}
       <p className="m-0 text-sm text-[var(--color-graphite)]">{t("practice")}</p>
-      <h2 className="mt-2 font-display text-2xl text-[var(--color-ink)]">
+      <h2 className="mt-1 font-display text-[clamp(1.35rem,3.5vw,1.5rem)] text-[var(--color-ink)] sm:text-2xl">
         {step.title}
       </h2>
-      <div className="surface-panel mt-4 p-4 sm:p-5">
+      <div className="mt-3 border-t border-[var(--color-line)] pt-4 sm:mt-4 sm:pt-5">
         <ExercisePlayer
           key={step.exercise.id}
           moduleId={lesson.moduleId}

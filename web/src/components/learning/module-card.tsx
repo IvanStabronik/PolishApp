@@ -43,7 +43,7 @@ export async function ModuleCard({ module }: Props) {
       <Link
         href={`/learn/${module.id}`}
         data-testid={`module-open-${module.id}`}
-        className="font-medium text-[var(--color-amber-deep)] no-underline hover:underline"
+        className="inline-flex min-h-11 items-center font-medium text-[var(--color-amber-deep)] no-underline hover:underline"
       >
         {tLearn("openModule")} →
       </Link>

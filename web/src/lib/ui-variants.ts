@@ -18,7 +18,8 @@ export const buttonVariants = cva(
           "bg-[var(--color-burgundy)] text-[var(--color-paper-raised)] hover:brightness-110 active:translate-y-px",
       },
       size: {
-        sm: "min-h-9 px-3 text-sm",
+        /* Touch floor ≥44px across sizes */
+        sm: "min-h-11 px-3 text-sm",
         md: "min-h-11 px-4 text-base",
         lg: "min-h-12 px-5 text-lg",
       },

@@ -40,9 +40,12 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
       data-testid="site-header"
       className="border-b border-[var(--color-line)] bg-[color-mix(in_srgb,var(--color-paper-raised)_90%,transparent)] backdrop-blur-sm"
     >
-      <div className="page-shell flex flex-col gap-4 py-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="page-shell flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-4">
         <BrandMark compact />
-        <nav aria-label={t("menu")} className="flex flex-wrap gap-x-4 gap-y-2">
+        <nav
+          aria-label={t("menu")}
+          className="-mx-1 flex max-w-full flex-wrap gap-x-1 gap-y-1 overflow-x-auto sm:mx-0 sm:gap-x-2"
+        >
           {signedIn ? (
             <>
               {LINKS.map((item) => {
@@ -54,7 +57,7 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
                     href={item.href}
                     data-testid={item.testId}
                     className={cn(
-                      "text-sm font-medium no-underline transition-colors",
+                      "inline-flex min-h-11 items-center px-2.5 text-sm font-medium no-underline transition-colors",
                       active
                         ? "text-[var(--color-amber-deep)]"
                         : "text-[var(--color-graphite)] hover:text-[var(--color-ink)]",
@@ -69,7 +72,7 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
                 type="button"
                 data-testid="link-logout"
                 onClick={() => void signOut()}
-                className="cursor-pointer border-0 bg-transparent p-0 text-sm font-medium text-[var(--color-graphite)] hover:text-[var(--color-ink)]"
+                className="inline-flex min-h-11 cursor-pointer items-center border-0 bg-transparent px-2.5 text-sm font-medium text-[var(--color-graphite)] hover:text-[var(--color-ink)]"
               >
                 {t("signOut")}
               </button>
@@ -79,14 +82,14 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
               <Link
                 href="/login"
                 data-testid="link-login"
-                className="text-sm font-medium text-[var(--color-graphite)] no-underline hover:text-[var(--color-ink)]"
+                className="inline-flex min-h-11 items-center px-2.5 text-sm font-medium text-[var(--color-graphite)] no-underline hover:text-[var(--color-ink)]"
               >
                 {t("signIn")}
               </Link>
               <Link
                 href="/register"
                 data-testid="link-register"
-                className="text-sm font-medium text-[var(--color-amber-deep)] no-underline hover:underline"
+                className="inline-flex min-h-11 items-center px-2.5 text-sm font-medium text-[var(--color-amber-deep)] no-underline hover:underline"
               >
                 {t("register")}
               </Link>
