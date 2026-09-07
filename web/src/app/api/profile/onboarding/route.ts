@@ -6,6 +6,14 @@ import { learnerProfiles, type ConsentSnapshot } from "@/db/schema";
 import { LEARNER_L1, UI_LOCALES } from "@/lib/enums";
 import { getRequestSession } from "@/modules/auth/session";
 import { assertBetaAccessActive } from "@/modules/auth/beta-access";
+import {
+  RATE_LIMIT_BUCKETS,
+  assertSameOrigin,
+  getCorrelationId,
+  publicErrorBody,
+  structuredLog,
+} from "@/modules/ops/runtime";
+import { clientIpFromRequest, consumeRateLimit } from "@/modules/ops/rate-limit";
 
 const onboardingSchema = z.object({
   uiLocale: z.enum(UI_LOCALES),
@@ -39,9 +47,29 @@ function serializeProfile(row: typeof learnerProfiles.$inferSelect) {
 }
 
 export async function POST(request: Request) {
+  const correlationId = getCorrelationId(request);
+  if (!assertSameOrigin(request)) {
+    return NextResponse.json(publicErrorBody("origin_rejected", correlationId), {
+      status: 403,
+    });
+  }
+
+  const rl = await consumeRateLimit({
+    bucketKey: `${RATE_LIMIT_BUCKETS.onboarding}:${clientIpFromRequest(request)}`,
+    limit: 20,
+    windowMs: 60_000,
+  });
+  if (!rl.allowed) {
+    return NextResponse.json(publicErrorBody("rate_limited", correlationId), {
+      status: 429,
+    });
+  }
+
   const session = await getRequestSession();
   if (!session) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+    return NextResponse.json(publicErrorBody("unauthorized", correlationId), {
+      status: 401,
+    });
   }
   const denied = assertBetaAccessActive(session);
   if (denied) return denied;
@@ -50,13 +78,15 @@ export async function POST(request: Request) {
   try {
     json = await request.json();
   } catch {
-    return NextResponse.json({ error: "invalid_json" }, { status: 400 });
+    return NextResponse.json(publicErrorBody("invalid_json", correlationId), {
+      status: 400,
+    });
   }
 
   const parsed = onboardingSchema.safeParse(json);
   if (!parsed.success) {
     return NextResponse.json(
-      { error: "validation_failed", issues: parsed.error.flatten() },
+      { error: "validation_failed", correlationId },
       { status: 400 },
     );
   }
@@ -108,9 +138,18 @@ export async function POST(request: Request) {
       profile = inserted!;
     }
 
-    return NextResponse.json({ profile: serializeProfile(profile) });
+    return NextResponse.json({
+      profile: serializeProfile(profile),
+      correlationId,
+    });
   } catch (err) {
-    console.error("onboarding upsert failed", err);
-    return NextResponse.json({ error: "onboarding_failed" }, { status: 500 });
+    structuredLog("error", "onboarding_upsert_failed", {
+      correlationId,
+      error: err instanceof Error ? err.message : "unknown",
+    });
+    return NextResponse.json(
+      publicErrorBody("onboarding_failed", correlationId),
+      { status: 500 },
+    );
   }
 }

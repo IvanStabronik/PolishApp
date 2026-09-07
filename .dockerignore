@@ -1,0 +1,21 @@
+# Build context: `docker build -f web/Dockerfile .` from repo root.
+.git
+.github
+.tmp-*
+**/node_modules
+**/.next
+**/test-results
+**/playwright-report
+**/playwright-artifacts
+**/.env
+**/.env.local
+**/.env.*.local
+web/tests
+web/e2e
+web/coverage
+**/.DS_Store
+**/Thumbs.db
+*.log
+.cursor
+.vscode
+agent-transcripts

@@ -4,12 +4,18 @@ import { db } from "@/db/client";
 import * as schema from "@/db/schema";
 import type { UserRole } from "@/lib/enums";
 import { isBetaModeEnabled } from "@/modules/admin/roles";
+import { resolveTrustedOrigins } from "@/modules/ops/runtime";
 import { DEMO_ACCOUNTS, isDemoMode } from "./demo";
+import {
+  authBuiltinRateLimitEnabled,
+  authUsesSecureCookies,
+} from "./auth-policy";
 
 const secret = process.env.BETTER_AUTH_SECRET;
 const baseURL =
   process.env.BETTER_AUTH_URL ??
   process.env.NEXT_PUBLIC_APP_URL ??
+  process.env.APP_URL ??
   "http://localhost:3000";
 
 if (!secret && process.env.NODE_ENV === "production") {
@@ -45,16 +51,12 @@ export const auth = betterAuth({
   },
   secret: secret ?? "dev-only-insecure-secret-change-me",
   baseURL,
-  trustedOrigins: [
-    baseURL,
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3001",
-  ],
+  trustedOrigins: resolveTrustedOrigins(),
   /**
-   * better-auth enables rate limits in production (3 sign-in/sign-up per 10s).
-   * CI E2E hammers /sign-in from one runner IP and trips 429s; disable there only.
+   * better-auth enables rate limits in production by default.
+   * CI E2E hammers /sign-in from one runner IP — disable builtin there only.
+   * App-level Postgres rate limits still apply in `api/auth/[...all]`.
+   * Use `undefined` (not `true`) outside CI so dev `next dev` is not throttled.
    */
   rateLimit: {
     enabled: isCi ? false : undefined,
@@ -64,7 +66,7 @@ export const auth = betterAuth({
      * CI / private-alpha run on http://127.0.0.1. NODE_ENV=production during
      * `next start` would otherwise prefer Secure cookies that browsers drop on HTTP.
      */
-    useSecureCookies: baseURL.startsWith("https://"),
+    useSecureCookies: authUsesSecureCookies(baseURL),
     database: {
       generateId: () => crypto.randomUUID(),
     },
@@ -73,6 +75,7 @@ export const auth = betterAuth({
 
 export type Auth = typeof auth;
 export { DEMO_ACCOUNTS, isDemoMode };
+export { authBuiltinRateLimitEnabled, authUsesSecureCookies };
 
 export function getDemoAccount(kind: keyof typeof DEMO_ACCOUNTS) {
   return DEMO_ACCOUNTS[kind];

@@ -1,5 +1,11 @@
 # Runbook — deployment
 
+Canonical M5 docs:
+
+- [deployment-v1.md](../architecture/deployment-v1.md)
+- [release-and-rollback.md](../operations/release-and-rollback.md)
+- [private-beta-runbook.md](../operations/private-beta-runbook.md)
+
 ## Package
 
 - Production Dockerfile: `web/Dockerfile` (Next.js standalone).
@@ -8,30 +14,24 @@
 
 ## Required runtime env
 
-- `DATABASE_URL`
-- `BETTER_AUTH_SECRET` (≥16 chars)
-- `BETTER_AUTH_URL` / `NEXT_PUBLIC_APP_URL`
-- `INVITE_TOKEN_PEPPER` (recommended)
-- `BETA_MODE=true` for invite-only registration
+See `web/.env.production.example`. Validate: `pnpm ops:validate-env`.
 
-Validate: `pnpm ops:validate-env` (from `web/`).
-
-## Migrate on start (recommended job)
+## Migrate (separate release step)
 
 ```bash
 pnpm db:migrate   # advisory-locked; safe vs concurrent runners
 ```
 
-Production seed must **not** create demo accounts unless `ALLOW_PRODUCTION_DEMO=true` (discouraged).
+Production seed must **not** create demo accounts (`DEMO_MODE=false`).
 
 ## Cloud provisioning
 
-**EXTERNAL BLOCKER:** no cloud credentials are present in this repository.
-Ship the deployable image/package; do not claim a public URL until a real environment exists.
+**EXTERNAL ACCESS REQUIRED** until Railway (or other) credentials + GitHub Environment `private-beta` secrets exist.
+Deploy workflow: `.github/workflows/deploy.yml` (`workflow_dispatch` only).
 
 ## Status
 
 ```
-PUBLIC DEPLOYMENT: EXTERNAL BLOCKER (no provisioned URL / cloud credentials)
+PUBLIC DEPLOYMENT: EXTERNAL ACCESS REQUIRED
 PUBLIC CONTENT RELEASE: BLOCKED PENDING INDEPENDENT JPJO REVIEW
 ```

@@ -5,12 +5,14 @@ Web platform for adults with L1 Ukrainian / Russian / Belarusian who need system
 
 Working phrase: **Od podobnych słów do własnego głosu**.
 
-## Status (private alpha v2)
+## Status (Milestone 5 — deployed private beta)
 
 | Gate | Status |
 | --- | --- |
-| Five A1 DRAFT modules | **internal preview only** (previewer / author / reviewer) |
-| Auth / onboarding / attempts | **PostgreSQL** via Better Auth (no client fake session) |
+| Milestone 4 operable closed beta | **COMPLETE** (merged PR #3) |
+| Deployed private beta package | **In progress on `feat/deployed-private-beta-v5`** |
+| Provider URL / Railway credentials | **EXTERNAL ACCESS REQUIRED** until secrets exist |
+| Five A1 DRAFT modules | **internal / invite preview only** |
 | Public content release | **BLOCKED** pending independent JPJO review |
 | A2–B2 semantic migration | **NOT STARTED** |
 
@@ -18,11 +20,7 @@ Structural CI green ≠ pedagogical approval. Preview mastery is marked as inter
 
 ## Branch
 
-Active private-alpha work: **`feat/private-alpha-v2`** (from foundation `6ab4592`).
-
-Curriculum structural baseline: branch **`docs/phase-2-integrity-fix`** (see also `docs/requirements/curriculum/phase-2-integrity-report.md`).
-
-Related review packet (not approved): `docs/reviews/`, `docs/reports/phase-2-a1-review-readiness-report.md`.
+Active private-beta deploy work: **`feat/deployed-private-beta-v5`** (base `docs/requirements-r2`).
 
 ## Stack
 
@@ -30,12 +28,13 @@ Related review packet (not approved): `docs/reviews/`, `docs/reports/phase-2-a1-
 | --- | --- |
 | App | Next.js App Router (`web/`) |
 | Packages | pnpm (Node 22) |
-| DB | PostgreSQL 16 via Docker Compose |
-| ORM | Drizzle |
-| Auth | Better Auth |
+| DB | PostgreSQL 16 via Docker Compose (prod: managed Postgres) |
+| ORM | Drizzle (advisory-locked migrate) |
+| Auth | Better Auth (invite-only when `BETA_MODE=true`) |
 | Content | YAML under `content/` + Zod validate/import |
 | UI i18n | next-intl (UI locale ≠ L1) |
-| Tests | Vitest + Playwright |
+| Tests | Vitest + Playwright (incl. production smoke project) |
+| Deploy | Multi-stage `web/Dockerfile` (provider-portable; Railway primary) |
 
 Why the app is under `web/`: [ADR-007](docs/architecture/adr/007-web-directory.md).
 
@@ -74,7 +73,7 @@ pnpm dev
 
 App: [http://localhost:3000](http://localhost:3000)
 
-From repo root (workspace scripts proxy into `web/`):
+From repo root:
 
 ```bash
 docker compose up -d
@@ -92,7 +91,7 @@ python scripts/validate-curriculum.py
 
 ## Demo credentials
 
-Seeded when `DEMO_MODE=true` / after `pnpm db:seed` (local only):
+Seeded when `DEMO_MODE=true` / after `pnpm db:seed` (local only — **not** for production):
 
 | Role | Email | Password | Notes |
 | --- | --- | --- | --- |
@@ -102,35 +101,38 @@ Seeded when `DEMO_MODE=true` / after `pnpm db:seed` (local only):
 
 Ordinary registered learners **without** `previewer`/`author`/`reviewer` do **not** see DRAFT.
 
-Author and reviewer are **different accounts** (self-review of content is prohibited).
-
 ## Useful scripts
 
 | Command | What it does |
 | --- | --- |
 | `pnpm lint` / `pnpm typecheck` | ESLint + `tsc --noEmit` |
 | `pnpm test` | Vitest unit tests |
-| `pnpm test:e2e` | Playwright smoke |
+| `pnpm test:integration` | Postgres integration (M4/M5) |
+| `pnpm test:e2e` | Playwright M2–M4 suites |
+| `pnpm test:e2e:production` | Deployed-env smoke (`BASE_URL` required; no local webServer) |
+| `pnpm ops:validate-env` | Zod runtime env check |
+| `pnpm ops:generate-secret` | Cryptographic secret for auth/pepper |
 | `pnpm content:validate` | Zod-validate YAML under `content/` |
-| `pnpm content:import` | Import YAML into DB |
 | `pnpm db:migrate` / `pnpm db:seed` | Schema + demo users |
 | `python scripts/validate-curriculum.py` | Curriculum structural integrity |
 
 ## Environment
 
-See `.env.example` / `web/.env.example`:
+See `.env.example` / `web/.env.example` (local) and `web/.env.production.example` (private beta):
 
-- `DATABASE_URL=postgresql://slowarium:slowarium@localhost:5433/slowarium` (Docker maps host **5433** → container 5432)
-- `BETTER_AUTH_SECRET=…`
-- `BETTER_AUTH_URL=http://localhost:3000`
-- `DEMO_MODE=true`
-- `DEMO_PREVIEW=true` (server-side preview env; **not** an auth substitute)
-- `NEXT_PUBLIC_DEMO_PREVIEW` is **not** used for DRAFT authorization
+- `DATABASE_URL=…`
+- `BETTER_AUTH_SECRET=…` (generate: `pnpm ops:generate-secret`)
+- `BETTER_AUTH_URL` / `NEXT_PUBLIC_APP_URL` / `APP_URL`
+- `INVITE_TOKEN_PEPPER`, `PRIVACY_AUDIT_SECRET`
+- `BETA_MODE=true`
+- Local: `DEMO_MODE=true` / `DEMO_PREVIEW=true`
+- Production: `DEMO_MODE=false` / `DEMO_PREVIEW=false`
 
 ## Docs
 
 - Brand: `docs/brand/brand-foundation.md`
-- Design handoff (*Pierwsze spotkanie*): `docs/design/figma-handoff.md`
-- Architecture: `docs/architecture/`
+- Design handoff: `docs/design/figma-handoff.md`
+- Architecture: `docs/architecture/` (incl. [deployment-v1.md](docs/architecture/deployment-v1.md))
+- Operations: `docs/operations/` (runbook, incident, backup, release)
 - Requirements / curriculum: `docs/requirements/`
 - Contributing: `CONTRIBUTING.md`

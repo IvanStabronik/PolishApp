@@ -50,6 +50,7 @@ const webServerEnv: Record<string, string> = {
   NEXT_PUBLIC_DEMO_PREVIEW: "false",
   DEMO_PREVIEW: "false",
   DEMO_MODE: "true",
+  ALLOW_PRODUCTION_DEMO: process.env.CI ? "true" : (process.env.ALLOW_PRODUCTION_DEMO ?? ""),
   BETTER_AUTH_URL: baseURL,
   NEXT_PUBLIC_APP_URL: baseURL,
 };
