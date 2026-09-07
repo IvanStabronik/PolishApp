@@ -236,4 +236,111 @@ test.describe("M4 operable closed beta", () => {
     await page.goto("/ru/register");
     await expect(page.getByTestId("register-invite-required")).toBeVisible();
   });
+
+  test("13: admin deactivates invitee — session revoked, product denied", async ({
+    browser,
+  }) => {
+    test.setTimeout(180_000);
+    expect(learnerEmail).toBeTruthy();
+
+    const learnerCtx = await browser.newContext();
+    const adminCtx = await browser.newContext();
+    const learnerPage = await learnerCtx.newPage();
+    const adminPage = await adminCtx.newPage();
+
+    try {
+      // Learner establishes an active product session.
+      await loginUi(learnerPage, learnerEmail, learnerPassword);
+      await expect(learnerPage).toHaveURL(/\/dashboard/);
+      await expect(learnerPage.getByTestId("site-header")).toBeVisible();
+
+      // Admin deactivates that learner (revokes DB sessions).
+      await loginUi(adminPage, "admin@demo.slowarium.local", "DemoAdmin1!");
+      await adminPage.goto("/ru/admin/beta");
+      await expect(adminPage.getByTestId("admin-beta-console")).toBeVisible({
+        timeout: 20_000,
+      });
+      await adminPage.getByTestId("admin-learner-search").fill(learnerEmail);
+      const learnerRow = adminPage.locator(`[data-testid^="learner-row-"]`).first();
+      await expect(learnerRow).toBeVisible({ timeout: 10_000 });
+      const deactivate = learnerRow.locator(`[data-testid^="admin-deactivate-"]`);
+      await expect(deactivate).toBeVisible();
+      await deactivate.click();
+      await expect(
+        learnerRow.locator(`[data-testid^="learner-deactivated-"]`),
+      ).toBeVisible({ timeout: 15_000 });
+
+      // Old learner session cookie is now invalid / product denied.
+      await learnerPage.goto("/ru/dashboard", { waitUntil: "domcontentloaded" });
+      await expect(learnerPage).toHaveURL(/\/(login|beta-disabled)/, {
+        timeout: 20_000,
+      });
+
+      // Re-login allowed only to show explicit disabled state.
+      await learnerCtx.clearCookies();
+      await learnerPage.goto("/ru/login");
+      await learnerPage.getByTestId("login-email").fill(learnerEmail);
+      await learnerPage.getByTestId("login-password").fill(learnerPassword);
+      await learnerPage.getByTestId("login-submit").click();
+      await expect(learnerPage.getByTestId("beta-access-disabled")).toBeVisible({
+        timeout: 30_000,
+      });
+
+      await learnerPage.goto("/ru/dashboard");
+      await expect(learnerPage.getByTestId("beta-access-disabled")).toBeVisible({
+        timeout: 15_000,
+      });
+      await learnerPage.goto(`/ru/learn/${MODULE}`);
+      await expect(learnerPage.getByTestId("beta-access-disabled")).toBeVisible({
+        timeout: 15_000,
+      });
+      await learnerPage.goto("/ru/plan");
+      await expect(learnerPage.getByTestId("beta-access-disabled")).toBeVisible({
+        timeout: 15_000,
+      });
+
+      const attempt = await learnerCtx.request.post("/api/learning/attempt", {
+        headers: {
+          ...authApiHeaders(),
+          "Content-Type": "application/json",
+        },
+        data: {
+          moduleId: MODULE,
+          exerciseId: "EX-PLACEHOLDER",
+          answer: { choice: 0 },
+        },
+      });
+      expect(attempt.status()).toBe(403);
+      expect(((await attempt.json()) as { error?: string }).error).toBe(
+        "beta_access_revoked",
+      );
+
+      const feedback = await learnerCtx.request.post("/api/feedback", {
+        headers: {
+          ...authApiHeaders(),
+          "Content-Type": "application/json",
+        },
+        data: {
+          category: "bug",
+          comment: "should fail",
+          idempotencyKey: "11111111-1111-4111-8111-111111111111",
+          context: { route: "/ru/plan" },
+        },
+      });
+      expect(feedback.status()).toBe(403);
+      expect(((await feedback.json()) as { error?: string }).error).toBe(
+        "beta_access_revoked",
+      );
+
+      // Admin still sees deactivated status after reload.
+      await adminPage.goto("/ru/admin/beta");
+      await adminPage.getByTestId("admin-learner-search").fill(learnerEmail);
+      await expect(
+        adminPage.locator(`[data-testid^="learner-deactivated-"]`).first(),
+      ).toBeVisible({ timeout: 15_000 });
+    } finally {
+      await learnerCtx.close();
+      await adminCtx.close();
+    }
+  });
 });

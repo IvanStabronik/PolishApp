@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getRequestSession } from "@/modules/auth/session";
+import { assertBetaAccessActive } from "@/modules/auth/beta-access";
 import {
   FeedbackCreateSchema,
   sanitizeFeedbackContext,
@@ -24,6 +25,8 @@ export async function POST(request: Request) {
   if (!session) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
+  const denied = assertBetaAccessActive(session);
+  if (denied) return denied;
 
   const rl = await consumeRateLimit({
     bucketKey: `feedback:create:${session.user.id}:${clientIpFromRequest(request)}`,

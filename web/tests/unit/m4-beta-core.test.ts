@@ -136,3 +136,45 @@ describe("analytics defs + redaction", () => {
     });
   });
 });
+
+describe("analytics dimensions canonicalize", () => {
+  it("produces stable keys regardless of key insertion order", async () => {
+    const { analyticsDimensionsKey, canonicalizeAnalyticsDimensions } =
+      await import("@/modules/analytics/dimensions");
+    const a = canonicalizeAnalyticsDimensions({ b: 1, a: 2 });
+    const b = canonicalizeAnalyticsDimensions({ a: 2, b: 1 });
+    expect(a).toEqual(b);
+    expect(analyticsDimensionsKey({ z: true, a: "x" })).toBe(
+      analyticsDimensionsKey({ a: "x", z: true }),
+    );
+  });
+});
+
+describe("beta access active", () => {
+  it("revoked invitee is inactive; admin/demo stay active", async () => {
+    const { resolveBetaAccessActive } = await import(
+      "@/modules/auth/beta-access"
+    );
+    expect(
+      resolveBetaAccessActive({
+        roles: ["learner"],
+        email: "invitee@example.com",
+        betaAccessRevokedAt: new Date(),
+      }),
+    ).toBe(false);
+    expect(
+      resolveBetaAccessActive({
+        roles: ["learner"],
+        email: "invitee@example.com",
+        betaAccessRevokedAt: null,
+      }),
+    ).toBe(true);
+    expect(
+      resolveBetaAccessActive({
+        roles: ["admin"],
+        email: "x@y.z",
+        betaAccessRevokedAt: new Date(),
+      }),
+    ).toBe(true);
+  });
+});

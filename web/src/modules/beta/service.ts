@@ -1,15 +1,27 @@
 import { and, eq, gt, isNull, sql } from "drizzle-orm";
-import { getDb } from "@/db/client";
-import { betaInvites, user, userRoles } from "@/db/schema";
+import { randomUUID } from "node:crypto";
+import { getDb, type Db } from "@/db/client";
+import {
+  account,
+  adminEvents,
+  betaInvites,
+  session as authSession,
+  user,
+  userRoles,
+} from "@/db/schema";
 import type { UserRole } from "@/lib/enums";
-import { recordAdminEvent } from "@/modules/admin/audit";
+import {
+  recordAdminEvent,
+  redactAdminDetails,
+} from "@/modules/admin/audit";
 import { inspectInvite, type InviteInspection } from "./invite-state";
 import { generateInviteToken, hashInviteToken } from "./token";
 
 export type CreateInviteInput = {
   actorUserId: string | null;
   expiresAt: Date;
-  useLimit?: number;
+  /** Personal one-time invites only — must be 1 when provided. */
+  useLimit?: 1;
   label?: string;
   correlationId?: string;
 };
@@ -21,9 +33,14 @@ export type CreateInviteResult = {
   expiresAt: Date;
 };
 
+type Tx = Parameters<Parameters<Db["transaction"]>[0]>[0];
+
 export async function createBetaInvite(
   input: CreateInviteInput,
 ): Promise<CreateInviteResult> {
+  if (input.useLimit !== undefined && input.useLimit !== 1) {
+    throw new Error("invite_use_limit_must_be_one");
+  }
   const rawToken = generateInviteToken();
   const tokenHash = hashInviteToken(rawToken);
   const db = getDb();
@@ -32,7 +49,7 @@ export async function createBetaInvite(
     .values({
       tokenHash,
       status: "pending",
-      useLimit: input.useLimit ?? 1,
+      useLimit: 1,
       useCount: 0,
       expiresAt: input.expiresAt,
       createdByUserId: input.actorUserId || null,
@@ -50,7 +67,7 @@ export async function createBetaInvite(
     subjectId: row!.id,
     details: {
       expiresAt: input.expiresAt.toISOString(),
-      useLimit: input.useLimit ?? 1,
+      useLimit: 1,
       label: input.label ?? null,
       tokenHashPrefix: tokenHash.slice(0, 8),
     },
@@ -128,9 +145,59 @@ export async function lookupInviteByRawToken(
   return { invite, inspection };
 }
 
+/** Roles granted on invite consume — matches demo learner for DRAFT access. */
+const CLOSED_BETA_INVITEE_ROLES = [
+  "learner",
+  "previewer",
+] as const satisfies readonly UserRole[];
+
+async function writeInviteAcceptedAudit(
+  executor: Db | Tx,
+  input: {
+    userId: string;
+    inviteId: string;
+    correlationId?: string;
+  },
+): Promise<void> {
+  await executor.insert(adminEvents).values({
+    actorUserId: input.userId,
+    action: "beta.invite_accepted",
+    subjectType: "beta_invite",
+    subjectId: input.inviteId,
+    details: redactAdminDetails({ createdUserId: input.userId }),
+    correlationId: input.correlationId ?? null,
+  });
+}
+
+async function ensureClosedBetaLearnerRolesTx(
+  tx: Tx,
+  userId: string,
+): Promise<void> {
+  const existing = await tx.query.user.findFirst({ where: eq(user.id, userId) });
+  if (!existing) {
+    throw new Error("user_missing_in_txn");
+  }
+  const roles = new Set<UserRole>([
+    ...((existing.roleFlags as UserRole[] | null) ?? []),
+    ...CLOSED_BETA_INVITEE_ROLES,
+  ]);
+  await tx
+    .update(user)
+    .set({ roleFlags: [...roles], updatedAt: new Date() })
+    .where(eq(user.id, userId));
+  for (const role of CLOSED_BETA_INVITEE_ROLES) {
+    const hasRole = await tx.query.userRoles.findFirst({
+      where: and(eq(userRoles.userId, userId), eq(userRoles.role, role)),
+    });
+    if (!hasRole) {
+      await tx.insert(userRoles).values({ userId, role });
+    }
+  }
+}
+
 /**
- * Atomically consume a pending invite for a newly created user.
- * Race-safe: single UPDATE with status/use guards.
+ * Atomically consume a pending invite for an existing user (row-locked).
+ * Prefer registerWithInviteToken for new registrations — that wraps user+account+roles.
  */
 export async function consumeInviteForUser(input: {
   rawToken: string;
@@ -138,82 +205,197 @@ export async function consumeInviteForUser(input: {
   correlationId?: string;
 }): Promise<
   | { ok: true; inviteId: string }
-  | { ok: false; reason: InviteInspection["ok"] extends false ? string : string }
+  | { ok: false; reason: string }
 > {
-  const found = await lookupInviteByRawToken(input.rawToken);
-  if (!found) return { ok: false, reason: "invalid" };
-  if (!found.inspection.ok) {
-    return { ok: false, reason: found.inspection.reason };
-  }
-
+  const tokenHash = hashInviteToken(input.rawToken);
   const db = getDb();
-  const now = new Date();
-  const updated = await db
-    .update(betaInvites)
-    .set({
-      status: "accepted",
-      acceptedAt: now,
-      useCount: sql`${betaInvites.useCount} + 1`,
-      createdUserId: input.userId,
-      updatedAt: now,
-    })
-    .where(
-      and(
-        eq(betaInvites.id, found.invite.id),
-        eq(betaInvites.status, "pending"),
-        isNull(betaInvites.revokedAt),
-        isNull(betaInvites.acceptedAt),
-        gt(betaInvites.expiresAt, now),
-        sql`${betaInvites.useCount} < ${betaInvites.useLimit}`,
-      ),
-    )
-    .returning({ id: betaInvites.id });
 
-  if (!updated.length) {
-    return { ok: false, reason: "used" };
-  }
+  return db.transaction(async (tx) => {
+    const locked = await tx
+      .select()
+      .from(betaInvites)
+      .where(eq(betaInvites.tokenHash, tokenHash))
+      .for("update");
+    const invite = locked[0];
+    if (!invite) return { ok: false as const, reason: "invalid" };
 
-  // Closed-beta invitees learn DRAFT content (JPJO not approved yet), so they
-  // need the same learner+previewer pair as the seeded demo learner.
-  await ensureClosedBetaLearnerRoles(input.userId);
+    const inspection = inspectInvite({
+      status: invite.status,
+      expiresAt: invite.expiresAt,
+      revokedAt: invite.revokedAt,
+      acceptedAt: invite.acceptedAt,
+      useLimit: invite.useLimit,
+      useCount: invite.useCount,
+    });
+    if (!inspection.ok) {
+      return { ok: false as const, reason: inspection.reason };
+    }
 
-  await recordAdminEvent({
-    actorUserId: input.userId,
-    action: "beta.invite_accepted",
-    subjectType: "beta_invite",
-    subjectId: found.invite.id,
-    details: { createdUserId: input.userId },
-    correlationId: input.correlationId,
+    const now = new Date();
+    const updated = await tx
+      .update(betaInvites)
+      .set({
+        status: "accepted",
+        acceptedAt: now,
+        useCount: sql`${betaInvites.useCount} + 1`,
+        createdUserId: input.userId,
+        updatedAt: now,
+      })
+      .where(
+        and(
+          eq(betaInvites.id, invite.id),
+          eq(betaInvites.status, "pending"),
+          isNull(betaInvites.revokedAt),
+          isNull(betaInvites.acceptedAt),
+          gt(betaInvites.expiresAt, now),
+          sql`${betaInvites.useCount} < ${betaInvites.useLimit}`,
+          eq(betaInvites.useLimit, 1),
+        ),
+      )
+      .returning({ id: betaInvites.id });
+
+    if (!updated.length) {
+      return { ok: false as const, reason: "used" };
+    }
+
+    await ensureClosedBetaLearnerRolesTx(tx, input.userId);
+    await writeInviteAcceptedAudit(tx, {
+      userId: input.userId,
+      inviteId: invite.id,
+      correlationId: input.correlationId,
+    });
+
+    return { ok: true as const, inviteId: invite.id };
   });
-
-  return { ok: true, inviteId: found.invite.id };
 }
 
-/** Roles granted on invite consume — matches demo learner for DRAFT access. */
-const CLOSED_BETA_INVITEE_ROLES = [
-  "learner",
-  "previewer",
-] as const satisfies readonly UserRole[];
+export type RegisterWithInviteInput = {
+  rawToken: string;
+  email: string;
+  passwordHash: string;
+  name: string;
+  correlationId?: string;
+};
 
-async function ensureClosedBetaLearnerRoles(userId: string): Promise<void> {
+export type RegisterWithInviteResult =
+  | { ok: true; userId: string; inviteId: string }
+  | { ok: false; reason: string };
+
+/**
+ * Single PostgreSQL transaction: user + credential account + roles + invite
+ * consume + required audit. Loser of a race leaves no orphan rows.
+ * Callers must run analytics only after a successful commit.
+ */
+export async function registerWithInviteToken(
+  input: RegisterWithInviteInput,
+): Promise<RegisterWithInviteResult> {
+  const tokenHash = hashInviteToken(input.rawToken);
+  const email = input.email.toLowerCase();
   const db = getDb();
-  const existing = await db.query.user.findFirst({ where: eq(user.id, userId) });
-  if (!existing) return;
-  const roles = new Set<UserRole>([
-    ...((existing.roleFlags as UserRole[] | null) ?? []),
-    ...CLOSED_BETA_INVITEE_ROLES,
-  ]);
-  await db
-    .update(user)
-    .set({ roleFlags: [...roles], updatedAt: new Date() })
-    .where(eq(user.id, userId));
-  for (const role of CLOSED_BETA_INVITEE_ROLES) {
-    const hasRole = await db.query.userRoles.findFirst({
-      where: and(eq(userRoles.userId, userId), eq(userRoles.role, role)),
+
+  try {
+    return await db.transaction(async (tx) => {
+      const locked = await tx
+        .select()
+        .from(betaInvites)
+        .where(eq(betaInvites.tokenHash, tokenHash))
+        .for("update");
+      const invite = locked[0];
+      if (!invite) return { ok: false as const, reason: "invalid" };
+
+      const inspection = inspectInvite({
+        status: invite.status,
+        expiresAt: invite.expiresAt,
+        revokedAt: invite.revokedAt,
+        acceptedAt: invite.acceptedAt,
+        useLimit: invite.useLimit,
+        useCount: invite.useCount,
+      });
+      if (!inspection.ok) {
+        return { ok: false as const, reason: inspection.reason };
+      }
+
+      const existing = await tx.query.user.findFirst({
+        where: eq(user.email, email),
+        columns: { id: true },
+      });
+      if (existing) {
+        return { ok: false as const, reason: "email_taken" };
+      }
+
+      const userId = randomUUID();
+      const now = new Date();
+
+      await tx.insert(user).values({
+        id: userId,
+        name: input.name,
+        email,
+        emailVerified: false,
+        roleFlags: [...CLOSED_BETA_INVITEE_ROLES],
+        createdAt: now,
+        updatedAt: now,
+      });
+
+      await tx.insert(account).values({
+        id: randomUUID(),
+        accountId: userId,
+        providerId: "credential",
+        issuer: "local:credential",
+        userId,
+        password: input.passwordHash,
+        createdAt: now,
+        updatedAt: now,
+      });
+
+      for (const role of CLOSED_BETA_INVITEE_ROLES) {
+        await tx.insert(userRoles).values({ userId, role });
+      }
+
+      const updated = await tx
+        .update(betaInvites)
+        .set({
+          status: "accepted",
+          acceptedAt: now,
+          useCount: sql`${betaInvites.useCount} + 1`,
+          createdUserId: userId,
+          updatedAt: now,
+        })
+        .where(
+          and(
+            eq(betaInvites.id, invite.id),
+            eq(betaInvites.status, "pending"),
+            isNull(betaInvites.revokedAt),
+            isNull(betaInvites.acceptedAt),
+            gt(betaInvites.expiresAt, now),
+            sql`${betaInvites.useCount} < ${betaInvites.useLimit}`,
+            eq(betaInvites.useLimit, 1),
+          ),
+        )
+        .returning({ id: betaInvites.id });
+
+      if (!updated.length) {
+        // Abort entire transaction — no orphan user/account/roles.
+        throw new Error("INVITE_RACE_LOST");
+      }
+
+      await writeInviteAcceptedAudit(tx, {
+        userId,
+        inviteId: invite.id,
+        correlationId: input.correlationId,
+      });
+
+      return { ok: true as const, userId, inviteId: invite.id };
     });
-    if (!hasRole) {
-      await db.insert(userRoles).values({ userId, role });
+  } catch (err) {
+    if (err instanceof Error && err.message === "INVITE_RACE_LOST") {
+      return { ok: false, reason: "used" };
     }
+    // Unique email race under concurrency
+    const msg = err instanceof Error ? err.message : String(err);
+    if (/unique|duplicate|email/i.test(msg)) {
+      return { ok: false, reason: "email_taken" };
+    }
+    throw err;
   }
 }
 
@@ -224,22 +406,29 @@ export async function deactivateBetaAccess(input: {
   correlationId?: string;
 }): Promise<void> {
   const db = getDb();
-  await db
-    .update(user)
-    .set({
-      betaAccessRevokedAt: new Date(),
-      betaDeactivatedReason: input.reason ?? "admin_deactivated",
-      updatedAt: new Date(),
-    })
-    .where(eq(user.id, input.userId));
+  await db.transaction(async (tx) => {
+    await tx
+      .update(user)
+      .set({
+        betaAccessRevokedAt: new Date(),
+        betaDeactivatedReason: input.reason ?? "admin_deactivated",
+        updatedAt: new Date(),
+      })
+      .where(eq(user.id, input.userId));
 
-  await recordAdminEvent({
-    actorUserId: input.actorUserId,
-    action: "beta.access_deactivated",
-    subjectType: "user",
-    subjectId: input.userId,
-    details: { reason: input.reason ?? "admin_deactivated" },
-    correlationId: input.correlationId,
+    // Immediately invalidate all active Better Auth sessions for this user.
+    await tx.delete(authSession).where(eq(authSession.userId, input.userId));
+
+    await tx.insert(adminEvents).values({
+      actorUserId: input.actorUserId,
+      action: "beta.access_deactivated",
+      subjectType: "user",
+      subjectId: input.userId,
+      details: redactAdminDetails({
+        reason: input.reason ?? "admin_deactivated",
+      }),
+      correlationId: input.correlationId ?? null,
+    });
   });
 }
 

@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
 import { hashPassword } from "better-auth/crypto";
-import { randomUUID } from "node:crypto";
-import { eq } from "drizzle-orm";
 import { z } from "zod";
-import { getDb } from "@/db/client";
-import { account, user } from "@/db/schema";
 import { isBetaModeEnabled } from "@/modules/admin/roles";
 import {
-  consumeInviteForUser,
   lookupInviteByRawToken,
+  registerWithInviteToken,
 } from "@/modules/beta";
 import { trackAnalyticsEvent } from "@/modules/analytics/service";
 import {
@@ -86,69 +82,41 @@ export async function POST(request: Request) {
     );
   }
 
-  const db = getDb();
-  const existing = await db.query.user.findFirst({
-    where: eq(user.email, parsed.data.email.toLowerCase()),
-  });
-  if (existing) {
-    return NextResponse.json({ error: "email_taken" }, { status: 409 });
-  }
-
-  const userId = randomUUID();
-  const now = new Date();
   const passwordHash = await hashPassword(parsed.data.password);
+  const name =
+    parsed.data.name?.trim() || parsed.data.email.split("@")[0]!;
 
-  await db.insert(user).values({
-    id: userId,
-    name: parsed.data.name?.trim() || parsed.data.email.split("@")[0]!,
-    email: parsed.data.email.toLowerCase(),
-    emailVerified: false,
-    roleFlags: ["learner", "previewer"],
-    createdAt: now,
-    updatedAt: now,
-  });
-
-  await db.insert(account).values({
-    id: randomUUID(),
-    accountId: userId,
-    providerId: "credential",
-    issuer: "local:credential",
-    userId,
-    password: passwordHash,
-    createdAt: now,
-    updatedAt: now,
-  });
-
-  const consumed = await consumeInviteForUser({
+  const registered = await registerWithInviteToken({
     rawToken: parsed.data.token,
-    userId,
+    email: parsed.data.email,
+    passwordHash,
+    name,
     correlationId,
   });
 
-  if (!consumed.ok) {
-    // Roll back user if invite lost the race
-    await db.delete(account).where(eq(account.userId, userId));
-    await db.delete(user).where(eq(user.id, userId));
-    return NextResponse.json({ error: consumed.reason }, { status: 409 });
+  if (!registered.ok) {
+    const status =
+      registered.reason === "email_taken" || registered.reason === "used"
+        ? 409
+        : 400;
+    return NextResponse.json({ error: registered.reason }, { status });
   }
 
+  // Analytics only after successful commit — never part of the registration txn.
   await trackAnalyticsEvent({
     eventKey: "activation_invite_to_onboarding",
-    userId,
+    userId: registered.userId,
     dimensions: { stage: "registered" },
-  }).catch((err) => {
-    structuredLog("warn", "beta_register_analytics_failed", {
-      correlationId,
-      userId,
-      error: err instanceof Error ? err.message : String(err),
-    });
   });
 
-  structuredLog("info", "beta_register_ok", { correlationId, userId });
+  structuredLog("info", "beta_register_ok", {
+    correlationId,
+    userId: registered.userId,
+  });
 
   return NextResponse.json({
     ok: true,
-    userId,
+    userId: registered.userId,
     next: "sign_in",
   });
 }

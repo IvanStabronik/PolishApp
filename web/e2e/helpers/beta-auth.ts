@@ -41,7 +41,7 @@ export async function adminCreateInvite(
     "DemoAdmin1!",
   );
   const res = await request.post("/api/admin/beta/invites", {
-    data: { expiresInDays: 7, useLimit: 1, label: "e2e" },
+    data: { expiresInDays: 7, label: "e2e" },
     headers: authApiHeaders(),
   });
   expect(res.ok(), await res.text()).toBeTruthy();

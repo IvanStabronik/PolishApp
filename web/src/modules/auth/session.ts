@@ -5,6 +5,7 @@ import { learnerProfiles, user } from "@/db/schema";
 import type { UserRole } from "@/lib/enums";
 import { USER_ROLES } from "@/lib/enums";
 import { isDemoAccountEmail } from "@/modules/learning/attempt-mode";
+import { resolveBetaAccessActive } from "./beta-access";
 import { auth } from "./auth";
 import { DEMO_ACCOUNTS } from "./demo";
 import { canPreviewDraft } from "./roles";
@@ -20,9 +21,13 @@ export type AppSession = {
   roles: UserRole[];
   canPreviewDraft: boolean;
   isDemoUser: boolean;
+  /** False when closed-beta access was deactivated for this invitee. */
+  betaAccessActive: boolean;
 };
 
 export type LearnerProfileRow = typeof learnerProfiles.$inferSelect;
+
+export { resolveBetaAccessActive };
 
 function normalizeRoles(raw: unknown): UserRole[] {
   if (!Array.isArray(raw)) return [];
@@ -65,14 +70,16 @@ export async function getRequestSession(): Promise<AppSession | null> {
     );
 
     let roles = sessionRoles;
+    let betaAccessRevokedAt: Date | null = null;
     try {
       const dbUser = await db.query.user.findFirst({
         where: eq(user.id, session.user.id),
-        columns: { roleFlags: true },
+        columns: { roleFlags: true, betaAccessRevokedAt: true },
       });
       if (dbUser?.roleFlags?.length) {
         roles = normalizeRoles(dbUser.roleFlags);
       }
+      betaAccessRevokedAt = dbUser?.betaAccessRevokedAt ?? null;
     } catch {
       /* DB unavailable — fall back to session additionalFields */
     }
@@ -86,6 +93,11 @@ export async function getRequestSession(): Promise<AppSession | null> {
       roles,
       canPreviewDraft: resolveCanPreviewDraft(roles, email),
       isDemoUser: isDemoAccountEmail(email),
+      betaAccessActive: resolveBetaAccessActive({
+        roles,
+        email,
+        betaAccessRevokedAt,
+      }),
     };
   } catch {
     return null;

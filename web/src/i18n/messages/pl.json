@@ -246,7 +246,10 @@
     "password": "Hasło",
     "submit": "Przyjmij zaproszenie i utwórz konto",
     "errorGeneric": "Nie udało się przyjąć zaproszenia.",
-    "registerBlocked": "Rejestracja bez zaproszenia jest zamknięta. Użyj linku z zaproszenia."
+    "registerBlocked": "Rejestracja bez zaproszenia jest zamknięta. Użyj linku z zaproszenia.",
+    "accessDisabledTitle": "Dostęp do zamkniętej bety wyłączony",
+    "accessDisabledLead": "Administrator dezaktywował Twój dostęp do zamkniętej bety SŁOWARIUM. Lekcje, plan, powtórka i opinie są niedostępne. W razie potrzeby skontaktuj się z organizatorami programu beta.",
+    "accessDisabledSignIn": "Wróć do logowania"
   },
   "feedback": {
     "cta": "Zgłoś problem",

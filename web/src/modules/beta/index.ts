@@ -4,6 +4,7 @@ export {
   revokeBetaInvite,
   lookupInviteByRawToken,
   consumeInviteForUser,
+  registerWithInviteToken,
   deactivateBetaAccess,
   listBetaInvites,
 } from "./service";

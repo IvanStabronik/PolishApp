@@ -160,6 +160,8 @@ export const analyticsDailyAggregates = pgTable(
     metricKey: text("metric_key").notNull(),
     bucketDate: date("bucket_date").notNull(),
     dimensions: jsonb("dimensions").$type<Record<string, unknown>>().notNull().default({}),
+    /** Deterministic hash of canonicalized dimensions — UPSERT conflict target. */
+    dimensionsKey: text("dimensions_key").notNull().default(""),
     valueNum: doublePrecision("value_num").notNull().default(0),
     valueCount: integer("value_count").notNull().default(0),
     updatedAt: timestamp("updated_at", { withTimezone: true })
@@ -171,6 +173,11 @@ export const analyticsDailyAggregates = pgTable(
       .notNull(),
   },
   (table) => [
+    uniqueIndex("analytics_daily_metric_bucket_dims_key_uidx").on(
+      table.metricKey,
+      table.bucketDate,
+      table.dimensionsKey,
+    ),
     index("analytics_daily_metric_idx").on(table.metricKey, table.bucketDate),
   ],
 );

@@ -14,7 +14,8 @@ export const runtime = "nodejs";
 
 const CreateSchema = z.object({
   expiresInDays: z.number().int().min(1).max(90).default(14),
-  useLimit: z.number().int().min(1).max(5).default(1),
+  /** Personal one-time invites only — omitted or literal 1. */
+  useLimit: z.literal(1).optional(),
   label: z.string().max(120).optional(),
 });
 
@@ -87,7 +88,7 @@ export async function POST(request: Request) {
   const created = await createBetaInvite({
     actorUserId: session.user.id,
     expiresAt,
-    useLimit: parsed.data.useLimit,
+    useLimit: 1,
     label: parsed.data.label,
     correlationId,
   });

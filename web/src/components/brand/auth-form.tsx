@@ -27,20 +27,25 @@ export function AuthForm({ mode }: { mode: Mode }) {
 
   async function resolveDestination(): Promise<string> {
     const fromQuery = safeReturnTo(searchParams.get("returnTo"));
-    if (fromQuery) return fromQuery;
 
     let onboarded = false;
+    let betaAccessActive = true;
     try {
       const res = await fetch("/api/profile", { credentials: "include" });
       if (res.ok) {
         const data = (await res.json()) as {
           profile?: { onboardingComplete?: boolean } | null;
+          betaAccessActive?: boolean;
         };
         onboarded = Boolean(data.profile?.onboardingComplete);
+        if (data.betaAccessActive === false) betaAccessActive = false;
       }
     } catch {
       /* treat as not onboarded */
     }
+
+    if (!betaAccessActive) return `/${locale}/beta-disabled`;
+    if (fromQuery) return fromQuery;
     return defaultPostAuthPath(mode, locale, onboarded);
   }
 

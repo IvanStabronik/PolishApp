@@ -49,6 +49,7 @@ export async function GET() {
       user: session.user,
       roles: session.roles,
       canPreviewDraft: session.canPreviewDraft,
+      betaAccessActive: session.betaAccessActive,
       profile: profile ? serializeProfile(profile) : null,
     });
   } catch (err) {

@@ -295,7 +295,9 @@ Prior clipped clones (`36:246`, `36:255`, `36:156`, `36:165`) were replaced.
 ## 7b. Milestone 4 — Operable Closed Beta
 
 **Page:** `M4 Operable Closed Beta` (`45:2`)
-Visual language matches Cover tokens (paper / ink / graphite / raised surfaces). Mobile and tablet frames are native widths — not clipped desktop clones.
+Rebuilt for acceptance (2026-09): real RU chrome, metric cards, invite/learner/feedback UI, auto-layout, touch targets ≥44px. No placeholder “Counts / Actions / Learner table” blocks.
+
+**Screenshots (repo):** `docs/design/figma-m4-screens/`
 
 | Frame | node-id | Viewport | Link |
 | --- | --- | --- | --- |
@@ -314,6 +316,11 @@ Visual language matches Cover tokens (paper / ink / graphite / raised surfaces).
 | M4 / Desktop · Feedback inbox | `45:109` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-109) |
 | M4 / Desktop · Ops error | `45:119` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-119) |
 | M4 / Desktop · Maintenance | `45:125` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=45-125) |
+| M4 / Desktop · Beta access disabled | `51:190` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=51-190) |
+| M4 / Desktop · Feedback success | `51:101` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=51-101) |
+| M4 / Desktop · Feedback error | `51:108` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=51-108) |
+
+Chrome language: **RU**. Polish appears only in learning content frames (not these ops/beta surfaces).
 
 ## 8. Out of scope
 

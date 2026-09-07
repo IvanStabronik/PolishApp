@@ -119,6 +119,9 @@ export function AdminBetaConsole() {
     <div className="flex flex-col gap-10" data-testid="admin-beta-console">
       <section>
         <h2 className="font-display text-2xl">Invite inventory</h2>
+        <p className="mt-1 text-sm text-[var(--color-graphite)]">
+          Personal one-time invites only (single use).
+        </p>
         <ul className="mt-2 flex flex-wrap gap-4 p-0 list-none" data-testid="invite-counts">
           {Object.entries(overview.inviteCounts).map(([k, v]) => (
             <li key={k} className="text-sm">
@@ -138,7 +141,7 @@ export function AdminBetaConsole() {
                   method: "POST",
                   credentials: "include",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ expiresInDays: 14, useLimit: 1 }),
+                  body: JSON.stringify({ expiresInDays: 14 }),
                 });
                 if (!res.ok) {
                   setError("create_failed");
@@ -150,7 +153,7 @@ export function AdminBetaConsole() {
               })
             }
           >
-            Create invite
+            Create one-time invite
           </Button>
         </div>
         {createdToken ? (
@@ -158,7 +161,7 @@ export function AdminBetaConsole() {
             data-testid="admin-invite-token-once"
             className="mt-3 break-all rounded border border-[var(--color-line)] bg-[var(--color-paper-sunken)] p-3 text-sm"
           >
-            One-time token (copy now): {createdToken}
+            One-time token (copy now — shown once): {createdToken}
           </p>
         ) : null}
         <ul className="mt-4 flex list-none flex-col gap-2 p-0" data-testid="invite-list">
@@ -172,7 +175,7 @@ export function AdminBetaConsole() {
                 data-testid={`invite-row-${inv.id}`}
               >
                 <span className="text-sm">
-                  {inv.status} · uses {inv.useCount}/{inv.useLimit} ·{" "}
+                  {inv.status} · one-time · used {inv.useCount}/1 ·{" "}
                   {inv.label ?? inv.id.slice(0, 8)}
                 </span>
                 {inv.status === "pending" ? (
@@ -227,7 +230,16 @@ export function AdminBetaConsole() {
                 <p className="m-0 text-sm text-[var(--color-graphite)]">{l.email}</p>
                 <p className="m-0 mt-1 text-sm">
                   onboarding: {l.onboardingComplete ? "yes" : "no"} · attempts:{" "}
-                  {l.attempts} · revoked: {l.betaAccessRevoked ? "yes" : "no"}
+                  {l.attempts} · status:{" "}
+                  <span
+                    data-testid={
+                      l.betaAccessRevoked
+                        ? `learner-deactivated-${l.id}`
+                        : `learner-active-${l.id}`
+                    }
+                  >
+                    {l.betaAccessRevoked ? "deactivated" : "active"}
+                  </span>
                 </p>
                 {!l.betaAccessRevoked ? (
                   <Button

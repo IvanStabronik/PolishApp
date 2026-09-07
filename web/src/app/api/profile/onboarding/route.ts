@@ -5,6 +5,7 @@ import { db } from "@/db/client";
 import { learnerProfiles, type ConsentSnapshot } from "@/db/schema";
 import { LEARNER_L1, UI_LOCALES } from "@/lib/enums";
 import { getRequestSession } from "@/modules/auth/session";
+import { assertBetaAccessActive } from "@/modules/auth/beta-access";
 
 const onboardingSchema = z.object({
   uiLocale: z.enum(UI_LOCALES),
@@ -42,6 +43,8 @@ export async function POST(request: Request) {
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
+  const denied = assertBetaAccessActive(session);
+  if (denied) return denied;
 
   let json: unknown;
   try {
