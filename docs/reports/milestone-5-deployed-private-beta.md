@@ -2,7 +2,7 @@
 
 ## Verdict
 
-**Package: COMPLETE for merge review.**  
+**Package: COMPLETE for merge review.**
 **Live provider deploy: EXTERNAL ACCESS REQUIRED** (no Railway/GitHub deploy credentials in this environment).
 
 Do **not** claim `SŁOWARIUM DEPLOYED PRIVATE BETA: COMPLETE` until a real HTTPS URL passes production smoke.
@@ -71,4 +71,3 @@ CI will additionally run M3/M4 e2e, no-demo suite, clean-DB migrate smoke, and `
 ## Explicit non-goals (unchanged)
 
 No public content launch, no DRAFT publication, no fake JPJO, no A2–B2, no payments, no Figma redesign, no M6.
-
