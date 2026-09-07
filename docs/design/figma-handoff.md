@@ -322,6 +322,8 @@ Rebuilt for acceptance (2026-09): real RU chrome, metric cards, invite/learner/f
 
 Chrome language: **RU**. Polish appears only in learning content frames (not these ops/beta surfaces).
 
+Note: long desktop Admin beta content may require vertical scrolling inside the 1440×900 frame (accepted as-is; not rebuilt in the dimensions_key fix).
+
 ## 8. Out of scope
 
 Architecture ADRs · DB schema docs · certificate claims · gamification HUD · public content release before JPJO · simulating independent JPJO decisions in-app

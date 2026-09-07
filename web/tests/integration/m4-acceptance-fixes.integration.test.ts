@@ -5,10 +5,11 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { randomUUID } from "node:crypto";
 import { hashPassword } from "better-auth/crypto";
-import { eq, sql } from "drizzle-orm";
+import { eq, and, sql } from "drizzle-orm";
 import { getDb, getSql } from "@/db/client";
 import {
   account,
+  analyticsDailyAggregates,
   betaInvites,
   session as authSession,
   user,
@@ -19,6 +20,10 @@ import {
   deactivateBetaAccess,
   registerWithInviteToken,
 } from "@/modules/beta";
+import {
+  analyticsDimensionsKey,
+  canonicalizeAnalyticsDimensions,
+} from "@/modules/analytics/dimensions";
 import {
   getDailyAggregateCount,
   trackAnalyticsEvent,
@@ -131,6 +136,184 @@ describe.skipIf(!hasDb)("M4 acceptance fixes (postgres)", () => {
         dimensions: { suite: "ok" },
       }),
     ).resolves.toBeUndefined();
+  });
+
+  it("upgrade-path: old MD5 backfill row merges; unique key holds", async () => {
+    const dim = canonicalizeAnalyticsDimensions({
+      suite: `agg-upgrade-${randomUUID().slice(0, 8)}`,
+      z: true,
+      a: "x",
+    });
+    const runtimeKey = analyticsDimensionsKey(dim);
+    expect(runtimeKey).toMatch(/^[a-f0-9]{32}$/);
+
+    const bucketDate = new Date().toISOString().slice(0, 10);
+    const now = new Date();
+    const db = getDb();
+
+    // Old 0006-style key: md5(jsonb::text) — differs from runtime MD5(JSON.stringify).
+    const oldKeyRows = await db.execute<{ k: string }>(
+      sql`SELECT md5((${JSON.stringify(dim)}::jsonb)::text) AS k`,
+    );
+    const oldBackfillKey = Array.from(oldKeyRows)[0]?.k;
+    expect(oldBackfillKey).toBeTruthy();
+    expect(oldBackfillKey).not.toBe(runtimeKey);
+
+    await db.insert(analyticsDailyAggregates).values({
+      metricKey: "day1_readiness",
+      bucketDate,
+      dimensions: dim,
+      dimensionsKey: oldBackfillKey!,
+      valueNum: 7,
+      valueCount: 7,
+      updatedAt: now,
+      createdAt: now,
+    });
+
+    // Re-apply 0007 reconciliation (idempotent with migration on fresh DBs).
+    await db.execute(sql`
+      WITH keyed AS (
+        SELECT
+          id,
+          metric_key,
+          bucket_date,
+          md5(
+            CASE
+              WHEN dimensions IS NULL OR dimensions = '{}'::jsonb THEN '{}'
+              ELSE (
+                SELECT '{' || string_agg(
+                  to_json(e.key)::text || ':' ||
+                    CASE jsonb_typeof(e.value)
+                      WHEN 'string' THEN e.value::text
+                      WHEN 'number' THEN (e.value #>> '{}')
+                      WHEN 'boolean' THEN (e.value #>> '{}')
+                      WHEN 'null' THEN 'null'
+                      ELSE e.value::text
+                    END,
+                  ','
+                  ORDER BY e.key
+                ) || '}'
+                FROM jsonb_each(dimensions) AS e
+              )
+            END
+          ) AS target_key,
+          dimensions_key,
+          value_num,
+          value_count,
+          updated_at
+        FROM analytics_daily_aggregates
+        WHERE metric_key = 'day1_readiness'
+          AND bucket_date = ${bucketDate}::date
+          AND dimensions_key = ${oldBackfillKey}
+      ),
+      ranked AS (
+        SELECT
+          id,
+          target_key,
+          value_num,
+          value_count,
+          ROW_NUMBER() OVER (
+            PARTITION BY metric_key, bucket_date, target_key
+            ORDER BY
+              CASE WHEN dimensions_key = target_key THEN 0 ELSE 1 END,
+              updated_at DESC,
+              id
+          ) AS rn,
+          SUM(value_num) OVER (
+            PARTITION BY metric_key, bucket_date, target_key
+          ) AS sum_num,
+          SUM(value_count) OVER (
+            PARTITION BY metric_key, bucket_date, target_key
+          ) AS sum_count
+        FROM keyed
+      ),
+      deleted AS (
+        DELETE FROM analytics_daily_aggregates AS a
+        USING ranked AS r
+        WHERE a.id = r.id
+          AND r.rn > 1
+        RETURNING a.id
+      )
+      UPDATE analytics_daily_aggregates AS a
+      SET
+        dimensions_key = r.target_key,
+        value_num = r.sum_num,
+        value_count = r.sum_count::integer,
+        updated_at = now()
+      FROM ranked AS r
+      WHERE a.id = r.id
+        AND r.rn = 1
+    `);
+
+    const rekeyed = await db
+      .select()
+      .from(analyticsDailyAggregates)
+      .where(
+        and(
+          eq(analyticsDailyAggregates.metricKey, "day1_readiness"),
+          eq(analyticsDailyAggregates.bucketDate, bucketDate),
+          eq(analyticsDailyAggregates.dimensionsKey, runtimeKey),
+        ),
+      );
+    expect(rekeyed).toHaveLength(1);
+    expect(Number(rekeyed[0]?.valueCount)).toBe(7);
+
+    await trackAnalyticsEvent({
+      eventKey: "day1_readiness",
+      dimensions: dim,
+    });
+
+    const afterOne = await db
+      .select()
+      .from(analyticsDailyAggregates)
+      .where(
+        and(
+          eq(analyticsDailyAggregates.metricKey, "day1_readiness"),
+          eq(analyticsDailyAggregates.bucketDate, bucketDate),
+          eq(analyticsDailyAggregates.dimensionsKey, runtimeKey),
+        ),
+      );
+    expect(afterOne).toHaveLength(1);
+    expect(Number(afterOne[0]?.valueCount)).toBe(8);
+    expect(Number(afterOne[0]?.valueNum)).toBe(8);
+
+    const lookup = await getDailyAggregateCount({
+      metricKey: "day1_readiness",
+      dimensions: dim,
+      bucketDate,
+    });
+    expect(lookup).toEqual({ valueNum: 8, valueCount: 8 });
+
+    const parallel = 5;
+    await Promise.all(
+      Array.from({ length: parallel }, () =>
+        trackAnalyticsEvent({
+          eventKey: "day1_readiness",
+          dimensions: dim,
+        }),
+      ),
+    );
+
+    const afterParallel = await db
+      .select()
+      .from(analyticsDailyAggregates)
+      .where(
+        and(
+          eq(analyticsDailyAggregates.metricKey, "day1_readiness"),
+          eq(analyticsDailyAggregates.bucketDate, bucketDate),
+          eq(analyticsDailyAggregates.dimensionsKey, runtimeKey),
+        ),
+      );
+    expect(afterParallel).toHaveLength(1);
+    expect(Number(afterParallel[0]?.valueCount)).toBe(8 + parallel);
+    expect(Number(afterParallel[0]?.valueNum)).toBe(8 + parallel);
+
+    const uniqueIdxRows = await db.execute<{ indexname: string }>(
+      sql`SELECT indexname FROM pg_indexes
+          WHERE tablename = 'analytics_daily_aggregates'
+            AND indexname = 'analytics_daily_metric_bucket_dims_key_uidx'`,
+    );
+    expect(Array.from(uniqueIdxRows)).toHaveLength(1);
   });
 
   it("invite use_limit is constrained to 1", async () => {

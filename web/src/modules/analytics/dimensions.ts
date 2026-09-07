@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { sanitizeAnalyticsDimensions } from "./metrics";
 
-/** Sort keys recursively so identical dimension maps collide on the same key. */
+/** Sort keys so identical dimension maps collide on the same key. */
 export function canonicalizeAnalyticsDimensions(
   dims: Record<string, unknown> | undefined,
 ): Record<string, unknown> {
@@ -13,12 +13,24 @@ export function canonicalizeAnalyticsDimensions(
   return sorted;
 }
 
-/** Stable SHA-256 hex of canonical JSON — used as UPSERT conflict target. */
+/**
+ * Compact canonical JSON (sorted keys, JSON.stringify spacing).
+ * Must stay in lockstep with migration 0007 SQL builder.
+ */
+export function analyticsDimensionsCanonicalJson(
+  dims: Record<string, unknown> | undefined,
+): string {
+  return JSON.stringify(canonicalizeAnalyticsDimensions(dims));
+}
+
+/**
+ * MD5 hex of canonical JSON (identity checksum, not security).
+ * Shared by runtime UPSERT/lookup and migration 0007 reconciliation.
+ */
 export function analyticsDimensionsKey(
   dims: Record<string, unknown> | undefined,
 ): string {
-  const canonical = canonicalizeAnalyticsDimensions(dims);
-  return createHash("sha256")
-    .update(JSON.stringify(canonical))
+  return createHash("md5")
+    .update(analyticsDimensionsCanonicalJson(dims), "utf8")
     .digest("hex");
 }

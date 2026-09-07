@@ -160,7 +160,7 @@ export const analyticsDailyAggregates = pgTable(
     metricKey: text("metric_key").notNull(),
     bucketDate: date("bucket_date").notNull(),
     dimensions: jsonb("dimensions").$type<Record<string, unknown>>().notNull().default({}),
-    /** Deterministic hash of canonicalized dimensions — UPSERT conflict target. */
+    /** MD5 of canonical compact JSON — UPSERT conflict target (identity checksum). */
     dimensionsKey: text("dimensions_key").notNull().default(""),
     valueNum: doublePrecision("value_num").notNull().default(0),
     valueCount: integer("value_count").notNull().default(0),

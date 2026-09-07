@@ -50,6 +50,13 @@
       "when": 1757700000000,
       "tag": "0006_m4_acceptance_fixes",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1757800000000,
+      "tag": "0007_analytics_dimensions_key_md5",
+      "breakpoints": true
     }
   ]
 }

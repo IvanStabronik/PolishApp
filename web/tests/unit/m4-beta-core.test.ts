@@ -138,15 +138,22 @@ describe("analytics defs + redaction", () => {
 });
 
 describe("analytics dimensions canonicalize", () => {
-  it("produces stable keys regardless of key insertion order", async () => {
-    const { analyticsDimensionsKey, canonicalizeAnalyticsDimensions } =
-      await import("@/modules/analytics/dimensions");
+  it("produces stable MD5 keys regardless of key insertion order", async () => {
+    const {
+      analyticsDimensionsCanonicalJson,
+      analyticsDimensionsKey,
+      canonicalizeAnalyticsDimensions,
+    } = await import("@/modules/analytics/dimensions");
     const a = canonicalizeAnalyticsDimensions({ b: 1, a: 2 });
     const b = canonicalizeAnalyticsDimensions({ a: 2, b: 1 });
     expect(a).toEqual(b);
-    expect(analyticsDimensionsKey({ z: true, a: "x" })).toBe(
-      analyticsDimensionsKey({ a: "x", z: true }),
+    expect(analyticsDimensionsCanonicalJson({ z: true, a: "x" })).toBe(
+      '{"a":"x","z":true}',
     );
+    const key = analyticsDimensionsKey({ z: true, a: "x" });
+    expect(key).toBe(analyticsDimensionsKey({ a: "x", z: true }));
+    expect(key).toMatch(/^[a-f0-9]{32}$/);
+    expect(key).toHaveLength(32);
   });
 });
 
