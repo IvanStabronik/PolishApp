@@ -1,7 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { LinkButton } from "@/components/ui/link-button";
+import { PageIntro } from "@/components/brand/page-intro";
 
 type Props = {
   params: Promise<{ locale: string; lessonId: string }>;
@@ -19,9 +18,11 @@ export default async function LessonResultPage({ params, searchParams }: Props) 
   const moduleId = query.module ?? "pierwsze-spotkanie";
 
   return (
-    <Card className="max-w-xl">
-      <h1 className="font-display m-0 text-3xl">{t("resultTitle")}</h1>
-      <p className="mt-2 text-[var(--color-graphite)]">{t("resultLead")}</p>
+    <div
+      className="surface-panel motion-fade-rise max-w-xl p-4 sm:p-6"
+      data-testid="lesson-result-card"
+    >
+      <PageIntro title={t("resultTitle")} lead={t("resultLead")} />
       <p className="mt-6 text-lg text-[var(--color-ink)]">
         {t("scoreLabel")}:{" "}
         <strong>
@@ -32,19 +33,19 @@ export default async function LessonResultPage({ params, searchParams }: Props) 
         {t("masteryHint")}
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <Link href={`/learn/modules/${moduleId}`}>
-          <Button>{t("backToModule")}</Button>
-        </Link>
-        <Link href={`/learn/${moduleId}`}>
-          <Button variant="secondary">{t("startPractice")}</Button>
-        </Link>
-        <Link href="/progress">
-          <Button variant="ghost">{t("toProgress")}</Button>
-        </Link>
-        <Link href={`/learn/lessons/${lessonId}`}>
-          <Button variant="ghost">{t("startLesson")}</Button>
-        </Link>
+        <LinkButton href={`/learn/modules/${moduleId}`}>
+          {t("backToModule")}
+        </LinkButton>
+        <LinkButton href={`/learn/${moduleId}`} variant="secondary">
+          {t("startPractice")}
+        </LinkButton>
+        <LinkButton href="/progress" variant="ghost">
+          {t("toProgress")}
+        </LinkButton>
+        <LinkButton href={`/learn/lessons/${lessonId}`} variant="ghost">
+          {t("startLesson")}
+        </LinkButton>
       </div>
-    </Card>
+    </div>
   );
 }

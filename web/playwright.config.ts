@@ -33,6 +33,11 @@ const databaseUrl =
   envLocal.DATABASE_URL ??
   "postgresql://slowarium:slowarium@localhost:5433/slowarium";
 
+// Keep test helpers (registerLearner) aligned with the webServer beta gate.
+if (process.env.BETA_MODE === undefined) {
+  process.env.BETA_MODE = "true";
+}
+
 /** Milestone 1 acceptance boots with demo preview so DRAFT Pierwsze spotkanie is visible. */
 const webServerEnv: Record<string, string> = {
   ...Object.fromEntries(
@@ -94,6 +99,11 @@ export default defineConfig({
         channel:
           process.env.PLAYWRIGHT_CHROME_CHANNEL ??
           (process.platform === "win32" ? "chrome" : undefined),
+        // Windows High Contrast / Forced Colors remaps CTA paints and trips axe
+        // color-contrast even when authored ink/paper hex is correct.
+        launchOptions: {
+          args: ["--disable-features=ForcedColors", "--force-color-profile=srgb"],
+        },
       },
     },
   ],

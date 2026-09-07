@@ -3,7 +3,9 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
+import { SiteFooter } from "@/components/brand/site-footer";
 import { PreviewBanner } from "@/components/brand/preview-banner";
+import { PageIntro } from "@/components/brand/page-intro";
 import { ModuleOverview } from "@/components/learning/module-overview";
 import { LinkButton } from "@/components/ui/link-button";
 import { Badge } from "@/components/ui/badge";
@@ -46,41 +48,49 @@ export default async function ModulePage({ params }: Props) {
   const lessons = [...mod.lessons].sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <SiteHeader signedIn />
       {preview ? <PreviewBanner /> : null}
-      <main id="main-content" className="page-shell" data-testid="module-page">
+      <main
+        id="main-content"
+        className="page-shell flex-1 pb-10 sm:pb-14"
+        data-testid="module-page"
+      >
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone="info">{mod.level}</Badge>
           {preview ? <Badge tone="draft">{tDash("previewBadge")}</Badge> : null}
         </div>
-        <p className="mt-3 text-sm text-[var(--color-graphite)]">{mod.hallLabel}</p>
-        <h1 className="font-display text-3xl text-[var(--color-ink)] sm:text-4xl">
-          {mod.titlePl}
-        </h1>
-        <p className="mt-1 text-lg text-[var(--color-graphite)]">{mod.title}</p>
-        <p className="mt-4 max-w-2xl text-[var(--color-ink-soft)]">{mod.situation}</p>
-        <p className="mt-2 max-w-2xl text-[var(--color-ink-soft)]">
-          <strong>{t("objective")}:</strong> {mod.objective}
-        </p>
+        <PageIntro
+          className="mt-3"
+          title={mod.titlePl}
+          lead={mod.title}
+          eyebrow={mod.hallLabel}
+        >
+          <p className="mt-4 max-w-2xl text-[var(--color-ink-soft)]">
+            {mod.situation}
+          </p>
+          <p className="mt-2 max-w-2xl text-[var(--color-ink-soft)]">
+            <strong>{t("objective")}:</strong> {mod.objective}
+          </p>
+        </PageIntro>
 
-        <div className="mt-10">
+        <div className="surface-panel mt-8 p-4 sm:p-6">
           <ModuleOverview dialogue={mod.dialogue} keyLines={mod.keyLines} />
         </div>
 
         <section className="mt-10" data-testid="module-lessons">
-          <h2 className="font-display m-0 text-xl text-[var(--color-ink)]">
+          <h2 className="font-display m-0 text-xl text-[var(--color-ink)] sm:text-2xl">
             {t("lessons")}
           </h2>
           <ul className="mt-4 flex list-none flex-col gap-3 p-0">
             {lessons.map((lesson) => (
               <li
                 key={lesson.id}
-                className="flex flex-wrap items-center justify-between gap-3 border border-[var(--color-line)] bg-[var(--color-paper-raised)] px-4 py-3 rounded-[var(--radius-md)]"
+                className="surface-panel flex flex-wrap items-center justify-between gap-3 p-4"
                 data-testid="module-lesson"
                 data-lesson-id={lesson.id}
               >
-                <div>
+                <div className="min-w-0">
                   <p className="m-0 font-medium text-[var(--color-ink)]">
                     {lesson.titlePl}
                   </p>
@@ -110,12 +120,13 @@ export default async function ModulePage({ params }: Props) {
         <p className="mt-6">
           <Link
             href={`/learn/modules/${mod.id}`}
-            className="text-sm text-[var(--color-forest)]"
+            className="inline-flex min-h-11 items-center text-sm text-[var(--color-amber-deep)] no-underline hover:underline"
           >
             /learn/modules/{mod.id}
           </Link>
         </p>
       </main>
-    </>
+      <SiteFooter />
+    </div>
   );
 }

@@ -16,7 +16,11 @@ export function LinkButton({
 }: LinkButtonProps) {
   return (
     <Link
-      className={cn(buttonVariants({ variant, size }), "no-underline", className)}
+      className={cn(
+        buttonVariants({ variant, size }),
+        "no-underline hover:no-underline",
+        className,
+      )}
       {...props}
     />
   );

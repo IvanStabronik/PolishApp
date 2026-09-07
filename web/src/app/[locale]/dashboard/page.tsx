@@ -3,6 +3,7 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
+import { SiteFooter } from "@/components/brand/site-footer";
 import { PreviewBanner } from "@/components/brand/preview-banner";
 import { ModuleCard } from "@/components/learning/module-card";
 import { listPreviewModules } from "@/lib/content/load-module";
@@ -11,7 +12,7 @@ import {
   isPrivateAlphaPreviewEnv,
 } from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
-import { LinkButton } from "@/components/ui/link-button";
+import { ContinueCta } from "@/components/learning/continue-cta";
 import { protectApp } from "@/lib/auth/protect";
 import { loadContinueLearning } from "@/modules/learning/continue-learning";
 
@@ -40,10 +41,10 @@ export default async function DashboardPage({ params }: Props) {
   const progressWidth = Math.max(0, Math.min(100, snapshot.overallPercent));
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <SiteHeader signedIn />
       {showPreview ? <PreviewBanner /> : null}
-      <main id="main-content" className="page-shell pb-10 sm:pb-14" data-testid="dashboard-page">
+      <main id="main-content" className="page-shell flex-1 pb-10 sm:pb-14" data-testid="dashboard-page">
         <header className="motion-fade-rise max-w-3xl">
           <p className="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-amber-deep)]">
             SŁOWARIUM
@@ -87,13 +88,10 @@ export default async function DashboardPage({ params }: Props) {
               </p>
             </div>
             {snapshot.continueCta ? (
-              <LinkButton
+              <ContinueCta
                 href={snapshot.continueCta.href}
-                data-testid="continue-cta"
-                className="w-full sm:w-auto"
-              >
-                {t("continueLearning")}
-              </LinkButton>
+                label={t("continueLearning")}
+              />
             ) : null}
           </div>
 
@@ -184,6 +182,7 @@ export default async function DashboardPage({ params }: Props) {
           )}
         </section>
       </main>
-    </>
+      <SiteFooter />
+    </div>
   );
 }

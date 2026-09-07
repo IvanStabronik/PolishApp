@@ -283,7 +283,8 @@ textarea:focus-visible {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  padding: var(--space-3) 0;
+  min-height: 2.75rem;
+  padding: var(--space-2) 0;
 }
 
 @keyframes fade-rise {
@@ -430,6 +431,14 @@ textarea:focus-visible {
   background: var(--color-paper-raised);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+}
+
+/* Keep primary CTAs readable under Windows Forced Colors (axe color-contrast). */
+.cta-ink {
+  background-color: #0c1a2b !important;
+  color: #f2ebdd !important;
+  forced-color-adjust: none;
+  -webkit-forced-color-adjust: none;
 }
 
 .admin-metric {

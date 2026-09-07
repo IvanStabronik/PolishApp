@@ -3,7 +3,9 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
-import { Link } from "@/i18n/navigation";
+import { SiteFooter } from "@/components/brand/site-footer";
+import { PageIntro } from "@/components/brand/page-intro";
+import { LinkButton } from "@/components/ui/link-button";
 import { requireAuth } from "@/modules/auth/guards";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -21,33 +23,33 @@ export default async function BetaDisabledPage({ params }: Props) {
   const t = await getTranslations("beta");
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <SiteHeader signedIn />
       <main
         id="main-content"
-        className="page-shell prose-narrow py-16"
+        className="page-shell flex-1 pb-10 sm:pb-14"
         data-testid="beta-access-disabled"
         tabIndex={-1}
       >
-        <h1 className="font-display m-0 text-3xl text-[var(--color-ink)]">
-          {t("accessDisabledTitle")}
-        </h1>
-        <p className="mt-4 text-[var(--color-graphite)]">
-          {t("accessDisabledLead")}
-        </p>
-        <p className="mt-2 text-sm text-[var(--color-graphite-muted)]">
-          {session.user.email}
-        </p>
-        <p className="mt-6">
-          <Link
+        <PageIntro
+          title={t("accessDisabledTitle")}
+          lead={t("accessDisabledLead")}
+        >
+          <p className="mt-3 text-sm text-[var(--color-graphite-muted)]">
+            {session.user.email}
+          </p>
+        </PageIntro>
+        <div className="surface-panel motion-fade-rise-delay mt-6 max-w-lg p-4 sm:mt-8 sm:p-6">
+          <LinkButton
             href="/login"
-            className="text-[var(--color-amber-deep)] underline"
             data-testid="beta-disabled-sign-in"
+            variant="secondary"
           >
             {t("accessDisabledSignIn")}
-          </Link>
-        </p>
+          </LinkButton>
+        </div>
       </main>
-    </>
+      <SiteFooter />
+    </div>
   );
 }

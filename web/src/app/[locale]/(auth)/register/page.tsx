@@ -25,7 +25,7 @@ export default async function RegisterPage({ params }: Props) {
       <main id="main-content">
         <AuthShell>
           <p className="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-amber-deep)]">
-            Closed beta
+            Закрытая бета
           </p>
           <h1 className="mt-3 font-display text-3xl text-[var(--color-ink)]">
             {t("registerTitle")}

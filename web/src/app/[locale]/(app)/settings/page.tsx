@@ -4,7 +4,8 @@ import { useEffect, useState, useTransition, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { PageIntro } from "@/components/brand/page-intro";
+import { StatusPanel } from "@/components/brand/status-panel";
 import {
   LEARNER_L1,
   UI_LOCALES,
@@ -29,6 +30,7 @@ function normalizeGoal(value: string | null | undefined): Goal {
 export default function SettingsPage() {
   const t = useTranslations("settings");
   const to = useTranslations("onboarding");
+  const tc = useTranslations("common");
   const locale = useLocale() as UiLocale;
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -113,108 +115,129 @@ export default function SettingsPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <header>
-        <h1 className="font-display m-0 text-3xl">{t("title")}</h1>
-        <p className="mt-2 text-[var(--color-graphite)]">{t("lead")}</p>
-      </header>
+      <PageIntro title={t("title")} lead={t("lead")} />
 
-      <Card>
-        <form onSubmit={onSave} className="flex flex-col gap-6">
-          <fieldset className="m-0 border-0 p-0" disabled={loading || pending}>
-            <legend className="font-medium">{t("uiLocale")}</legend>
-            <div className="mt-2 flex gap-4">
-              {UI_LOCALES.map((code) => (
-                <label key={code} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="radio"
-                    checked={uiLocale === code}
-                    onChange={() => setUiLocale(code)}
-                  />
-                  {code.toUpperCase()}
-                </label>
-              ))}
-            </div>
-          </fieldset>
+      {loading ? (
+        <StatusPanel kind="loading">{tc("loading")}</StatusPanel>
+      ) : (
+        <div className="surface-panel motion-fade-rise-delay max-w-xl p-4 sm:p-6">
+          <form onSubmit={onSave} className="flex flex-col gap-6">
+            <fieldset className="m-0 border-0 p-0" disabled={pending}>
+              <legend className="font-medium text-[var(--color-ink)]">
+                {t("uiLocale")}
+              </legend>
+              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                {UI_LOCALES.map((code) => (
+                  <label
+                    key={code}
+                    className="inline-flex min-h-11 items-center gap-2 text-sm"
+                  >
+                    <input
+                      type="radio"
+                      checked={uiLocale === code}
+                      onChange={() => setUiLocale(code)}
+                    />
+                    {code.toUpperCase()}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
 
-          <fieldset className="m-0 border-0 p-0" disabled={loading || pending}>
-            <legend className="font-medium">{t("l1")}</legend>
-            <div className="mt-2 flex flex-col gap-2">
-              {LEARNER_L1.map((code) => (
-                <label key={code} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="radio"
-                    checked={l1 === code}
-                    onChange={() => setL1(code)}
-                  />
-                  {code === "ukr"
-                    ? to("l1Ukr")
-                    : code === "rus"
-                      ? to("l1Rus")
-                      : to("l1Bel")}
-                </label>
-              ))}
-            </div>
-          </fieldset>
+            <fieldset className="m-0 border-0 p-0" disabled={pending}>
+              <legend className="font-medium text-[var(--color-ink)]">
+                {t("l1")}
+              </legend>
+              <div className="mt-2 flex flex-col gap-1">
+                {LEARNER_L1.map((code) => (
+                  <label
+                    key={code}
+                    className="inline-flex min-h-11 items-center gap-2 text-sm"
+                  >
+                    <input
+                      type="radio"
+                      checked={l1 === code}
+                      onChange={() => setL1(code)}
+                    />
+                    {code === "ukr"
+                      ? to("l1Ukr")
+                      : code === "rus"
+                        ? to("l1Rus")
+                        : to("l1Bel")}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
 
-          <fieldset className="m-0 border-0 p-0" disabled={loading || pending}>
-            <legend className="font-medium">{t("goal")}</legend>
-            <div className="mt-2 flex flex-col gap-2">
-              {(
-                [
-                  ["life", "goalLife"],
-                  ["exam", "goalExam"],
-                  ["study", "goalStudy"],
-                ] as const
-              ).map(([code, key]) => (
-                <label key={code} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="radio"
-                    checked={goal === code}
-                    onChange={() => setGoal(code)}
-                  />
-                  {to(key)}
-                </label>
-              ))}
-            </div>
-          </fieldset>
+            <fieldset className="m-0 border-0 p-0" disabled={pending}>
+              <legend className="font-medium text-[var(--color-ink)]">
+                {t("goal")}
+              </legend>
+              <div className="mt-2 flex flex-col gap-1">
+                {(
+                  [
+                    ["life", "goalLife"],
+                    ["exam", "goalExam"],
+                    ["study", "goalStudy"],
+                  ] as const
+                ).map(([code, key]) => (
+                  <label
+                    key={code}
+                    className="inline-flex min-h-11 items-center gap-2 text-sm"
+                  >
+                    <input
+                      type="radio"
+                      checked={goal === code}
+                      onChange={() => setGoal(code)}
+                    />
+                    {to(key)}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
 
-          <fieldset className="m-0 border-0 p-0" disabled={loading || pending}>
-            <legend className="font-medium">{t("weeklyGoal")}</legend>
-            <div className="mt-2 flex flex-col gap-2">
-              {(
-                [
-                  ["60", "weekly60"],
-                  ["180", "weekly180"],
-                  ["300", "weekly300"],
-                ] as const
-              ).map(([code, key]) => (
-                <label key={code} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="radio"
-                    checked={weeklyGoal === code}
-                    onChange={() => setWeeklyGoal(code)}
-                  />
-                  {to(key)}
-                </label>
-              ))}
-            </div>
-          </fieldset>
+            <fieldset className="m-0 border-0 p-0" disabled={pending}>
+              <legend className="font-medium text-[var(--color-ink)]">
+                {t("weeklyGoal")}
+              </legend>
+              <div className="mt-2 flex flex-col gap-1">
+                {(
+                  [
+                    ["60", "weekly60"],
+                    ["180", "weekly180"],
+                    ["300", "weekly300"],
+                  ] as const
+                ).map(([code, key]) => (
+                  <label
+                    key={code}
+                    className="inline-flex min-h-11 items-center gap-2 text-sm"
+                  >
+                    <input
+                      type="radio"
+                      checked={weeklyGoal === code}
+                      onChange={() => setWeeklyGoal(code)}
+                    />
+                    {to(key)}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
 
-          <Button type="submit" disabled={pending || loading}>
-            {t("save")}
-          </Button>
-          {error ? (
-            <p role="alert" className="m-0 text-sm text-[var(--color-error)]">
-              {error}
-            </p>
-          ) : null}
-          {saved ? (
-            <p role="status" className="m-0 text-sm text-[var(--color-success)]">
-              {t("saved")}
-            </p>
-          ) : null}
-        </form>
-      </Card>
+            <Button type="submit" disabled={pending}>
+              {t("save")}
+            </Button>
+            {error ? (
+              <p role="alert" className="m-0 text-sm text-[var(--color-error)]">
+                {error}
+              </p>
+            ) : null}
+            {saved ? (
+              <p role="status" className="m-0 text-sm text-[var(--color-success)]">
+                {t("saved")}
+              </p>
+            ) : null}
+          </form>
+        </div>
+      )}
     </div>
   );
 }

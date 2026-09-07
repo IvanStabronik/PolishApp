@@ -35,7 +35,14 @@
     "published": "Опубліковано",
     "loreModule": "Зала {hall} · {loreTitle}",
     "academicModule": "Навчальний модуль {code}",
-    "dualLabel": "{lore} / {academic}"
+    "dualLabel": "{lore} / {academic}",
+    "footerTagline": "Архів живої мови",
+    "footerNav": "Підвал",
+    "backToDashboard": "← До кабінету",
+    "emptyDash": "Поки порожньо",
+    "planEmpty": "План дня поки порожній — відкрийте кабінет, коли з’явиться наступний крок.",
+    "reviewEmpty": "Черга повторення порожня. Нові картки з’являться за розкладом mastery.",
+    "kronikaEmpty": "Хроніка поки порожня. Пройдіть вправу — запис з’явиться тут."
   },
   "landing": {
     "headline": "Від схожих слів — до власного голосу",

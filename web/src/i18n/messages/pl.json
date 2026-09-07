@@ -35,7 +35,14 @@
     "published": "Opublikowane",
     "loreModule": "Sala {hall} · {loreTitle}",
     "academicModule": "Moduł dydaktyczny {code}",
-    "dualLabel": "{lore} / {academic}"
+    "dualLabel": "{lore} / {academic}",
+    "footerTagline": "Archiwum żywej mowy",
+    "footerNav": "Stopka",
+    "backToDashboard": "← Do gabinetu",
+    "emptyDash": "Na razie pusto",
+    "planEmpty": "Plan dnia jest pusty — wróć do gabinetu, gdy pojawi się kolejny krok.",
+    "reviewEmpty": "Kolejka powtórek jest pusta. Nowe karty pojawią się według harmonogramu mastery.",
+    "kronikaEmpty": "Kronika jest pusta. Ukończ ćwiczenie — wpis pojawi się tutaj."
   },
   "landing": {
     "headline": "Od podobnych słów do własnego głosu",

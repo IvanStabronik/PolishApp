@@ -35,7 +35,14 @@
     "published": "Опубликовано",
     "loreModule": "Зал {hall} · {loreTitle}",
     "academicModule": "Учебный модуль {code}",
-    "dualLabel": "{lore} / {academic}"
+    "dualLabel": "{lore} / {academic}",
+    "footerTagline": "Архив живой речи",
+    "footerNav": "Подвал",
+    "backToDashboard": "← В кабинет",
+    "emptyDash": "Пока пусто",
+    "planEmpty": "План дня пока пуст — откройте кабинет, когда появится следующий шаг.",
+    "reviewEmpty": "Очередь повторения пуста. Новые карточки появятся по расписанию mastery.",
+    "kronikaEmpty": "Хроника пока пуста. Пройдите упражнение — запись появится здесь."
   },
   "landing": {
     "headline": "От похожих слов — к собственному голосу",

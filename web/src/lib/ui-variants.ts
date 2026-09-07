@@ -7,15 +7,15 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-[var(--color-ink)] text-[var(--color-paper-raised)] hover:bg-[var(--color-ink-soft)] active:translate-y-px",
+          "bg-[#0C1A2B] text-[#F2EBDD] hover:bg-[#1A2D42] active:translate-y-px forced-colors:border forced-colors:border-[CanvasText]",
         amber:
-          "bg-[var(--color-amber)] text-[var(--accent-foreground)] hover:bg-[var(--color-amber-deep)] active:translate-y-px",
+          "bg-[#B06D1A] text-[#FFF8EF] hover:bg-[#8A5412] active:translate-y-px forced-colors:border forced-colors:border-[CanvasText]",
         secondary:
-          "border border-[var(--color-line-strong)] bg-[var(--color-paper-raised)] text-[var(--color-ink)] shadow-[var(--shadow-xs)] hover:border-[var(--color-amber)] hover:shadow-[var(--shadow-sm)]",
+          "border border-[#9A8F7C] bg-[#F2EBDD] text-[#0C1A2B] shadow-[var(--shadow-xs)] hover:border-[#B06D1A] hover:shadow-[var(--shadow-sm)]",
         ghost:
-          "bg-transparent text-[var(--color-ink-soft)] underline-offset-4 hover:underline",
+          "bg-transparent text-[#1A2D42] underline-offset-4 hover:underline",
         danger:
-          "bg-[var(--color-burgundy)] text-[var(--color-paper-raised)] hover:brightness-110 active:translate-y-px",
+          "bg-[#6E3D42] text-[#F2EBDD] hover:brightness-110 active:translate-y-px",
       },
       size: {
         /* Touch floor ≥44px across sizes */

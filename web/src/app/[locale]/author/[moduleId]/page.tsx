@@ -3,6 +3,8 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
+import { SiteFooter } from "@/components/brand/site-footer";
+import { PageIntro } from "@/components/brand/page-intro";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessAuthorArea,
@@ -71,58 +73,59 @@ export default async function AuthorReviewDetailPage({ params }: Props) {
   const canReview = isReviewer && version.status === "IN_REVIEW";
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <SiteHeader signedIn />
       <main
         id="main-content"
-        className="page-shell"
+        className="page-shell flex-1 pb-10 sm:pb-14"
         data-testid="author-review-detail"
       >
-        <h1 className="font-display text-3xl text-[var(--color-ink)]">
-          {version.title}
-        </h1>
-        <p
-          className="mt-2 text-[var(--color-graphite)]"
-          data-testid="review-status"
-        >
-          Status: {version.status}
-          {dbState ? " (DB)" : " (YAML fallback)"}
-        </p>
-        <p className="mt-2 text-sm text-[var(--color-graphite)]">
-          Version id: {version.id}
-          {version.authorId ? ` · Author: ${version.authorId}` : null}
-          {version.reviewerId ? ` · Reviewer: ${version.reviewerId}` : null}
-        </p>
-        <p className="mt-2 text-sm text-[var(--color-graphite)]">
-          Exercises (answers visible to reviewer): {mod.exercises.length}
-        </p>
-        {approvedBlocked ? (
+        <PageIntro title={version.title}>
           <p
-            className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-amber)] bg-[var(--color-paper-sunken)] px-4 py-3 text-sm"
-            data-testid="approved-but-blocked"
-            role="status"
+            className="mt-3 text-[var(--color-graphite)]"
+            data-testid="review-status"
           >
-            APPROVED but PUBLISHED blocked: DEC-016 / JPJO gates open. This does
-            not simulate an independent expert decision.
+            Status: {version.status}
+            {dbState ? " (DB)" : " (YAML fallback)"}
           </p>
-        ) : null}
-        {version.status === CHANGES_REQUESTED_DB_STATUS ? (
-          <p
-            className="mt-4 text-sm text-[var(--color-burgundy)]"
-            data-testid="changes-requested"
-          >
-            Changes requested (DB status REJECTED = CHANGES_REQUESTED). Author
-            revises and resubmits.
+        </PageIntro>
+        <div className="surface-panel motion-fade-rise-delay mt-6 space-y-3 p-4 sm:mt-8 sm:p-6">
+          <p className="m-0 text-sm text-[var(--color-graphite)]">
+            Version id: {version.id}
+            {version.authorId ? ` · Author: ${version.authorId}` : null}
+            {version.reviewerId ? ` · Reviewer: ${version.reviewerId}` : null}
           </p>
-        ) : null}
-        <ReviewActions
-          moduleId={moduleId}
-          status={version.status}
-          canSubmit={canSubmit}
-          canReview={canReview}
-        />
+          <p className="m-0 text-sm text-[var(--color-graphite)]">
+            Exercises (answers visible to reviewer): {mod.exercises.length}
+          </p>
+          {approvedBlocked ? (
+            <p
+              className="rounded-[var(--radius-md)] border border-[var(--color-amber)] bg-[var(--color-warning-bg)] px-4 py-3 text-sm text-[var(--color-warning)]"
+              data-testid="approved-but-blocked"
+              role="status"
+            >
+              APPROVED but PUBLISHED blocked: DEC-016 / JPJO gates open. This does
+              not simulate an independent expert decision.
+            </p>
+          ) : null}
+          {version.status === CHANGES_REQUESTED_DB_STATUS ? (
+            <p
+              className="text-sm text-[var(--color-burgundy)]"
+              data-testid="changes-requested"
+            >
+              Changes requested (DB status REJECTED = CHANGES_REQUESTED). Author
+              revises and resubmits.
+            </p>
+          ) : null}
+          <ReviewActions
+            moduleId={moduleId}
+            status={version.status}
+            canSubmit={canSubmit}
+            canReview={canReview}
+          />
+        </div>
         <pre
-          className="mt-8 overflow-auto rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-4 text-xs"
+          className="mt-6 overflow-auto rounded-[var(--radius-lg)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-4 text-xs shadow-[var(--shadow-xs)]"
           data-testid="review-packet-json"
           tabIndex={0}
           role="region"
@@ -135,11 +138,15 @@ export default async function AuthorReviewDetailPage({ params }: Props) {
           decisions here.
         </p>
         <p className="mt-8">
-          <Link href="/author" className="text-[var(--color-forest)]">
+          <Link
+            href="/author"
+            className="inline-flex min-h-11 items-center text-[var(--color-amber-deep)] no-underline hover:underline"
+          >
             ← author list
           </Link>
         </p>
       </main>
-    </>
+      <SiteFooter />
+    </div>
   );
 }
