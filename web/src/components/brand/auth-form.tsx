@@ -179,14 +179,14 @@ export function AuthForm({ mode }: { mode: Mode }) {
         {mode === "register" ? (
           <>
             {t("haveAccount")}{" "}
-            <Link href="/login" className="text-[var(--color-forest)]">
+            <Link href="/login" className="text-[var(--color-amber-deep)]">
               {t("submitSignIn")}
             </Link>
           </>
         ) : (
           <>
             {t("needAccount")}{" "}
-            <Link href="/register" className="text-[var(--color-forest)]">
+            <Link href="/register" className="text-[var(--color-amber-deep)]">
               {t("submitRegister")}
             </Link>
           </>

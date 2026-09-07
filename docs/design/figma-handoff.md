@@ -324,6 +324,29 @@ Chrome language: **RU**. Polish appears only in learning content frames (not the
 
 Note: long desktop Admin beta content may require vertical scrolling inside the 1440×900 frame (accepted as-is; not rebuilt in the dimensions_key fix).
 
+## 9. Visual System v2 (design stream)
+
+**Branch:** `feat/visual-system-v2` (from M5 tip; separable from deploy PR)
+**Direction:** Archive Panel — ink atmosphere + warm paper surfaces; Source Serif 4 / Source Sans 3; amber accent. No purple-AI / Duolingo / generic SaaS.
+**Page:** `Visual System v2` (`55:2`)
+**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=55-2
+
+| Frame | node-id | Viewport | Link |
+| --- | --- | --- | --- |
+| VS2 / Desktop · Login | `57:2` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=57-2) |
+| VS2 / Desktop · Invite accept | `61:2` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=61-2) |
+| VS2 / Desktop · Dashboard | `59:2` | 1440×1100 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=59-2) |
+| VS2 / Desktop · Lesson shell | `60:36` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=60-36) |
+| VS2 / Desktop · Admin beta | `60:2` | 1440×1200 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=60-2) |
+
+**Code kit raises (this stream):**
+- Auth split shell (`AuthShell`) for login / register / invite
+- Elevation + paper grain tokens in `globals.css`
+- Button via CVA + `@radix-ui/react-slot` (Slowarium colors, not Radix Themes defaults)
+- Dashboard continue panel + progress rail; lesson shell rail; admin metric tiles / surface panels
+
+**Still to polish:** tablet/mobile VS2 frames; Foundations `27:3` fill from primitives; Code Connect mappings; deeper component variant sync from Figma `02 Components`.
+
 ## 8. Out of scope
 
 Architecture ADRs · DB schema docs · certificate claims · gamification HUD · public content release before JPJO · simulating independent JPJO decisions in-app

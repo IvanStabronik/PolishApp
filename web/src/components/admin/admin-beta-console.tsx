@@ -117,19 +117,25 @@ export function AdminBetaConsole() {
 
   return (
     <div className="flex flex-col gap-10" data-testid="admin-beta-console">
-      <section>
-        <h2 className="font-display text-2xl">Invite inventory</h2>
+      <section className="surface-panel p-5 sm:p-6">
+        <h2 className="m-0 font-display text-2xl text-[var(--color-ink)]">
+          Invite inventory
+        </h2>
         <p className="mt-1 text-sm text-[var(--color-graphite)]">
           Personal one-time invites only (single use).
         </p>
-        <ul className="mt-2 flex flex-wrap gap-4 p-0 list-none" data-testid="invite-counts">
+        <ul
+          className="mt-4 flex list-none flex-wrap gap-3 p-0"
+          data-testid="invite-counts"
+        >
           {Object.entries(overview.inviteCounts).map(([k, v]) => (
-            <li key={k} className="text-sm">
-              <strong>{k}</strong>: {v}
+            <li key={k} className="admin-metric">
+              <span className="admin-metric__value">{v}</span>
+              <span className="admin-metric__label">{k}</span>
             </li>
           ))}
         </ul>
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-wrap gap-2">
           <Button
             type="button"
             data-testid="admin-create-invite"
@@ -159,7 +165,7 @@ export function AdminBetaConsole() {
         {createdToken ? (
           <p
             data-testid="admin-invite-token-once"
-            className="mt-3 break-all rounded border border-[var(--color-line)] bg-[var(--color-paper-sunken)] p-3 text-sm"
+            className="mt-3 break-all rounded-[var(--radius-md)] border border-[var(--color-amber-soft)] bg-[var(--color-warning-bg)] p-3 text-sm text-[var(--color-ink)]"
           >
             One-time token (copy now — shown once): {createdToken}
           </p>
@@ -171,16 +177,18 @@ export function AdminBetaConsole() {
             invites.map((inv) => (
               <li
                 key={inv.id}
-                className="flex flex-wrap items-center justify-between gap-2 border border-[var(--color-line)] p-3"
+                className="flex flex-wrap items-center justify-between gap-2 rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[color-mix(in_srgb,var(--color-paper)_55%,var(--color-paper-raised))] p-3"
                 data-testid={`invite-row-${inv.id}`}
               >
-                <span className="text-sm">
+                <span className="text-sm text-[var(--color-ink-soft)]">
                   {inv.status} · one-time · used {inv.useCount}/1 ·{" "}
                   {inv.label ?? inv.id.slice(0, 8)}
                 </span>
                 {inv.status === "pending" ? (
                   <Button
                     type="button"
+                    variant="secondary"
+                    size="sm"
                     data-testid={`admin-revoke-${inv.id}`}
                     onClick={() =>
                       startTransition(async () => {
@@ -203,16 +211,18 @@ export function AdminBetaConsole() {
         </ul>
       </section>
 
-      <section>
-        <h2 className="font-display text-2xl">Beta learners</h2>
+      <section className="surface-panel p-5 sm:p-6">
+        <h2 className="m-0 font-display text-2xl text-[var(--color-ink)]">
+          Beta learners
+        </h2>
         <input
           data-testid="admin-learner-search"
-          className="mt-2 w-full max-w-md"
+          className="mt-3 w-full max-w-md min-h-11 rounded-[var(--radius-md)] border border-[var(--color-line-strong)] bg-[var(--color-paper-raised)] px-3 text-[var(--color-ink)]"
           placeholder="Search name / email"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <p className="mt-2 text-sm text-[var(--color-graphite)]">
+        <p className="mt-3 text-sm text-[var(--color-graphite)]">
           Feedback reports: {overview.feedbackCount} · Review due:{" "}
           {overview.reviewDueCount}
         </p>
@@ -223,12 +233,12 @@ export function AdminBetaConsole() {
             filteredLearners.map((l) => (
               <li
                 key={l.id}
-                className="border border-[var(--color-line)] p-3"
+                className="rounded-[var(--radius-md)] border border-[var(--color-line)] p-3"
                 data-testid={`learner-row-${l.id}`}
               >
-                <p className="m-0 font-medium">{l.name}</p>
+                <p className="m-0 font-medium text-[var(--color-ink)]">{l.name}</p>
                 <p className="m-0 text-sm text-[var(--color-graphite)]">{l.email}</p>
-                <p className="m-0 mt-1 text-sm">
+                <p className="m-0 mt-1 text-sm text-[var(--color-ink-soft)]">
                   onboarding: {l.onboardingComplete ? "yes" : "no"} · attempts:{" "}
                   {l.attempts} · status:{" "}
                   <span
@@ -244,6 +254,8 @@ export function AdminBetaConsole() {
                 {!l.betaAccessRevoked ? (
                   <Button
                     type="button"
+                    variant="danger"
+                    size="sm"
                     className="mt-2"
                     data-testid={`admin-deactivate-${l.id}`}
                     onClick={() =>
@@ -267,8 +279,10 @@ export function AdminBetaConsole() {
         </ul>
       </section>
 
-      <section>
-        <h2 className="font-display text-2xl">Feedback inbox</h2>
+      <section className="surface-panel p-5 sm:p-6">
+        <h2 className="m-0 font-display text-2xl text-[var(--color-ink)]">
+          Feedback inbox
+        </h2>
         <ul className="mt-4 flex list-none flex-col gap-2 p-0" data-testid="feedback-inbox">
           {feedback.length === 0 ? (
             <li data-testid="feedback-empty">Inbox empty.</li>
@@ -276,18 +290,20 @@ export function AdminBetaConsole() {
             feedback.map((f) => (
               <li
                 key={f.id}
-                className="border border-[var(--color-line)] p-3"
+                className="rounded-[var(--radius-md)] border border-[var(--color-line)] p-3"
                 data-testid={`feedback-row-${f.id}`}
               >
-                <p className="m-0 text-sm">
+                <p className="m-0 text-sm text-[var(--color-ink-soft)]">
                   {f.category} · {f.status} · rating {f.rating ?? "—"}
                 </p>
-                <p className="m-0 mt-1 text-sm">{f.comment}</p>
+                <p className="m-0 mt-1 text-sm text-[var(--color-ink)]">{f.comment}</p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {(["triaged", "resolved", "wont_fix"] as const).map((status) => (
                     <Button
                       key={status}
                       type="button"
+                      variant="secondary"
+                      size="sm"
                       data-testid={`feedback-set-${status}-${f.id}`}
                       onClick={() =>
                         startTransition(async () => {
@@ -314,12 +330,18 @@ export function AdminBetaConsole() {
         </ul>
       </section>
 
-      <section>
-        <h2 className="font-display text-2xl">Privacy analytics (aggregates)</h2>
-        <ul className="mt-2 list-none p-0 text-sm" data-testid="analytics-aggregates">
+      <section className="surface-panel p-5 sm:p-6">
+        <h2 className="m-0 font-display text-2xl text-[var(--color-ink)]">
+          Privacy analytics (aggregates)
+        </h2>
+        <ul className="mt-3 list-none p-0 text-sm text-[var(--color-ink-soft)]" data-testid="analytics-aggregates">
           {overview.analytics.recentEvents.map((e) => (
-            <li key={e.eventKey}>
-              {e.eventKey}: {e.count}
+            <li
+              key={e.eventKey}
+              className="border-b border-[var(--color-line)] py-2"
+            >
+              <span className="font-medium text-[var(--color-ink)]">{e.eventKey}</span>
+              : {e.count}
             </li>
           ))}
         </ul>

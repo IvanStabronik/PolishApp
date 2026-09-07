@@ -26,6 +26,7 @@ export function LessonPlayer({ lesson, moduleHref }: LessonPlayerProps) {
   const step = lesson.steps[stepIndex];
   const total = lesson.steps.length;
   const stepLabel = t("stepOf", { current: stepIndex + 1, total });
+  const progressWidth = total > 0 ? ((stepIndex + 1) / total) * 100 : 0;
 
   function finish(nextScore: { correct: number; total: number }) {
     const params = new URLSearchParams({
@@ -54,12 +55,35 @@ export function LessonPlayer({ lesson, moduleHref }: LessonPlayerProps) {
 
   if (!step) return null;
 
+  const shellChrome = (
+    <div className="lesson-shell mb-6 max-w-[var(--prose-max)]">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="m-0 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-graphite-muted)]">
+          {lesson.title}
+        </p>
+        <p className="m-0 text-sm text-[var(--color-graphite)]">{stepLabel}</p>
+      </div>
+      <div
+        className="lesson-shell__rail"
+        role="progressbar"
+        aria-valuenow={Math.round(progressWidth)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={stepLabel}
+      >
+        <div
+          className="lesson-shell__rail-fill"
+          style={{ width: `${progressWidth}%` }}
+        />
+      </div>
+    </div>
+  );
+
   if (step.kind === "theory") {
     return (
       <section className="prose-narrow" data-testid="lesson-theory-step">
-        <p className="m-0 text-sm text-[var(--color-graphite)]">
-          {stepLabel} · {t("theory")}
-        </p>
+        {shellChrome}
+        <p className="m-0 text-sm text-[var(--color-graphite)]">{t("theory")}</p>
         <h1 className="mt-2 font-display text-3xl text-[var(--color-ink)]">
           {step.title}
         </h1>
@@ -86,13 +110,12 @@ export function LessonPlayer({ lesson, moduleHref }: LessonPlayerProps) {
       data-lesson-id={lesson.id}
       className="prose-narrow"
     >
-      <p className="m-0 text-sm text-[var(--color-graphite)]">
-        {stepLabel} · {t("practice")}
-      </p>
+      {shellChrome}
+      <p className="m-0 text-sm text-[var(--color-graphite)]">{t("practice")}</p>
       <h2 className="mt-2 font-display text-2xl text-[var(--color-ink)]">
         {step.title}
       </h2>
-      <div className="mt-4">
+      <div className="surface-panel mt-4 p-4 sm:p-5">
         <ExercisePlayer
           key={step.exercise.id}
           moduleId={lesson.moduleId}

@@ -22,7 +22,10 @@ export default async function AdminBetaPage({ params }: Props) {
     <>
       <SiteHeader signedIn />
       <main id="main-content" className="page-shell" data-testid="admin-beta-page">
-        <h1 className="font-display text-3xl text-[var(--color-ink)]">
+        <p className="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-amber-deep)]">
+          Ops · Closed beta
+        </p>
+        <h1 className="mt-2 font-display text-3xl text-[var(--color-ink)]">
           Closed beta control center
         </h1>
         <p className="mt-2 max-w-2xl text-[var(--color-graphite)]">
