@@ -9,6 +9,8 @@
 ```
 MILESTONE 3 FINAL ACCEPTANCE: COMPLETE
 SŁOWARIUM OPERABLE CLOSED BETA: PENDING FINAL ACCEPTANCE
+  — CI green: https://github.com/IvanStabronik/PolishApp/actions/runs/34109887584
+  — PR #3 stays unmerged pending re-audit
 PUBLIC DEPLOYMENT: EXTERNAL BLOCKER
 PUBLIC CONTENT RELEASE: BLOCKED PENDING INDEPENDENT JPJO REVIEW
 A2–B2 SEMANTIC MIGRATION: NOT STARTED
@@ -62,7 +64,19 @@ Ordinary non-invite learners stay denied without previewer.
 
 ## CI
 
-Final green CI run will be cited here after push verification (replaces prior `34067752341` / `34104290297` references for acceptance).
+**Final green CI (acceptance fix package):** https://github.com/IvanStabronik/PolishApp/actions/runs/34109887584  
+SHA: `7c948078bc953c35264b8f234d9895efab59d9c0`  
+Artifacts: `playwright-artifacts` (run 34109887584)
+
+| Suite | Result |
+| --- | --- |
+| Unit | 83 passed / 0 skipped |
+| Integration | 39 passed / 0 skipped |
+| E2E M2.1 | 7 passed |
+| E2E M3 | 8 passed |
+| E2E M4 | 11 passed (incl. deactivation) |
+| E2E no-demo | 2 passed |
+| **Skipped** | **0** |
 
 ## Known limitations
 
