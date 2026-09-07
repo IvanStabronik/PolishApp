@@ -64,9 +64,10 @@ Ordinary non-invite learners stay denied without previewer.
 
 ## CI
 
-**Final green CI (acceptance fix package):** https://github.com/IvanStabronik/PolishApp/actions/runs/34109887584  
-SHA: `7c948078bc953c35264b8f234d9895efab59d9c0`  
-Artifacts: `playwright-artifacts` (run 34109887584)
+**Final green CI (acceptance fix package):** https://github.com/IvanStabronik/PolishApp/actions/runs/34109887584
+
+- SHA: `7c948078bc953c35264b8f234d9895efab59d9c0`
+- Artifacts: `playwright-artifacts` (run 34109887584)
 
 | Suite | Result |
 | --- | --- |
