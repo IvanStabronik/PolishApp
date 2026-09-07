@@ -6,6 +6,7 @@ import { expect, test, type APIRequestContext, type Page } from "@playwright/tes
 import AxeBuilder from "@axe-core/playwright";
 import path from "node:path";
 import fs from "node:fs";
+import { registerLearner } from "./helpers/beta-auth";
 
 const ARTIFACT_DIR = path.join("playwright-artifacts", "closed-beta-screens");
 const MODULE = "pierwsze-spotkanie";
@@ -473,12 +474,11 @@ test.describe("Milestone 3 closed beta core", () => {
     const stamp = Date.now();
     const email = `e2e.m3.ord.${stamp}@slowarium.test`;
     const password = "E2eTestPass123!";
-    await page.goto("/ru/register");
-    await page.getByTestId("register-name").fill("M3 Ordinary");
-    await page.getByTestId("register-email").fill(email);
-    await page.getByTestId("register-password").fill(password);
-    await page.getByTestId("register-submit").click();
-    await page.waitForURL(/\/(onboarding|dashboard)/, { timeout: 30_000 });
+    await registerLearner(page, {
+      name: "M3 Ordinary",
+      email,
+      password,
+    });
     if (page.url().includes("/onboarding")) {
       await page.getByTestId("onboarding-age").check();
       await page.getByTestId("onboarding-consent-terms").check();

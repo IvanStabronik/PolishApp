@@ -26,6 +26,11 @@ export const user = pgTable("user", {
   image: text("image"),
   /** Combined role flags: learner | previewer | author | reviewer | admin */
   roleFlags: jsonb("role_flags").$type<UserRole[]>().notNull().default([]),
+  /** Soft revoke of closed-beta access without deleting the account. */
+  betaAccessRevokedAt: timestamp("beta_access_revoked_at", {
+    withTimezone: true,
+  }),
+  betaDeactivatedReason: text("beta_deactivated_reason"),
   createdAt: timestamp("created_at", { withTimezone: true })
     .defaultNow()
     .notNull(),

@@ -15,6 +15,7 @@ import {
   isPrivateAlphaPreviewEnv,
 } from "@/lib/demo";
 import { getRequestSession } from "@/modules/auth/session";
+import { assertBetaAccessActive } from "@/modules/auth/beta-access";
 import {
   resolveAttemptMode,
   shouldWriteLiveMastery,
@@ -58,6 +59,8 @@ export async function POST(request: Request) {
   if (!session) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
+  const denied = assertBetaAccessActive(session);
+  if (denied) return denied;
 
   const raw = await request.text();
   if (raw.length > MAX_BODY) {

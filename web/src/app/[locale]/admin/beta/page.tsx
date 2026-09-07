@@ -1,0 +1,39 @@
+import { setRequestLocale } from "next-intl/server";
+import { hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
+import { SiteHeader } from "@/components/brand/site-header";
+import { protectApp } from "@/lib/auth/protect";
+import { canAccessAdminArea } from "@/modules/admin/roles";
+import { AdminBetaConsole } from "@/components/admin/admin-beta-console";
+
+type Props = { params: Promise<{ locale: string }> };
+
+export default async function AdminBetaPage({ params }: Props) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+  const session = await protectApp(locale, `/${locale}/admin/beta`);
+  if (!canAccessAdminArea(session.roles)) {
+    notFound();
+  }
+
+  return (
+    <>
+      <SiteHeader signedIn />
+      <main id="main-content" className="page-shell" data-testid="admin-beta-page">
+        <h1 className="font-display text-3xl text-[var(--color-ink)]">
+          Closed beta control center
+        </h1>
+        <p className="mt-2 max-w-2xl text-[var(--color-graphite)]">
+          Invite inventory, learner activity, feedback inbox, and aggregate
+          analytics. Raw invite tokens are shown only at creation. Public content
+          release remains blocked pending independent JPJO review.
+        </p>
+        <div className="mt-8">
+          <AdminBetaConsole />
+        </div>
+      </main>
+    </>
+  );
+}

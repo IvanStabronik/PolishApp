@@ -1,6 +1,7 @@
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 import path from "node:path";
 import fs from "node:fs";
+import { registerLearner } from "./helpers/beta-auth";
 
 /**
  * Milestone 2.1 private-alpha learner path (5 modules, 4 types, privacy).
@@ -210,16 +211,14 @@ test.describe("Milestone 2.1 private alpha learner path", () => {
     page,
   }) => {
     test.setTimeout(180_000);
-    const stamp = Date.now();
-    const email = `e2e.ordinary.${stamp}@slowarium.test`;
-    const password = "E2eTestPass123!";
-
-    await page.goto("/ru/register");
-    await page.getByTestId("register-name").fill("E2E Ordinary");
-    await page.getByTestId("register-email").fill(email);
-    await page.getByTestId("register-password").fill(password);
-    await page.getByTestId("register-submit").click();
-    await expect(page).toHaveURL(/\/onboarding/, { timeout: 30_000 });
+    // Non-invite learner-only account (no previewer). Invitees get previewer and
+    // may see DRAFT; this matrix must stay denied for ordinary learners.
+    await loginAs(
+      page,
+      "ordinary@demo.slowarium.local",
+      "DemoOrdinary1!",
+      /\/(dashboard|onboarding)/,
+    );
     await finishOnboardingIfNeeded(page);
 
     await expect(page.getByTestId("module-pierwsze-spotkanie")).toHaveCount(0);
@@ -241,13 +240,14 @@ test.describe("Milestone 2.1 private alpha learner path", () => {
     const email = `e2e.delete.${stamp}@slowarium.test`;
     const password = "E2eTestPass123!";
 
-    await page.goto("/ru/register");
-    await page.getByTestId("register-name").fill("E2E Delete");
-    await page.getByTestId("register-email").fill(email);
-    await page.getByTestId("register-password").fill(password);
-    await page.getByTestId("register-submit").click();
-    await expect(page).toHaveURL(/\/onboarding/, { timeout: 30_000 });
-    await finishOnboardingIfNeeded(page);
+    await registerLearner(page, {
+      name: "E2E Delete",
+      email,
+      password,
+    });
+    if (page.url().includes("/onboarding")) {
+      await finishOnboardingIfNeeded(page);
+    }
 
     await page.getByTestId("link-privacy").click();
     await page.getByTestId("privacy-delete").click();

@@ -8,6 +8,13 @@ export const DEMO_ACCOUNTS = {
     name: "Demo Learner",
     roles: ["learner", "previewer"] as const satisfies readonly UserRole[],
   },
+  /** Non-invite learner without previewer — DRAFT denial / M2.1 security matrix. */
+  ordinaryLearner: {
+    email: "ordinary@demo.slowarium.local",
+    password: "DemoOrdinary1!",
+    name: "Demo Ordinary Learner",
+    roles: ["learner"] as const satisfies readonly UserRole[],
+  },
   author: {
     email: "author@demo.slowarium.local",
     password: "DemoAuthor1!",
@@ -19,6 +26,12 @@ export const DEMO_ACCOUNTS = {
     password: "DemoReviewer1!",
     name: "Demo Reviewer",
     roles: ["reviewer", "previewer"] as const satisfies readonly UserRole[],
+  },
+  admin: {
+    email: "admin@demo.slowarium.local",
+    password: "DemoAdmin1!",
+    name: "Demo Admin",
+    roles: ["admin", "learner", "previewer"] as const satisfies readonly UserRole[],
   },
 } as const;
 

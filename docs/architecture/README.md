@@ -45,7 +45,9 @@
 | [security-privacy.md](security-privacy.md) | Better Auth, авторизация на сервере, export/delete, AI off |
 | [testing-strategy.md](testing-strategy.md) | Unit / integration / e2e / CI |
 | [deployment.md](deployment.md) | Local Docker Postgres; без публичного launch |
-| [adr/](adr/) | Architecture Decision Records 001–007 |
+| [adr/](adr/) | Architecture Decision Records 001–011 |
+| [metric-definitions.md](metric-definitions.md) | Privacy-preserving analytics metrics (M4) |
+| [threat-model-m4.md](threat-model-m4.md) | Invite / admin / feedback threats (M4) |
 
 ## ADR
 
@@ -58,6 +60,10 @@
 | [005](adr/005-i18n-and-l1-separation.md) | UI locale ≠ L1 методики |
 | [006](adr/006-progress-from-evidence.md) | Progress из evidence, не из «урока пройден» |
 | [007](adr/007-app-under-web-directory.md) | Приложение в `web/`, не в корне репо |
+| [008](adr/008-learner-safe-exercise-dto.md) | Learner-safe exercise DTO |
+| [009](adr/009-daily-plan.md) | Deterministic daily plan |
+| [010](adr/010-invite-only-closed-beta.md) | Invite-only closed beta |
+| [011](adr/011-privacy-preserving-analytics.md) | Privacy-preserving analytics |
 
 ## Отложенное (осознанно)
 

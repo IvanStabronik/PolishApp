@@ -6,7 +6,7 @@ import {
   canAccessDraftContent,
   isPrivateAlphaPreviewEnv,
 } from "@/lib/demo";
-import { getRequestSession } from "@/modules/auth/session";
+import { protectApp } from "@/lib/auth/protect";
 
 type Props = {
   params: Promise<{ locale: string; lessonId: string }>;
@@ -17,13 +17,14 @@ export default async function LessonPage({ params }: Props) {
   setRequestLocale(locale);
   await getTranslations("learn");
 
+  const session = await protectApp(locale, `/${locale}/learn/lessons/${lessonId}`);
+
   const lesson = await getLessonById(lessonId);
   if (!lesson) notFound();
 
-  const session = await getRequestSession();
   const canDraft = canAccessDraftContent({
-    roles: session?.roles ?? [],
-    email: session?.user.email,
+    roles: session.roles,
+    email: session.user.email,
     isPreviewEnv: isPrivateAlphaPreviewEnv(),
   });
 

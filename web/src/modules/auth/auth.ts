@@ -3,6 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db/client";
 import * as schema from "@/db/schema";
 import type { UserRole } from "@/lib/enums";
+import { isBetaModeEnabled } from "@/modules/admin/roles";
 import { DEMO_ACCOUNTS, isDemoMode } from "./demo";
 
 const secret = process.env.BETTER_AUTH_SECRET;
@@ -29,6 +30,8 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    /** Closed beta: open sign-up disabled; use /api/beta/invite instead. */
+    disableSignUp: isBetaModeEnabled(),
   },
   user: {
     additionalFields: {
