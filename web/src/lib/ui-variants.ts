@@ -7,15 +7,15 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-[#0C1A2B] text-[#F2EBDD] hover:bg-[#1A2D42] active:translate-y-px forced-colors:border forced-colors:border-[CanvasText]",
+          "bg-[#0C1A2B] text-[#F2EBDD] hover:bg-[#1A2D42] active:translate-y-px [forced-color-adjust:none]",
         amber:
-          "bg-[#B06D1A] text-[#FFF8EF] hover:bg-[#8A5412] active:translate-y-px forced-colors:border forced-colors:border-[CanvasText]",
+          "bg-[#B06D1A] text-[#FFF8EF] hover:bg-[#8A5412] active:translate-y-px [forced-color-adjust:none]",
         secondary:
-          "border border-[#9A8F7C] bg-[#F2EBDD] text-[#0C1A2B] shadow-[var(--shadow-xs)] hover:border-[#B06D1A] hover:shadow-[var(--shadow-sm)]",
+          "border border-[#9A8F7C] bg-[#F2EBDD] text-[#0C1A2B] shadow-[var(--shadow-xs)] hover:border-[#B06D1A] hover:shadow-[var(--shadow-sm)] [forced-color-adjust:none]",
         ghost:
           "bg-transparent text-[#1A2D42] underline-offset-4 hover:underline",
         danger:
-          "bg-[#6E3D42] text-[#F2EBDD] hover:brightness-110 active:translate-y-px",
+          "bg-[#6E3D42] text-[#F2EBDD] hover:brightness-110 active:translate-y-px [forced-color-adjust:none]",
       },
       size: {
         /* Touch floor ≥44px across sizes */
