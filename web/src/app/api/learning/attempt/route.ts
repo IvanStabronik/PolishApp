@@ -27,6 +27,11 @@ import {
 } from "@/modules/learning/persist-attempt";
 import { getDb } from "@/db/client";
 import { contentVersions } from "@/db/schema";
+import {
+  assertSameOrigin,
+  getCorrelationId,
+  publicErrorBody,
+} from "@/modules/ops/runtime";
 
 export const runtime = "nodejs";
 
@@ -55,6 +60,13 @@ const MAX_BODY = 32_768;
  * Server decides mode from content status. Client mode/preview/correct ignored.
  */
 export async function POST(request: Request) {
+  const correlationId = getCorrelationId(request);
+  if (!assertSameOrigin(request)) {
+    return NextResponse.json(publicErrorBody("origin_rejected", correlationId), {
+      status: 403,
+    });
+  }
+
   const session = await getRequestSession();
   if (!session) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });

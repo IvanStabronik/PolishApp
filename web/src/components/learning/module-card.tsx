@@ -18,7 +18,8 @@ export async function ModuleCard({ module }: Props) {
   return (
     <Card
       as="article"
-      className="flex flex-col gap-4"
+      elevated
+      className="flex flex-col gap-4 transition-[box-shadow,border-color] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-md)]"
       data-testid={`module-${module.id}`}
       data-module-status={module.status}
     >
@@ -42,7 +43,7 @@ export async function ModuleCard({ module }: Props) {
       <Link
         href={`/learn/${module.id}`}
         data-testid={`module-open-${module.id}`}
-        className="font-medium text-[var(--color-forest)] no-underline hover:underline"
+        className="inline-flex min-h-11 items-center font-medium text-[var(--color-amber-deep)] no-underline hover:underline"
       >
         {tLearn("openModule")} →
       </Link>

@@ -1,6 +1,7 @@
 "use client";
 
 import { PrivacyActions } from "@/components/brand/privacy-actions";
+import { PageIntro } from "@/components/brand/page-intro";
 import { useTranslations } from "next-intl";
 
 export default function PrivacyPage() {
@@ -8,13 +9,8 @@ export default function PrivacyPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <header>
-        <h1 className="font-display m-0 text-3xl text-[var(--color-ink)]">
-          {t("title")}
-        </h1>
-        <p className="mt-2 max-w-xl text-[var(--color-graphite)]">{t("lead")}</p>
-      </header>
-      <div className="max-w-xl">
+      <PageIntro title={t("title")} lead={t("lead")} />
+      <div className="surface-panel motion-fade-rise-delay max-w-xl p-4 sm:p-6">
         <PrivacyActions />
       </div>
     </div>

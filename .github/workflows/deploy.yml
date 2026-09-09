@@ -1,0 +1,170 @@
+name: Deploy private beta
+
+# M5 — deployment workflow. Automatic production deploy is DISABLED until
+# Railway (or other) credentials + environment protection exist.
+# Operators run this manually via workflow_dispatch after secrets are configured.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_environment:
+        description: "Type 'private-beta' to confirm"
+        required: true
+        type: string
+      image_tag:
+        description: "Git SHA or image tag to deploy"
+        required: true
+        type: string
+      run_production_smoke:
+        description: "Run Playwright production smoke after health checks"
+        required: true
+        type: boolean
+        default: true
+
+concurrency:
+  group: deploy-private-beta
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    name: Guardrails
+    runs-on: ubuntu-latest
+    # Must use the same Environment as migrate/deploy so environment-scoped
+    # secrets are visible (repo-level empty checks always fail closed otherwise).
+    environment: private-beta
+    steps:
+      - name: Confirm intent
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.confirm_environment }}" != "private-beta" ]; then
+            echo "Refusing deploy: confirm_environment must be 'private-beta'"
+            exit 1
+          fi
+          if [ -z "${{ secrets.DATABASE_URL }}" ] || [ -z "${{ secrets.BETTER_AUTH_SECRET }}" ]; then
+            echo "EXTERNAL ACCESS REQUIRED: DATABASE_URL / BETTER_AUTH_SECRET secrets missing"
+            echo "Configure GitHub Environment 'private-beta' secrets, then re-run."
+            exit 1
+          fi
+          if [ -z "${{ secrets.DEPLOY_WEBHOOK_URL }}" ] && [ -z "${{ secrets.RAILWAY_TOKEN }}" ]; then
+            echo "EXTERNAL ACCESS REQUIRED: no DEPLOY_WEBHOOK_URL or RAILWAY_TOKEN"
+            echo "Prepare provider credentials before enabling deploy."
+            exit 1
+          fi
+
+  migrate:
+    name: Migration gate
+    needs: guard
+    runs-on: ubuntu-latest
+    environment: private-beta
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.image_tag }}
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Apply migrations (advisory lock)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: pnpm db:migrate
+      - name: On failure — rollback instructions
+        if: failure()
+        run: |
+          echo "::error::Migration failed — STOP deploy. Restore pre-migrate dump if schema half-applied. Redeploy previous app image. See docs/operations/release-and-rollback.md"
+
+  deploy:
+    name: Deploy image (manual provider)
+    needs: migrate
+    runs-on: ubuntu-latest
+    environment: private-beta
+    steps:
+      - name: Trigger provider deploy
+        env:
+          DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          IMAGE_TAG: ${{ inputs.image_tag }}
+        run: |
+          set -euo pipefail
+          if [ -n "${DEPLOY_WEBHOOK_URL:-}" ]; then
+            curl -fsS -X POST "$DEPLOY_WEBHOOK_URL" \
+              -H "Content-Type: application/json" \
+              -d "{\"tag\":\"$IMAGE_TAG\",\"service\":\"slowarium-web\"}"
+            echo "Deploy webhook invoked for $IMAGE_TAG"
+            exit 0
+          fi
+          if [ -n "${RAILWAY_TOKEN:-}" ]; then
+            echo "RAILWAY_TOKEN present — install Railway CLI and deploy in a follow-up once project ID is configured."
+            echo "EXTERNAL ACCESS REQUIRED: set RAILWAY_SERVICE_ID / complete GitHub↔Railway link."
+            exit 1
+          fi
+          echo "No deploy transport configured"
+          exit 1
+
+  verify:
+    name: Health + production smoke
+    needs: deploy
+    runs-on: ubuntu-latest
+    environment: private-beta
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.image_tag }}
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Wait for health/ready
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "${BASE_URL:-}" ]; then
+            echo "EXTERNAL ACCESS REQUIRED: BASE_URL secret missing"
+            exit 1
+          fi
+          for i in $(seq 1 30); do
+            if curl -fsS "$BASE_URL/api/health" >/dev/null && curl -fsS "$BASE_URL/api/ready" >/dev/null; then
+              echo "Healthy"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Health/ready failed — rollback previous image. See docs/operations/release-and-rollback.md"
+          exit 1
+      - name: Production smoke
+        if: ${{ inputs.run_production_smoke }}
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          PROD_SMOKE_ADMIN_EMAIL: ${{ secrets.PROD_SMOKE_ADMIN_EMAIL }}
+          PROD_SMOKE_ADMIN_PASSWORD: ${{ secrets.PROD_SMOKE_ADMIN_PASSWORD }}
+          PROD_SMOKE_ALLOW_DESTRUCTIVE: ${{ secrets.PROD_SMOKE_ALLOW_DESTRUCTIVE }}
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          pnpm test:e2e:production
+      - name: Upload smoke artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-smoke-artifacts
+          path: |
+            web/test-results/
+            web/playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14

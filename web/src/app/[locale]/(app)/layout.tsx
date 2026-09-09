@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/brand/site-header";
+import { SiteFooter } from "@/components/brand/site-footer";
 import { PreviewBanner } from "@/components/brand/preview-banner";
 import {
   canAccessDraftContent,
@@ -23,12 +24,13 @@ export default async function AppShellLayout({
   });
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <SiteHeader signedIn />
       {canDraft ? <PreviewBanner /> : null}
-      <div id="main-content" className="page-shell pb-16" tabIndex={-1}>
+      <div id="main-content" className="page-shell flex-1 pb-10 sm:pb-14" tabIndex={-1}>
         {children}
       </div>
-    </>
+      <SiteFooter />
+    </div>
   );
 }

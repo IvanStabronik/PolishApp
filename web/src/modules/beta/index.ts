@@ -8,6 +8,7 @@ export {
   deactivateBetaAccess,
   listBetaInvites,
 } from "./service";
+export { adminResetLearnerPassword } from "./reset-password";
 export {
   generateInviteToken,
   hashInviteToken,

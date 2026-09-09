@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, master, "feat/**"]
+    branches: [main, master, "feat/**", "docs/**"]
   pull_request:
 
 concurrency:
@@ -56,6 +56,8 @@ jobs:
       BETA_MODE: "true"
       DEMO_MODE: "true"
       DEMO_PREVIEW: "true"
+      # CI e2e uses `next start` (NODE_ENV=production) with demo seed — not a real prod deploy.
+      ALLOW_PRODUCTION_DEMO: "true"
       PLAYWRIGHT_BASE_URL: http://127.0.0.1:3000
       CI: "true"
 
@@ -99,31 +101,50 @@ jobs:
       - name: M3 inventory + provenance assert
         run: pnpm m3:assert
 
-      - name: Security / config checks
+      - name: Security / config / M5 docs checks
         run: |
           set -euo pipefail
           test -f Dockerfile
-          test -f ../docs/runbooks/deployment.md
-          test -f ../docs/runbooks/backup-restore.md
-          test -f ../docs/runbooks/beta-operator.md
+          test -f ../.dockerignore
+          test -f src/instrumentation.ts
+          test -f ../docs/architecture/deployment-v1.md
+          test -f ../docs/operations/private-beta-runbook.md
+          test -f ../docs/operations/incident-response.md
+          test -f ../docs/operations/backup-and-restore.md
+          test -f ../docs/operations/release-and-rollback.md
+          test -f ../docs/reports/milestone-5-deployed-private-beta.md
+          test -f ../.github/workflows/deploy.yml
+          test -f playwright.production.config.ts
+          test -f e2e/production-smoke.spec.ts
+          test -f .env.production.example
           pnpm ops:validate-env
           set +e
-          pnpm audit --prod --audit-level=high > ../docs/reports/m4-dependency-audit.txt 2>&1
+          pnpm audit --prod --audit-level=high > ../docs/reports/m5-dependency-audit.txt 2>&1
           audit_rc=$?
           set -e
           echo "pnpm audit exit=$audit_rc"
-          cat ../docs/reports/m4-dependency-audit.txt
+          cat ../docs/reports/m5-dependency-audit.txt
           if [ "$audit_rc" -ne 0 ]; then
             echo "Failing CI: production dependency audit reported high+ issues"
             exit "$audit_rc"
           fi
+
+      - name: Migration smoke on clean DB
+        env:
+          DATABASE_URL: postgresql://slowarium:slowarium@localhost:5432/slowarium_migrate_smoke
+          PGPASSWORD: slowarium
+        run: |
+          set -euo pipefail
+          psql -h localhost -U slowarium -d slowarium_test -c "CREATE DATABASE slowarium_migrate_smoke;"
+          pnpm db:migrate
+          echo "clean-db migration smoke OK"
 
       - name: Migrate & seed (test DB)
         run: |
           pnpm db:migrate
           pnpm db:seed
 
-      - name: DB integration tests
+      - name: DB integration tests (incl. M5 migrations + security)
         run: pnpm test:integration
 
       - name: Production build
@@ -166,7 +187,7 @@ jobs:
 
       - name: Whitespace / conflict markers
         working-directory: .
-        run: git diff --check 4a9d495d038d9af27dd26cfad823d5e1d8bd4d94..HEAD
+        run: git diff --check aa89b148f8be8c80c5f98816f24c5f8eff32dbfe..HEAD
 
       - name: Upload Playwright artifacts
         if: always()
@@ -177,6 +198,6 @@ jobs:
             web/test-results/
             web/playwright-report/
             web/playwright-artifacts/
-            docs/reports/m4-dependency-audit.txt
+            docs/reports/m5-dependency-audit.txt
           if-no-files-found: error
           retention-days: 14

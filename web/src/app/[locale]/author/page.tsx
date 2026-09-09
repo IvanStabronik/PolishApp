@@ -3,6 +3,9 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
+import { SiteFooter } from "@/components/brand/site-footer";
+import { PageIntro } from "@/components/brand/page-intro";
+import { StatusPanel } from "@/components/brand/status-panel";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessAuthorArea,
@@ -12,6 +15,7 @@ import {
 import { listPreviewModules } from "@/lib/content/load-module";
 import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
+import { Badge } from "@/components/ui/badge";
 import { loadModuleReviewState } from "@/modules/content/persist-review-transition";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -51,43 +55,59 @@ export default async function AuthorListPage({ params }: Props) {
   );
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <SiteHeader signedIn />
-      <main id="main-content" className="page-shell" data-testid="author-list-page">
-        <h1 className="font-display text-3xl text-[var(--color-ink)]">
-          Author / Review
-        </h1>
-        <p className="mt-2 text-[var(--color-graphite)]">
-          DRAFT workflow only. PUBLISHED blocked pending JPJO / DEC-016.
-          Status from content_versions when seeded.
-        </p>
-        <ul className="mt-8 flex list-none flex-col gap-4 p-0">
-          {versions.map((v) => (
-            <li
-              key={v.id}
-              className="border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-4 rounded-[var(--radius-md)]"
-              data-testid={`author-version-${v.moduleId}`}
-            >
-              <p className="m-0 font-display text-xl">{v.title}</p>
-              <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
-                {v.status} · v{v.version}
-              </p>
-              <Link
-                href={`/author/${v.moduleId}`}
-                className="mt-2 inline-block text-sm text-[var(--color-forest)]"
+      <main
+        id="main-content"
+        className="page-shell flex-1 pb-10 sm:pb-14"
+        data-testid="author-list-page"
+      >
+        <PageIntro
+          title="Author / Review"
+          lead="DRAFT workflow only. PUBLISHED blocked pending JPJO / DEC-016."
+        />
+
+        {versions.length === 0 ? (
+          <StatusPanel className="mt-6 sm:mt-8">Нет модулей для ревью.</StatusPanel>
+        ) : (
+          <ul className="mt-6 flex list-none flex-col gap-4 p-0 sm:mt-8">
+            {versions.map((v) => (
+              <li
+                key={v.id}
+                className="surface-panel p-4 sm:p-5"
+                data-testid={`author-version-${v.moduleId}`}
               >
-                Open review detail →
-              </Link>
-              <details className="mt-3">
-                <summary className="cursor-pointer text-sm">Review packet</summary>
-                <pre className="mt-2 overflow-auto whitespace-pre-wrap text-xs">
-                  {buildReviewPacketMarkdown(v)}
-                </pre>
-              </details>
-            </li>
-          ))}
-        </ul>
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="m-0 font-display text-xl text-[var(--color-ink)]">
+                    {v.title}
+                  </p>
+                  <Badge tone={v.status === "DRAFT" ? "draft" : "info"}>
+                    {v.status}
+                  </Badge>
+                </div>
+                <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
+                  v{v.version}
+                </p>
+                <Link
+                  href={`/author/${v.moduleId}`}
+                  className="mt-3 inline-flex min-h-11 items-center text-sm font-medium text-[var(--color-amber-deep)] no-underline hover:underline"
+                >
+                  Open review detail →
+                </Link>
+                <details className="mt-3">
+                  <summary className="cursor-pointer text-sm text-[var(--color-graphite)]">
+                    Review packet
+                  </summary>
+                  <pre className="mt-2 overflow-auto whitespace-pre-wrap rounded-[var(--radius-md)] bg-[var(--color-paper-sunken)] p-3 text-xs">
+                    {buildReviewPacketMarkdown(v)}
+                  </pre>
+                </details>
+              </li>
+            ))}
+          </ul>
+        )}
       </main>
-    </>
+      <SiteFooter />
+    </div>
   );
 }

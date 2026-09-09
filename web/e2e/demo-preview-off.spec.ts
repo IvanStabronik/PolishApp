@@ -21,8 +21,8 @@ async function assertServerReady(request: APIRequestContext): Promise<void> {
   }
 }
 
-function authApiHeaders(): Record<string, string> {
-  const base = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
+function authApiHeaders(baseURL: string): Record<string, string> {
+  const base = baseURL.replace(/\/$/, "");
   return {
     "Content-Type": "application/json",
     Origin: base,
@@ -41,13 +41,15 @@ test.describe("no-preview security gate", () => {
 
   test("previewer still cannot see DRAFT when preview env is off", async ({
     page,
+    baseURL,
   }) => {
+    const origin = (baseURL ?? "http://127.0.0.1:3001").replace(/\/$/, "");
     let res = await page.context().request.post("/api/auth/sign-in/email", {
       data: {
         email: "learner@demo.slowarium.local",
         password: "DemoLearner1!",
       },
-      headers: authApiHeaders(),
+      headers: authApiHeaders(origin),
     });
     for (let attempt = 0; attempt < 3 && res.status() === 429; attempt += 1) {
       const retryAfter = Number(res.headers()["x-retry-after"] ?? "11");
@@ -57,7 +59,7 @@ test.describe("no-preview security gate", () => {
           email: "learner@demo.slowarium.local",
           password: "DemoLearner1!",
         },
-        headers: authApiHeaders(),
+        headers: authApiHeaders(origin),
       });
     }
     expect(

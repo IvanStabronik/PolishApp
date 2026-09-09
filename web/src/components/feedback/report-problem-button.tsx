@@ -78,7 +78,7 @@ export function ReportProblemButton({
           role="dialog"
           aria-labelledby={dialogId}
           data-testid="feedback-dialog"
-          className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-4"
+          className="mt-3 rounded-[var(--radius-lg)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-4 shadow-[var(--shadow-sm)] sm:p-5"
         >
           <h2 id={dialogId} className="m-0 font-display text-xl">
             {t("title")}

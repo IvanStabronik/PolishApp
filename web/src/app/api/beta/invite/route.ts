@@ -8,6 +8,7 @@ import {
 } from "@/modules/beta";
 import { trackAnalyticsEvent } from "@/modules/analytics/service";
 import {
+  RATE_LIMIT_BUCKETS,
   assertSameOrigin,
   getCorrelationId,
   structuredLog,
@@ -55,7 +56,7 @@ export async function POST(request: Request) {
   }
 
   const rl = await consumeRateLimit({
-    bucketKey: `beta:register:${clientIpFromRequest(request)}`,
+    bucketKey: `${RATE_LIMIT_BUCKETS.inviteRedeem}:${clientIpFromRequest(request)}`,
     limit: 10,
     windowMs: 60_000,
   });

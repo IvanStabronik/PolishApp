@@ -1,0 +1,14 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "include": ["src/components/**/*.figma.ts"],
+    "label": "React",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "importPaths": {
+      "src/components/*": "@/"
+    }
+  },
+  "documentUrl": "https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G"
+}

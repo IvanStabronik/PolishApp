@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { MasteryBadge } from "@/components/mastery-badge";
-import { Card } from "@/components/ui/card";
+import { PageIntro } from "@/components/brand/page-intro";
+import { StatusPanel } from "@/components/brand/status-panel";
 import { getProgressOverview } from "@/modules/learning";
 import { Link } from "@/i18n/navigation";
 
@@ -17,37 +18,40 @@ export default async function ProgressPage({ params }: Props) {
 
   return (
     <div className="flex flex-col gap-8" data-testid="progress-page">
-      <header>
-        <h1 className="font-display m-0 text-3xl">{t("title")}</h1>
-        <p className="mt-2 text-[var(--color-graphite)]">{t("lead")}</p>
+      <PageIntro title={t("title")} lead={t("lead")}>
         <p className="mt-2 text-sm text-[var(--color-graphite-muted)]">
           {t("noCertificate")}
         </p>
-      </header>
+      </PageIntro>
 
       {empty ? (
-        <Card>
-          <p className="m-0 text-[var(--color-graphite)]">
+        <StatusPanel>
+          <p className="m-0">
             {overview.signedIn ? t("emptySignedIn") : t("emptySignedOut")}
           </p>
           {!overview.signedIn ? (
             <p className="mt-3 text-sm">
-              <Link href="/login" className="text-[var(--color-burgundy)] underline">
+              <Link
+                href="/login"
+                className="inline-flex min-h-11 items-center text-[var(--color-amber-deep)] underline"
+              >
                 {t("signInCta")}
               </Link>
             </p>
           ) : null}
-        </Card>
+        </StatusPanel>
       ) : null}
 
       {concepts.length > 0 ? (
-        <section>
-          <h2 className="font-display m-0 text-xl">{t("concepts")}</h2>
-          <ul className="mt-4 flex list-none flex-col gap-3 p-0">
+        <section className="surface-panel p-4 sm:p-6">
+          <h2 className="font-display m-0 text-xl text-[var(--color-ink)]">
+            {t("concepts")}
+          </h2>
+          <ul className="mt-4 flex list-none flex-col gap-0 p-0">
             {concepts.map((c) => (
               <li
                 key={c.conceptId}
-                className="flex items-center justify-between gap-3"
+                className="flex items-center justify-between gap-3 border-b border-[var(--color-line)] py-2.5 last:border-b-0"
               >
                 <span className="text-[var(--color-ink)]">{c.label}</span>
                 <MasteryBadge status={c.status} />
@@ -58,8 +62,10 @@ export default async function ProgressPage({ params }: Props) {
       ) : null}
 
       {attempts.length > 0 ? (
-        <Card>
-          <h2 className="font-display m-0 text-xl">{t("recentAttempts")}</h2>
+        <section className="surface-panel p-4 sm:p-6">
+          <h2 className="font-display m-0 text-xl text-[var(--color-ink)]">
+            {t("recentAttempts")}
+          </h2>
           <ul className="mt-4 flex list-none flex-col gap-2 p-0">
             {attempts.map((a) => (
               <li key={a.id} className="text-sm text-[var(--color-graphite)]">
@@ -68,7 +74,7 @@ export default async function ProgressPage({ params }: Props) {
               </li>
             ))}
           </ul>
-        </Card>
+        </section>
       ) : null}
     </div>
   );

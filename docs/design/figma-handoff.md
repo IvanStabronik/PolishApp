@@ -290,7 +290,8 @@ Prior clipped clones (`36:246`, `36:255`, `36:156`, `36:165`) were replaced.
 
 ### Design debt (deferred — not claimed as completed M3 work)
 
-- Foundations (`27:3`) and Components (`27:4`) M3 copies remain empty; M1–M2 foundations/components already exist in-file and remain the visual source until a dedicated design-system sync pass.
+- Foundations (`27:3`) filled in Visual System v2 polish with token board `64:6`.
+- Components (`27:4`) filled in Visual System v2 with VS2 component sets (see §9).
 
 ## 7b. Milestone 4 — Operable Closed Beta
 
@@ -323,6 +324,63 @@ Rebuilt for acceptance (2026-09): real RU chrome, metric cards, invite/learner/f
 Chrome language: **RU**. Polish appears only in learning content frames (not these ops/beta surfaces).
 
 Note: long desktop Admin beta content may require vertical scrolling inside the 1440×900 frame (accepted as-is; not rebuilt in the dimensions_key fix).
+
+## 9. Visual System v2 (design stream)
+
+**Branch:** `feat/visual-system-v2` (from M5 tip; separable from deploy PR)
+**Direction:** Archive Panel — ink atmosphere + warm paper surfaces; Source Serif 4 / Source Sans 3; amber accent. No purple-AI / Duolingo / generic SaaS.
+**Page:** `Visual System v2` (`55:2`)
+**File:** https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=55-2
+
+| Frame | node-id | Viewport | Link |
+| --- | --- | --- | --- |
+| VS2 / Desktop · Login | `57:2` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=57-2) |
+| VS2 / Desktop · Invite accept | `61:2` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=61-2) |
+| VS2 / Desktop · Dashboard | `59:2` | 1440×1100 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=59-2) |
+| VS2 / Desktop · Lesson shell | `60:36` | 1440×900 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=60-36) |
+| VS2 / Desktop · Admin beta | `60:2` | 1440×1200 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=60-2) |
+| VS2 / Tablet · Login | `65:24` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=65-24) |
+| VS2 / Tablet · Invite accept | `65:72` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=65-72) |
+| VS2 / Tablet · Dashboard | `66:26` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-26) |
+| VS2 / Tablet · Lesson shell | `66:83` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-83) |
+| VS2 / Tablet · Admin beta | `66:132` | 834×1112 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-132) |
+| VS2 / Mobile · Login | `65:2` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=65-2) |
+| VS2 / Mobile · Invite accept | `65:47` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=65-47) |
+| VS2 / Mobile · Dashboard | `66:2` | 390×1100 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-2) |
+| VS2 / Mobile · Lesson shell | `66:60` | 390×844 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-60) |
+| VS2 / Mobile · Admin beta | `66:106` | 390×1100 | [open](https://www.figma.com/design/lKdDOQ9za0oYr0nS3c1g1G?node-id=66-106) |
+
+**Foundations (filled):** `VS2 / Foundations · Slowarium tokens` (`64:6`) on page Foundations (`27:3`) — color swatches, type, space/radius, focus ring.
+
+**Components (filled):** page Components (`27:4`) — VS2 component set cloned/adapted from M1–M2 kit + new atoms:
+
+| Component | node-id | Code mapping |
+| --- | --- | --- |
+| VS2 / Button | `67:2` | `web/src/components/ui/button.tsx` (+ `Button.figma.ts`) |
+| VS2 / Input | `67:27` | `.field` inputs in `globals.css` |
+| VS2 / Card | `67:48` | `web/src/components/ui/card.tsx` (+ `Card.figma.ts`) |
+| VS2 / Nav Desktop | `67:61` | `web/src/components/brand/site-header.tsx` |
+| VS2 / Feedback | `67:68` | learning feedback panel |
+| VS2 / EmptyState | `67:81` | `web/src/components/brand/status-panel.tsx` |
+| VS2 / ChoiceOption | `67:91` | `web/src/components/learning/choice-option.tsx` |
+| VS2 / ProgressBar | `67:104` | `.lesson-shell__rail` |
+| VS2 / Badge | `67:131` | `web/src/components/ui/badge.tsx` (+ `Badge.figma.ts`) |
+| VS2 / SurfacePanel | `67:132` | `.surface-panel` (+ `SurfacePanel.figma.ts`) |
+| VS2 / MetricTile | `67:144` | `.admin-metric` (+ `MetricTile.figma.ts`) |
+
+**Code Connect:** local parserless stubs under `web/src/components/**/*.figma.ts` + `web/figma.config.json`. Live Figma Code Connect publish requires Org/Enterprise Dev seat — currently blocked on plan (`list_file_components_for_code_connect` / publish APIs unavailable). Stubs are ready when the seat upgrades.
+
+**Code kit raises (this stream):**
+- Auth split shell (`AuthShell`) for login / register / invite — md+ split, compact mobile atmosphere
+- Elevation + paper grain tokens in `globals.css`; `overflow-x: clip`; responsive `page-shell` gutters
+- Button via CVA + `@radix-ui/react-slot` (touch floor ≥44px all sizes)
+- Site header nav links ≥44px; choice options ≥44px; `SiteFooter` on app shells
+- Shared `PageIntro` + `StatusPanel` for empty/loading/error consistency
+- Dashboard continue panel + progress rail; lesson shell sticky chrome (mobile); admin metric tiles / divider rows / loading skeleton
+- VS2 polish sweep: onboarding, plan, Powtórka, progress, privacy, settings, kronika, A1 catalog, module/result, author/review, beta-disabled, maintenance, 404
+- Motion: `fade-rise`, delayed fade, `ink-line` (honours `prefers-reduced-motion`)
+
+**Still optional:** Publish Figma library + push live Code Connect after Org seat; deeper responsive VS2 frames for every secondary route.
 
 ## 8. Out of scope
 

@@ -3,6 +3,9 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
+import { SiteFooter } from "@/components/brand/site-footer";
+import { PageIntro } from "@/components/brand/page-intro";
+import { StatusPanel } from "@/components/brand/status-panel";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessDraftContent,
@@ -21,6 +24,7 @@ export default async function DailyPlanPage({ params }: Props) {
   setRequestLocale(locale);
   const session = await protectApp(locale, `/${locale}/plan`);
   const t = await getTranslations("learn");
+  const tc = await getTranslations("common");
   const accessCtx = {
     roles: session.roles,
     email: session.user.email,
@@ -31,20 +35,25 @@ export default async function DailyPlanPage({ params }: Props) {
   const plan = snapshot.dailyPlan;
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <SiteHeader signedIn />
-      <main id="main-content" className="page-shell" data-testid="daily-plan-page">
-        <h1 className="font-display text-3xl text-[var(--color-ink)]">
-          {t("dailyPlan")}
-        </h1>
-        <p className="mt-2 text-[var(--color-graphite)]">
-          {t(`planGoal.${plan.nextGoalKey}`)}
-        </p>
-        <ol className="mt-8 flex list-decimal flex-col gap-4 pl-5">
-          {plan.items.length === 0 ? (
-            <li className="text-[var(--color-graphite)]">—</li>
-          ) : (
-            plan.items.map((item, i) => {
+      <main
+        id="main-content"
+        className="page-shell flex-1 pb-10 sm:pb-14"
+        data-testid="daily-plan-page"
+      >
+        <PageIntro
+          title={t("dailyPlan")}
+          lead={t(`planGoal.${plan.nextGoalKey}`)}
+        />
+
+        {plan.items.length === 0 ? (
+          <StatusPanel className="mt-6 sm:mt-8" testId="plan-empty">
+            {tc("planEmpty")}
+          </StatusPanel>
+        ) : (
+          <ol className="mt-6 flex list-none flex-col gap-3 p-0 sm:mt-8">
+            {plan.items.map((item, i) => {
               const href =
                 "href" in item && typeof item.href === "string"
                   ? item.href
@@ -52,37 +61,47 @@ export default async function DailyPlanPage({ params }: Props) {
               return (
                 <li
                   key={`${item.kind}-${i}`}
+                  className="surface-panel motion-fade-rise-delay flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5"
                   data-testid={`plan-item-${item.kind}`}
                   data-lesson-id={
                     item.kind === "unfinished_lesson" ? item.lessonId : undefined
                   }
+                  style={{ animationDelay: `${0.04 * i}s` }}
                 >
-                  <span className="font-medium text-[var(--color-ink)]">
-                    {t(`planReason.${item.reasonKey}`)}
-                  </span>
-                  <span className="text-[var(--color-graphite)]">
-                    {" "}
-                    · {item.minutes} min
-                  </span>
+                  <div className="min-w-0">
+                    <p className="m-0 font-medium text-[var(--color-ink)]">
+                      {t(`planReason.${item.reasonKey}`)}
+                    </p>
+                    <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
+                      {item.minutes} min
+                    </p>
+                  </div>
                   {href ? (
-                    <div className="mt-2">
-                      <LinkButton href={href} data-testid={`plan-cta-${item.kind}`}>
-                        {t("openItem")}
-                      </LinkButton>
-                    </div>
+                    <LinkButton
+                      href={href}
+                      data-testid={`plan-cta-${item.kind}`}
+                      className="w-full sm:w-auto"
+                    >
+                      {t("openItem")}
+                    </LinkButton>
                   ) : null}
                 </li>
               );
-            })
-          )}
-        </ol>
+            })}
+          </ol>
+        )}
+
         <ReportProblemButton />
         <p className="mt-8">
-          <Link href="/dashboard" className="text-[var(--color-forest)]">
-            ← dashboard
+          <Link
+            href="/dashboard"
+            className="inline-flex min-h-11 items-center text-[var(--color-amber-deep)] no-underline hover:underline"
+          >
+            {tc("backToDashboard")}
           </Link>
         </p>
       </main>
-    </>
+      <SiteFooter />
+    </div>
   );
 }

@@ -5,6 +5,11 @@ import { getModuleById } from "@/lib/content/load-module";
 import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
 import { canAccessAuthorArea } from "@/modules/content/review-workflow";
 import { persistReviewTransition } from "@/modules/content/persist-review-transition";
+import {
+  assertSameOrigin,
+  getCorrelationId,
+  publicErrorBody,
+} from "@/modules/ops/runtime";
 
 export const runtime = "nodejs";
 
@@ -20,6 +25,13 @@ const BodySchema = z.object({
  * publication_events. Never writes privacy_audit for content lifecycle.
  */
 export async function POST(request: Request) {
+  const correlationId = getCorrelationId(request);
+  if (!assertSameOrigin(request)) {
+    return NextResponse.json(publicErrorBody("origin_rejected", correlationId), {
+      status: 403,
+    });
+  }
+
   const session = await getRequestSession();
   if (!session) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });

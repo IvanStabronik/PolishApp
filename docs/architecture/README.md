@@ -44,7 +44,8 @@
 | [content-pipeline.md](content-pipeline.md) | YAML lifecycle, self-review ban, Zod → import → seed |
 | [security-privacy.md](security-privacy.md) | Better Auth, авторизация на сервере, export/delete, AI off |
 | [testing-strategy.md](testing-strategy.md) | Unit / integration / e2e / CI |
-| [deployment.md](deployment.md) | Local Docker Postgres; без публичного launch |
+| [deployment.md](deployment.md) | Local Docker Postgres (legacy local-first notes) |
+| [deployment-v1.md](deployment-v1.md) | Deployed private beta (M5) — portable Docker + migrate gate |
 | [adr/](adr/) | Architecture Decision Records 001–011 |
 | [metric-definitions.md](metric-definitions.md) | Privacy-preserving analytics metrics (M4) |
 | [threat-model-m4.md](threat-model-m4.md) | Invite / admin / feedback threats (M4) |

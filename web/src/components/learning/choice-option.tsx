@@ -28,7 +28,7 @@ export function ChoiceOption({
       data-testid="exercise-option"
       data-option-id={id}
       className={cn(
-        "flex cursor-pointer items-start gap-3 border px-4 py-3 transition-colors rounded-[var(--radius-md)]",
+        "flex min-h-11 cursor-pointer items-center gap-3 border px-4 py-3 transition-colors rounded-[var(--radius-md)]",
         selected
           ? "border-[var(--color-forest)] bg-[color-mix(in_srgb,var(--color-forest-soft)_55%,var(--color-paper-raised))]"
           : "border-[var(--color-line)] bg-[var(--color-paper-raised)] hover:border-[var(--color-line-strong)]",
