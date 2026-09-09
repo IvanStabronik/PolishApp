@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -19,6 +19,7 @@ export default async function AdminBetaPage({ params }: Props) {
   if (!canAccessAdminArea(session.roles)) {
     notFound();
   }
+  const t = await getTranslations("adminBeta");
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -29,9 +30,9 @@ export default async function AdminBetaPage({ params }: Props) {
         data-testid="admin-beta-page"
       >
         <PageIntro
-          title="Closed beta control center"
-          lead="Invite inventory, learner activity, feedback inbox, and aggregate analytics. Raw invite tokens are shown only at creation. Public content release remains blocked pending independent JPJO review."
-          eyebrow="Ops · Closed beta"
+          title={t("pageTitle")}
+          lead={t("pageLead")}
+          eyebrow={t("eyebrow")}
         />
         <div className="mt-6 sm:mt-8">
           <AdminBetaConsole />

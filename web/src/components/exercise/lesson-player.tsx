@@ -17,7 +17,7 @@ type LessonPlayerProps = {
  * Lesson player: theory + all 4 exercise types via learner-safe DTOs.
  * Attempts go through /api/learning/attempt with real moduleId/lessonId/exerciseId.
  */
-export function LessonPlayer({ lesson, moduleHref }: LessonPlayerProps) {
+export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps) {
   const t = useTranslations("learn");
   const router = useRouter();
   const [stepIndex, setStepIndex] = useState(0);
@@ -57,6 +57,14 @@ export function LessonPlayer({ lesson, moduleHref }: LessonPlayerProps) {
 
   const shellChrome = (
     <div className="lesson-shell sticky top-0 z-[2] -mx-1 mb-5 bg-[color-mix(in_srgb,var(--color-paper)_92%,transparent)] px-1 py-2 backdrop-blur-sm sm:static sm:mx-0 sm:mb-6 sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none">
+      {preview ? (
+        <p
+          className="m-0 mb-2 text-xs text-[var(--color-amber-deep)]"
+          data-testid="lesson-preview-trust"
+        >
+          {t("previewTrust")}
+        </p>
+      ) : null}
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <p className="m-0 max-w-[70%] truncate text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-graphite-muted)]">
           {lesson.title}

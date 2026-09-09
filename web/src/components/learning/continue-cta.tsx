@@ -15,9 +15,12 @@ export function ContinueCta({
   return (
     <Button
       type="button"
+      variant="primary"
       data-testid="continue-cta"
       data-continue-href={href}
       className="cta-ink w-full sm:w-auto"
+      /* Explicit ink/paper paints — axe color-contrast must not see remapped greys. */
+      style={{ backgroundColor: "#0C1A2B", color: "#F2EBDD" }}
       onClick={() => router.push(href)}
     >
       {label}

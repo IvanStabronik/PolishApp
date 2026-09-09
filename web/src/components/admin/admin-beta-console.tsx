@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useTransition } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 type Overview = {
@@ -42,7 +43,14 @@ type FeedbackRow = {
   createdAt: string;
 };
 
+function inviteAbsoluteUrl(locale: string, token: string): string {
+  if (typeof window === "undefined") return `/${locale}/invite/${token}`;
+  return `${window.location.origin}/${locale}/invite/${token}`;
+}
+
 export function AdminBetaConsole() {
+  const t = useTranslations("adminBeta");
+  const locale = useLocale();
   const [overview, setOverview] = useState<Overview | null>(null);
   const [invites, setInvites] = useState<InviteRow[]>([]);
   const [feedback, setFeedback] = useState<FeedbackRow[]>([]);
@@ -51,6 +59,8 @@ export function AdminBetaConsole() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [createdToken, setCreatedToken] = useState<string | null>(null);
+  const [tempPassword, setTempPassword] = useState<string | null>(null);
+  const [copyHint, setCopyHint] = useState(false);
   const [pending, startTransition] = useTransition();
 
   async function load() {
@@ -95,10 +105,27 @@ export function AdminBetaConsole() {
     );
   }, [overview, search]);
 
+  const inviteUrl = createdToken
+    ? inviteAbsoluteUrl(locale, createdToken)
+    : null;
+  const emailBody = inviteUrl
+    ? t("emailBody", { url: inviteUrl })
+    : null;
+
+  async function copyText(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyHint(true);
+      window.setTimeout(() => setCopyHint(false), 2000);
+    } catch {
+      /* ignore */
+    }
+  }
+
   if (forbidden) {
     return (
       <p data-testid="admin-beta-forbidden" role="alert">
-        Forbidden — admin role required.
+        {t("forbidden")}
       </p>
     );
   }
@@ -111,7 +138,7 @@ export function AdminBetaConsole() {
         aria-busy="true"
         aria-live="polite"
       >
-        <p className="m-0 text-sm text-[var(--color-graphite)]">Loading…</p>
+        <p className="m-0 text-sm text-[var(--color-graphite)]">{t("loading")}</p>
         <div className="admin-loading__bar w-2/3" />
         <div className="admin-loading__bar w-full" />
         <div className="admin-loading__bar w-5/6" />
@@ -123,7 +150,7 @@ export function AdminBetaConsole() {
   if (error || !overview) {
     return (
       <p data-testid="admin-beta-error" role="alert">
-        Failed to load admin beta console.
+        {t("loadFailed")}
       </p>
     );
   }
@@ -132,11 +159,9 @@ export function AdminBetaConsole() {
     <div className="flex flex-col gap-8 sm:gap-10" data-testid="admin-beta-console">
       <section className="surface-panel p-4 sm:p-6">
         <h2 className="m-0 font-display text-xl text-[var(--color-ink)] sm:text-2xl">
-          Invite inventory
+          {t("inviteInventory")}
         </h2>
-        <p className="mt-1 text-sm text-[var(--color-graphite)]">
-          Personal one-time invites only (single use).
-        </p>
+        <p className="mt-1 text-sm text-[var(--color-graphite)]">{t("inviteLead")}</p>
         <ul
           className="mt-4 flex list-none flex-wrap gap-2 p-0 sm:gap-3"
           data-testid="invite-counts"
@@ -157,6 +182,7 @@ export function AdminBetaConsole() {
             onClick={() =>
               startTransition(async () => {
                 setCreatedToken(null);
+                setTempPassword(null);
                 const res = await fetch("/api/admin/beta/invites", {
                   method: "POST",
                   credentials: "include",
@@ -173,21 +199,67 @@ export function AdminBetaConsole() {
               })
             }
           >
-            Create one-time invite
+            {t("createInvite")}
           </Button>
         </div>
-        {createdToken ? (
-          <p
+        {createdToken && inviteUrl ? (
+          <div
+            className="mt-3 space-y-3 rounded-[var(--radius-md)] border border-[var(--color-amber-soft)] bg-[var(--color-warning-bg)] p-3"
             data-testid="admin-invite-token-once"
-            className="mt-3 break-all rounded-[var(--radius-md)] border border-[var(--color-amber-soft)] bg-[var(--color-warning-bg)] p-3 text-sm text-[var(--color-ink)]"
           >
-            One-time token (copy now — shown once): {createdToken}
-          </p>
+            <p className="m-0 break-all text-sm text-[var(--color-ink)]">
+              {t("tokenOnce")}: {createdToken}
+            </p>
+            <p className="m-0 break-all text-sm text-[var(--color-ink)]">
+              <span className="font-medium">{t("inviteUrl")}:</span>{" "}
+              <a
+                href={inviteUrl}
+                className="text-[var(--color-amber-deep)] underline"
+                data-testid="admin-invite-url"
+              >
+                {inviteUrl}
+              </a>
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                size="sm"
+                variant="secondary"
+                data-testid="admin-copy-invite-url"
+                onClick={() => void copyText(inviteUrl)}
+              >
+                {copyHint ? t("copied") : t("copyUrl")}
+              </Button>
+            </div>
+            <div data-testid="admin-invite-email-template">
+              <p className="m-0 text-xs font-semibold uppercase tracking-wide text-[var(--color-graphite)]">
+                {t("emailTemplate")}
+              </p>
+              <p className="m-0 mt-1 text-sm font-medium text-[var(--color-ink)]">
+                {t("emailSubject")}
+              </p>
+              <pre className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] p-3 text-xs text-[var(--color-ink-soft)]">
+                {emailBody}
+              </pre>
+              <Button
+                type="button"
+                size="sm"
+                variant="ghost"
+                className="mt-2"
+                data-testid="admin-copy-invite-email"
+                onClick={() =>
+                  void copyText(`${t("emailSubject")}\n\n${emailBody ?? ""}`)
+                }
+              >
+                {copyHint ? t("copied") : t("copyUrl")}
+              </Button>
+            </div>
+          </div>
         ) : null}
         <ul className="mt-3 list-none p-0 sm:mt-4" data-testid="invite-list">
           {invites.length === 0 ? (
             <li data-testid="invite-empty" className="admin-empty">
-              No invites yet.
+              {t("noInvites")}
             </li>
           ) : (
             invites.map((inv) => (
@@ -197,9 +269,12 @@ export function AdminBetaConsole() {
                 data-testid={`invite-row-${inv.id}`}
               >
                 <span className="min-w-0 text-sm text-[var(--color-ink-soft)]">
-                  <span className="font-medium text-[var(--color-ink)]">{inv.status}</span>
-                  {" · one-time · used "}
-                  {inv.useCount}/1 · {inv.label ?? inv.id.slice(0, 8)}
+                  <span className="font-medium text-[var(--color-ink)]">
+                    {inv.status}
+                  </span>
+                  {" · "}
+                  {t("oneTimeUsed", { count: inv.useCount })} ·{" "}
+                  {inv.label ?? inv.id.slice(0, 8)}
                 </span>
                 {inv.status === "pending" ? (
                   <Button
@@ -219,7 +294,7 @@ export function AdminBetaConsole() {
                       })
                     }
                   >
-                    Revoke
+                    {t("revoke")}
                   </Button>
                 ) : null}
               </li>
@@ -230,23 +305,33 @@ export function AdminBetaConsole() {
 
       <section className="surface-panel p-4 sm:p-6">
         <h2 className="m-0 font-display text-xl text-[var(--color-ink)] sm:text-2xl">
-          Beta learners
+          {t("learners")}
         </h2>
         <input
           data-testid="admin-learner-search"
           className="mt-3 w-full max-w-md min-h-11 rounded-[var(--radius-md)] border border-[var(--color-line-strong)] bg-[var(--color-paper-raised)] px-3 text-[var(--color-ink)]"
-          placeholder="Search name / email"
+          placeholder={t("searchPlaceholder")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <p className="mt-3 text-sm text-[var(--color-graphite)]">
-          Feedback reports: {overview.feedbackCount} · Review due:{" "}
-          {overview.reviewDueCount}
+          {t("feedbackReviewSummary", {
+            feedback: overview.feedbackCount,
+            review: overview.reviewDueCount,
+          })}
         </p>
+        {tempPassword ? (
+          <p
+            data-testid="admin-temp-password-once"
+            className="mt-3 break-all rounded-[var(--radius-md)] border border-[var(--color-amber-soft)] bg-[var(--color-warning-bg)] p-3 text-sm text-[var(--color-ink)]"
+          >
+            {t("tempPasswordOnce")}: {tempPassword}
+          </p>
+        ) : null}
         <ul className="mt-3 list-none p-0 sm:mt-4" data-testid="learner-list">
           {filteredLearners.length === 0 ? (
             <li data-testid="learner-empty" className="admin-empty">
-              No learners match.
+              {t("noLearners")}
             </li>
           ) : (
             filteredLearners.map((l) => (
@@ -261,8 +346,9 @@ export function AdminBetaConsole() {
                     {l.email}
                   </p>
                   <p className="m-0 mt-1 text-sm text-[var(--color-ink-soft)]">
-                    onboarding: {l.onboardingComplete ? "yes" : "no"} · attempts:{" "}
-                    {l.attempts} · status:{" "}
+                    {t("onboarding")}:{" "}
+                    {l.onboardingComplete ? t("yes") : t("no")} · {t("attempts")}
+                    : {l.attempts} · {t("status")}:{" "}
                     <span
                       data-testid={
                         l.betaAccessRevoked
@@ -270,31 +356,58 @@ export function AdminBetaConsole() {
                           : `learner-active-${l.id}`
                       }
                     >
-                      {l.betaAccessRevoked ? "deactivated" : "active"}
+                      {l.betaAccessRevoked ? t("deactivated") : t("active")}
                     </span>
                   </p>
                 </div>
-                {!l.betaAccessRevoked ? (
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <Button
                     type="button"
-                    variant="danger"
+                    variant="secondary"
                     size="sm"
-                    data-testid={`admin-deactivate-${l.id}`}
+                    data-testid={`admin-reset-password-${l.id}`}
+                    disabled={pending}
                     onClick={() =>
                       startTransition(async () => {
-                        await fetch("/api/admin/beta/overview", {
+                        setTempPassword(null);
+                        const res = await fetch("/api/admin/beta/reset-password", {
                           method: "POST",
                           credentials: "include",
                           headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({ userId: l.id }),
                         });
-                        await load();
+                        if (!res.ok) return;
+                        const data = (await res.json()) as {
+                          temporaryPassword: string;
+                        };
+                        setTempPassword(data.temporaryPassword);
                       })
                     }
                   >
-                    Deactivate beta access
+                    {t("resetPassword")}
                   </Button>
-                ) : null}
+                  {!l.betaAccessRevoked ? (
+                    <Button
+                      type="button"
+                      variant="danger"
+                      size="sm"
+                      data-testid={`admin-deactivate-${l.id}`}
+                      onClick={() =>
+                        startTransition(async () => {
+                          await fetch("/api/admin/beta/overview", {
+                            method: "POST",
+                            credentials: "include",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ userId: l.id }),
+                          });
+                          await load();
+                        })
+                      }
+                    >
+                      {t("deactivate")}
+                    </Button>
+                  ) : null}
+                </div>
               </li>
             ))
           )}
@@ -303,12 +416,12 @@ export function AdminBetaConsole() {
 
       <section className="surface-panel p-4 sm:p-6">
         <h2 className="m-0 font-display text-xl text-[var(--color-ink)] sm:text-2xl">
-          Feedback inbox
+          {t("feedbackInbox")}
         </h2>
         <ul className="mt-3 list-none p-0 sm:mt-4" data-testid="feedback-inbox">
           {feedback.length === 0 ? (
             <li data-testid="feedback-empty" className="admin-empty">
-              Inbox empty.
+              {t("inboxEmpty")}
             </li>
           ) : (
             feedback.map((f) => (
@@ -318,16 +431,19 @@ export function AdminBetaConsole() {
                 data-testid={`feedback-row-${f.id}`}
               >
                 <p className="m-0 text-sm text-[var(--color-ink-soft)]">
-                  {f.category} · {f.status} · rating {f.rating ?? "—"}
+                  {f.category} · {f.status}
+                  {f.rating != null ? ` · ★${f.rating}` : ""}
                 </p>
-                <p className="m-0 mt-1 text-sm text-[var(--color-ink)]">{f.comment}</p>
+                <p className="m-0 mt-1 text-sm text-[var(--color-ink)]">
+                  {f.comment}
+                </p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {(["triaged", "resolved", "wont_fix"] as const).map((status) => (
                     <Button
                       key={status}
                       type="button"
-                      variant="secondary"
                       size="sm"
+                      variant="secondary"
                       data-testid={`feedback-set-${status}-${f.id}`}
                       onClick={() =>
                         startTransition(async () => {
@@ -344,7 +460,11 @@ export function AdminBetaConsole() {
                         })
                       }
                     >
-                      Mark {status}
+                      {status === "triaged"
+                        ? t("triage")
+                        : status === "resolved"
+                          ? t("resolve")
+                          : status}
                     </Button>
                   ))}
                 </div>
@@ -356,30 +476,23 @@ export function AdminBetaConsole() {
 
       <section className="surface-panel p-4 sm:p-6">
         <h2 className="m-0 font-display text-xl text-[var(--color-ink)] sm:text-2xl">
-          Privacy analytics (aggregates)
+          {t("analytics")}
         </h2>
-        {overview.analytics.recentEvents.length === 0 ? (
-          <p className="admin-empty" data-testid="analytics-aggregates">
-            No aggregate events yet.
-          </p>
-        ) : (
-          <ul
-            className="mt-3 list-none p-0 text-sm text-[var(--color-ink-soft)]"
-            data-testid="analytics-aggregates"
-          >
-            {overview.analytics.recentEvents.map((e) => (
-              <li
-                key={e.eventKey}
-                className="flex items-baseline justify-between gap-3 border-b border-[var(--color-line)] py-2.5 last:border-b-0"
-              >
-                <span className="min-w-0 font-medium text-[var(--color-ink)]">
-                  {e.eventKey}
-                </span>
-                <span className="tabular-nums">{e.count}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul
+          className="mt-3 list-none p-0 text-sm text-[var(--color-ink-soft)]"
+          data-testid="analytics-aggregates"
+        >
+          {overview.analytics.aggregates.slice(0, 12).map((a) => (
+            <li key={`${a.metricKey}-${a.bucketDate}`} className="admin-row">
+              <span className="min-w-0 font-medium text-[var(--color-ink)]">
+                {a.metricKey}
+              </span>
+              <span className="tabular-nums">
+                {a.valueNum} · {a.bucketDate}
+              </span>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );

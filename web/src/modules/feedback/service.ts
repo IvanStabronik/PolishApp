@@ -113,6 +113,24 @@ export async function listFeedbackForAdmin(filters?: {
   });
 }
 
+/** Learner-visible inbox — own reports only (no other users' PII). */
+export async function listFeedbackForUser(userId: string) {
+  const db = getDb();
+  return db.query.feedbackReports.findMany({
+    where: eq(feedbackReports.reporterUserId, userId),
+    orderBy: [desc(feedbackReports.createdAt)],
+    limit: 50,
+    columns: {
+      id: true,
+      category: true,
+      status: true,
+      comment: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+}
+
 export async function getFeedbackHistory(feedbackId: string) {
   const db = getDb();
   return db.query.feedbackStatusHistory.findMany({

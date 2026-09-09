@@ -433,12 +433,19 @@ textarea:focus-visible {
   box-shadow: var(--shadow-sm);
 }
 
-/* Keep primary CTAs readable under Windows Forced Colors (axe color-contrast). */
+/* Keep primary CTAs readable under Forced Colors / axe color-contrast. */
 .cta-ink {
   background-color: #0c1a2b !important;
   color: #f2ebdd !important;
+  border-color: #0c1a2b !important;
   forced-color-adjust: none;
   -webkit-forced-color-adjust: none;
+}
+
+.cta-ink:hover,
+.cta-ink:focus-visible {
+  background-color: #1a2d42 !important;
+  color: #f2ebdd !important;
 }
 
 .admin-metric {

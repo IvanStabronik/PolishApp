@@ -6,6 +6,7 @@ import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { PageIntro } from "@/components/brand/page-intro";
 import { StatusPanel } from "@/components/brand/status-panel";
+import { MyFeedbackList } from "@/components/feedback/my-feedback-list";
 import {
   LEARNER_L1,
   UI_LOCALES,
@@ -238,6 +239,8 @@ export default function SettingsPage() {
           </form>
         </div>
       )}
+
+      <MyFeedbackList />
     </div>
   );
 }

@@ -15,9 +15,19 @@ Invite-only **deployed private beta**. Not a public content launch. DRAFT curric
 
 1. Sign in as admin.
 2. Create invite in `/admin/beta` (plaintext token shown **once**).
-3. Send invite URL out-of-band: `{APP_URL}/{locale}/invite/{token}`
-4. User registers → onboarding → learning.
-5. Never store plaintext tokens in tickets/logs.
+3. Copy the full invite URL from the console (or build `{APP_URL}/{locale}/invite/{token}`).
+4. Paste the ready email template from the console into your mail client (out-of-band — no product mailer yet).
+5. User opens URL → registers → onboarding → learning.
+6. Never store plaintext tokens in tickets/logs.
+
+## Password recovery (closed beta)
+
+There is **no** self-serve email reset. Operator path:
+
+1. Admin → `/admin/beta` → learner row → **Reset password**.
+2. Temporary password is shown **once**; copy out-of-band to the user.
+3. All of that user’s sessions are revoked immediately.
+4. User signs in with the temporary password and should change it later via support process (product change-password UI is not yet shipped).
 
 ## Deactivate a user
 

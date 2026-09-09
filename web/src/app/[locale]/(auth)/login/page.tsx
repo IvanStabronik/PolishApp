@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/brand/site-header";
 import { AuthShell } from "@/components/brand/auth-shell";
 import { AuthFormSuspense } from "@/components/brand/auth-form-suspense";
+import { Link } from "@/i18n/navigation";
 import { protectAuthPages } from "@/lib/auth/protect";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -15,6 +16,7 @@ export default async function LoginPage({ params }: Props) {
   setRequestLocale(locale);
   await protectAuthPages(locale);
   const t = await getTranslations("auth");
+  const th = await getTranslations("accountHelp");
 
   return (
     <>
@@ -31,6 +33,15 @@ export default async function LoginPage({ params }: Props) {
           <div className="mt-8">
             <AuthFormSuspense mode="login" />
           </div>
+          <p className="mt-6">
+            <Link
+              href="/account-help"
+              className="inline-flex min-h-11 items-center text-sm text-[var(--color-amber-deep)] no-underline hover:underline"
+              data-testid="login-account-help"
+            >
+              {th("title")}
+            </Link>
+          </p>
         </AuthShell>
       </main>
     </>
