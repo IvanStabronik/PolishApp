@@ -1,12 +1,16 @@
 kind: lesson
 canonical_id: LES-A1-WK-02
 slug: rozmiar-dodatki-i-platnosc
-version: 1
+version: 2
 status: DRAFT
 title_pl: Rozmiar, dodatki i płatność
 sort_order: 2
-situation_ru: Вы уточняете размер напитка, добавку и способ оплаты после базового заказа.
-objective_ru: Расширить заказ двумя уточнениями и правильно подтвердить итог перед оплатой.
+situation_ru: >
+  Заказ уже начат у стойки. Бариста уточняет размер и добавку;
+  вы отвечаете коротко, закрываете заказ и платите.
+objective_ru: >
+  Назвать размер (dużą / małą), ответить на z mlekiem / bez mleka,
+  сказать Tak, to wszystko и оплатить kartą — на pan/pani.
 curriculum_links:
   scenarios:
     - SCN-A1-FOOD-01
@@ -45,17 +49,23 @@ dialogue:
       text_pl: Kartą, proszę. Dziękuję.
 key_lines:
   - text_pl: Poproszę dużą kawę.
-    explanation_ru: Размер согласуется с kawę в рамке заказа.
+    explanation_ru: >
+      Размер в том же падеже, что и напиток: dużą kawę (Acc) после Poproszę.
   - text_pl: Z mlekiem, proszę.
-    explanation_ru: Короткий ответ на вопрос о добавке.
+    explanation_ru: >
+      Короткий ответ на вопрос о добавке: z mlekiem / bez mleka + proszę.
   - text_pl: Tak, to wszystko.
-    explanation_ru: Подтверждение, что заказ завершён.
+    explanation_ru: >
+      «Да, это всё» — спокойно закрыть выбор перед ценой.
   - text_pl: Kartą, proszę.
-    explanation_ru: Указание способа оплаты.
+    explanation_ru: >
+      Способ оплаты: kartą / gotówką (творительный в этой формуле).
 pan_pani:
-  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
-    просьбы и благодарность важнее буквального переноса форм L1.
-  form: małą/dużą · z mlekiem · to wszystko · kartą
+  summary_ru: >
+    К баристе-незнакомцу — pan/pani и спокойные формулы заказа
+    (Poproszę…, Z mlekiem, proszę, Kartą, proszę). Не переходите на ty
+    и не говорите *Daj… у стойки.
+  form: "małą / dużą · z mlekiem · to wszystko · kartą"
   examples_pl: &a1
     - Poproszę dużą kawę.
     - Z mlekiem, proszę.
@@ -66,19 +76,30 @@ pan_pani:
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
-    ukr: Відпрацьовуйте польську рамку «małą/dużą · z mlekiem · to wszystko · kartą» цілісно; не
-      складайте її дослівно з українських слів.
-    rus: Отрабатывайте польскую рамку «małą/dużą · z mlekiem · to wszystko · kartą» целиком, без
-      дословной кальки с русского.
-    bel: Адпрацоўвайце польскую рамку «małą/dużą · z mlekiem · to wszystko · kartą» цалкам; не складайце
-      яе даслоўна з беларускай.
+    ukr: >
+      Не збирайте заказ з «дайте / можна мені». Тримайте małą/dużą + Acc,
+      z mlekiem і Kartą, proszę цілими; «ти» до баристи лише якщо він сам
+      запропонував.
+    rus: >
+      Не собирайте заказ из «дайте / можно мне». Нужны małą/dużą + Acc,
+      z mlekiem и Kartą, proszę целиком; ty к баристе — только если он сам
+      предложил.
+    bel: >
+      Не збірайце заказ з «дайце / можна мне». Трымайце małą/dużą + Acc,
+      z mlekiem і Kartą, proszę цэлымі; «ты» да барысты толькі калі ён сам
+      прапанаваў.
 grammar_points:
   - id: GP-A1-WK-L2
     title_pl: Rozwinięcie zamówienia
-    summary_ru: Расширить заказ двумя уточнениями и правильно подтвердить итог перед оплатой.
-    form: Poproszę + rozmiar + produkt. Z/bez + dodatek. Kartą/gotówką.
-    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
-    use: Вы уточняете размер напитка, добавку и способ оплаты после базового заказа.
+    summary_ru: >
+      К заказу добавить размер и добавку, закрыть to wszystko и оплатить.
+    form: >
+      Poproszę + rozmiar + produkt (Acc). Z/bez + dodatek. Kartą / gotówką.
+    meaning: >
+      Бариста понимает размер, добавку и как вы платите.
+    use: >
+      После базового Poproszę… у стойки: ответить на уточнения, затем
+      Ile płacę? / Kartą, proszę.
     examples_pl: *a1
     counterexamples_pl:
       - "*Ty daj."
@@ -88,41 +109,50 @@ grammar_points:
       - GR-PRO-DEM-01
       - GR-NUM-MONEY-01
     l1_notes:
-      ukr: Відпрацьовуйте польську рамку «Poproszę + rozmiar + produkt. Z/bez + dodatek. Kartą/gotówką.»
-        цілісно; не складайте її дослівно з українських слів.
-      rus: Отрабатывайте польскую рамку «Poproszę + rozmiar + produkt. Z/bez + dodatek. Kartą/gotówką.»
-        целиком, без дословной кальки с русского.
-      bel: Адпрацоўвайце польскую рамку «Poproszę + rozmiar + produkt. Z/bez + dodatek. Kartą/gotówką.»
-        цалкам; не складайце яе даслоўна з беларускай.
+      ukr: >
+        Після Poproszę — Acc (dużą kawę), не називний. Z mlekiem /
+        bez mleka і kartą тримайте цілими формулами, не калькуйте
+        «з молоком / на карту».
+      rus: >
+        После Poproszę — Acc (dużą kawę), не именительный. Z mlekiem /
+        bez mleka и kartą — целые формулы, не калька «с молоком / на карту».
+      bel: >
+        Пасля Poproszę — Acc (dużą kawę), не назоўны. Z mlekiem /
+        bez mleka і kartą трымайце цэлымі; не калькуйце «з малаком / на карту».
 l1_notes:
-  ukr: Відпрацьовуйте польську рамку «małą/dużą · z mlekiem · to wszystko · kartą» цілісно; не
-    складайте її дослівно з українських слів.
-  rus: Отрабатывайте польскую рамку «małą/dużą · z mlekiem · to wszystko · kartą» целиком, без
-    дословной кальки с русского.
-  bel: Адпрацоўвайце польскую рамку «małą/dużą · z mlekiem · to wszystko · kartą» цалкам; не складайце
-    яе даслоўна з беларускай.
+  ukr: >
+    Урок про уточнення замовлення: розмір (dużą/małą), добавка (z mlekiem),
+    Tak, to wszystko і оплата kartą. Не калькуйте «дайте»; pan/pani до
+    персоналу.
+  rus: >
+    Урок про уточнения заказа: размер (dużą/małą), добавка (z mlekiem),
+    Tak, to wszystko и оплата kartą. Без кальки «дайте» и без ty к баристе.
+  bel: >
+    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Dużą kawę / z mlekiem /
+    to wszystko / Kartą, proszę — асобныя польскія рамкі ў кавярні.
 steps:
   - id: step-l2-situation
     kind: situation
     title_ru: Ситуация
-    body_ru: Вы уточняете размер напитка, добавку и способ оплаты после базового заказа.
+    body_ru: >
+      У стойки уточняете размер и добавку, закрываете заказ и платите.
   - id: step-l2-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-l2-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-l2-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-l2-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-WK-L2
   - id: step-l2-practice
     kind: practice
-    title_ru: Управляемая практика
+    title_ru: Практика
     exercise_ids:
       - ex-wk-l2-01
       - ex-wk-l2-02
@@ -132,20 +162,20 @@ steps:
       - ex-wk-l2-06
   - id: step-l2-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids: &a2
       - ex-wk-l2-07
       - ex-wk-l2-08
   - id: step-l2-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-wk-l2-01
     canonical_id: EX-A1-WK-L2-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Бариста спрашивает «Dużą czy małą?». Выберите ответ.
+    prompt: "Бариста спрашивает: «Dużą czy małą?» Что ответить?"
     concept_ids:
       - GR-CAS-ACC-01
     function_ids:
@@ -153,8 +183,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Dużą повторяет форму к kawę.
-      incorrect: Duży не согласуется, Daj слишком резко.
+      correct: "Dużą, proszę — размер в Acc, как у kawę."
+      incorrect: "Duży не согласуется; Daj слишком резко у стойки."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -176,7 +206,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Какие реплики уточняют заказ?
+    prompt: "Какие реплики уточняют или закрывают заказ у стойки?"
     concept_ids:
       - GR-PRO-DEM-01
     function_ids:
@@ -184,8 +214,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Добавки и подтверждение завершают состав заказа.
-      incorrect: Do dworca относится к маршруту.
+      correct: "Добавка и «это всё» — обычные шаги после выбора напитка."
+      incorrect: "Do dworca — про маршрут, не про кофейню."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -220,8 +250,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Dużą согласуется с kawę.
-      incorrect: Нужна форма dużą.
+      correct: "Dużą согласуется с kawę в Acc."
+      incorrect: "Нужна форма dużą (не duży)."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -248,8 +278,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: To wszystko закрывает выбор.
-      incorrect: Нужно слово wszystko.
+      correct: "To wszystko — закрыть выбор перед оплатой."
+      incorrect: "Нужно слово wszystko."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -268,7 +298,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: Расставьте уточнения заказа.
+    prompt: "Расставьте шаги уточнённого заказа."
     concept_ids:
       - GR-CAS-ACC-01
     function_ids:
@@ -276,8 +306,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Товар → добавка → подтверждение → оплата.
-      incorrect: Сначала определите заказ, затем платите.
+      correct: "Напиток → добавка → «это всё» → оплата."
+      incorrect: "Сначала заказ и уточнения, потом оплата."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -305,7 +335,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Как ответить на «Kartą czy gotówką?»
+    prompt: "Бариста спрашивает: «Kartą czy gotówką?» Что ответить?"
     concept_ids:
       - GR-PRO-DEM-01
     function_ids:
@@ -313,8 +343,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Kartą — готовая форма способа оплаты.
-      incorrect: Karta/na kartę не подходят в этой рамке.
+      correct: "Kartą, proszę — творительный в формуле оплаты."
+      incorrect: "Karta / Na kartę — кальки, не то, что говорят у стойки."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -336,7 +366,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Отметьте позиции, которые можно связать с Poproszę.
+    prompt: "Что можно поставить после Poproszę?"
     concept_ids:
       - GR-NUM-MONEY-01
     function_ids:
@@ -344,8 +374,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Товары стоят после Poproszę в форме объекта.
-      incorrect: Kartą называет способ оплаты.
+      correct: "После Poproszę — объект в Acc (напиток, еда)."
+      incorrect: "Kartą — способ оплаты, не объект заказа."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -372,7 +402,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Мини-проверка: завершите заказ."
+    prompt: "Соберите шаги закрытия заказа и оплаты."
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -380,8 +410,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Подтверждение состава → сумма → способ оплаты.
-      incorrect: Оплата следует после подтверждения заказа.
+      correct: "Вопрос «это всё?» → ответ → сумма → способ оплаты."
+      incorrect: "Сначала подтвердите заказ, потом спросите цену и платите."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -412,11 +442,13 @@ mini_check:
     - GR-PRO-DEM-01
     - GR-NUM-MONEY-01
 result_metadata:
-  title_ru: Результат урока
-  success_ru: Расширить заказ двумя уточнениями и правильно подтвердить итог перед оплатой. Результат
-    относится только к DRAFT-превью.
-  retry_ru: "Повторите опорные реплики: małą/dużą · z mlekiem · to wszystko · kartą, затем снова
-    выполните мини-проверку."
+  title_ru: Итог урока
+  success_ru: >
+    Короткая проверка пройдена. Вы можете уточнить размер и добавку,
+    закрыть заказ и оплатить у стойки (DRAFT preview).
+  retry_ru: >
+    Повторите dużą/małą, z mlekiem, Tak, to wszystko и Kartą, proszę,
+    затем пройдите короткую проверку снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-TRANS-01
@@ -434,4 +466,8 @@ provenance:
     - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01, FN-A1-ASK-01,
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
+  notes: >
+    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
+    DRAFT — pending human review; not JPJO-approved, not published to learners.
+    reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only
