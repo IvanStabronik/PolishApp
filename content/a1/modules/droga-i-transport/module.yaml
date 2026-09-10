@@ -1,7 +1,7 @@
 kind: module
 canonical_id: MOD-A1-DROGA-I-TRANSPORT
 slug: droga-i-transport
-version: 3
+version: 4
 status: DRAFT
 level: A1
 title_pl: Droga i transport
@@ -46,4 +46,5 @@ provenance:
     - "Common-knowledge Polish urban navigation & ticket MWUs (język ogólny)"
   ai_assisted: true
   notes: >
-    Wave 6 — L01–L03 deepen (speaking, listening on L02/L03, dual gaps, hard foils). DRAFT — not JPJO-approved, not learner-published. reviewer_id null.
+    Static audio on L01–L03 assessed listening (edge-tts interim under /audio/a1/).
+    DRAFT — not JPJO-approved, not learner-published. reviewer_id null.

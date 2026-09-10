@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-02
 slug: ilosc-cena-i-paragon
-version: 4
+version: 5
 status: DRAFT
 title_pl: Ilość, cena i paragon
 sort_order: 2
@@ -393,11 +393,12 @@ exercises:
 
   - id: ex-ws-l2-listen-01
     canonical_id: EX-A1-WS-L2-LIS-01
-    version: 1
+    version: 2
     type: listening
     status: DRAFT
     prompt: "Послушайте кассира. Что она сказала?"
     audio_text_pl: Razem jedenaście złotych.
+    audio_url: /audio/a1/EX-A1-WS-L2-LIS-01.mp3
     options:
       - id: a
         text: Назвала итоговую сумму покупки.
@@ -581,4 +582,5 @@ provenance:
       LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Wave 6 deepen v4 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).
+    Static assessed-listening audio (edge-tts interim). Hard shop foils.
+    DRAFT — not JPJO-approved. reviewer_id null.

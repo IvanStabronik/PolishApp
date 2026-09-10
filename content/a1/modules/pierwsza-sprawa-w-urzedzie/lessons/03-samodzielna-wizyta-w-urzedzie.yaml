@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-03
 slug: samodzielna-wizyta-w-urzedzie
-version: 4
+version: 5
 status: DRAFT
 title_pl: Samodzielna wizyta w urzędzie
 sort_order: 3
@@ -375,11 +375,12 @@ exercises:
 
   - id: ex-ur-l3-listen-01
     canonical_id: EX-A1-UR-L3-LIS-01
-    version: 1
+    version: 2
     type: listening
     status: DRAFT
     prompt: "Послушайте служащего. Что он сказал?"
     audio_text_pl: Przy okienku numer cztery.
+    audio_url: /audio/a1/EX-A1-UR-L3-LIS-01.mp3
     options:
       - id: a
         text: Указал, где ждать.
@@ -561,4 +562,5 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
   ai_assisted: true
   notes: >
-    Wave 6 deepen v4 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).
+    Static assessed-listening audio (edge-tts interim). Hard urząd foils.
+    DRAFT — not JPJO-approved. reviewer_id null.

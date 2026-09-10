@@ -28,7 +28,7 @@ edge-tts --voice pl-PL-MarekNeural `
 
 Polish voices: `pl-PL-MarekNeural` (male), `pl-PL-ZofiaNeural` (female).
 
-## Current inventory (2026-09-10)
+## Current inventory (2026-09-10) — all A1 assessed listening
 
 | File | Lesson | Text |
 | --- | --- | --- |
@@ -38,5 +38,16 @@ Polish voices: `pl-PL-MarekNeural` (male), `pl-PL-ZofiaNeural` (female).
 | `EX-A1-WK-LIS-01.mp3` | W kawiarni L01 | Dużą czy małą? |
 | `EX-A1-WK-L2-LIS-01.mp3` | W kawiarni L02 | Z mlekiem czy bez mleka? |
 | `EX-A1-WK-L3-LIS-01.mp3` | W kawiarni L03 | Kanapka z serem czy z szynką? |
+| `EX-A1-WS-LIS-01.mp3` | W sklepie L01 | Dwanaście złotych i pięćdziesiąt groszy. |
+| `EX-A1-WS-L2-LIS-01.mp3` | W sklepie L02 | Razem jedenaście złotych. |
+| `EX-A1-WS-L3-LIS-01.mp3` | W sklepie L03 | Jedno mleko? |
+| `EX-A1-DT-LIS-01.mp3` | Droga i transport L01 | Za dziesięć minut. Bilet normalny — cztery złote. |
+| `EX-A1-DT-L2-LIS-01.mp3` | Droga i transport L02 | Na czwartym, przy poczcie. |
+| `EX-A1-DT-L3-LIS-01.mp3` | Droga i transport L03 | Na piątym. |
+| `EX-A1-UR-LIS-01.mp3` | Pierwsza sprawa w urzędzie L01 | Rozumiem. Proszę czekać na numer. |
+| `EX-A1-UR-L2-LIS-01.mp3` | Pierwsza sprawa w urzędzie L02 | Brakuje wniosku i jednego zdjęcia. |
+| `EX-A1-UR-L3-LIS-01.mp3` | Pierwsza sprawa w urzędzie L03 | Przy okienku numer cztery. |
+
+**Count:** 15 / 15 A1 assessed listening items have static `audio_url`.
 
 After YAML edits: `pnpm content:validate` from repo root. Bump lesson + listening exercise versions; keep `status: DRAFT`.

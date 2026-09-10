@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-01
 slug: bilet-i-droga
-version: 5
+version: 6
 status: DRAFT
 title_pl: Bilet i droga
 sort_order: 1
@@ -272,11 +272,12 @@ exercises:
 
   - id: ex-dt-listen-01
     canonical_id: EX-A1-DT-LIS-01
-    version: 1
+    version: 2
     type: listening
     status: DRAFT
     prompt: "Послушайте кассира билетов. Что он сказал?"
     audio_text_pl: Za dziesięć minut. Bilet normalny — cztery złote.
+    audio_url: /audio/a1/EX-A1-DT-LIS-01.mp3
     options:
       - id: a
         text: Назвал время отправления и цену билета.
@@ -663,4 +664,5 @@ provenance:
     - "Curriculum links: SCN-A1-DIRECTIONS-01, SCN-A1-TICKET-01, FN-A1-DIRECT-01"
   ai_assisted: true
   notes: >
-    Wave 6 deepen v5 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).
+    Static assessed-listening audio (edge-tts interim, not studio).
+    Hard same-scenario foils. DRAFT — not JPJO-approved. reviewer_id null.

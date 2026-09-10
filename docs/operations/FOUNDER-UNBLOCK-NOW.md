@@ -122,4 +122,18 @@ Status stays `NOT_STARTED` until a real reviewer opens it. AI must not APPROVE. 
 - [ ] Wizard §1–§2 + §4 health rows marked Done
 - [ ] (Optional) JPJO calendar booked — still not PUBLISHED
 
-Until then: local closed-beta only. Score stays ~34 / 50 EXTERNAL (listening audio moved §3; HTTPS/JPJO still blocked).
+Until then: local closed-beta only. Score stays ~**34.5 / 50** EXTERNAL (all 15 A1 assessed listen have static audio; HTTPS/JPJO still blocked).
+
+**Exact next command (human):**
+
+```powershell
+railway login
+```
+
+Then continue with the wizard (or Railway web UI + `private-beta` secrets as above).
+
+```powershell
+cd D:\MyProjects\PolishApp
+pwsh -File scripts\founder-unblock.ps1
+```
+

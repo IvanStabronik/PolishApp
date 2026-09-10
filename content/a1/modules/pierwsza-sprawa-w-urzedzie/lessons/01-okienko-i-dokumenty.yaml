@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-01
 slug: okienko-i-dokumenty
-version: 5
+version: 6
 status: DRAFT
 title_pl: Okienko i dokumenty
 sort_order: 1
@@ -273,11 +273,12 @@ exercises:
 
   - id: ex-ur-listen-01
     canonical_id: EX-A1-UR-LIS-01
-    version: 1
+    version: 2
     type: listening
     status: DRAFT
     prompt: "Послушайте служащего. Что он сказал?"
     audio_text_pl: Rozumiem. Proszę czekać na numer.
+    audio_url: /audio/a1/EX-A1-UR-LIS-01.mp3
     options:
       - id: a
         text: Понял и попросил ждать номер.
@@ -671,4 +672,5 @@ provenance:
     - "Curriculum links: SCN-A1-URZAD-01, FN-A1-PURPOSE-01, FN-A1-DOCS-01"
   ai_assisted: true
   notes: >
-    Wave 6 deepen v5 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).
+    Static assessed-listening audio (edge-tts interim, not studio).
+    Hard same-scenario foils. DRAFT — not JPJO-approved. reviewer_id null.
