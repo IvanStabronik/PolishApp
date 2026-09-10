@@ -25,6 +25,10 @@ export const RuntimeEnvSchema = z.object({
   BETA_MODE: truthy.optional(),
   DEMO_MODE: falsyOrUnset.optional(),
   DEMO_PREVIEW: falsyOrUnset.optional(),
+  /** Closed-beta DRAFT learning for invitees (previewer) — allowed in production. */
+  BETA_ALLOW_DRAFT: truthy.optional(),
+  CLOSED_BETA_PREVIEW: truthy.optional(),
+  ALLOW_DRAFT_PREVIEW: truthy.optional(),
   NODE_ENV: z.enum(["development", "test", "production"]).optional(),
   ALLOW_PRODUCTION_DEMO: truthy.optional(),
 });
@@ -48,6 +52,9 @@ export function validateRuntimeEnv(
     BETA_MODE: env.BETA_MODE,
     DEMO_MODE: env.DEMO_MODE,
     DEMO_PREVIEW: env.DEMO_PREVIEW,
+    BETA_ALLOW_DRAFT: env.BETA_ALLOW_DRAFT,
+    CLOSED_BETA_PREVIEW: env.CLOSED_BETA_PREVIEW,
+    ALLOW_DRAFT_PREVIEW: env.ALLOW_DRAFT_PREVIEW,
     NODE_ENV: env.NODE_ENV,
     ALLOW_PRODUCTION_DEMO: env.ALLOW_PRODUCTION_DEMO,
   });

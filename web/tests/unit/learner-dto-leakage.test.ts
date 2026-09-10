@@ -24,7 +24,11 @@ const authoredSingle: ModuleExercise = {
   options: ["A", "B", "C"],
   correctIndex: 1,
   conceptIds: ["C1"],
-  feedback: { explanation: "B is right", evidenceWeight: 0.8 },
+  feedback: {
+    correct: "B is right",
+    incorrect: "Not B",
+    evidenceWeight: 0.8,
+  },
   retryPolicy: "unlimited",
 };
 
@@ -35,7 +39,11 @@ const authoredGap: ModuleExercise = {
   textWithGaps: "Fill ___",
   gaps: [GAP_ANSWER_SENTINEL],
   conceptIds: ["C1"],
-  feedback: { explanation: "ok", evidenceWeight: 1 },
+  feedback: {
+    correct: "ok",
+    incorrect: "nope",
+    evidenceWeight: 1,
+  },
   retryPolicy: "unlimited",
 };
 
@@ -74,7 +82,7 @@ describe("learner exercise DTO whitelist", () => {
         options: ["a", "b"],
         correctIndices: [0, 1],
         conceptIds: [],
-        feedback: { explanation: "x", evidenceWeight: 1 },
+        feedback: { correct: "x", incorrect: "y", evidenceWeight: 1 },
         retryPolicy: "unlimited",
       },
       {
@@ -84,7 +92,7 @@ describe("learner exercise DTO whitelist", () => {
         items: ["x", "y"],
         correctOrder: [1, 0],
         conceptIds: [],
-        feedback: { explanation: "x", evidenceWeight: 1 },
+        feedback: { correct: "x", incorrect: "y", evidenceWeight: 1 },
         retryPolicy: "unlimited",
       },
     ]) {

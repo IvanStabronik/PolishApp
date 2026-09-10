@@ -13,8 +13,26 @@ export function isPublicDemoPreviewEnv(): boolean {
   );
 }
 
+function envFlagTrue(name: string): boolean {
+  const v = process.env[name];
+  return v === "1" || v === "true";
+}
+
 /**
- * Server-side private-alpha preview *environment* gate.
+ * Closed-beta DRAFT learning without DEMO_MODE / DEMO_PREVIEW theater.
+ * Safe to enable in production with BETA_MODE (invitees hold previewer).
+ * Aliases: BETA_ALLOW_DRAFT, CLOSED_BETA_PREVIEW, ALLOW_DRAFT_PREVIEW.
+ */
+export function isClosedBetaDraftEnv(): boolean {
+  return (
+    envFlagTrue("BETA_ALLOW_DRAFT") ||
+    envFlagTrue("CLOSED_BETA_PREVIEW") ||
+    envFlagTrue("ALLOW_DRAFT_PREVIEW")
+  );
+}
+
+/**
+ * Server-side private-alpha preview *environment* gate (demo path).
  * Uses DEMO_PREVIEW / DEMO_MODE only — not NEXT_PUBLIC alone.
  * Explicit DEMO_PREVIEW=false|0 wins (e2e publish-gate).
  */
@@ -30,9 +48,18 @@ export function isPrivateAlphaPreviewEnv(): boolean {
   return false;
 }
 
-/** @deprecated Prefer isPrivateAlphaPreviewEnv + canAccessDraftContent. */
-export function isDemoPreviewEnabled(): boolean {
+/**
+ * Environment allows DRAFT learning for authorized roles:
+ * closed-beta flag OR classic DEMO_PREVIEW / DEMO_MODE.
+ */
+export function isDraftLearningEnvEnabled(): boolean {
+  if (isClosedBetaDraftEnv()) return true;
   return isPrivateAlphaPreviewEnv();
+}
+
+/** @deprecated Prefer isDraftLearningEnvEnabled + canAccessDraftContent. */
+export function isDemoPreviewEnabled(): boolean {
+  return isDraftLearningEnvEnabled();
 }
 
 const SEEDED_DEMO_EMAILS = new Set(
@@ -47,7 +74,7 @@ export function isSeededDemoEmail(email: string | null | undefined): boolean {
 export type DraftAccessInput = {
   roles: readonly UserRole[];
   /**
-   * Preview environment enabled (server DEMO_PREVIEW / DEMO_MODE).
+   * Draft-learning environment enabled (BETA_ALLOW_DRAFT / DEMO_PREVIEW / DEMO_MODE).
    * When false, DRAFT is denied even to staff (security e2e).
    */
   isPreviewEnv?: boolean;
@@ -57,13 +84,22 @@ export type DraftAccessInput = {
 
 /**
  * DRAFT access authorization (server-side).
- * - roles include previewer | author | reviewer | admin, and preview env is on; OR
+ * - roles include previewer | author | reviewer | admin, and draft-learning env is on; OR
  * - DEMO_MODE && seeded demo email && role includes previewer
  *
  * Never trusts NEXT_PUBLIC alone.
+ * Pass `isPreviewEnv: false` to force deny (publish-gate e2e).
+ * Pass `isPreviewEnv: true` when the caller already resolved draft-learning env.
+ * Omit `isPreviewEnv` to consult `isDraftLearningEnvEnabled()` (BETA_ALLOW_DRAFT / DEMO_*).
  */
 export function canAccessDraftContent(input: DraftAccessInput): boolean {
   if (input.isPreviewEnv === false) return false;
+  if (
+    input.isPreviewEnv === undefined &&
+    !isDraftLearningEnvEnabled()
+  ) {
+    return false;
+  }
 
   if (canPreviewDraft(input.roles)) {
     return true;

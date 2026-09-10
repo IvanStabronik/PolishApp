@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/brand/site-footer";
 import { PreviewBanner } from "@/components/brand/preview-banner";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 import { protectApp } from "@/lib/auth/protect";
 
@@ -20,7 +20,7 @@ export default async function AppShellLayout({
   const canDraft = canAccessDraftContent({
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   });
 
   return (

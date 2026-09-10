@@ -1,4 +1,5 @@
 import type { LearnerExercise } from "@/lib/content/learner-dto";
+import type { LearnerL1 } from "@/lib/enums";
 
 export type ContentStatus =
   | "DRAFT"
@@ -23,6 +24,18 @@ export type ModuleSummary = {
   lessonIds: string[];
 };
 
+export type LearnerDialogueTurn = {
+  speaker: string;
+  pl: string;
+  gloss?: string;
+};
+
+export type LearnerKeyLine = {
+  pl: string;
+  explanation: string;
+  l1Note?: string;
+};
+
 /**
  * Learner-safe lesson steps — never include answer keys.
  * Exercise steps carry LearnerExercise whitelist DTOs only.
@@ -36,6 +49,38 @@ export type LessonStep =
     }
   | {
       id: string;
+      kind: "dialogue";
+      title: string;
+      turns: LearnerDialogueTurn[];
+    }
+  | {
+      id: string;
+      kind: "key_lines";
+      title: string;
+      lines: LearnerKeyLine[];
+    }
+  | {
+      id: string;
+      kind: "pan_pani";
+      title: string;
+      summary: string;
+      form?: string;
+      examples?: string[];
+      l1Note?: string;
+    }
+  | {
+      id: string;
+      kind: "grammar";
+      title: string;
+      summary: string;
+      form?: string;
+      meaning?: string;
+      use?: string;
+      examples: string[];
+      l1Note?: string;
+    }
+  | {
+      id: string;
       kind: "exercise";
       title: string;
       exercise: LearnerExercise;
@@ -46,6 +91,8 @@ export type LessonDetail = {
   moduleId: string;
   title: string;
   sortOrder: number;
+  /** Profile L1 used when mapping notes into steps. */
+  l1?: LearnerL1;
   steps: LessonStep[];
 };
 

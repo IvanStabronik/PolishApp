@@ -4,7 +4,7 @@ import { getLessonById } from "@/modules/content";
 import { LessonPlayer } from "@/components/exercise/lesson-player";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 import { protectApp } from "@/lib/auth/protect";
 
@@ -25,7 +25,7 @@ export default async function LessonPage({ params }: Props) {
   const canDraft = canAccessDraftContent({
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   });
 
   return (

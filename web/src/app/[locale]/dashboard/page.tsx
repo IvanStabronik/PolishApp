@@ -9,7 +9,7 @@ import { ModuleCard } from "@/components/learning/module-card";
 import { listPreviewModules } from "@/lib/content/load-module";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
 import { ContinueCta } from "@/components/learning/continue-cta";
@@ -30,7 +30,7 @@ export default async function DashboardPage({ params }: Props) {
   const accessCtx = {
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   };
   const showPreview = canAccessDraftContent(accessCtx);
   const modules = listPreviewModules(accessCtx);

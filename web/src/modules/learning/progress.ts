@@ -10,6 +10,7 @@ import {
   learnerProfiles,
 } from "@/db/schema";
 import { masteryStateToBadge } from "./attempt-mode";
+import { humanConceptLabel } from "@/lib/content/concept-labels";
 
 export type ProgressConcept = {
   conceptId: string;
@@ -33,7 +34,7 @@ export type ProgressOverview = {
 };
 
 function labelForConcept(canonicalId: string): string {
-  return canonicalId;
+  return humanConceptLabel(canonicalId, "ru");
 }
 
 export async function loadProgressOverview(

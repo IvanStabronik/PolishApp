@@ -18,7 +18,15 @@ export type KeyLine = {
 };
 
 export type ExerciseFeedback = {
-  explanation: string;
+  /** Explanation shown after a correct answer. */
+  correct: string;
+  /** Explanation shown after an incorrect answer. */
+  incorrect: string;
+  /**
+   * @deprecated Prefer `correct` / `incorrect`. Kept for older fixtures;
+   * evaluate falls back when correct/incorrect are absent.
+   */
+  explanation?: string;
   l1Notes?: Partial<Record<LearnerL1, string>>;
   conceptId?: string;
   evidenceWeight: number;
@@ -109,11 +117,16 @@ export type DraftLesson = {
   keyLines: KeyLine[];
   pragmatics: {
     panPani: string;
+    form?: string;
+    examples?: string[];
     l1Notes?: Partial<Record<LearnerL1, string>>;
   };
   grammar: {
     title: string;
     explanation: string;
+    form?: string;
+    meaning?: string;
+    use?: string;
     examples: string[];
     conceptId: string;
     l1Notes?: Partial<Record<LearnerL1, string>>;
@@ -141,11 +154,16 @@ export type DraftModule = {
   keyLines: KeyLine[];
   pragmatics: {
     panPani: string;
+    form?: string;
+    examples?: string[];
     l1Notes?: Partial<Record<LearnerL1, string>>;
   };
   grammar: {
     title: string;
     explanation: string;
+    form?: string;
+    meaning?: string;
+    use?: string;
     examples: string[];
     conceptId: string;
     l1Notes?: Partial<Record<LearnerL1, string>>;

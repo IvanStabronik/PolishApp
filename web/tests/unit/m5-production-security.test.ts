@@ -71,6 +71,17 @@ describe("M5 production env validation", () => {
     ).toThrow(/DEMO_MODE/);
   });
 
+  it("accepts BETA_ALLOW_DRAFT in production without ALLOW_PRODUCTION_DEMO", () => {
+    expect(() =>
+      validateRuntimeEnv({
+        ...base,
+        BETA_ALLOW_DRAFT: "true",
+        DEMO_PREVIEW: "false",
+        DEMO_MODE: "false",
+      }),
+    ).not.toThrow();
+  });
+
   it("rejects DEMO_PREVIEW in production", () => {
     expect(() =>
       validateRuntimeEnv({ ...base, DEMO_PREVIEW: "true" }),

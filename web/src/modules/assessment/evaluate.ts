@@ -5,10 +5,14 @@
 
 import type { ModuleExercise } from "@/lib/content/types";
 import type { AttemptAnswer } from "@/lib/content/evaluate-yaml";
+import type { LearnerL1 } from "@/lib/enums";
+import { isLearnerL1 } from "@/lib/content/types";
 
 export type EvalResult = {
   correct: boolean;
   explanation: string;
+  /** Optional L1 contrast note after evaluation (never on initial DTO). */
+  l1Note?: string;
   evidenceWeight: number;
   conceptId?: string;
   /**
@@ -16,6 +20,11 @@ export type EvalResult = {
    * Never include on initial learner exercise DTO.
    */
   revealCorrectIndexes?: number[];
+};
+
+export type EvaluateAnswerOptions = {
+  /** Learner L1 for selecting feedback.l1Notes. */
+  l1?: LearnerL1 | string | null;
 };
 
 /** Normalize Polish learner text for closed matching (ASM-006). */
@@ -29,6 +38,26 @@ export function normalizeAnswer(raw: string): string {
     .toLocaleLowerCase("pl-PL");
 }
 
+function resolveFeedbackText(
+  exercise: ModuleExercise,
+  correct: boolean,
+): string {
+  const fb = exercise.feedback;
+  if (correct) {
+    return fb.correct || fb.explanation || "";
+  }
+  return fb.incorrect || fb.explanation || "";
+}
+
+function resolveL1Note(
+  exercise: ModuleExercise,
+  l1?: LearnerL1 | string | null,
+): string | undefined {
+  if (!l1 || !isLearnerL1(l1)) return undefined;
+  const note = exercise.feedback.l1Notes?.[l1];
+  return note?.trim() ? note : undefined;
+}
+
 /**
  * Evaluate a YAML / UI exercise payload (index-based answers).
  * Used by `/api/learning/attempt` and unit tests.
@@ -36,61 +65,66 @@ export function normalizeAnswer(raw: string): string {
 export function evaluateAnswer(
   exercise: ModuleExercise,
   answer: AttemptAnswer,
+  options: EvaluateAnswerOptions = {},
 ): EvalResult {
-  const base = {
-    explanation: exercise.feedback.explanation,
+  const baseMeta = {
     evidenceWeight: exercise.feedback.evidenceWeight,
     conceptId: exercise.feedback.conceptId ?? exercise.conceptIds[0],
   };
 
+  const finish = (correct: boolean, extra: Partial<EvalResult> = {}): EvalResult => {
+    const explanation = resolveFeedbackText(exercise, correct);
+    const l1Note = resolveL1Note(exercise, options.l1);
+    return {
+      ...baseMeta,
+      correct,
+      explanation,
+      ...(l1Note ? { l1Note } : {}),
+      ...extra,
+    };
+  };
+
   if (answer.type !== exercise.type) {
-    return { ...base, correct: false };
+    return finish(false);
   }
 
   switch (exercise.type) {
     case "single_choice": {
       const a = answer as Extract<AttemptAnswer, { type: "single_choice" }>;
-      return {
-        ...base,
-        correct: a.index === exercise.correctIndex,
+      return finish(a.index === exercise.correctIndex, {
         revealCorrectIndexes: [exercise.correctIndex],
-      };
+      });
     }
     case "multiple_choice": {
       const a = answer as Extract<AttemptAnswer, { type: "multiple_choice" }>;
       const got = [...a.indices].sort((x, y) => x - y);
       const exp = [...exercise.correctIndices].sort((x, y) => x - y);
-      return {
-        ...base,
-        correct:
-          got.length === exp.length && got.every((v, i) => v === exp[i]),
-        revealCorrectIndexes: [...exercise.correctIndices],
-      };
+      return finish(
+        got.length === exp.length && got.every((v, i) => v === exp[i]),
+        { revealCorrectIndexes: [...exercise.correctIndices] },
+      );
     }
     case "gap_fill": {
       const a = answer as Extract<AttemptAnswer, { type: "gap_fill" }>;
       if (a.values.length !== exercise.gaps.length) {
-        return { ...base, correct: false };
+        return finish(false);
       }
-      return {
-        ...base,
-        correct: a.values.every(
+      return finish(
+        a.values.every(
           (v, i) => normalizeAnswer(v) === normalizeAnswer(exercise.gaps[i]!),
         ),
-      };
+      );
     }
     case "ordering": {
       const a = answer as Extract<AttemptAnswer, { type: "ordering" }>;
-      return {
-        ...base,
-        correct:
-          a.order.length === exercise.correctOrder.length &&
+      return finish(
+        a.order.length === exercise.correctOrder.length &&
           a.order.every((v, i) => v === exercise.correctOrder[i]),
-        revealCorrectIndexes: [...exercise.correctOrder],
-      };
+        { revealCorrectIndexes: [...exercise.correctOrder] },
+      );
     }
     default:
-      return { ...base, correct: false };
+      return finish(false);
   }
 }
 

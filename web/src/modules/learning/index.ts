@@ -3,7 +3,7 @@
 import { getRequestSession } from "@/modules/auth/session";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 import { getA1Catalog } from "@/modules/content/learner-content";
 import { loadProgressOverview } from "./progress";
@@ -22,7 +22,7 @@ export async function getNextLearningStep() {
   const canDraft = canAccessDraftContent({
     roles: session?.roles ?? [],
     email: session?.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   });
   return {
     kind: "lesson" as const,

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getRequestSession } from "@/modules/auth/session";
 import { getModuleById } from "@/lib/content/load-module";
-import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
+import { isDraftLearningEnvEnabled } from "@/lib/demo";
 import { canAccessAuthorArea } from "@/modules/content/review-workflow";
 import { persistReviewTransition } from "@/modules/content/persist-review-transition";
 import {
@@ -54,7 +54,7 @@ export async function POST(request: Request) {
   const mod = getModuleById(parsed.data.moduleId, {
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   });
   if (!mod) {
     return NextResponse.json({ error: "not_found" }, { status: 404 });

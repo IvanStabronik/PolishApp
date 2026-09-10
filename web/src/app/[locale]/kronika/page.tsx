@@ -38,21 +38,34 @@ export default async function KronikaPage({ params }: Props) {
           </StatusPanel>
         ) : (
           <ol className="surface-panel mt-6 list-none p-0 sm:mt-8">
-            {progress.recentAttempts.map((a) => (
-              <li
-                key={a.id}
-                className="border-b border-[var(--color-line)] px-4 py-3 last:border-b-0 sm:px-5"
-                data-testid="kronika-entry"
-              >
-                <span className="font-medium text-[var(--color-ink)]">
-                  {t("proba")}
-                </span>
-                <span className="text-[var(--color-graphite)]">
-                  {" "}
-                  · {a.result} · {a.mode} · {a.at}
-                </span>
-              </li>
-            ))}
+            {progress.recentAttempts.map((a) => {
+              const resultLabel =
+                a.result === "correct"
+                  ? t("kronikaCorrect")
+                  : a.result === "incorrect"
+                    ? t("kronikaIncorrect")
+                    : t("kronikaUnknown");
+              const title =
+                a.lessonTitle && a.lessonTitle !== "attempt"
+                  ? a.lessonTitle
+                  : t("proba");
+              return (
+                <li
+                  key={a.id}
+                  className="border-b border-[var(--color-line)] px-4 py-3 last:border-b-0 sm:px-5"
+                  data-testid="kronika-entry"
+                  data-mode={a.mode}
+                >
+                  <p className="m-0 font-medium text-[var(--color-ink)]">
+                    {t("kronikaEntry", {
+                      title,
+                      result: resultLabel,
+                      date: a.at,
+                    })}
+                  </p>
+                </li>
+              );
+            })}
           </ol>
         )}
 

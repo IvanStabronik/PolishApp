@@ -77,7 +77,7 @@
     "stepGoal": "Główny cel",
     "stepWeekly": "Ile czasu w tygodniu",
     "stepConsent": "Zgody",
-    "l1Hint": "Język ojczysty wybierasz osobno od języka menu. UI białoruski nie jest wymagany — L1 białoruski jest wspierany.",
+    "l1Hint": "Język menu i język ojczysty to osobne ustawienia. Ukraiński, rosyjski i białoruski L1 są równorzędne — podpowiedzi dopasowują się do Twojego wyboru.",
     "l1Ukr": "Ukraiński",
     "l1Rus": "Rosyjski",
     "l1Bel": "Białoruski",
@@ -109,7 +109,7 @@
     "lead": "Dalej — to, czego potrzebujesz na swojej trasie, a nie punkty za kliknięcia.",
     "modulesHeading": "Moduły A1",
     "previewBadge": "Podgląd wewnętrzny",
-    "previewStatus": "Widzisz szkice (DRAFT). To podgląd wewnętrzny — nie certyfikat i nie zatwierdzenie JPJO.",
+    "previewStatus": "Widzisz wstępne lekcje zamkniętej bety. To nie jest publiczna premiera ani niezależna certyfikacja treści.",
     "currentRoute": "Na trasie: {goal}",
     "continueLearning": "Kontynuuj naukę",
     "viewProgress": "Zobacz postęp",
@@ -117,7 +117,7 @@
     "nextStep": "Następny krok",
     "overallProgress": "Postęp ogólny: {percent}%",
     "nextGoal": "Dalej",
-    "emptyPublished": "Brak opublikowanych modułów. W zamkniętej alfie szkice widzą tylko previewer, author i reviewer."
+    "emptyPublished": "Nie ma jeszcze dostępnych modułów. Jeśli masz zaproszenie do zamkniętej bety — napisz do organizatorów: dostęp do materiałów jeszcze nie jest otwarty."
   },
   "learn": {
     "catalogTitle": "Skrzydło A1",
@@ -172,19 +172,31 @@
     "incorrect": "Niepoprawnie",
     "tryAgain": "Spróbuj ponownie",
     "feedbackTitle": "Informacja zwrotna",
-    "previewTrust": "Szkic do wewnętrznej kontroli: to nie certyfikat ani potwierdzenie JPJO.",
+    "previewTrust": "Materiał wstępny: to nie certyfikat i nie niezależne potwierdzenie jakości.",
     "resultTitle": "Podsumowanie modułu",
-    "resultLead": "To wynik dydaktyczny, nie certyfikat i nie egzamin państwowy.",
+    "resultLead": "Krótkie podsumowanie tej sesji ćwiczeń — nie certyfikat i nie oficjalna ocena opanowania.",
     "scoreLabel": "Poprawnych odpowiedzi",
     "exercisesCount": "ćwiczeń w module",
     "backToModule": "Do modułu",
     "toProgress": "Do postępu",
     "toDashboard": "Do gabinetu",
-    "masteryHint": "Pieczęcie wiedzy pojawią się, gdy będzie dość potwierdzonych odpowiedzi.",
+    "masteryHint": "Pewność w tematach pojawi się po kilku potwierdzonych odpowiedziach — zajrzyj do postępów.",
     "previewNoMastery": "W wewnętrznym podglądzie odpowiedzi nie trafiają do żywego rozliczenia opanowania.",
     "persistError": "Odpowiedź sprawdzona, ale nie udało się zapisać próby. Spróbuj ponownie później.",
     "persistErrorMissingVersion": "Odpowiedź sprawdzona, ale wersja treści jest niedostępna — próba nie została zapisana.",
-    "catalogEmptyDraft": "Brak opublikowanych modułów. Szkice widzą tylko previewer / author / reviewer / admin."
+    "catalogEmptyDraft": "Nie ma jeszcze dostępnych lekcji. Jeśli jesteś w zamkniętej becie i ekran jest pusty — napisz do organizatorów.",
+    "panPani": "Pan / pani",
+    "grammar": "Gramatyka",
+    "grammarForm": "Forma",
+    "grammarMeaning": "Znaczenie",
+    "grammarUse": "Kiedy tak mówimy",
+    "kronikaEntry": "{title} — {result} · {date}",
+    "kronikaCorrect": "poprawnie",
+    "kronikaIncorrect": "błąd",
+    "kronikaUnknown": "bez oceny",
+    "sessionScoreLabel": "W tej sesji poprawnych",
+    "sessionScoreHint": "To licznik ćwiczeń w lekcji, nie oficjalna pieczęć opanowania. Pełny obraz — w postępach.",
+    "sessionScoreMissing": "Podsumowanie sesji nie zostało przekazane — otwórz postępy, by zobaczyć zapisane próby."
   },
   "progress": {
     "title": "Postęp",
@@ -230,9 +242,9 @@
     "deleteDone": "Prośba o usunięcie przyjęta."
   },
   "demo": {
-    "bannerTitle": "Kontrola wewnętrzna — nie certyfikat",
-    "bannerBody": "Widzisz szkice zamkniętej bety. To nie jest publiczna publikacja ani potwierdzenie JPJO. W wewnętrznym podglądzie odpowiedzi nie zapisują się do żywego rozliczenia opanowania.",
-    "draftOnly": "Tylko dla author / reviewer / admin"
+    "bannerTitle": "Lekcje wstępne",
+    "bannerBody": "Materiał zamkniętej bety nie przeszedł jeszcze niezależnej weryfikacji. Ucz się spokojnie — to nie publiczna premiera i nie certyfikat.",
+    "draftOnly": "Tylko dla zespołu treści"
   },
   "adminBeta": {
     "pageTitle": "Centrum zarządzania zamkniętą betą",
@@ -312,7 +324,10 @@
     "registerBlocked": "Bez zaproszenia nie zarejestrujesz się. Otwórz link z maila.",
     "accessDisabledTitle": "Dostęp do zamkniętej bety wyłączony",
     "accessDisabledLead": "Administrator wyłączył Twój dostęp do zamkniętej bety SŁOWARIUM. Lekcje, plan, powtórka i opinie są niedostępne. Jeśli trzeba — napisz do organizatorów bety.",
-    "accessDisabledSignIn": "Wróć do logowania"
+    "accessDisabledSignIn": "Wróć do logowania",
+    "inviteEyebrow": "Tylko z zaproszeniem",
+    "inviteTitle": "Przyjmij zaproszenie do bety",
+    "inviteLead": "Zamknięta beta SŁOWARIUM jest dostępna tylko z jednorazowym zaproszeniem. Załóż konto przez ważny link."
   },
   "feedback": {
     "cta": "Zgłoś problem",

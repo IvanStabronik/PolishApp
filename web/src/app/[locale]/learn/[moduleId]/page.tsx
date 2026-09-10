@@ -13,9 +13,11 @@ import { getModuleById, isInternalPreview } from "@/lib/content/load-module";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
+import { getLearnerProfile } from "@/modules/auth/session";
+import { isLearnerL1 } from "@/lib/content/types";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string }>;
@@ -34,12 +36,16 @@ export default async function ModulePage({ params }: Props) {
   const accessCtx = {
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   };
   const canDraft = canAccessDraftContent(accessCtx);
 
   const mod = getModuleById(moduleId, accessCtx);
   if (!mod) notFound();
+
+  const profile = await getLearnerProfile(session.user.id);
+  const l1 =
+    profile?.l1 && isLearnerL1(profile.l1) ? profile.l1 : ("rus" as const);
 
   const t = await getTranslations("learn");
   const tDash = await getTranslations("dashboard");
@@ -75,7 +81,13 @@ export default async function ModulePage({ params }: Props) {
         </PageIntro>
 
         <div className="surface-panel mt-8 p-4 sm:p-6">
-          <ModuleOverview dialogue={mod.dialogue} keyLines={mod.keyLines} />
+          <ModuleOverview
+            dialogue={mod.dialogue}
+            keyLines={mod.keyLines}
+            l1={l1}
+            pragmatics={mod.pragmatics}
+            grammar={mod.grammar}
+          />
         </div>
 
         <section className="mt-10" data-testid="module-lessons">
@@ -95,7 +107,7 @@ export default async function ModulePage({ params }: Props) {
                     {lesson.titlePl}
                   </p>
                   <p className="m-0 text-sm text-[var(--color-graphite-muted)]">
-                    {lesson.id}
+                    {lesson.objective}
                   </p>
                 </div>
                 <LinkButton href={`/learn/lessons/${lesson.id}`}>

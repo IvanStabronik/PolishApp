@@ -93,6 +93,7 @@ export function ExercisePlayer({
     let data: {
       correct?: boolean;
       explanation?: string;
+      l1Note?: string;
       revealCorrectIndexes?: number[];
       error?: string;
       reason?: string;
@@ -110,6 +111,7 @@ export function ExercisePlayer({
       setResult({
         correct: data.correct,
         explanation: data.explanation ?? "",
+        l1Note: data.l1Note,
         revealCorrectIndexes: data.revealCorrectIndexes,
       });
     }
@@ -268,6 +270,7 @@ export function ExercisePlayer({
       <FeedbackPanel
         correct={result ? result.correct : null}
         message={result?.explanation ?? ""}
+        l1Note={result?.l1Note}
       />
 
       {persistError ? (

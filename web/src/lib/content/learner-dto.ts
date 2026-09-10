@@ -73,6 +73,8 @@ export type SubmittedAnswerDto =
 export type EvaluationResultDto = {
   correct: boolean;
   explanation: string;
+  /** Optional L1 contrast note after an attempt. */
+  l1Note?: string;
   /** After attempt: indexes to highlight as correct (pedagogy only). */
   revealCorrectIndexes?: number[];
 };

@@ -6,9 +6,10 @@ import { cn } from "@/lib/cn";
 type FeedbackPanelProps = {
   correct: boolean | null;
   message: string;
+  l1Note?: string;
 };
 
-export function FeedbackPanel({ correct, message }: FeedbackPanelProps) {
+export function FeedbackPanel({ correct, message, l1Note }: FeedbackPanelProps) {
   const t = useTranslations("learn");
   if (correct === null || !message) return null;
 
@@ -30,6 +31,14 @@ export function FeedbackPanel({ correct, message }: FeedbackPanelProps) {
         {correct ? t("correct") : t("incorrect")}
       </p>
       <p className="m-0 mt-1 text-[var(--color-ink-soft)]">{message}</p>
+      {l1Note ? (
+        <p
+          className="m-0 mt-2 text-sm text-[var(--color-moss)]"
+          data-testid="exercise-feedback-l1"
+        >
+          {l1Note}
+        </p>
+      ) : null}
     </div>
   );
 }

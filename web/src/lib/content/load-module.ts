@@ -3,7 +3,7 @@ import path from "node:path";
 import type { ContentStatus, LearnerL1, UserRole } from "@/lib/enums";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 import {
   loadModulePackage,
@@ -40,7 +40,8 @@ function resolveModulesRoot(): string {
 
 function mapExercise(ex: PackageExercise): ModuleExercise {
   const feedback = {
-    explanation: ex.feedback.correct,
+    correct: ex.feedback.correct,
+    incorrect: ex.feedback.incorrect,
     l1Notes: ex.feedback.l1,
     conceptId: ex.concept_ids[0],
     evidenceWeight: ex.mini_check ? 1 : 0.6,
@@ -93,10 +94,6 @@ function mapExercise(ex: PackageExercise): ModuleExercise {
         prompt: ex.prompt,
         textWithGaps,
         gaps,
-        feedback: {
-          ...feedback,
-          explanation: `${ex.feedback.correct} ${ex.feedback.incorrect}`,
-        },
       } satisfies GapFillExercise;
     }
     case "ordering": {
@@ -169,11 +166,16 @@ function packageLessonToDraft(lesson: PackageLesson): DraftLesson {
     })),
     pragmatics: {
       panPani: lesson.pan_pani.summary_ru,
+      form: lesson.pan_pani.form,
+      examples: lesson.pan_pani.examples_pl,
       l1Notes: lesson.pan_pani.l1_notes,
     },
     grammar: {
       title: lesson.grammar_points[0]?.title_pl ?? "Grammar",
       explanation: lesson.grammar_points[0]?.summary_ru ?? "",
+      form: lesson.grammar_points[0]?.form,
+      meaning: lesson.grammar_points[0]?.meaning,
+      use: lesson.grammar_points[0]?.use,
       examples: lesson.grammar_points[0]?.examples_pl ?? [],
       conceptId: lesson.grammar_points[0]?.concept_ids[0] ?? "",
       l1Notes: lesson.grammar_points[0]?.l1_notes,
@@ -260,7 +262,7 @@ export function loadDraftModuleFromYaml(): DraftModule {
 export type ContentAccessContext = {
   roles?: readonly UserRole[];
   email?: string | null;
-  /** When omitted, uses isPrivateAlphaPreviewEnv(). */
+  /** When omitted, uses isDraftLearningEnvEnabled(). */
   isPreviewEnv?: boolean;
 };
 
@@ -268,7 +270,7 @@ function allowDraft(ctx?: ContentAccessContext): boolean {
   return canAccessDraftContent({
     roles: ctx?.roles ?? [],
     email: ctx?.email,
-    isPreviewEnv: ctx?.isPreviewEnv ?? isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: ctx?.isPreviewEnv ?? isDraftLearningEnvEnabled(),
   });
 }
 

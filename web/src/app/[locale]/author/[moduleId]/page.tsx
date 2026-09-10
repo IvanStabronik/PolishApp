@@ -14,7 +14,7 @@ import {
   type ContentVersionView,
 } from "@/modules/content/review-workflow";
 import { getModuleById } from "@/lib/content/load-module";
-import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
+import { isDraftLearningEnvEnabled } from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
 import { ReviewActions } from "@/components/author/review-actions";
 import { loadModuleReviewState } from "@/modules/content/persist-review-transition";
@@ -36,7 +36,7 @@ export default async function AuthorReviewDetailPage({ params }: Props) {
   const mod = getModuleById(moduleId, {
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   });
   if (!mod) notFound();
 

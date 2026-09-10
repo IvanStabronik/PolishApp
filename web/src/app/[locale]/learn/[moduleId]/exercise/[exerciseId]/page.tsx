@@ -15,7 +15,7 @@ import { toLearnerExercise } from "@/lib/content/learner-dto";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 
 type Props = {
@@ -34,7 +34,7 @@ export default async function ExercisePage({ params }: Props) {
   const accessCtx = {
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   };
   const canDraft = canAccessDraftContent(accessCtx);
 

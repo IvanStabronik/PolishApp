@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { ExercisePlayer } from "@/components/learning/exercise-player";
+import { LessonStructuredStep } from "@/components/exercise/lesson-structured-step";
 import type { LessonDetail } from "@/lib/mocks/content";
 
 type LessonPlayerProps = {
@@ -14,7 +15,7 @@ type LessonPlayerProps = {
 };
 
 /**
- * Lesson player: theory + all 4 exercise types via learner-safe DTOs.
+ * Lesson player: structured content + all 4 exercise types via learner-safe DTOs.
  * Attempts go through /api/learning/attempt with real moduleId/lessonId/exerciseId.
  */
 export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps) {
@@ -89,6 +90,25 @@ export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps)
     </div>
   );
 
+  const nextButtons = (
+    <div className="mt-5 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-3">
+      <Button
+        onClick={() => goNext()}
+        data-testid="lesson-next-step"
+        className="w-full sm:w-auto"
+      >
+        {t("nextStep")}
+      </Button>
+      <Button
+        variant="ghost"
+        onClick={() => router.push(moduleHref)}
+        className="w-full sm:w-auto"
+      >
+        {t("backToModule")}
+      </Button>
+    </div>
+  );
+
   if (step.kind === "theory") {
     return (
       <section className="prose-narrow w-full min-w-0" data-testid="lesson-theory-step">
@@ -100,22 +120,22 @@ export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps)
         <div className="mt-3 whitespace-pre-wrap text-[var(--color-ink-soft)] sm:mt-4">
           {step.body}
         </div>
-        <div className="mt-5 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-3">
-          <Button
-            onClick={() => goNext()}
-            data-testid="lesson-next-step"
-            className="w-full sm:w-auto"
-          >
-            {t("nextStep")}
-          </Button>
-          <Button
-            variant="ghost"
-            onClick={() => router.push(moduleHref)}
-            className="w-full sm:w-auto"
-          >
-            {t("backToModule")}
-          </Button>
-        </div>
+        {nextButtons}
+      </section>
+    );
+  }
+
+  if (
+    step.kind === "dialogue" ||
+    step.kind === "key_lines" ||
+    step.kind === "pan_pani" ||
+    step.kind === "grammar"
+  ) {
+    return (
+      <section className="prose-narrow w-full min-w-0">
+        {shellChrome}
+        <LessonStructuredStep step={step} />
+        {nextButtons}
       </section>
     );
   }

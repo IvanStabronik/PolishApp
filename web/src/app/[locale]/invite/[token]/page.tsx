@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -14,6 +14,7 @@ export default async function InviteAcceptPage({ params }: Props) {
   const { locale, token } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  const t = await getTranslations("beta");
 
   return (
     <>
@@ -21,14 +22,13 @@ export default async function InviteAcceptPage({ params }: Props) {
       <main id="main-content" data-testid="invite-page">
         <AuthShell>
           <p className="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-amber-deep)]">
-            Invite only
+            {t("inviteEyebrow")}
           </p>
           <h1 className="mt-3 font-display text-3xl text-[var(--color-ink)]">
-            Accept beta invite
+            {t("inviteTitle")}
           </h1>
           <p className="mt-2 max-w-md text-[var(--color-graphite)]">
-            SŁOWARIUM closed beta is invite-only. Create your account with a valid
-            one-time invite.
+            {t("inviteLead")}
           </p>
           <div className="mt-8">
             <InviteAcceptForm token={token} />

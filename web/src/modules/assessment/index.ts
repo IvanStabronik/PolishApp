@@ -8,8 +8,9 @@
 import { findLessonById } from "@/lib/content/load-module";
 import { evaluateAnswer } from "@/modules/assessment/evaluate";
 import type { CheckAnswerInput, CheckAnswerResult } from "../types";
-import { getRequestSession } from "@/modules/auth/session";
-import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
+import { getRequestSession, getLearnerProfile } from "@/modules/auth/session";
+import { isDraftLearningEnvEnabled } from "@/lib/demo";
+import { isLearnerL1 } from "@/lib/content/types";
 
 export async function checkClosedAnswer(
   input: CheckAnswerInput,
@@ -18,7 +19,7 @@ export async function checkClosedAnswer(
   const ctx = {
     roles: session?.roles ?? [],
     email: session?.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   };
 
   const found = findLessonById(input.lessonId, ctx);
@@ -41,15 +42,27 @@ export async function checkClosedAnswer(
     };
   }
 
+  const profile = session
+    ? await getLearnerProfile(session.user.id)
+    : null;
+  const l1 =
+    profile?.l1 && isLearnerL1(profile.l1) ? profile.l1 : undefined;
+
   const optionIndex = Number(input.optionId);
-  const result = evaluateAnswer(exercise, {
-    type: "single_choice",
-    index: Number.isFinite(optionIndex) ? optionIndex : -1,
-  });
+  const result = evaluateAnswer(
+    exercise,
+    {
+      type: "single_choice",
+      index: Number.isFinite(optionIndex) ? optionIndex : -1,
+    },
+    { l1 },
+  );
 
   return {
     correct: result.correct,
-    feedback: result.explanation,
+    feedback: result.l1Note
+      ? `${result.explanation}\n\n${result.l1Note}`
+      : result.explanation,
     conceptId: result.conceptId ?? exercise.conceptIds[0] ?? "",
   };
 }

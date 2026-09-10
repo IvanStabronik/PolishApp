@@ -13,7 +13,7 @@ import {
   type ContentVersionView,
 } from "@/modules/content/review-workflow";
 import { listPreviewModules } from "@/lib/content/load-module";
-import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
+import { isDraftLearningEnvEnabled } from "@/lib/demo";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
 import { loadModuleReviewState } from "@/modules/content/persist-review-transition";
@@ -32,7 +32,7 @@ export default async function AuthorListPage({ params }: Props) {
   const modules = listPreviewModules({
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   });
 
   const versions: ContentVersionView[] = await Promise.all(

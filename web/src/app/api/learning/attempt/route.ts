@@ -12,9 +12,9 @@ import { CONTENT_STATUSES } from "@/lib/enums";
 import { evaluateAnswer } from "@/modules/assessment/evaluate";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
-import { getRequestSession } from "@/modules/auth/session";
+import { getRequestSession, getLearnerProfile } from "@/modules/auth/session";
 import { assertBetaAccessActive } from "@/modules/auth/beta-access";
 import {
   resolveAttemptMode,
@@ -32,6 +32,7 @@ import {
   getCorrelationId,
   publicErrorBody,
 } from "@/modules/ops/runtime";
+import { isLearnerL1 } from "@/lib/content/types";
 
 export const runtime = "nodejs";
 
@@ -100,7 +101,7 @@ export async function POST(request: Request) {
   const accessCtx = {
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   };
   const canDraft = canAccessDraftContent(accessCtx);
 
@@ -117,9 +118,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "exercise_not_found" }, { status: 404 });
   }
 
+  const profile = await getLearnerProfile(session.user.id);
+  const learnerL1 =
+    profile?.l1 && isLearnerL1(profile.l1) ? profile.l1 : undefined;
+
   const evaluation = evaluateAnswer(
     exercise,
     body.answer as unknown as AttemptAnswer,
+    { l1: learnerL1 },
   );
 
   try {

@@ -11,15 +11,19 @@ import {
   loadAllModulesFromYaml,
   type ContentAccessContext,
 } from "@/lib/content/load-module";
-import { toLearnerExercise } from "@/lib/content/learner-dto";
-import type { DraftLesson, DraftModule } from "@/lib/content/types";
+import type { DraftModule } from "@/lib/content/types";
+import { isLearnerL1 } from "@/lib/content/types";
 import type { LessonDetail, LoreLabel, ModuleSummary } from "@/lib/mocks/content";
-import { getRequestSession } from "@/modules/auth/session";
-import { isPrivateAlphaPreviewEnv } from "@/lib/demo";
+import type { LearnerL1 } from "@/lib/enums";
+import { getRequestSession, getLearnerProfile } from "@/modules/auth/session";
+import { isDraftLearningEnvEnabled } from "@/lib/demo";
+import { draftLessonToDetail } from "@/modules/content/draft-lesson-to-detail";
 
 export type CatalogModule = ModuleSummary & {
   draft?: DraftModule;
 };
+
+export { draftLessonToDetail } from "@/modules/content/draft-lesson-to-detail";
 
 function draftToSummary(mod: DraftModule, hall: number): CatalogModule {
   const lore: LoreLabel = {
@@ -43,8 +47,16 @@ async function resolveAccessContext(): Promise<ContentAccessContext> {
   return {
     roles: session?.roles ?? [],
     email: session?.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   };
+}
+
+async function resolveLearnerL1(): Promise<LearnerL1 | undefined> {
+  const session = await getRequestSession();
+  if (!session) return undefined;
+  const profile = await getLearnerProfile(session.user.id);
+  if (profile?.l1 && isLearnerL1(profile.l1)) return profile.l1;
+  return undefined;
 }
 
 export async function getA1Catalog(): Promise<CatalogModule[]> {
@@ -69,10 +81,11 @@ export async function listModuleLessons(
   const ctx = await resolveAccessContext();
   const yaml = getYamlModule(moduleId, ctx);
   if (!yaml) return [];
+  const l1 = await resolveLearnerL1();
   return yaml.lessons
     .slice()
     .sort((a, b) => a.sortOrder - b.sortOrder)
-    .map((lesson) => draftLessonToDetail(yaml, lesson));
+    .map((lesson) => draftLessonToDetail(yaml, lesson, l1));
 }
 
 export async function getLessonById(
@@ -81,82 +94,8 @@ export async function getLessonById(
   const ctx = await resolveAccessContext();
   const found = findLessonById(lessonId, ctx);
   if (!found) return null;
-  return draftLessonToDetail(found.module, found.lesson);
-}
-
-/**
- * Expand YAML lesson steps into learner-safe theory + exercise steps.
- * Practice/mini_check steps expand to one player step per exercise.
- */
-function draftLessonToDetail(
-  mod: DraftModule,
-  lesson: DraftLesson,
-): LessonDetail {
-  const byId = new Map(lesson.exercises.map((ex) => [ex.id, ex]));
-  const steps: LessonDetail["steps"] = [];
-
-  for (const step of lesson.steps) {
-    if (step.kind === "situation") {
-      steps.push({
-        id: step.id,
-        kind: "theory",
-        title: step.titleRu,
-        body: step.bodyRu ?? lesson.situation,
-      });
-      continue;
-    }
-    if (
-      step.kind === "dialogue" ||
-      step.kind === "key_lines" ||
-      step.kind === "pan_pani" ||
-      step.kind === "grammar" ||
-      step.kind === "result"
-    ) {
-      let body = "";
-      if (step.kind === "dialogue") {
-        body = lesson.dialogue
-          .map((t) => `${t.speaker}: ${t.pl}`)
-          .join("\n");
-      } else if (step.kind === "key_lines") {
-        body = lesson.keyLines
-          .map((k) => `${k.pl}\n${k.explanation}`)
-          .join("\n\n");
-      } else if (step.kind === "pan_pani") {
-        body = lesson.pragmatics.panPani;
-      } else if (step.kind === "grammar") {
-        body = `${lesson.grammar.title}\n${lesson.grammar.explanation}\n${lesson.grammar.examples.join("\n")}`;
-      } else {
-        body = lesson.objective;
-      }
-      steps.push({
-        id: step.id,
-        kind: "theory",
-        title: step.titleRu,
-        body,
-      });
-      continue;
-    }
-    if (step.kind === "practice" || step.kind === "mini_check") {
-      for (const exerciseId of step.exerciseIds) {
-        const authored = byId.get(exerciseId);
-        if (!authored) continue;
-        steps.push({
-          id: authored.id,
-          kind: "exercise",
-          title: authored.prompt.slice(0, 64),
-          exercise: toLearnerExercise(authored),
-        });
-      }
-    }
-  }
-
-  return {
-    id: lesson.id,
-    moduleId: mod.id,
-    title: lesson.titlePl,
-    sortOrder: lesson.sortOrder,
-    steps,
-  };
+  const l1 = await resolveLearnerL1();
+  return draftLessonToDetail(found.module, found.lesson, l1);
 }
 
 export {

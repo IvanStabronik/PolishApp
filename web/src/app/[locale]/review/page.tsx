@@ -9,12 +9,16 @@ import { StatusPanel } from "@/components/brand/status-panel";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 import { loadContinueLearning } from "@/modules/learning/continue-learning";
 import { Link } from "@/i18n/navigation";
 import { LinkButton } from "@/components/ui/link-button";
 import { ReportProblemButton } from "@/components/feedback/report-problem-button";
+import {
+  humanConceptLabel,
+  type ConceptLabelLocale,
+} from "@/lib/content/concept-labels";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -28,10 +32,12 @@ export default async function ReviewQueuePage({ params }: Props) {
   const accessCtx = {
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   };
   const scope = canAccessDraftContent(accessCtx) ? "preview" : "live";
   const snapshot = await loadContinueLearning(session.user.id, accessCtx, scope);
+  const labelLocale: ConceptLabelLocale =
+    locale === "uk" || locale === "pl" || locale === "ru" ? locale : "ru";
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -59,7 +65,7 @@ export default async function ReviewQueuePage({ params }: Props) {
               >
                 <div className="min-w-0">
                   <p className="m-0 font-medium text-[var(--color-ink)]">
-                    {item.conceptCanonicalId}
+                    {humanConceptLabel(item.conceptCanonicalId, labelLocale)}
                   </p>
                   <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
                     {t(`reviewReason.${item.reasonKey}`)} · {item.dueAt}

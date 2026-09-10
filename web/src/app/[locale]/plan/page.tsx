@@ -9,7 +9,7 @@ import { StatusPanel } from "@/components/brand/status-panel";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessDraftContent,
-  isPrivateAlphaPreviewEnv,
+  isDraftLearningEnvEnabled,
 } from "@/lib/demo";
 import { loadContinueLearning } from "@/modules/learning/continue-learning";
 import { Link } from "@/i18n/navigation";
@@ -28,7 +28,7 @@ export default async function DailyPlanPage({ params }: Props) {
   const accessCtx = {
     roles: session.roles,
     email: session.user.email,
-    isPreviewEnv: isPrivateAlphaPreviewEnv(),
+    isPreviewEnv: isDraftLearningEnvEnabled(),
   };
   const scope = canAccessDraftContent(accessCtx) ? "preview" : "live";
   const snapshot = await loadContinueLearning(session.user.id, accessCtx, scope);
