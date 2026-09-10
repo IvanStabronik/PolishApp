@@ -46,10 +46,10 @@
   },
   "landing": {
     "headline": "Od podobnych słów do własnego głosu",
-    "lead": "Systemowa nauka polskiego dla dorosłych z L1 ukraińskim, rosyjskim i białoruskim. Bez punktów gry — z dowodami mastery.",
-    "ctaPrimary": "Rozpocznij drogę",
+    "lead": "Polski dla dorosłych z ojczystym ukraińskim, rosyjskim lub białoruskim. Bez punktów za kliknięcia — z jasnym postępem w sprawie.",
+    "ctaPrimary": "Wejdź do Archiwum",
     "ctaSecondary": "Mam już konto",
-    "aside": "Pierwsza sala Archiwum otwiera się po rejestracji i krótkim onboardingu."
+    "aside": "Pierwsza sala otwiera się po rejestracji i krótkiej konfiguracji profilu."
   },
   "auth": {
     "registerTitle": "Rejestracja w SŁOWARIUM",
@@ -106,10 +106,10 @@
     "title": "Gabinet",
     "welcome": "Witamy w Archiwum",
     "welcomeName": "Dzień dobry, {name}",
-    "lead": "Kolejny krok wynika z Twojej trajektorii — nie z XP.",
+    "lead": "Dalej — to, czego potrzebujesz na swojej trasie, a nie punkty za kliknięcia.",
     "modulesHeading": "Moduły A1",
-    "previewBadge": "Wewnętrzny podgląd",
-    "previewStatus": "Tryb aprobaty wewnętrznej: DRAFT widoczny dla roli previewer. To nie certyfikat i nie zatwierdzenie JPJO.",
+    "previewBadge": "Podgląd wewnętrzny",
+    "previewStatus": "Widzisz szkice (DRAFT). To podgląd wewnętrzny — nie certyfikat i nie zatwierdzenie JPJO.",
     "currentRoute": "Cel trasy: {goal}",
     "continueLearning": "Kontynuuj naukę",
     "viewProgress": "Zobacz postęp",
@@ -117,7 +117,7 @@
     "nextStep": "Następny krok",
     "overallProgress": "Postęp ogólny: {percent}%",
     "nextGoal": "Następny cel",
-    "emptyPublished": "Brak opublikowanych modułów. W private alpha DRAFT jest dostępny tylko dla ról previewer/author/reviewer."
+    "emptyPublished": "Brak opublikowanych modułów. W zamkniętej alfie szkice widzą tylko previewer, author i reviewer."
   },
   "learn": {
     "catalogTitle": "Skrzydło A1",

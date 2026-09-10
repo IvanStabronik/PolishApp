@@ -1,19 +1,18 @@
 kind: module
 canonical_id: MOD-A1-PIERWSZE-SPOTKANIE
 slug: pierwsze-spotkanie
-version: 1
+version: 2
 status: DRAFT
 level: A1
 title_pl: Pierwsze spotkanie
 working_title: Pierwsze spotkanie
 situation_ru: >
-  Короткий первый контакт со взрослым собеседником в Польше — сосед во дворе
-  или знакомый коллеги. Нужно поздороваться в уместном регистре, назвать себя
-  и сказать, откуда вы.
+  Сосед на кладке или знакомый коллеги — первый короткий разговор со взрослым
+  человеком в Польше. Нужно поздороваться нормально, назвать себя и сказать,
+  откуда вы.
 objective_ru: >
-  После модуля учащийся может открыть контакт формулой дня, представиться
-  (nazywam się… / jestem z…) и удержать адрес pan/pani, не скатываясь в ty
-  с незнакомцем.
+  Вы можете сказать Dzień dobry, представиться (Nazywam się… / Jestem z…)
+  и держаться pan/pani, не переходя сразу на «ты».
 curriculum_links:
   scenarios:
     - SCN-A1-EVERYDAY-01
@@ -42,6 +41,8 @@ provenance:
     - "Common-knowledge Polish greeting & self-introduction patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). DRAFT — pending human review; not JPJO-approved, not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
+    adult RU situation/objective. DRAFT — pending human review; not JPJO-approved,
+    not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true

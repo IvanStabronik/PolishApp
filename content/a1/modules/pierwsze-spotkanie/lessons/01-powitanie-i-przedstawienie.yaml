@@ -1,16 +1,16 @@
 kind: lesson
 canonical_id: LES-A1-PS-01
 slug: powitanie-i-przedstawienie
-version: 1
+version: 2
 status: DRAFT
 title_pl: Powitanie i przedstawienie
 sort_order: 1
 situation_ru: >
-  Вы впервые здороваетесь со взрослым человеком в Польше (сосед, знакомый
-  на работе). Речь спокойная, темы знакомые: имя и происхождение.
+  Первый разговор со взрослым в Польше — сосед или знакомый с работы.
+  Спокойно: имя и откуда вы.
 objective_ru: >
-  Поздороваться формулой дня, представиться польскими конструкциями
-  «Nazywam się…» и «Jestem z…», выбрать pan/pani вместо преждевременного ty.
+  Поздороваться (Dzień dobry), сказать Nazywam się… и Jestem z…,
+  говорить на pan/pani, а не сразу на ty.
 curriculum_links:
   scenarios:
     - SCN-A1-EVERYDAY-01
@@ -49,26 +49,23 @@ dialogue:
 key_lines:
   - text_pl: Dzień dobry.
     explanation_ru: >
-      Нейтральное / вежливое приветствие днём. Подходит для первого контакта
-      со взрослым незнакомцем; не смешивать с cześć в urzędzie или с соседом,
-      которого вы ещё не знаете.
+      Обычное «здравствуйте» днём. К взрослому незнакомцу — да; cześć —
+      только если уже на «ты» или в совсем своей компании.
   - text_pl: Nazywam się Marek Nowak.
     explanation_ru: >
-      Формула самопредставления: nazywam się + имя (именительный). Это не
-      дословный перевод «меня зовут» без się.
+      Так говорят «меня зовут»: Nazywam się + имя. Без się фраза ломается
+      (*Nazywam Marek — так не говорят).
   - text_pl: Jestem z Ukrainy. / Jestem z Lwowa.
     explanation_ru: >
-      Jestem z + родительный падеж места происхождения. На A1 учим формулу
-      целиком на частых топонимах.
+      «Я из…»: Jestem z + род. падеж (z Ukrainy, z Lwowa). Учите целиком
+      на частых местах.
   - text_pl: Miło panią poznać. / Do widzenia.
     explanation_ru: >
-      Закрытие первого контакта в вежливом регистре: panią / pana согласуется
-      с адресатом; do widzenia — стандартное прощание.
+      Вежливо закрыть разговор: Miło panią/pana poznać и Do widzenia.
 pan_pani:
   summary_ru: >
-    С незнакомцем-взрослым в Польше по умолчанию используйте pan (к мужчине)
-    или pani (к женщине) и глагол в 3-м лице. Форма ty — только после явного
-    сигнала собеседника или в явно неформальном кругу.
+    К взрослому незнакомцу — pan / pani и глагол в 3 лице (Skąd pani jest?).
+    На ty переходите только если человек сам предложил или вы уже свои.
   form: "Czy może mi pan / pani…? · Skąd pan / pani jest? · Miło pana / panią poznać."
   examples_pl:
     - Skąd pani jest?
@@ -99,16 +96,15 @@ grammar_points:
   - id: GP-A1-PS-NAZYWAM-JESTEM
     title_pl: Nazywam się… / Jestem z…
     summary_ru: >
-      Две опорные формулы идентичности на A1: назвать себя и сказать
-      происхождение.
+      Две короткие фразы: как вас зовут и откуда вы.
     form: >
-      Nazywam się + Imię (Mianownik). Jestem z + miejsce (Dopełniacz):
+      Nazywam się + имя (именительный). Jestem z + место (родительный):
       z Ukrainy, z Lwowa, z Polski.
     meaning: >
-      Сообщить, кто говорит, и откуда — чтобы собеседник однозначно вас опознал.
+      Собеседник понимает, кто вы и откуда.
     use: >
-      Первый контакт, сосед, короткий обмен на работе; затем можно добавить
-      «teraz mieszkam w…».
+      Сосед, короткий разговор на работе. Потом можно добавить:
+      teraz mieszkam w…
     examples_pl:
       - Nazywam się Olena Kovalenko.
       - Jestem z Ukrainy.
@@ -135,38 +131,35 @@ grammar_points:
         збірайце іх з бел. «Мяне клічуць» даслоўна.
 l1_notes:
   ukr: >
-    Урок про перший дорослий контакт: день добрий → представлення → pan/pani.
-    Не підставляйте українські рамки «мене звати / я з…» дослівно; тримайте
-    польські слоти. Фонетика імен (PHON-CORE-01) — читайте по-польськи, не
-    «як кирилицею».
+    Не калькуйте «мене звати» / «я з…» дослівно. Тримайте Nazywam się…
+    і Jestem z…. Імена читайте по-польськи, не «як кирилицею».
   rus: >
-    Фокус: вежливое приветствие и самопредставление без кальки «меня зовут»
-    и без «вы» во 2 л. мн. к незнакомцу. Имена и топонимы произносите по
-    польской модели ударения (парокситон), не по русскому слуху.
+    Не переводите «меня зовут» без się и не говорите незнакомцу
+    «вы» как wy jesteście. Ударение в именах — по-польски (обычно на
+    предпоследний слог).
   bel: >
-    Асобны акцэнт для BEL: не спадзявайцеся на «і так зразумеюць» і не
-    капіюйце рускія нотаткі. Ветлівы pan/pani + Nazywam się / Jestem z —
-    асобныя польскія формулы; пісьмо імёнаў без акання і без замены ł на ў.
+    Не спадзявайцеся на «і так зразумеюць». Pan/pani + Nazywam się /
+    Jestem z — асобныя польскія формулы; пішыце імёны без акання.
 steps:
   - id: step-situation
     kind: situation
     title_ru: Ситуация
     body_ru: >
-      Первый короткий разговор на клатке: поздороваться, назвать себя,
-      сказать, откуда вы, попрощаться.
+      На клатке: поздороваться, назвать себя, сказать откуда вы,
+      попрощаться.
   - id: step-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-PS-NAZYWAM-JESTEM
   - id: step-practice
     kind: practice
@@ -181,20 +174,20 @@ steps:
       - ex-ps-07
   - id: step-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids:
       - ex-ps-08
       - ex-ps-09
   - id: step-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-ps-01
     canonical_id: EX-A1-PS-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: "Первый контакт со взрослым незнакомцем днём. Что сказать?"
+    prompt: "Сосед на кладке, день. Чем поздороваться?"
     options:
       - id: a
         text: Dzień dobry.
@@ -211,12 +204,12 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: "Верно: Dzień dobry — безопасная формула первого контакта."
-      incorrect: "Cześć/hejka слишком фамильярны для незнакомца-взрослого."
-      hint: "Подумайте об urzędzie или соседе, которого вы видите впервые."
+      correct: "Да. Dzień dobry — нормальное «здравствуйте» для такого случая."
+      incorrect: "Cześć и hejka — слишком свои для незнакомца."
+      hint: "Представьте urząd или соседа, которого видите впервые."
       l1:
         ukr: "Не калькуйте «Привіт» у перший контакт з дорослим незнайомцем."
-        rus: "Не переносите «Привет» на первого взрослого незнакомца."
+        rus: "Не подставляйте «Привет» вместо Dzień dobry с незнакомцем."
         bel: "Не стаўце «Прывітанне» замест Dzień dobry з незнаёмцам."
     provenance:
       originality: created_for_product
@@ -232,7 +225,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: "Как вежливо спросить женщину-незнакомку, откуда она?"
+    prompt: "Как спросить незнакомку, откуда она — на pan/pani?"
     options:
       - id: a
         text: Skąd ty jesteś?
@@ -248,11 +241,11 @@ exercises:
       - FN-A1-GREET-01
       - FN-A1-IDENTIFY-01
     feedback:
-      correct: "Skąd pani jest? — pani + 3 лицо."
-      incorrect: "ty и wy+2л.мн. — неверный регистр для незнакомки."
+      correct: "Да: Skąd pani jest? — pani и глагол в 3 лице."
+      incorrect: "ty или wy jesteście здесь не подходят."
       l1:
         ukr: "Не калькуйте «ви» як wy jesteście до pani."
-        rus: "Не используйте вы + 2 л. мн. вместо pani + 3 л."
+        rus: "Не говорите «вы» как wy jesteście — нужно pani + 3 л."
         bel: "Не пераносьце «вы» ў форму wy jesteście да незнаёмкі."
     provenance:
       originality: created_for_product
@@ -268,7 +261,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: "Отметьте все уместные вежливые формулы для первого контакта (день)."
+    prompt: "Отметьте всё, что уместно при первом дневном разговоре со взрослым."
     options:
       - id: a
         text: Dzień dobry.
@@ -289,8 +282,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: "Dzień dobry, Miło panią poznać и Do widzenia — в регистре pan/pani."
-      incorrect: "Cześć, co tam? — слишком неформально для первого взрослого контакта."
+      correct: "Dzień dobry, Miło panią poznać и Do widzenia — на pan/pani."
+      incorrect: "Cześć, co tam? — слишком своё для первого разговора со взрослым."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -305,7 +298,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: "Какие реплики помогают идентифицировать человека (имя / происхождение)?"
+    prompt: "Какие реплики называют имя или откуда вы?"
     options:
       - id: a
         text: Nazywam się Olena Kovalenko.
@@ -327,8 +320,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: "Имя и Jestem z… — слоты идентичности; Do widzenia — прощание."
-      incorrect: "Do widzenia закрывает контакт, но не называет, кто вы."
+      correct: "Имя и Jestem z… говорят, кто вы; Do widzenia — только прощание."
+      incorrect: "Do widzenia закрывает разговор, но не говорит, кто вы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -343,7 +336,7 @@ exercises:
     version: 1
     type: gap_fill
     status: DRAFT
-    prompt: "Дополните: {{gap1}} się Anna Nowak."
+    prompt: "Вставьте пропущенное: {{gap1}} się Anna Nowak."
     gaps:
       - id: gap1
         accepted_answers:
@@ -358,8 +351,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: "Nazywam się… — целая рамка с się."
-      incorrect: "Нужна форма Nazywam (1 л. наст. вр.) перед się."
+      correct: "Nazywam się… — целиком, с się."
+      incorrect: "Нужно Nazywam перед się."
       l1:
         ukr: "Не пишіть *Nazywam Anna без się і не калькуйте «мене звати»."
         rus: "Не опускайте się и не пишите *Nazywam Anna."
@@ -378,7 +371,7 @@ exercises:
     version: 1
     type: gap_fill
     status: DRAFT
-    prompt: "Дополните: Jestem {{gap1}} Ukrainy."
+    prompt: "Вставьте пропущенное: Jestem {{gap1}} Ukrainy."
     gaps:
       - id: gap1
         accepted_answers:
@@ -392,11 +385,11 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: "Jestem z + Dopełniacz: z Ukrainy."
-      incorrect: "Нужен предлог z в формуле Jestem z…"
+      correct: "Jestem z + род. падеж: z Ukrainy."
+      incorrect: "Нужен предлог z: Jestem z…"
       l1:
         ukr: "Не *Jestem z Ukraina в називному."
-        rus: "Не *Jestem iz / *Ja z Ukraina без z+род.п."
+        rus: "Не *Jestem iz и не *Ja z Ukraina без z + род.п."
         bel: "Трымайце z + форма Ukrainy, не кальку «я з Украіна»."
     provenance:
       originality: created_for_product
@@ -412,7 +405,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Расставьте реплики первого контакта в логичном порядке."
+    prompt: "Расставьте реплики в порядке короткого первого разговора."
     items:
       - id: t1
         text: Dzień dobry.
@@ -434,8 +427,8 @@ exercises:
       - FN-A1-GREET-01
       - FN-A1-IDENTIFY-01
     feedback:
-      correct: "Приветствие → представление → ответ → вежливое закрытие."
-      incorrect: "Сначала контакт, потом имя/происхождение, затем прощание."
+      correct: "Сначала поздороваться, потом имена, потом вежливо закрыть."
+      incorrect: "Сначала приветствие, потом кто вы / откуда, затем прощание."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -450,7 +443,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Соберите самопредставление: порядок слотов."
+    prompt: "Соберите представление о себе по порядку."
     items:
       - id: s1
         text: Nazywam się Olena Kovalenko.
@@ -469,8 +462,8 @@ exercises:
       - FN-A1-IDENTIFY-01
     mini_check: true
     feedback:
-      correct: "Имя → происхождение → текущий город — ясная идентификация."
-      incorrect: "Сначала кто вы, потом skąd, затем где сейчас."
+      correct: "Имя → откуда → где сейчас — так понятнее."
+      incorrect: "Сначала кто вы, потом skąd, затем где живёте сейчас."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -484,7 +477,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: "Выберите корректную формулу представления."
+    prompt: "Какая формула представления правильная?"
     options:
       - id: a
         text: Nazywam się Olena.
@@ -501,7 +494,7 @@ exercises:
     mini_check: true
     feedback:
       correct: "Nazywam się + имя в именительном."
-      incorrect: "Без się или со сломанным порядком формула неверна."
+      incorrect: "Без się или с ломаным порядком так не говорят."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -520,13 +513,13 @@ mini_check:
     - GR-TNS-PRS-01
     - PRAG-PAN-01
 result_metadata:
-  title_ru: Результат урока
+  title_ru: Итог
   success_ru: >
-    Мини-проверка пройдена. Вы можете открыть контакт, представиться и
-    удержать pan/pani в коротком бытовом диалоге (DRAFT preview).
+    Короткая проверка пройдена. Вы можете поздороваться, представиться и
+    держаться pan/pani в коротком бытовом разговоре (черновик, внутренний просмотр).
   retry_ru: >
-    Повторите формулы Nazywam się… / Jestem z… и выбор pan/pani, затем
-    пройдите мини-проверку снова.
+    Ещё раз Nazywam się… / Jestem z… и выбор pan/pani — потом короткая
+    проверка снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-IDENTIFY-01
@@ -544,5 +537,8 @@ provenance:
     - "Original SŁOWARIUM dialogue and exercises — Pierwsze spotkanie DRAFT"
     - "Curriculum links: SCN-A1-EVERYDAY-01, FN-A1-GREET-01, FN-A1-IDENTIFY-01"
   ai_assisted: true
-  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
+  notes: >
+    AI-assisted system draft. Language pass v2 — adult RU instructional chrome
+    (prompts, feedback, steps, result). DRAFT — not JPJO-approved, not published
+    to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only
