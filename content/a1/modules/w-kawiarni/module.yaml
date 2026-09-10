@@ -1,19 +1,18 @@
 kind: module
 canonical_id: MOD-A1-W-KAWIARNI
 slug: w-kawiarni
-version: 1
+version: 2
 status: DRAFT
 level: A1
 title_pl: W kawiarni
 working_title: W kawiarni
 situation_ru: >
-  Короткий заказ напитка или простого блюда у стойки в польской кофейне.
-  Меню с понятными позициями; кассир или бариста — взрослый незнакомец;
-  нужна вежливая транзакция без сложной рекламации.
+  Короткий заказ у стойки в польской кофейне: кофе, чай или простое блюдо.
+  Меню понятное, бариста — взрослый незнакомец. Нужна спокойная вежливая
+  покупка, без сложных жалоб.
 objective_ru: >
-  После модуля учащийся может поздороваться, заказать позицию формулой
-  Poproszę…, уточнить наличие или размер, подтвердить оплату и закрыть
-  контакт dziękuję / do widzenia в регистре pan/pani.
+  Вы можете поздороваться, заказать (Poproszę…), уточнить размер или наличие,
+  оплатить и закрыть разговор (dziękuję / do widzenia) — на pan/pani.
 curriculum_links:
   scenarios:
     - SCN-A1-FOOD-01
@@ -45,6 +44,8 @@ provenance:
     - "Common-knowledge Polish café order patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). DRAFT — pending human review; not JPJO-approved, not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
+    adult RU situation/objective. DRAFT — pending human review; not JPJO-approved,
+    not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true
