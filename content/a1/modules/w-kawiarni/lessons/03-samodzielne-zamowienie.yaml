@@ -1,12 +1,18 @@
 kind: lesson
 canonical_id: LES-A1-WK-03
 slug: samodzielne-zamowienie
-version: 1
+version: 2
 status: DRAFT
 title_pl: Samodzielne zamówienie
 sort_order: 3
-situation_ru: Вы самостоятельно заказываете напиток и еду, проверяете наличие и завершаете оплату.
-objective_ru: "Провести всю транзакцию без подсказки: выбор, наличие, уточнение, цена, оплата и благодарность."
+situation_ru: >
+  Вы у стойки одни: нужен напиток и еда, возможно ещё что-то из меню,
+  потом цена и оплата. Бариста — взрослый незнакомец; речь спокойная,
+  без подсказок из прошлых шагов.
+objective_ru: >
+  Самим провести короткий заказ: две позиции через Poproszę… i…,
+  спросить о наличии, добавить позицию, оплатить и поблагодарить —
+  на pan/pani.
 curriculum_links:
   scenarios:
     - SCN-A1-FOOD-01
@@ -45,16 +51,22 @@ dialogue:
       text_pl: Kartą. Dziękuję, do widzenia.
 key_lines:
   - text_pl: Poproszę herbatę i kanapkę.
-    explanation_ru: Две позиции можно соединить союзом i.
+    explanation_ru: >
+      Две позиции в одном заказе: Poproszę + Acc + i + Acc.
   - text_pl: Czy jest sok jabłkowy?
-    explanation_ru: Самостоятельная проверка наличия.
+    explanation_ru: >
+      Сами спрашиваете о наличии: Czy jest…? — тот же шаблон, что у стойки.
   - text_pl: To poproszę też sok.
-    explanation_ru: Добавление позиции после ответа.
+    explanation_ru: >
+      После «Tak, jest» — спокойно добавить позицию: To poproszę też…
   - text_pl: Dziękuję, do widzenia.
-    explanation_ru: Вежливое закрытие транзакции.
+    explanation_ru: >
+      Закрыть контакт: благодарность и прощание после оплаты.
 pan_pani:
-  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
-    просьбы и благодарность важнее буквального переноса форм L1.
+  summary_ru: >
+    К баристе-незнакомцу — pan/pani и спокойные формулы
+    (Poproszę…, Czy jest…?, Ile płacę?, Kartą). Не переходите на ty
+    и не собирайте заказ из *Daj… у стойки.
   form: Poproszę… · Czy jest…? · Ile płacę? · Dziękuję
   examples_pl: &a1
     - Poproszę herbatę i kanapkę.
@@ -66,20 +78,30 @@ pan_pani:
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
-    ukr: Відпрацьовуйте польську рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» цілісно; не
-      складайте її дослівно з українських слів.
-    rus: Отрабатывайте польскую рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» целиком, без
-      дословной кальки с русского.
-    bel: Адпрацоўвайце польскую рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» цалкам; не
-      складайце яе даслоўна з беларускай.
+    ukr: >
+      Тримайте рамку Poproszę… / Czy jest…? / Ile płacę? / Dziękuję цілою.
+      Не збирайте заказ з «дайте / можна мені»; «ти» до баристи лише якщо
+      він сам запропонував.
+    rus: >
+      Держите рамку Poproszę… / Czy jest…? / Ile płacę? / Dziękuję целиком.
+      Не собирайте заказ из «дайте / можно мне»; ty к баристе — только если
+      он сам предложил.
+    bel: >
+      Трымайце рамку Poproszę… / Czy jest…? / Ile płacę? / Dziękuję цэлай.
+      Не збірайце заказ з «дайце / можна мне»; «ты» да барысты толькі калі
+      ён сам прапанаваў.
 grammar_points:
   - id: GP-A1-WK-L3
     title_pl: Pełna transakcja w kawiarni
-    summary_ru: "Провести всю транзакцию без подсказки: выбор, наличие, уточнение, цена, оплата и
-      благодарность."
+    summary_ru: >
+      Собрать знакомые реплики в один заказ: две позиции, наличие,
+      добавка, цена и оплата.
     form: Poproszę X i Y. Czy jest Z? To poproszę też Z. Ile płacę?
-    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
-    use: Вы самостоятельно заказываете напиток и еду, проверяете наличие и завершаете оплату.
+    meaning: >
+      Бариста понимает полный выбор и как вы платите — без лишних слов.
+    use: >
+      Когда у стойки нужны напиток и еда, плюс вопрос о наличии и закрытие
+      оплаты в одной короткой сцене.
     examples_pl: *a1
     counterexamples_pl:
       - "*Ty daj."
@@ -89,41 +111,52 @@ grammar_points:
       - GR-PRO-DEM-01
       - GR-NUM-MONEY-01
     l1_notes:
-      ukr: Відпрацьовуйте польську рамку «Poproszę X i Y. Czy jest Z? To poproszę też Z. Ile płacę?»
-        цілісно; не складайте її дослівно з українських слів.
-      rus: Отрабатывайте польскую рамку «Poproszę X i Y. Czy jest Z? To poproszę też Z. Ile płacę?»
-        целиком, без дословной кальки с русского.
-      bel: Адпрацоўвайце польскую рамку «Poproszę X i Y. Czy jest Z? To poproszę też Z. Ile płacę?»
-        цалкам; не складайце яе даслоўна з беларускай.
+      ukr: >
+        Після Poproszę — Acc (herbatę, kanapkę), не називний. Czy jest…?
+        і To poproszę też… тримайте цілими; не калькуйте «можна мені ще».
+      rus: >
+        После Poproszę — Acc (herbatę, kanapkę), не именительный. Czy jest…?
+        и To poproszę też… — целые формулы, не калька «можно мне ещё».
+      bel: >
+        Пасля Poproszę — Acc (herbatę, kanapkę), не назоўны. Czy jest…?
+        і To poproszę też… трымайце цэлымі; не калькуйце «можна мне яшчэ».
 l1_notes:
-  ukr: Відпрацьовуйте польську рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» цілісно; не
-    складайте її дослівно з українських слів.
-  rus: Отрабатывайте польскую рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» целиком, без
-    дословной кальки с русского.
-  bel: Адпрацоўвайце польскую рамку «Poproszę… · Czy jest…? · Ile płacę? · Dziękuję» цалкам; не
-    складайце яе даслоўна з беларускай.
+  ukr: >
+    Урок про повний заказ у кавʼярні: дві позиції (Poproszę X i Y),
+    Czy jest…?, To poproszę też…, ціна й Kartą. Без кальки «дайте»
+    і без ty до персоналу.
+  rus: >
+    Урок про полный заказ в кофейне: две позиции (Poproszę X i Y),
+    Czy jest…?, To poproszę też…, цена и Kartą. Без кальки «дайте»
+    и без ty к баристе.
+  bel: >
+    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Poproszę X i Y /
+    Czy jest…? / To poproszę też… / Kartą — асобныя польскія рамкі
+    ў кавярні.
 steps:
   - id: step-l3-situation
     kind: situation
     title_ru: Ситуация
-    body_ru: Вы самостоятельно заказываете напиток и еду, проверяете наличие и завершаете оплату.
+    body_ru: >
+      Сами заказываете напиток и еду, при необходимости спрашиваете
+      о наличии, оплачиваете и прощаетесь.
   - id: step-l3-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-l3-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-l3-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-WK-L3
   - id: step-l3-practice
     kind: practice
-    title_ru: Самостоятельная практика
+    title_ru: Практика
     exercise_ids:
       - ex-wk-l3-01
       - ex-wk-l3-02
@@ -133,20 +166,20 @@ steps:
       - ex-wk-l3-06
   - id: step-l3-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids: &a2
       - ex-wk-l3-07
       - ex-wk-l3-08
   - id: step-l3-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-wk-l3-01
     canonical_id: EX-A1-WK-L3-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Выберите полную реплику для заказа двух позиций.
+    prompt: "Как вежливо заказать чай и канапку?"
     concept_ids:
       - GR-CAS-ACC-01
     function_ids:
@@ -154,8 +187,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Poproszę связывает обе позиции в вежливый заказ.
-      incorrect: Остальные варианты не образуют сервисную реплику.
+      correct: "Poproszę herbatę i kanapkę — две позиции в Acc."
+      incorrect: "Dawaj / Ja mieć — резко или ломаная конструкция, не заказ у стойки."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -177,7 +210,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Какие шаги нужны для самостоятельной транзакции?
+    prompt: "Что нужно сделать, чтобы довести заказ до оплаты?"
     concept_ids:
       - GR-PRO-DEM-01
     function_ids:
@@ -185,8 +218,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Первые три шага обеспечивают заказ и оплату.
-      incorrect: Переход на ty не нужен.
+      correct: "Назвать позиции, при необходимости спросить о наличии, узнать сумму."
+      incorrect: "Переход на ty к баристе у стойки не нужен."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -221,8 +254,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Czy jest…? проверяет наличие.
-      incorrect: Нужна форма jest.
+      correct: "Czy jest…? — вопрос о наличии."
+      incorrect: "Нужен глагол jest в рамке Czy jest…?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -249,8 +282,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Też добавляет ещё одну позицию.
-      incorrect: Нужно też.
+      correct: "Też — добавить ещё одну позицию после ответа о наличии."
+      incorrect: "Нужно слово też."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -269,7 +302,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: Соберите самостоятельный заказ.
+    prompt: "Расставьте шаги самостоятельного заказа."
     concept_ids:
       - GR-CAS-ACC-01
     function_ids:
@@ -277,8 +310,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Заказ → наличие → добавление и цена → оплата.
-      incorrect: Не платите до окончательного состава заказа.
+      correct: "Заказ → наличие → добавление и цена → оплата и прощание."
+      incorrect: "Сначала состав заказа, потом оплата."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -306,7 +339,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Бариста спрашивает вид канапки. Как ответить?
+    prompt: "Бариста спрашивает: «Kanapka z serem czy z szynką?» Что ответить?"
     concept_ids:
       - GR-PRO-DEM-01
     function_ids:
@@ -314,8 +347,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Z serem, proszę — ясное и вежливое уточнение.
-      incorrect: Одно слово неясно, приказ с ty неуместен.
+      correct: "Z serem, proszę — короткий спокойный ответ."
+      incorrect: "Одно слово Ser неясно; Ty daj — резко и на ty."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -337,7 +370,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Выберите уместные финальные реплики клиента.
+    prompt: "Какие финальные реплики уместны у стойки?"
     concept_ids:
       - GR-NUM-MONEY-01
     function_ids:
@@ -345,8 +378,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Цена, оплата и благодарность образуют финал.
-      incorrect: Приказ Daj неуместен.
+      correct: "Цена, способ оплаты и благодарность — обычный финал."
+      incorrect: "Daj paragon! слишком резко для первого контакта."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -373,7 +406,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Мини-проверка: восстановите последний обмен."
+    prompt: "Соберите последний обмен: цена, оплата, прощание."
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -381,8 +414,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Сумма следует за вопросом, затем оплата и прощание.
-      incorrect: Сначала узнайте сумму.
+      correct: "Вопрос о сумме → ответ → способ оплаты → прощание."
+      incorrect: "Сначала узнайте сумму, потом платите и прощайтесь."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -413,11 +446,13 @@ mini_check:
     - GR-PRO-DEM-01
     - GR-NUM-MONEY-01
 result_metadata:
-  title_ru: Результат урока
-  success_ru: "Провести всю транзакцию без подсказки: выбор, наличие, уточнение, цена, оплата и
-    благодарность. Результат относится только к DRAFT-превью."
-  retry_ru: "Повторите опорные реплики: Poproszę… · Czy jest…? · Ile płacę? · Dziękuję, затем снова
-    выполните мини-проверку."
+  title_ru: Итог урока
+  success_ru: >
+    Короткая проверка пройдена. Вы можете сами заказать две позиции,
+    спросить о наличии, добавить позицию и оплатить у стойки (DRAFT preview).
+  retry_ru: >
+    Повторите Poproszę X i Y, Czy jest…?, To poproszę też… и Kartą,
+    затем пройдите короткую проверку снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-TRANS-01
@@ -435,4 +470,8 @@ provenance:
     - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01, FN-A1-ASK-01,
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
+  notes: >
+    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
+    DRAFT — pending human review; not JPJO-approved, not published to learners.
+    reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only
