@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-03
 slug: samodzielne-pierwsze-spotkanie
-version: 2
+version: 3
 status: DRAFT
 title_pl: Samodzielne pierwsze spotkanie
 sort_order: 3
@@ -69,17 +69,17 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Тримайте рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia»
-      цілою; не збирайте її дослівно з українських слів і не переходьте на ty
-      з незнайомцем.
+      Не збирайте знайомство з «мене звати / я з…» дослівно. Тримайте
+      Dzień dobry → Nazywam się… → A pan/pani? → Do widzenia; з
+      незнайомцем — не ty.
     rus: >
       Держите рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia»
       целиком; не собирайте её дословно с русского и не переходите на ty
       с незнакомцем.
     bel: >
-      Трымайце рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia»
-      цэлай; не збірайце яе даслоўна з беларускай і не пераходзьце на ty
-      з незнаёмцам.
+      Не збірайце знаёмства з «мяне клічуць / я з…» даслоўна. Трымайце
+      Dzień dobry → Nazywam się… → A pan/pani? → Do widzenia; з
+      незнаёмцам — не ty.
 grammar_points:
   - id: GP-A1-PS-L3
     title_pl: Spójna autoprezentacja
@@ -101,14 +101,14 @@ grammar_points:
       - PRAG-PAN-01
     l1_notes:
       ukr: >
-        Рамка Dzień dobry → Nazywam się… → Jestem z… → A pan/pani? — ціла
-        дія. Не збирайте її з українського «мене звати / я з…» дослівно.
+        Калька «мене звати / я з…» ламає рамку. Тримайте Nazywam się…
+        і Jestem z… цілими, потім A pan/pani?
       rus: >
         Рамка Dzień dobry → Nazywam się… → Jestem z… → A pan/pani? — целое
         действие. Не собирайте её с русского «меня зовут / я из…» дословно.
       bel: >
-        Рамка Dzień dobry → Nazywam się… → Jestem z… → A pan/pani? — цэлае
-        дзеянне. Не збірайце яе з бел. «мяне клічуць / я з…» даслоўна.
+        «Мяне клічуць / я з…» даслоўна не працуе. Nazywam się… / Jestem z…
+        вучыце цэлымі, потым A pan/pani? — як у дыялогу.
 l1_notes:
   ukr: >
     Самі проведіть знайомство цілими формулами. З незнайомцем — pan/pani,
@@ -457,7 +457,8 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v2 — adult RU instructional chrome
-    (prompts, feedback, steps, result, l1_notes). DRAFT — not JPJO-approved, not
-    published to learners. reviewer_id is null (no fake review evidence).
+    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
+    full-meeting frame traps; adult RU chrome retained. DRAFT — not
+    JPJO-approved, not published to learners. reviewer_id is null (no fake
+    review evidence).
 visibility: internal_preview_only

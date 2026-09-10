@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-02
 slug: pytania-o-imie-i-pochodzenie
-version: 2
+version: 3
 status: DRAFT
 title_pl: Pytania o imię i pochodzenie
 sort_order: 2
@@ -70,17 +70,17 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Не калькуйте «Як вас звати?» / «Звідки ви?» як *Jak masz…* або
-      wy jesteście. Тримайте Jak ma pan/pani na imię? і Skąd pan/pani jest?
-      цілими; назад — A pan? / A pani?
+      «Як вас звати?» / «Звідки ви?» не дає *Jak masz…* і не wy + 2 ос. мн.
+      До незнайомця — Jak ma pan/pani na imię? і Skąd pan/pani jest?;
+      назад — A pan? / A pani?
     rus: >
       Не подставляйте «Как вас зовут?» / «Откуда вы?» как *Jak masz…*
       или wy jesteście. Нужны Jak ma pan/pani na imię? и Skąd pan/pani jest?
       целиком; встречный вопрос — A pan? / A pani?
     bel: >
-      Не калькуйце «Як вас завуць?» / «Адкуль вы?» як *Jak masz…* ці
-      wy jesteście. Трымайце Jak ma pan/pani na imię? і Skąd pan/pani jest?
-      цэлымі; назад — A pan? / A pani?
+      «Як вас завуць?» / «Адкуль вы?» — не *Jak masz…* і не wy jesteście.
+      З незнаёмцам: Jak ma pan/pani na imię? і Skąd pan/pani jest?;
+      сустрэчнае — A pan? / A pani?
 grammar_points:
   - id: GP-A1-PS-L2
     title_pl: Pytania z pan / pani
@@ -101,24 +101,24 @@ grammar_points:
       - PRAG-PAN-01
     l1_notes:
       ukr: >
-        Рамка з pan/pani + 3 особа: ma / jest, не masz / jesteś. Не збирайте
-        питання з українського «ви» як wy. A pani? — окрема коротка формула.
+        З pan/pani дієслово в 3 особі: ma / jest, не masz / jesteś.
+        Українське «ви» ≠ wy. A pani? — окрема коротка формула.
       rus: >
         Рамка с pan/pani + 3 л.: ma / jest, не masz / jesteś. Не копируйте
         русское «вы» как wy. A pani? — отдельная короткая формула.
       bel: >
-        Рамка з pan/pani + 3 асоба: ma / jest, не masz / jesteś. Не пераносьце
-        «вы» як wy. A pani? — асобная кароткая формула.
+        З pan/pani — 3 асоба: ma / jest, не masz / jesteś. Беларус. «вы»
+        не пераносіцца як wy. A pani? — асобная кароткая формула.
 l1_notes:
   ukr: >
-    Питайте і відповідайте цілими формулами. Не переходьте на ty з
-    незнайомцем; A pan? / A pani? повертає те саме питання без «ти».
+    Питайте цілими формулами. З незнайомцем — не ty; A pan? / A pani?
+    повертає те саме питання без «ти».
   rus: >
     Спрашивайте и отвечайте целыми формулами. С незнакомцем — не ty;
     A pan? / A pani? возвращает тот же вопрос без «ты».
   bel: >
-    Пытайце і адказвайце цэлымі формуламі. З незнаёмцам — не ty;
-    A pan? / A pani? вяртае той жа пытанне без «ты».
+    Пытанні і адказы — цэлымі формуламі. З незнаёмцам не ty;
+    A pan? / A pani? вяртае тое ж пытанне без «ты».
 steps:
   - id: step-l2-situation
     kind: situation
@@ -452,7 +452,8 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v2 — adult RU instructional chrome
-    (prompts, feedback, steps, result, l1_notes). DRAFT — not JPJO-approved, not
-    published to learners. reviewer_id is null (no fake review evidence).
+    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
+    pan/pani question traps; adult RU chrome retained. DRAFT — not
+    JPJO-approved, not published to learners. reviewer_id is null (no fake
+    review evidence).
 visibility: internal_preview_only
