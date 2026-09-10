@@ -75,6 +75,15 @@ export type DailyPlanItem =
       href: string;
     };
 
+/** Life-outcome hall for plan CTA copy (not curriculum IDs). */
+export type PlanHallKey =
+  | "spotkanie"
+  | "kawiarnia"
+  | "sklep"
+  | "transport"
+  | "urzad"
+  | "generic";
+
 export type DailyPlan = {
   targetMinutes: 15;
   masteryScope: MasteryScope;
@@ -86,11 +95,26 @@ export type DailyPlan = {
     | "strengthenConcept"
     | "reviewErrors"
     | "openNextSala";
+  /** Hall for adaptive planGoal copy. */
+  hallKey: PlanHallKey;
   /** @deprecated use nextGoalKey + i18n */
   nextGoal: string;
 };
 
 const TARGET = 15;
+
+const MODULE_HALL: Record<string, PlanHallKey> = {
+  "pierwsze-spotkanie": "spotkanie",
+  "w-kawiarni": "kawiarnia",
+  "w-sklepie": "sklep",
+  "droga-i-transport": "transport",
+  "pierwsza-sprawa-w-urzedzie": "urzad",
+};
+
+export function hallKeyForModuleId(moduleId: string | null | undefined): PlanHallKey {
+  if (!moduleId) return "generic";
+  return MODULE_HALL[moduleId] ?? "generic";
+}
 
 /** Explainable weak-concept threshold: REVIEW_DUE always; LEARNING with ≥2 errors. */
 export function isWeakConcept(state: string, errorCount: number): boolean {
@@ -98,6 +122,20 @@ export function isWeakConcept(state: string, errorCount: number): boolean {
   if (state === "LEARNING" && errorCount >= 2) return true;
   if (state === "NOT_STARTED" && errorCount >= 1) return true;
   return false;
+}
+
+function resolveHallKey(
+  items: DailyPlanItem[],
+  modules: DailyPlanInput["modules"],
+): PlanHallKey {
+  const first = items[0];
+  if (first?.kind === "unfinished_lesson" || first?.kind === "mini_check") {
+    return hallKeyForModuleId(first.moduleId);
+  }
+  const unfinished = modules.find((m) => m.unfinishedLessonId);
+  if (unfinished) return hallKeyForModuleId(unfinished.id);
+  if (modules[0]) return hallKeyForModuleId(modules[0].id);
+  return "generic";
 }
 
 export function buildDailyPlan(input: DailyPlanInput): DailyPlan {
@@ -192,12 +230,15 @@ export function buildDailyPlan(input: DailyPlanInput): DailyPlan {
             ? "reviewErrors"
             : "openNextSala";
 
+  const hallKey = resolveHallKey(items, input.modules);
+
   return {
     targetMinutes: TARGET,
     masteryScope: scope,
     generatedAt: input.now.toISOString(),
     items,
     nextGoalKey,
+    hallKey,
     nextGoal: nextGoalKey,
   };
 }

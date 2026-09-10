@@ -14,8 +14,8 @@ export const LEARNER_EXERCISE_WHITELIST = [
   "items",
   "textWithGaps",
   "gapCount",
-  "audioTextPl",
   "audioUrl",
+  "hasTtsStimulus",
   "__learnerSafe",
 ] as const;
 
@@ -57,8 +57,11 @@ export type LearnerOrdering = LearnerExerciseBase & {
 
 export type LearnerListening = LearnerExerciseBase & {
   type: "listening";
-  /** Spoken stimulus for TTS / optional URL — not an answer key. */
-  audioTextPl: string;
+  /**
+   * TTS / audio available — spoken Polish is NOT shipped in this DTO
+   * (answer leak). Client fetches stimulus via authenticated play API.
+   */
+  hasTtsStimulus: boolean;
   audioUrl?: string;
   options: string[];
 };
@@ -103,6 +106,8 @@ export const ANSWER_KEY_FIELD_NAMES = [
   "acceptedAnswers",
   "answerKey",
   "answer_key",
+  "audioTextPl",
+  "audio_text_pl",
   "evidenceWeight",
   "evidence_weight",
   "conceptIds",
@@ -117,7 +122,7 @@ export const ANSWER_KEY_FIELD_NAMES = [
 
 /**
  * Strip server-only ModuleExercise → learner-safe whitelist DTO.
- * Gap answers become gapCount only.
+ * Gap answers become gapCount only. Listening never includes audioTextPl.
  */
 export function toLearnerExercise(ex: ModuleExercise): LearnerExercise {
   switch (ex.type) {
@@ -160,7 +165,7 @@ export function toLearnerExercise(ex: ModuleExercise): LearnerExercise {
         id: ex.id,
         type: "listening",
         prompt: ex.prompt,
-        audioTextPl: ex.audioTextPl,
+        hasTtsStimulus: Boolean(ex.audioTextPl?.trim() || ex.audioUrl),
         ...(ex.audioUrl ? { audioUrl: ex.audioUrl } : {}),
         options: [...ex.options],
       };

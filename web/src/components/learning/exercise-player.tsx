@@ -10,7 +10,7 @@ import type {
 import { Button } from "@/components/ui/button";
 import { ChoiceOption } from "./choice-option";
 import { FeedbackPanel } from "./feedback-panel";
-import { PolishLineAudio } from "@/components/exercise/polish-line-audio";
+import { ListeningAudioControl } from "@/components/learning/listening-audio-control";
 
 type Props = {
   moduleId: string;
@@ -190,11 +190,14 @@ export function ExercisePlayer({
             {t("listeningExerciseHint")}
           </p>
           <div className="flex flex-wrap items-center gap-3">
-            <PolishLineAudio
-              text={exercise.audioTextPl}
-              audioUrl={exercise.audioUrl}
-              className="min-h-10 px-4 text-base"
-            />
+            {exercise.hasTtsStimulus || exercise.audioUrl ? (
+              <ListeningAudioControl
+                moduleId={moduleId}
+                exerciseId={exercise.id}
+                audioUrl={exercise.audioUrl}
+                className="min-h-10 px-4 text-base"
+              />
+            ) : null}
             <span className="text-xs text-[var(--color-graphite-muted)]">
               {t("listeningReplayOk")}
             </span>

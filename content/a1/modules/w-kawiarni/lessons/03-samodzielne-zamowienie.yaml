@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-03
 slug: samodzielne-zamowienie
-version: 3
+version: 4
 status: DRAFT
 title_pl: Samodzielne zamówienie
 sort_order: 3
@@ -144,6 +144,15 @@ steps:
   - id: step-l3-key-lines
     kind: key_lines
     title_ru: Важные реплики
+  - id: step-l3-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите полный заказ вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Poproszę herbatę i kanapkę.
+      - Czy jest sok jabłkowy?
+      - Kartą.
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -468,8 +477,7 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
-    full-order frame traps; adult RU chrome retained. DRAFT — not
-    JPJO-approved, not published to learners. reviewer_id is null (no fake
-    review evidence).
+    AI-assisted system draft. Wave 4 v4 — speaking_practice for full order;
+    shorter UK/BEL L1 notes retained. DRAFT — not JPJO-approved, not published
+    to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

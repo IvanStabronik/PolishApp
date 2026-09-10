@@ -4,7 +4,10 @@
  * never return raw GR-/FN- IDs as primary UI text.
  */
 
-import { curriculumTitleFor } from "./curriculum-labels";
+import {
+  curriculumTitleFor,
+  isUsableCurriculumTitle,
+} from "./curriculum-labels";
 
 const CONCEPT_LABELS_RU: Record<string, string> = {
   "GR-CAS-NOM-01": "Как вас зовут: Nazywam się…",
@@ -28,6 +31,11 @@ const CONCEPT_LABELS_RU: Record<string, string> = {
   "FN-A1-ADDRESS-01": "Вежливо обратиться",
   "FN-A1-QUANT-01": "Размер и количество",
   "FN-A1-THANKS-01": "Поблагодарить",
+  "FN-A1-DIRECT-01": "Спросить дорогу",
+  "FN-A1-TIME-01": "Уточнить время отправления",
+  "FN-A1-PURPOSE-01": "Сказать цель визита в urzędzie",
+  "FN-A1-DOCS-01": "Передать документы у окошка",
+  "FN-A1-CONFIRM-01": "Подтвердить и закрыть разговор",
   "ORTH-CORE-01": "Базовая польская орфография",
 };
 
@@ -53,6 +61,11 @@ const CONCEPT_LABELS_UK: Record<string, string> = {
   "FN-A1-ADDRESS-01": "Ввічливо звернутися",
   "FN-A1-QUANT-01": "Розмір і кількість",
   "FN-A1-THANKS-01": "Подякувати",
+  "FN-A1-DIRECT-01": "Запитати дорогу",
+  "FN-A1-TIME-01": "Уточнити час відправлення",
+  "FN-A1-PURPOSE-01": "Сказати мету візиту в urzędzie",
+  "FN-A1-DOCS-01": "Передати документи біля віконця",
+  "FN-A1-CONFIRM-01": "Підтвердити і завершити розмову",
   "ORTH-CORE-01": "Базовий польський правопис",
 };
 
@@ -78,6 +91,11 @@ const CONCEPT_LABELS_PL: Record<string, string> = {
   "FN-A1-ADDRESS-01": "Zwrot grzecznościowy",
   "FN-A1-QUANT-01": "Rozmiar i ilość",
   "FN-A1-THANKS-01": "Podziękować",
+  "FN-A1-DIRECT-01": "Zapytać o drogę",
+  "FN-A1-TIME-01": "Uściślić czas odjazdu",
+  "FN-A1-PURPOSE-01": "Podać cel wizyty w urzędzie",
+  "FN-A1-DOCS-01": "Przekazać dokumenty przy okienku",
+  "FN-A1-CONFIRM-01": "Potwierdzić i domknąć rozmowę",
   "ORTH-CORE-01": "Podstawowa ortografia polska",
 };
 
@@ -92,7 +110,9 @@ function tableFor(locale: ConceptLabelLocale): Record<string, string> {
 /** Soft fallback when an ID is not in the map — never return raw ops IDs as primary. */
 function softFallback(canonicalId: string, locale: ConceptLabelLocale): string {
   const fromSoT = curriculumTitleFor(canonicalId, locale);
-  if (fromSoT) return fromSoT;
+  if (fromSoT && isUsableCurriculumTitle(fromSoT, canonicalId)) {
+    return fromSoT;
+  }
 
   if (canonicalId.startsWith("PRAG-PAN")) {
     return locale === "pl"

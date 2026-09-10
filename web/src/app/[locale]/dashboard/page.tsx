@@ -84,7 +84,9 @@ export default async function DashboardPage({ params }: Props) {
               </p>
               <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
                 {t("nextGoal")}:{" "}
-                {tLearn(`planGoal.${snapshot.dailyPlan.nextGoalKey}`)}
+                {tLearn(
+                  `planGoal.${snapshot.dailyPlan.nextGoalKey}.${snapshot.dailyPlan.hallKey}`,
+                )}
               </p>
             </div>
             {snapshot.continueCta ? (

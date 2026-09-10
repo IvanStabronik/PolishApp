@@ -1,73 +1,63 @@
 # Improvement loop status
 
 **Branch:** `docs/requirements-r2`  
-**Stance:** Wave 1–3 foundations only — **not** reference quality.  
-**Re-audit (post–Wave 2):** ~**30.5 / 50** against `reference-quality-bar.md`.  
-Wave 2 listening/speaking were **PARTIAL / thin** (TTS on dialogue ≠ assessed listening; speaking only on PS L01). Session-link race left early attempts unlinked until Wave 3 harden.
+**Stance:** Wave 1–4 foundations only — **not** reference quality.  
+**Re-audit (post–Wave 3):** ~**31 / 50** against `reference-quality-bar.md`.  
+**Wave 4 estimate (this pass):** ~**34 / 50** — code/docs moved; EXTERNAL wall unchanged. Never claim reference quality.
 
-## Wave 1 goals — honest regrade
+## Wave 3 — shipped (summary)
 
-| ID | Goal | Status |
-| --- | --- | --- |
-| A | Feedback pipeline: incorrect + L1 notes on wrong answers | **Shipped** (keep) |
-| B | Lesson player: structured dialogue / key lines / pan-pani / grammar | **Shipped** (keep) |
-| C | Closed-beta DRAFT via `BETA_ALLOW_DRAFT` without DEMO theater | **Shipped** (keep) |
-| D | Invite i18n; human review/Kronika labels; BEL respect; soften jargon | **Overclaimed** in W1 — fixed in Wave 2 |
-| E | Lesson result not presented as authoritative mastery from `?c=&n=` | **Partial** → Wave 2 session aggregates; Wave 3 session-link harden |
+1. Session reliability — `ensureOpenLessonSession` on lesson SSR + first attempt; orphan attempts in window.
+2. Hub TTS on dialogue / key lines.
+3. Speaking on PS L01–L03 + café L01.
+4. PS deepen + assessed listening seed (`listening` type + migration 0008).
+5. Habit / plan life-outcome copy (then still spotkanie-biased).
+6. Concept labels + broken SoT preference (FN parser bug latent).
+7. HTTPS dry-run checklist; admin craft freeze.
 
-## Wave 2 — honest regrade (~30.5/50)
+## Wave 3 re-audit must-fixes — shipped in Wave 4
 
-| Item | Claimed | Honest |
-| --- | --- | --- |
-| Identity leakage / ops chrome purge | Shipped | **Keep** |
-| Attempts + YAML content version | Shipped | **Keep** |
-| Session-1 hub path | Shipped | **Keep** |
-| Listening v1 (TTS on dialogue) | Shipped | **PARTIAL** — not assessed listening |
-| Speaking v1 | Shipped | **PARTIAL / thin** — PS L01 only; best-effort Web Speech |
-| Server lesson results | Shipped | **PARTIAL** — race: `useEffect` session start after early attempts |
+| Fix | Status |
+| --- | --- |
+| FN SoT parser (`\s` crossed CRLF → `**ID:**` junk) | **Fixed** — horizontal WS only + Title(PL) block parse + usable-title gate |
+| JPJO in learner chrome (`speakingHonesty` etc.) | **Fixed** — adult honesty without ops acronym |
+| Listening `audioTextPl` on client DTO | **Fixed** — fetch-on-play API; DTO has `hasTtsStimulus` only |
+| Adaptive planGoal by hall | **Fixed** — `hallKey` + nested i18n (café / tram / urząd / sklep / spotkanie) |
 
-## Wave 3 — shipped this pass
+## Wave 4 — results this pass
 
-1. **Session reliability** — `ensureOpenLessonSession` on lesson page (SSR) + on first attempt persist; aggregates include orphan attempts in session window; client picks up `learningSessionId` from attempt response.
-2. **Hub TTS** — `ModuleOverview` dialogue + key lines use `PolishLineAudio` (was silent).
-3. **Speaking coverage** — `speaking_practice` on Pierwsze spotkanie L01–L03 and W kawiarni L01; non-exam honesty copy retained.
-4. **Content deepen (PS 01–03)** — adult distractors, distinct UK/BEL/RU L1 traps, productive dual gap; versions bumped; still **DRAFT**.
-5. **Assessed listening type** — schema `listening` + PS L01 `ex-ps-listen-01` (TTS interim for `audio_text_pl`); migration `0008_listening_exercise_type`.
-6. **Habit / plan life-outcome copy** — uk/ru/pl `planGoal` / `planReason` / dashboard CTA (“завтра: знакомство / кафе / tram / urząd”).
-7. **Concept labels** — expanded map + curriculum inventory SoT fallback (`curriculum-labels.ts`); GR-/FN- never primary UI.
-8. **HTTPS dry-run checklist** — `docs/operations/https-deploy-dry-run.md` fail-closed; `deploy.yml` Railway path requires `RAILWAY_SERVICE_ID` (no invented secrets).
-9. **Learner craft polish** — speaking/listen controls quieter Archive tone; **admin craft freeze** this wave (no new admin features).
+1. **Broader listening + speaking** — assessed `listening` + `speaking_practice` on L01 of w-sklepie, droga-i-transport, pierwsza-sprawa-w-urzedzie; café L02/L03 speaking. Still **DRAFT**; versions bumped.
+2. **Competitive week-1 bakeoff** — `docs/reports/competitive-week1-bakeoff.md` (script + current FAIL honesty).
+3. **JPJO hall packet** — `docs/reviews/pierwsze-spotkanie-jpjo-hall-packet.md`, status **`NOT_STARTED`** (no fake APPROVE).
+4. **Learner craft** — previewNoMastery softened; MasteryBadge “Уверенно/Впевнено/Pewnie”; UK/BEL step title fallback; speaking privacy note for mic.
+5. **Tests** — curriculum labels / listening DTO leak / hallKey plan / ensure export; content:validate + tsc + vitest expected green.
 
 ## Still broken vs reference bar
 
-1. TTS ≠ human/studio listening assets (FUN-110 / V2).
-2. Speaking recognition still best-effort — not JPJO / exam scoring.
-3. All content remains DRAFT — no JPJO PUBLISHED hall (§7).
-4. Competitive week-1 vs Telegram phrasebot not measured (§10).
-5. HTTPS dry-run checklist exists; **live** HTTPS not proven without external secrets.
-6. Concept SoT parser covers inventory headings — curated map still needed for life-outcome phrasing.
-7. Listening assessed items are sparse (one vertical seed).
+1. TTS ≠ studio listening (FUN-110 / V2).
+2. Speaking recognition best-effort — not exam scoring.
+3. All content **DRAFT** — no JPJO PUBLISHED hall (§7). **EXTERNAL**
+4. Competitive week-1 not yet **run** with real invitees (script only).
+5. Live HTTPS not proven without Railway/host secrets. **EXTERNAL**
+6. Admin vs learner craft — freeze held; recheck §9 after player polish.
 
-## Wave 4 backlog (ranked by audit pressure)
+## Wave 5 = EXTERNAL wall (+ leftover code)
 
-1. **JPJO human review packet** — first PUBLISHED hall without lying about status. **EXTERNAL**
-2. **Human listening assets** — replace TTS interim for assessed listening where required.
-3. **Competitive week-1 script** — timed walkthrough vs Telegram phrasebot; fix gaps found.
-4. **HTTPS live proof** — operator completes dry-run with real Railway/host secrets; health/ready on public URL. **EXTERNAL**
-5. **Speaking privacy / upload policy** — if remote recording ever lands.
-6. **Broader speaking + listening coverage** — remaining A1 halls beyond PS / café seed.
-7. **Admin vs learner craft audit** — keep freeze until player polish passes §9 again.
-
-## Admin craft freeze (Wave 3+)
-
-No new admin/author/reviewer features this wave. Learner player, feedback, progress, and copy take priority until §9 no longer fails by attention imbalance.
+1. **JPJO human review** — calendar + first hall APPROVE/REJECT in packet (no AI self-approve).
+2. **Live HTTPS proof** — operator completes dry-run with real `RAILWAY_*` / webhook / secrets; health/ready public.
+3. **Invite path on live** — `BETA_ALLOW_DRAFT=true`, `DEMO_*=false`, invite pepper.
+4. Optional code leftovers: studio audio pipeline, deeper speaking upload policy, remaining L02/L03 listening seeds, timed bakeoff execution log.
 
 ## External blockers (track)
 
-- Railway / host: set `BETA_ALLOW_DRAFT=true` with `DEMO_*=false` on live HTTPS; provision `RAILWAY_TOKEN` + `RAILWAY_SERVICE_ID` or `DEPLOY_WEBHOOK_URL`.
-- Independent JPJO human reviewer calendar (content publish gate).
-- Production secrets (`INVITE_TOKEN_PEPPER`, DB, auth) if not already provisioned.
-- Browser TTS / SpeechRecognition quality and availability (Chrome-first; Safari/Firefox degrade).
+- Railway / host secrets and service ID.
+- Independent JPJO reviewer calendar.
+- Production `INVITE_TOKEN_PEPPER`, DB, auth if not provisioned.
+- Browser TTS / SpeechRecognition variance.
+
+## Admin craft freeze
+
+Still in force. No new admin/author features this wave.
 
 ## Loop ritual
 

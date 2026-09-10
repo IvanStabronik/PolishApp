@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-01
 slug: zakupy-przy-kasie
-version: 3
+version: 4
 status: DRAFT
 title_pl: Zakupy przy kasie
 sort_order: 1
@@ -151,6 +151,15 @@ steps:
   - id: step-key-lines
     kind: key_lines
     title_ru: Важные реплики
+  - id: step-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите реплики у кассы вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Poproszę ten chleb i mleko.
+      - Ile to kosztuje?
+      - Płacę kartą.
   - id: step-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -164,6 +173,7 @@ steps:
     exercise_ids:
       - ex-ws-01
       - ex-ws-02
+      - ex-ws-listen-01
       - ex-ws-03
       - ex-ws-04
       - ex-ws-05
@@ -215,6 +225,45 @@ exercises:
       reviewer_id: null
       sources:
         - "LEX-A1-SERVICE"
+      ai_assisted: true
+    mini_check: false
+
+  - id: ex-ws-listen-01
+    canonical_id: EX-A1-WS-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте кассира. Что он сказал?"
+    audio_text_pl: Dwanaście złotych i pięćdziesiąt groszy.
+    options:
+      - id: a
+        text: Назвал цену покупки.
+      - id: b
+        text: Спросил, откуда вы.
+      - id: c
+        text: Попросил паспорт у окошка.
+    correct_option_id: a
+    concept_ids:
+      - GR-NUM-MONEY-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-CONFIRM-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: "Да: это сумма — złotych и groszy."
+      incorrect: "Это цена у кассы, не знакомство и не urząd."
+      l1:
+        ukr: "Слухайте цілу суму (złotych / groszy), не окремі слова."
+        rus: "Слышите цену целиком — не вопрос про имя и не документы."
+        bel: "Гэта цана ў касе, не прадстаўленне і не paszport."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "LEX-A1-MONEY / GR-NUM-MONEY-01"
       ai_assisted: true
     mini_check: false
 
@@ -560,8 +609,8 @@ provenance:
     - "Curriculum links: SCN-A1-SHOP-01, FN-A1-TRANS-01, FN-A1-QUANT-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
-    shorter UK/BEL L1 notes on checkout traps; adult RU chrome retained. DRAFT —
-    pending human review; not JPJO-approved, not learner-published.
-    No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Wave 4 v4 —
+    speaking_practice + assessed listening (TTS interim) at checkout; shorter UK/BEL
+    L1 notes retained. DRAFT — pending human review; not JPJO-approved, not
+    learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only

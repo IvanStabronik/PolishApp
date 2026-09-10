@@ -44,7 +44,7 @@ export default async function DailyPlanPage({ params }: Props) {
       >
         <PageIntro
           title={t("dailyPlan")}
-          lead={t(`planGoal.${plan.nextGoalKey}`)}
+          lead={t(`planGoal.${plan.nextGoalKey}.${plan.hallKey}`)}
         />
 
         {plan.items.length === 0 ? (

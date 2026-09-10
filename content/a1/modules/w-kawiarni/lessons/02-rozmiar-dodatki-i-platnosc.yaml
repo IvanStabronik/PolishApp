@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-02
 slug: rozmiar-dodatki-i-platnosc
-version: 3
+version: 4
 status: DRAFT
 title_pl: Rozmiar, dodatki i płatność
 sort_order: 2
@@ -139,6 +139,15 @@ steps:
   - id: step-l2-key-lines
     kind: key_lines
     title_ru: Важные реплики
+  - id: step-l2-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите размер, добавку и оплату вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Poproszę dużą kawę.
+      - Z mlekiem, proszę.
+      - Kartą, proszę.
   - id: step-l2-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -463,8 +472,7 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
-    size/add-on/pay traps; adult RU chrome retained. DRAFT — not
-    JPJO-approved, not published to learners. reviewer_id is null (no fake
-    review evidence).
+    AI-assisted system draft. Wave 4 v4 — speaking_practice for size/add-on/pay;
+    shorter UK/BEL L1 notes retained. DRAFT — not JPJO-approved, not published
+    to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

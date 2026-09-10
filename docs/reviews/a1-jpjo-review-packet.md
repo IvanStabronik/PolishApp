@@ -23,7 +23,7 @@
 | ERR in canonical A1 chains | **31** | semantic validation pending JPJO |
 | A2–B2 | legacy | **pending semantic migration** |
 
-Связанные файлы: `docs/curriculum/*`, `docs/reviews/a1-source-verification.md`, `docs/reports/phase-2-a1-review-readiness-report.md`.
+Связанные файлы: `docs/curriculum/*`, `docs/reviews/a1-source-verification.md`, `docs/reviews/pierwsze-spotkanie-jpjo-hall-packet.md` (hall-1 content packet, also `NOT_STARTED`), `docs/reports/phase-2-a1-review-readiness-report.md`.
 
 ## Контрольные метрики процесса
 

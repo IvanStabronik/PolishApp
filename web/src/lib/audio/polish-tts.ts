@@ -33,7 +33,7 @@ export function speakPolish(
   options: SpeakPolishOptions = {},
 ): boolean {
   const line = text.trim();
-  if (!line) return false;
+  if (!line && !options.audioUrl) return false;
 
   stopPolishAudio();
 
@@ -47,15 +47,24 @@ export function speakPolish(
       };
       audio.onerror = () => {
         sharedAudio = null;
+        if (!line) {
+          options.onError?.();
+          return false;
+        }
         // Fall through to TTS
         return speakWithSynthesis(line, options);
       };
       void audio.play().catch(() => {
         sharedAudio = null;
-        speakWithSynthesis(line, options);
+        if (line) speakWithSynthesis(line, options);
+        else options.onError?.();
       });
       return true;
     } catch {
+      if (!line) {
+        options.onError?.();
+        return false;
+      }
       return speakWithSynthesis(line, options);
     }
   }

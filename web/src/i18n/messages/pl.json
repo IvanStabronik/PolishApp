@@ -138,11 +138,46 @@
       "miniCheck": "Krótkie sprawdzenie przed prawdziwą rozmową"
     },
     "planGoal": {
-      "finishLesson": "Jutro: krótkie spotkanie — imię i skąd",
-      "miniCheck": "Utrwal formuły przed rozmową na klatce",
-      "strengthenConcept": "Podciągnij to, co psuje się w żywej mowie",
-      "reviewErrors": "Przejrzyj wczorajsze potknięcia — by jutro nie wróciły",
-      "openNextSala": "Gdy gotów — następny byt: kawiarnia / tram / urząd"
+      "finishLesson": {
+        "spotkanie": "Jutro: krótkie spotkanie — imię i skąd",
+        "kawiarnia": "Jutro: zamówienie przy barze — Poproszę i płatność",
+        "sklep": "Jutro: przy kasie — towar, cena, karta",
+        "transport": "Jutro: przystanek i bilet — do / na",
+        "urzad": "Jutro: przy okienku — w sprawie… i dokumenty",
+        "generic": "Jutro: dokończ rozpoczętą lekcję — przyda się na żywo"
+      },
+      "miniCheck": {
+        "spotkanie": "Utrwal formuły przed rozmową na klatce",
+        "kawiarnia": "Utrwal zamówienie przed żywym barem",
+        "sklep": "Utrwal kasę przed prawdziwymi zakupami",
+        "transport": "Utrwal bilet i orientację przed podróżą",
+        "urzad": "Utrwal cel wizyty przed urzędem",
+        "generic": "Krótkie sprawdzenie przed prawdziwą rozmową"
+      },
+      "strengthenConcept": {
+        "spotkanie": "Podciągnij to, co psuje się przy spotkaniu",
+        "kawiarnia": "Podciągnij to, co psuje się przy barze",
+        "sklep": "Podciągnij to, co psuje się przy kasie",
+        "transport": "Podciągnij to, co psuje się w drodze",
+        "urzad": "Podciągnij to, co psuje się w urzędzie",
+        "generic": "Podciągnij to, co psuje się w żywej mowie"
+      },
+      "reviewErrors": {
+        "spotkanie": "Przejrzyj wczorajsze potknięcia w spotkaniu",
+        "kawiarnia": "Przejrzyj wczorajsze potknięcia w zamówieniu",
+        "sklep": "Przejrzyj wczorajsze potknięcia przy kasie",
+        "transport": "Przejrzyj wczorajsze potknięcia w drodze",
+        "urzad": "Przejrzyj wczorajsze potknięcia przy okienku",
+        "generic": "Przejrzyj wczorajsze potknięcia — by jutro nie wróciły"
+      },
+      "openNextSala": {
+        "spotkanie": "Gdy gotów — następny byt: kawiarnia / tram / urząd",
+        "kawiarnia": "Gdy gotów — następny byt: sklep / tram / urząd",
+        "sklep": "Gdy gotów — następny byt: tram / urząd / klatka",
+        "transport": "Gdy gotów — następny byt: urząd / kawiarnia / sklep",
+        "urzad": "Gdy gotów — następny byt: kawiarnia / tram / klatka",
+        "generic": "Gdy gotów — następny byt: kawiarnia / tram / urząd"
+      }
     },
     "reviewReason": {
       "scheduledDue": "Według harmonogramu powtórek",
@@ -181,7 +216,7 @@
     "toProgress": "Do postępu",
     "toDashboard": "Do gabinetu",
     "masteryHint": "Pewność w tematach pojawi się po kilku potwierdzonych odpowiedziach — zajrzyj do postępów.",
-    "previewNoMastery": "W wewnętrznym podglądzie odpowiedzi nie trafiają do żywego rozliczenia opanowania.",
+    "previewNoMastery": "W tym trybie wstępnym odpowiedzi nie budują jeszcze trwałego postępu.",
     "persistError": "Odpowiedź sprawdzona, ale nie udało się zapisać próby. Spróbuj ponownie później.",
     "persistErrorMissingVersion": "Odpowiedź sprawdzona, ale wersja treści jest niedostępna — próba nie została zapisana.",
     "catalogEmptyDraft": "Nie ma jeszcze dostępnych lekcji. Jeśli jesteś w zamkniętej becie i ekran jest pusty — napisz do organizatorów.",
@@ -204,7 +239,8 @@
     "listeningReplayOk": "Możesz odsłuchać jeszcze raz.",
     "speaking": "Na głos",
     "speakingHint": "Powiedz kwestię na głos — spokojnie, jak z dorosłym na klatce.",
-    "speakingHonesty": "To trening mowy, nie egzamin i nie ocena JPJO.",
+    "speakingHonesty": "To trening mowy, nie egzamin i nie ocena.",
+    "speakingPrivacy": "Mikrofon działa tylko w przeglądarce do rozpoznania na tym kroku — nagranie nie trafia na serwer.",
     "speakingRecord": "Mów",
     "speakingStop": "Stop",
     "speakingSelfCheck": "Powiedziałem/am na głos",
@@ -220,7 +256,7 @@
     "title": "Postęp",
     "lead": "Opanowanie buduje się z prób i potwierdzeń, nie z «punktów».",
     "concepts": "Tematy",
-    "mastered": "Opanowane",
+    "mastered": "Pewnie",
     "emerging": "W toku",
     "notStarted": "Jeszcze nie rozpoczęte",
     "recentAttempts": "Ostatnie próby",
@@ -228,7 +264,7 @@
     "emptySignedIn": "Brak zapisanych prób. Ukończ ćwiczenie — pojawi się postęp.",
     "emptySignedOut": "Zaloguj się, aby zobaczyć swój postęp.",
     "signInCta": "Przejdź do logowania",
-    "previewMode": "podgląd"
+    "previewMode": "podgląd wstępny"
   },
   "settings": {
     "title": "Ustawienia",

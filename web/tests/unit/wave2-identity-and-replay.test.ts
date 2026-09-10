@@ -4,8 +4,19 @@ import {
   uiLocaleToConceptLabelLocale,
 } from "@/lib/content/lesson-titles";
 import { humanConceptLabel } from "@/lib/content/concept-labels";
+import {
+  clearCurriculumTitleCache,
+  curriculumTitleFor,
+  isUsableCurriculumTitle,
+} from "@/lib/content/curriculum-labels";
+import {
+  serializeLearnerExercise,
+  toLearnerExercise,
+} from "@/lib/content/learner-dto";
+import { localizeStepTitle } from "@/lib/content/step-title-locale";
 import { evaluationFromStoredResponse } from "@/modules/learning/persist-attempt";
 import { evaluateAnswer } from "@/modules/assessment/evaluate";
+import { ensureOpenLessonSession } from "@/modules/learning/lesson-session";
 import type { ListeningExercise } from "@/lib/content/types";
 
 describe("attempt lesson titles", () => {
@@ -36,12 +47,28 @@ describe("attempt lesson titles", () => {
     expect(humanConceptLabel("PRAG-PAN-01", "uk")).not.toBe("PRAG-PAN-01");
   });
 
-  it("never returns raw GR-/FN- IDs as primary labels", () => {
+  it("never returns raw GR-/FN- IDs or markdown junk as primary labels", () => {
+    clearCurriculumTitleCache();
     expect(humanConceptLabel("GR-CAS-NOM-01", "ru")).not.toBe("GR-CAS-NOM-01");
     expect(humanConceptLabel("FN-A1-IDENTIFY-01", "pl")).not.toBe(
       "FN-A1-IDENTIFY-01",
     );
+    expect(humanConceptLabel("FN-A1-DIRECT-01", "ru")).not.toMatch(/\*\*/);
+    expect(humanConceptLabel("FN-A1-DIRECT-01", "ru")).not.toMatch(/^FN-/);
+    expect(humanConceptLabel("FN-A1-PURPOSE-01", "ru")).not.toContain("**ID:**");
     expect(humanConceptLabel("GR-UNKNOWN-99", "ru")).not.toMatch(/^GR-/);
+    const sot = curriculumTitleFor("FN-A1-IDENTIFY-01", "pl");
+    expect(sot).toBeTruthy();
+    expect(sot).not.toContain("**");
+    expect(isUsableCurriculumTitle(sot!, "FN-A1-IDENTIFY-01")).toBe(true);
+  });
+});
+
+describe("UK/BEL step title fallback", () => {
+  it("localizes common step titles for ukr/bel L1", () => {
+    expect(localizeStepTitle("Ситуация", "ukr")).toBe("Ситуація");
+    expect(localizeStepTitle("Диалог", "bel")).toBe("Дыялог");
+    expect(localizeStepTitle("Ситуация", "rus")).toBe("Ситуация");
   });
 });
 
@@ -64,7 +91,7 @@ describe("idempotent replay preserves l1Note", () => {
   });
 });
 
-describe("listening exercise evaluation", () => {
+describe("listening exercise evaluation + learner DTO integrity", () => {
   const listening: ListeningExercise = {
     id: "ex-ps-listen-01",
     canonicalId: "EX-A1-PS-LIS-01",
@@ -89,5 +116,23 @@ describe("listening exercise evaluation", () => {
     expect(
       evaluateAnswer(listening, { type: "listening", index: 1 }).correct,
     ).toBe(false);
+  });
+
+  it("does not ship audioTextPl on learner DTO", () => {
+    const dto = toLearnerExercise(listening);
+    expect(dto.type).toBe("listening");
+    if (dto.type === "listening") {
+      expect(dto.hasTtsStimulus).toBe(true);
+      expect("audioTextPl" in dto).toBe(false);
+    }
+    const json = serializeLearnerExercise(dto);
+    expect(json).not.toContain("audioTextPl");
+    expect(json).not.toContain("Nazywam się");
+  });
+});
+
+describe("ensureOpenLessonSession export", () => {
+  it("exports ensure helper for attempt/page race harden", () => {
+    expect(typeof ensureOpenLessonSession).toBe("function");
   });
 });

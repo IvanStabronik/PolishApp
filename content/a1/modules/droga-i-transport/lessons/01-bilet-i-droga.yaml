@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-01
 slug: bilet-i-droga
-version: 3
+version: 4
 status: DRAFT
 title_pl: Bilet i droga
 sort_order: 1
@@ -155,6 +155,15 @@ steps:
   - id: step-key-lines
     kind: key_lines
     title_ru: Важные реплики
+  - id: step-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите реплики о дороге и билете вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Przepraszam, gdzie jest przystanek autobusowy?
+      - Poproszę bilet na autobus.
+      - O której odjeżdża dwunastka?
   - id: step-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -168,6 +177,7 @@ steps:
     exercise_ids:
       - ex-dt-01
       - ex-dt-02
+      - ex-dt-listen-01
       - ex-dt-03
       - ex-dt-04
       - ex-dt-05
@@ -252,6 +262,47 @@ exercises:
       reviewer_id: null
       sources:
         - "GR-PREP-DO-NA-01"
+      ai_assisted: true
+    mini_check: false
+
+  - id: ex-dt-listen-01
+    canonical_id: EX-A1-DT-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте кассира билетов. Что он сказал?"
+    audio_text_pl: Za dziesięć minut. Bilet normalny — cztery złote.
+    options:
+      - id: a
+        text: Назвал время отправления и цену билета.
+      - id: b
+        text: Спросил имя и фамилию.
+      - id: c
+        text: Предложил кофе у стойки.
+    correct_option_id: a
+    concept_ids:
+      - GR-TIME-EXPR-01
+      - GR-NUM-MONEY-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-TIME-01
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+      - LEX-A1-MONEY
+    feedback:
+      correct: "Да: za X minut + цена билета."
+      incorrect: "Это время и цена билета, не представление и не кафе."
+      l1:
+        ukr: "Слухайте рамку za… minut + bilet… złote."
+        rus: "Слышите отправление и цену — не имя и не заказ кофе."
+        bel: "Гэта час адпраўлення і цана білета."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "GR-TIME-EXPR-01 / LEX-A1-TRANSPORT"
       ai_assisted: true
     mini_check: false
 
@@ -567,8 +618,9 @@ provenance:
     - "Curriculum links: SCN-A1-DIRECTIONS-01, SCN-A1-TICKET-01, FN-A1-DIRECT-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
-    shorter UK/BEL L1 notes on direction and ticket traps; adult RU chrome retained.
-    DRAFT — pending human review; not JPJO-approved, not learner-published.
-    No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Wave 4 v4 —
+    speaking_practice + assessed listening (TTS interim) for ticket/directions;
+    shorter UK/BEL L1 notes retained. DRAFT — pending human review; not
+    JPJO-approved, not learner-published. No human reviewer assigned
+    (reviewer_id: null).
 visibility: internal_preview_only

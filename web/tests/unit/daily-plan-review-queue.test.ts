@@ -53,6 +53,29 @@ describe("daily plan algorithm", () => {
     expect(plan.items.reduce((s, i) => s + i.minutes, 0)).toBeLessThanOrEqual(
       15,
     );
+    expect(plan.nextGoalKey).toBe("finishLesson");
+    expect(plan.hallKey).toBe("spotkanie");
+  });
+
+  it("keys café unfinished lesson to kawiarnia hall copy", () => {
+    const plan = buildDailyPlan({
+      now: new Date("2026-09-06T10:00:00.000Z"),
+      masteryScope: "preview",
+      modules: [
+        {
+          id: "w-kawiarni",
+          title: "W kawiarni",
+          lessonIds: ["LES-A1-WK-01"],
+          unfinishedLessonId: "LES-A1-WK-01",
+          miniCheckReady: false,
+          miniCheckExerciseIds: [],
+        },
+      ],
+      weakConcepts: [],
+      recentErrors: [],
+    });
+    expect(plan.hallKey).toBe("kawiarnia");
+    expect(plan.nextGoalKey).toBe("finishLesson");
   });
 
   it("never mixes preview and live scopes", () => {

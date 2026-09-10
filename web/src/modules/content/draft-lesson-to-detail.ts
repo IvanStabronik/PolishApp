@@ -6,6 +6,7 @@ import { toLearnerExercise } from "@/lib/content/learner-dto";
 import type { DraftLesson, DraftModule } from "@/lib/content/types";
 import type { LessonDetail } from "@/lib/mocks/content";
 import type { LearnerL1 } from "@/lib/enums";
+import { localizeStepTitle } from "@/lib/content/step-title-locale";
 
 /**
  * Expand YAML lesson steps into structured learner steps + exercises.
@@ -20,13 +21,14 @@ export function draftLessonToDetail(
   const steps: LessonDetail["steps"] = [];
   const note = (notes?: Partial<Record<LearnerL1, string>>) =>
     l1 && notes?.[l1] ? notes[l1] : undefined;
+  const titleOf = (titleRu: string) => localizeStepTitle(titleRu, l1);
 
   for (const step of lesson.steps) {
     if (step.kind === "situation" || step.kind === "result") {
       steps.push({
         id: step.id,
         kind: "theory",
-        title: step.titleRu,
+        title: titleOf(step.titleRu),
         body:
           step.kind === "situation"
             ? (step.bodyRu ?? lesson.situation)
@@ -38,7 +40,7 @@ export function draftLessonToDetail(
       steps.push({
         id: step.id,
         kind: "dialogue",
-        title: step.titleRu,
+        title: titleOf(step.titleRu),
         turns: lesson.dialogue.map((t) => ({
           speaker: t.speaker,
           pl: t.pl,
@@ -52,7 +54,7 @@ export function draftLessonToDetail(
       steps.push({
         id: step.id,
         kind: "key_lines",
-        title: step.titleRu,
+        title: titleOf(step.titleRu),
         lines: lesson.keyLines.map((k) => ({
           pl: k.pl,
           explanation: k.explanation,
@@ -66,7 +68,7 @@ export function draftLessonToDetail(
       steps.push({
         id: step.id,
         kind: "speaking_practice",
-        title: step.titleRu,
+        title: titleOf(step.titleRu),
         ...(step.promptRu ? { prompt: step.promptRu } : {}),
         lines: [...step.linesPl],
       });
@@ -76,7 +78,7 @@ export function draftLessonToDetail(
       steps.push({
         id: step.id,
         kind: "pan_pani",
-        title: step.titleRu,
+        title: titleOf(step.titleRu),
         summary: lesson.pragmatics.panPani,
         form: lesson.pragmatics.form,
         examples: lesson.pragmatics.examples,
@@ -90,7 +92,7 @@ export function draftLessonToDetail(
       steps.push({
         id: step.id,
         kind: "grammar",
-        title: step.titleRu,
+        title: titleOf(step.titleRu),
         summary: lesson.grammar.explanation,
         form: lesson.grammar.form,
         meaning: lesson.grammar.meaning,

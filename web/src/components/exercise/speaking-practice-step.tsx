@@ -126,6 +126,9 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
       <p className="mt-1 text-xs text-[var(--color-graphite-muted)]">
         {t("speakingHonesty")}
       </p>
+      <p className="mt-1 text-xs text-[var(--color-graphite-muted)]">
+        {t("speakingPrivacy")}
+      </p>
 
       <div className="mt-5 border border-[var(--color-line)] px-4 py-4 rounded-[var(--radius-md)]">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
