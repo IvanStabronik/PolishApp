@@ -4,7 +4,10 @@ import { getExercise } from "@/lib/content/load-module";
 import { isDraftLearningEnvEnabled } from "@/lib/demo";
 import { getRequestSession } from "@/modules/auth/session";
 import { assertBetaAccessActive } from "@/modules/auth/beta-access";
-import { mintListeningPlayToken } from "@/modules/learning/listening-play-proof";
+import {
+  LISTENING_TTS_UNLOCK_DOC,
+  mintListeningPlayToken,
+} from "@/modules/learning/listening-play-proof";
 import { assertSameOrigin, getCorrelationId } from "@/modules/ops/runtime";
 import { clientIpFromRequest, consumeRateLimit } from "@/modules/ops/rate-limit";
 
@@ -13,14 +16,13 @@ export const runtime = "nodejs";
 const BodySchema = z.object({
   moduleId: z.string().min(1).max(128),
   exerciseId: z.string().min(1).max(128),
+  reason: z.literal("tts_unavailable"),
 });
 
 /**
- * Listening play stimulus — authenticated, same-origin, rate-limited.
- * Prefer studio `audioUrl` alone (no text). TTS interim may return `textPl`
- * only when there is no URL — client must not render it in the DOM.
- * Lesson DTO never embeds audioTextPl (hasTtsStimulus flag only).
- * Always mints `playToken` — required on listening attempts.
+ * Unlock listening submit when the browser cannot play audio/TTS.
+ * Documented interim path — still requires the minted token on attempt.
+ * See LISTENING_TTS_UNLOCK_DOC.
  */
 export async function POST(req: Request) {
   const correlationId = getCorrelationId(req);
@@ -42,8 +44,8 @@ export async function POST(req: Request) {
   if (denied) return denied;
 
   const rl = await consumeRateLimit({
-    bucketKey: `listening:stimulus:${session.user.id}:${clientIpFromRequest(req)}`,
-    limit: 60,
+    bucketKey: `listening:unlock:${session.user.id}:${clientIpFromRequest(req)}`,
+    limit: 30,
     windowMs: 60_000,
   });
   if (!rl.allowed) {
@@ -96,23 +98,12 @@ export async function POST(req: Request) {
     userId: session.user.id,
     moduleId: parsed.data.moduleId,
     exerciseId: parsed.data.exerciseId,
-    kind: "played",
+    kind: "tts_unavailable",
   });
 
-  const audioUrl = exercise.audioUrl?.trim() || null;
-  if (audioUrl) {
-    // Studio / recorded path — do not also ship TTS text.
-    return NextResponse.json({ audioUrl, playToken });
-  }
-
-  const textPl = exercise.audioTextPl?.trim() ?? "";
-  if (!textPl) {
-    return NextResponse.json(
-      { error: "not_found", correlationId },
-      { status: 404 },
-    );
-  }
-
-  // TTS interim only — unavoidable for browser speechSynthesis.
-  return NextResponse.json({ textPl, playToken });
+  return NextResponse.json({
+    playToken,
+    unlock: "tts_unavailable" as const,
+    note: LISTENING_TTS_UNLOCK_DOC,
+  });
 }

@@ -7,6 +7,33 @@
 
 Allowed status values: `NOT_STARTED` · `IN_REVIEW` · `COMPLETED`.
 
+---
+
+## One-sitting reviewer path (~60–90 min)
+
+1. Open local or live preview with DRAFT access (`BETA_ALLOW_DRAFT=true`, invitee = learner+previewer).
+2. Hall home → complete **L01 → L02 → L03** in order (dialogue, key lines, speaking, practice, mini-check).
+3. On each **listening** item: press play (or note TTS-unavailable unlock), then answer — foils must be same-scenario, not café/ticket giveaways.
+4. Spot-check UK / RU / BEL L1 notes on 2–3 wrong answers (distinct traps, not copies).
+5. Fill the log below (`APPROVE` / `APPROVE_WITH_CHANGES` / `REJECT` / `NEEDS_EVIDENCE`). Leave status `NOT_STARTED` until you actually start → then `IN_REVIEW` → `COMPLETED`.
+6. **Stop.** Do not flip YAML to `PUBLISHED`. Product gates (DEC-016 / live HTTPS) are separate.
+
+---
+
+## Wave 6+ inventory (honest counts — still DRAFT)
+
+| Lesson | Lesson ID | Speaking | Assessed listening | Exercises (approx) |
+| --- | --- | ---: | ---: | ---: |
+| Powitanie i przedstawienie | `LES-A1-PS-01` | 1 | 1 (`EX-A1-PS-LIS-01`) | 11 |
+| Pytania o imię i pochodzenie | `LES-A1-PS-02` | 1 | 1 (`EX-A1-PS-L2-LIS-01`) | 9 |
+| Samodzielne pierwsze spotkanie | `LES-A1-PS-03` | 1 | 1 (`EX-A1-PS-L3-LIS-01`) | 9 |
+
+**Hall totals:** 3 lessons · 3 speaking steps · **3 assessed listening** · ~29 exercises · module version **3** · all **DRAFT** · `reviewer_id: null`.
+
+Listening foils (micro-fix): same-scenario near-minimal (name vs skąd vs A pan? / close vs name). Café «сколько стоит кофе» giveaway removed from L01.
+
+---
+
 ## What the human reviewer must verify
 
 1. **Polish object language** — dialogue and key lines are adult, spoken Polish (pan/pani), not RU/UK calque.
@@ -69,7 +96,9 @@ Paths under repo:
 | Hall dialogue PS-02 | `LES-A1-PS-02` | `NOT_REVIEWED` | — | — | — | — |
 | Hall dialogue PS-03 | `LES-A1-PS-03` | `NOT_REVIEWED` | — | — | — | — |
 | Exercises + L1 notes | `EX-A1-PS-*` | `NOT_REVIEWED` | — | — | — | — |
-| Listening seed | `EX-A1-PS-LIS-01` | `NOT_REVIEWED` | — | — | — | — |
+| Listening L01 | `EX-A1-PS-LIS-01` | `NOT_REVIEWED` | — | — | — | — |
+| Listening L02 | `EX-A1-PS-L2-LIS-01` | `NOT_REVIEWED` | — | — | — | — |
+| Listening L03 | `EX-A1-PS-L3-LIS-01` | `NOT_REVIEWED` | — | — | — | — |
 | Speaking steps | `speaking_practice` | `NOT_REVIEWED` | — | — | — | — |
 
 **Hall publish gate:** closed until human `COMPLETED` + product DEC-016 / HTTPS ops allow release. No fake PUBLISHED.

@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-01
 slug: powitanie-i-przedstawienie
-version: 5
+version: 6
 status: DRAFT
 title_pl: Powitanie i przedstawienie
 sort_order: 1
@@ -265,7 +265,7 @@ exercises:
 
   - id: ex-ps-listen-01
     canonical_id: EX-A1-PS-LIS-01
-    version: 1
+    version: 2
     type: listening
     status: DRAFT
     prompt: "Послушайте реплику соседа. Что он сказал?"
@@ -274,9 +274,9 @@ exercises:
       - id: a
         text: Он назвал себя и спросил ваше имя на pan/pani.
       - id: b
-        text: Он попрощался и ушёл.
+        text: Он только попрощался (Do widzenia).
       - id: c
-        text: Он спросил, сколько стоит кофе.
+        text: Он спросил, откуда вы (Skąd pani jest?).
     correct_option_id: a
     concept_ids:
       - GR-CAS-NOM-01
@@ -289,11 +289,11 @@ exercises:
       - LEX-A1-IDENTITY
     feedback:
       correct: "Да: Nazywam się… A pani? — имя и встречный вопрос."
-      incorrect: "Это представление (Nazywam się…), не прощание и не вопрос «откуда»."
+      incorrect: "Это представление (Nazywam się… A pani?), не прощание и не вопрос «откуда»."
       l1:
-        ukr: "Слухайте цілу рамку Nazywam się… A pani? — не окремі слова."
-        rus: "Слышите Nazywam się + A pani? — не Do widzenia и не заказ."
-        bel: "Гэта прадстаўленне + A pani?, не развітанне."
+        ukr: "Слухайте цілу рамку Nazywam się… A pani? — не Do widzenia і не Skąd…?"
+        rus: "Слышите Nazywam się + A pani? — не Do widzenia и не Skąd pani jest?"
+        bel: "Гэта прадстаўленне + A pani?, не развітанне і не skąd."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -628,7 +628,6 @@ provenance:
     - "Curriculum links: SCN-A1-EVERYDAY-01, FN-A1-GREET-01, FN-A1-IDENTIFY-01"
   ai_assisted: true
   notes: >
-    Wave 3 deepen v5 — adult distractors, listening closed item (TTS interim),
-    productive dual gap, distinct UK/BEL/RU L1 traps. DRAFT — not JPJO-approved,
-    not published. reviewer_id is null (no fake review evidence).
+    Micro-fix: hard same-scenario listening foils (no café giveaway).
+    DRAFT — not JPJO-approved, not published. reviewer_id null.
 visibility: internal_preview_only

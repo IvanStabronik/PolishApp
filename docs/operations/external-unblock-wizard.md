@@ -3,7 +3,7 @@
 Ruthless path to unlock what code cannot: live HTTPS + independent JPJO.  
 **No fake credentials. No fake PUBLISHED.**
 
-Related: `web/.env.production.example`, `.github/workflows/deploy.yml`, [https-deploy-dry-run.md](./https-deploy-dry-run.md), [local-closed-beta.md](./local-closed-beta.md), [pierwsze-spotkanie-jpjo-hall-packet.md](../reviews/pierwsze-spotkanie-jpjo-hall-packet.md).
+Related: `web/.env.production.example`, `.github/workflows/deploy.yml`, [https-deploy-dry-run.md](./https-deploy-dry-run.md), [local-closed-beta.md](./local-closed-beta.md), [FOUNDER-UNBLOCK-NOW.md](./FOUNDER-UNBLOCK-NOW.md), [pierwsze-spotkanie-jpjo-hall-packet.md](../reviews/pierwsze-spotkanie-jpjo-hall-packet.md).
 
 Mark each row **Done** or **Blocked**. Empty secret = Blocked.
 

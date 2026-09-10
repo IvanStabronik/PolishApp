@@ -119,16 +119,26 @@ describe("listening-stimulus POST", () => {
     });
     const res = await POST(makeReq());
     expect(res.status).toBe(200);
-    const body = (await res.json()) as { audioUrl?: string; textPl?: string };
+    const body = (await res.json()) as {
+      audioUrl?: string;
+      textPl?: string;
+      playToken?: string;
+    };
     expect(body.audioUrl).toBe("https://cdn.example.com/listen/studio-01.mp3");
     expect(body.textPl).toBeUndefined();
+    expect(body.playToken).toMatch(/^v1\./);
   });
 
   it("returns textPl for TTS interim when no audioUrl", async () => {
     const res = await POST(makeReq());
     expect(res.status).toBe(200);
-    const body = (await res.json()) as { audioUrl?: string; textPl?: string };
+    const body = (await res.json()) as {
+      audioUrl?: string;
+      textPl?: string;
+      playToken?: string;
+    };
     expect(body.textPl).toBe("Dużą czy małą?");
     expect(body.audioUrl).toBeUndefined();
+    expect(body.playToken).toMatch(/^v1\./);
   });
 });

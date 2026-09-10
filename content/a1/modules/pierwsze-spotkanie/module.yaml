@@ -1,7 +1,7 @@
 kind: module
 canonical_id: MOD-A1-PIERWSZE-SPOTKANIE
 slug: pierwsze-spotkanie
-version: 2
+version: 3
 status: DRAFT
 level: A1
 title_pl: Pierwsze spotkanie
@@ -41,8 +41,7 @@ provenance:
     - "Common-knowledge Polish greeting & self-introduction patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
-    adult RU situation/objective. DRAFT — pending human review; not JPJO-approved,
-    not learner-published. No human reviewer assigned (reviewer_id: null).
+    Micro-fix inventory: listening on L01–L03 + speaking on all three.
+    DRAFT — pending human JPJO; not learner-published. reviewer_id null.
 visibility: internal_preview_only
 internal_preview_only: true

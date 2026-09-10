@@ -35,6 +35,7 @@ import {
 } from "@/modules/ops/runtime";
 import { isLearnerL1 } from "@/lib/content/types";
 import { ensureOpenLessonSession } from "@/modules/learning/lesson-session";
+import { verifyListeningPlayToken } from "@/modules/learning/listening-play-proof";
 
 export const runtime = "nodejs";
 
@@ -44,6 +45,8 @@ const BodySchema = z.object({
   learningSessionId: z.string().uuid().optional(),
   exerciseId: z.string().min(1).max(200),
   answer: z.record(z.string(), z.unknown()),
+  /** Required for listening — HMAC from stimulus or tts_unavailable unlock. */
+  listeningPlayToken: z.string().min(1).max(512).optional(),
   hinted: z.boolean().optional(),
   idempotencyKey: z.string().uuid().optional(),
   // Explicitly ignored — never trusted from client:
@@ -119,6 +122,25 @@ export async function POST(request: Request) {
   const exercise = getExercise(body.moduleId, body.exerciseId, accessCtx);
   if (!exercise) {
     return NextResponse.json({ error: "exercise_not_found" }, { status: 404 });
+  }
+
+  if (exercise.type === "listening") {
+    const playProof = verifyListeningPlayToken({
+      token: body.listeningPlayToken,
+      userId: session.user.id,
+      moduleId: body.moduleId,
+      exerciseId: body.exerciseId,
+    });
+    if (!playProof.ok) {
+      return NextResponse.json(
+        {
+          error: "listening_play_required",
+          reason: playProof.reason,
+          correlationId,
+        },
+        { status: 403 },
+      );
+    }
   }
 
   const profile = await getLearnerProfile(session.user.id);

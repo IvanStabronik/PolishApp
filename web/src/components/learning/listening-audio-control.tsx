@@ -15,15 +15,16 @@ type Props = {
   /** Optional studio URL already known (no text leak). */
   audioUrl?: string | null;
   className?: string;
-  /** Fired once a play attempt successfully starts (play-gate for submit). */
-  onPlayed?: () => void;
-  /** Fired when this browser cannot play (gate must not soft-lock submit). */
-  onUnavailable?: () => void;
+  /** Fired with server playToken once play starts (or unlock). */
+  onPlayed?: (playToken: string) => void;
+  /** Fired when this browser cannot play (server unlock token still required). */
+  onUnavailable?: (playToken: string) => void;
 };
 
 /**
  * Listening play control — fetches TTS text on click, never renders it.
  * Interim: network tab can still see stimulus; DOM / lesson DTO do not.
+ * Always obtains a server playToken (stimulus or tts_unavailable unlock).
  */
 export function ListeningAudioControl({
   moduleId,
@@ -41,11 +42,35 @@ export function ListeningAudioControl({
   useEffect(() => {
     const ok = Boolean(audioUrl) || isPolishTtsSupported();
     setSupported(ok);
-    if (!ok) onUnavailable?.();
+    if (!ok) {
+      void requestUnlock().then((token) => {
+        if (token) onUnavailable?.(token);
+      });
+    }
     return () => stopPolishAudio();
     // Gate unlock once per stimulus identity; avoid re-firing on parent re-renders.
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- onUnavailable is a notify-only callback
-  }, [audioUrl]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- notify-only callbacks
+  }, [audioUrl, moduleId, exerciseId]);
+
+  async function requestUnlock(): Promise<string | null> {
+    try {
+      const res = await fetch("/api/learning/listening-play-unlock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          moduleId,
+          exerciseId,
+          reason: "tts_unavailable",
+        }),
+      });
+      if (!res.ok) return null;
+      const data = (await res.json()) as { playToken?: string };
+      return data.playToken?.trim() || null;
+    } catch {
+      return null;
+    }
+  }
 
   if (!supported) return null;
 
@@ -58,13 +83,30 @@ export function ListeningAudioControl({
     setBusy(true);
     try {
       if (audioUrl) {
+        // Still mint play evidence via stimulus (returns audioUrl + playToken).
+        const res = await fetch("/api/learning/listening-stimulus", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ moduleId, exerciseId }),
+        });
+        if (!res.ok) {
+          setPlaying(false);
+          return;
+        }
+        const data = (await res.json()) as {
+          audioUrl?: string;
+          playToken?: string;
+        };
+        const url = data.audioUrl?.trim() || audioUrl;
+        const token = data.playToken?.trim();
         const ok = speakPolish("", {
-          audioUrl,
+          audioUrl: url,
           onEnd: () => setPlaying(false),
           onError: () => setPlaying(false),
         });
         setPlaying(ok);
-        if (ok) onPlayed?.();
+        if (ok && token) onPlayed?.(token);
         return;
       }
       const res = await fetch("/api/learning/listening-stimulus", {
@@ -80,8 +122,10 @@ export function ListeningAudioControl({
       const data = (await res.json()) as {
         textPl?: string;
         audioUrl?: string;
+        playToken?: string;
       };
       const line = data.textPl?.trim() ?? "";
+      const token = data.playToken?.trim();
       if (!line && !data.audioUrl) return;
       const ok = speakPolish(line || " ", {
         audioUrl: data.audioUrl,
@@ -89,7 +133,7 @@ export function ListeningAudioControl({
         onError: () => setPlaying(false),
       });
       setPlaying(ok);
-      if (ok) onPlayed?.();
+      if (ok && token) onPlayed?.(token);
     } finally {
       setBusy(false);
     }

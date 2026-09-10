@@ -52,6 +52,14 @@ export function ExercisePlayer({
   const [result, setResult] = useState<EvaluationResultDto | null>(null);
   const [persistError, setPersistError] = useState<string | null>(null);
   const [listeningPlayed, setListeningPlayed] = useState(false);
+  const [listeningPlayToken, setListeningPlayToken] = useState<string | null>(
+    null,
+  );
+
+  function markListeningPlayed(playToken: string) {
+    setListeningPlayToken(playToken);
+    setListeningPlayed(true);
+  }
 
   function buildAnswer() {
     switch (exercise.type) {
@@ -73,8 +81,8 @@ export function ExercisePlayer({
       case "single_choice":
         return selected !== null;
       case "listening":
-        // Play-gate: must start audio before submit (blocks skip-audio gaming).
-        return selected !== null && listeningPlayed;
+        // Play-gate: client UX + server playToken required on attempt.
+        return selected !== null && listeningPlayed && Boolean(listeningPlayToken);
       case "multiple_choice":
         return multiSelected.length > 0;
       case "gap_fill":
@@ -101,6 +109,9 @@ export function ExercisePlayer({
         exerciseId: exercise.id,
         answer,
         idempotencyKey,
+        ...(exercise.type === "listening" && listeningPlayToken
+          ? { listeningPlayToken }
+          : {}),
       }),
     });
 
@@ -137,9 +148,11 @@ export function ExercisePlayer({
 
     if (!res.ok || data.persisted === false || data.error) {
       setPersistError(
-        data.reason === "missing_content_version"
-          ? t("persistErrorMissingVersion")
-          : t("persistError"),
+        data.error === "listening_play_required"
+          ? t("listeningPlayBeforeSubmit")
+          : data.reason === "missing_content_version"
+            ? t("persistErrorMissingVersion")
+            : t("persistError"),
       );
     }
   }
@@ -199,8 +212,8 @@ export function ExercisePlayer({
                 exerciseId={exercise.id}
                 audioUrl={exercise.audioUrl}
                 className="min-h-10 px-4 text-base"
-                onPlayed={() => setListeningPlayed(true)}
-                onUnavailable={() => setListeningPlayed(true)}
+                onPlayed={markListeningPlayed}
+                onUnavailable={markListeningPlayed}
               />
             ) : null}
             <span className="text-xs text-[var(--color-graphite-muted)]">

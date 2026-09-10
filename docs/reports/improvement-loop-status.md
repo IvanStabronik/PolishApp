@@ -4,11 +4,23 @@
 **Stance:** Wave 1–6 foundations only — **not** reference quality.  
 **Wave 4 re-audit (honest):** ~**30 / 50** against `reference-quality-bar.md` (prior “34” was soft).  
 **Wave 5 estimate:** ~**32–33 / 50** — café listening + deepen + ops docs + stimulus harden; EXTERNAL wall unchanged.  
-**Wave 6 re-audit (honest):** ~**32.5 / 50** — CODE-DOABLE substance landed; further content/improve waves toward the bar are **diminishing-return waste** until EXTERNAL unlock. Never claim reference quality.
+**Wave 6 re-audit (honest):** ~**32.5 / 50** — CODE-DOABLE substance landed; further content/improve waves toward the bar are **diminishing-return waste** until EXTERNAL unlock. Never claim reference quality.  
+**Post–stop-rule micro-fixes (2026-09-10):** ~**33 / 50** — server play-proof + PS L02/L03 listening + foil fix. Still **EXTERNAL** until live HTTPS or JPJO. Not a marketed wave.
 
 ### STOP RULE
 
 **No more content / improve waves marketed toward reference quality** until [`external-unblock-wizard.md`](../operations/external-unblock-wizard.md) has **at least one real Done row** — either live HTTPS smoke (§4) **or** a JPJO human decision (§3). Optional micro-fixes only (e.g. server play-gate, PS L02/03 listen) — not another scored “wave toward reference.”
+
+### Micro-fixes under stop-rule exception (shipped)
+
+| Fix | Status |
+| --- | --- |
+| Server listening play evidence on attempt (HMAC `listeningPlayToken` from stimulus; unlock via `/api/learning/listening-play-unlock` when TTS unavailable) | **Done** — client gate alone was PARTIAL |
+| PS L02–L03 assessed listening + hard same-scenario foils; L01 café «сколько стоит кофе» giveaway removed | **Done** — still DRAFT |
+| Founder unblock one-pager | **Done** — [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) (probe: no `private-beta` env, no Railway CLI, no `BASE_URL`) |
+| JPJO hall packet inventory refresh | **Done** — status remains `NOT_STARTED` |
+
+Score held ~**33 / 50**. No fake PUBLISHED. No live HTTPS claimed.
 
 ### Local closed-beta smoke (2026-09-10)
 
@@ -73,23 +85,23 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 2. Speaking recognition best-effort — not exam scoring.
 3. All content **DRAFT** — no JPJO PUBLISHED hall (§7). **EXTERNAL**
 4. Competitive week-1 not yet **run** with real invitees (script only).
-5. Live HTTPS not proven without Railway/host secrets. **EXTERNAL**
+5. Live HTTPS not proven without Railway/host secrets. **EXTERNAL** — founder path: [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md).
 6. Admin vs learner craft — freeze held; recheck §9 after player polish.
-7. Play-gate is client-side (honest UX); server does not yet require play evidence on attempt.
+7. ~~Play-gate is client-side only~~ — **mitigated**: server requires `listeningPlayToken` (stimulus or `tts_unavailable` unlock). Still interim vs studio audio.
 
 ## After STOP RULE — human unlock only
 
-Do **not** start Wave 7 as another content deepen. Founder path = [external-unblock-wizard.md](../operations/external-unblock-wizard.md):
+Do **not** start Wave 7 as another content deepen. Founder path = [FOUNDER-UNBLOCK-NOW.md](../operations/FOUNDER-UNBLOCK-NOW.md) + [external-unblock-wizard.md](../operations/external-unblock-wizard.md):
 
 1. **Live HTTPS proof** — Railway/host secrets + `BASE_URL` health/ready (§1–§2, §4).
 2. **JPJO human review** — calendar + first hall APPROVE/REJECT in packet (§3; no AI self-approve).
 3. **Invite path on live** — same closed-beta flags as local (`BETA_ALLOW_DRAFT=true`, `DEMO_*=false`).
 
-Optional micro-fixes (not a reference wave): server-side play evidence; PS L02/03 listen polish; studio audio pipeline; timed bakeoff log.
+Optional further micro-fixes (not a reference wave): studio audio pipeline; timed bakeoff log.
 
 ## External blockers (track)
 
-- Railway / host secrets and service ID (wizard §1).
+- Railway / host secrets and service ID (wizard §1) — **probe 2026-09-10: missing**.
 - Independent JPJO reviewer calendar (wizard §3).
 - Production `INVITE_TOKEN_PEPPER`, DB, auth if not provisioned.
 - Browser TTS / SpeechRecognition variance.

@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-03
 slug: samodzielne-pierwsze-spotkanie
-version: 4
+version: 5
 status: DRAFT
 title_pl: Samodzielne pierwsze spotkanie
 sort_order: 3
@@ -156,6 +156,7 @@ steps:
     exercise_ids:
       - ex-ps-l3-01
       - ex-ps-l3-02
+      - ex-ps-l3-listen-01
       - ex-ps-l3-03
       - ex-ps-l3-04
       - ex-ps-l3-05
@@ -237,6 +238,44 @@ exercises:
       - a
       - b
       - c
+  - id: ex-ps-l3-listen-01
+    canonical_id: EX-A1-PS-L3-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте. Чем закрывают знакомство?"
+    audio_text_pl: Dziękuję za rozmowę. Do widzenia.
+    options:
+      - id: a
+        text: Благодарность за разговор и прощание.
+      - id: b
+        text: Представление (Nazywam się…).
+      - id: c
+        text: Вопрос об имени (Jak ma pan na imię?).
+    correct_option_id: a
+    concept_ids:
+      - PRAG-PAN-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-GREET-01
+      - FN-A1-IDENTIFY-01
+    lex_bundle_ids:
+      - LEX-A1-GREETINGS
+    feedback:
+      correct: "Да: Dziękuję za rozmowę + Do widzenia — спокойное закрытие."
+      incorrect: "Это закрытие разговора, не представление и не вопрос об имени."
+      l1:
+        ukr: "Слухайте Dziękuję za rozmowę / Do widzenia — фінал, не Nazywam się / Jak ma…"
+        rus: "Слышите закрытие — не представление и не вопрос об имени."
+        bel: "Гэта закрыццё знаёмства, не прадстаўленне і не пытанне пра імя."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Dialogue Samodzielne pierwsze spotkanie
+      ai_assisted: true
+    mini_check: false
   - id: ex-ps-l3-03
     canonical_id: EX-A1-PS-L3-GF-03
     version: 1
@@ -467,6 +506,6 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    Wave 3 v4 — speaking_practice; adult distractors (siema / A ty kto?);
+    Micro-fix: assessed listening with same-scenario foils (close vs name vs ask).
     DRAFT — not JPJO-approved. reviewer_id null.
 visibility: internal_preview_only

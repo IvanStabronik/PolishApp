@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-02
 slug: pytania-o-imie-i-pochodzenie
-version: 4
+version: 5
 status: DRAFT
 title_pl: Pytania o imię i pochodzenie
 sort_order: 2
@@ -156,6 +156,7 @@ steps:
     exercise_ids:
       - ex-ps-l2-01
       - ex-ps-l2-02
+      - ex-ps-l2-listen-01
       - ex-ps-l2-03
       - ex-ps-l2-04
       - ex-ps-l2-05
@@ -237,6 +238,45 @@ exercises:
       - a
       - b
       - d
+  - id: ex-ps-l2-listen-01
+    canonical_id: EX-A1-PS-L2-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте. Что спросили?"
+    audio_text_pl: Jak ma pan na imię?
+    options:
+      - id: a
+        text: Спросили имя у мужчины на pan/pani.
+      - id: b
+        text: Спросили, откуда он (Skąd pan jest?).
+      - id: c
+        text: Вернули вопрос коротко (A pan?).
+    correct_option_id: a
+    concept_ids:
+      - PRAG-PAN-01
+      - PHON-CORE-01
+      - GR-CAS-NOM-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: "Да: Jak ma pan na imię? — вопрос об имени."
+      incorrect: "Это вопрос об имени, не skąd и не короткий возврат A pan?"
+      l1:
+        ukr: "Слухайте Jak ma pan na imię? — ім'я, не Skąd… і не A pan?"
+        rus: "Слышите вопрос об имени — не происхождение и не A pan?"
+        bel: "Гэта пытанне пра імя, не skąd і не A pan?"
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Dialogue Pytania o imię i pochodzenie
+      ai_assisted: true
+    mini_check: false
   - id: ex-ps-l2-03
     canonical_id: EX-A1-PS-L2-GF-03
     version: 1
@@ -462,6 +502,6 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    Wave 3 v4 — speaking_practice added; adult distractors (wy macie / age
-    question trap); DRAFT — not JPJO-approved. reviewer_id null.
+    Micro-fix: assessed listening with same-scenario foils (name vs skąd vs A pan?).
+    DRAFT — not JPJO-approved. reviewer_id null.
 visibility: internal_preview_only
