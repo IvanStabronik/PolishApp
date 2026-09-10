@@ -1,13 +1,18 @@
 kind: lesson
 canonical_id: LES-A1-UR-03
 slug: samodzielna-wizyta-w-urzedzie
-version: 1
+version: 2
 status: DRAFT
 title_pl: Samodzielna wizyta w urzędzie
 sort_order: 3
-situation_ru: "Вы самостоятельно проходите короткий визит: называете цель, идентифицируетесь,
-  передаёте комплект и выполняете указание."
-objective_ru: Провести официальный контакт от приветствия до завершения, не теряя pan/pani.
+situation_ru: >
+  Вы сами проходите короткий визит к окошку: поздороваться, сказать зачем
+  пришли, назвать себя, передать комплект документов и уточнить, где ждать.
+  Служащий — взрослый незнакомец; речь спокойная, на pan/pani.
+objective_ru: >
+  Пройти контакт от приветствия до прощания: цель (w sprawie…), имя
+  (Nazywam się…), документы (Oto…) и уточнение (Gdzie mam czekać?) — на
+  pan/pani, не на ty.
 curriculum_links:
   scenarios:
     - SCN-A1-URZAD-01
@@ -47,86 +52,106 @@ dialogue:
       text_pl: Rozumiem. Dziękuję. Do widzenia.
 key_lines:
   - text_pl: Przyszłam w sprawie meldunku.
-    explanation_ru: Цель визита называется сразу после приветствия.
+    explanation_ru: >
+      Цель визита сразу после приветствия: Przyszedłem/Przyszłam w sprawie +
+      Gen. Служащий сразу понимает, зачем вы у окошка.
   - text_pl: Nazywam się…
-    explanation_ru: Идентификация по вопросу служащего.
+    explanation_ru: >
+      Ответ на вопрос служащего, как вас зовут. Целая формула — Nazywam się…
   - text_pl: Oto paszport, wniosek i zdjęcie.
-    explanation_ru: Передача полного перечисленного комплекта.
+    explanation_ru: >
+      Передача полного комплекта: Oto + то, что кладёте на стол. Без догадок.
   - text_pl: Gdzie mam czekać?
-    explanation_ru: Уточнение следующего действия.
+    explanation_ru: >
+      Спокойное уточнение следующего шага, когда сказали Proszę czekać….
 pan_pani:
-  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
-    просьбы и благодарность важнее буквального переноса форм L1.
-  form: w sprawie · nazywam się · oto dokumenty · proszę czekać
+  summary_ru: >
+    К служащему-незнакомцу — pan/pani и 3-е лицо. Цель, имя, документы и
+    уточнение — спокойно; ty и приказы вроде *Daj… у окошка не к месту.
+  form: "w sprawie · nazywam się · oto dokumenty · proszę czekać"
   examples_pl: &a1
     - Przyszłam w sprawie meldunku.
     - Nazywam się Svitlana Koval.
     - Gdzie mam czekać?
   counterexamples_pl:
-    - "*Ty mi powiedz."
-    - "*Daj mi to."
+    - "*Ty mi powiedz." # грубо к служащему
+    - "*Daj mi to." # приказ вместо просьбы
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
-    ukr: Відпрацьовуйте польську рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać»
-      цілісно; не складайте її дослівно з українських слів.
-    rus: Отрабатывайте польскую рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać» целиком,
-      без дословной кальки с русского.
-    bel: Адпрацоўвайце польскую рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać» цалкам;
-      не складайце яе даслоўна з беларускай.
+    ukr: >
+      Не калькуйте «ти» / «дай» як *Ty… / *Daj… до urzędnika. Тримайте
+      w sprawie… · Nazywam się… · Oto… · Gdzie mam…? як цілі рамки.
+    rus: >
+      Не *Ty… / *Daj… к служащему. Отработайте цепочку w sprawie… →
+      Nazywam się… → Oto… → Gdzie mam czekać? целиком.
+    bel: >
+      Не пераносьце «ты» / «дай» як *Ty… / *Daj…. Трымайце польскія рамкі
+      w sprawie… · Nazywam się… · Oto… без калькі з беларускай.
 grammar_points:
   - id: GP-A1-UR-L3
     title_pl: Pełny przebieg wizyty
-    summary_ru: Провести официальный контакт от приветствия до завершения, не теряя pan/pani.
-    form: Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?
-    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
-    use: "Вы самостоятельно проходите короткий визит: называете цель, идентифицируетесь, передаёте
-      комплект и выполняете указание."
+    summary_ru: >
+      Собрать знакомые реплики в один визит: приветствие и цель → имя →
+      документы → уточнение, где ждать — на pan/pani.
+    form: >
+      Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?
+    meaning: >
+      Пройти короткий официальный контакт от начала до спокойного закрытия.
+    use: >
+      Самостоятельный визит к одному okienku: цель, имя, комплект и ожидание.
     examples_pl: *a1
     counterexamples_pl:
-      - "*Ty daj."
-      - "*Ja nie rozumieć."
+      - "*Ty daj." # приказ
+      - "*Ja nie rozumieć." # ломает глагол
     concept_ids:
       - PRAG-PAN-01
       - GR-TV-AGR-01
       - GR-CAS-ACC-01
     l1_notes:
-      ukr: Відпрацьовуйте польську рамку «Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?»
-        цілісно; не складайте її дослівно з українських слів.
-      rus: Отрабатывайте польскую рамку «Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?»
-        целиком, без дословной кальки с русского.
-      bel: Адпрацоўвайце польскую рамку «Przyszedłem/Przyszłam w sprawie… Nazywam się… Oto… Gdzie mam…?»
-        цалкам; не складайце яе даслоўна з беларускай.
+      ukr: >
+        Відпрацьовуйте ланцюжок Przyszłam w sprawie… → Nazywam się… → Oto…
+        → Gdzie mam…? цілісно; не складайте з українських слів дослівно.
+      rus: >
+        Цепочку Przyszłam w sprawie… → Nazywam się… → Oto… → Gdzie mam…?
+        берите целиком, без дословной кальки с русского.
+      bel: >
+        Трымайце ланцужок Przyszłam w sprawie… → Nazywam się… → Oto… →
+        Gdzie mam…? цалкам; без даслоўнай калькі з беларускай.
 l1_notes:
-  ukr: Відпрацьовуйте польську рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać»
-    цілісно; не складайте її дослівно з українських слів.
-  rus: Отрабатывайте польскую рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać» целиком,
-    без дословной кальки с русского.
-  bel: Адпрацоўвайце польскую рамку «w sprawie · nazywam się · oto dokumenty · proszę czekać» цалкам;
-    не складайце яе даслоўна з беларускай.
+  ukr: >
+    Урок про самостійний візит: w sprawie…, Nazywam się…, Oto dokumenty,
+    Gdzie mam czekać? Без ty / *Daj… до служачого.
+  rus: >
+    Полный короткий визит у окошка: цель → имя → комплект → где ждать.
+    Держите pan/pani; без ty к служащему.
+  bel: >
+    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Польскія рамкі візіту
+    цалкам; без «ты» да urzędnika.
 steps:
   - id: step-l3-situation
     kind: situation
     title_ru: Ситуация
-    body_ru: "Вы самостоятельно проходите короткий визит: называете цель, идентифицируетесь, передаёте
-      комплект и выполняете указание."
+    body_ru: >
+      Вы сами проходите короткий визит: цель, имя, передача комплекта и
+      уточнение, где ждать.
   - id: step-l3-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-l3-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-l3-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-UR-L3
   - id: step-l3-practice
     kind: practice
-    title_ru: Самостоятельная практика
+    title_ru: Практика
     exercise_ids:
       - ex-ur-l3-01
       - ex-ur-l3-02
@@ -136,20 +161,20 @@ steps:
       - ex-ur-l3-06
   - id: step-l3-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids: &a2
       - ex-ur-l3-07
       - ex-ur-l3-08
   - id: step-l3-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-ur-l3-01
     canonical_id: EX-A1-UR-L3-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Выберите самостоятельное официальное начало визита.
+    prompt: "Как спокойно начать визит у окошка?"
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -157,8 +182,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
-      correct: Приветствие и цель сразу ориентируют служащего.
-      incorrect: Неформальные варианты не подходят urzędowi.
+      correct: "Приветствие и цель сразу сориентируют служащего."
+      incorrect: "Cześć / Hej — слишком свои для urzędu."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -180,7 +205,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Какие шаги входят в полный визит?
+    prompt: "Какие шаги входят в полный короткий визит?"
     concept_ids:
       - GR-TV-AGR-01
     function_ids:
@@ -188,8 +213,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
-      correct: Первые три шага образуют официальный сценарий.
-      incorrect: Ty неуместно у окошка.
+      correct: "Цель, имя и документы — основа визита у окошка."
+      incorrect: "Переход на ty у окошка не к месту."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -202,7 +227,7 @@ exercises:
       - id: a
         text: Назвать цель
       - id: b
-        text: Ответить на идентификацию
+        text: Назвать себя
       - id: c
         text: Передать документы
       - id: d
@@ -224,8 +249,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
-      correct: Nazywam się… — целая формула.
-      incorrect: Нужно się.
+      correct: "Nazywam się… — целая формула имени."
+      incorrect: "Нужно się в формуле Nazywam się…"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -252,8 +277,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
-      correct: После w sprawie используется форма meldunku.
-      incorrect: Нужна форма meldunku.
+      correct: "После w sprawie — Gen: meldunku."
+      incorrect: "Нужна форма meldunku (Gen)."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -272,7 +297,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: Проведите самостоятельный визит.
+    prompt: "Расставьте шаги самостоятельного визита по порядку."
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -280,8 +305,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
-      correct: Цель → имя → комплект → следующий шаг.
-      incorrect: Сначала объясните цель визита.
+      correct: "Цель → имя → комплект → где ждать."
+      incorrect: "Сначала цель визита, потом имя и документы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -309,7 +334,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Служащий говорит «Proszę czekać na numer». Как уточнить место?
+    prompt: "Служащий говорит «Proszę czekać na numer». Как уточнить место?"
     concept_ids:
       - GR-TV-AGR-01
     function_ids:
@@ -317,8 +342,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
-      correct: Gdzie mam czekać? нейтрально уточняет инструкцию.
-      incorrect: Ty и сломанная реплика не подходят.
+      correct: "Gdzie mam czekać? — спокойное уточнение инструкции."
+      incorrect: "Ty или сломанная реплика у окошка не подходят."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -340,7 +365,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Выберите уместные признаки завершённого визита.
+    prompt: "Что уместно в финале короткого визита?"
     concept_ids:
       - GR-CAS-ACC-01
     function_ids:
@@ -348,8 +373,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
-      correct: Комплект, понимание и прощание закрывают визит.
-      incorrect: Приказ Daj нарушает регистр.
+      correct: "Комплект в порядке, понимание и прощание закрывают визит."
+      incorrect: "Daj… — слишком резко для служащего."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -376,7 +401,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Мини-проверка: восстановите официальный финал."
+    prompt: "Соберите финал визита: результат → инструкция → уточнение → прощание."
     concept_ids:
       - GR-TNS-PRS-01
     function_ids:
@@ -384,8 +409,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
-      correct: Результат → инструкция → уточнение → закрытие.
-      incorrect: Сначала получите результат и инструкцию.
+      correct: "Результат → инструкция → уточнение → закрытие."
+      incorrect: "Сначала результат и инструкция, потом уточнение и прощание."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -416,11 +441,14 @@ mini_check:
     - GR-TV-AGR-01
     - GR-CAS-ACC-01
 result_metadata:
-  title_ru: Результат урока
-  success_ru: Провести официальный контакт от приветствия до завершения, не теряя pan/pani. Результат
-    относится только к DRAFT-превью.
-  retry_ru: "Повторите опорные реплики: w sprawie · nazywam się · oto dokumenty · proszę czekać, затем
-    снова выполните мини-проверку."
+  title_ru: Итог урока
+  success_ru: >
+    Короткая проверка пройдена. Вы можете пройти короткий визит от
+    приветствия до прощания: цель, имя, документы и уточнение, где ждать
+    (DRAFT preview).
+  retry_ru: >
+    Повторите w sprawie… · Nazywam się… · Oto dokumenty · Gdzie mam czekać?,
+    затем пройдите короткую проверку снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-PURPOSE-01
@@ -438,4 +466,8 @@ provenance:
     - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01, FN-A1-DOCS-01,
       FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
   ai_assisted: true
+  notes: >
+    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
+    DRAFT — not JPJO-approved, not published to learners. reviewer_id is null
+    (no fake review evidence).
 visibility: internal_preview_only
