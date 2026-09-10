@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-01
 slug: okienko-i-dokumenty
-version: 2
+version: 3
 status: DRAFT
 title_pl: Okienko i dokumenty
 sort_order: 1
@@ -87,17 +87,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Українське «ви» не копіюйте як wy + 2 ос. мн. до urzędnika. Тримайте
-      pan/pani; «ти» і cześć у першому візиті до окошка — помилка регістру.
-      Przyszłam / Przyszedłem узгоджуйте з власною статтю.
+      «Ви» ≠ wy + 2 ос. мн. до urzędnika → pan/pani. Не cześć / ty
+      у першому візиті; Przyszłam / Przyszedłem — за статтю.
     rus: >
-      «Вы» + 2 л. мн. (*Вы можете…?) к служащему — типичная ошибка.
-      К вам скажут Czy ma pani…? (3 л.). Не *Daj formularz; цель —
-      w sprawie….
+      «Вы» + 2 л. мн. к служащему — ошибка. К вам — Czy ma pani…? (3 л.).
+      Не *Daj formularz; цель — w sprawie….
     bel: >
-      Не пераносьце бел. «вы» як wy да служачага. Афіцыйны рэгістр —
-      pan/pani; Przyszłam/Przyszedłem + w sprawie… без калькі «па справе»
-      з няправільным склонам.
+      «Вы» не робіць wy да служачага. pan/pani; Przyszłam/Przyszedłem
+      + w sprawie… + Gen, не «па справе» з назоўным.
 grammar_points:
   - id: GP-A1-UR-SPRAWA-DOCS
     title_pl: w sprawie… · dokumenty · formularz
@@ -126,24 +123,24 @@ grammar_points:
       - GR-TV-AGR-01
     l1_notes:
       ukr: >
-        Після w sprawie потрібен Gen (*meldunku*), не називний. Не *для PESEL
-        замість w sprawie…. Рід: Przyszłam / Przyszedłem.
+        «Для PESEL / по справі» → w sprawie + Gen (*meldunku*), не називний.
+        Рід: Przyszłam / Przyszedłem.
       rus: >
         «По делу» → w sprawie + Gen, не *w sprawa / *dla PESEL. Род
-        прошедшего согласуйте; документы называйте явно (Oto…).
+        прошедшего — по говорящему; документы — Oto….
       bel: >
-        Не калькуйце «па справе» без Gen. Трымайце Przyszłam/Przyszedłem і
-        Oto… як цэлыя рамкі; без ty да служачага.
+        «Па справе» без Gen → *w sprawa. Трымайце w sprawie… + Gen і Oto…;
+        без ty да служачага.
 l1_notes:
   ukr: >
-    Урок про перше вікно urzędu: Przyszłam/Przyszedłem w sprawie…, Oto
-    dokumenty, prośba o formularz. Не cześć / ty; pan/pani обовʼязковий.
+    Не калькуйте «для PESEL / дай бланк». Тримайте w sprawie…, Oto…,
+    Proszę o formularz; до служачого — pan/pani, не cześć.
   rus: >
-    Цель одной фразой и передача документов — без ty к служащему.
-    Запомните w sprawie + Gen и Oto…; род прошедшего — по говорящему.
+    Фокус: w sprawie + Gen, Oto…, Proszę o formularz — без ty к служащему.
+    Род прошедшего — по говорящему.
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Афіцыйныя рамкі польскія;
-    пісьмо назваў дакументаў без акання; без «ты» да urzędnika.
+    Не спадзявайцеся на «і так зразумеюць». w sprawie… / Oto… /
+    Proszę o formularz — асобныя польскія рамкі; без ty да urzędnika.
 steps:
   - id: step-situation
     kind: situation
@@ -214,9 +211,9 @@ exercises:
       incorrect: "Cześć / приказ — слишком свои или слишком резко для urzędu."
       hint: "Ищите формулу Przyszedłem/Przyszłam w sprawie…"
       l1:
-        ukr: "Не ставте cześć і не калькуйте «для PESEL» замість w sprawie…"
+        ukr: "«Для PESEL / cześć» → w sprawie…; не cześć до окошка."
         rus: "Не *для PESEL / *Cześć у окошка; нужна цель w sprawie…"
-        bel: "Трымайце w sprawie…, не cześć да служачага."
+        bel: "«Па справе / cześć» → w sprawie…; без cześć да служачага."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -394,9 +391,9 @@ exercises:
       correct: "w sprawie… — обычная рамка цели визита."
       incorrect: "Нужна форма sprawie в рамке w sprawie…"
       l1:
-        ukr: "Не *w sprawa / *для meldunku замість w sprawie…"
+        ukr: "«Для meldunku» → w sprawie…; форма sprawie, не *w sprawa."
         rus: "Не пишите *w sprawa вместо sprawie."
-        bel: "Трымайце sprawie, не кальку «справе» без прыназоўніка."
+        bel: "Патрэбна sprawie ў рамцы w sprawie…, не назоўны."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -578,7 +575,8 @@ provenance:
     - "Curriculum links: SCN-A1-URZAD-01, FN-A1-PURPOSE-01, FN-A1-DOCS-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
-    DRAFT — not JPJO-approved, not published to learners. reviewer_id is null
-    (no fake review evidence).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on urzęd register and w sprawie traps; adult RU chrome retained.
+    DRAFT — pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only

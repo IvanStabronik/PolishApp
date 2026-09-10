@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-02
 slug: brakujacy-dokument-i-formularz
-version: 2
+version: 3
 status: DRAFT
 title_pl: Brakujący dokument i formularz
 sort_order: 2
@@ -80,14 +80,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Не калькуйте «дай мені» як *Daj mi… до urzędniczki. Тримайте Nie mam…
-      / Brakuje… / Proszę o…; після brakuje — Gen (wniosku, zdjęcia).
+      «Дай мені» → не *Daj mi…. Nie mam… / Brakuje… + Gen; просьба —
+      Proszę o… / Czy mogę prosić o….
     rus: >
       Не *Daj mi formularz и не ty к служащему. Brakuje + Gen; просьба —
       Proszę o… или Czy mogę prosić o….
     bel: >
-      Не пераносьце «дай мне» як *Daj mi…. Трымайце польскія рамкі з Gen
-      пасля brakuje / nie mam; без ty да служачай.
+      «Дай мне» не робіць *Daj mi…. Gen пасля nie mam / brakuje;
+      просьба — Proszę o…, не прыказ.
 grammar_points:
   - id: GP-A1-UR-L2
     title_pl: Brak i uzupełnienie dokumentów
@@ -111,24 +111,24 @@ grammar_points:
       - GR-CAS-ACC-01
     l1_notes:
       ukr: >
-        Після nie mam / brakuje — Gen (*wniosku*), не називний. Не *Daj…
-        замість Proszę o…. Уточнення: Czego jeszcze potrzebuję?
+        *Nie mam wniosek → Nie mam wniosku (Gen). Не *Daj…; уточнення —
+        Czego jeszcze potrzebuję?
       rus: >
         «У меня нет» → Nie mam + Gen, не *Nie mam wniosek. Brakuje тоже
         с Gen. Просьба — Proszę o…, не приказ.
       bel: >
-        Не калькуйце назоўны пасля nie mam / brakuje. Трымайце Gen і
-        Proszę o… як цэлыя рамкі; без ty да служачай.
+        Назоўны пасля nie mam / brakuje — пастка. Gen + Proszę o…;
+        без ty да служачай.
 l1_notes:
   ukr: >
-    Урок про прогалину в комплекті: Nie mam…, Brakuje…, уточнення Czego
-    jeszcze potrzebuję? і просьба про formularz. Без *Daj… / ty.
+    Не калькуйте «дай / у мене немає + називний». Тримайте Nie mam… /
+    Brakuje… + Gen, Czego jeszcze…?, Proszę o formularz.
   rus: >
-    Нехватка документа — обычная ситуация у окошка. Запомните Gen после
-    nie mam / brakuje и спокойную просьбу о бланке.
+    Фокус: Gen после nie mam / brakuje и спокойная просьба о бланке —
+    без ty к служащему.
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Gen пасля nie mam /
-    brakuje; просьба — Proszę o…, не «дай».
+    Не спадзявайцеся на «і так зразумеюць». Nie mam… / Brakuje… + Gen;
+    просьба — Proszę o…, не «дай».
 steps:
   - id: step-l2-situation
     kind: situation
@@ -467,7 +467,8 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
-    DRAFT — not JPJO-approved, not published to learners. reviewer_id is null
-    (no fake review evidence).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on brakuje / nie mam Gen traps; adult RU chrome retained.
+    DRAFT — pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only

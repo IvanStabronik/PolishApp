@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-03
 slug: samodzielna-wizyta-w-urzedzie
-version: 2
+version: 3
 status: DRAFT
 title_pl: Samodzielna wizyta w urzędzie
 sort_order: 3
@@ -80,14 +80,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Не калькуйте «ти» / «дай» як *Ty… / *Daj… до urzędnika. Тримайте
-      w sprawie… · Nazywam się… · Oto… · Gdzie mam…? як цілі рамки.
+      «Ти / дай» → не *Ty… / *Daj… до urzędnika. Ланцюжок: w sprawie… ·
+      Nazywam się… · Oto… · Gdzie mam…?
     rus: >
       Не *Ty… / *Daj… к служащему. Отработайте цепочку w sprawie… →
       Nazywam się… → Oto… → Gdzie mam czekać? целиком.
     bel: >
-      Не пераносьце «ты» / «дай» як *Ty… / *Daj…. Трымайце польскія рамкі
-      w sprawie… · Nazywam się… · Oto… без калькі з беларускай.
+      «Ты / дай» не робіць *Ty… / *Daj…. w sprawie… · Nazywam się… ·
+      Oto… — асобныя польскія рамкі.
 grammar_points:
   - id: GP-A1-UR-L3
     title_pl: Pełny przebieg wizyty
@@ -110,24 +110,24 @@ grammar_points:
       - GR-CAS-ACC-01
     l1_notes:
       ukr: >
-        Відпрацьовуйте ланцюжок Przyszłam w sprawie… → Nazywam się… → Oto…
-        → Gdzie mam…? цілісно; не складайте з українських слів дослівно.
+        Не збирайте візит з укр. слів дослівно. Ланцюжок польськими формулами:
+        w sprawie… → Nazywam się… → Oto… → Gdzie mam…?
       rus: >
         Цепочку Przyszłam w sprawie… → Nazywam się… → Oto… → Gdzie mam…?
         берите целиком, без дословной кальки с русского.
       bel: >
-        Трымайце ланцужок Przyszłam w sprawie… → Nazywam się… → Oto… →
-        Gdzie mam…? цалкам; без даслоўнай калькі з беларускай.
+        «Па справе / як мяне клічуць» → w sprawie… / Nazywam się…. Ланцужок
+        цалкам; без ty да служачага.
 l1_notes:
   ukr: >
-    Урок про самостійний візит: w sprawie…, Nazywam się…, Oto dokumenty,
-    Gdzie mam czekać? Без ty / *Daj… до служачого.
+    Не калькуйте «ти / дай / па справе». Тримайте w sprawie…, Nazywam się…,
+    Oto…, Gdzie mam czekać?; без ty до служачого.
   rus: >
-    Полный короткий визит у окошка: цель → имя → комплект → где ждать.
-    Держите pan/pani; без ty к служащему.
+    Фокус: цель → имя → комплект → где ждать, без ty к служащему.
+    Держите pan/pani у окошка.
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Польскія рамкі візіту
-    цалкам; без «ты» да urzędnika.
+    Не спадзявайцеся на «і так зразумеюць». w sprawie… / Nazywam się… /
+    Oto… / Gdzie mam…? — асобныя польскія рамкі; без ty да urzędnika.
 steps:
   - id: step-l3-situation
     kind: situation
@@ -467,7 +467,8 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
-    DRAFT — not JPJO-approved, not published to learners. reviewer_id is null
-    (no fake review evidence).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on full-visit chain traps; adult RU chrome retained.
+    DRAFT — pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
