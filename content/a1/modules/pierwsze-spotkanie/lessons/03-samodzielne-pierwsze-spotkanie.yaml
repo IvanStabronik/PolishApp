@@ -1,13 +1,16 @@
 kind: lesson
 canonical_id: LES-A1-PS-03
 slug: samodzielne-pierwsze-spotkanie
-version: 1
+version: 2
 status: DRAFT
 title_pl: Samodzielne pierwsze spotkanie
 sort_order: 3
-situation_ru: Вы самостоятельно начинаете и завершаете короткое знакомство с новым соседом, выбирая
-  уместный регистр.
-objective_ru: "Без подсказки провести знакомство: приветствие, имя, происхождение, встречный вопрос и прощание."
+situation_ru: >
+  Новый сосед. Вы сами начинаете короткое знакомство и сами его закрываете —
+  без подсказки, на pan/pani.
+objective_ru: >
+  Сами провести знакомство: Dzień dobry, имя, откуда вы, встречный вопрос
+  и Do widzenia.
 curriculum_links:
   scenarios:
     - SCN-A1-EVERYDAY-01
@@ -39,16 +42,21 @@ dialogue:
       text_pl: Do widzenia.
 key_lines:
   - text_pl: Dzień dobry. Nazywam się…
-    explanation_ru: Самостоятельное открытие и представление одной связкой.
+    explanation_ru: >
+      Сами открываете разговор: приветствие и имя одной связкой.
   - text_pl: Jestem z… A pan?
-    explanation_ru: Происхождение плюс вежливый встречный вопрос.
+    explanation_ru: >
+      Откуда вы — и короткий встречный вопрос (A pan? / A pani?).
   - text_pl: Miło pana / panią poznać.
-    explanation_ru: Форма зависит от адресата.
+    explanation_ru: >
+      Вежливое «приятно познакомиться»: pana к мужчине, panią к женщине.
   - text_pl: Dziękuję za rozmowę.
-    explanation_ru: Нейтральное завершение короткого знакомства.
+    explanation_ru: >
+      Спокойно закрыть короткое знакомство перед Do widzenia.
 pan_pani:
-  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
-    просьбы и благодарность важнее буквального переноса форм L1.
+  summary_ru: >
+    С незнакомым взрослым — pan/pani и 3 лицо. Не переходите на ty,
+    пока человек сам не предложит.
   form: Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia
   examples_pl: &a1
     - Nazywam się Nina Kowal.
@@ -60,21 +68,29 @@ pan_pani:
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
-    ukr: Відпрацьовуйте польську рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» цілісно;
-      не складайте її дослівно з українських слів.
-    rus: Отрабатывайте польскую рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» целиком,
-      без дословной кальки с русского.
-    bel: Адпрацоўвайце польскую рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» цалкам;
-      не складайце яе даслоўна з беларускай.
+    ukr: >
+      Тримайте рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia»
+      цілою; не збирайте її дослівно з українських слів і не переходьте на ty
+      з незнайомцем.
+    rus: >
+      Держите рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia»
+      целиком; не собирайте её дословно с русского и не переходите на ty
+      с незнакомцем.
+    bel: >
+      Трымайце рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia»
+      цэлай; не збірайце яе даслоўна з беларускай і не пераходзьце на ty
+      з незнаёмцам.
 grammar_points:
   - id: GP-A1-PS-L3
     title_pl: Spójna autoprezentacja
-    summary_ru: "Без подсказки провести знакомство: приветствие, имя, происхождение, встречный вопрос и
-      прощание."
+    summary_ru: >
+      Связать знакомые реплики в одно короткое знакомство — от приветствия
+      до прощания.
     form: Dzień dobry. Nazywam się + imię. Jestem z + miejsce. A pan/pani?
-    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
-    use: Вы самостоятельно начинаете и завершаете короткое знакомство с новым соседом, выбирая уместный
-      регистр.
+    meaning: >
+      Собеседник понимает, кто вы, откуда вы, и разговор можно спокойно закрыть.
+    use: >
+      Новый сосед: сами начать, обменяться и попрощаться на pan/pani.
     examples_pl: *a1
     counterexamples_pl:
       - "*Ty daj."
@@ -84,42 +100,49 @@ grammar_points:
       - GR-TNS-PRS-01
       - PRAG-PAN-01
     l1_notes:
-      ukr: Відпрацьовуйте польську рамку «Dzień dobry. Nazywam się + imię. Jestem z + miejsce. A
-        pan/pani?» цілісно; не складайте її дослівно з українських слів.
-      rus: Отрабатывайте польскую рамку «Dzień dobry. Nazywam się + imię. Jestem z + miejsce. A pan/pani?»
-        целиком, без дословной кальки с русского.
-      bel: Адпрацоўвайце польскую рамку «Dzień dobry. Nazywam się + imię. Jestem z + miejsce. A pan/pani?»
-        цалкам; не складайце яе даслоўна з беларускай.
+      ukr: >
+        Рамка Dzień dobry → Nazywam się… → Jestem z… → A pan/pani? — ціла
+        дія. Не збирайте її з українського «мене звати / я з…» дослівно.
+      rus: >
+        Рамка Dzień dobry → Nazywam się… → Jestem z… → A pan/pani? — целое
+        действие. Не собирайте её с русского «меня зовут / я из…» дословно.
+      bel: >
+        Рамка Dzień dobry → Nazywam się… → Jestem z… → A pan/pani? — цэлае
+        дзеянне. Не збірайце яе з бел. «мяне клічуць / я з…» даслоўна.
 l1_notes:
-  ukr: Відпрацьовуйте польську рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» цілісно;
-    не складайте її дослівно з українських слів.
-  rus: Отрабатывайте польскую рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» целиком,
-    без дословной кальки с русского.
-  bel: Адпрацоўвайце польскую рамку «Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia» цалкам;
-    не складайце яе даслоўна з беларускай.
+  ukr: >
+    Самі проведіть знайомство цілими формулами. З незнайомцем — pan/pani,
+    не ty; A pan? / A pani? повертає питання без «ти».
+  rus: >
+    Сами проведите знакомство целыми формулами. С незнакомцем — pan/pani,
+    не ty; A pan? / A pani? возвращает вопрос без «ты».
+  bel: >
+    Самі правядзіце знаёмства цэлымі формуламі. З незнаёмцам — pan/pani,
+    не ty; A pan? / A pani? вяртае пытанне без «ты».
 steps:
   - id: step-l3-situation
     kind: situation
     title_ru: Ситуация
-    body_ru: Вы самостоятельно начинаете и завершаете короткое знакомство с новым соседом, выбирая
-      уместный регистр.
+    body_ru: >
+      Сами начать короткое знакомство с соседом и сами его закрыть —
+      на pan/pani.
   - id: step-l3-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-l3-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-l3-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-PS-L3
   - id: step-l3-practice
     kind: practice
-    title_ru: Самостоятельная практика
+    title_ru: Практика
     exercise_ids:
       - ex-ps-l3-01
       - ex-ps-l3-02
@@ -129,20 +152,20 @@ steps:
       - ex-ps-l3-06
   - id: step-l3-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids: &a2
       - ex-ps-l3-07
       - ex-ps-l3-08
   - id: step-l3-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-ps-l3-01
     canonical_id: EX-A1-PS-L3-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Выберите лучшее самостоятельное начало знакомства с соседкой.
+    prompt: "Как лучше начать знакомство с соседкой — самим, на pan/pani?"
     concept_ids:
       - GR-CAS-NOM-01
     function_ids:
@@ -150,8 +173,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: Приветствие и полная рамка имени открывают контакт.
-      incorrect: Остальные варианты фамильярны или грамматически неполны.
+      correct: "Dzień dobry + Nazywam się… — спокойное открытие."
+      incorrect: "Hej / ty слишком свои; Ja Nina… — неполная рамка."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -173,7 +196,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Что входит в завершённое первое знакомство?
+    prompt: "Что обычно входит в короткое первое знакомство?"
     concept_ids:
       - GR-TNS-PRS-01
     function_ids:
@@ -181,8 +204,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: Первые три шага создают законченный нейтральный контакт.
-      incorrect: Переход на ty нельзя требовать у незнакомца.
+      correct: "Приветствие, имя и происхождение или встречный вопрос."
+      incorrect: "Требовать переход на ty у незнакомца нельзя."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -209,7 +232,7 @@ exercises:
     version: 1
     type: gap_fill
     status: DRAFT
-    prompt: "Дополните: Miło {{gap1}} poznać. (мужчину)"
+    prompt: "Вставьте пропущенное: Miło {{gap1}} poznać. (мужчину)"
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -217,8 +240,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: Miło pana poznać — обращение к мужчине.
-      incorrect: Нужна форма pana.
+      correct: "Miło pana poznać — к мужчине."
+      incorrect: "Нужна форма pana."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -237,7 +260,7 @@ exercises:
     version: 1
     type: gap_fill
     status: DRAFT
-    prompt: "Дополните: Jestem {{gap1}} Białorusi."
+    prompt: "Вставьте пропущенное: Jestem {{gap1}} Białorusi."
     concept_ids:
       - PHON-CORE-01
     function_ids:
@@ -245,8 +268,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: Jestem z + форма места.
-      incorrect: Нужен предлог z.
+      correct: "Jestem z… — предлог z + место."
+      incorrect: "Нужен предлог z."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -265,7 +288,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: Постройте полный контакт.
+    prompt: "Расставьте реплики в порядке короткого знакомства."
     concept_ids:
       - GR-CAS-NOM-01
     function_ids:
@@ -273,8 +296,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: Приветствие → идентификация → обмен → закрытие.
-      incorrect: Не начинайте с прощания или встречного вопроса.
+      correct: "Приветствие → имя → откуда / вопрос → закрытие."
+      incorrect: "Не начинайте с прощания и не ставьте вопрос раньше имени."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -302,7 +325,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Незнакомец говорит «Miło panią poznać». Как ответить?
+    prompt: "Незнакомец говорит «Miło panią poznać». Как ответить?"
     concept_ids:
       - GR-TNS-PRS-01
     function_ids:
@@ -310,8 +333,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: Wzajemnie сохраняет нейтрально-вежливый регистр.
-      incorrect: Ty też меняет регистр, Cześć не отвечает на формулу.
+      correct: "Wzajemnie — спокойный ответ в том же регистре."
+      incorrect: "Ty też меняет регистр; Cześć не отвечает на формулу."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -333,7 +356,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Выберите все грамматически целые рамки.
+    prompt: "Отметьте все целые уместные рамки."
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -341,8 +364,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: Три рамки полны и уместны.
-      incorrect: Nazywam требует się.
+      correct: "Nazywam się…, Jestem z… и Skąd pani jest? — полные."
+      incorrect: "Nazywam без się — так не говорят."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -369,7 +392,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Мини-проверка: восстановите финал встречи."
+    prompt: "Соберите финал встречи по порядку."
     concept_ids:
       - PHON-CORE-01
     function_ids:
@@ -377,8 +400,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: Взаимная формула → благодарность → прощание.
-      incorrect: Закрывайте контакт после взаимного ответа.
+      correct: "Miło… → Wzajemnie → благодарность → Do widzenia."
+      incorrect: "Сначала взаимный ответ, потом закрытие."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -409,11 +432,14 @@ mini_check:
     - GR-TNS-PRS-01
     - PRAG-PAN-01
 result_metadata:
-  title_ru: Результат урока
-  success_ru: "Без подсказки провести знакомство: приветствие, имя, происхождение, встречный вопрос и
-    прощание. Результат относится только к DRAFT-превью."
-  retry_ru: "Повторите опорные реплики: Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia, затем
-    снова выполните мини-проверку."
+  title_ru: Итог
+  success_ru: >
+    Короткая проверка пройдена. Вы можете сами провести короткое знакомство:
+    приветствие, имя, происхождение, встречный вопрос и прощание
+    (черновик, внутренний просмотр).
+  retry_ru: >
+    Ещё раз Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia —
+    потом короткая проверка снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-IDENTIFY-01
@@ -430,4 +456,8 @@ provenance:
     - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01,
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
+  notes: >
+    AI-assisted system draft. Language pass v2 — adult RU instructional chrome
+    (prompts, feedback, steps, result, l1_notes). DRAFT — not JPJO-approved, not
+    published to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only
