@@ -1,12 +1,17 @@
 kind: lesson
 canonical_id: LES-A1-DT-03
 slug: samodzielna-podroz
-version: 1
+version: 2
 status: DRAFT
 title_pl: Samodzielna podróż
 sort_order: 3
-situation_ru: Вы самостоятельно находите остановку, проверяете линию, покупаете билет и уточняете выход.
-objective_ru: Соединить навигацию и билет в один самостоятельный сценарий без пересадок.
+situation_ru: >
+  Вы в городе в Польше: сами находите остановку трамвая, проверяете линию,
+  покупаете билет и уточняете, где выйти. Прохожий и продавец — взрослые
+  незнакомцы. Одна простая поездка, без пересадок; речь спокойная.
+objective_ru: >
+  Собрать маршрут целиком: где przystanek, едет ли tramwaj do цели,
+  Poproszę bilet na… и na którym przystanku wysiąść — на pan/pani.
 curriculum_links:
   scenarios:
     - SCN-A1-DIRECTIONS-01
@@ -47,84 +52,113 @@ dialogue:
       text_pl: Na piątym.
 key_lines:
   - text_pl: Gdzie jest przystanek tramwajowy?
-    explanation_ru: Самостоятельный старт навигации.
+    explanation_ru: >
+      Обычный вопрос про остановку трамвая. К незнакомцу на улице начинайте
+      с Przepraszam — так контакт спокойный.
   - text_pl: Czy tramwaj numer trzy jedzie do centrum?
-    explanation_ru: Проверка выбранной линии.
+    explanation_ru: >
+      Проверка линии до цели: Czy + транспорт + jedzie do + Gen.
+      Слушайте короткий ответ Tak / Nie.
   - text_pl: Poproszę bilet na tramwaj.
-    explanation_ru: Покупка подходящего билета.
+    explanation_ru: >
+      Заказ билета: Poproszę bilet + na + Acc. Не *Daj bilet к продавцу-незнакомцу.
   - text_pl: Na którym przystanku mam wysiąść?
-    explanation_ru: Контроль конечного шага поездки.
+    explanation_ru: >
+      Спрашиваете, где выйти. В ответе часто порядковый номер
+      (Na piątym) — держите его.
 pan_pani:
-  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
-    просьбы и благодарность важнее буквального переноса форм L1.
-  form: gdzie · do centrum · bilet na autobus · wysiąść
+  summary_ru: >
+    И к прохожему, и к продавцу билетов — pan/pani и спокойный тон:
+    Przepraszam…, Poproszę bilet…, Dziękuję. Форма ty и резкое *Ej…
+    / *Ty mi powiedz — не к незнакомцу на улице или у кассы.
+  form: "Gdzie jest…? · Czy … jedzie do…? · Poproszę bilet na… · Na którym przystanku…?"
   examples_pl: &a1
     - Gdzie jest przystanek?
     - Czy tramwaj jedzie do centrum?
     - Poproszę bilet na tramwaj.
   counterexamples_pl:
-    - "*Ty mi powiedz."
-    - "*Daj mi to."
+    - "*Ty mi powiedz." # слишком свои
+    - "*Daj mi to." # грубо к незнакомцу
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
-    ukr: Відпрацьовуйте польську рамку «gdzie · do centrum · bilet na autobus · wysiąść» цілісно; не
-      складайте її дослівно з українських слів.
-    rus: Отрабатывайте польскую рамку «gdzie · do centrum · bilet na autobus · wysiąść» целиком, без
-      дословной кальки с русского.
-    bel: Адпрацоўвайце польскую рамку «gdzie · do centrum · bilet na autobus · wysiąść» цалкам; не
-      складайце яе даслоўна з беларускай.
+    ukr: >
+      Починайте з Przepraszam. Ланцюжок «зупинка → лінія → квиток → вихід»
+      тримайте польськими формулами — не збирайте «де / на центр / дай квиток»
+      дослівно з української.
+    rus: >
+      Не говорите ty прохожему или продавцу. Учите четыре шага целиком:
+      gdzie… / czy … do… / bilet na… / na którym… — без кальки «скажи мне».
+    bel: >
+      Не калькуйце «скажы мне» ў *Ty mi powiedz. Трымайце Przepraszam
+      і польскія крокі: прыпынак, лінія, квіток, выход — асобна ад L1.
 grammar_points:
   - id: GP-A1-DT-L3
     title_pl: Od drogi do przejazdu
-    summary_ru: Соединить навигацию и билет в один самостоятельный сценарий без пересадок.
-    form: Gdzie jest…? Czy X jedzie do…? Poproszę bilet na… Na którym…?
-    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
-    use: Вы самостоятельно находите остановку, проверяете линию, покупаете билет и уточняете выход.
+    summary_ru: >
+      Четыре коротких куска одной поездки: остановка, проверка линии,
+      билет и выход — без пересадок.
+    form: >
+      Gdzie jest…? Czy X jedzie do + Gen? Poproszę bilet na + Acc.
+      Na którym przystanku mam wysiąść?
+    meaning: >
+      Собрать простую поездку: найти остановку, подтвердить линию,
+      купить билет и узнать, где выйти.
+    use: >
+      На улице и у продавца — один маршрут без сложной пересадки.
     examples_pl: *a1
     counterexamples_pl:
-      - "*Ty daj."
-      - "*Ja nie rozumieć."
+      - "*Ty daj." # грубо / неполный ответ
+      - "*Ja nie rozumieć." # ломаная рамка
     concept_ids:
       - GR-MOT-BASE-01
       - GR-PREP-DO-NA-01
       - GR-NUM-MONEY-01
     l1_notes:
-      ukr: Відпрацьовуйте польську рамку «Gdzie jest…? Czy X jedzie do…? Poproszę bilet na… Na którym…?»
-        цілісно; не складайте її дослівно з українських слів.
-      rus: Отрабатывайте польскую рамку «Gdzie jest…? Czy X jedzie do…? Poproszę bilet na… Na którym…?»
-        целиком, без дословной кальки с русского.
-      bel: Адпрацоўвайце польскую рамку «Gdzie jest…? Czy X jedzie do…? Poproszę bilet na… Na którym…?»
-        цалкам; не складайце яе даслоўна з беларускай.
+      ukr: >
+        ERR-тип do/na: *їхати на центр vs jedzie do centrum; квиток —
+        bilet na tramwaj, не *bilet do tramwaj.
+      rus: >
+        «На центр» и «билет на трамвай» путают предлоги. Учите jedzie do + Gen
+        и bilet na + Acc целиком.
+      bel: >
+        Не пераносьце «на цэнтр / квіток да трамвая» у польскую рамку.
+        Раздзяляйце do / na па дыялогу.
 l1_notes:
-  ukr: Відпрацьовуйте польську рамку «gdzie · do centrum · bilet na autobus · wysiąść» цілісно; не
-    складайте її дослівно з українських слів.
-  rus: Отрабатывайте польскую рамку «gdzie · do centrum · bilet na autobus · wysiąść» целиком, без
-    дословной кальки с русского.
-  bel: Адпрацоўвайце польскую рамку «gdzie · do centrum · bilet na autobus · wysiąść» цалкам; не
-    складайце яе даслоўна з беларускай.
+  ukr: >
+    Урок про самостійну поїздку: Gdzie jest…, Czy … jedzie do…,
+    Poproszę bilet na…, Na którym przystanku…? Починайте з Przepraszam;
+    не калькуйте «на центр / дай квиток».
+  rus: >
+    Фокус: остановка → линия → билет → выход, без ty к незнакомцу.
+    Держите do для цели и na для билета; выход — формулой Na którym…?
+  bel: >
+    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Прыпынак, лінія,
+    квіток і выход — польскія рамкі; лічэбнікі прыпынкаў без акання.
 steps:
   - id: step-l3-situation
     kind: situation
     title_ru: Ситуация
-    body_ru: Вы самостоятельно находите остановку, проверяете линию, покупаете билет и уточняете выход.
+    body_ru: >
+      Найти остановку, проверить линию, купить билет и уточнить выход —
+      одна простая поездка без пересадок.
   - id: step-l3-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-l3-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-l3-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-DT-L3
   - id: step-l3-practice
     kind: practice
-    title_ru: Самостоятельная практика
+    title_ru: Практика
     exercise_ids:
       - ex-dt-l3-01
       - ex-dt-l3-02
@@ -134,20 +168,20 @@ steps:
       - ex-dt-l3-06
   - id: step-l3-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids: &a2
       - ex-dt-l3-07
       - ex-dt-l3-08
   - id: step-l3-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-dt-l3-01
     canonical_id: EX-A1-DT-L3-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Выберите правильный первый вопрос о местоположении.
+    prompt: "На улице. Как вежливо спросить, где остановка?"
     concept_ids:
       - GR-MOT-BASE-01
     function_ids:
@@ -155,8 +189,12 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: Przepraszam + gdzie jest… открывает вежливый контакт.
-      incorrect: Остальные варианты грубы или сломаны.
+      correct: "Przepraszam + gdzie jest… — спокойный старт к незнакомцу."
+      incorrect: "Ej / ty — слишком грубо или слишком свои к прохожему."
+      l1:
+        ukr: "Починайте з Przepraszam, не «ей»."
+        rus: "Не используйте ty к прохожему."
+        bel: "Трымайце Przepraszam, не грубае зварот."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -178,7 +216,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Какие шаги входят в самостоятельную поездку?
+    prompt: "Какие шаги нужны для простой самостоятельной поездки?"
     concept_ids:
       - GR-PREP-DO-NA-01
     function_ids:
@@ -186,8 +224,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Первые три шага необходимы до поездки.
-      incorrect: Остановку выхода нужно уточнить.
+      correct: "Остановка, линия и билет — три нужных куска до поездки."
+      incorrect: "Игнорировать выход — так легко проехать мимо."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -222,8 +260,12 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: Jedzie do + цель.
-      incorrect: Нужен предлог do.
+      correct: "Jedzie do + Gen — обычная рамка направления."
+      incorrect: "Нужен предлог do."
+      l1:
+        ukr: "Не *na centrum у цій рамці."
+        rus: "Не *na centrum вместо do centrum."
+        bel: "Трымайце do, не кальку «на цэнтр»."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -250,8 +292,12 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Bilet na + транспорт.
-      incorrect: Нужен предлог na.
+      correct: "Bilet na + Acc — формула билета."
+      incorrect: "Нужен предлог na в формуле билета."
+      l1:
+        ukr: "Bilet na, не *do tramwaj."
+        rus: "Держите na, не do в формуле билета."
+        bel: "Трымайце na, не do ў bilet na…"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -270,7 +316,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: Проведите маршрут и покупку.
+    prompt: "Расставьте шаги: сначала остановка, потом линия и билет."
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -278,8 +324,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: Локация → линия → билет → выход.
-      incorrect: Сначала найдите остановку и линию.
+      correct: "Остановка → линия → билет → выход."
+      incorrect: "Сначала найдите остановку и проверьте линию, потом билет."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -307,7 +353,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Получили указание «prosto i w lewo». Как закрыть контакт?
+    prompt: "Прохожий сказал «prosto i w lewo». Как спокойно закрыть контакт?"
     concept_ids:
       - GR-MOT-BASE-01
     function_ids:
@@ -315,8 +361,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Dziękuję уместно завершает короткую помощь.
-      incorrect: Остальные варианты меняют регистр.
+      correct: "Dziękuję — спокойное завершение короткой помощи."
+      incorrect: "Ty / cześć — меняют регистр с незнакомцем."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -338,7 +384,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Выберите корректные транспортные рамки.
+    prompt: "Отметьте корректные транспортные рамки."
     concept_ids:
       - GR-PREP-DO-NA-01
     function_ids:
@@ -346,8 +392,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: Три рамки соответствуют цели, билету и выходу.
-      incorrect: Do tramwaj не подходит.
+      correct: "Do centrum, bilet na tramwaj и na piątym — нужные куски."
+      incorrect: "Do tramwaj — ломает формулу билета / направления."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -374,7 +420,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Мини-проверка: восстановите поездку."
+    prompt: "Соберите поездку: остановка → линия → билет → выход."
     concept_ids:
       - GR-NUM-MONEY-01
     function_ids:
@@ -382,8 +428,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Остановка → линия → билет → выход.
-      incorrect: Следуйте фактическому порядку действий.
+      correct: "Остановка → линия → билет → выход — порядок простой поездки."
+      incorrect: "Держите сведения в порядке от старта к выходу."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -414,11 +460,13 @@ mini_check:
     - GR-PREP-DO-NA-01
     - GR-NUM-MONEY-01
 result_metadata:
-  title_ru: Результат урока
-  success_ru: Соединить навигацию и билет в один самостоятельный сценарий без пересадок. Результат
-    относится только к DRAFT-превью.
-  retry_ru: "Повторите опорные реплики: gdzie · do centrum · bilet na autobus · wysiąść, затем снова
-    выполните мини-проверку."
+  title_ru: Итог урока
+  success_ru: >
+    Короткая проверка пройдена. Вы можете найти остановку, проверить линию,
+    купить билет и уточнить выход — в одной простой поездке (DRAFT preview).
+  retry_ru: >
+    Повторите gdzie…, czy … do…, bilet na… и Na którym…?, затем пройдите
+    короткую проверку снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-DIRECT-01
@@ -437,4 +485,8 @@ provenance:
       FN-A1-DIRECT-01, FN-A1-TRANS-01, FN-A1-ASK-01, FN-A1-TIME-01, FN-A1-THANKS-01 /
       LEX-A1-TRANSPORT, LEX-A1-MONEY
   ai_assisted: true
+  notes: >
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
+    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
+    not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
