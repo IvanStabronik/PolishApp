@@ -70,13 +70,34 @@ pnpm ops:validate-env
 
 ## 3. Run the app
 
+If port **3000** hangs (health curl never returns), a **stale** `node` from an earlier `pnpm dev` may still own `127.0.0.1:3000`. Kill it, then start fresh:
+
+```powershell
+Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue |
+  Select-Object -ExpandProperty OwningProcess -Unique |
+  ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }
+```
+
 ```powershell
 pnpm dev
 ```
 
-Open `http://localhost:3000` (or your `APP_URL`).
+Open `http://localhost:3000` (or your `APP_URL` — `127.0.0.1` is fine if that matches `.env.local`).
 
-Sign in as seeded **admin** after the first seed (`admin@demo.slowarium.local` / password from `DEMO_ACCOUNTS.admin` in `web/src/modules/auth/demo.ts`). With `DEMO_MODE=false` the accounts still exist in DB if you seeded earlier.
+Smoke:
+
+```powershell
+curl.exe -fsS http://localhost:3000/api/health
+curl.exe -fsS http://localhost:3000/api/ready
+```
+
+Sign in as seeded **admin** after the first seed (`admin@demo.slowarium.local` / `DemoAdmin1!` from `DEMO_ACCOUNTS.admin` in `web/src/modules/auth/demo.ts`). With `DEMO_MODE=false` the accounts still exist in DB if you seeded earlier.
+
+Quick path check after login:
+
+1. `/{locale}/dashboard` — five DRAFT halls listed (café, sklep, …) when the user has `previewer` (admin/learner demo accounts do).
+2. `/{locale}/learn/w-kawiarni` → open `/{locale}/learn/lessons/LES-A1-WK-01` — expect preview honesty chrome.
+3. Ordinary learner `ordinary@demo.slowarium.local` / `DemoOrdinary1!` (roles: `learner` only) should **not** see DRAFT hall links on the dashboard.
 
 ---
 
@@ -139,6 +160,6 @@ curl.exe -fsS http://localhost:3000/api/ready
 
 | Claim | Status |
 | --- | --- |
-| Local invite + DRAFT learning | Doable with steps above |
+| Local invite + DRAFT learning | **PASS** smoke 2026-09-10 (health/ready, admin DRAFT halls, lesson open) — see [improvement-loop-status.md](../reports/improvement-loop-status.md) |
 | Live HTTPS / Railway | **EXTERNAL** — see [external-unblock-wizard.md](./external-unblock-wizard.md) |
 | Content PUBLISHED / JPJO approved | **Blocked** — do not flip status |
