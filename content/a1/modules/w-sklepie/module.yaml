@@ -1,19 +1,18 @@
 kind: module
 canonical_id: MOD-A1-W-SKLEPIE
 slug: w-sklepie
-version: 1
+version: 2
 status: DRAFT
 level: A1
 title_pl: W sklepie
 working_title: W sklepie
 situation_ru: >
-  Покупка нескольких простых товаров у кассы в небольшом польском магазине.
-  Витрина ограничена; кассир — взрослый незнакомец; нужна ясная транзакция
-  с количеством, ценой и способом оплаты.
+  Небольшой магазин в Польше: у кассы несколько простых товаров. Кассир —
+  взрослый незнакомец. Нужно спокойно назвать выбор, количество, цену
+  и способ оплаты.
 objective_ru: >
-  После модуля учащийся может назвать товар и количество, спросить цену,
-  подтвердить оплату (gotówka / karta) и вежливо закрыть контакт в регистре
-  pan/pani, не скатываясь в ty к кассиру.
+  Вы можете назвать товар и количество, спросить цену, сказать gotówka / karta
+  и вежливо закрыть разговор — на pan/pani, не на ty к кассиру.
 curriculum_links:
   scenarios:
     - SCN-A1-SHOP-01
@@ -46,6 +45,8 @@ provenance:
     - "Common-knowledge Polish retail dialogue patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). DRAFT — pending human review; not JPJO-approved, not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
+    adult RU situation/objective. DRAFT — pending human review; not JPJO-approved,
+    not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true

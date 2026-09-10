@@ -1,17 +1,17 @@
 kind: lesson
 canonical_id: LES-A1-WS-01
 slug: zakupy-przy-kasie
-version: 1
+version: 2
 status: DRAFT
 title_pl: Zakupy przy kasie
 sort_order: 1
 situation_ru: >
-  Вы покупаете хлеб и молоко у кассы в небольшом магазине. Кассир —
-  взрослый незнакомец; нужно назвать товары, количество, спросить цену
-  и выбрать способ оплаты.
+  Вы у кассы в небольшом магазине в Польше. Нужны хлеб и молоко: назвать
+  товары, количество, спросить цену и выбрать оплату. Кассир — взрослый
+  незнакомец; речь спокойная, без суеты.
 objective_ru: >
-  Назвать товар и количество, спросить ile to kosztuje, подтвердить оплату
-  и поблагодарить — удерживая pan/pani к кассиру.
+  Назвать товар и количество, спросить Ile to kosztuje?, подтвердить оплату
+  и поблагодарить — на pan/pani, не на ty к кассиру.
 curriculum_links:
   scenarios:
     - SCN-A1-SHOP-01
@@ -54,21 +54,25 @@ dialogue:
 key_lines:
   - text_pl: Poproszę ten chleb i mleko.
     explanation_ru: >
-      Выбор товара: Poproszę + Acc; указательное ten помогает указать
-      конкретный объект на кассе/витрине.
+      Обычный выбор у кассы: Poproszę + винительный (Biernik). Указательное
+      ten помогает показать конкретный хлеб на витрине — не *Daj… к кассиру.
   - text_pl: Ile mleka? / Jedno, proszę.
     explanation_ru: >
-      Количество: вопрос кассира и короткий ответ числительным/формой меры.
+      Вопрос кассира про количество и короткий ответ: Jedno, proszę —
+      без лишних слов.
   - text_pl: Ile to kosztuje?
     explanation_ru: >
-      Базовый вопрос о цене; ответ слушайте как целый числовой слот (zł / grosze).
+      Базовый вопрос о цене. Ответ слушайте целиком: złotych и groszy
+      как один числовой кусок.
   - text_pl: Płacę kartą. / Czy mogę dostać paragon?
     explanation_ru: >
-      Оплата творительным (kartą) и просьба о чеке — закрытие транзакции.
+      Оплата творительным (kartą / gotówką) и просьба о чеке — чтобы
+      спокойно закрыть покупку.
 pan_pani:
   summary_ru: >
-    К кассиру-незнакомцу — только вежливый сервисный регистр: Poproszę…,
-    Ile to kosztuje?, Dziękuję. Избегайте ty и резкого *Daj… у кассы.
+    К кассиру-незнакомцу по умолчанию — pan/pani и спокойный сервисный тон:
+    Poproszę…, Ile to kosztuje?, Dziękuję. Форма ty и резкое *Daj… —
+    не к незнакомцу у кассы.
   form: "Poproszę… · Ile to kosztuje? · Płacę kartą / gotówką."
   examples_pl:
     - Poproszę ten chleb.
@@ -84,8 +88,8 @@ pan_pani:
       Не ставте «дайте» як *Daj і не калькуйте «скільки коштує» дослівно.
       Тримайте Ile to kosztuje? і pan/pani до касира.
     rus: >
-      «Сколько стоит» → Ile to kosztuje?, не *Skolko. Не используйте ty
-      к кассиру; kartą — Ins, не «на карте».
+      «Сколько стоит» → Ile to kosztuje?, не *Skolko. Не говорите ty
+      кассиру; kartą — творительный в формуле оплаты, не «на карте».
     bel: >
       Не пераносьце «дайце / колькі каштуе» ў польскую калькай. Poproszę…
       і Ile to kosztuje? — асобныя рамкі; без ty да касіра.
@@ -93,14 +97,14 @@ grammar_points:
   - id: GP-A1-WS-CENA-ILOSC
     title_pl: Ile to kosztuje? / ilość
     summary_ru: >
-      Числовые слоты покупки: цена (zł) и количество товара в короткой кассе.
+      Два коротких куска у кассы: цена (zł) и количество товара.
     form: >
-      Ile to kosztuje? → X złotych. Ilość: jedno / dwa + rzeczownik.
-      Płatność: płacę kartą / gotówką.
+      Ile to kosztuje? → X złotych. Количество: jedno / dwa + rzeczownik.
+      Оплата: płacę kartą / gotówką.
     meaning: >
-      Согласовать цену и количество, чтобы завершить обмен товар↔оплата.
+      Согласовать цену и количество, чтобы завершить покупку.
     use: >
-      Касса магазина с ≤10 позициями; затем подтверждение и paragon.
+      Касса с коротким списком товаров; затем подтверждение и paragon.
     examples_pl:
       - Ile to kosztuje?
       - Jedno mleko, proszę.
@@ -119,7 +123,7 @@ grammar_points:
         (dwanaście złotych). Не *Skilky kosztuje.
       rus: >
         Не калькируйте «сколько стоит это» порядком слов. Kartą — Ins.
-        Следите за одно/два в ответе о количестве.
+        Следите за jedno / dwa в ответе о количестве.
       bel: >
         Аканне ў сумах на пісьме не пераносіце. Вучыце Ile to kosztuje?
         і płacę kartą цэлымі формуламі.
@@ -128,8 +132,8 @@ l1_notes:
     Урок про касу: Poproszę + Acc, кількість, Ile to kosztuje?, оплата
     kartą. Не калькуйте «скільки коштує / дайте»; pan/pani до касира.
   rus: >
-    Фокус: цена и количество без L1-порядка слов и без ty у кассы.
-    Зафиксируйте Ile to kosztuje? и płacę kartą как целые рамки.
+    Цена и количество без L1-порядка слов и без ty у кассы. Запомните
+    Ile to kosztuje? и płacę kartą целиком.
   bel: >
     Асобны акцэнт BEL: не капіюйце рускія нотаткі. Касавыя формулы
     польскія; пісьмо сум без акання; без «ты» да касіра.
@@ -146,13 +150,13 @@ steps:
     dialogue_ref: primary
   - id: step-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-WS-CENA-ILOSC
   - id: step-practice
     kind: practice
@@ -168,20 +172,20 @@ steps:
       - ex-ws-08
   - id: step-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids:
       - ex-ws-09
       - ex-ws-10
   - id: step-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-ws-01
     canonical_id: EX-A1-WS-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: "Как вежливо назвать товар у кассы?"
+    prompt: "У кассы. Как вежливо назвать товар?"
     options:
       - id: a
         text: Poproszę ten chleb.
@@ -199,8 +203,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: "Poproszę ten chleb — выбор + Acc в сервисном регистре."
-      incorrect: "Daj / резкий приказ — неверный регистр у кассы."
+      correct: "Poproszę ten chleb — спокойный выбор + Acc."
+      incorrect: "Daj / резкий приказ — слишком грубо у кассы."
       l1:
         ukr: "Не ставте «дайте» як *Daj до касира."
         rus: "Не используйте приказ без Poproszę."
@@ -237,8 +241,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: "Ile to kosztuje? — стандартный вопрос о цене."
-      incorrect: "L1-калька или ty к кассиру — ошибка."
+      correct: "Ile to kosztuje? — обычный вопрос о цене."
+      incorrect: "L1-калька или ty к кассиру — не то, что говорят у кассы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -307,8 +311,8 @@ exercises:
       - FN-A1-TRANS-01
       - FN-A1-THANKS-01
     feedback:
-      correct: "Выбор, цена и вежливое закрытие — уместны."
-      incorrect: "Hej, dawaj szybciej! — грубый регистр."
+      correct: "Выбор, цена и спокойное прощание — уместны."
+      incorrect: "Hej, dawaj szybciej! — слишком грубо для кассы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -323,7 +327,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: "Какие реплики закрывают числовые слоты покупки?"
+    prompt: "Какие реплики закрывают количество, цену и чек?"
     options:
       - id: a
         text: Jedno, proszę.
@@ -344,8 +348,8 @@ exercises:
       - FN-A1-QUANT-01
       - FN-A1-CONFIRM-01
     feedback:
-      correct: "Количество, цена и paragon — слоты кассы."
-      incorrect: "Cześć, stary! не относится к числовым слотам покупки."
+      correct: "Количество, цена и paragon — нужные куски у кассы."
+      incorrect: "Cześć, stary! не относится к покупке у кассы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -462,7 +466,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Соберите слоты количества и цены."
+    prompt: "Соберите порядок: количество, затем цена."
     items:
       - id: s1
         text: Ile mleka?
@@ -496,7 +500,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: "Выберите корректную формулу цены."
+    prompt: "Выберите корректный вопрос о цене."
     options:
       - id: a
         text: Ile to kosztuje?
@@ -531,13 +535,13 @@ mini_check:
     - GR-NUM-CARD-01
     - PRAG-PAN-01
 result_metadata:
-  title_ru: Результат урока
+  title_ru: Итог урока
   success_ru: >
-    Мини-проверка пройдена. Вы можете назвать товар, обработать количество
+    Короткая проверка пройдена. Вы можете назвать товар, количество
     и цену и закрыть оплату у кассы (DRAFT preview).
   retry_ru: >
     Повторите Poproszę…, Ile to kosztuje? и Płacę kartą, затем пройдите
-    мини-проверку снова.
+    короткую проверку снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-TRANS-01
@@ -555,5 +559,8 @@ provenance:
     - "Original SŁOWARIUM dialogue and exercises — W sklepie DRAFT"
     - "Curriculum links: SCN-A1-SHOP-01, FN-A1-TRANS-01, FN-A1-QUANT-01"
   ai_assisted: true
-  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
+  notes: >
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
+    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
+    not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
