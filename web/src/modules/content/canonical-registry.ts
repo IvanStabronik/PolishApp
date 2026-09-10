@@ -63,6 +63,19 @@ function findRepoRoot(startDir: string): string {
     ) {
       return dir;
     }
+    // Vercel serverless NFT often ships content/ without docs/curriculum.
+    // Treat content/a1/modules (+ package.json or web/) as sufficient for runtime.
+    if (fs.existsSync(path.join(dir, "content", "a1", "modules"))) {
+      if (
+        fs.existsSync(path.join(dir, "package.json")) ||
+        fs.existsSync(path.join(dir, "web", "package.json")) ||
+        fs.existsSync(path.join(dir, "vercel.json"))
+      ) {
+        return dir;
+      }
+      // Traced layout may be only content/ under the NFT root
+      return dir;
+    }
     const parent = path.dirname(dir);
     if (parent === dir) {
       throw new Error(`Could not locate repo root from ${startDir}`);

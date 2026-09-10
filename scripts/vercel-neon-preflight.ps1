@@ -91,6 +91,11 @@ if (Test-Path $NextConfig) {
   if ($nc -match "outputFileTracingIncludes") { Ok "outputFileTracingIncludes set" } else { Bad "missing outputFileTracingIncludes" }
   if ($nc -match "\.\./content" -or $nc -match "\./content") { Ok "includes mention content/ paths" }
   else { Bad "tracing includes should reference content/" }
+  if ($nc -match "\.\./package\.json" -or $nc -match "package\.json") {
+    Ok "tracing includes root package.json marker (findRepoRoot without docs/)"
+  } else {
+    WarnMsg "consider tracing ../package.json so findRepoRoot works without docs/ on NFT"
+  }
 }
 
 # --- 4) Required env names (from production example) ---
@@ -135,11 +140,15 @@ if (Test-Path $EnvExample) {
 # --- 5) Migrate command (placeholders only) ---
 Section "Migrate (run AFTER Neon direct URL exists - placeholders only)"
 Write-Host ""
-Write-Host ("  cd " + $WebDir)
+Write-Host ("  Prefer: powershell -ExecutionPolicy Bypass -File scripts\neon-bootstrap.ps1 ``")
+Write-Host '    -DirectUrl "<NEON_DIRECT_POSTGRES_URL>" -PooledUrl "<NEON_POOLED_URL>"'
+Write-Host ""
+Write-Host ("  Manual: cd " + $WebDir)
 Write-Host '  $env:DATABASE_URL = "<NEON_DIRECT_POSTGRES_URL>"   # not pooler; never commit'
 Write-Host "  pnpm db:migrate"
 Write-Host ""
 Note "App DATABASE_URL on Vercel should be the pooled Neon URL when available."
+Note "DB client caches sql on globalThis in production (required for /api/ready on Vercel)."
 
 # --- 6) Tooling probes ---
 Section "Tooling probes"
@@ -249,9 +258,9 @@ if ($script:Fail -eq 0) {
 Write-Host ""
 Write-Host "  Exact 3 clicks for founder next:" -ForegroundColor Yellow
 Write-Host "    1) Neon console - New Project - copy pooled + direct URLs"
-Write-Host "    2) Vercel - Add New - Project - Import IvanStabronik/PolishApp"
-Write-Host "    3) Vercel - Settings - Environment Variables - paste from .env.production.example"
-Write-Host "  Then: pnpm db:migrate with DIRECT URL; curl /api/health + /api/ready on *.vercel.app"
+Write-Host "    2) Run: scripts\neon-bootstrap.ps1 -DirectUrl '<DIRECT>' -PooledUrl '<POOLED>'"
+Write-Host "    3) Vercel - Import IvanStabronik/PolishApp - env from .env.production.example - redeploy"
+Write-Host "  Then: curl /api/health + /api/ready on *.vercel.app; FORCE_SEED one-shot + invite-first"
 Write-Host ""
 Write-Host "  Interactive full wizard: powershell -ExecutionPolicy Bypass -File scripts\founder-unblock.ps1" -ForegroundColor DarkGray
 Write-Host "  Docs: docs\operations\FOUNDER-UNBLOCK-NOW.md" -ForegroundColor DarkGray

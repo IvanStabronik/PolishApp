@@ -17,7 +17,12 @@ function getConnectionString(): string {
   return connectionString;
 }
 
-/** Lazy postgres.js + Drizzle client (ADR-002). */
+/**
+ * Lazy postgres.js + Drizzle client (ADR-002).
+ * Always cache on globalThis so getSql() works under NODE_ENV=production
+ * (Vercel serverless). Skipping the sql cache in prod used to break /api/ready.
+ * prepare:false is required for Neon transaction pooler; max:1 suits serverless.
+ */
 export function getDb(): Db {
   if (globalForDb.slowariumDb) {
     return globalForDb.slowariumDb;
@@ -26,13 +31,11 @@ export function getDb(): Db {
   const sql =
     globalForDb.slowariumSql ??
     postgres(getConnectionString(), {
-      max: 10,
+      max: process.env.VERCEL || process.env.NODE_ENV === "production" ? 1 : 10,
       prepare: false,
     });
 
-  if (process.env.NODE_ENV !== "production") {
-    globalForDb.slowariumSql = sql;
-  }
+  globalForDb.slowariumSql = sql;
 
   const db = drizzle(sql, { schema });
   globalForDb.slowariumDb = db;

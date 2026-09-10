@@ -54,11 +54,28 @@ if (isProd) {
 const nextConfig: NextConfig = {
   // Trace from monorepo root so sibling `content/` (YAML lessons) ships on Vercel.
   // Docker builds still COPY content/ separately (see web/Dockerfile).
+  // Includes use ../content from web/ (Next project root); /** covers App Router locales.
+  // Also ship root package.json so findRepoRoot can locate the monorepo without docs/.
   outputFileTracingRoot: repoRoot,
   outputFileTracingIncludes: {
-    "/*": ["./content/**/*", "../content/**/*"],
-    "/api/**/*": ["./content/**/*", "../content/**/*"],
-    "/(.*)": ["./content/**/*", "../content/**/*"],
+    "/**": [
+      "../content/**/*",
+      "./content/**/*",
+      "../package.json",
+      "../vercel.json",
+    ],
+    "/*": [
+      "../content/**/*",
+      "./content/**/*",
+      "../package.json",
+      "../vercel.json",
+    ],
+    "/api/**/*": [
+      "../content/**/*",
+      "./content/**/*",
+      "../package.json",
+      "../vercel.json",
+    ],
   },
   // File-based content lives outside web/ — allow reading at build/runtime.
   serverExternalPackages: ["yaml"],
