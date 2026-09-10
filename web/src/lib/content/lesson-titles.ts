@@ -73,9 +73,10 @@ function findLessonOwningExercise(exerciseKey: string): string | null {
 
 export function uiLocaleToConceptLabelLocale(
   locale: string | null | undefined,
-): "ru" | "uk" | "pl" {
+): "ru" | "uk" | "pl" | "be" {
   const base = (locale ?? "ru").toLowerCase().split("-")[0];
   if (base === "uk") return "uk";
   if (base === "pl") return "pl";
+  if (base === "be" || base === "bel") return "be";
   return "ru";
 }

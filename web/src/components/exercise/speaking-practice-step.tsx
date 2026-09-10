@@ -47,6 +47,7 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
   const [heard, setHeard] = useState<string | null>(null);
   const [supported, setSupported] = useState(false);
   const [revealed, setRevealed] = useState(false);
+  const [micError, setMicError] = useState(false);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   const line = lines[lineIndex] ?? lines[0] ?? "";
@@ -66,6 +67,7 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
     setHeard(null);
     setRevealed(false);
     setListening(false);
+    setMicError(false);
   }, [lineIndex]);
 
   function startListen() {
@@ -87,14 +89,19 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
       setHeard(transcript);
       setListening(false);
     };
-    rec.onerror = () => setListening(false);
+    rec.onerror = () => {
+      setListening(false);
+      setMicError(true);
+    };
     rec.onend = () => setListening(false);
     setHeard(null);
+    setMicError(false);
     setListening(true);
     try {
       rec.start();
     } catch {
       setListening(false);
+      setMicError(true);
     }
   }
 
@@ -187,6 +194,15 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
             {t("speakingHeard")}: {heard}
             {matchHint === "close" ? ` — ${t("speakingCloseMatch")}` : null}
             {matchHint === "diff" ? ` — ${t("speakingBestEffort")}` : null}
+          </p>
+        ) : null}
+        {micError ? (
+          <p
+            className="mt-3 text-sm text-[var(--color-warning)]"
+            data-testid="speaking-mic-error"
+            role="status"
+          >
+            {t("speakingMicError")}
           </p>
         ) : null}
         {!supported ? (

@@ -17,7 +17,7 @@ import { LinkButton } from "@/components/ui/link-button";
 import { ReportProblemButton } from "@/components/feedback/report-problem-button";
 import {
   humanConceptLabel,
-  type ConceptLabelLocale,
+  resolveConceptLabelLocale,
 } from "@/lib/content/concept-labels";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -36,8 +36,26 @@ export default async function ReviewQueuePage({ params }: Props) {
   };
   const scope = canAccessDraftContent(accessCtx) ? "preview" : "live";
   const snapshot = await loadContinueLearning(session.user.id, accessCtx, scope);
-  const labelLocale: ConceptLabelLocale =
-    locale === "uk" || locale === "pl" || locale === "ru" ? locale : "ru";
+  const labelLocale = resolveConceptLabelLocale({
+    uiLocale: locale,
+    l1: snapshot.learnerL1,
+  });
+  const dateLocale =
+    locale === "uk" ? "uk-UA" : locale === "pl" ? "pl-PL" : "ru-RU";
+
+  function formatDueAt(iso: string): string {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    try {
+      return new Intl.DateTimeFormat(dateLocale, {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }).format(d);
+    } catch {
+      return iso.slice(0, 10);
+    }
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -68,7 +86,8 @@ export default async function ReviewQueuePage({ params }: Props) {
                     {humanConceptLabel(item.conceptCanonicalId, labelLocale)}
                   </p>
                   <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
-                    {t(`reviewReason.${item.reasonKey}`)} · {item.dueAt}
+                    {t(`reviewReason.${item.reasonKey}`)} ·{" "}
+                    {formatDueAt(item.dueAt)}
                   </p>
                 </div>
                 {item.href ? (

@@ -184,6 +184,15 @@ Empty secret = `deploy.yml` fails closed. Do not invent values.
 ### 8) Prove live HTTPS (PowerShell)
 
 ```powershell
+cd D:\MyProjects\PolishApp
+powershell -ExecutionPolicy Bypass -File scripts\smoke-vercel.ps1 `
+  -BaseUrl https://YOUR_PROJECT.vercel.app
+# optional: -WaitSeconds 90  or  -RunPlaywright
+```
+
+Equivalent manual curls:
+
+```powershell
 $BASE_URL = "https://YOUR_PROJECT.vercel.app"   # no trailing slash
 curl.exe -fsS "$BASE_URL/api/health"
 curl.exe -fsS "$BASE_URL/api/ready"
@@ -193,7 +202,9 @@ Both must return HTTP 200. Browser must open the same host without cert warning.
 
 Then: create invite → accept → onboard → one lesson attempt persists.
 
-Mark Done rows in `docs/operations/external-unblock-wizard.md` only after those curls succeed.
+Mark Done rows in `docs/operations/external-unblock-wizard.md` only after those curls / `smoke-vercel.ps1` succeed.
+
+**Screenshot-free click path (exact button labels):** [vercel-neon-click-checklist.md](./vercel-neon-click-checklist.md).
 
 ### 9) JPJO (parallel, human only)
 
@@ -208,13 +219,13 @@ Status stays `NOT_STARTED` until a real reviewer opens it. AI must not APPROVE. 
 - [ ] Wizard / checklist § Neon+Vercel + closed-beta flags + health rows Done
 - [ ] (Optional) JPJO calendar booked — still not PUBLISHED
 
-Until then: local closed-beta only. Score stays ~**35.5 / 50** EXTERNAL (HTTPS/JPJO still blocked).
+Until then: local closed-beta only. Score stays below reference until HTTPS + JPJO. See [improvement-loop-status.md](../reports/improvement-loop-status.md).
 
 **Exact next commands (human) — after Neon Create:**
 
 1. `scripts\neon-bootstrap.ps1 -DirectUrl '<DIRECT>' -PooledUrl '<POOLED>'`
-2. Import `IvanStabronik/PolishApp` on Vercel → set env from `.env.production.example` (pooled `DATABASE_URL`; `DEMO_MODE=false`).
-3. Redeploy → curl `/api/health` + `/api/ready` on the `*.vercel.app` host.
+2. Import `IvanStabronik/PolishApp` on Vercel → set env from `.env.production.example` (pooled `DATABASE_URL`; `DEMO_MODE=false`). Click path: [vercel-neon-click-checklist.md](./vercel-neon-click-checklist.md).
+3. Redeploy → `scripts\smoke-vercel.ps1 -BaseUrl https://….vercel.app`
 4. `scripts\bootstrap-first-admin.ps1 -DatabaseUrl '<DIRECT>' -Email '…' -Password '…'` → admin → invite → accept → onboard → one DRAFT attempt.
 
 ```powershell

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { loadAllModulesFromYaml } from "@/lib/content/load-module";
 
 describe("M3 learner-visible lesson inventory", () => {
-  it("exposes 5 modules, 15 distinct LES-* lessons, 141 exercises", () => {
+  it("exposes 5 modules, 15 distinct LES-* lessons, 157 exercises", () => {
     const modules = loadAllModulesFromYaml();
     expect(modules).toHaveLength(5);
 
@@ -20,7 +20,7 @@ describe("M3 learner-visible lesson inventory", () => {
     }
 
     const exerciseCount = modules.reduce((n, m) => n + m.exercises.length, 0);
-    expect(exerciseCount).toBe(141);
+    expect(exerciseCount).toBe(157);
   });
 
   it("catalog lessonIds never use synthetic les-${moduleId}", () => {

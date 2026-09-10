@@ -17,7 +17,7 @@ import { LinkButton } from "@/components/ui/link-button";
 import { ReportProblemButton } from "@/components/feedback/report-problem-button";
 import {
   humanConceptLabel,
-  type ConceptLabelLocale,
+  resolveConceptLabelLocale,
 } from "@/lib/content/concept-labels";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -37,8 +37,10 @@ export default async function DailyPlanPage({ params }: Props) {
   const scope = canAccessDraftContent(accessCtx) ? "preview" : "live";
   const snapshot = await loadContinueLearning(session.user.id, accessCtx, scope);
   const plan = snapshot.dailyPlan;
-  const labelLocale: ConceptLabelLocale =
-    locale === "uk" || locale === "pl" || locale === "ru" ? locale : "ru";
+  const labelLocale = resolveConceptLabelLocale({
+    uiLocale: locale,
+    l1: snapshot.learnerL1,
+  });
 
   return (
     <div className="flex min-h-screen flex-col">

@@ -3,7 +3,7 @@ import {
   resolveAttemptLessonTitle,
   uiLocaleToConceptLabelLocale,
 } from "@/lib/content/lesson-titles";
-import { humanConceptLabel } from "@/lib/content/concept-labels";
+import { humanConceptLabel, resolveConceptLabelLocale } from "@/lib/content/concept-labels";
 import {
   clearCurriculumTitleCache,
   curriculumTitleFor,
@@ -47,8 +47,11 @@ describe("attempt lesson titles", () => {
     expect(uiLocaleToConceptLabelLocale("uk")).toBe("uk");
     expect(uiLocaleToConceptLabelLocale("pl-PL")).toBe("pl");
     expect(uiLocaleToConceptLabelLocale("ru")).toBe("ru");
+    expect(uiLocaleToConceptLabelLocale("be")).toBe("be");
     expect(humanConceptLabel("PRAG-PAN-01", "uk")).toMatch(/pan/i);
     expect(humanConceptLabel("PRAG-PAN-01", "uk")).not.toBe("PRAG-PAN-01");
+    expect(humanConceptLabel("PRAG-PAN-01", "be")).toMatch(/pan/i);
+    expect(humanConceptLabel("FN-A1-GREET-01", "be")).toMatch(/Прывітацца|папрашчацца/i);
   });
 
   it("never returns raw GR-/FN- IDs or markdown junk as primary labels", () => {
@@ -65,6 +68,17 @@ describe("attempt lesson titles", () => {
     expect(sot).toBeTruthy();
     expect(sot).not.toContain("**");
     expect(isUsableCurriculumTitle(sot!, "FN-A1-IDENTIFY-01")).toBe(true);
+    // UK/BEL must not fall back to Russian SoT titles
+    expect(curriculumTitleFor("FN-A1-IDENTIFY-01", "uk")).toBeNull();
+    expect(curriculumTitleFor("FN-A1-IDENTIFY-01", "be")).toBeNull();
+    expect(humanConceptLabel("GR-UNKNOWN-99", "uk")).not.toMatch(/Грамматическ/i);
+    expect(humanConceptLabel("GR-UNKNOWN-99", "be")).toMatch(/Граматычн|Тэма/i);
+  });
+
+  it("resolves concept label locale from L1 (BEL first-class)", () => {
+    expect(resolveConceptLabelLocale({ uiLocale: "ru", l1: "bel" })).toBe("be");
+    expect(resolveConceptLabelLocale({ uiLocale: "ru", l1: "ukr" })).toBe("uk");
+    expect(resolveConceptLabelLocale({ uiLocale: "uk", l1: "rus" })).toBe("uk");
   });
 });
 

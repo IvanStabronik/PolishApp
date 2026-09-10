@@ -16,6 +16,7 @@ import {
   canAccessDraftContent,
   isDraftLearningEnvEnabled,
 } from "@/lib/demo";
+import { loadContinueLearning } from "@/modules/learning/continue-learning";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string }>;
@@ -42,6 +43,11 @@ export default async function ResultPage({ params }: Props) {
 
   const t = await getTranslations("learn");
   const showDraftBanner = canDraft && isInternalPreview(mod.status);
+  const scope = canDraft ? "preview" : "live";
+  const snapshot = await loadContinueLearning(session.user.id, accessCtx, scope);
+  const tomorrowLead = t(
+    `planGoal.${snapshot.dailyPlan.nextGoalKey}.${snapshot.dailyPlan.hallKey}`,
+  );
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -65,9 +71,20 @@ export default async function ResultPage({ params }: Props) {
               {t("previewNoMastery")}
             </p>
           ) : null}
+          <p
+            className="mt-4 text-sm text-[var(--color-ink-soft)]"
+            data-testid="result-tomorrow-lead"
+          >
+            {t("resultTomorrowLead")}: {tomorrowLead}
+          </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <LinkButton href={`/learn/${mod.id}`}>{t("backToModule")}</LinkButton>
-            <LinkButton href="/dashboard" variant="secondary">
+            <LinkButton href="/plan" data-testid="result-to-plan">
+              {t("resultToPlan")}
+            </LinkButton>
+            <LinkButton href={`/learn/${mod.id}`} variant="secondary">
+              {t("backToModule")}
+            </LinkButton>
+            <LinkButton href="/dashboard" variant="ghost">
               {t("toDashboard")}
             </LinkButton>
           </div>

@@ -13,11 +13,11 @@ import {
 import { masteryStateToBadge } from "./attempt-mode";
 import {
   humanConceptLabel,
+  resolveConceptLabelLocale,
   type ConceptLabelLocale,
 } from "@/lib/content/concept-labels";
 import {
   resolveAttemptLessonTitle,
-  uiLocaleToConceptLabelLocale,
   type LessonTitleLocale,
 } from "@/lib/content/lesson-titles";
 
@@ -47,14 +47,16 @@ export type LoadProgressOptions = {
   locale?: string | null;
 };
 
+function titleLocaleFor(labelLocale: ConceptLabelLocale): LessonTitleLocale {
+  if (labelLocale === "uk") return "uk";
+  if (labelLocale === "pl") return "pl";
+  return "ru";
+}
+
 export async function loadProgressOverview(
   userId: string | null,
   options: LoadProgressOptions = {},
 ): Promise<ProgressOverview> {
-  const labelLocale: ConceptLabelLocale = uiLocaleToConceptLabelLocale(
-    options.locale,
-  );
-
   if (!userId) {
     return { signedIn: false, concepts: [], recentAttempts: [] };
   }
@@ -63,16 +65,17 @@ export async function loadProgressOverview(
     const db = getDb();
     const profile = await db.query.learnerProfiles.findFirst({
       where: eq(learnerProfiles.userId, userId),
-      columns: { id: true, uiLocale: true },
+      columns: { id: true, uiLocale: true, l1: true },
     });
     if (!profile) {
       return { signedIn: true, concepts: [], recentAttempts: [] };
     }
 
-    const effectiveLocale: ConceptLabelLocale = options.locale
-      ? labelLocale
-      : uiLocaleToConceptLabelLocale(profile.uiLocale);
-    const effectiveTitleLocale = effectiveLocale as LessonTitleLocale;
+    const effectiveLocale: ConceptLabelLocale = resolveConceptLabelLocale({
+      uiLocale: options.locale ?? profile.uiLocale,
+      l1: profile.l1,
+    });
+    const effectiveTitleLocale = titleLocaleFor(effectiveLocale);
 
     const masteryRows = await db
       .select({

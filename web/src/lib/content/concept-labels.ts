@@ -2,6 +2,8 @@
  * Human-readable labels for A1 concept IDs shown in learner progress / review.
  * Prefer curated life-outcome copy; fall back to curriculum inventory SoT;
  * never return raw GR-/FN- IDs as primary UI text.
+ *
+ * Locales: UI ru/uk/pl plus `be` when learner L1 is Belarusian (menu may stay RU).
  */
 
 import {
@@ -69,6 +71,37 @@ const CONCEPT_LABELS_UK: Record<string, string> = {
   "ORTH-CORE-01": "Базовий польський правопис",
 };
 
+/** Belarusian L1 — equal peer to UKR/RUS; used when profile.l1 === bel. */
+const CONCEPT_LABELS_BE: Record<string, string> = {
+  "GR-CAS-NOM-01": "Як вас клічуць: Nazywam się…",
+  "GR-CAS-ACC-01": "Заказ: Poproszę + вінавальны",
+  "GR-TNS-PRS-01": "Кароткія фразы ў цяперашнім",
+  "GR-TV-AGR-01": "Узгадненне з pan / pani",
+  "PRAG-PAN-01": "Зварот на pan / pani",
+  "PHON-CORE-01": "Вымаўленне базавых формул",
+  "GR-NUM-CARD-01": "Лічэбнікі і колькасць",
+  "GR-NUM-MONEY-01": "Цана і грошы каля стойкі",
+  "GR-PRO-DEM-01": "Указальныя словы (ten / ta / to)",
+  "GR-EXIST-01": "Ёсць / няма — наяўнасць",
+  "GR-MOT-BASE-01": "Куды едзеце: do / na",
+  "GR-PREP-DO-NA-01": "Прыназоўнікі do і na ў дарозе",
+  "GR-TIME-EXPR-01": "Час адпраўлення",
+  "GR-Q-WH-01": "Пытанні куды / адкуль / калі",
+  "FN-A1-IDENTIFY-01": "Назваць сябе і адкуль вы",
+  "FN-A1-GREET-01": "Прывітацца і папрашчацца",
+  "FN-A1-TRANS-01": "Просты заказ каля стойкі",
+  "FN-A1-ASK-01": "Спытаць пра наяўнасць",
+  "FN-A1-ADDRESS-01": "Вучціва звярнуцца",
+  "FN-A1-QUANT-01": "Памер і колькасць",
+  "FN-A1-THANKS-01": "Падзякаваць",
+  "FN-A1-DIRECT-01": "Спытаць дарогу",
+  "FN-A1-TIME-01": "Удакладніць час адпраўлення",
+  "FN-A1-PURPOSE-01": "Сказаць мэту візіту ў urzędzie",
+  "FN-A1-DOCS-01": "Перадаць дакументы каля вакенца",
+  "FN-A1-CONFIRM-01": "Пацвердзіць і закрыць размову",
+  "ORTH-CORE-01": "Базавы польскі правапіс",
+};
+
 const CONCEPT_LABELS_PL: Record<string, string> = {
   "GR-CAS-NOM-01": "Przedstawianie: Nazywam się…",
   "GR-CAS-ACC-01": "Zamówienie: Poproszę + biernik",
@@ -99,71 +132,88 @@ const CONCEPT_LABELS_PL: Record<string, string> = {
   "ORTH-CORE-01": "Podstawowa ortografia polska",
 };
 
-export type ConceptLabelLocale = "ru" | "uk" | "pl";
+export type ConceptLabelLocale = "ru" | "uk" | "pl" | "be";
 
 function tableFor(locale: ConceptLabelLocale): Record<string, string> {
   if (locale === "uk") return CONCEPT_LABELS_UK;
   if (locale === "pl") return CONCEPT_LABELS_PL;
+  if (locale === "be") return CONCEPT_LABELS_BE;
   return CONCEPT_LABELS_RU;
+}
+
+/**
+ * Prefer learner L1 for instructional concept copy (BEL/UKR first-class).
+ * UI locale fills when L1 is rus or unset.
+ */
+export function resolveConceptLabelLocale(opts: {
+  uiLocale?: string | null;
+  l1?: string | null;
+}): ConceptLabelLocale {
+  const l1 = (opts.l1 ?? "").toLowerCase();
+  if (l1 === "bel" || l1 === "be") return "be";
+  if (l1 === "ukr" || l1 === "uk") return "uk";
+  const ui = (opts.uiLocale ?? "ru").toLowerCase().split("-")[0] ?? "ru";
+  if (ui === "uk") return "uk";
+  if (ui === "pl") return "pl";
+  return "ru";
 }
 
 /** Soft fallback when an ID is not in the map — never return raw ops IDs as primary. */
 function softFallback(canonicalId: string, locale: ConceptLabelLocale): string {
-  const fromSoT = curriculumTitleFor(canonicalId, locale);
-  if (fromSoT && isUsableCurriculumTitle(fromSoT, canonicalId)) {
-    return fromSoT;
+  // SoT inventories are PL + RU only — skip for uk/be so we never show Russian on UK/BEL.
+  if (locale === "ru" || locale === "pl") {
+    const fromSoT = curriculumTitleFor(canonicalId, locale);
+    if (fromSoT && isUsableCurriculumTitle(fromSoT, canonicalId)) {
+      return fromSoT;
+    }
   }
 
   if (canonicalId.startsWith("PRAG-PAN")) {
-    return locale === "pl"
-      ? "Zwrot pan / pani"
-      : locale === "uk"
-        ? "Звертання pan / pani"
-        : "Обращение pan / pani";
+    if (locale === "pl") return "Zwrot pan / pani";
+    if (locale === "uk") return "Звертання pan / pani";
+    if (locale === "be") return "Зварот pan / pani";
+    return "Обращение pan / pani";
   }
   if (canonicalId.startsWith("PHON")) {
-    return locale === "pl"
-      ? "Wymowa"
-      : locale === "uk"
-        ? "Вимова"
-        : "Произношение";
+    if (locale === "pl") return "Wymowa";
+    if (locale === "uk") return "Вимова";
+    if (locale === "be") return "Вымаўленне";
+    return "Произношение";
   }
   if (canonicalId.startsWith("FN-A1-GREET")) {
-    return locale === "pl"
-      ? "Powitanie i pożegnanie"
-      : locale === "uk"
-        ? "Привітання і прощання"
-        : "Приветствие и прощание";
+    if (locale === "pl") return "Powitanie i pożegnanie";
+    if (locale === "uk") return "Привітання і прощання";
+    if (locale === "be") return "Прывітанне і развітанне";
+    return "Приветствие и прощание";
   }
   if (canonicalId.startsWith("FN-A1-IDENTIFY")) {
-    return locale === "pl"
-      ? "Przedstawianie się"
-      : locale === "uk"
-        ? "Представлення себе"
-        : "Представление себя";
+    if (locale === "pl") return "Przedstawianie się";
+    if (locale === "uk") return "Представлення себе";
+    if (locale === "be") return "Прастаўленне сябе";
+    return "Представление себя";
   }
   if (canonicalId.startsWith("FN-")) {
-    return locale === "pl"
-      ? "Umiejętność komunikacyjna"
-      : locale === "uk"
-        ? "Комунікативна навичка"
-        : "Коммуникативный навык";
+    if (locale === "pl") return "Umiejętność komunikacyjna";
+    if (locale === "uk") return "Комунікативна навичка";
+    if (locale === "be") return "Камунікатыўны навык";
+    return "Коммуникативный навык";
   }
   if (canonicalId.startsWith("GR-NUM-MONEY")) {
-    return locale === "pl" ? "Pieniądze" : locale === "uk" ? "Гроші" : "Деньги";
+    if (locale === "pl") return "Pieniądze";
+    if (locale === "uk") return "Гроші";
+    if (locale === "be") return "Грошы";
+    return "Деньги";
   }
   if (canonicalId.startsWith("GR-")) {
-    return locale === "pl"
-      ? "Temat gramatyczny"
-      : locale === "uk"
-        ? "Граматична тема"
-        : "Грамматическая тема";
+    if (locale === "pl") return "Temat gramatyczny";
+    if (locale === "uk") return "Граматична тема";
+    if (locale === "be") return "Граматычная тэма";
+    return "Грамматическая тема";
   }
-  return locale === "pl"
-    ? "Temat do powtórki"
-    : locale === "uk"
-      ? "Тема для повторення"
-      : "Тема для повторения";
+  if (locale === "pl") return "Temat do powtórki";
+  if (locale === "uk") return "Тема для повторення";
+  if (locale === "be") return "Тэма для паўтарэння";
+  return "Тема для повторения";
 }
 
 export function humanConceptLabel(

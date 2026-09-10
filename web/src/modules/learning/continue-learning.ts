@@ -42,6 +42,8 @@ export type ContinueLearningSnapshot = {
   nextGoal: string;
   dailyPlan: DailyPlan;
   reviewQueue: ReviewQueue;
+  /** Learner L1 (ukr|rus|bel) for concept-label locale — null if no profile. */
+  learnerL1: string | null;
 };
 
 function exerciseDone(
@@ -65,8 +67,9 @@ export async function loadContinueLearning(
 
   const profile = await db.query.learnerProfiles.findFirst({
     where: eq(learnerProfiles.userId, userId),
-    columns: { id: true },
+    columns: { id: true, l1: true },
   });
+  const learnerL1 = profile?.l1 ?? null;
 
   let lastPoint: ContinueLearningSnapshot["lastPoint"] = null;
   const attemptedExerciseIds = new Set<string>();
@@ -362,5 +365,6 @@ export async function loadContinueLearning(
     nextGoal: dailyPlan.nextGoal,
     dailyPlan,
     reviewQueue,
+    learnerL1,
   };
 }

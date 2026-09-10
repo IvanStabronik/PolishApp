@@ -206,16 +206,14 @@ export function ExercisePlayer({
             {t("listeningExerciseHint")}
           </p>
           <div className="flex flex-wrap items-center gap-3">
-            {exercise.hasTtsStimulus || exercise.audioUrl ? (
-              <ListeningAudioControl
-                moduleId={moduleId}
-                exerciseId={exercise.id}
-                audioUrl={exercise.audioUrl}
-                className="min-h-10 px-4 text-base"
-                onPlayed={markListeningPlayed}
-                onUnavailable={markListeningPlayed}
-              />
-            ) : null}
+            <ListeningAudioControl
+              moduleId={moduleId}
+              exerciseId={exercise.id}
+              audioUrl={exercise.audioUrl}
+              className="min-h-10 px-4 text-base"
+              onPlayed={markListeningPlayed}
+              onUnavailable={markListeningPlayed}
+            />
             <span className="text-xs text-[var(--color-graphite-muted)]">
               {t("listeningReplayOk")}
             </span>

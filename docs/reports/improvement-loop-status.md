@@ -11,22 +11,23 @@
 **Post–Vercel preflight (2026-09-10):** ~**35 / 50** — `scripts/vercel-neon-preflight.ps1` + FOUNDER helpers; local day-1 bakeoff checklist; JPJO one-page checklist. `pnpm --dir web build` **PASS**. Probe: `gh` OK; `vercel whoami` **no credentials**; no `.vercel` link. Still waiting Neon+Vercel human. No live HTTPS claimed.
 **Post–Neon bootstrap + DB/content NFT (2026-09-10):** ~**35.5 / 50** — `neon-bootstrap` migrate path; production `getSql` globalThis cache (Vercel `/api/ready`); `outputFileTracingRoot` + content NFT markers; first-admin bootstrap script (`bootstrap-first-admin.ps1`, `DEMO_MODE=false`). Still **EXTERNAL** for live HTTPS until founder pastes Neon URL + finishes Vercel. No fake PUBLISHED / JPJO.
 **Local day-1 bakeoff executed (2026-09-10):** ~**36 / 50** — checklist **LOCAL_PASS** (invite→onboard→PS L01 listen/speak/wrong+L1→plan); phrasebot compare **LOCAL reasoned**; live week still **FAIL**. Micro-fix: exercise step h2 no longer mid-truncates prompt (`draftLessonToDetail` uses section title). Artifact: `web/playwright-artifacts/day1-bakeoff/result.json`.
+**CODE-DOABLE pack (2026-09-10, post-HTTPS-block):** ~**37.5 / 50** — `smoke-vercel.ps1`; Vercel/Neon screenshot-free click checklist; lesson result → plan “tomorrow” CTA; BEL concept-label table + L1→label locale; UK no longer gets Russian SoT titles; listening/speaking failure surfaces; civilian “L1” / closed-beta chrome soften; review due dates localized. **No live HTTPS. No JPJO. No fake PUBLISHED.** Admin freeze held.
 
-### Critical re-score (post local day-1 bakeoff) — `/50`
+### Critical re-score (post CODE-DOABLE pack) — `/50`
 
-| # | Criterion | /5 | Note |
-| --- | --- | ---: | --- |
-| 1 | Session-1 life loop | 4.0 | Local invite→lesson LOCAL_PASS; live invite path unproven until Neon+Vercel |
-| 2 | Feedback that teaches | 4.0 | incorrect + L1 on deepened halls; bakeoff wrong-answer evidence |
-| 3 | Listening + speaking path | 4.0 | All 15 assessed listen have `audio_url`; speaking still interim; local L5/L6 ✅ |
-| 4 | Human-readable progress | 3.5 | Labels improved; habit clarity ok; plan narratable (L7) |
-| 5 | Zero civilian ops jargon | 3.5 | Preview honesty; staff jargon out of learner chrome |
-| 6 | BEL first-class L1 | 3.5 | Notes present; UI locale share remains |
-| 7 | Content honesty contract | 4.0 | DRAFT + banner; no fake PUBLISHED |
-| 8 | Deploy teaches someone | 4.0 | Preflight + neon-bootstrap + first-admin (no DEMO_MODE) + NFT/getSql; secrets/HTTPS still EXTERNAL |
-| 9 | Admin ≤ learner craft | 3.5 | Freeze held; exercise h2 title micro-fix (no sliced prompt) |
-| 10 | Competitive first week | 3.5 | Local day-1 **LOCAL_PASS** / SPLIT vs phrasebot; live week still FAIL / not run |
-| | **Total** | **~36** | Still far from reference; EXTERNAL wall |
+| # | Criterion | before | after | Note |
+| --- | --- | ---: | ---: | --- |
+| 1 | Session-1 life loop | 4.0 | 4.0 | Local still LOCAL_PASS; result→plan CTA; live invite EXTERNAL |
+| 2 | Feedback that teaches | 4.0 | 4.0 | Unchanged this pack |
+| 3 | Listening + speaking path | 4.0 | 4.0 | Play/unlock + mic errors surfaced; still interim TTS/ASR |
+| 4 | Human-readable progress | 3.5 | 3.75 | Tomorrow CTA; review dates; BEL/UK labels |
+| 5 | Zero civilian ops jargon | 3.5 | 3.75 | “L1” out of chrome; beta jargon softened |
+| 6 | BEL first-class L1 | 3.5 | 3.75 | `CONCEPT_LABELS_BE` + L1 wiring; theory bodies still RU |
+| 7 | Content honesty contract | 4.0 | 4.0 | DRAFT + banner; no fake PUBLISHED |
+| 8 | Deploy teaches someone | 4.0 | 4.25 | smoke-vercel + click checklist; secrets/HTTPS EXTERNAL |
+| 9 | Admin ≤ learner craft | 3.5 | 3.5 | Freeze held; learner-only pack |
+| 10 | Competitive first week | 3.5 | 3.5 | Local day-1 LOCAL_PASS; live week FAIL |
+| | **Total** | **~36** | **~37.5** | Still far from reference; EXTERNAL wall |
 
 ### Waiting on founder (EXTERNAL)
 
@@ -36,9 +37,11 @@
 1. [`scripts/vercel-neon-preflight.ps1`](../../scripts/vercel-neon-preflight.ps1) — fast config/auth probe (primary helper alongside wizard).
 2. After Neon Create: [`scripts/neon-bootstrap.ps1`](../../scripts/neon-bootstrap.ps1) `-DirectUrl` / `-PooledUrl`.
 3. After migrate + Vercel env: [`scripts/bootstrap-first-admin.ps1`](../../scripts/bootstrap-first-admin.ps1) `-DatabaseUrl` `-Email` `-Password` (`DEMO_MODE=false`).
-4. [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) — interactive secret capture + Done/Blocked paste-back.
+4. After live URL: [`scripts/smoke-vercel.ps1`](../../scripts/smoke-vercel.ps1) `-BaseUrl https://…`
+5. Click path (exact button labels): [`vercel-neon-click-checklist.md`](../operations/vercel-neon-click-checklist.md)
+6. [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) — interactive secret capture + Done/Blocked paste-back.
 
-See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not invent secrets; do not claim HTTPS without curl 200.
+See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not invent secrets; do not claim HTTPS without curl 200 / smoke PASS.
 
 ### STOP RULE
 
@@ -61,8 +64,14 @@ See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not inv
 | Static assessed-listening audio — all 5 A1 halls L01–L03 | **Done** — **15×** MP3 under `web/public/audio/a1/`; YAML `audio_url`; see [`audio-assets.md`](../operations/audio-assets.md) |
 | JPJO hall packet inventory refresh | **Done** — status remains `NOT_STARTED` |
 | Exercise step h2 mid-truncation | **Done** — `draftLessonToDetail` uses practice/mini_check section title (not `prompt.slice(0,64)`) |
+| Production smoke script for BASE_URL | **Done** — [`scripts/smoke-vercel.ps1`](../../scripts/smoke-vercel.ps1) |
+| Vercel/Neon screenshot-free click checklist | **Done** — [`vercel-neon-click-checklist.md`](../operations/vercel-neon-click-checklist.md) |
+| Result → plan “tomorrow” CTA | **Done** — lesson + module result pages |
+| BEL concept labels + L1 locale wiring | **Done** — `CONCEPT_LABELS_BE`; UK SoT no longer leaks Russian |
+| Listening/speaking failure surfaces | **Done** — unlock/play + mic error copy |
+| Civilian chrome soften (L1 acronym / beta jargon) | **Done** — onboarding/settings/banner/previewMode |
 
-Score estimate ~**36 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL** (Neon URL + Vercel).
+Score estimate ~**37.5 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL** (Neon URL + Vercel).
 
 ### Local closed-beta smoke (2026-09-10)
 

@@ -142,9 +142,12 @@ export function clearCurriculumTitleCache(): void {
 
 export function curriculumTitleFor(
   canonicalId: string,
-  locale: "ru" | "uk" | "pl",
+  locale: "ru" | "uk" | "pl" | "be",
 ): string | null {
   try {
+    // Inventories ship PL + RU titles only. UK/BEL must use curated concept-labels
+    // maps — never fall back to Russian SoT on a Ukrainian/Belarusian path.
+    if (locale === "uk" || locale === "be") return null;
     const entry = loadCurriculumConceptTitles().get(canonicalId);
     if (!entry) return null;
     const pick =
