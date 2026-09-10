@@ -8,11 +8,12 @@
 **Post–stop-rule micro-fixes (2026-09-10):** ~**33 / 50** — server play-proof + PS L02/L03 listening + foil fix (`e7c7b1a`). Still **EXTERNAL** until live HTTPS or JPJO. Not a marketed wave.  
 **Static listening audio (PS + café):** ~**33.5–34 / 50** — six edge-tts MP3s; stimulus `audioUrl` without `textPl`.  
 **Full A1 assessed-listening audio (2026-09-10):** ~**34.5 / 50** — **15 / 15** static MP3s wired (sklep + droga + urząd L01–L03 added). §3 listening path at interim ceiling (edge-tts ≠ studio). GitHub Environment `private-beta` shell **exists** (secrets empty). **Primary deploy path: Vercel + Neon/Supabase** (Railway secondary). No live HTTPS. No JPJO. No fake PUBLISHED.
+**Post–Vercel preflight (2026-09-10):** ~**35 / 50** — `scripts/vercel-neon-preflight.ps1` + FOUNDER helpers; local day-1 bakeoff checklist; JPJO one-page checklist. `pnpm --dir web build` **PASS**. Probe: `gh` OK; `vercel whoami` **no credentials**; no `.vercel` link. Still waiting Neon+Vercel human. No live HTTPS claimed.
 
-### Critical re-score (post full audio) — `/50`
+### Critical re-score (post preflight) — `/50`
 
 | # | Criterion | /5 | Note |
-| --- | --- | --- | --- |
+| --- | --- | ---: | --- |
 | 1 | Session-1 life loop | 3.5 | Local closed-beta PASS; live invite path unproven |
 | 2 | Feedback that teaches | 4.0 | incorrect + L1 on deepened halls |
 | 3 | Listening + speaking path | 4.0 | All 15 assessed listen have `audio_url`; speaking still interim |
@@ -20,16 +21,20 @@
 | 5 | Zero civilian ops jargon | 3.5 | Preview honesty; staff jargon out of learner chrome |
 | 6 | BEL first-class L1 | 3.5 | Notes present; UI locale share remains |
 | 7 | Content honesty contract | 4.0 | DRAFT + banner; no fake PUBLISHED |
-| 8 | Deploy teaches someone | 3.0 | Runbooks + env shell; secrets / HTTPS EXTERNAL |
+| 8 | Deploy teaches someone | 3.5 | Preflight + runbooks; secrets / HTTPS still EXTERNAL |
 | 9 | Admin ≤ learner craft | 3.5 | Freeze held |
-| 10 | Competitive first week | 3.0 | Script only; not run with invitees |
-| | **Total** | **~34.5** | Still far from reference; EXTERNAL wall |
+| 10 | Competitive first week | 3.0 | Local day-1 checklist added; live week still FAIL / not run |
+| | **Total** | **~35** | Still far from reference; EXTERNAL wall |
 
 ### Waiting on founder (EXTERNAL)
 
 **Blocked on human-owned steps only** — Neon/Supabase + Vercel project + env vars → `pnpm db:migrate` → live `BASE_URL` health·ready, and/or independent JPJO. Code cannot unlock this.
 
-**Run:** [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) (primary on Windows) — see [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Paste the wizard’s Done/Blocked block back into chat when finished. Do not invent secrets; do not claim HTTPS without curl 200.
+**Run (Windows):**
+1. [`scripts/vercel-neon-preflight.ps1`](../../scripts/vercel-neon-preflight.ps1) — fast config/auth probe (primary helper alongside wizard).
+2. [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) — interactive secret capture + Done/Blocked paste-back.
+
+See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not invent secrets; do not claim HTTPS without curl 200.
 
 ### STOP RULE
 
@@ -44,10 +49,13 @@
 | Founder unblock one-pager + interactive wizard | **Done** — [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + `scripts/founder-unblock.ps1` |
 | GitHub Environment `private-beta` shell | **Done** — created via `gh api …/environments/private-beta` PUT; **secrets still empty** |
 | Deploy story → Vercel + Neon/Supabase primary | **Done docs/config** — founder still must create Neon + Vercel accounts |
+| Vercel+Neon preflight script | **Done** — [`scripts/vercel-neon-preflight.ps1`](../../scripts/vercel-neon-preflight.ps1); stops when `vercel login` / secrets missing |
+| Local day-1 competitive checklist | **Done** — in [`competitive-week1-bakeoff.md`](./competitive-week1-bakeoff.md); live week still **FAIL** until HTTPS |
+| JPJO one-page reviewer checklist | **Done** — in hall packet; status remains `NOT_STARTED` |
 | Static assessed-listening audio — all 5 A1 halls L01–L03 | **Done** — **15×** MP3 under `web/public/audio/a1/`; YAML `audio_url`; see [`audio-assets.md`](../operations/audio-assets.md) |
 | JPJO hall packet inventory refresh | **Done** — status remains `NOT_STARTED` |
 
-Score estimate ~**34.5 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL**.
+Score estimate ~**35 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL** (Neon + Vercel).
 
 ### Local closed-beta smoke (2026-09-10)
 
@@ -111,14 +119,14 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 1. Static edge-tts ≠ studio listening (FUN-110 / V2). All assessed items now have `audioUrl` (no `textPl` on stimulus) — still interim Neural TTS.
 2. Speaking recognition best-effort — not exam scoring.
 3. All content **DRAFT** — no JPJO PUBLISHED hall (§7). **EXTERNAL**
-4. Competitive week-1 not yet **run** with real invitees (script only).
-5. Live HTTPS not proven without Neon/Vercel (human). **EXTERNAL** — founder path: [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md).
+4. Competitive week-1 not yet **run** with real invitees (local day-1 checklist exists; live still FAIL).
+5. Live HTTPS not proven without Neon/Vercel (human). **EXTERNAL** — founder path: [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + preflight.
 6. Admin vs learner craft — freeze held; recheck §9 after player polish.
 7. ~~Play-gate is client-side only~~ — **mitigated**: server requires `listeningPlayToken` (stimulus or `tts_unavailable` unlock). Still interim vs studio audio.
 
 ## After STOP RULE — human unlock only
 
-Do **not** start Wave 7 as another content deepen. Founder path = run [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) → [FOUNDER-UNBLOCK-NOW.md](../operations/FOUNDER-UNBLOCK-NOW.md) + [external-unblock-wizard.md](../operations/external-unblock-wizard.md):
+Do **not** start Wave 7 as another content deepen. Founder path = [`scripts/vercel-neon-preflight.ps1`](../../scripts/vercel-neon-preflight.ps1) then [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) → [FOUNDER-UNBLOCK-NOW.md](../operations/FOUNDER-UNBLOCK-NOW.md) + [external-unblock-wizard.md](../operations/external-unblock-wizard.md):
 
 1. **Live HTTPS proof** — Neon + Vercel env + migrate + `BASE_URL` health/ready (§1–§2, §4).
 2. **JPJO human review** — calendar + first hall APPROVE/REJECT in packet (§3; no AI self-approve).

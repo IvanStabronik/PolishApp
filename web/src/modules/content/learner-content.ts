@@ -8,7 +8,6 @@ import {
   findLessonById,
   getModuleById as getYamlModule,
   listPreviewModules,
-  loadAllModulesFromYaml,
   type ContentAccessContext,
 } from "@/lib/content/load-module";
 import type { DraftModule } from "@/lib/content/types";

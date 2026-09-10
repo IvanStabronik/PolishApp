@@ -20,6 +20,27 @@ Allowed status values: `NOT_STARTED` · `IN_REVIEW` · `COMPLETED`.
 
 ---
 
+## One-page reviewer checklist (print / paste)
+
+Status stays `NOT_STARTED` until a human starts. AI must not tick APPROVE.
+
+| ☐ | Gate | Pass criteria |
+| --- | --- | --- |
+| ☐ | Access | DRAFT preview path opens; banner honest; no PUBLISHED claim |
+| ☐ | L01 Polish | Adult spoken PL (pan/pani); no calque dialogue |
+| ☐ | L02 Polish | Same bar; identity / pochodzenie natural |
+| ☐ | L03 Polish | Same bar; hall exit coherent |
+| ☐ | Keys | Correct options pedagogically right; distractors = adult L1 traps |
+| ☐ | L1 notes | UK / RU / BEL distinct on ≥2 wrong answers each locale spot-check |
+| ☐ | Listening ×3 | Play-then-answer; same-scenario foils; no visible stimulus as key |
+| ☐ | Speaking ×3 | Training honesty; no exam-score theater |
+| ☐ | Provenance | `status: DRAFT`, `reviewer_id: null` until this review completes |
+| ☐ | Verdict | Fill log → set packet `IN_REVIEW` → `COMPLETED`; **do not** publish YAML |
+
+**Reviewer:** ________ **Date:** ________ **Hall verdict:** `APPROVE` / `APPROVE_WITH_CHANGES` / `REJECT` / `NEEDS_EVIDENCE`
+
+---
+
 ## Wave 6+ inventory (honest counts — still DRAFT)
 
 | Lesson | Lesson ID | Speaking | Assessed listening | Exercises (approx) |

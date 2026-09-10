@@ -64,7 +64,28 @@
 - Weak incorrect+L1 repair.
 - Hard to narrate “what I can do tomorrow at the urząd.”
 
-## Operator log (fill when running)
+## Local day-1 checklist (closed-beta laptop — no live HTTPS)
+
+Run against [local-closed-beta.md](../operations/local-closed-beta.md) only. Fill boxes yourself. Product verdict for **live** competitive week stays **FAIL** until HTTPS invite path is proven.
+
+**Prereq:** local Postgres up, `.env.local` closed-beta shape, `pnpm dev`, health/ready 200 on `http://127.0.0.1:3000`.
+
+| # | Check (operator) | Pass? | Notes |
+| ---: | --- | :---: | --- |
+| L1 | Create invite (admin) → open invite URL in private window | ☐ | |
+| L2 | Accept invite → set L1 (UK/RU/BEL) → finish onboarding without staff | ☐ | |
+| L3 | Open Pierwsze spotkanie (or first DRAFT hall) as previewer | ☐ | |
+| L4 | Complete one lesson end-to-end (dialogue → practice → at least one wrong answer with incorrect+L1) | ☐ | |
+| L5 | Assessed listening: play starts before submit (or TTS-unavailable unlock) | ☐ | |
+| L6 | Speaking step present with honesty (not exam scoring claim) | ☐ | |
+| L7 | After lesson: can name tomorrow’s life task in plain language (no GR-/FN- IDs) | ☐ | |
+| L8 | Same sitting: open a Telegram Polish phrasebot → 10 min dump of greetings | ☐ | |
+| L9 | Honest compare: scenarios+register+repair vs phrase volume / friction | ☐ | |
+
+**Local day-1 result:** `LOCAL_PASS` / `LOCAL_FAIL` / `NOT_RUN` — ____  
+**Live week-1 verdict:** remains **FAIL** until Neon+Vercel HTTPS + real invitees (see protocol above). Do not upgrade this row from local alone.
+
+## Operator log (fill when running live or local series)
 
 | Day | SŁOWARIUM (min / pass?) | Phrasebot (min / pass?) | Notes |
 | --- | --- | --- | --- |

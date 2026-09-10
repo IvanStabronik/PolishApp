@@ -5,12 +5,22 @@
 
 **Contract (must match live):** `BETA_ALLOW_DRAFT=true`, `DEMO_MODE=false`, `DEMO_PREVIEW=false`.
 
-**Primary path (Windows):** interactive wizard — human-owned steps only; prompts each secret by name (never invents); prints Done/Blocked to paste back into chat.
+**Primary helpers (Windows):**
+
+1. **Preflight (fast, non-interactive)** — validates `vercel.json` + content tracing, lists required env **names**, prints migrate placeholders, probes `vercel`/`gh` auth. Stops cleanly when secrets/login missing. Never invents values.
 
 ```powershell
 cd D:\MyProjects\PolishApp
-pwsh -File scripts\founder-unblock.ps1
-# or: powershell -ExecutionPolicy Bypass -File scripts\founder-unblock.ps1
+powershell -ExecutionPolicy Bypass -File scripts\vercel-neon-preflight.ps1
+# optional: -OpenBrowsers   # opens Neon + Vercel new-project URLs
+```
+
+2. **Interactive wizard** — human-owned steps only; prompts each secret by name (never invents); prints Done/Blocked to paste back into chat.
+
+```powershell
+cd D:\MyProjects\PolishApp
+powershell -ExecutionPolicy Bypass -File scripts\founder-unblock.ps1
+# or: pwsh -File scripts\founder-unblock.ps1
 ```
 
 Optional (Git Bash / WSL / macOS): `bash scripts/founder-unblock.sh`
@@ -150,14 +160,15 @@ Until then: local closed-beta only. Score stays ~**34.5 / 50** EXTERNAL (HTTPS/J
 
 **Exact next commands (human):**
 
-1. Create Neon (or Supabase) project → copy `DATABASE_URL`.
+1. Create Neon (or Supabase) project → copy pooled + direct `DATABASE_URL`.
 2. Import `IvanStabronik/PolishApp` on Vercel → set env from `.env.production.example`.
 3. `pnpm db:migrate` against the direct DB URL.
 4. Curl health/ready on the `*.vercel.app` host.
 
 ```powershell
 cd D:\MyProjects\PolishApp
-pwsh -File scripts\founder-unblock.ps1
+powershell -ExecutionPolicy Bypass -File scripts\vercel-neon-preflight.ps1 -OpenBrowsers
+powershell -ExecutionPolicy Bypass -File scripts\founder-unblock.ps1
 ```
 
 ---
