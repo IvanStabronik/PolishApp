@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-01
 slug: bilet-i-droga
-version: 2
+version: 3
 status: DRAFT
 title_pl: Bilet i droga
 sort_order: 1
@@ -88,14 +88,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Не ставте «ей» замість Przepraszam. Уважно з do/na: do dworca,
-      na przystanek / bilet na autobus — різні рамки.
+      «Ей» → не замість Przepraszam. do dworca ≠ *на dworzec; bilet na autobus —
+      окрема рамка від напрямку.
     rus: >
       «На вокзал» часто даёт *na dworzec вместо do dworca. Не говорите
       ty прохожему; держите Przepraszam + вопрос.
     bel: >
-      Не калькуйце «на вакзал / на прыпынак» без польскай rekcji.
-      Przepraszam… і do + Gen — асобныя формулы; без ty да незнаёмца.
+      «На вакзал / на прыпынак» не робіць *na dworzec. Przepraszam… + do + Gen;
+      без ty да незнаёмца.
 grammar_points:
   - id: GP-A1-DT-DO-NA-BILET
     title_pl: do / na · bilet · odjazd
@@ -124,24 +124,23 @@ grammar_points:
       - GR-TIME-EXPR-01
     l1_notes:
       ukr: >
-        ERR-тип do/na: *їхати на автобусі vs autobusem; do dworca ≠ *на dworzec
-        у польській рамці напрямку.
+        *їхати на автобусі → autobusem; do dworca ≠ *на dworzec.
       rus: >
         «На автобусе» и «до вокзала» путают предлоги. Учите dojechać do + Gen
         и bilet na + Acc целиком.
       bel: >
-        Не пераносьце бел. «на прыпынак» у *na przystanek як адзіную мадэль
-        для ўсіх мэт; раздзяляйце do / na па дыялогу.
+        «На прыпынак» ≠ адзіная мадэль. do + Gen для мэты; bilet na + Acc —
+        асобна.
 l1_notes:
   ukr: >
-    Урок про дорогу і квиток: Przepraszam, prosto/w prawo, do + Gen,
-    bilet na…, O której…? Не калькуйте «на вокзал / на автобусі» дослівно.
+    Не калькуйте «на вокзал / на автобусі». Тримайте do + Gen, bilet na…,
+    O której…?; до незнайомця — Przepraszam, не «ей».
   rus: >
     Фокус: do vs na в городе и в билете, без ty к незнакомцу. Слушайте
     ориентиры как шаги; время отправления — формулой O której…?
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Арыенціры і bilet —
-    польскія рамкі; пісьмо назваў ліній без акання.
+    Не спадзявайцеся на «і так зразумеюць». do… / bilet na… / O której…? —
+    асобныя польскія рамкі; пісьмо ліній без акання.
 steps:
   - id: step-situation
     kind: situation
@@ -568,7 +567,8 @@ provenance:
     - "Curriculum links: SCN-A1-DIRECTIONS-01, SCN-A1-TICKET-01, FN-A1-DIRECT-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
-    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
-    not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on direction and ticket traps; adult RU chrome retained.
+    DRAFT — pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only

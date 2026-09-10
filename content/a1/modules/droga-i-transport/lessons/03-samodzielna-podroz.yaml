@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-03
 slug: samodzielna-podroz
-version: 2
+version: 3
 status: DRAFT
 title_pl: Samodzielna podróż
 sort_order: 3
@@ -83,15 +83,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Починайте з Przepraszam. Ланцюжок «зупинка → лінія → квиток → вихід»
-      тримайте польськими формулами — не збирайте «де / на центр / дай квиток»
-      дослівно з української.
+      «Де / на центр / дай квиток» → gdzie… / jedzie do… / Poproszę bilet na….
+      Ланцюжок польськими формулами; старт — Przepraszam.
     rus: >
       Не говорите ty прохожему или продавцу. Учите четыре шага целиком:
       gdzie… / czy … do… / bilet na… / na którym… — без кальки «скажи мне».
     bel: >
-      Не калькуйце «скажы мне» ў *Ty mi powiedz. Трымайце Przepraszam
-      і польскія крокі: прыпынак, лінія, квіток, выход — асобна ад L1.
+      «Скажы мне» не робіць *Ty mi powiedz. Прыпынак → лінія → квіток → выход —
+      асобныя польскія рамкі; без ty.
 grammar_points:
   - id: GP-A1-DT-L3
     title_pl: Od drogi do przejazdu
@@ -116,25 +115,24 @@ grammar_points:
       - GR-NUM-MONEY-01
     l1_notes:
       ukr: >
-        ERR-тип do/na: *їхати на центр vs jedzie do centrum; квиток —
-        bilet na tramwaj, не *bilet do tramwaj.
+        *їхати на центр → jedzie do centrum; квиток — bilet na tramwaj,
+        не *bilet do tramwaj.
       rus: >
         «На центр» и «билет на трамвай» путают предлоги. Учите jedzie do + Gen
         и bilet na + Acc целиком.
       bel: >
-        Не пераносьце «на цэнтр / квіток да трамвая» у польскую рамку.
-        Раздзяляйце do / na па дыялогу.
+        «На цэнтр / квіток да трамвая» → do centrum / bilet na tramwaj.
+        do і na — розныя рамкі.
 l1_notes:
   ukr: >
-    Урок про самостійну поїздку: Gdzie jest…, Czy … jedzie do…,
-    Poproszę bilet na…, Na którym przystanku…? Починайте з Przepraszam;
-    не калькуйте «на центр / дай квиток».
+    Не калькуйте «на центр / дай квиток». Тримайте gdzie…, jedzie do…,
+    bilet na…, Na którym…?; старт — Przepraszam.
   rus: >
     Фокус: остановка → линия → билет → выход, без ty к незнакомцу.
     Держите do для цели и na для билета; выход — формулой Na którym…?
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Прыпынак, лінія,
-    квіток і выход — польскія рамкі; лічэбнікі прыпынкаў без акання.
+    Не спадзявайцеся на «і так зразумеюць». gdzie… / do… / bilet na… /
+    Na którym…? — асобныя польскія рамкі; лічэбнікі без акання.
 steps:
   - id: step-l3-situation
     kind: situation
@@ -486,7 +484,8 @@ provenance:
       LEX-A1-TRANSPORT, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
-    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
-    not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on solo-trip traps; adult RU chrome retained. DRAFT —
+    pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only

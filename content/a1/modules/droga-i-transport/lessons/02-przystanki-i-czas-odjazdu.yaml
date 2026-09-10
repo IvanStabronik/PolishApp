@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-02
 slug: przystanki-i-czas-odjazdu
-version: 2
+version: 3
 status: DRAFT
 title_pl: Przystanki i czas odjazdu
 sort_order: 2
@@ -82,14 +82,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Починайте з Przepraszam. Три питання тримайте цілими формулами —
-      не збирайте «який автобус / на якій / о котрій» дослівно з української.
+      «Який автобус / на якій / о котрій» → który… / na którym… / o której…
+      цілком. Починайте з Przepraszam, не «скажи мені».
     rus: >
       Не говорите ty пассажиру. Учите три вопроса целиком: który autobus…
       / na którym przystanku… / o której… — без кальки «скажи мне».
     bel: >
-      Не калькуйце «скажы мне» ў *Ty mi powiedz. Трымайце Przepraszam
-      і польскія пытанні пра лінію, выход і час асобна ад L1.
+      «Скажы мне» не робіць *Ty mi powiedz. Przepraszam + który / na którym /
+      o której — асобныя польскія рамкі.
 grammar_points:
   - id: GP-A1-DT-L2
     title_pl: Linia, przystanek i godzina
@@ -114,24 +114,24 @@ grammar_points:
       - GR-NUM-MONEY-01
     l1_notes:
       ukr: >
-        ERR-тип: *який автобус на центр vs który autobus jedzie do centrum;
-        вихід — na którym przystanku, не калька «на якій».
+        *який автобус на центр → który autobus jedzie do centrum; вихід —
+        na którym przystanku, не «на якій».
       rus: >
         «Какой автобус на центр» часто ломает рамку. Учите który… do + Gen
         и O której odjeżdża… целиком.
       bel: >
-        Не пераносьце «які аўтобус на цэнтр» у польскую рамку. Раздзяляйце
-        który / na którym / o której па дыялогу.
+        «Які аўтобус на цэнтр» → który… do + Gen. który / na którym / o której —
+        тры асобныя формулы.
 l1_notes:
   ukr: >
-    Урок про лінію, вихід і час: Który autobus…, Na którym przystanku…,
-    O której…? Починайте з Przepraszam; не калькуйте «скажи мені».
+    Не калькуйте «скажи мені / який на центр». Тримайте który… do…,
+    na którym przystanku…, O której…?; старт — Przepraszam.
   rus: >
     Фокус: линия → остановка выхода → время отправления, без ty к
     незнакомцу. Слушайте номер и ориентир вместе; время — формулой O której…?
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Лінія, выход і час —
-    польскія рамкі; лічэбнікі прыпынкаў без акання.
+    Не спадзявайцеся на «і так зразумеюць». który… / na którym… / o której… —
+    асобныя польскія рамкі; лічэбнікі прыпынкаў без акання.
 steps:
   - id: step-l2-situation
     kind: situation
@@ -483,7 +483,8 @@ provenance:
       LEX-A1-TRANSPORT, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
-    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
-    not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on line, stop, and departure traps; adult RU chrome retained.
+    DRAFT — pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
