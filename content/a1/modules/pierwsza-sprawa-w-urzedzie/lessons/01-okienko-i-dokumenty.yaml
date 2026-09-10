@@ -1,18 +1,18 @@
 kind: lesson
 canonical_id: LES-A1-UR-01
 slug: okienko-i-dokumenty
-version: 1
+version: 2
 status: DRAFT
 title_pl: Okienko i dokumenty
 sort_order: 1
 situation_ru: >
-  Вы впервые подошли к окошку urzędu в Польше. Нужно поздороваться, назвать
-  цель визита (sprawa), передать документы и при необходимости попросить
-  formularz. Служащий — взрослый незнакомец; регистр pan/pani обязателен.
+  Вы впервые подошли к окошку urzędu в Польше. Нужно поздороваться, сказать,
+  зачем пришли (sprawa), передать документы и при необходимости попросить
+  formularz. Служащий — взрослый незнакомец; речь спокойная, на pan/pani.
 objective_ru: >
   Открыть контакт, сказать Przyszedłem/Przyszłam w sprawie…, передать
-  dokumenty, попросить formularz при необходимости и закрыть визит —
-  удерживая официальный pan/pani.
+  dokumenty, попросить formularz при необходимости и спокойно попрощаться —
+  на pan/pani, не на ty.
 curriculum_links:
   scenarios:
     - SCN-A1-URZAD-01
@@ -60,22 +60,21 @@ key_lines:
   - text_pl: Przyszłam w sprawie meldunku.
     explanation_ru: >
       Цель визита одной фразой: Przyszedłem/Przyszłam w sprawie + Gen.
-      Род прошедшего согласуется с говорящим; не опускайте w sprawie….
+      Род прошедшего — по говорящему; не опускайте w sprawie….
   - text_pl: Oto mój paszport i wniosek.
     explanation_ru: >
-      Передача документов: Oto + названные позиции. Служащий должен понять
-      комплект без догадок.
+      Передача документов: Oto + то, что вы кладёте на стол. Служащий
+      сразу видит комплект — без догадок.
   - text_pl: Czy mogę prosić o formularz?
     explanation_ru: >
-      Просьба о бланке в официальном регистре; альтернатива — Proszę o formularz.
+      Спокойная просьба о бланке. Короче тоже можно: Proszę o formularz.
   - text_pl: Nazywam się… / Dziękuję. Do widzenia.
     explanation_ru: >
-      Идентификация по запросу и вежливое закрытие контакта у окошка.
+      Назвать себя, если спросили, и спокойно закрыть разговор у окошка.
 pan_pani:
   summary_ru: >
-    В urzędzie к служащему-незнакомцу — только pan/pani и 3-е лицо в обращении
-    к вам со стороны персонала (Czy ma pani…?). Форма ty и cześć недопустимы
-    на первом визите у окошка.
+    В urzędzie к служащему-незнакомцу — pan/pani. К вам обратятся в 3-м лице
+    (Czy ma pani…?). Форма ty и cześć на первом визите у окошка — не к месту.
   form: "Przyszedłem / Przyszłam w sprawie… · Oto dokumenty · Proszę o formularz."
   examples_pl:
     - Przyszłam w sprawie meldunku.
@@ -92,8 +91,9 @@ pan_pani:
       pan/pani; «ти» і cześć у першому візиті до окошка — помилка регістру.
       Przyszłam / Przyszedłem узгоджуйте з власною статтю.
     rus: >
-      «Вы» + 2 л. мн. (*Вы можете…?*) к служащему — типичная ошибка.
-      К вам скажут Czy ma pani…? (3 л.). Не *Daj formularz; цель — w sprawie….
+      «Вы» + 2 л. мн. (*Вы можете…?) к служащему — типичная ошибка.
+      К вам скажут Czy ma pani…? (3 л.). Не *Daj formularz; цель —
+      w sprawie….
     bel: >
       Не пераносьце бел. «вы» як wy да служачага. Афіцыйны рэгістр —
       pan/pani; Przyszłam/Przyszedłem + w sprawie… без калькі «па справе»
@@ -102,15 +102,15 @@ grammar_points:
   - id: GP-A1-UR-SPRAWA-DOCS
     title_pl: w sprawie… · dokumenty · formularz
     summary_ru: >
-      Цель визита и документооборот у окошка: w sprawie + Gen, Oto + документы,
-      prośba o formularz.
+      Два коротких куска у окошка: цель визита (w sprawie + Gen) и документы
+      (Oto…, prośba o formularz).
     form: >
       Przyszedłem / Przyszłam w sprawie + Gen. Oto + Acc (paszport, wniosek).
       Proszę o formularz / Czy mogę prosić o formularz?
     meaning: >
-      Сориентировать служащего и обеспечить передачу/получение документов.
+      Сориентировать служащего и спокойно передать или получить документы.
     use: >
-      Короткий визит к одному okienku без апелляций; затем ожидание numeru.
+      Короткий визит к одному okienku; затем ожидание numeru.
     examples_pl:
       - Przyszłam w sprawie meldunku.
       - Oto mój paszport i wniosek.
@@ -129,8 +129,8 @@ grammar_points:
         Після w sprawie потрібен Gen (*meldunku*), не називний. Не *для PESEL
         замість w sprawie…. Рід: Przyszłam / Przyszedłem.
       rus: >
-        «По делу» → w sprawie + Gen, не *w sprawa / *dla PESEL. Род прошедшего
-        согласуйте; документы называйте явно (Oto…).
+        «По делу» → w sprawie + Gen, не *w sprawa / *dla PESEL. Род
+        прошедшего согласуйте; документы называйте явно (Oto…).
       bel: >
         Не калькуйце «па справе» без Gen. Трымайце Przyszłam/Przyszedłem і
         Oto… як цэлыя рамкі; без ty да служачага.
@@ -139,7 +139,7 @@ l1_notes:
     Урок про перше вікно urzędu: Przyszłam/Przyszedłem w sprawie…, Oto
     dokumenty, prośba o formularz. Не cześć / ty; pan/pani обовʼязковий.
   rus: >
-    Фокус: цель визита одной фразой и передача документов без ty к служащему.
+    Цель одной фразой и передача документов — без ty к служащему.
     Запомните w sprawie + Gen и Oto…; род прошедшего — по говорящему.
   bel: >
     Асобны акцэнт BEL: не капіюйце рускія нотаткі. Афіцыйныя рамкі польскія;
@@ -157,13 +157,13 @@ steps:
     dialogue_ref: primary
   - id: step-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-UR-SPRAWA-DOCS
   - id: step-practice
     kind: practice
@@ -179,20 +179,20 @@ steps:
       - ex-ur-08
   - id: step-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids:
       - ex-ur-09
       - ex-ur-10
   - id: step-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-ur-01
     canonical_id: EX-A1-UR-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: "Как вежливо назвать цель визита у окошка?"
+    prompt: "У окошка. Как спокойно назвать цель визита?"
     options:
       - id: a
         text: Przyszłam w sprawie meldunku.
@@ -210,8 +210,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
-      correct: "Przyszłam w sprawie… — цель одной фразой в официальном регистре."
-      incorrect: "Cześć / приказ — неверный регистр для urzędu."
+      correct: "Przyszłam w sprawie… — цель одной фразой, спокойный регистр."
+      incorrect: "Cześć / приказ — слишком свои или слишком резко для urzędu."
       hint: "Ищите формулу Przyszedłem/Przyszłam w sprawie…"
       l1:
         ukr: "Не ставте cześć і не калькуйте «для PESEL» замість w sprawie…"
@@ -249,7 +249,7 @@ exercises:
       - LEX-A1-DOCS
     feedback:
       correct: "Oto + названные документы — понятная передача комплекта."
-      incorrect: "Разговорный / неясный регистр не закрывает слот документов."
+      incorrect: "Слишком разговорно или неясно — служащий не поймёт комплект."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -282,8 +282,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
-      correct: "Czy mogę prosić o formularz? — официальная просьба о бланке."
-      incorrect: "Daj / ty — недопустимы у окошка."
+      correct: "Czy mogę prosić o formularz? — спокойная просьба о бланке."
+      incorrect: "Daj / ty — слишком резко для окошка."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -322,8 +322,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
-      correct: "Приветствие+цель, документы и закрытие — уместны."
-      incorrect: "Hej, szybko… — грубый регистр для urzędu."
+      correct: "Приветствие с целью, документы и спокойное прощание — уместны."
+      incorrect: "Hej, szybko… — слишком грубо для urzędu."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -360,8 +360,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
-      correct: "Передача, просьба о бланке и недостающий документ — слоты DOCS."
-      incorrect: "Cześć, co tam? — неформальный регистр, не документооборот."
+      correct: "Передача, просьба о бланке и недостающий документ — про документы."
+      incorrect: "Cześć, co tam? — неформальный регистр, не про документы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -391,7 +391,7 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
-      correct: "w sprawie… — опорная рамка цели визита."
+      correct: "w sprawie… — обычная рамка цели визита."
       incorrect: "Нужна форма sprawie в рамке w sprawie…"
       l1:
         ukr: "Не *w sprawa / *для meldunku замість w sprawie…"
@@ -465,7 +465,7 @@ exercises:
       - FN-A1-DOCS-01
       - FN-A1-GREET-01
     feedback:
-      correct: "Приветствие+цель → документы → бланк → прощание."
+      correct: "Приветствие и цель → документы → бланк → прощание."
       incorrect: "Сначала цель, потом документы и бланк, затем закрытие."
     provenance:
       originality: created_for_product
@@ -481,7 +481,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Соберите слоты цели и документов."
+    prompt: "Соберите порядок: цель, документы, бланк."
     items:
       - id: s1
         text: Przyszłam w sprawie meldunku.
@@ -534,7 +534,7 @@ exercises:
     mini_check: true
     feedback:
       correct: "Przyszłam w sprawie meldunku — Gen после w sprawie."
-      incorrect: "Називний / L1-порядок ломают рамку цели."
+      incorrect: "Именительный или L1-порядок ломают рамку цели."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -553,13 +553,13 @@ mini_check:
     - GR-TNS-PRS-01
     - GR-CAS-ACC-01
 result_metadata:
-  title_ru: Результат урока
+  title_ru: Итог урока
   success_ru: >
-    Мини-проверка пройдена. Вы можете назвать цель визита, передать документы
-    и попросить бланк в коротком диалоге у окошка (DRAFT preview).
+    Короткая проверка пройдена. Вы можете назвать цель визита, передать
+    документы и попросить бланк в коротком диалоге у окошка (DRAFT preview).
   retry_ru: >
-    Повторите Przyszłam/Przyszedłem w sprawie…, Oto… и prośba o formularz,
-    затем пройдите мини-проверку снова.
+    Повторите Przyszłam/Przyszedłem w sprawie…, Oto… и просьбу о formularz,
+    затем пройдите короткую проверку снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-PURPOSE-01
@@ -577,5 +577,8 @@ provenance:
     - "Original SŁOWARIUM dialogue and exercises — Pierwsza sprawa w urzędzie DRAFT"
     - "Curriculum links: SCN-A1-URZAD-01, FN-A1-PURPOSE-01, FN-A1-DOCS-01"
   ai_assisted: true
-  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
+  notes: >
+    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
+    DRAFT — not JPJO-approved, not published to learners. reviewer_id is null
+    (no fake review evidence).
 visibility: internal_preview_only

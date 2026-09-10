@@ -1,19 +1,19 @@
 kind: module
 canonical_id: MOD-A1-PIERWSZA-SPRAWA-W-URZEDZIE
 slug: pierwsza-sprawa-w-urzedzie
-version: 1
+version: 2
 status: DRAFT
 level: A1
 title_pl: Pierwsza sprawa w urzędzie
 working_title: Pierwsza sprawa w urzędzie
 situation_ru: >
-  Первый короткий визит к окошку urzędu: поздороваться, назвать цель
-  визита, передать базовые документы и попросить бланк при необходимости.
-  Один служащий, без апелляций; регистр pan/pani обязателен.
+  Короткий визит к окошку urzędu в Польше: поздороваться, сказать, зачем
+  вы пришли, передать документы и при необходимости попросить бланк.
+  Один служащий, без сложных жалоб; речь на pan/pani.
 objective_ru: >
-  После модуля учащийся может открыть контакт в urzędzie, сказать
-  Przyszedłem/Przyszłam w sprawie…, передать dokumenty и удержать
-  официальный адрес pan/pani до закрытия визита.
+  Вы можете открыть разговор у окошка, сказать Przyszedłem/Przyszłam
+  w sprawie…, передать dokumenty и дойти до спокойного прощания —
+  на pan/pani, не на ty.
 curriculum_links:
   scenarios:
     - SCN-A1-URZAD-01
@@ -46,6 +46,8 @@ provenance:
     - "Common-knowledge Polish institutional register patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). DRAFT — pending human review; not JPJO-approved, not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
+    adult RU situation/objective. DRAFT — pending human review; not JPJO-approved,
+    not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true
