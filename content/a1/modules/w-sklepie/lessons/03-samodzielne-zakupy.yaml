@@ -1,12 +1,17 @@
 kind: lesson
 canonical_id: LES-A1-WS-03
 slug: samodzielne-zakupy
-version: 1
+version: 2
 status: DRAFT
 title_pl: Samodzielne zakupy
 sort_order: 3
-situation_ru: Вы самостоятельно выбираете несколько товаров, корректируете количество и завершаете покупку.
-objective_ru: Провести покупку от выбора до чека, реагируя на вопрос кассира без готовой подсказки.
+situation_ru: >
+  Вы у кассы сами: несколько товаров, уточнение количества, оплата и чек.
+  Кассир может переспросить — отвечайте коротко, без готовой подсказки
+  с экрана. Кассир — взрослый незнакомец; речь спокойная.
+objective_ru: >
+  Пройти покупку от списка до paragon: назвать товары, подтвердить
+  количество, оплатить и попросить чек — на pan/pani, без ty к кассиру.
 curriculum_links:
   scenarios:
     - SCN-A1-SHOP-01
@@ -46,84 +51,110 @@ dialogue:
       text_pl: Dziękuję. Do widzenia.
 key_lines:
   - text_pl: Poproszę ten chleb, mleko i trzy bułki.
-    explanation_ru: Самостоятельный выбор нескольких товаров.
+    explanation_ru: >
+      Список у кассы в одной реплике: Poproszę + товары (Acc) и число.
+      Союз i связывает позиции — не *Daj… и не набор слов без рамки.
   - text_pl: Tak, jedno.
-    explanation_ru: Короткое подтверждение количества.
+    explanation_ru: >
+      Короткий ответ на уточнение кассира: Tak, jedno —
+      без лишних слов и без ty.
   - text_pl: I jeszcze torbę, proszę.
-    explanation_ru: Добавление последней позиции.
+    explanation_ru: >
+      Добавить позицию в конце: I jeszcze…, proszę —
+      спокойно, без *Daj mi.
   - text_pl: Czy mogę dostać paragon?
-    explanation_ru: Полная просьба о чеке.
+    explanation_ru: >
+      Полная просьба о чеке — закрыть покупку без резкости к кассиру.
 pan_pani:
-  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
-    просьбы и благодарность важнее буквального переноса форм L1.
+  summary_ru: >
+    К кассиру-незнакомцу — pan/pani и спокойный сервисный тон:
+    Poproszę…, jeszcze…, Razem…, płacę…. Форма ty и резкое *Daj…
+    — не к незнакомцу у кассы.
   form: Poproszę… · jeszcze… · razem… · płacę…
   examples_pl: &a1
     - Poproszę ten chleb i mleko.
     - Tak, jedno.
     - I jeszcze torbę, proszę.
   counterexamples_pl:
-    - "*Ty mi powiedz."
-    - "*Daj mi to."
+    - "*Ty mi powiedz." # ty к кассиру
+    - "*Daj mi to." # резко
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
-    ukr: Відпрацьовуйте польську рамку «Poproszę… · jeszcze… · razem… · płacę…» цілісно; не складайте її
-      дослівно з українських слів.
-    rus: Отрабатывайте польскую рамку «Poproszę… · jeszcze… · razem… · płacę…» целиком, без дословной
-      кальки с русского.
-    bel: Адпрацоўвайце польскую рамку «Poproszę… · jeszcze… · razem… · płacę…» цалкам; не складайце яе
-      даслоўна з беларускай.
+    ukr: >
+      Не ставте «дайте» як *Daj і не збирайте Poproszę… · jeszcze… ·
+      razem… · płacę… дослівно з українських слів. Тримайте pan/pani
+      до касира.
+    rus: >
+      Не собирайте «попрошу / ещё / итого / плачу» дословной калькой.
+      Poproszę… и I jeszcze… — польские рамки; без ty к кассиру.
+    bel: >
+      Не пераносьце «дайце / яшчэ / разам / плачу» калькай.
+      Poproszę…, jeszcze… і płacę… — асобныя рамкі; без ty да касіра.
 grammar_points:
   - id: GP-A1-WS-L3
     title_pl: Pełna lista zakupów
-    summary_ru: Провести покупку от выбора до чека, реагируя на вопрос кассира без готовой подсказки.
+    summary_ru: >
+      Связать знакомые реплики в одну покупку: список, уточнение,
+      сумма, оплата и чек.
     form: Poproszę A, B i liczbę C. Tak, jedno/dwa. I jeszcze…
-    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
-    use: Вы самостоятельно выбираете несколько товаров, корректируете количество и завершаете покупку.
+    meaning: >
+      Провести покупку от выбора до чека, отвечая на вопрос кассира.
+    use: >
+      Самостоятельный список у кассы; короткое подтверждение количества;
+      итог и оплата.
     examples_pl: *a1
     counterexamples_pl:
-      - "*Ty daj."
-      - "*Ja nie rozumieć."
+      - "*Ty daj." # грубо + ty
+      - "*Ja nie rozumieć." # сломанный глагол
     concept_ids:
       - GR-CAS-ACC-01
       - GR-NUM-MONEY-01
       - GR-NUM-CARD-01
     l1_notes:
-      ukr: Відпрацьовуйте польську рамку «Poproszę A, B i liczbę C. Tak, jedno/dwa. I jeszcze…» цілісно;
-        не складайте її дослівно з українських слів.
-      rus: Отрабатывайте польскую рамку «Poproszę A, B i liczbę C. Tak, jedno/dwa. I jeszcze…» целиком,
-        без дословной кальки с русского.
-      bel: Адпрацоўвайце польскую рамку «Poproszę A, B i liczbę C. Tak, jedno/dwa. I jeszcze…» цалкам; не
-        складайце яе даслоўна з беларускай.
+      ukr: >
+        Список і Tak, jedno тримайте готовими. Не *Daj і не збирайте
+        рамку дослівно з L1.
+      rus: >
+        Не калькируйте весь заказ порядком слов из L1. Jedno / dwa —
+        готовый слот; I jeszcze… добавляет позицию.
+      bel: >
+        Аканне ў сумах на пісьме не пераносіце. Вучыце Poproszę +
+        спіс і Tak, jedno цэлымі формуламі.
 l1_notes:
-  ukr: Відпрацьовуйте польську рамку «Poproszę… · jeszcze… · razem… · płacę…» цілісно; не складайте її
-    дослівно з українських слів.
-  rus: Отрабатывайте польскую рамку «Poproszę… · jeszcze… · razem… · płacę…» целиком, без дословной
-    кальки с русского.
-  bel: Адпрацоўвайце польскую рамку «Poproszę… · jeszcze… · razem… · płacę…» цалкам; не складайце яе
-    даслоўна з беларускай.
+  ukr: >
+    Урок про самостійну покупку: список, Tak, jedno, I jeszcze…,
+    оплата і paragon. Не калькуйте з L1; pan/pani до касира.
+  rus: >
+    Полный заказ у кассы без L1-сборки и без ty. Запомните
+    Poproszę…, Tak, jedno, I jeszcze… и просьбу о paragon целиком.
+  bel: >
+    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Спіс, колькасць
+    і paragon — польскія рамкі; пісьмо сум без акання; без «ты» да касіра.
 steps:
   - id: step-l3-situation
     kind: situation
     title_ru: Ситуация
-    body_ru: Вы самостоятельно выбираете несколько товаров, корректируете количество и завершаете покупку.
+    body_ru: >
+      Самостоятельная покупка у кассы: назвать список, подтвердить
+      количество, оплатить и попросить чек.
   - id: step-l3-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-l3-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-l3-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-WS-L3
   - id: step-l3-practice
     kind: practice
-    title_ru: Самостоятельная практика
+    title_ru: Практика
     exercise_ids:
       - ex-ws-l3-01
       - ex-ws-l3-02
@@ -133,20 +164,20 @@ steps:
       - ex-ws-l3-06
   - id: step-l3-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids: &a2
       - ex-ws-l3-07
       - ex-ws-l3-08
   - id: step-l3-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-ws-l3-01
     canonical_id: EX-A1-WS-L3-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Выберите ясный заказ трёх позиций.
+    prompt: "У кассы. Как ясно заказать три позиции?"
     concept_ids:
       - GR-CAS-ACC-01
     function_ids:
@@ -154,8 +185,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Poproszę и союз i связывают список.
-      incorrect: Остальные варианты не дают вежливого ясного заказа.
+      correct: "Poproszę и союз i связывают список."
+      incorrect: "Остальные варианты слишком обрывисты или грубы у кассы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -177,7 +208,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Какие действия показывают самостоятельность у кассы?
+    prompt: "Что помогает закрыть покупку самостоятельно у кассы?"
     concept_ids:
       - GR-NUM-MONEY-01
     function_ids:
@@ -185,8 +216,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Первые три действия закрывают информационные слоты.
-      incorrect: Кассир не должен угадывать заказ.
+      correct: "Список, подтверждение количества и torba — нужные шаги."
+      incorrect: "Кассир не должен угадывать ваш заказ."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -201,7 +232,7 @@ exercises:
       - id: b
         text: Подтвердить количество
       - id: c
-        text: Добавить нужную торбу
+        text: Добавить torbę, если нужна
       - id: d
         text: Ждать, пока кассир угадает
     correct_option_ids:
@@ -221,8 +252,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: I jeszcze… добавляет позицию.
-      incorrect: Нужно jeszcze.
+      correct: "I jeszcze… добавляет позицию."
+      incorrect: "Нужно jeszcze."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -249,8 +280,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Полная просьба заканчивается названием чека.
-      incorrect: Нужно paragon.
+      correct: "В конце просьбы — слово paragon."
+      incorrect: "Нужно paragon."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -269,7 +300,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: Проведите самостоятельную покупку.
+    prompt: "Расставьте шаги самостоятельной покупки."
     concept_ids:
       - GR-CAS-ACC-01
     function_ids:
@@ -277,8 +308,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Список → уточнение → сумма → оплата.
-      incorrect: Количество уточняют до оплаты.
+      correct: "Список → уточнение → сумма → оплата."
+      incorrect: "Количество уточняют до оплаты."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -306,7 +337,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Кассир спрашивает «Jedno mleko?». Ответьте.
+    prompt: "Кассир спрашивает «Jedno mleko?». Как ответить?"
     concept_ids:
       - GR-NUM-MONEY-01
     function_ids:
@@ -314,8 +345,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Tak, jedno подтверждает количество mleko.
-      incorrect: Jeden не согласуется, ty не отвечает.
+      correct: "Tak, jedno подтверждает количество mleko."
+      incorrect: "Jeden не согласуется; ty не отвечает на вопрос."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -337,7 +368,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Какие реплики уместны после сообщения суммы?
+    prompt: "Какие реплики уместны после суммы у кассы?"
     concept_ids:
       - GR-NUM-CARD-01
     function_ids:
@@ -345,8 +376,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: Подтверждение, оплата и чек следуют после суммы.
-      incorrect: Происхождение не относится к транзакции.
+      correct: "Подтверждение, оплата и чек — после суммы."
+      incorrect: "Вопрос о происхождении к покупке не относится."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -373,7 +404,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Мини-проверка: восстановите кассовый финал."
+    prompt: "Соберите финал у кассы: сумма → оплата → чек → прощание."
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -381,8 +412,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-MONEY
     feedback:
-      correct: Сумма → принятие и оплата → чек → прощание.
-      incorrect: Не прощайтесь до завершения оплаты.
+      correct: "Сумма → принятие и оплата → чек → прощание."
+      incorrect: "Не прощайтесь до завершения оплаты."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -413,11 +444,13 @@ mini_check:
     - GR-NUM-MONEY-01
     - GR-NUM-CARD-01
 result_metadata:
-  title_ru: Результат урока
-  success_ru: Провести покупку от выбора до чека, реагируя на вопрос кассира без готовой подсказки.
-    Результат относится только к DRAFT-превью.
-  retry_ru: "Повторите опорные реплики: Poproszę… · jeszcze… · razem… · płacę…, затем снова выполните
-    мини-проверку."
+  title_ru: Итог урока
+  success_ru: >
+    Короткая проверка пройдена. Вы можете провести покупку от списка
+    до чека и ответить на уточнение кассира (DRAFT preview).
+  retry_ru: >
+    Повторите Poproszę…, Tak, jedno, I jeszcze… и просьбу о paragon,
+    затем пройдите короткую проверку снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-TRANS-01
@@ -436,4 +469,8 @@ provenance:
       FN-A1-ASK-01, FN-A1-ADDRESS-01, FN-A1-CONFIRM-01, FN-A1-THANKS-01 / LEX-A1-SERVICE,
       LEX-A1-MONEY
   ai_assisted: true
+  notes: >
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
+    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
+    not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
