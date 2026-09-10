@@ -5,6 +5,8 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const webRoot = path.dirname(fileURLToPath(import.meta.url));
+/** Monorepo root (sibling of `web/`) — needed so Vercel/NFT can ship `content/`. */
+const repoRoot = path.resolve(webRoot, "..");
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -50,8 +52,14 @@ if (isProd) {
 }
 
 const nextConfig: NextConfig = {
-  // Keep tracing rooted at web/ even if a parent workspace lockfile exists.
-  outputFileTracingRoot: webRoot,
+  // Trace from monorepo root so sibling `content/` (YAML lessons) ships on Vercel.
+  // Docker builds still COPY content/ separately (see web/Dockerfile).
+  outputFileTracingRoot: repoRoot,
+  outputFileTracingIncludes: {
+    "/*": ["./content/**/*", "../content/**/*"],
+    "/api/**/*": ["./content/**/*", "../content/**/*"],
+    "/(.*)": ["./content/**/*", "../content/**/*"],
+  },
   // File-based content lives outside web/ — allow reading at build/runtime.
   serverExternalPackages: ["yaml"],
   output: process.env.DOCKER_BUILD === "1" ? "standalone" : undefined,

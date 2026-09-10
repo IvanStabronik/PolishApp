@@ -1,6 +1,6 @@
 # Deployment architecture v1 — SŁOWARIUM private beta
 
-Status: **provider-portable private beta**. Primary target is **Railway** (Next.js + managed PostgreSQL), but no business logic imports Railway SDKs or hostnames.
+Status: **provider-portable private beta**. **Primary target: Vercel (Next.js) + Neon or Supabase (managed PostgreSQL)**. Railway/Docker remains a secondary/legacy path. No business logic imports provider SDKs or hostnames.
 
 ## Topology
 
@@ -8,74 +8,76 @@ Status: **provider-portable private beta**. Primary target is **Railway** (Next.
 Internet (HTTPS)
     │
     ▼
-[Edge / provider TLS]  ← custom domain ready (CNAME to provider URL)
+[Vercel edge TLS]  ← *.vercel.app or custom domain CNAME
     │
     ▼
-[Web service: Next.js standalone container]
+[Web: Next.js on Vercel]
     │  /api/health  → liveness (no DB)
     │  /api/ready   → readiness (Postgres SELECT 1)
+    │  reads repo content/ via filesystem (NFT tracing)
     ▼
-[Managed PostgreSQL]
+[Managed PostgreSQL — Neon preferred, or Supabase]
     │
-    └── migrations applied by a **separate release job** (advisory lock)
+    └── migrations applied by a **separate** one-off / CI job (advisory lock)
 ```
 
 ## Artifacts
 
 | Artifact | Path / command |
 | --- | --- |
-| Multi-stage Dockerfile | `web/Dockerfile` |
-| Docker ignore | `.dockerignore` |
-| Standalone output | `DOCKER_BUILD=1` → Next `output: "standalone"` |
+| Vercel monorepo config | root `vercel.json` (`pnpm --dir web build`) |
+| Next content tracing | `web/next.config.ts` → `outputFileTracingRoot` + `outputFileTracingIncludes` for `../content` |
+| Multi-stage Dockerfile | `web/Dockerfile` (local / legacy Railway-style hosts) |
+| Standalone output | `DOCKER_BUILD=1` → Next `output: "standalone"` (Docker only; Vercel does not use it) |
 | Env validation | Zod `validateRuntimeEnv` + `src/instrumentation.ts` on boot |
 | Secret generation | `pnpm ops:generate-secret` |
 
 ## Release steps (immutable)
 
-1. **Build** image from git SHA (`docker build -f web/Dockerfile .`).
-2. **Migrate** against production DB from a one-off job / CI gate: `pnpm db:migrate` (Postgres advisory lock `784512309`).
-3. **Deploy** the new image / restart web service.
-4. **Probe** `/api/health` then `/api/ready`.
-5. **Smoke** `pnpm test:e2e:production` with `BASE_URL`.
+1. **Build/deploy** via Vercel Git integration (or Deploy Hook / optional `deploy.yml`).
+2. **Migrate** against production DB from a one-off job / laptop: `pnpm db:migrate` (use Neon **direct** URL if pooler fails; Postgres advisory lock `784512309`).
+3. **Probe** `/api/health` then `/api/ready` on `BASE_URL`.
+4. **Smoke** `pnpm test:e2e:production` with `BASE_URL` (optional).
 
-App start **does not** run migrations (avoids race across replicas).
+App start **does not** run migrations (avoids race across serverless instances).
 
 ## Environment (production)
 
-Required:
+Required (set on **Vercel**):
 
-- `DATABASE_URL`
+- `DATABASE_URL` (Neon pooled preferred for app; direct for migrate)
 - `BETTER_AUTH_SECRET` (≥16; generate via `pnpm ops:generate-secret`)
 - `INVITE_TOKEN_PEPPER`
-- `BETTER_AUTH_URL` / `NEXT_PUBLIC_APP_URL` (https:// public URL)
+- `BETTER_AUTH_URL` / `NEXT_PUBLIC_APP_URL` / `APP_URL` (https:// public URL)
 - `BETA_MODE=true`
+- `BETA_ALLOW_DRAFT=true`
 - `DEMO_MODE=false`
 - `DEMO_PREVIEW=false`
 - `NODE_ENV=production`
 
 Optional:
 
-- `APP_URL`, `TRUSTED_ORIGINS` (comma-separated)
+- `TRUSTED_ORIGINS` (comma-separated)
 - `PRIVACY_AUDIT_SECRET`
 - `ALLOW_PRODUCTION_DEMO` (discouraged; never for real beta)
 
 Cookies: `useSecureCookies` when base URL is `https://`.
 
-CSRF: mutating APIs use `assertSameOrigin`. Browser cookie sessions must present a trusted `Origin` (or trusted `Referer` / `Sec-Fetch-Site: same-origin|none`). Non-browser clients without cookies may omit `Origin` but still need a valid session.
+## Provider notes (Vercel + Neon)
 
-CSP honesty: production CSP omits `unsafe-eval` on `script-src` but still allows `unsafe-inline` for scripts/styles (Next.js App Router constraint). Do not claim a nonce-only CSP.
+Manual (external) steps — see [FOUNDER-UNBLOCK-NOW.md](../operations/FOUNDER-UNBLOCK-NOW.md):
 
-## Provider notes (Railway)
-
-Manual (external) steps — see M5 report:
-
-1. Create Railway project + Postgres plugin.
-2. Set env vars (never commit).
-3. Connect GitHub repo **or** deploy from image.
-4. Run migrate job once per release.
+1. Create Neon (or Supabase) project; copy `DATABASE_URL`.
+2. Import `IvanStabronik/PolishApp` on Vercel; use root `vercel.json` or Root Directory `web`.
+3. Set env vars (never commit).
+4. Run `pnpm db:migrate` once per schema change.
 5. Attach custom domain when ready.
 
 Until credentials exist: **EXTERNAL ACCESS REQUIRED** — code is deployable; URL is not claimed.
+
+## Legacy (Railway / Docker)
+
+`web/Dockerfile` still builds a standalone image with `content/` copied to `/content`. Prefer Vercel for closed beta. GitHub `deploy.yml` keeps Railway as a secondary transport after Vercel hook/CLI.
 
 ## Observability
 

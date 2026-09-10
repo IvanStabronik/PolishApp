@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
 
 # Production image for SŁOWARIUM web (Next.js standalone).
-# Provider-agnostic: works on Railway, Fly, Render, or any Docker host.
+# Legacy / secondary host path (Railway, Fly, Render, or any Docker host).
+# Primary private-beta path is Vercel + Neon/Supabase — see docs/operations/FOUNDER-UNBLOCK-NOW.md.
 # Build from repository root:
 #   docker build -f web/Dockerfile -t slowarium:web .
 #

@@ -7,7 +7,7 @@
 **Wave 6 re-audit (honest):** ~**32.5 / 50** — CODE-DOABLE substance landed; further content/improve waves toward the bar are **diminishing-return waste** until EXTERNAL unlock. Never claim reference quality.  
 **Post–stop-rule micro-fixes (2026-09-10):** ~**33 / 50** — server play-proof + PS L02/L03 listening + foil fix (`e7c7b1a`). Still **EXTERNAL** until live HTTPS or JPJO. Not a marketed wave.  
 **Static listening audio (PS + café):** ~**33.5–34 / 50** — six edge-tts MP3s; stimulus `audioUrl` without `textPl`.  
-**Full A1 assessed-listening audio (2026-09-10):** ~**34.5 / 50** — **15 / 15** static MP3s wired (sklep + droga + urząd L01–L03 added). §3 listening path at interim ceiling (edge-tts ≠ studio). GitHub Environment `private-beta` shell **exists** (secrets empty); Railway CLI installed — **`railway login` next**. No live HTTPS. No JPJO. No fake PUBLISHED.
+**Full A1 assessed-listening audio (2026-09-10):** ~**34.5 / 50** — **15 / 15** static MP3s wired (sklep + droga + urząd L01–L03 added). §3 listening path at interim ceiling (edge-tts ≠ studio). GitHub Environment `private-beta` shell **exists** (secrets empty). **Primary deploy path: Vercel + Neon/Supabase** (Railway secondary). No live HTTPS. No JPJO. No fake PUBLISHED.
 
 ### Critical re-score (post full audio) — `/50`
 
@@ -27,7 +27,7 @@
 
 ### Waiting on founder (EXTERNAL)
 
-**Blocked on human-owned steps only** — `railway login` → project + secrets → fill `private-beta` secrets → live `BASE_URL` health·ready, and/or independent JPJO. Code cannot unlock this.
+**Blocked on human-owned steps only** — Neon/Supabase + Vercel project + env vars → `pnpm db:migrate` → live `BASE_URL` health·ready, and/or independent JPJO. Code cannot unlock this.
 
 **Run:** [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) (primary on Windows) — see [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Paste the wizard’s Done/Blocked block back into chat when finished. Do not invent secrets; do not claim HTTPS without curl 200.
 
@@ -43,7 +43,7 @@
 | PS L02–L03 assessed listening + hard same-scenario foils; L01 café «сколько стоит кофе» giveaway removed | **Done** — `e7c7b1a`; still DRAFT |
 | Founder unblock one-pager + interactive wizard | **Done** — [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + `scripts/founder-unblock.ps1` |
 | GitHub Environment `private-beta` shell | **Done** — created via `gh api …/environments/private-beta` PUT; **secrets still empty** |
-| Railway CLI on Windows | **Done install** — `railway 5.52.0`; login still human (`railway login` OAuth) |
+| Deploy story → Vercel + Neon/Supabase primary | **Done docs/config** — founder still must create Neon + Vercel accounts |
 | Static assessed-listening audio — all 5 A1 halls L01–L03 | **Done** — **15×** MP3 under `web/public/audio/a1/`; YAML `audio_url`; see [`audio-assets.md`](../operations/audio-assets.md) |
 | JPJO hall packet inventory refresh | **Done** — status remains `NOT_STARTED` |
 
@@ -103,7 +103,7 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 2. **Hard listening foils** — replaced cross-hall cartoon distractors (paszport / bilety / urząd giveaways) with same-scenario near-minimal foils on café + sklep/droga/urząd listening (new + existing).
 3. **Listen play-gate** — `ExercisePlayer` requires a successful play start before submit; hint copy in RU/UK/PL.
 4. **Stimulus API tests** — unit coverage for same-origin 403, unauthorized 401, rate-limit 429, `audioUrl` without `textPl`.
-5. **Honesty** — re-audit ~**32.5 / 50**; EXTERNAL wall unchanged (Railway + JPJO). No fake PUBLISHED.
+5. **Honesty** — re-audit ~**32.5 / 50**; EXTERNAL wall unchanged (Vercel/Neon + JPJO). No fake PUBLISHED.
 6. **Local closed-beta path** — proven **PASS** (see smoke table above). Not live HTTPS; not JPJO.
 
 ## Still broken vs reference bar
@@ -112,7 +112,7 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 2. Speaking recognition best-effort — not exam scoring.
 3. All content **DRAFT** — no JPJO PUBLISHED hall (§7). **EXTERNAL**
 4. Competitive week-1 not yet **run** with real invitees (script only).
-5. Live HTTPS not proven without Railway/host secrets. **EXTERNAL** — founder path: [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md).
+5. Live HTTPS not proven without Neon/Vercel (human). **EXTERNAL** — founder path: [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md).
 6. Admin vs learner craft — freeze held; recheck §9 after player polish.
 7. ~~Play-gate is client-side only~~ — **mitigated**: server requires `listeningPlayToken` (stimulus or `tts_unavailable` unlock). Still interim vs studio audio.
 
@@ -120,7 +120,7 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 
 Do **not** start Wave 7 as another content deepen. Founder path = run [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) → [FOUNDER-UNBLOCK-NOW.md](../operations/FOUNDER-UNBLOCK-NOW.md) + [external-unblock-wizard.md](../operations/external-unblock-wizard.md):
 
-1. **Live HTTPS proof** — Railway/host secrets + `BASE_URL` health/ready (§1–§2, §4).
+1. **Live HTTPS proof** — Neon + Vercel env + migrate + `BASE_URL` health/ready (§1–§2, §4).
 2. **JPJO human review** — calendar + first hall APPROVE/REJECT in packet (§3; no AI self-approve).
 3. **Invite path on live** — same closed-beta flags as local (`BETA_ALLOW_DRAFT=true`, `DEMO_*=false`).
 
@@ -128,10 +128,11 @@ Optional further micro-fixes (not a reference wave): studio voiceover replace; t
 
 ## External blockers (track)
 
-- Railway login + project + secrets / service ID (wizard §1) — **CLI installed; not logged in; secrets missing**. Next human: `railway login`.
-- GitHub Environment `private-beta` — **shell exists; secrets empty**.
+- Neon (or Supabase) project + `DATABASE_URL` — **human**.
+- Vercel project linked to `IvanStabronik/PolishApp` + production env — **human**.
+- `pnpm db:migrate` against direct DB URL — **human**.
+- GitHub Environment `private-beta` — **shell exists; secrets empty** (optional if Vercel Git alone).
 - Independent JPJO reviewer calendar (wizard §3).
-- Production `INVITE_TOKEN_PEPPER`, DB, auth if not provisioned.
 - Browser TTS / SpeechRecognition variance.
 
 ## Admin craft freeze

@@ -2,7 +2,7 @@
 
 ## Policy
 
-- Automated logical backups via provider (Railway Postgres) **or** scheduled `pg_dump`.
+- Automated logical backups via provider (Neon / Supabase) **or** scheduled `pg_dump`.
 - Retention: ≥ 7 daily dumps for private beta (adjust when traffic grows).
 - Backups are **encrypted at rest** in provider storage; access is operator-only.
 - Never download production dumps onto shared laptops without ticket + wipe plan.

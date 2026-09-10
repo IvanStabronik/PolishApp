@@ -1,6 +1,6 @@
 # Local closed-beta shape (Windows)
 
-Run the **invite + DRAFT learning** path on a laptop without Railway. This is not a public publish and not JPJO approval.
+Run the **invite + DRAFT learning** path on a laptop without Vercel/Neon. This is not a public publish and not JPJO approval.
 
 Related: [private-beta-runbook.md](./private-beta-runbook.md), [https-deploy-dry-run.md](./https-deploy-dry-run.md), `web/.env.example`, `web/.env.production.example`.
 
@@ -161,5 +161,5 @@ curl.exe -fsS http://localhost:3000/api/ready
 | Claim | Status |
 | --- | --- |
 | Local invite + DRAFT learning | **PASS** smoke 2026-09-10 (health/ready, admin DRAFT halls, lesson open) — see [improvement-loop-status.md](../reports/improvement-loop-status.md) |
-| Live HTTPS / Railway | **EXTERNAL** — see [external-unblock-wizard.md](./external-unblock-wizard.md) |
+| Live HTTPS / Vercel + Neon | **EXTERNAL** — see [external-unblock-wizard.md](./external-unblock-wizard.md) |
 | Content PUBLISHED / JPJO approved | **Blocked** — do not flip status |

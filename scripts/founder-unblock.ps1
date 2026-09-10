@@ -4,9 +4,9 @@
   Interactive founder unblock wizard - human-owned EXTERNAL steps only.
 
 .DESCRIPTION
-  Walks Railway + GitHub Environment private-beta setup, prompts for secrets
-  (never invents values), dispatches deploy, curls health/ready, optional JPJO.
-  Prints Done/Blocked checkboxes to paste back into chat.
+  Walks Neon/Supabase Postgres + Vercel + optional GitHub Environment private-beta
+  setup, prompts for secrets (never invents values), optional migrate, curls
+  health/ready, optional JPJO. Prints Done/Blocked checkboxes to paste back into chat.
 
 .EXAMPLE
   pwsh -File scripts/founder-unblock.ps1
@@ -181,82 +181,49 @@ function Get-RepoRoot {
 # STAGES
 # --------------------------------------------------------------------------
 
-$script:TOTAL_STAGES = 7
+$script:TOTAL_STAGES = 8
 $repoRoot = Get-RepoRoot
 $packetRel = "docs/reviews/pierwsze-spotkanie-jpjo-hall-packet.md"
 $packetPath = Join-Path $repoRoot $packetRel
 
-Write-Banner "SLOWARIUM founder unblock (EXTERNAL)"
+Write-Banner "SLOWARIUM founder unblock (EXTERNAL) - Vercel + Neon/Supabase"
 
-# -- 1. Railway project + Postgres -----------------------------------------
-Enter-Stage "Railway project + Postgres"
-Say "Create the host. Do not invent DATABASE_URL - copy it from Railway."
-Open-Url "https://railway.app"
-Step "New Project -> Deploy from GitHub -> repo PolishApp (IvanStabronik/PolishApp)."
-Step "Add Postgres plugin; open the Postgres service -> Variables / Connect -> copy DATABASE_URL."
-Step "Open the web service -> Variables. You will paste runtime env in stage 3."
-Pause-Wizard "When Postgres exists and you have DATABASE_URL copied, press Enter"
+# -- 1. Neon / Supabase Postgres -------------------------------------------
+Enter-Stage "Neon (preferred) or Supabase Postgres"
+Say "Create managed Postgres. Do not invent DATABASE_URL - copy it from the console."
+Step "Neon: https://console.neon.tech -> New Project -> copy pooled + direct connection strings."
+Step "Supabase (alt): https://supabase.com/dashboard -> New project -> Settings -> Database -> URI."
+Step "Pooled URL -> Vercel app DATABASE_URL; Direct URL -> pnpm db:migrate."
+Open-Url "https://console.neon.tech"
+Pause-Wizard "When you have DATABASE_URL copied, press Enter"
 
-$dbUrl = Ask-Value -Key "DATABASE_URL" -Prompt "Paste DATABASE_URL:" -Secret
+$dbUrl = Ask-Value -Key "DATABASE_URL" -Prompt "Paste DATABASE_URL (app/pooled OK; keep direct for migrate):" -Secret
 if ([string]::IsNullOrWhiteSpace($dbUrl)) {
-  Mark-Check "railway_db" "Blocked" "Railway Postgres / DATABASE_URL"
-  Warn-Wizard "No DATABASE_URL - later secret steps will stay Blocked."
+  Mark-Check "postgres_db" "Blocked" "Neon/Supabase Postgres / DATABASE_URL"
+  Warn-Wizard "No DATABASE_URL - later steps will stay Blocked."
 } else {
   $script:Captured["DATABASE_URL"] = $dbUrl
-  Mark-Check "railway_db" "Done" "Railway Postgres / DATABASE_URL"
+  Mark-Check "postgres_db" "Done" "Neon/Supabase Postgres / DATABASE_URL"
 }
-if (Confirm-Wizard "Railway project + web service created?") {
-  Mark-Check "railway_project" "Done" "Railway project + web service"
+if (Confirm-Wizard "Postgres project created (Neon or Supabase)?") {
+  Mark-Check "postgres_project" "Done" "Postgres project created"
 } else {
-  Mark-Check "railway_project" "Blocked" "Railway project + web service"
-}
-
-# -- 2. GitHub Environment private-beta ------------------------------------
-Enter-Stage "GitHub Environment private-beta"
-Say "Environment name must be exactly: private-beta (matches deploy.yml)."
-Open-Url "https://github.com/$($script:REPO)/settings/environments"
-Step "New environment -> name exactly: private-beta"
-Step "Leave protection rules optional for now; secrets come next."
-Pause-Wizard "When the environment exists, press Enter"
-
-if (Confirm-Wizard "Environment private-beta exists?") {
-  Mark-Check "gh_env" "Done" "GitHub Environment private-beta created"
-} else {
-  Mark-Check "gh_env" "Blocked" "GitHub Environment private-beta created"
+  Mark-Check "postgres_project" "Blocked" "Postgres project created"
 }
 
-# -- 3. Host runtime flags + generate secrets ------------------------------
-Enter-Stage "Host runtime flags + generate secrets"
-Say "On Railway web service Variables, set closed-beta flags exactly:"
-Step "BETA_MODE=true"
-Step "BETA_ALLOW_DRAFT=true"
-Step "DEMO_MODE=false"
-Step "DEMO_PREVIEW=false"
-Step "ALLOW_PRODUCTION_DEMO unset / false"
-Say ""
-Say "Generate three secrets from the repo (do not invent them in chat):"
-Note "  cd $repoRoot\web"
-Note "  pnpm ops:generate-secret   # -> BETTER_AUTH_SECRET"
-Note "  pnpm ops:generate-secret   # -> INVITE_TOKEN_PEPPER"
-Note "  pnpm ops:generate-secret   # -> PRIVACY_AUDIT_SECRET"
-Say ""
-Say "Also set on Railway (shape: web/.env.production.example):"
-Step "NODE_ENV=production"
-Step "DATABASE_URL=<postgres url>"
-Step "BETTER_AUTH_SECRET / INVITE_TOKEN_PEPPER / PRIVACY_AUDIT_SECRET"
-Step "BETTER_AUTH_URL / NEXT_PUBLIC_APP_URL / APP_URL = https://<your-railway-host>"
-Say ""
-Step "Deploy once from Railway UI so a public HTTPS host exists."
-Step "Copy public HTTPS URL (no trailing slash) -> BASE_URL"
-Step "Account -> Tokens -> create token -> RAILWAY_TOKEN"
-Step "Service settings -> copy Service ID -> RAILWAY_SERVICE_ID"
-Open-Url "https://railway.app/account/tokens"
-Pause-Wizard "When Railway variables + first deploy + token/service id are ready, press Enter"
+# -- 2. Vercel project -----------------------------------------------------
+Enter-Stage "Vercel project linked to PolishApp"
+Say "Import the GitHub repo. Prefer root vercel.json (Root Directory empty)."
+Open-Url "https://vercel.com/new"
+Step "Add New -> Project -> Import IvanStabronik/PolishApp."
+Step "Root Directory: leave empty (uses root vercel.json) OR set to web (content via next.config tracing)."
+Step "Deploy once; copy https://….vercel.app -> BASE_URL (no trailing slash)."
+Pause-Wizard "When the Vercel project exists and you have the public URL, press Enter"
 
-if (Confirm-Wizard "BETA_ALLOW_DRAFT=true and DEMO_*=false set on Railway?") {
-  Mark-Check "beta_flags" "Done" "BETA_ALLOW_DRAFT=true, DEMO_*=false on host"
+if (Confirm-Wizard "Vercel project linked and first deploy started?") {
+  Mark-Check "vercel_project" "Done" "Vercel project linked to PolishApp"
 } else {
-  Mark-Check "beta_flags" "Blocked" "BETA_ALLOW_DRAFT=true, DEMO_*=false on host"
+  Mark-Check "vercel_project" "Blocked" "Vercel project linked to PolishApp"
 }
 
 $baseUrl = Ask-Value -Key "BASE_URL" -Prompt "Paste BASE_URL (https://... no trailing slash):"
@@ -271,74 +238,148 @@ if ($baseUrl) {
   Mark-Check "base_url" "Blocked" "BASE_URL captured"
 }
 
-# -- 4. Set each required GitHub Environment secret ------------------------
-Enter-Stage "Set private-beta Environment secrets"
-Say "Prompting one secret at a time. Empty = Blocked (never invent)."
-Say "These names must match .github/workflows/deploy.yml + FOUNDER-UNBLOCK-NOW.md."
-Write-Host ""
+# -- 3. Vercel env vars + closed-beta flags --------------------------------
+Enter-Stage "Vercel Environment Variables + closed-beta flags"
+Say "On Vercel -> Project -> Settings -> Environment Variables (Production), set:"
+Step "BETA_MODE=true"
+Step "BETA_ALLOW_DRAFT=true"
+Step "DEMO_MODE=false"
+Step "DEMO_PREVIEW=false"
+Step "ALLOW_PRODUCTION_DEMO unset / false"
+Say ""
+Say "Generate three secrets from the repo (do not invent them in chat):"
+Note "  cd $repoRoot\web"
+Note "  pnpm ops:generate-secret   # -> BETTER_AUTH_SECRET"
+Note "  pnpm ops:generate-secret   # -> INVITE_TOKEN_PEPPER"
+Note "  pnpm ops:generate-secret   # -> PRIVACY_AUDIT_SECRET"
+Say ""
+Say "Also set (shape: web/.env.production.example):"
+Step "NODE_ENV=production"
+Step "DATABASE_URL=<Neon pooled / Supabase URI>"
+Step "BETTER_AUTH_SECRET / INVITE_TOKEN_PEPPER / PRIVACY_AUDIT_SECRET"
+Step "BETTER_AUTH_URL / NEXT_PUBLIC_APP_URL / APP_URL = https://<your>.vercel.app"
+Say ""
+Step "Redeploy after saving env vars."
+Open-Url "https://vercel.com"
+Pause-Wizard "When Vercel env vars + closed-beta flags are set, press Enter"
 
-$secretSpecs = @(
-  @{ Name = "DATABASE_URL";         FromCapture = "DATABASE_URL"; Hint = "Railway Postgres URL" }
-  @{ Name = "BETTER_AUTH_SECRET";   FromCapture = $null;          Hint = "from pnpm ops:generate-secret (same as Railway)" }
-  @{ Name = "INVITE_TOKEN_PEPPER";  FromCapture = $null;          Hint = "from pnpm ops:generate-secret (same as Railway)" }
-  @{ Name = "PRIVACY_AUDIT_SECRET"; FromCapture = $null;          Hint = "from pnpm ops:generate-secret (same as Railway)" }
-  @{ Name = "BASE_URL";             FromCapture = "BASE_URL";     Hint = "public https:// host, no trailing slash" }
-  @{ Name = "RAILWAY_TOKEN";        FromCapture = $null;          Hint = "Railway account token" }
-  @{ Name = "RAILWAY_SERVICE_ID";   FromCapture = $null;          Hint = "Railway web service ID" }
-)
+if (Confirm-Wizard "BETA_ALLOW_DRAFT=true and DEMO_*=false set on Vercel?") {
+  Mark-Check "beta_flags" "Done" "BETA_ALLOW_DRAFT=true, DEMO_*=false on Vercel"
+} else {
+  Mark-Check "beta_flags" "Blocked" "BETA_ALLOW_DRAFT=true, DEMO_*=false on Vercel"
+}
+if (Confirm-Wizard "Auth secrets + DATABASE_URL + public URL trio set on Vercel?") {
+  Mark-Check "vercel_env" "Done" "Vercel production env vars set"
+} else {
+  Mark-Check "vercel_env" "Blocked" "Vercel production env vars set"
+}
 
+# -- 4. One-off migrate ----------------------------------------------------
+Enter-Stage "Run migrations (one-off against Neon/Supabase)"
+Say "Migrations are NOT run by Vercel app start. Use DIRECT DB URL if pooler fails."
+Note "  cd $repoRoot\web"
+Note "  `$env:DATABASE_URL = '<direct postgres URL>'"
+Note "  pnpm db:migrate"
+Pause-Wizard "After you run migrate (or decide to skip), press Enter"
+
+if (Confirm-Wizard "pnpm db:migrate succeeded against Neon/Supabase?") {
+  Mark-Check "migrate" "Done" "pnpm db:migrate against Neon/Supabase"
+} else {
+  Mark-Check "migrate" "Blocked" "pnpm db:migrate against Neon/Supabase"
+}
+
+# -- 5. Optional GitHub Environment secrets --------------------------------
+Enter-Stage "Optional: GitHub Environment private-beta secrets"
+Say "App secrets live primarily on Vercel. GitHub secrets are ONLY needed for Actions deploy.yml."
+Say "Environment name must be exactly: private-beta."
 Open-Url "https://github.com/$($script:REPO)/settings/environments"
-Note "If gh auth is ready, values are written with: gh secret set NAME --env private-beta"
-Note "Otherwise set them in the Environment UI (Secrets)."
-Write-Host ""
 
-foreach ($spec in $secretSpecs) {
-  $name = $spec.Name
-  Say "-- $name --"
-  Note $spec.Hint
-  if ($spec.FromCapture -and $script:Captured.ContainsKey($spec.FromCapture)) {
-    $script:Captured[$name] = $script:Captured[$spec.FromCapture]
-    Note "(offering value captured earlier this run - Enter to reuse, or paste a new one)"
-  }
-  $val = Ask-Value -Key $name -Prompt "Paste $name (empty = skip/Blocked):" -Secret
-  if ([string]::IsNullOrWhiteSpace($val)) {
-    Mark-Check "secret_$name" "Blocked" "Environment secret $name"
-    continue
-  }
-  if ($name -eq "BASE_URL") {
-    $val = $val.TrimEnd("/")
-    $script:Captured["BASE_URL"] = $val
-  }
-  $ok = Set-EnvSecret -Name $name -Value $val
-  if ($ok) {
-    Mark-Check "secret_$name" "Done" "Environment secret $name"
+if (-not (Confirm-Wizard "Set GitHub Environment secrets for workflow_dispatch? (N = skip; Vercel Git is enough)")) {
+  Mark-Check "gh_env" "Skipped" "GitHub Environment private-beta secrets (optional)"
+  Mark-Check "gh_secrets" "Skipped" "Optional GitHub deploy secrets"
+} else {
+  Pause-Wizard "When Environment private-beta exists, press Enter"
+  if (Confirm-Wizard "Environment private-beta exists?") {
+    Mark-Check "gh_env" "Done" "GitHub Environment private-beta created"
   } else {
-    if (Confirm-Wizard "Did you set $name manually in the GitHub Environment UI?") {
+    Mark-Check "gh_env" "Blocked" "GitHub Environment private-beta created"
+  }
+
+  Say "Prompting one secret at a time. Empty = Blocked (never invent)."
+  $secretSpecs = @(
+    @{ Name = "DATABASE_URL";            FromCapture = "DATABASE_URL"; Hint = "Neon/Supabase URL (direct preferred for migrate job)" }
+    @{ Name = "BETTER_AUTH_SECRET";      FromCapture = $null;          Hint = "same as Vercel (pnpm ops:generate-secret)" }
+    @{ Name = "BASE_URL";                FromCapture = "BASE_URL";     Hint = "public https:// host, no trailing slash" }
+    @{ Name = "VERCEL_DEPLOY_HOOK_URL";  FromCapture = $null;          Hint = "Vercel Deploy Hook (preferred transport)" }
+  )
+
+  Note "If gh auth is ready, values are written with: gh secret set NAME --env private-beta"
+  Write-Host ""
+
+  foreach ($spec in $secretSpecs) {
+    $name = $spec.Name
+    Say "-- $name --"
+    Note $spec.Hint
+    if ($spec.FromCapture -and $script:Captured.ContainsKey($spec.FromCapture)) {
+      $script:Captured[$name] = $script:Captured[$spec.FromCapture]
+      Note "(offering value captured earlier this run - Enter to reuse, or paste a new one)"
+    }
+    $val = Ask-Value -Key $name -Prompt "Paste $name (empty = skip/Blocked):" -Secret
+    if ([string]::IsNullOrWhiteSpace($val)) {
+      Mark-Check "secret_$name" "Blocked" "Environment secret $name"
+      continue
+    }
+    if ($name -eq "BASE_URL") {
+      $val = $val.TrimEnd("/")
+      $script:Captured["BASE_URL"] = $val
+    }
+    $ok = Set-EnvSecret -Name $name -Value $val
+    if ($ok) {
       Mark-Check "secret_$name" "Done" "Environment secret $name"
     } else {
-      Mark-Check "secret_$name" "Blocked" "Environment secret $name"
+      if (Confirm-Wizard "Did you set $name manually in the GitHub Environment UI?") {
+        Mark-Check "secret_$name" "Done" "Environment secret $name"
+      } else {
+        Mark-Check "secret_$name" "Blocked" "Environment secret $name"
+      }
     }
   }
+
+  Say ""
+  Say "Optional CLI trio (leave empty if using Deploy Hook):"
+  foreach ($opt in @("VERCEL_TOKEN", "VERCEL_ORG_ID", "VERCEL_PROJECT_ID")) {
+    $val = Ask-Value -Key $opt -Prompt "Paste $opt (optional, empty=skip):" -Secret
+    if ([string]::IsNullOrWhiteSpace($val)) {
+      Mark-Check "secret_$opt" "Skipped" "Optional Environment secret $opt"
+      continue
+    }
+    if (Set-EnvSecret -Name $opt -Value $val) {
+      Mark-Check "secret_$opt" "Done" "Optional Environment secret $opt"
+    } else {
+      Mark-Check "secret_$opt" "Blocked" "Optional Environment secret $opt"
+    }
+  }
+
+  Say ""
+  Say "Optional smoke secrets (leave empty - keep run_production_smoke=false):"
+  foreach ($opt in @("PROD_SMOKE_ADMIN_EMAIL", "PROD_SMOKE_ADMIN_PASSWORD")) {
+    $val = Ask-Value -Key $opt -Prompt "Paste $opt (optional, empty=skip):" -Secret
+    if ([string]::IsNullOrWhiteSpace($val)) {
+      Mark-Check "secret_$opt" "Skipped" "Optional Environment secret $opt"
+      continue
+    }
+    if (Set-EnvSecret -Name $opt -Value $val) {
+      Mark-Check "secret_$opt" "Done" "Optional Environment secret $opt"
+    } else {
+      Mark-Check "secret_$opt" "Blocked" "Optional Environment secret $opt"
+    }
+  }
+  Mark-Check "gh_secrets" "Done" "Optional GitHub deploy secrets prompted"
 }
 
-Say ""
-Say "Optional smoke secrets (leave empty to skip - keep run_production_smoke=false):"
-foreach ($opt in @("PROD_SMOKE_ADMIN_EMAIL", "PROD_SMOKE_ADMIN_PASSWORD")) {
-  $val = Ask-Value -Key $opt -Prompt "Paste $opt (optional, empty=skip):" -Secret
-  if ([string]::IsNullOrWhiteSpace($val)) {
-    Mark-Check "secret_$opt" "Skipped" "Optional Environment secret $opt"
-    continue
-  }
-  if (Set-EnvSecret -Name $opt -Value $val) {
-    Mark-Check "secret_$opt" "Done" "Optional Environment secret $opt"
-  } else {
-    Mark-Check "secret_$opt" "Blocked" "Optional Environment secret $opt"
-  }
-}
-
-# -- 5. workflow_dispatch deploy -------------------------------------------
-Enter-Stage "Dispatch Deploy private beta"
-Say "Manual deploy only - workflow_dispatch. Do not invent image_tag."
+# -- 6. Optional workflow_dispatch ----------------------------------------
+Enter-Stage "Optional: Dispatch Deploy private beta"
+Say "Usually unnecessary if Vercel Git integration auto-deploys. Skip unless you set GH secrets."
 Open-Url "https://github.com/$($script:REPO)/actions/workflows/deploy.yml"
 
 $defaultSha = $null
@@ -349,44 +390,47 @@ try {
   Pop-Location
 }
 
-Step "Actions -> Deploy private beta -> Run workflow"
-Step "confirm_environment = private-beta"
-if ($defaultSha) {
-  Step "image_tag = $defaultSha  (current HEAD; change only if you intend another SHA)"
+if (-not (Confirm-Wizard "Run workflow_dispatch Deploy private beta now?")) {
+  Mark-Check "deploy" "Skipped" "workflow_dispatch Deploy private beta (optional)"
 } else {
-  Step "image_tag = current commit SHA on docs/requirements-r2 (or main when ready)"
-}
-Step "run_production_smoke = false until smoke secrets exist"
-Pause-Wizard "After you start the workflow (or decide to skip), press Enter"
+  Step "confirm_environment = private-beta"
+  if ($defaultSha) {
+    Step "image_tag = $defaultSha"
+  } else {
+    Step "image_tag = current commit SHA on docs/requirements-r2"
+  }
+  Step "run_production_smoke = false until smoke secrets exist"
+  Pause-Wizard "After you start the workflow (or decide to skip), press Enter"
 
-$dispatched = $false
-if ((Test-GhReady) -and (Confirm-Wizard "Dispatch via gh now? (needs secrets already set)")) {
-  $script:Captured["IMAGE_TAG"] = $defaultSha
-  $tag = Ask-Value -Key "IMAGE_TAG" -Prompt "image_tag SHA"
-  if (-not $tag -and $defaultSha) { $tag = $defaultSha }
-  if ($tag) {
-    & gh workflow run deploy.yml `
-      --repo $script:REPO `
-      -f "confirm_environment=private-beta" `
-      -f "image_tag=$tag" `
-      -f "run_production_smoke=false"
-    if ($LASTEXITCODE -eq 0) {
-      Write-Host "  OK workflow_dispatch sent" -ForegroundColor Green
-      $dispatched = $true
-      Open-Url "https://github.com/$($script:REPO)/actions"
-    } else {
-      Warn-Wizard "gh workflow run failed - use the Actions UI"
+  $dispatched = $false
+  if ((Test-GhReady) -and (Confirm-Wizard "Dispatch via gh now?")) {
+    $script:Captured["IMAGE_TAG"] = $defaultSha
+    $tag = Ask-Value -Key "IMAGE_TAG" -Prompt "image_tag SHA"
+    if (-not $tag -and $defaultSha) { $tag = $defaultSha }
+    if ($tag) {
+      & gh workflow run deploy.yml `
+        --repo $script:REPO `
+        -f "confirm_environment=private-beta" `
+        -f "image_tag=$tag" `
+        -f "run_production_smoke=false"
+      if ($LASTEXITCODE -eq 0) {
+        Write-Host "  OK workflow_dispatch sent" -ForegroundColor Green
+        $dispatched = $true
+        Open-Url "https://github.com/$($script:REPO)/actions"
+      } else {
+        Warn-Wizard "gh workflow run failed - use the Actions UI"
+      }
     }
+  }
+
+  if ($dispatched -or (Confirm-Wizard "Deploy workflow started (or already green)?")) {
+    Mark-Check "deploy" "Done" "workflow_dispatch Deploy private beta"
+  } else {
+    Mark-Check "deploy" "Blocked" "workflow_dispatch Deploy private beta"
   }
 }
 
-if ($dispatched -or (Confirm-Wizard "Deploy workflow started (or already green)?")) {
-  Mark-Check "deploy" "Done" "workflow_dispatch Deploy private beta"
-} else {
-  Mark-Check "deploy" "Blocked" "workflow_dispatch Deploy private beta"
-}
-
-# -- 6. curl health / ready ------------------------------------------------
+# -- 7. curl health / ready ------------------------------------------------
 Enter-Stage "Prove live HTTPS (health + ready)"
 Say "Both must return HTTP 200. Do not claim success without that."
 $base = $null
@@ -454,7 +498,7 @@ if (Confirm-Wizard "Browser opens the same host over HTTPS without cert warning?
   Mark-Check "https_browser" "Blocked" "Browser HTTPS without cert warning"
 }
 
-# -- 7. Optional JPJO ------------------------------------------------------
+# -- 8. Optional JPJO ------------------------------------------------------
 Enter-Stage "Optional: book JPJO reviewer"
 Say "Packet (human only - AI must not APPROVE):"
 Note "  $packetRel"
@@ -502,6 +546,7 @@ Write-Host ""
 Write-Host "---------- PASTE FROM HERE ----------"
 Write-Host "FOUNDER UNBLOCK - Done/Blocked ($((Get-Date).ToString('yyyy-MM-dd')))"
 Write-Host "Branch/commit: docs/requirements-r2 @ $shortSha"
+Write-Host "Primary path: Vercel + Neon/Supabase"
 if ($script:Captured.ContainsKey("BASE_URL") -and $script:Captured["BASE_URL"]) {
   Write-Host "BASE_URL set: yes (value not pasted)"
 } else {
