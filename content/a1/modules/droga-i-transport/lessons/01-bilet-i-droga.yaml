@@ -1,17 +1,17 @@
 kind: lesson
 canonical_id: LES-A1-DT-01
 slug: bilet-i-droga
-version: 1
+version: 2
 status: DRAFT
 title_pl: Bilet i droga
 sort_order: 1
 situation_ru: >
-  Вы ищете остановку автобуса и покупаете простой билет. Прохожий и
-  кассир/киоскёр — взрослые незнакомцы; маршрут короткий (2–3 шага),
-  без пересадок.
+  Вы в городе в Польше: ищете остановку автобуса и покупаете простой билет.
+  Прохожий и кассир — взрослые незнакомцы. Маршрут короткий (2–3 шага),
+  без пересадок; речь спокойная.
 objective_ru: >
   Спросить дорогу до przystanku, понять prosto / w lewo / w prawo,
-  заказать bilet и уточнить время отправления в регистре pan/pani.
+  заказать bilet и уточнить отправление — на pan/pani, не на ty.
 curriculum_links:
   scenarios:
     - SCN-A1-DIRECTIONS-01
@@ -57,21 +57,25 @@ dialogue:
 key_lines:
   - text_pl: Gdzie jest przystanek autobusowy?
     explanation_ru: >
-      Базовый вопрос локации остановки; открывайте контакт словом Przepraszam
-      к незнакомцу.
+      Обычный вопрос про остановку. К незнакомцу на улице начинайте
+      с Przepraszam — так контакт спокойный и вежливый.
   - text_pl: Prosto, potem w prawo.
     explanation_ru: >
-      Ориентиры пути: prosto / w lewo / w prawo — слушайте как шаги маршрута.
+      Короткие ориентиры пути: prosto / w lewo / w prawo. Слушайте их
+      как шаги маршрута, а не как отдельные слова.
   - text_pl: Poproszę bilet na autobus.
     explanation_ru: >
-      Заказ билета: Poproszę bilet + na + Acc (вид транспорта / направление).
+      Заказ билета: Poproszę bilet + na + Acc (вид транспорта). Не *Daj bilet
+      к кассиру-незнакомцу.
   - text_pl: O której odjeżdża…?
     explanation_ru: >
-      Вопрос о времени отправления; ответ часто «za X minut» или точный час.
+      Вопрос о времени отправления. В ответе часто «za X minut»
+      или точный час — слушайте целиком.
 pan_pani:
   summary_ru: >
-    И к прохожему, и к кассиру билетов — вежливый регистр: Przepraszam…,
-    pan/pani в ответах персонала, без ty. Благодарите после указания пути.
+    И к прохожему, и к кассиру билетов — pan/pani и спокойный тон:
+    Przepraszam…, Poproszę bilet…, Dziękuję. Форма ty и резкое *Ej…
+    — не к незнакомцу на улице или у кассы.
   form: "Przepraszam, gdzie jest…? · Jak dojść / dojechać do…? · Poproszę bilet…"
   examples_pl:
     - Przepraszam, gdzie jest przystanek?
@@ -87,8 +91,8 @@ pan_pani:
       Не ставте «ей» замість Przepraszam. Уважно з do/na: do dworca,
       na przystanek / bilet na autobus — різні рамки.
     rus: >
-      «На вокзал» часто даёт *na dworzec вместо do dworca. Не используйте
-      ty к прохожему; держите Przepraszam + вопрос.
+      «На вокзал» часто даёт *na dworzec вместо do dworca. Не говорите
+      ty прохожему; держите Przepraszam + вопрос.
     bel: >
       Не калькуйце «на вакзал / на прыпынак» без польскай rekcji.
       Przepraszam… і do + Gen — асобныя формулы; без ty да незнаёмца.
@@ -96,14 +100,16 @@ grammar_points:
   - id: GP-A1-DT-DO-NA-BILET
     title_pl: do / na · bilet · odjazd
     summary_ru: >
-      Предлоги направления и заказ билета: do + Gen, na + Acc в транспортных рамках.
+      Два коротких куска в городе: направление (do + Gen) и билет
+      (bilet na + Acc), плюс вопрос об отправлении.
     form: >
       Jak dojść / dojechać do + Gen. Bilet na + Acc. O której odjeżdża…?
       Orientacja: prosto / w lewo / w prawo.
     meaning: >
-      Получить маршрут до цели и оформить простой билет с временем отправления.
+      Получить маршрут до цели и купить простой билет с временем отправления.
     use: >
-      Пешком до остановки + касса/киоск одного вида транспорта без пересадок.
+      Пешком до остановки, затем касса или киоск одного вида транспорта —
+      без пересадок.
     examples_pl:
       - Jak dojechać do dworca?
       - Poproszę bilet na autobus.
@@ -131,8 +137,8 @@ l1_notes:
     Урок про дорогу і квиток: Przepraszam, prosto/w prawo, do + Gen,
     bilet na…, O której…? Не калькуйте «на вокзал / на автобусі» дослівно.
   rus: >
-    Фокус: do vs na в городе и билете, без ty к незнакомцу. Слушайте
-    ориентиры как шаги; время отправления держите формулой O której…?
+    Фокус: do vs na в городе и в билете, без ty к незнакомцу. Слушайте
+    ориентиры как шаги; время отправления — формулой O której…?
   bel: >
     Асобны акцэнт BEL: не капіюйце рускія нотаткі. Арыенціры і bilet —
     польскія рамкі; пісьмо назваў ліній без акання.
@@ -141,21 +147,21 @@ steps:
     kind: situation
     title_ru: Ситуация
     body_ru: >
-      Спросить дорогу до остановки, понять ориентиры, купить билет и
-      уточнить отправление.
+      Спросить дорогу до остановки, понять ориентиры, купить билет
+      и уточнить отправление.
   - id: step-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-DT-DO-NA-BILET
   - id: step-practice
     kind: practice
@@ -171,20 +177,20 @@ steps:
       - ex-dt-08
   - id: step-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids:
       - ex-dt-09
       - ex-dt-10
   - id: step-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-dt-01
     canonical_id: EX-A1-DT-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: "Как вежливо спросить дорогу до остановки?"
+    prompt: "На улице. Как вежливо спросить дорогу до остановки?"
     options:
       - id: a
         text: Przepraszam, gdzie jest przystanek autobusowy?
@@ -202,8 +208,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Przepraszam + gdzie jest… — безопасный старт."
-      incorrect: "Ej / ty — неверный регистр к незнакомцу."
+      correct: "Przepraszam + gdzie jest… — спокойный старт к незнакомцу."
+      incorrect: "Ej / ty — слишком грубо или слишком свои к прохожему."
       l1:
         ukr: "Починайте з Przepraszam, не «ей»."
         rus: "Не используйте ty к прохожему."
@@ -239,7 +245,7 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Dojechać do + Gen — целевая рамка направления."
+      correct: "Dojechać do + Gen — обычная рамка направления."
       incorrect: "Na dworzec / w dworzec — типичная путаница предлогов."
     provenance:
       originality: created_for_product
@@ -255,7 +261,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: "Как заказать билет на автобус?"
+    prompt: "У кассы. Как заказать билет на автобус?"
     options:
       - id: a
         text: Poproszę bilet na autobus.
@@ -272,8 +278,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Poproszę bilet na autobus — сервисная рамка + na."
-      incorrect: "Daj / без na ломают заказ билета."
+      correct: "Poproszę bilet na autobus — спокойный заказ + na."
+      incorrect: "Daj / без na — слишком резко или ломает формулу билета."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -311,7 +317,7 @@ exercises:
       - LEX-A1-TRANSPORT
     feedback:
       correct: "Prosto / w prawo / ориентир у магазина — шаги маршрута."
-      incorrect: "Cześć, co tam? не является указанием пути."
+      incorrect: "Cześć, co tam? — не указание пути."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -347,7 +353,7 @@ exercises:
       - FN-A1-TRANS-01
       - FN-A1-TIME-01
     feedback:
-      correct: "Билет, вопрос об отправлении и ответ о времени — слоты TICKET."
+      correct: "Билет, вопрос об отправлении и ответ о времени — нужные куски."
       incorrect: "Miło panią poznać — формула знакомства, не билета."
     provenance:
       originality: created_for_product
@@ -377,7 +383,7 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Dojechać do + Gen."
+      correct: "Dojechać do + Gen — готовая рамка."
       incorrect: "Нужен предлог do."
       l1:
         ukr: "Не *na dworca / *w dworzec у цій рамці."
@@ -411,7 +417,7 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Bilet na + Acc."
+      correct: "Bilet na + Acc — формула билета."
       incorrect: "Нужен предлог na в формуле билета."
     provenance:
       originality: created_for_product
@@ -427,7 +433,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: "Расставьте шаги: дорога, затем билет."
+    prompt: "Расставьте шаги: сначала дорога, потом билет."
     items:
       - id: t1
         text: Przepraszam, gdzie jest przystanek autobusowy?
@@ -451,7 +457,7 @@ exercises:
       - FN-A1-TRANS-01
     feedback:
       correct: "Вопрос о пути → ориентир → билет/время → оплата."
-      incorrect: "Сначала ориентация, потом касса билетов."
+      incorrect: "Сначала ориентация на улице, потом касса билетов."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -515,8 +521,8 @@ exercises:
       - FN-A1-TIME-01
     mini_check: true
     feedback:
-      correct: "O której odjeżdża…? — рамка времени отправления."
-      incorrect: "Na której / ty — неверная рамка или регистр."
+      correct: "O której odjeżdża…? — готовая рамка времени отправления."
+      incorrect: "Na której / ty — неверная рамка или слишком свои."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -536,13 +542,13 @@ mini_check:
     - GR-TIME-EXPR-01
     - PRAG-PAN-01
 result_metadata:
-  title_ru: Результат урока
+  title_ru: Итог урока
   success_ru: >
-    Мини-проверка пройдена. Вы можете спросить дорогу, понять ориентиры
+    Короткая проверка пройдена. Вы можете спросить дорогу, понять ориентиры
     и купить простой билет с уточнением отправления (DRAFT preview).
   retry_ru: >
     Повторите do/na, ориентиры prosto/w prawo и O której…?, затем пройдите
-    мини-проверку снова.
+    короткую проверку снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-DIRECT-01
@@ -561,5 +567,8 @@ provenance:
     - "Original SŁOWARIUM dialogue and exercises — Droga i transport DRAFT"
     - "Curriculum links: SCN-A1-DIRECTIONS-01, SCN-A1-TICKET-01, FN-A1-DIRECT-01"
   ai_assisted: true
-  notes: AI-assisted system draft pending human review. DRAFT — not JPJO-approved, not published to learners. reviewer_id is null (no fake review evidence).
+  notes: >
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
+    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
+    not learner-published. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
