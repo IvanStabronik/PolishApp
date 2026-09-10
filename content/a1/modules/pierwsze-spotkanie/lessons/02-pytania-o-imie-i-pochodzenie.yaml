@@ -1,13 +1,16 @@
 kind: lesson
 canonical_id: LES-A1-PS-02
 slug: pytania-o-imie-i-pochodzenie
-version: 1
+version: 2
 status: DRAFT
 title_pl: Pytania o imię i pochodzenie
 sort_order: 2
-situation_ru: "Вы продолжаете первое знакомство: спрашиваете имя и происхождение, затем отвечаете
-  полными короткими репликами."
-objective_ru: Закрепить взаимный обмен именем и происхождением с pan/pani и связать ответы в короткий разговор.
+situation_ru: >
+  Знакомство уже началось. Теперь вы сами спрашиваете имя и откуда человек —
+  и коротко отвечаете, когда спрашивают вас.
+objective_ru: >
+  Спросить Jak ma pan/pani na imię? и Skąd pan/pani jest?, ответить самому
+  и вернуть вопрос (A pan? / A pani?) — на pan/pani.
 curriculum_links:
   scenarios:
     - SCN-A1-EVERYDAY-01
@@ -39,17 +42,23 @@ dialogue:
       text_pl: Wzajemnie.
 key_lines:
   - text_pl: Jak ma pan na imię?
-    explanation_ru: "Вежливый вопрос об имени мужчины: pan и глагол в третьем лице."
+    explanation_ru: >
+      Как спросить имя у мужчины на «вы»: pan и глагол в 3 лице
+      (не *Jak masz…* к незнакомцу).
   - text_pl: Skąd pani jest?
-    explanation_ru: Вопрос о происхождении женщины в регистре pani.
+    explanation_ru: >
+      «Откуда вы?» к женщине: pani + jest (3 л.), не ty и не wy jesteście.
   - text_pl: A pan? / A pani?
-    explanation_ru: Короткий способ вернуть тот же вопрос собеседнику.
+    explanation_ru: >
+      Коротко вернуть тот же вопрос: вы ответили — и спросили обратно.
   - text_pl: Wzajemnie.
-    explanation_ru: Естественный ответ на Miło mi / Miło pana poznać.
+    explanation_ru: >
+      Ответ на Miło mi / Miło pana poznać — «взаимно», без лишних слов.
 pan_pani:
-  summary_ru: С незнакомым взрослым собеседником сохраняйте pan/pani и третье лицо; нейтральные
-    просьбы и благодарность важнее буквального переноса форм L1.
-  form: Jak ma pan/pani na imię? · Skąd pan/pani jest?
+  summary_ru: >
+    К взрослому незнакомцу — pan / pani и 3 лицо: Jak ma pan na imię?,
+    Skąd pani jest? Не переходите на ty, пока человек сам не предложит.
+  form: Jak ma pan/pani na imię? · Skąd pan/pani jest? · A pan/pani?
   examples_pl: &a1
     - Jak ma pani na imię?
     - Skąd pan jest?
@@ -60,21 +69,28 @@ pan_pani:
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
-    ukr: Відпрацьовуйте польську рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest?» цілісно; не
-      складайте її дослівно з українських слів.
-    rus: Отрабатывайте польскую рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest?» целиком, без
-      дословной кальки с русского.
-    bel: Адпрацоўвайце польскую рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest?» цалкам; не
-      складайце яе даслоўна з беларускай.
+    ukr: >
+      Не калькуйте «Як вас звати?» / «Звідки ви?» як *Jak masz…* або
+      wy jesteście. Тримайте Jak ma pan/pani na imię? і Skąd pan/pani jest?
+      цілими; назад — A pan? / A pani?
+    rus: >
+      Не подставляйте «Как вас зовут?» / «Откуда вы?» как *Jak masz…*
+      или wy jesteście. Нужны Jak ma pan/pani na imię? и Skąd pan/pani jest?
+      целиком; встречный вопрос — A pan? / A pani?
+    bel: >
+      Не калькуйце «Як вас завуць?» / «Адкуль вы?» як *Jak masz…* ці
+      wy jesteście. Трымайце Jak ma pan/pani na imię? і Skąd pan/pani jest?
+      цэлымі; назад — A pan? / A pani?
 grammar_points:
   - id: GP-A1-PS-L2
     title_pl: Pytania z pan / pani
-    summary_ru: Закрепить взаимный обмен именем и происхождением с pan/pani и связать ответы в короткий
-      разговор.
+    summary_ru: >
+      Два вопроса и короткий возврат: имя, откуда, A pan? / A pani?
     form: Jak ma pan/pani na imię? · Skąd pan/pani jest? · A pan/pani?
-    meaning: Связать знакомые A1-реплики в понятное действие внутри ситуации.
-    use: "Вы продолжаете первое знакомство: спрашиваете имя и происхождение, затем отвечаете полными
-      короткими репликами."
+    meaning: >
+      Вы узнаёте, как человека зовут и откуда он, и можете ответить сами.
+    use: >
+      Сосед, короткий разговор на работе: спросить → ответить → вернуть вопрос.
     examples_pl: *a1
     counterexamples_pl:
       - "*Ty daj."
@@ -84,42 +100,49 @@ grammar_points:
       - GR-TNS-PRS-01
       - PRAG-PAN-01
     l1_notes:
-      ukr: Відпрацьовуйте польську рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest? · A pan/pani?»
-        цілісно; не складайте її дослівно з українських слів.
-      rus: Отрабатывайте польскую рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest? · A pan/pani?»
-        целиком, без дословной кальки с русского.
-      bel: Адпрацоўвайце польскую рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest? · A pan/pani?»
-        цалкам; не складайце яе даслоўна з беларускай.
+      ukr: >
+        Рамка з pan/pani + 3 особа: ma / jest, не masz / jesteś. Не збирайте
+        питання з українського «ви» як wy. A pani? — окрема коротка формула.
+      rus: >
+        Рамка с pan/pani + 3 л.: ma / jest, не masz / jesteś. Не копируйте
+        русское «вы» как wy. A pani? — отдельная короткая формула.
+      bel: >
+        Рамка з pan/pani + 3 асоба: ma / jest, не masz / jesteś. Не пераносьце
+        «вы» як wy. A pani? — асобная кароткая формула.
 l1_notes:
-  ukr: Відпрацьовуйте польську рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest?» цілісно; не
-    складайте її дослівно з українських слів.
-  rus: Отрабатывайте польскую рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest?» целиком, без
-    дословной кальки с русского.
-  bel: Адпрацоўвайце польскую рамку «Jak ma pan/pani na imię? · Skąd pan/pani jest?» цалкам; не
-    складайце яе даслоўна з беларускай.
+  ukr: >
+    Питайте і відповідайте цілими формулами. Не переходьте на ty з
+    незнайомцем; A pan? / A pani? повертає те саме питання без «ти».
+  rus: >
+    Спрашивайте и отвечайте целыми формулами. С незнакомцем — не ty;
+    A pan? / A pani? возвращает тот же вопрос без «ты».
+  bel: >
+    Пытайце і адказвайце цэлымі формуламі. З незнаёмцам — не ty;
+    A pan? / A pani? вяртае той жа пытанне без «ты».
 steps:
   - id: step-l2-situation
     kind: situation
     title_ru: Ситуация
-    body_ru: "Вы продолжаете первое знакомство: спрашиваете имя и происхождение, затем отвечаете полными
-      короткими репликами."
+    body_ru: >
+      Спросить имя и откуда человек, ответить самому, вернуть вопрос
+      (A pan? / A pani?).
   - id: step-l2-dialogue
     kind: dialogue
     title_ru: Диалог
     dialogue_ref: primary
   - id: step-l2-key-lines
     kind: key_lines
-    title_ru: Ключевые реплики
+    title_ru: Важные реплики
   - id: step-l2-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
   - id: step-l2-grammar
     kind: grammar
-    title_ru: Грамматика урока
+    title_ru: Грамматика
     grammar_point_id: GP-A1-PS-L2
   - id: step-l2-practice
     kind: practice
-    title_ru: Управляемая практика
+    title_ru: Практика
     exercise_ids:
       - ex-ps-l2-01
       - ex-ps-l2-02
@@ -129,20 +152,20 @@ steps:
       - ex-ps-l2-06
   - id: step-l2-mini-check
     kind: mini_check
-    title_ru: Мини-проверка
+    title_ru: Короткая проверка
     exercise_ids: &a2
       - ex-ps-l2-07
       - ex-ps-l2-08
   - id: step-l2-result
     kind: result
-    title_ru: Результат
+    title_ru: Итог
 exercises:
   - id: ex-ps-l2-01
     canonical_id: EX-A1-PS-L2-SC-01
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Вы спрашиваете имя мужчины-незнакомца. Выберите реплику.
+    prompt: "Как спросить имя у мужчины-незнакомца — на pan/pani?"
     concept_ids:
       - GR-CAS-NOM-01
     function_ids:
@@ -150,8 +173,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: Pan + ma сохраняет вежливый регистр.
-      incorrect: Формы masz/ty преждевременно переводят разговор на ty.
+      correct: "Да: Jak ma pan na imię? — pan и глагол в 3 лице."
+      incorrect: "masz / ty здесь слишком свои для незнакомца."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -173,7 +196,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Отметьте все вежливые вопросы первого знакомства.
+    prompt: "Отметьте всё, что уместно спросить при первом знакомстве со взрослым."
     concept_ids:
       - GR-TNS-PRS-01
     function_ids:
@@ -181,8 +204,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: Три реплики поддерживают pan/pani.
-      incorrect: Вопрос с ty не подходит для первого взрослого контакта.
+      correct: "Jak ma pani…, Skąd pan… и A pani? — на pan/pani."
+      incorrect: "Gdzie ty mieszkasz? — слишком своё для первого контакта."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -209,7 +232,7 @@ exercises:
     version: 1
     type: gap_fill
     status: DRAFT
-    prompt: "Дополните: Jak ma {{gap1}} na imię?"
+    prompt: "Вставьте пропущенное: Jak ma {{gap1}} na imię?"
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -217,8 +240,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: Jak ma pani na imię? — полный вежливый вопрос.
-      incorrect: Нужна форма pani.
+      correct: "Jak ma pani na imię? — целиком, с pani."
+      incorrect: "Нужна форма pani."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -237,7 +260,7 @@ exercises:
     version: 1
     type: gap_fill
     status: DRAFT
-    prompt: "Дополните: Skąd pan {{gap1}}?"
+    prompt: "Вставьте пропущенное: Skąd pan {{gap1}}?"
     concept_ids:
       - PHON-CORE-01
     function_ids:
@@ -245,8 +268,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: Pan сочетается с jest в третьем лице.
-      incorrect: Нужна форма jest, не jesteś.
+      correct: "Skąd pan jest? — pan и глагол в 3 лице."
+      incorrect: "Нужно jest, не jesteś."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -265,7 +288,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: Соберите взаимное знакомство.
+    prompt: "Расставьте реплики в порядке короткого взаимного знакомства."
     concept_ids:
       - GR-CAS-NOM-01
     function_ids:
@@ -273,8 +296,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: Вопрос → ответ и встречный вопрос → ответ → закрытие.
-      incorrect: Сначала установите контакт и обменяйтесь именами.
+      correct: "Вопрос → ответ и встречный вопрос → ответ → закрытие."
+      incorrect: "Сначала спросить, потом обменяться именами, затем закрыть."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -302,7 +325,7 @@ exercises:
     version: 1
     type: single_choice
     status: DRAFT
-    prompt: Как кратко вернуть вопрос о происхождении женщине?
+    prompt: "Как коротко вернуть вопрос о происхождении женщине?"
     concept_ids:
       - GR-TNS-PRS-01
     function_ids:
@@ -310,8 +333,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: A pani? вежливо возвращает тот же вопрос.
-      incorrect: Ty меняет регистр, а I pani? не выполняет эту функцию.
+      correct: "A pani? — вежливо возвращает тот же вопрос."
+      incorrect: "A ty? меняет регистр; I pani? так обычно не говорят."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -333,7 +356,7 @@ exercises:
     version: 1
     type: multiple_choice
     status: DRAFT
-    prompt: Какие ответы сообщают происхождение?
+    prompt: "Какие ответы говорят, откуда вы?"
     concept_ids:
       - PRAG-PAN-01
     function_ids:
@@ -341,8 +364,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: Обе реплики с Jestem z… называют происхождение.
-      incorrect: Имя и формула взаимности не отвечают на skąd.
+      correct: "Jestem z… называет происхождение; имя и Wzajemnie — нет."
+      incorrect: "Nazywam się… и Wzajemnie не отвечают на skąd."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -368,7 +391,7 @@ exercises:
     version: 1
     type: ordering
     status: DRAFT
-    prompt: Расставьте самостоятельный ответ по смыслу.
+    prompt: "Соберите ответ о себе по порядку."
     concept_ids:
       - PHON-CORE-01
     function_ids:
@@ -376,8 +399,8 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: Имя → происхождение → нынешний город.
-      incorrect: Дайте собеседнику информацию от основной к дополнительной.
+      correct: "Имя → откуда → где сейчас — так понятнее."
+      incorrect: "Сначала кто вы, потом skąd, затем где живёте сейчас."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -405,11 +428,13 @@ mini_check:
     - GR-TNS-PRS-01
     - PRAG-PAN-01
 result_metadata:
-  title_ru: Результат урока
-  success_ru: Закрепить взаимный обмен именем и происхождением с pan/pani и связать ответы в короткий
-    разговор. Результат относится только к DRAFT-превью.
-  retry_ru: "Повторите опорные реплики: Jak ma pan/pani na imię? · Skąd pan/pani jest?, затем снова
-    выполните мини-проверку."
+  title_ru: Итог
+  success_ru: >
+    Короткая проверка пройдена. Вы можете спросить имя и откуда человек,
+    ответить и вернуть вопрос на pan/pani (черновик, внутренний просмотр).
+  retry_ru: >
+    Ещё раз Jak ma pan/pani na imię?, Skąd pan/pani jest? и A pan? / A pani? —
+    потом короткая проверка снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-IDENTIFY-01
@@ -426,4 +451,8 @@ provenance:
     - Original SŁOWARIUM DRAFT lesson; curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01,
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
+  notes: >
+    AI-assisted system draft. Language pass v2 — adult RU instructional chrome
+    (prompts, feedback, steps, result, l1_notes). DRAFT — not JPJO-approved, not
+    published to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only
