@@ -3,14 +3,14 @@
 kind: course
 canonical_id: CRS-A1-CLOSED-BETA
 slug: a1-closed-beta
-version: 1
+version: 2
 status: DRAFT
 level: A1
 title_pl: Kurs A1 — zamknięta beta
 working_title: A1 Closed Beta Course
 objective_ru: >
-  Связный сегмент A1: 5 залов × 3 урока. Внутренний preview / closed beta.
-  Не публикация и не одобрение JPJO.
+  Пять залов A1 по три урока — для внутреннего просмотра закрытой беты.
+  Не публичный релиз и не одобрение JPJO.
 module_slugs:
   - pierwsze-spotkanie
   - w-kawiarni
@@ -25,6 +25,6 @@ provenance:
     - "Curriculum A1 inventory / SCN / FN / LEX"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Course entity for Milestone 3 hierarchy Course→Module→Lesson. DRAFT only — pending human review; publication blocked by DEC-016. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Course entity for Milestone 3 hierarchy Course→Module→Lesson. Language pass v2 — softer RU objective chrome. DRAFT only — pending human review; publication blocked by DEC-016. No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
 internal_preview_only: true

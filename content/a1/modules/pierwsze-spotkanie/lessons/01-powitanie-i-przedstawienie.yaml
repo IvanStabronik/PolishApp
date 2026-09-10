@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-01
 slug: powitanie-i-przedstawienie
-version: 2
+version: 3
 status: DRAFT
 title_pl: Powitanie i przedstawienie
 sort_order: 1
@@ -78,20 +78,16 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Українське «ви» не копіюється в польську як wy + 2 ос. мн. до незнайомої
-      людини. Для першого контакту тримайте pan/pani + 3 особа; «ти» лише після
-      явного дозволу. Не переносьте вокатив імен на польський pani без моделі
-      з діалогу.
+      Українське «ви» не копіюється як wy + 2 ос. мн. до незнайомої людини.
+      На перший контакт — pan/pani + 3 особа; «ти» лише після явного дозволу.
     rus: >
       Русское «вы» + глагол во 2 л. мн. (*Вы откуда?*) — типичная ошибка.
       По-польски к незнакомке: Skąd pani jest? (3 л.), не *Skąd wy jesteście?
       Вокатив в обращении слабее привычки — не подставляйте именительный вместо
       устойчивых формул pani / pan.
     bel: >
-      Беларускае «вы» і звычка пераходзіць на «ты» сярод «сваіх» не адмяняюць
-      польскі pan/pani з незнаёмцам. Не калькуйце «добры дзень» парадкам слоў
-      і не змешвайце bel. ветлівасць з польскай 3-й асобай; трымайцеся рэплік
-      дыялогу.
+      Беларускае «вы» і хуткі пераход на «ты» сярод «сваіх» не адмяняюць
+      польскі pan/pani з незнаёмцам. Трымайцеся рэплік дыялогу.
 grammar_points:
   - id: GP-A1-PS-NAZYWAM-JESTEM
     title_pl: Nazywam się… / Jestem z…
@@ -118,17 +114,17 @@ grammar_points:
       - GR-TNS-PRS-01
     l1_notes:
       ukr: >
-        Калька «Мене звати / У мене на ім'я» → *Nazywam Olena* без się або
-        *U mnie na imię*. Тримайте цілу рамку Nazywam się…. Для походження
-        Jestem z + dopełniacz (z Ukrainy), не називний *z Ukraina.
+        Калька «Мене звати / У мене на ім'я» → *Nazywam Olena* без się.
+        Тримайте цілу рамку Nazywam się…. Для походження: Jestem z +
+        dopełniacz (z Ukrainy), не називний *z Ukraina.
       rus: >
         «Меня зовут» часто даёт *Mienia zowut / Nazywam Anna* без się.
         Зафиксируйте się как часть формулы. «Я из…» → Jestem z + род.п.,
         не *Ja z Ukraina без падежа.
       bel: >
-        Аканне ў імёнах/тапонімах на пісьме не пераносіце ў польскую
-        артаграфію. Формулы Nazywam się… / Jestem z… вучыце цэлымі; не
-        збірайце іх з бел. «Мяне клічуць» даслоўна.
+        Аканне ў імёнах і тапонімах на пісьме не пераносіце ў польскую
+        артаграфію. Nazywam się… / Jestem z… вучыце цэлымі — не збірайце
+        з бел. «Мяне клічуць» даслоўна.
 l1_notes:
   ukr: >
     Не калькуйте «мене звати» / «я з…» дослівно. Тримайте Nazywam się…
@@ -538,7 +534,8 @@ provenance:
     - "Curriculum links: SCN-A1-EVERYDAY-01, FN-A1-GREET-01, FN-A1-IDENTIFY-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v2 — adult RU instructional chrome
-    (prompts, feedback, steps, result). DRAFT — not JPJO-approved, not published
-    to learners. reviewer_id is null (no fake review evidence).
+    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
+    pan/pani and Nazywam się traps; adult RU chrome retained. DRAFT — not
+    JPJO-approved, not published to learners. reviewer_id is null (no fake
+    review evidence).
 visibility: internal_preview_only
