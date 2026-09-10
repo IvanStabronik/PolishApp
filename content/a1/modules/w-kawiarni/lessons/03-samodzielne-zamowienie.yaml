@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-03
 slug: samodzielne-zamowienie
-version: 2
+version: 3
 status: DRAFT
 title_pl: Samodzielne zamówienie
 sort_order: 3
@@ -79,17 +79,17 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Тримайте рамку Poproszę… / Czy jest…? / Ile płacę? / Dziękuję цілою.
-      Не збирайте заказ з «дайте / можна мені»; «ти» до баристи лише якщо
-      він сам запропонував.
+      Не збирайте заказ з «дайте / можна мені». Тримайте
+      Poproszę… → Czy jest…? → Ile płacę? → Dziękuję; «ти» до баристи —
+      лише якщо сам запропонував.
     rus: >
       Держите рамку Poproszę… / Czy jest…? / Ile płacę? / Dziękuję целиком.
       Не собирайте заказ из «дайте / можно мне»; ty к баристе — только если
       он сам предложил.
     bel: >
-      Трымайце рамку Poproszę… / Czy jest…? / Ile płacę? / Dziękuję цэлай.
-      Не збірайце заказ з «дайце / можна мне»; «ты» да барысты толькі калі
-      ён сам прапанаваў.
+      Не збірайце заказ з «дайце / можна мне». Трымайце
+      Poproszę… → Czy jest…? → Ile płacę? → Dziękuję; да барысты не ty,
+      пакуль ён сам не прапануе.
 grammar_points:
   - id: GP-A1-WK-L3
     title_pl: Pełna transakcja w kawiarni
@@ -112,27 +112,24 @@ grammar_points:
       - GR-NUM-MONEY-01
     l1_notes:
       ukr: >
-        Після Poproszę — Acc (herbatę, kanapkę), не називний. Czy jest…?
-        і To poproszę też… тримайте цілими; не калькуйте «можна мені ще».
+        Після Poproszę — Acc (herbatę, kanapkę). Czy jest…? і
+        To poproszę też… цілими; не «можна мені ще».
       rus: >
         После Poproszę — Acc (herbatę, kanapkę), не именительный. Czy jest…?
         и To poproszę też… — целые формулы, не калька «можно мне ещё».
       bel: >
-        Пасля Poproszę — Acc (herbatę, kanapkę), не назоўны. Czy jest…?
-        і To poproszę też… трымайце цэлымі; не калькуйце «можна мне яшчэ».
+        Acc пасля Poproszę. Czy jest…? / To poproszę też… вучыце цэлымі;
+        не калька «можна мне яшчэ».
 l1_notes:
   ukr: >
-    Урок про повний заказ у кавʼярні: дві позиції (Poproszę X i Y),
-    Czy jest…?, To poproszę też…, ціна й Kartą. Без кальки «дайте»
-    і без ty до персоналу.
+    Самі: Poproszę X i Y, Czy jest…?, To poproszę też…, ціна й Kartą.
+    Без «дайте» і без ty до персоналу.
   rus: >
-    Урок про полный заказ в кофейне: две позиции (Poproszę X i Y),
-    Czy jest…?, To poproszę też…, цена и Kartą. Без кальки «дайте»
-    и без ty к баристе.
+    Сами: две позиции (Poproszę X i Y), Czy jest…?, To poproszę też…,
+    цена и Kartą. Без кальки «дайте» и без ty к баристе.
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Poproszę X i Y /
-    Czy jest…? / To poproszę też… / Kartą — асобныя польскія рамкі
-    ў кавярні.
+    Самі правядзіце заказ цэлымі рамкамі: Poproszę X i Y / Czy jest…? /
+    To poproszę też… / Kartą. Без калькі «дайце» і без ty да бара.
 steps:
   - id: step-l3-situation
     kind: situation
@@ -471,7 +468,8 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
-    DRAFT — pending human review; not JPJO-approved, not published to learners.
-    reviewer_id is null (no fake review evidence).
+    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
+    full-order frame traps; adult RU chrome retained. DRAFT — not
+    JPJO-approved, not published to learners. reviewer_id is null (no fake
+    review evidence).
 visibility: internal_preview_only

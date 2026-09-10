@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-01
 slug: zamowienie-przy-barze
-version: 2
+version: 3
 status: DRAFT
 title_pl: Zamówienie przy barze
 sort_order: 1
@@ -85,17 +85,15 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Українське «дайте / можна мені» не переносьте як *Daj / *Można mnie.
-      У кавʼярні тримайте Poproszę + biernik і pan/pani до персоналу;
-      «ти» лише якщо бариста сам запропонував.
+      «Дайте / можна мені» → не *Daj / *Można mnie. У кавʼярні —
+      Poproszę + biernik; до баристи pan/pani, не ty.
     rus: >
       «Можно мне кофе» часто даёт *Możno mnie kawę. По-польски —
       Poproszę kawę. Не говорите ty баристе-незнакомцу; kartą —
       творительный в формуле оплаты, не «на карте».
     bel: >
-      Не калькуйце «дайце кавы» ў рэзкі *Daj. Poproszę… + pan/pani —
-      асобны польскі сэрвісны рэгістр; не спадзявайцеся на бел. «вы»
-      як wy + 2 л. мн. да бара.
+      «Дайце кавы» не робіць рэзкі *Daj. Poproszę… + pan/pani —
+      асобны сэрвісны рэгістр; бел. «вы» ≠ wy + 2 л. мн. да бара.
 grammar_points:
   - id: GP-A1-WK-POPROSZE-ACC
     title_pl: Poproszę + Biernik
@@ -122,27 +120,25 @@ grammar_points:
       - GR-NUM-MONEY-01
     l1_notes:
       ukr: >
-        Не лишайте називний (*kawa) після Poproszę. «Кавою / картою» —
-        не плутайте з польським kartą (Ins оплати).
+        Після Poproszę — Acc (kawę), не *kawa. Kartą (Ins оплати)
+        ≠ укр. «картою / на карту».
       rus: >
         «Кофе» после Poproszę → kawę (Acc), не *kawa. Оплата: kartą,
         не *na karte / *karta.
       bel: >
-        Трымайце Acc пасля Poproszę; аканне ў назвах напояў на пісьме
-        не пераносіце. Kartą — цэлая формула, не збірайце з бел. «картай».
+        Acc пасля Poproszę; аканне ў назвах напояў на пісьме не пераносіце.
+        Kartą — цэлая формула, не з «картай».
 l1_notes:
   ukr: >
-    Урок про замовлення в кавʼярні: Poproszę + biernik, питання Czy jest…?,
-    оплата kartą/gotówką. Не калькуйте «дайте / можна мені»; pan/pani до
-    персоналу на першому контакті.
+    Не калькуйте «дайте / можна мені». Тримайте Poproszę + Acc,
+    Czy jest…?, Kartą, proszę; з персоналом — pan/pani, не ty.
   rus: >
     Заказ без кальки «можно мне» и без ty к баристе. Запомните Acc после
     Poproszę и творительный в kartą / gotówką; цену слушайте целиком:
     Ile płacę?
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі і не спадзявайцеся на
-    «і так зразумеюць». Poproszę… / Czy jest… / Kartą, proszę — асобныя
-    польскія рамкі; пісьмо без акання ў назвах напояў.
+    Не спадзявайцеся на «і так зразумеюць». Poproszę… / Czy jest… /
+    Kartą, proszę — асобныя польскія рамкі; пісьмо без акання ў напоях.
 steps:
   - id: step-situation
     kind: situation
@@ -576,7 +572,7 @@ provenance:
     - "Curriculum links: SCN-A1-FOOD-01, FN-A1-TRANS-01, LEX-A1-SERVICE"
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v2 — adult RU instructional chrome.
-    DRAFT — pending human review; not JPJO-approved, not published to learners.
-    reviewer_id is null (no fake review evidence).
+    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
+    café order traps; adult RU chrome retained. DRAFT — not JPJO-approved,
+    not published to learners. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only
