@@ -1,7 +1,7 @@
 kind: module
 canonical_id: MOD-A1-PIERWSZE-SPOTKANIE
 slug: pierwsze-spotkanie
-version: 3
+version: 4
 status: DRAFT
 level: A1
 title_pl: Pierwsze spotkanie
@@ -41,7 +41,7 @@ provenance:
     - "Common-knowledge Polish greeting & self-introduction patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    Micro-fix inventory: listening on L01–L03 + speaking on all three.
+    Static audio on L01–L03 assessed listening (edge-tts interim under /audio/a1/).
     DRAFT — pending human JPJO; not learner-published. reviewer_id null.
 visibility: internal_preview_only
 internal_preview_only: true

@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-02
 slug: rozmiar-dodatki-i-platnosc
-version: 6
+version: 7
 status: DRAFT
 title_pl: Rozmiar, dodatki i płatność
 sort_order: 2
@@ -254,11 +254,12 @@ exercises:
       - c
   - id: ex-wk-l2-listen-01
     canonical_id: EX-A1-WK-L2-LIS-01
-    version: 1
+    version: 2
     type: listening
     status: DRAFT
     prompt: "Послушайте баристу. О чём вопрос?"
     audio_text_pl: Z mlekiem czy bez mleka?
+    audio_url: /audio/a1/EX-A1-WK-L2-LIS-01.mp3
     options:
       - id: a
         text: Спрашивает про добавку молока.
@@ -570,4 +571,5 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Wave 6 v6 — hard same-scenario listening foils (near-minimal café distractors). DRAFT — not JPJO-approved, not learner-published. reviewer_id null.
+    Static assessed-listening audio (edge-tts interim). Hard café foils.
+    DRAFT — not JPJO-approved. reviewer_id null.

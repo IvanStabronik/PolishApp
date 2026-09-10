@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-03
 slug: samodzielne-pierwsze-spotkanie
-version: 5
+version: 6
 status: DRAFT
 title_pl: Samodzielne pierwsze spotkanie
 sort_order: 3
@@ -240,11 +240,12 @@ exercises:
       - c
   - id: ex-ps-l3-listen-01
     canonical_id: EX-A1-PS-L3-LIS-01
-    version: 1
+    version: 2
     type: listening
     status: DRAFT
     prompt: "Послушайте. Чем закрывают знакомство?"
     audio_text_pl: Dziękuję za rozmowę. Do widzenia.
+    audio_url: /audio/a1/EX-A1-PS-L3-LIS-01.mp3
     options:
       - id: a
         text: Благодарность за разговор и прощание.
@@ -506,6 +507,6 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    Micro-fix: assessed listening with same-scenario foils (close vs name vs ask).
+    Static assessed-listening audio (edge-tts interim). Same-scenario foils.
     DRAFT — not JPJO-approved. reviewer_id null.
 visibility: internal_preview_only

@@ -1,6 +1,6 @@
 # FOUNDER UNBLOCK NOW
 
-**Status (2026-09-10 probe):** GitHub Environment `private-beta` = **missing**. Repo secrets = **empty**. Railway CLI = **not installed**. `BASE_URL` = **unset**. Code cannot mint live HTTPS. No fake deploy.
+**Status (2026-09-10 probe #2):** GitHub Environment `private-beta` = **EXISTS** (created via API; secrets still **empty**). Railway CLI = **installed** (`railway 5.52.0` via npm) — **not logged in** (no invented token). Repo secrets / `BASE_URL` = **unset**. Code cannot mint live HTTPS. No fake deploy.
 
 **Primary path (Windows):** run the interactive wizard — it walks only human-owned steps, prompts for each secret by name (never invents values), and prints Done/Blocked checkboxes to paste back into chat.
 
@@ -16,7 +16,19 @@ Do **not** paste secret values into chat, tickets, or git. Related checklists: [
 
 ---
 
-## Manual fallback (if you prefer not to run the script)
+## Remaining human-only steps
+
+### 0) Railway login (CLI optional)
+
+CLI is on PATH after `npm install -g @railway/cli`. Login is interactive OAuth — agent cannot complete it:
+
+```powershell
+railway login
+# Opens browser OAuth. For headless/SSH only: railway login --browserless
+# (prints a URL + short code — do not invent tokens)
+```
+
+Or skip CLI and use the Railway web UI alone (below).
 
 ### 1) Railway project (15 min)
 
@@ -54,10 +66,9 @@ Paste each into Railway as `BETTER_AUTH_SECRET` / `INVITE_TOKEN_PEPPER` / `PRIVA
 6. Account → **Tokens** → create token → keep for GitHub.
 7. Service settings → copy **Service ID** → keep for GitHub.
 
-### 2) GitHub Environment `private-beta`
+### 2) GitHub Environment `private-beta` secrets
 
-1. GitHub → repo → **Settings** → **Environments** → **New environment** → name exactly `private-beta`.
-2. Add **Environment secrets** (names must match):
+Environment shell **already exists**. Add **Environment secrets** only (names must match):
 
 | Secret | Paste |
 | --- | --- |
@@ -72,6 +83,8 @@ Paste each into Railway as `BETTER_AUTH_SECRET` / `INVITE_TOKEN_PEPPER` / `PRIVA
 Optional smoke later: `PROD_SMOKE_ADMIN_EMAIL` / `PROD_SMOKE_ADMIN_PASSWORD`.
 
 Do **not** invent values. Empty secret = deploy.yml fails closed.
+
+Wizard / CLI write path: `gh secret set NAME --env private-beta` (after you paste each value into the wizard).
 
 ### 3) Dispatch deploy
 
@@ -109,4 +122,4 @@ Status stays `NOT_STARTED` until a real reviewer opens it. AI must not APPROVE. 
 - [ ] Wizard §1–§2 + §4 health rows marked Done
 - [ ] (Optional) JPJO calendar booked — still not PUBLISHED
 
-Until then: local closed-beta only. Score stays ~33 / 50 EXTERNAL.
+Until then: local closed-beta only. Score stays ~34 / 50 EXTERNAL (listening audio moved §3; HTTPS/JPJO still blocked).

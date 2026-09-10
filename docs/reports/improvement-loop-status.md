@@ -5,17 +5,18 @@
 **Wave 4 re-audit (honest):** ~**30 / 50** against `reference-quality-bar.md` (prior “34” was soft).  
 **Wave 5 estimate:** ~**32–33 / 50** — café listening + deepen + ops docs + stimulus harden; EXTERNAL wall unchanged.  
 **Wave 6 re-audit (honest):** ~**32.5 / 50** — CODE-DOABLE substance landed; further content/improve waves toward the bar are **diminishing-return waste** until EXTERNAL unlock. Never claim reference quality.  
-**Post–stop-rule micro-fixes (2026-09-10):** ~**33 / 50** — server play-proof + PS L02/L03 listening + foil fix (`e7c7b1a`). Still **EXTERNAL** until live HTTPS or JPJO. Not a marketed wave.
+**Post–stop-rule micro-fixes (2026-09-10):** ~**33 / 50** — server play-proof + PS L02/L03 listening + foil fix (`e7c7b1a`). Still **EXTERNAL** until live HTTPS or JPJO. Not a marketed wave.  
+**Static listening audio micro-fix (2026-09-10):** ~**33.5–34 / 50** — six edge-tts MP3s wired on Pierwsze spotkanie + W kawiarni L01–L03; stimulus returns `audioUrl` without `textPl`; play-gate unchanged. Moves §3 (listening path) toward harder interim — **still not studio / not JPJO**. GitHub Environment `private-beta` shell now **exists**; secrets + Railway login + live HTTPS still **EXTERNAL**.
 
 ### Waiting on founder (EXTERNAL)
 
-**Blocked on human-owned steps only** — Railway / GitHub Environment `private-beta` secrets / live `BASE_URL` health·ready, and/or independent JPJO. Code cannot unlock this.
+**Blocked on human-owned steps only** — Railway login/project + `private-beta` **secrets** (env shell exists) / live `BASE_URL` health·ready, and/or independent JPJO. Code cannot unlock this.
 
 **Run:** [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) (primary on Windows) — see [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Paste the wizard’s Done/Blocked block back into chat when finished. Do not invent secrets; do not claim HTTPS without curl 200.
 
 ### STOP RULE
 
-**No more content / improve waves marketed toward reference quality** until [`external-unblock-wizard.md`](../operations/external-unblock-wizard.md) has **at least one real Done row** — either live HTTPS smoke (§4) **or** a JPJO human decision (§3). Optional micro-fixes only (e.g. server play-gate, PS L02/03 listen) — not another scored “wave toward reference.”
+**No more content / improve waves marketed toward reference quality** until [`external-unblock-wizard.md`](../operations/external-unblock-wizard.md) has **at least one real Done row** — either live HTTPS smoke (§4) **or** a JPJO human decision (§3). Optional micro-fixes only (e.g. server play-gate, static audio) — not another scored “wave toward reference.”
 
 ### Micro-fixes under stop-rule exception (shipped)
 
@@ -23,10 +24,13 @@
 | --- | --- |
 | Server listening play evidence on attempt (HMAC `listeningPlayToken` from stimulus; unlock via `/api/learning/listening-play-unlock` when TTS unavailable) | **Done** — `e7c7b1a`; client gate alone was PARTIAL |
 | PS L02–L03 assessed listening + hard same-scenario foils; L01 café «сколько стоит кофе» giveaway removed | **Done** — `e7c7b1a`; still DRAFT |
-| Founder unblock one-pager + interactive wizard | **Done** — [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + `scripts/founder-unblock.ps1` (probe: no `private-beta` env, no Railway CLI, no `BASE_URL`) |
+| Founder unblock one-pager + interactive wizard | **Done** — [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + `scripts/founder-unblock.ps1` |
+| GitHub Environment `private-beta` shell | **Done** — created via `gh api …/environments/private-beta` PUT; **secrets still empty** |
+| Railway CLI on Windows | **Done install** — `railway 5.52.0`; login still human (`railway login` OAuth) |
+| Static assessed-listening audio (PS + café L01–L03) | **Done** — 6× MP3 under `web/public/audio/a1/`; YAML `audio_url`; see [`audio-assets.md`](../operations/audio-assets.md) |
 | JPJO hall packet inventory refresh | **Done** — status remains `NOT_STARTED` |
 
-Score held ~**33 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL**.
+Score estimate ~**33.5–34 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL**.
 
 ### Local closed-beta smoke (2026-09-10)
 
@@ -87,7 +91,7 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 
 ## Still broken vs reference bar
 
-1. TTS ≠ studio listening (FUN-110 / V2). Network tab can still see TTS `textPl` when no `audioUrl` (interim).
+1. Static edge-tts ≠ studio listening (FUN-110 / V2). Other halls still TTS-only when no `audioUrl`. Network tab can still see TTS `textPl` when no `audioUrl`.
 2. Speaking recognition best-effort — not exam scoring.
 3. All content **DRAFT** — no JPJO PUBLISHED hall (§7). **EXTERNAL**
 4. Competitive week-1 not yet **run** with real invitees (script only).
@@ -103,11 +107,12 @@ Do **not** start Wave 7 as another content deepen. Founder path = run [`scripts/
 2. **JPJO human review** — calendar + first hall APPROVE/REJECT in packet (§3; no AI self-approve).
 3. **Invite path on live** — same closed-beta flags as local (`BETA_ALLOW_DRAFT=true`, `DEMO_*=false`).
 
-Optional further micro-fixes (not a reference wave): studio audio pipeline; timed bakeoff log. Still waiting on founder **EXTERNAL**.
+Optional further micro-fixes (not a reference wave): more hall static audio; timed bakeoff log. Still waiting on founder **EXTERNAL**.
 
 ## External blockers (track)
 
-- Railway / host secrets and service ID (wizard §1) — **probe 2026-09-10: missing**.
+- Railway login + project + secrets / service ID (wizard §1) — **CLI installed; not logged in; secrets missing**.
+- GitHub Environment `private-beta` — **shell exists; secrets empty**.
 - Independent JPJO reviewer calendar (wizard §3).
 - Production `INVITE_TOKEN_PEPPER`, DB, auth if not provisioned.
 - Browser TTS / SpeechRecognition variance.

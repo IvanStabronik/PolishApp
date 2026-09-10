@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-02
 slug: pytania-o-imie-i-pochodzenie
-version: 5
+version: 6
 status: DRAFT
 title_pl: Pytania o imię i pochodzenie
 sort_order: 2
@@ -240,11 +240,12 @@ exercises:
       - d
   - id: ex-ps-l2-listen-01
     canonical_id: EX-A1-PS-L2-LIS-01
-    version: 1
+    version: 2
     type: listening
     status: DRAFT
     prompt: "Послушайте. Что спросили?"
     audio_text_pl: Jak ma pan na imię?
+    audio_url: /audio/a1/EX-A1-PS-L2-LIS-01.mp3
     options:
       - id: a
         text: Спросили имя у мужчины на pan/pani.
@@ -502,6 +503,6 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    Micro-fix: assessed listening with same-scenario foils (name vs skąd vs A pan?).
+    Static assessed-listening audio (edge-tts interim). Same-scenario foils.
     DRAFT — not JPJO-approved. reviewer_id null.
 visibility: internal_preview_only

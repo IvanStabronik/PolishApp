@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-01
 slug: powitanie-i-przedstawienie
-version: 6
+version: 7
 status: DRAFT
 title_pl: Powitanie i przedstawienie
 sort_order: 1
@@ -265,11 +265,12 @@ exercises:
 
   - id: ex-ps-listen-01
     canonical_id: EX-A1-PS-LIS-01
-    version: 2
+    version: 3
     type: listening
     status: DRAFT
     prompt: "Послушайте реплику соседа. Что он сказал?"
     audio_text_pl: Nazywam się Marek Nowak. A pani?
+    audio_url: /audio/a1/EX-A1-PS-LIS-01.mp3
     options:
       - id: a
         text: Он назвал себя и спросил ваше имя на pan/pani.
@@ -628,6 +629,6 @@ provenance:
     - "Curriculum links: SCN-A1-EVERYDAY-01, FN-A1-GREET-01, FN-A1-IDENTIFY-01"
   ai_assisted: true
   notes: >
-    Micro-fix: hard same-scenario listening foils (no café giveaway).
-    DRAFT — not JPJO-approved, not published. reviewer_id null.
+    Static assessed-listening audio (edge-tts interim, not studio).
+    Hard same-scenario foils. DRAFT — not JPJO-approved. reviewer_id null.
 visibility: internal_preview_only

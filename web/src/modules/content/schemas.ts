@@ -110,13 +110,28 @@ export const OrderingExerciseSchema = ExerciseBaseSchema.extend({
 });
 
 /**
+ * Absolute https URL or same-origin static path under /audio/ (Next public/).
+ * Relative paths let DRAFT lessons ship without a known production host.
+ */
+export const AudioAssetUrlSchema = z.union([
+  z.string().url(),
+  z
+    .string()
+    .regex(
+      /^\/audio\/[A-Za-z0-9._/-]+\.(mp3|wav|ogg|m4a)$/i,
+      "audio_url must be https URL or /audio/….(mp3|wav|ogg|m4a)",
+    ),
+]);
+
+/**
  * Closed listening item: hear Polish (TTS or audio_url), then choose.
  * `audio_text_pl` is the spoken stimulus — not shown as the primary prompt text.
+ * Prefer `audio_url` (static file); stimulus API then omits textPl.
  */
 export const ListeningExerciseSchema = ExerciseBaseSchema.extend({
   type: z.literal("listening"),
   audio_text_pl: z.string().min(1),
-  audio_url: z.string().url().optional(),
+  audio_url: AudioAssetUrlSchema.optional(),
   options: z.array(ChoiceOptionSchema).min(2),
   correct_option_id: z.string().min(1),
 });
@@ -134,13 +149,13 @@ export type ExerciseType = Exercise["type"];
 export const DialogueTurnSchema = z.object({
   speaker: z.string().min(1),
   text_pl: z.string().min(1),
-  audio_url: z.string().url().optional(),
+  audio_url: AudioAssetUrlSchema.optional(),
 });
 
 export const KeyLineSchema = z.object({
   text_pl: z.string().min(1),
   explanation_ru: z.string().min(1),
-  audio_url: z.string().url().optional(),
+  audio_url: AudioAssetUrlSchema.optional(),
 });
 
 export const GrammarPointSchema = z.object({
