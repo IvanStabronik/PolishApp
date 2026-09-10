@@ -317,6 +317,22 @@ async function main() {
     process.exit(1);
   }
 
+  const forceSeed =
+    process.env.FORCE_SEED === "true" || process.env.FORCE_SEED === "1";
+
+  // Refuse the dangerous combo: FORCE_SEED under DEMO_MODE in production —
+  // that path would leave production demo theater on. Prefer bootstrap-first-admin.
+  if (
+    forceSeed &&
+    isDemoMode() &&
+    process.env.NODE_ENV === "production"
+  ) {
+    console.error(
+      "Refuse: FORCE_SEED + DEMO_MODE in production. Keep DEMO_MODE=false and use scripts/bootstrap-first-admin.ps1 (or FORCE_SEED with DEMO_MODE unset).",
+    );
+    process.exit(1);
+  }
+
   if (!allowDemoSeed()) {
     console.log(
       "Skipping seed (demo seed not allowed). Set DEMO_MODE=true (non-production) or FORCE_SEED=true / ALLOW_PRODUCTION_DEMO.",
@@ -324,11 +340,17 @@ async function main() {
     return;
   }
 
-  if (!isDemoMode() && process.env.FORCE_SEED !== "true") {
+  if (!isDemoMode() && !forceSeed) {
     console.log(
       "Skipping seed (DEMO_MODE is not true). Set DEMO_MODE=true or FORCE_SEED=true.",
     );
     return;
+  }
+
+  if (forceSeed && !isDemoMode()) {
+    console.log(
+      "FORCE_SEED one-shot with DEMO_MODE off — demo accounts only; DEMO_MODE stays false. Prefer scripts/bootstrap-first-admin.ps1 for a real founder email.",
+    );
   }
 
   console.log("Seeding demo users + roles + LVL-A1 + DRAFT A1 modules + beta slots…");

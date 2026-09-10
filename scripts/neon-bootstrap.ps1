@@ -112,10 +112,14 @@ Write-Host '     curl.exe -fsS "$BASE_URL/api/ready"'
 Write-Host ""
 
 Section "First admin / invite-first (no DEMO_MODE on Vercel)"
-Note "Prefer invite-first after a one-shot staff seed. Do NOT set DEMO_MODE=true on Vercel."
+Note "Prefer bootstrap-first-admin with a real email. Do NOT set DEMO_MODE=true on Vercel."
 Write-Host ""
-Write-Host "  There is no separate non-demo admin CLI. First staff user comes from db:seed"
-Write-Host "  gated by FORCE_SEED (not DEMO_MODE). One-shot from this machine only:"
+Write-Host "  Preferred (founder email + password, DEMO_MODE stays false):"
+Write-Host ""
+Write-Host ("    powershell -ExecutionPolicy Bypass -File " + (Join-Path $RepoRoot "scripts\bootstrap-first-admin.ps1") + " ``")
+Write-Host '      -DatabaseUrl "<same DIRECT URL>" -Email "you@example.com" -Password "<strong>"'
+Write-Host ""
+Write-Host "  Fallback (demo accounts via FORCE_SEED — laptop only; DEMO_MODE unset/false):"
 Write-Host ""
 Write-Host ("    cd " + $WebDir)
 Write-Host '    $env:DATABASE_URL = "<same DIRECT URL>"'
@@ -125,10 +129,9 @@ Write-Host "    pnpm db:seed"
 Write-Host '    Remove-Item Env:FORCE_SEED, Env:DATABASE_URL -ErrorAction SilentlyContinue'
 Write-Host ""
 Write-Host "  Then on live HTTPS (DEMO_MODE=false and BETA_ALLOW_DRAFT=true):"
-Write-Host "    - Sign in as seeded admin (see DEMO_ACCOUNTS.admin in web/src/modules/auth/demo.ts)"
+Write-Host "    - Sign in as the bootstrap admin (or DEMO_ACCOUNTS.admin if FORCE_SEED fallback)"
 Write-Host "    - Open /{locale}/admin/beta -> create invite -> share /{locale}/invite/{token}"
 Write-Host "    - Invitee registers -> onboard -> one DRAFT lesson attempt"
-Write-Host "  Change the seeded admin password immediately (settings / change-password)."
 Write-Host ""
 
 Section "Done"

@@ -137,12 +137,27 @@ No manual copy step if you deploy from this repo as linked above.
 
 ### 6) First admin → invite-first (no `DEMO_MODE` on Vercel)
 
-There is **no** separate non-demo admin CLI. Prefer:
+**Preferred** — real founder email, `DEMO_MODE` stays false (never set on Vercel):
 
-1. One-shot seed **from your laptop** (not Vercel env): `FORCE_SEED=true` + direct `DATABASE_URL` → `pnpm db:seed` (keeps `DEMO_MODE` unset/false).
-2. Sign in as seeded admin → `/{locale}/admin/beta` → create invite → share `/{locale}/invite/{token}`.
-3. Invitee path: accept → register → onboard → one DRAFT lesson.
-4. Change the seeded admin password immediately.
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\bootstrap-first-admin.ps1 `
+  -DatabaseUrl '<DIRECT URL>' `
+  -Email 'you@example.com' `
+  -Password '<strong password>'
+```
+
+Refuses if `DEMO_MODE=true` or `ALLOW_PRODUCTION_DEMO=true` is already in the shell. Never writes those to Vercel. Twin: `bash scripts/bootstrap-first-admin.sh --database-url '…' --email '…' --password '…'`.
+
+**Fallback** — one-shot demo accounts from your laptop only:
+
+1. `FORCE_SEED=true` + direct `DATABASE_URL` → `pnpm db:seed` (keep `DEMO_MODE` unset/false).
+2. Refuses `FORCE_SEED` + `DEMO_MODE` together when `NODE_ENV=production`.
+
+Then on live HTTPS (`DEMO_MODE=false`, `BETA_ALLOW_DRAFT=true`):
+
+1. Sign in as bootstrap admin (or seeded `admin@demo.slowarium.local` if FORCE_SEED fallback).
+2. `/{locale}/admin/beta` → create invite → share `/{locale}/invite/{token}`.
+3. Invitee: accept → register → onboard → one DRAFT lesson.
 
 `neon-bootstrap.ps1` prints the exact commands. **Never** set `DEMO_MODE=true` or `ALLOW_PRODUCTION_DEMO=true` on Vercel for real closed beta.
 
@@ -193,14 +208,14 @@ Status stays `NOT_STARTED` until a real reviewer opens it. AI must not APPROVE. 
 - [ ] Wizard / checklist § Neon+Vercel + closed-beta flags + health rows Done
 - [ ] (Optional) JPJO calendar booked — still not PUBLISHED
 
-Until then: local closed-beta only. Score stays ~**34.5 / 50** EXTERNAL (HTTPS/JPJO still blocked).
+Until then: local closed-beta only. Score stays ~**35.5 / 50** EXTERNAL (HTTPS/JPJO still blocked).
 
 **Exact next commands (human) — after Neon Create:**
 
 1. `scripts\neon-bootstrap.ps1 -DirectUrl '<DIRECT>' -PooledUrl '<POOLED>'`
 2. Import `IvanStabronik/PolishApp` on Vercel → set env from `.env.production.example` (pooled `DATABASE_URL`; `DEMO_MODE=false`).
 3. Redeploy → curl `/api/health` + `/api/ready` on the `*.vercel.app` host.
-4. One-shot `FORCE_SEED=true` seed (laptop only) → admin → invite → accept → onboard → one DRAFT attempt.
+4. `scripts\bootstrap-first-admin.ps1 -DatabaseUrl '<DIRECT>' -Email '…' -Password '…'` → admin → invite → accept → onboard → one DRAFT attempt.
 
 ```powershell
 cd D:\MyProjects\PolishApp

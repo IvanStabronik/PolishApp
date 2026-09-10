@@ -260,7 +260,7 @@ Write-Host "  Exact 3 clicks for founder next:" -ForegroundColor Yellow
 Write-Host "    1) Neon console - New Project - copy pooled + direct URLs"
 Write-Host "    2) Run: scripts\neon-bootstrap.ps1 -DirectUrl '<DIRECT>' -PooledUrl '<POOLED>'"
 Write-Host "    3) Vercel - Import IvanStabronik/PolishApp - env from .env.production.example - redeploy"
-Write-Host "  Then: curl /api/health + /api/ready on *.vercel.app; FORCE_SEED one-shot + invite-first"
+Write-Host "  Then: curl /api/health + /api/ready on *.vercel.app; scripts\bootstrap-first-admin.ps1 + invite-first"
 Write-Host ""
 Write-Host "  Interactive full wizard: powershell -ExecutionPolicy Bypass -File scripts\founder-unblock.ps1" -ForegroundColor DarkGray
 Write-Host "  Docs: docs\operations\FOUNDER-UNBLOCK-NOW.md" -ForegroundColor DarkGray
