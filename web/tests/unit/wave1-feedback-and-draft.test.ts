@@ -114,6 +114,18 @@ describe("draftLessonToDetail structured steps", () => {
     const dialogue = detail.steps.find((s) => s.kind === "dialogue");
     expect(dialogue && dialogue.kind === "dialogue" && dialogue.turns.length).toBeGreaterThan(0);
   });
+
+  it("includes speaking_practice on Pierwsze spotkanie lesson 01", () => {
+    const mods = loadAllModulesFromYaml();
+    const mod = mods.find((m) => m.id === "pierwsze-spotkanie")!;
+    const lesson = mod.lessons[0]!;
+    const detail = draftLessonToDetail(mod, lesson, "ukr");
+    const speaking = detail.steps.find((s) => s.kind === "speaking_practice");
+    expect(speaking && speaking.kind === "speaking_practice").toBe(true);
+    if (speaking && speaking.kind === "speaking_practice") {
+      expect(speaking.lines.length).toBeGreaterThan(0);
+    }
+  });
 });
 
 describe("closed-beta DRAFT flag", () => {

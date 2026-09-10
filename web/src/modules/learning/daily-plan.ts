@@ -168,14 +168,15 @@ export function buildDailyPlan(input: DailyPlanInput): DailyPlan {
     if (!mod.miniCheckReady || mod.miniCheckExerciseIds.length === 0) continue;
     const minutes = take(5);
     if (minutes <= 0) break;
-    const first = mod.miniCheckExerciseIds[0]!;
+    const lessonId =
+      mod.lessonIds[mod.lessonIds.length - 1] ?? mod.lessonIds[0] ?? null;
     items.push({
       kind: "mini_check",
       moduleId: mod.id,
       exerciseIds: [...mod.miniCheckExerciseIds],
       minutes,
       reasonKey: "miniCheck",
-      href: `/learn/${mod.id}/exercise/${first}`,
+      href: lessonId ? `/learn/lessons/${lessonId}` : `/learn/${mod.id}`,
     });
     break;
   }

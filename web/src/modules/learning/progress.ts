@@ -1,5 +1,6 @@
 /**
  * Progress overview from DB (attempts + concept_mastery).
+ * Learner-facing labels: human lesson titles + locale-aware concept labels.
  */
 
 import { desc, eq } from "drizzle-orm";
@@ -10,7 +11,15 @@ import {
   learnerProfiles,
 } from "@/db/schema";
 import { masteryStateToBadge } from "./attempt-mode";
-import { humanConceptLabel } from "@/lib/content/concept-labels";
+import {
+  humanConceptLabel,
+  type ConceptLabelLocale,
+} from "@/lib/content/concept-labels";
+import {
+  resolveAttemptLessonTitle,
+  uiLocaleToConceptLabelLocale,
+  type LessonTitleLocale,
+} from "@/lib/content/lesson-titles";
 
 export type ProgressConcept = {
   conceptId: string;
@@ -33,13 +42,19 @@ export type ProgressOverview = {
   recentAttempts: ProgressAttempt[];
 };
 
-function labelForConcept(canonicalId: string): string {
-  return humanConceptLabel(canonicalId, "ru");
-}
+export type LoadProgressOptions = {
+  /** UI locale (uk|ru|pl) for concept labels and fallbacks. */
+  locale?: string | null;
+};
 
 export async function loadProgressOverview(
   userId: string | null,
+  options: LoadProgressOptions = {},
 ): Promise<ProgressOverview> {
+  const labelLocale: ConceptLabelLocale = uiLocaleToConceptLabelLocale(
+    options.locale,
+  );
+
   if (!userId) {
     return { signedIn: false, concepts: [], recentAttempts: [] };
   }
@@ -48,11 +63,16 @@ export async function loadProgressOverview(
     const db = getDb();
     const profile = await db.query.learnerProfiles.findFirst({
       where: eq(learnerProfiles.userId, userId),
-      columns: { id: true },
+      columns: { id: true, uiLocale: true },
     });
     if (!profile) {
       return { signedIn: true, concepts: [], recentAttempts: [] };
     }
+
+    const effectiveLocale: ConceptLabelLocale = options.locale
+      ? labelLocale
+      : uiLocaleToConceptLabelLocale(profile.uiLocale);
+    const effectiveTitleLocale = effectiveLocale as LessonTitleLocale;
 
     const masteryRows = await db
       .select({
@@ -65,7 +85,7 @@ export async function loadProgressOverview(
 
     const concepts: ProgressConcept[] = masteryRows.map((row) => ({
       conceptId: row.conceptCanonicalId,
-      label: labelForConcept(row.conceptCanonicalId),
+      label: humanConceptLabel(row.conceptCanonicalId, effectiveLocale),
       status: masteryStateToBadge(row.state),
       state: row.state,
     }));
@@ -85,18 +105,9 @@ export async function loadProgressOverview(
 
     const recentAttempts: ProgressAttempt[] = attemptRows.map((row) => {
       const response = row.response as Record<string, unknown> | null;
-      const exerciseCanonicalId =
-        response && typeof response.exerciseCanonicalId === "string"
-          ? response.exerciseCanonicalId
-          : null;
-      const moduleId =
-        response && typeof response.moduleId === "string"
-          ? response.moduleId
-          : null;
       return {
         id: row.id,
-        lessonTitle:
-          exerciseCanonicalId ?? moduleId ?? "attempt",
+        lessonTitle: resolveAttemptLessonTitle(response, effectiveTitleLocale),
         result:
           row.correct === true
             ? "correct"
@@ -112,4 +123,12 @@ export async function loadProgressOverview(
   } catch {
     return { signedIn: true, concepts: [], recentAttempts: [] };
   }
+}
+
+/** @deprecated Prefer loadProgressOverview with locale; kept for callers. */
+export function labelForConcept(
+  canonicalId: string,
+  locale: ConceptLabelLocale = "ru",
+): string {
+  return humanConceptLabel(canonicalId, locale);
 }

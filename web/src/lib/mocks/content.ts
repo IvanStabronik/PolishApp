@@ -28,12 +28,15 @@ export type LearnerDialogueTurn = {
   speaker: string;
   pl: string;
   gloss?: string;
+  /** Optional recorded audio; TTS used when absent. */
+  audioUrl?: string;
 };
 
 export type LearnerKeyLine = {
   pl: string;
   explanation: string;
   l1Note?: string;
+  audioUrl?: string;
 };
 
 /**
@@ -78,6 +81,13 @@ export type LessonStep =
       use?: string;
       examples: string[];
       l1Note?: string;
+    }
+  | {
+      id: string;
+      kind: "speaking_practice";
+      title: string;
+      prompt?: string;
+      lines: string[];
     }
   | {
       id: string;

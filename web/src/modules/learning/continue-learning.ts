@@ -80,7 +80,7 @@ export async function loadContinueLearning(
   }> = [];
   const conceptToExercise = new Map<
     string,
-    { moduleId: string; exerciseId: string }
+    { moduleId: string; exerciseId: string; lessonId: string }
   >();
 
   for (const mod of catalog) {
@@ -91,6 +91,7 @@ export async function loadContinueLearning(
           conceptToExercise.set(concept, {
             moduleId: mod.id,
             exerciseId: ex.id,
+            lessonId: lesson.id,
           });
         }
       }
@@ -195,7 +196,7 @@ export async function loadContinueLearning(
       lessonsCompleted,
       continueHref: unfinishedLesson
         ? `/learn/lessons/${unfinishedLesson.id}`
-        : `/learn/modules/${mod.id}`,
+        : `/learn/${mod.id}`,
     };
   });
 
@@ -278,13 +279,13 @@ export async function loadContinueLearning(
       errorCount: errorByConcept.get(m.conceptCanonicalId) ?? 0,
       masteryScope: m.masteryScope as MasteryScope,
       href: conceptToExercise.has(m.conceptCanonicalId)
-        ? `/learn/${conceptToExercise.get(m.conceptCanonicalId)!.moduleId}/exercise/${conceptToExercise.get(m.conceptCanonicalId)!.exerciseId}`
+        ? `/learn/lessons/${conceptToExercise.get(m.conceptCanonicalId)!.lessonId}`
         : null,
     })),
     recentErrors: recentErrors.slice(0, 5).map((e) => ({
       ...e,
       href: e.moduleId
-        ? `/learn/${e.moduleId}/exercise/${e.exerciseId}`
+        ? `/learn/${e.moduleId}`
         : null,
     })),
   });
@@ -297,7 +298,7 @@ export async function loadContinueLearning(
       dueAt: row.dueAt.toISOString(),
       masteryScope: row.masteryScope as MasteryScope,
       href: conceptToExercise.has(row.conceptCanonicalId)
-        ? `/learn/${conceptToExercise.get(row.conceptCanonicalId)!.moduleId}/exercise/${conceptToExercise.get(row.conceptCanonicalId)!.exerciseId}`
+        ? `/learn/lessons/${conceptToExercise.get(row.conceptCanonicalId)!.lessonId}`
         : null,
     })),
     mastery: masteryRows.map((m) => ({
@@ -307,7 +308,7 @@ export async function loadContinueLearning(
       lastAttemptAt: m.updatedAt.toISOString(),
       masteryScope: m.masteryScope as MasteryScope,
       href: conceptToExercise.has(m.conceptCanonicalId)
-        ? `/learn/${conceptToExercise.get(m.conceptCanonicalId)!.moduleId}/exercise/${conceptToExercise.get(m.conceptCanonicalId)!.exerciseId}`
+        ? `/learn/lessons/${conceptToExercise.get(m.conceptCanonicalId)!.lessonId}`
         : null,
     })),
   });

@@ -24,6 +24,7 @@ import {
   persistLearningAttempt,
   resolveExerciseRow,
   resolveModuleContentVersionId,
+  ensureModuleContentVersionId,
 } from "@/modules/learning/persist-attempt";
 import { getDb } from "@/db/client";
 import { contentVersions } from "@/db/schema";
@@ -39,6 +40,7 @@ export const runtime = "nodejs";
 const BodySchema = z.object({
   moduleId: z.string().min(1).max(200),
   lessonId: z.string().min(1).max(200).optional(),
+  learningSessionId: z.string().uuid().optional(),
   exerciseId: z.string().min(1).max(200),
   answer: z.record(z.string(), z.unknown()),
   hinted: z.boolean().optional(),
@@ -137,7 +139,8 @@ export async function POST(request: Request) {
 
     const contentVersionId =
       exerciseRow?.contentVersionId ??
-      (await resolveModuleContentVersionId(db, body.moduleId));
+      (await resolveModuleContentVersionId(db, body.moduleId)) ??
+      (await ensureModuleContentVersionId(db, body.moduleId));
 
     let contentStatus: string | null = peeked.status;
     if (contentVersionId) {
@@ -167,6 +170,7 @@ export async function POST(request: Request) {
         userId: session.user.id,
         moduleId: body.moduleId,
         lessonId: body.lessonId ?? null,
+        learningSessionId: body.learningSessionId ?? null,
         exerciseCanonicalId:
           exerciseRow?.canonicalId ?? exercise.canonicalId ?? null,
         exerciseUuid: exerciseRow?.id ?? null,
@@ -195,7 +199,12 @@ export async function POST(request: Request) {
       );
     }
 
-    const evalOut = persistResult.evaluation ?? evaluation;
+    const evalOutBase = persistResult.evaluation ?? evaluation;
+    const evalOut = {
+      ...evalOutBase,
+      // Profile-aware L1 note from this request (survives idempotent replay).
+      ...(evaluation.l1Note ? { l1Note: evaluation.l1Note } : {}),
+    };
 
     return NextResponse.json({
       ...evalOut,

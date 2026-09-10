@@ -2,8 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import type { LessonStep } from "@/lib/mocks/content";
+import { PolishLineAudio } from "@/components/exercise/polish-line-audio";
 
-type ContentStep = Exclude<LessonStep, { kind: "exercise" } | { kind: "theory" }>;
+type ContentStep = Exclude<
+  LessonStep,
+  { kind: "exercise" } | { kind: "theory" } | { kind: "speaking_practice" }
+>;
 
 type Props = {
   step: ContentStep;
@@ -19,6 +23,9 @@ export function LessonStructuredStep({ step }: Props) {
         <h1 className="mt-1 font-display text-[clamp(1.5rem,4vw,1.875rem)] text-[var(--color-ink)] sm:text-3xl">
           {step.title}
         </h1>
+        <p className="mt-2 text-sm text-[var(--color-graphite-muted)]">
+          {t("listeningHint")}
+        </p>
         <ul className="mt-4 flex list-none flex-col gap-4 p-0">
           {step.turns.map((turn, i) => (
             <li
@@ -28,9 +35,12 @@ export function LessonStructuredStep({ step }: Props) {
               <p className="m-0 text-xs font-semibold uppercase tracking-wide text-[var(--color-forest)]">
                 {turn.speaker}
               </p>
-              <p className="m-0 mt-1 font-display text-xl text-[var(--color-ink)]">
-                {turn.pl}
-              </p>
+              <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <p className="m-0 font-display text-xl text-[var(--color-ink)]">
+                  {turn.pl}
+                </p>
+                <PolishLineAudio text={turn.pl} audioUrl={turn.audioUrl} />
+              </div>
               {turn.gloss ? (
                 <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
                   {turn.gloss}
@@ -53,9 +63,12 @@ export function LessonStructuredStep({ step }: Props) {
         <ul className="mt-4 flex list-none flex-col gap-5 p-0">
           {step.lines.map((line) => (
             <li key={line.pl}>
-              <p className="m-0 font-display text-xl text-[var(--color-ink)]">
-                {line.pl}
-              </p>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <p className="m-0 font-display text-xl text-[var(--color-ink)]">
+                  {line.pl}
+                </p>
+                <PolishLineAudio text={line.pl} audioUrl={line.audioUrl} />
+              </div>
               <p className="m-0 mt-1 text-[var(--color-graphite)]">
                 {line.explanation}
               </p>

@@ -15,6 +15,8 @@ type Props = {
   moduleId: string;
   /** Real lesson id when playing inside a lesson (persisted on attempt). */
   lessonId?: string;
+  /** Optional learning_sessions id for server-backed lesson results. */
+  learningSessionId?: string;
   /** Learner-safe DTO only — never ModuleExercise / AuthoredExercise. */
   exercise: LearnerExercise;
   nextHref: string;
@@ -26,6 +28,7 @@ type Props = {
 export function ExercisePlayer({
   moduleId,
   lessonId,
+  learningSessionId,
   exercise,
   nextHref,
   isLast,
@@ -84,6 +87,7 @@ export function ExercisePlayer({
       body: JSON.stringify({
         moduleId,
         lessonId: lessonId ?? undefined,
+        learningSessionId: learningSessionId ?? undefined,
         exerciseId: exercise.id,
         answer,
         idempotencyKey,

@@ -24,8 +24,8 @@ type Props = {
 };
 
 /**
- * Compatible adapter: module overview + flat start-practice (M2.1)
- * plus real lesson list (M3). Flat exercises are derived from lessons.
+ * Canonical Session-1 module hub: overview + lesson list → lesson player.
+ * Flat exercise shortcuts and raw path dumps removed for beta invitees.
  */
 export default async function ModulePage({ params }: Props) {
   const { locale, moduleId } = await params;
@@ -48,10 +48,9 @@ export default async function ModulePage({ params }: Props) {
     profile?.l1 && isLearnerL1(profile.l1) ? profile.l1 : ("rus" as const);
 
   const t = await getTranslations("learn");
-  const tDash = await getTranslations("dashboard");
-  const firstExercise = mod.exercises[0];
   const preview = canDraft && isInternalPreview(mod.status);
   const lessons = [...mod.lessons].sort((a, b) => a.sortOrder - b.sortOrder);
+  const firstLesson = lessons[0];
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -64,7 +63,6 @@ export default async function ModulePage({ params }: Props) {
       >
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone="info">{mod.level}</Badge>
-          {preview ? <Badge tone="draft">{tDash("previewBadge")}</Badge> : null}
         </div>
         <PageIntro
           className="mt-3"
@@ -118,23 +116,23 @@ export default async function ModulePage({ params }: Props) {
           </ul>
         </section>
 
-        {firstExercise ? (
+        {firstLesson ? (
           <div className="mt-10">
             <LinkButton
-              href={`/learn/${mod.id}/exercise/${firstExercise.id}`}
-              data-testid="start-practice"
+              href={`/learn/lessons/${firstLesson.id}`}
+              data-testid="start-first-lesson"
             >
-              {t("startPractice")}
+              {t("startLesson")}
             </LinkButton>
           </div>
         ) : null}
 
         <p className="mt-6">
           <Link
-            href={`/learn/modules/${mod.id}`}
+            href="/dashboard"
             className="inline-flex min-h-11 items-center text-sm text-[var(--color-amber-deep)] no-underline hover:underline"
           >
-            /learn/modules/{mod.id}
+            {t("toDashboard")}
           </Link>
         </p>
       </main>

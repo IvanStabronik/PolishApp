@@ -9,6 +9,8 @@ import {
   attemptAnswers,
   attempts,
   conceptMastery,
+  contentUnits,
+  contentVersions,
   evidenceRecords,
   exercises,
   learnerProfiles,
@@ -17,6 +19,7 @@ import {
 } from "@/db/schema";
 import type { AttemptAnswer } from "@/lib/content/evaluate-yaml";
 import type { ModuleExercise } from "@/lib/content/types";
+import { peekModuleById } from "@/lib/content/load-module";
 import type { EvalResult } from "@/modules/assessment/evaluate";
 import {
   assertNoContentPublish,
@@ -36,6 +39,7 @@ export type PersistAttemptInput = {
   userId: string;
   moduleId: string;
   lessonId?: string | null;
+  learningSessionId?: string | null;
   exerciseCanonicalId: string | null;
   exerciseUuid: string | null;
   contentVersionId: string | null;
@@ -124,8 +128,11 @@ export async function resolveModuleContentVersionId(
   db: Db,
   moduleId: string,
 ): Promise<string | null> {
+  const peeked = peekModuleById(moduleId);
   const candidates = [
     moduleId,
+    peeked?.canonicalId,
+    peeked?.id,
     moduleId === "mod-pierwsze-spotkanie" || moduleId === "pierwsze-spotkanie"
       ? "MOD-A1-PIERWSZE-SPOTKANIE"
       : null,
@@ -153,6 +160,97 @@ export async function resolveModuleContentVersionId(
     if (bySlug?.publishedVersionId) return bySlug.publishedVersionId;
   }
   return null;
+}
+
+/**
+ * Ensure a DRAFT content_versions row exists for YAML closed-beta learning.
+ * Never marks PUBLISHED. Used when exercises are evaluated from YAML but the
+ * DB has no imported version yet — avoids missing_content_version haunt.
+ */
+export async function ensureModuleContentVersionId(
+  db: Db,
+  moduleId: string,
+): Promise<string | null> {
+  const existing = await resolveModuleContentVersionId(db, moduleId);
+  if (existing) return existing;
+
+  const peeked = peekModuleById(moduleId);
+  const canonicalId =
+    peeked?.canonicalId ??
+    (moduleId.startsWith("MOD-") ? moduleId : `MOD-YAML-${moduleId}`);
+  const title =
+    peeked?.titlePl ?? peeked?.title ?? moduleId;
+
+  return db.transaction(async (tx) => {
+    let unit = await tx.query.contentUnits.findFirst({
+      where: eq(contentUnits.canonicalId, canonicalId),
+      columns: { id: true },
+    });
+    if (!unit) {
+      const [inserted] = await tx
+        .insert(contentUnits)
+        .values({
+          canonicalId,
+          kind: "module",
+          title,
+        })
+        .returning({ id: contentUnits.id });
+      unit = inserted!;
+    }
+
+    const latest = await tx
+      .select({ id: contentVersions.id })
+      .from(contentVersions)
+      .where(eq(contentVersions.unitId, unit.id))
+      .orderBy(desc(contentVersions.versionNo))
+      .limit(1);
+    if (latest[0]?.id) {
+      await linkModuleContentVersion(tx as unknown as Db, moduleId, canonicalId, latest[0].id);
+      return latest[0].id;
+    }
+
+    const [version] = await tx
+      .insert(contentVersions)
+      .values({
+        unitId: unit.id,
+        versionNo: 1,
+        status: "DRAFT",
+        provenance: {
+          originality: "yaml_learning_ensure",
+          note: "Auto-created for closed-beta YAML attempts. Not JPJO-approved. Not PUBLISHED.",
+          moduleId,
+        },
+        payload: { yamlLearningStub: true, moduleId, slug: peeked?.id ?? moduleId },
+      })
+      .returning({ id: contentVersions.id });
+
+    const versionId = version!.id;
+    await linkModuleContentVersion(tx as unknown as Db, moduleId, canonicalId, versionId);
+    return versionId;
+  });
+}
+
+async function linkModuleContentVersion(
+  db: Db,
+  moduleId: string,
+  canonicalId: string,
+  contentVersionId: string,
+): Promise<void> {
+  const row =
+    (await db.query.modules.findFirst({
+      where: eq(modules.canonicalId, canonicalId),
+      columns: { id: true, contentVersionId: true },
+    })) ??
+    (await db.query.modules.findFirst({
+      where: eq(modules.slug, moduleId),
+      columns: { id: true, contentVersionId: true },
+    }));
+  if (row && !row.contentVersionId) {
+    await db
+      .update(modules)
+      .set({ contentVersionId })
+      .where(eq(modules.id, row.id));
+  }
 }
 
 async function loadEvidenceForMastery(
@@ -204,6 +302,14 @@ async function loadEvidenceForMastery(
   });
 }
 
+/** Reconstruct EvalResult from persisted attempt.response (incl. l1Note). */
+export function evaluationFromStoredResponse(
+  response: Record<string, unknown>,
+  correct: boolean | null,
+): EvalResult | null {
+  return evaluationFromAttemptResponse(response, correct);
+}
+
 function evaluationFromAttemptResponse(
   response: Record<string, unknown>,
   correct: boolean | null,
@@ -219,6 +325,16 @@ function evaluationFromAttemptResponse(
           typeof e.evidenceWeight === "number" ? e.evidenceWeight : 0.6,
         conceptId:
           typeof e.conceptId === "string" ? e.conceptId : undefined,
+        ...(typeof e.l1Note === "string" && e.l1Note.trim()
+          ? { l1Note: e.l1Note }
+          : {}),
+        ...(Array.isArray(e.revealCorrectIndexes)
+          ? {
+              revealCorrectIndexes: e.revealCorrectIndexes.filter(
+                (n): n is number => typeof n === "number",
+              ),
+            }
+          : {}),
       };
     }
   }
@@ -322,6 +438,7 @@ export async function persistLearningAttempt(
         .insert(attempts)
         .values({
           learnerProfileId: profile.id,
+          learningSessionId: input.learningSessionId ?? null,
           exerciseId: input.exerciseUuid,
           contentVersionId: input.contentVersionId!,
           response: {

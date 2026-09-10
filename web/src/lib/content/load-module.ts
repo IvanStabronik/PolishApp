@@ -138,6 +138,14 @@ function mapLessonStep(step: PackageLessonStep): DraftLessonStep {
         titleRu: step.title_ru,
         grammarPointId: step.grammar_point_id,
       };
+    case "speaking_practice":
+      return {
+        id: step.id,
+        kind: "speaking_practice",
+        titleRu: step.title_ru,
+        promptRu: step.prompt_ru,
+        linesPl: [...step.lines_pl],
+      };
     default:
       return {
         id: step.id,
@@ -159,10 +167,12 @@ function packageLessonToDraft(lesson: PackageLesson): DraftLesson {
       speaker: t.speaker,
       pl: t.text_pl,
       glossRu: "",
+      ...(t.audio_url ? { audioUrl: t.audio_url } : {}),
     })),
     keyLines: lesson.key_lines.map((k) => ({
       pl: k.text_pl,
       explanation: k.explanation_ru,
+      ...(k.audio_url ? { audioUrl: k.audio_url } : {}),
     })),
     pragmatics: {
       panPani: lesson.pan_pani.summary_ru,

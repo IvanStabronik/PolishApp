@@ -29,13 +29,13 @@ export async function getNextLearningStep() {
     moduleId: first.id,
     lessonId,
     dualLore: first.lore,
-    moduleHref: `/learn/modules/${first.id}`,
+    moduleHref: `/learn/${first.id}`,
     lessonHref: `/learn/lessons/${lessonId}`,
     preview: canDraft,
   };
 }
 
-export async function getProgressOverview() {
+export async function getProgressOverview(locale?: string | null) {
   const session = await getRequestSession();
-  return loadProgressOverview(session?.user.id ?? null);
+  return loadProgressOverview(session?.user.id ?? null, { locale });
 }

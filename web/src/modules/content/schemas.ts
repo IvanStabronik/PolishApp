@@ -121,11 +121,13 @@ export type ExerciseType = Exercise["type"];
 export const DialogueTurnSchema = z.object({
   speaker: z.string().min(1),
   text_pl: z.string().min(1),
+  audio_url: z.string().url().optional(),
 });
 
 export const KeyLineSchema = z.object({
   text_pl: z.string().min(1),
   explanation_ru: z.string().min(1),
+  audio_url: z.string().url().optional(),
 });
 
 export const GrammarPointSchema = z.object({
@@ -178,6 +180,13 @@ export const LessonStepSchema = z.discriminatedUnion("kind", [
     kind: z.literal("grammar"),
     title_ru: z.string().min(1),
     grammar_point_id: z.string().min(1),
+  }),
+  z.object({
+    id: z.string().min(1),
+    kind: z.literal("speaking_practice"),
+    title_ru: z.string().min(1),
+    prompt_ru: z.string().min(1).optional(),
+    lines_pl: z.array(z.string().min(1)).min(1),
   }),
   z.object({
     id: z.string().min(1),

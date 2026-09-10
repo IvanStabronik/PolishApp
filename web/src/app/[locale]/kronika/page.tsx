@@ -20,7 +20,7 @@ export default async function KronikaPage({ params }: Props) {
   const session = await protectApp(locale, `/${locale}/kronika`);
   const t = await getTranslations("learn");
   const tc = await getTranslations("common");
-  const progress = await loadProgressOverview(session.user.id);
+  const progress = await loadProgressOverview(session.user.id, { locale });
 
   return (
     <div className="flex min-h-screen flex-col">

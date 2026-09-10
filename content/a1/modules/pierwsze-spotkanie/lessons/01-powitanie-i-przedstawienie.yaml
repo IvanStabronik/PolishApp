@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-01
 slug: powitanie-i-przedstawienie
-version: 3
+version: 4
 status: DRAFT
 title_pl: Powitanie i przedstawienie
 sort_order: 1
@@ -150,6 +150,15 @@ steps:
   - id: step-key-lines
     kind: key_lines
     title_ru: Важные реплики
+  - id: step-speaking
+    kind: speaking_practice
+    title_ru: Произнесите вслух
+    prompt_ru: >
+      Скажите реплику вслух. Распознавание — ориентир, не экзамен и не оценка.
+    lines_pl:
+      - Dzień dobry.
+      - Nazywam się Olena Kovalenko.
+      - Miło panią poznać.
   - id: step-pan-pani
     kind: pan_pani
     title_ru: Pan / pani

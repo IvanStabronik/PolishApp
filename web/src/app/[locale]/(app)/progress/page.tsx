@@ -11,10 +11,17 @@ export default async function ProgressPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("progress");
-  const overview = await getProgressOverview();
+  const tLearn = await getTranslations("learn");
+  const overview = await getProgressOverview(locale);
   const concepts = overview.concepts;
   const attempts = overview.recentAttempts;
   const empty = concepts.length === 0 && attempts.length === 0;
+
+  function resultLabel(result: "correct" | "incorrect" | "unknown"): string {
+    if (result === "correct") return tLearn("kronikaCorrect");
+    if (result === "incorrect") return tLearn("kronikaIncorrect");
+    return tLearn("kronikaUnknown");
+  }
 
   return (
     <div className="flex flex-col gap-8" data-testid="progress-page">
@@ -69,7 +76,7 @@ export default async function ProgressPage({ params }: Props) {
           <ul className="mt-4 flex list-none flex-col gap-2 p-0">
             {attempts.map((a) => (
               <li key={a.id} className="text-sm text-[var(--color-graphite)]">
-                {a.lessonTitle} · {a.result} · {a.at}
+                {a.lessonTitle} · {resultLabel(a.result)} · {a.at}
                 {a.mode === "preview" ? ` · ${t("previewMode")}` : ""}
               </li>
             ))}

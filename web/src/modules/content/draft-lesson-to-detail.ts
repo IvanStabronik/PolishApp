@@ -43,6 +43,7 @@ export function draftLessonToDetail(
           speaker: t.speaker,
           pl: t.pl,
           ...(t.glossRu.trim() ? { gloss: t.glossRu } : {}),
+          ...(t.audioUrl ? { audioUrl: t.audioUrl } : {}),
         })),
       });
       continue;
@@ -56,7 +57,18 @@ export function draftLessonToDetail(
           pl: k.pl,
           explanation: k.explanation,
           ...(note(k.l1Notes) ? { l1Note: note(k.l1Notes) } : {}),
+          ...(k.audioUrl ? { audioUrl: k.audioUrl } : {}),
         })),
+      });
+      continue;
+    }
+    if (step.kind === "speaking_practice") {
+      steps.push({
+        id: step.id,
+        kind: "speaking_practice",
+        title: step.titleRu,
+        ...(step.promptRu ? { prompt: step.promptRu } : {}),
+        lines: [...step.linesPl],
       });
       continue;
     }

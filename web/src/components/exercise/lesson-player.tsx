@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { ExercisePlayer } from "@/components/learning/exercise-player";
 import { LessonStructuredStep } from "@/components/exercise/lesson-structured-step";
+import { SpeakingPracticeStep } from "@/components/exercise/speaking-practice-step";
 import type { LessonDetail } from "@/lib/mocks/content";
 
 type LessonPlayerProps = {
@@ -15,26 +16,74 @@ type LessonPlayerProps = {
 };
 
 /**
- * Lesson player: structured content + all 4 exercise types via learner-safe DTOs.
- * Attempts go through /api/learning/attempt with real moduleId/lessonId/exerciseId.
+ * Lesson player: structured content + exercises via learner-safe DTOs.
+ * Finish completes a server lesson session; result page reads DB aggregates.
  */
 export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps) {
   const t = useTranslations("learn");
   const router = useRouter();
   const [stepIndex, setStepIndex] = useState(0);
   const [score, setScore] = useState({ correct: 0, total: 0 });
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
   const step = lesson.steps[stepIndex];
   const total = lesson.steps.length;
   const stepLabel = t("stepOf", { current: stepIndex + 1, total });
   const progressWidth = total > 0 ? ((stepIndex + 1) / total) * 100 : 0;
 
-  function finish(nextScore: { correct: number; total: number }) {
-    const params = new URLSearchParams({
-      c: String(nextScore.correct),
-      n: String(nextScore.total),
-      module: lesson.moduleId,
-    });
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const res = await fetch("/api/learning/lesson-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "start",
+            lessonId: lesson.id,
+            moduleId: lesson.moduleId,
+          }),
+        });
+        if (!res.ok) return;
+        const data = (await res.json()) as { sessionId?: string };
+        if (!cancelled && data.sessionId) setSessionId(data.sessionId);
+      } catch {
+        /* offline / unauth — result falls back gracefully */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [lesson.id, lesson.moduleId]);
+
+  async function finish(nextScore: { correct: number; total: number }) {
+    let sid = sessionId;
+    try {
+      const res = await fetch("/api/learning/lesson-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "complete",
+          sessionId: sid,
+          lessonId: lesson.id,
+          moduleId: lesson.moduleId,
+        }),
+      });
+      if (res.ok) {
+        const data = (await res.json()) as { sessionId?: string };
+        if (data.sessionId) sid = data.sessionId;
+      }
+    } catch {
+      /* keep navigating */
+    }
+
+    const params = new URLSearchParams({ module: lesson.moduleId });
+    if (sid) params.set("session", sid);
+    // Legacy query kept only as degraded fallback when session missing
+    if (!sid && nextScore.total > 0) {
+      params.set("c", String(nextScore.correct));
+      params.set("n", String(nextScore.total));
+    }
     router.push(`/learn/lessons/${lesson.id}/result?${params.toString()}`);
   }
 
@@ -48,7 +97,7 @@ export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps)
         : score;
     if (typeof wasCorrect === "boolean") setScore(nextScore);
     if (stepIndex + 1 >= total) {
-      finish(nextScore);
+      void finish(nextScore);
       return;
     }
     setStepIndex((i) => i + 1);
@@ -125,6 +174,20 @@ export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps)
     );
   }
 
+  if (step.kind === "speaking_practice") {
+    return (
+      <section className="prose-narrow w-full min-w-0">
+        {shellChrome}
+        <SpeakingPracticeStep
+          title={step.title}
+          prompt={step.prompt}
+          lines={step.lines}
+        />
+        {nextButtons}
+      </section>
+    );
+  }
+
   if (
     step.kind === "dialogue" ||
     step.kind === "key_lines" ||
@@ -158,6 +221,7 @@ export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps)
           key={step.exercise.id}
           moduleId={lesson.moduleId}
           lessonId={lesson.id}
+          learningSessionId={sessionId ?? undefined}
           exercise={step.exercise}
           nextHref={moduleHref}
           isLast={isLast}

@@ -5,15 +5,14 @@ import { StatusPanel } from "@/components/brand/status-panel";
 import { DualModuleLabel } from "@/components/dual-module-label";
 import { Badge } from "@/components/ui/badge";
 import { getA1Catalog } from "@/modules/content";
-import { isInternalPreview } from "@/lib/content/load-module";
 
 type Props = { params: Promise<{ locale: string }> };
 
+/** A1 catalog — one open path per module; no DRAFT badges for learners. */
 export default async function A1CatalogPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("learn");
-  const tc = await getTranslations("common");
   const modules = await getA1Catalog();
 
   return (
@@ -32,15 +31,10 @@ export default async function A1CatalogPage({ params }: Props) {
               </h2>
               <p className="m-0 flex-1 text-[var(--color-graphite)]">{mod.summary}</p>
               <div className="mt-3">
-                <Badge tone={isInternalPreview(mod.status) ? "draft" : "info"}>
-                  {isInternalPreview(mod.status) ? tc("draft") : tc("published")}
-                </Badge>
+                <Badge tone="info">{mod.lore.academicCode || "A1"}</Badge>
               </div>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-4">
                 <LinkButton href={`/learn/${mod.id}`}>{t("openModule")}</LinkButton>
-                <LinkButton href={`/learn/modules/${mod.id}`} variant="secondary">
-                  {t("lessons")}
-                </LinkButton>
               </div>
             </li>
           ))}

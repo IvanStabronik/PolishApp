@@ -41,7 +41,7 @@
     "backToDashboard": "← Do gabinetu",
     "emptyDash": "Na razie pusto",
     "planEmpty": "Plan dnia jest pusty — wróć do gabinetu, gdy pojawi się kolejny krok.",
-    "reviewEmpty": "Kolejka powtórek jest pusta. Nowe karty pojawią się według harmonogramu mastery.",
+    "reviewEmpty": "Kolejka powtórek jest pusta. Nowe karty pojawią się, gdy przyjdzie czas odświeżyć temat.",
     "kronikaEmpty": "Kronika jest pusta. Ukończ ćwiczenie — wpis pojawi się tutaj."
   },
   "landing": {
@@ -121,7 +121,7 @@
   },
   "learn": {
     "catalogTitle": "Skrzydło A1",
-    "catalogLead": "Trasy Archiwum na poziomie A1. Szkice widać tylko w wewnętrznym podglądzie.",
+    "catalogLead": "Trasy Archiwum na poziomie A1 — sale i lekcje do spokojnej praktyki.",
     "openModule": "Otwórz salę",
     "sala": "Sala",
     "lekcja": "Lekcja",
@@ -196,7 +196,23 @@
     "kronikaUnknown": "bez oceny",
     "sessionScoreLabel": "W tej sesji poprawnych",
     "sessionScoreHint": "To licznik ćwiczeń w lekcji, nie oficjalna pieczęć opanowania. Pełny obraz — w postępach.",
-    "sessionScoreMissing": "Podsumowanie sesji nie zostało przekazane — otwórz postępy, by zobaczyć zapisane próby."
+    "sessionScoreMissing": "Podsumowanie sesji nie zostało przekazane — otwórz postępy, by zobaczyć zapisane próby.",
+    "playLine": "Posłuchaj",
+    "stopAudio": "Stop",
+    "listeningHint": "Możesz odsłuchać polskie kwestie (synteza mowy w przeglądarce — tymczasowo, nie nagranie studyjne).",
+    "speaking": "Wymowa",
+    "speakingHint": "Powiedz kwestię na głos — spokojnie, jak w rozmowie dorosłych.",
+    "speakingHonesty": "To trening. Rozpoznawanie mowy to wskazówka, nie egzamin i nie certyfikat.",
+    "speakingRecord": "Nagraj",
+    "speakingStop": "Zatrzymaj",
+    "speakingSelfCheck": "Powiedziałem/am na głos",
+    "speakingReveal": "Pokaż podpowiedź",
+    "speakingNextLine": "Inna kwestia",
+    "speakingHeard": "Rozpoznano",
+    "speakingCloseMatch": "blisko wzorca",
+    "speakingBestEffort": "sprawdź sam — system może się mylić",
+    "speakingUnsupported": "W tej przeglądarce nie ma rozpoznawania mowy — powiedz na głos i zaznacz sam.",
+    "speakingHidden": "…"
   },
   "progress": {
     "title": "Postęp",

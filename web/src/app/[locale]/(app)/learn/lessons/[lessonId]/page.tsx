@@ -31,7 +31,7 @@ export default async function LessonPage({ params }: Props) {
   return (
     <LessonPlayer
       lesson={lesson}
-      moduleHref={`/learn/modules/${lesson.moduleId}`}
+      moduleHref={`/learn/${lesson.moduleId}`}
       preview={canDraft}
     />
   );

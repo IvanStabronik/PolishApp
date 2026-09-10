@@ -9,12 +9,14 @@ export type DialogueTurn = {
   speaker: string;
   pl: string;
   glossRu: string;
+  audioUrl?: string;
 };
 
 export type KeyLine = {
   pl: string;
   explanation: string;
   l1Notes?: Partial<Record<LearnerL1, string>>;
+  audioUrl?: string;
 };
 
 export type ExerciseFeedback = {
@@ -94,6 +96,13 @@ export type DraftLessonStep =
       titleRu: string;
       bodyRu?: string;
       grammarPointId?: string;
+    }
+  | {
+      id: string;
+      kind: "speaking_practice";
+      titleRu: string;
+      promptRu?: string;
+      linesPl: string[];
     }
   | {
       id: string;

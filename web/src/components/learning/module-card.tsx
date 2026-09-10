@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { DraftModule } from "@/lib/content/types";
-import { isInternalPreview } from "@/lib/content/load-module";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 
@@ -9,11 +8,12 @@ type Props = {
   module: DraftModule;
 };
 
+/**
+ * Learner module card — no DRAFT / Черновик badges.
+ * Closed-beta honesty lives on PreviewBanner once, not per card.
+ */
 export async function ModuleCard({ module }: Props) {
-  const t = await getTranslations("dashboard");
   const tLearn = await getTranslations("learn");
-  const tCommon = await getTranslations("common");
-  const preview = isInternalPreview(module.status);
 
   return (
     <Card
@@ -25,10 +25,6 @@ export async function ModuleCard({ module }: Props) {
     >
       <div className="flex flex-wrap items-center gap-2">
         <Badge tone="info">{module.level}</Badge>
-        {preview ? <Badge tone="draft">{t("previewBadge")}</Badge> : null}
-        {module.status === "DRAFT" ? (
-          <Badge tone="draft">{tCommon("draft")}</Badge>
-        ) : null}
       </div>
       <div>
         <p className="m-0 text-sm text-[var(--color-graphite)]">
