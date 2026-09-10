@@ -38,6 +38,7 @@ function getRecognitionCtor():
 /**
  * Constrained speaking practice — not exam scoring.
  * Chrome Web Speech when available; otherwise say-aloud + self-check reveal.
+ * Archive adult chrome: compact controls, no gamified streak language.
  */
 export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
   const t = useTranslations("learn");
@@ -46,7 +47,6 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
   const [heard, setHeard] = useState<string | null>(null);
   const [supported, setSupported] = useState(false);
   const [revealed, setRevealed] = useState(false);
-  const [practiced, setPracticed] = useState(false);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   const line = lines[lineIndex] ?? lines[0] ?? "";
@@ -65,7 +65,6 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
   useEffect(() => {
     setHeard(null);
     setRevealed(false);
-    setPracticed(false);
     setListening(false);
   }, [lineIndex]);
 
@@ -128,7 +127,7 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
         {t("speakingHonesty")}
       </p>
 
-      <div className="mt-5 rounded-[var(--radius-md)] border border-[var(--color-line)] p-4">
+      <div className="mt-5 border border-[var(--color-line)] px-4 py-4 rounded-[var(--radius-md)]">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <p className="m-0 font-display text-2xl text-[var(--color-ink)]">
             {line}
@@ -152,7 +151,6 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
               variant="secondary"
               onClick={() => {
                 setRevealed(true);
-                setPracticed(true);
               }}
               data-testid="speaking-self-check"
             >

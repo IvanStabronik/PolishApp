@@ -1,16 +1,16 @@
 kind: lesson
 canonical_id: LES-A1-PS-01
 slug: powitanie-i-przedstawienie
-version: 4
+version: 5
 status: DRAFT
 title_pl: Powitanie i przedstawienie
 sort_order: 1
 situation_ru: >
-  Первый разговор со взрослым в Польше — сосед или знакомый с работы.
-  Спокойно: имя и откуда вы.
+  Первый разговор со взрослым в Польше — сосед на кlatce или кто-то с работы.
+  Нужны имя и откуда вы — без панибратства и без детских «привет».
 objective_ru: >
   Поздороваться (Dzień dobry), сказать Nazywam się… и Jestem z…,
-  говорить на pan/pani, а не сразу на ty.
+  держаться pan/pani (3 лицо), не ty и не wy jesteście.
 curriculum_links:
   scenarios:
     - SCN-A1-EVERYDAY-01
@@ -152,7 +152,7 @@ steps:
     title_ru: Важные реплики
   - id: step-speaking
     kind: speaking_practice
-    title_ru: Произнесите вслух
+    title_ru: Вслух
     prompt_ru: >
       Скажите реплику вслух. Распознавание — ориентир, не экзамен и не оценка.
     lines_pl:
@@ -172,11 +172,13 @@ steps:
     exercise_ids:
       - ex-ps-01
       - ex-ps-02
+      - ex-ps-listen-01
       - ex-ps-03
       - ex-ps-04
       - ex-ps-05
       - ex-ps-06
       - ex-ps-07
+      - ex-ps-write-01
   - id: step-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -189,17 +191,17 @@ steps:
 exercises:
   - id: ex-ps-01
     canonical_id: EX-A1-PS-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
-    prompt: "Сосед на кладке, день. Чем поздороваться?"
+    prompt: "Сосед на кlatce, день. Вы видите его впервые. Чем открыть разговор?"
     options:
       - id: a
         text: Dzień dobry.
       - id: b
-        text: Cześć, stary!
+        text: Cześć! Jak się masz?
       - id: c
-        text: Hejka!!!
+        text: Witam serdecznie Pana!
     correct_option_id: a
     concept_ids:
       - PRAG-PAN-01
@@ -209,13 +211,13 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
-      correct: "Да. Dzień dobry — нормальное «здравствуйте» для такого случая."
-      incorrect: "Cześć и hejka — слишком свои для незнакомца."
-      hint: "Представьте urząd или соседа, которого видите впервые."
+      correct: "Да. Dzień dobry — спокойное дневное приветствие для незнакомца."
+      incorrect: "Cześć слишком своё; Witam serdecznie — канцелярски/письменно, не для кlatki."
+      hint: "Представьте соседа, которого видите впервые — не друга из чата."
       l1:
-        ukr: "Не калькуйте «Привіт» у перший контакт з дорослим незнайомцем."
-        rus: "Не подставляйте «Привет» вместо Dzień dobry с незнакомцем."
-        bel: "Не стаўце «Прывітанне» замест Dzień dobry з незнаёмцам."
+        ukr: "Не ставте «Привіт» / cześć до дорослого незнайомця на кlatce."
+        rus: "Не подставляйте «Привет» и не копируйте письмовое «Приветствую» как Witam serdecznie."
+        bel: "Не «Прывітанне» і не пісьмовы пафас Witam — на кlatce дастаткова Dzień dobry."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -227,13 +229,13 @@ exercises:
 
   - id: ex-ps-02
     canonical_id: EX-A1-PS-SC-02
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Как спросить незнакомку, откуда она — на pan/pani?"
     options:
       - id: a
-        text: Skąd ty jesteś?
+        text: Skąd pani jesteś?
       - id: b
         text: Skąd pani jest?
       - id: c
@@ -247,17 +249,57 @@ exercises:
       - FN-A1-IDENTIFY-01
     feedback:
       correct: "Да: Skąd pani jest? — pani и глагол в 3 лице."
-      incorrect: "ty или wy jesteście здесь не подходят."
+      incorrect: "pani jesteś смешивает регистры; wy jesteście — калька «вы»."
       l1:
-        ukr: "Не калькуйте «ви» як wy jesteście до pani."
-        rus: "Не говорите «вы» как wy jesteście — нужно pani + 3 л."
-        bel: "Не пераносьце «вы» ў форму wy jesteście да незнаёмкі."
+        ukr: "Не «ви» як wy jesteście і не pani + jesteś — тільки pani + jest."
+        rus: "Ловушка: pani + jesteś (смесь) или wy jesteście («вы»). Нужно pani + jest."
+        bel: "Не wy jesteście і не pani jesteś — толькі Skąd pani jest?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
         - "PRAG-PAN-01"
+      ai_assisted: true
+    mini_check: false
+
+  - id: ex-ps-listen-01
+    canonical_id: EX-A1-PS-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте реплику соседа. Что он сказал?"
+    audio_text_pl: Nazywam się Marek Nowak. A pani?
+    options:
+      - id: a
+        text: Он назвал себя и спросил ваше имя на pan/pani.
+      - id: b
+        text: Он попрощался и ушёл.
+      - id: c
+        text: Он спросил, сколько стоит кофе.
+    correct_option_id: a
+    concept_ids:
+      - GR-CAS-NOM-01
+      - PRAG-PAN-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: "Да: Nazywam się… A pani? — имя и встречный вопрос."
+      incorrect: "Это представление, не прощание и не заказ в кафе."
+      l1:
+        ukr: "Слухайте цілу рамку Nazywam się… A pani? — не окремі слова."
+        rus: "Слышите Nazywam się + A pani? — не Do widzenia и не заказ."
+        bel: "Гэта прадстаўленне + A pani?, не развітанне."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Spotkanie na klatce / FN-A1-IDENTIFY-01"
       ai_assisted: true
     mini_check: false
 
@@ -479,7 +521,7 @@ exercises:
 
   - id: ex-ps-09
     canonical_id: EX-A1-PS-SC-03
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Какая формула представления правильная?"
@@ -489,7 +531,7 @@ exercises:
       - id: b
         text: Nazywam Olena.
       - id: c
-        text: Ja Olena nazywam.
+        text: Mnie nazywają Olena.
     correct_option_id: a
     concept_ids:
       - GR-TNS-PRS-01
@@ -499,7 +541,11 @@ exercises:
     mini_check: true
     feedback:
       correct: "Nazywam się + имя в именительном."
-      incorrect: "Без się или с ломаным порядком так не говорят."
+      incorrect: "Без się или калька «меня зовут» как Mnie nazywają… — так не говорят."
+      l1:
+        ukr: "Не *Nazywam Olena і не калька «мене звуть» → Mnie nazywają."
+        rus: "Не *Nazywam Olena и не «Меня зовут» → Mnie nazywają."
+        bel: "Не без się і не «мяне клічуць» даслоўна."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -507,6 +553,45 @@ exercises:
       sources:
         - "GP-A1-PS-NAZYWAM-JESTEM"
       ai_assisted: true
+
+  - id: ex-ps-write-01
+    canonical_id: EX-A1-PS-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите целиком: {{gap1}} się Anna Nowak. Jestem {{gap2}} Ukrainy."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - Nazywam
+          - nazywam
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - z
+        placeholder: "…"
+    concept_ids:
+      - GR-CAS-NOM-01
+      - GR-TNS-PRS-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: "Две формулы подряд: Nazywam się… и Jestem z…"
+      incorrect: "Нужны Nazywam перед się и предлог z перед Ukrainy."
+      l1:
+        ukr: "Тримайте обидві рамки: Nazywam się… і Jestem z + dopełniacz."
+        rus: "Не пропускайте się и z — это две отдельные формулы."
+        bel: "Дзве цэлыя формулы: Nazywam się… / Jestem z…"
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "FN-A1-IDENTIFY-01 productive micro-task"
+      ai_assisted: true
+    mini_check: false
 
 mini_check:
   exercise_ids:
@@ -543,8 +628,7 @@ provenance:
     - "Curriculum links: SCN-A1-EVERYDAY-01, FN-A1-GREET-01, FN-A1-IDENTIFY-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
-    pan/pani and Nazywam się traps; adult RU chrome retained. DRAFT — not
-    JPJO-approved, not published to learners. reviewer_id is null (no fake
-    review evidence).
+    Wave 3 deepen v5 — adult distractors, listening closed item (TTS interim),
+    productive dual gap, distinct UK/BEL/RU L1 traps. DRAFT — not JPJO-approved,
+    not published. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

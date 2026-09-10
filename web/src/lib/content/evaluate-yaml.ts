@@ -7,7 +7,8 @@ export type AttemptAnswer =
   | { type: "single_choice"; index: number }
   | { type: "multiple_choice"; indices: number[] }
   | { type: "gap_fill"; values: string[] }
-  | { type: "ordering"; order: number[] };
+  | { type: "ordering"; order: number[] }
+  | { type: "listening"; index: number };
 
 export type AttemptResult = {
   correct: boolean;

@@ -13,18 +13,25 @@ type LessonPlayerProps = {
   lesson: LessonDetail;
   moduleHref: string;
   preview?: boolean;
+  /** Server-started session — preferred so attempts never race useEffect. */
+  initialSessionId?: string | null;
 };
 
 /**
  * Lesson player: structured content + exercises via learner-safe DTOs.
  * Finish completes a server lesson session; result page reads DB aggregates.
  */
-export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps) {
+export function LessonPlayer({
+  lesson,
+  moduleHref,
+  preview,
+  initialSessionId = null,
+}: LessonPlayerProps) {
   const t = useTranslations("learn");
   const router = useRouter();
   const [stepIndex, setStepIndex] = useState(0);
   const [score, setScore] = useState({ correct: 0, total: 0 });
-  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(initialSessionId);
 
   const step = lesson.steps[stepIndex];
   const total = lesson.steps.length;
@@ -32,6 +39,7 @@ export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps)
   const progressWidth = total > 0 ? ((stepIndex + 1) / total) * 100 : 0;
 
   useEffect(() => {
+    if (sessionId) return;
     let cancelled = false;
     void (async () => {
       try {
@@ -48,13 +56,13 @@ export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps)
         const data = (await res.json()) as { sessionId?: string };
         if (!cancelled && data.sessionId) setSessionId(data.sessionId);
       } catch {
-        /* offline / unauth — result falls back gracefully */
+        /* offline / unauth — attempt API will ensure session */
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, [lesson.id, lesson.moduleId]);
+  }, [lesson.id, lesson.moduleId, sessionId]);
 
   async function finish(nextScore: { correct: number; total: number }) {
     let sid = sessionId;
@@ -226,6 +234,9 @@ export function LessonPlayer({ lesson, moduleHref, preview }: LessonPlayerProps)
           nextHref={moduleHref}
           isLast={isLast}
           onNext={({ correct }) => goNext(correct)}
+          onSessionId={(id) => {
+            if (id && id !== sessionId) setSessionId(id);
+          }}
         />
       </div>
     </section>

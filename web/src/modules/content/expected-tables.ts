@@ -65,7 +65,8 @@ export type ExpectedExerciseRow = {
     | "single_choice"
     | "multiple_choice"
     | "gap_fill"
-    | "ordering";
+    | "ordering"
+    | "listening";
   content_version_id: string;
   /** Server-only answer key JSON; never sent to learner clients. */
   answer_key: Record<string, unknown>;

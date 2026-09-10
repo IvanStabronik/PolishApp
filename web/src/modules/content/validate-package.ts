@@ -137,7 +137,7 @@ function collectCurriculumRefs(pkg: ContentPackage): string[] {
 
 function exerciseShapeIssues(ex: Exercise, path: string): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
-  if (ex.type === "single_choice") {
+  if (ex.type === "single_choice" || ex.type === "listening") {
     const ids = new Set(ex.options.map((o) => o.id));
     if (!ids.has(ex.correct_option_id)) {
       issues.push({

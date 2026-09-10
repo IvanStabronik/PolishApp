@@ -5,6 +5,8 @@ import {
 } from "@/lib/content/lesson-titles";
 import { humanConceptLabel } from "@/lib/content/concept-labels";
 import { evaluationFromStoredResponse } from "@/modules/learning/persist-attempt";
+import { evaluateAnswer } from "@/modules/assessment/evaluate";
+import type { ListeningExercise } from "@/lib/content/types";
 
 describe("attempt lesson titles", () => {
   it("resolves Pierwsze spotkanie lesson title from lessonId", () => {
@@ -33,6 +35,14 @@ describe("attempt lesson titles", () => {
     expect(humanConceptLabel("PRAG-PAN-01", "uk")).toMatch(/pan/i);
     expect(humanConceptLabel("PRAG-PAN-01", "uk")).not.toBe("PRAG-PAN-01");
   });
+
+  it("never returns raw GR-/FN- IDs as primary labels", () => {
+    expect(humanConceptLabel("GR-CAS-NOM-01", "ru")).not.toBe("GR-CAS-NOM-01");
+    expect(humanConceptLabel("FN-A1-IDENTIFY-01", "pl")).not.toBe(
+      "FN-A1-IDENTIFY-01",
+    );
+    expect(humanConceptLabel("GR-UNKNOWN-99", "ru")).not.toMatch(/^GR-/);
+  });
 });
 
 describe("idempotent replay preserves l1Note", () => {
@@ -51,5 +61,33 @@ describe("idempotent replay preserves l1Note", () => {
     );
     expect(evalResult?.l1Note).toBe("UKR note here");
     expect(evalResult?.correct).toBe(false);
+  });
+});
+
+describe("listening exercise evaluation", () => {
+  const listening: ListeningExercise = {
+    id: "ex-ps-listen-01",
+    canonicalId: "EX-A1-PS-LIS-01",
+    type: "listening",
+    prompt: "Listen",
+    audioTextPl: "Nazywam się Marek Nowak. A pani?",
+    options: ["name", "bye", "coffee"],
+    correctIndex: 0,
+    conceptIds: ["GR-CAS-NOM-01"],
+    feedback: {
+      correct: "ok",
+      incorrect: "no",
+      evidenceWeight: 0.6,
+    },
+    retryPolicy: "unlimited",
+  };
+
+  it("scores listening like single choice by index", () => {
+    expect(
+      evaluateAnswer(listening, { type: "listening", index: 0 }).correct,
+    ).toBe(true);
+    expect(
+      evaluateAnswer(listening, { type: "listening", index: 1 }).correct,
+    ).toBe(false);
   });
 });

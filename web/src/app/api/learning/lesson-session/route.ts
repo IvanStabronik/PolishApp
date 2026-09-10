@@ -9,7 +9,7 @@ import {
 } from "@/modules/ops/runtime";
 import {
   completeLessonSession,
-  startLessonSession,
+  ensureOpenLessonSession,
 } from "@/modules/learning/lesson-session";
 
 export const runtime = "nodejs";
@@ -51,12 +51,12 @@ export async function POST(request: Request) {
   const body = parsed.data;
   try {
     if (body.action === "start") {
-      const started = await startLessonSession({
+      const started = await ensureOpenLessonSession({
         userId: session.user.id,
         lessonId: body.lessonId,
         moduleId: body.moduleId,
       });
-      return NextResponse.json(started);
+      return NextResponse.json({ sessionId: started.sessionId });
     }
 
     const summary = await completeLessonSession({

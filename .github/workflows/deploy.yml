@@ -50,6 +50,10 @@ jobs:
             echo "Prepare provider credentials before enabling deploy."
             exit 1
           fi
+          if [ -n "${{ secrets.RAILWAY_TOKEN }}" ] && [ -z "${{ secrets.RAILWAY_SERVICE_ID }}" ]; then
+            echo "EXTERNAL ACCESS REQUIRED: RAILWAY_TOKEN without RAILWAY_SERVICE_ID"
+            exit 1
+          fi
 
   migrate:
     name: Migration gate
@@ -102,9 +106,19 @@ jobs:
             exit 0
           fi
           if [ -n "${RAILWAY_TOKEN:-}" ]; then
-            echo "RAILWAY_TOKEN present — install Railway CLI and deploy in a follow-up once project ID is configured."
-            echo "EXTERNAL ACCESS REQUIRED: set RAILWAY_SERVICE_ID / complete GitHub↔Railway link."
-            exit 1
+            SERVICE_ID="${{ secrets.RAILWAY_SERVICE_ID }}"
+            if [ -z "${SERVICE_ID:-}" ]; then
+              echo "EXTERNAL ACCESS REQUIRED: RAILWAY_TOKEN set but RAILWAY_SERVICE_ID missing"
+              echo "Add RAILWAY_SERVICE_ID to GitHub Environment 'private-beta', then re-run."
+              exit 1
+            fi
+            curl -fsSL https://railway.com/install.sh | sh
+            export PATH="$HOME/.railway/bin:$PATH"
+            # Documented fail-closed path: token + service id. No invented project IDs.
+            # Expects the service already linked to this repo/image pipeline on Railway.
+            railway redeploy --service "$SERVICE_ID" --yes
+            echo "Railway redeploy requested for $SERVICE_ID (ref=$IMAGE_TAG)"
+            exit 0
           fi
           echo "No deploy transport configured"
           exit 1

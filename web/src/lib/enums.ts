@@ -30,6 +30,7 @@ export const EXERCISE_TYPES = [
   "multiple_choice",
   "gap_fill",
   "ordering",
+  "listening",
 ] as const;
 export type ExerciseType = (typeof EXERCISE_TYPES)[number];
 

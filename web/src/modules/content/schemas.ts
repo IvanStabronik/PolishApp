@@ -109,11 +109,24 @@ export const OrderingExerciseSchema = ExerciseBaseSchema.extend({
   correct_order: z.array(z.string().min(1)).min(2),
 });
 
+/**
+ * Closed listening item: hear Polish (TTS or audio_url), then choose.
+ * `audio_text_pl` is the spoken stimulus — not shown as the primary prompt text.
+ */
+export const ListeningExerciseSchema = ExerciseBaseSchema.extend({
+  type: z.literal("listening"),
+  audio_text_pl: z.string().min(1),
+  audio_url: z.string().url().optional(),
+  options: z.array(ChoiceOptionSchema).min(2),
+  correct_option_id: z.string().min(1),
+});
+
 export const ExerciseSchema = z.discriminatedUnion("type", [
   SingleChoiceExerciseSchema,
   MultipleChoiceExerciseSchema,
   GapFillExerciseSchema,
   OrderingExerciseSchema,
+  ListeningExerciseSchema,
 ]);
 export type Exercise = z.infer<typeof ExerciseSchema>;
 export type ExerciseType = Exercise["type"];

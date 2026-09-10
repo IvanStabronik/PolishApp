@@ -10,6 +10,7 @@ import type {
 import { Button } from "@/components/ui/button";
 import { ChoiceOption } from "./choice-option";
 import { FeedbackPanel } from "./feedback-panel";
+import { PolishLineAudio } from "@/components/exercise/polish-line-audio";
 
 type Props = {
   moduleId: string;
@@ -23,6 +24,8 @@ type Props = {
   isLast: boolean;
   /** When set, called instead of router.push(nextHref) after feedback. */
   onNext?: (result: { correct: boolean }) => void;
+  /** Server may ensure a session on first persist — bubble id to parent. */
+  onSessionId?: (sessionId: string) => void;
 };
 
 export function ExercisePlayer({
@@ -33,6 +36,7 @@ export function ExercisePlayer({
   nextHref,
   isLast,
   onNext,
+  onSessionId,
 }: Props) {
   const t = useTranslations("learn");
   const router = useRouter();
@@ -52,6 +56,8 @@ export function ExercisePlayer({
     switch (exercise.type) {
       case "single_choice":
         return { type: "single_choice" as const, index: selected ?? -1 };
+      case "listening":
+        return { type: "listening" as const, index: selected ?? -1 };
       case "multiple_choice":
         return { type: "multiple_choice" as const, indices: multiSelected };
       case "gap_fill":
@@ -64,6 +70,7 @@ export function ExercisePlayer({
   function canSubmit() {
     switch (exercise.type) {
       case "single_choice":
+      case "listening":
         return selected !== null;
       case "multiple_choice":
         return multiSelected.length > 0;
@@ -99,6 +106,7 @@ export function ExercisePlayer({
       explanation?: string;
       l1Note?: string;
       revealCorrectIndexes?: number[];
+      learningSessionId?: string;
       error?: string;
       reason?: string;
       persisted?: boolean;
@@ -108,6 +116,10 @@ export function ExercisePlayer({
     } catch {
       setPersistError(t("persistError"));
       return;
+    }
+
+    if (data.learningSessionId) {
+      onSessionId?.(data.learningSessionId);
     }
 
     // Correctness comes only from the server — never computed on the client.
@@ -169,7 +181,28 @@ export function ExercisePlayer({
         {exercise.prompt}
       </p>
 
-      {exercise.type === "single_choice" && (
+      {exercise.type === "listening" ? (
+        <div
+          className="flex flex-col gap-3 rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] px-4 py-4"
+          data-testid="exercise-listening-audio"
+        >
+          <p className="m-0 text-sm text-[var(--color-graphite-muted)]">
+            {t("listeningExerciseHint")}
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <PolishLineAudio
+              text={exercise.audioTextPl}
+              audioUrl={exercise.audioUrl}
+              className="min-h-10 px-4 text-base"
+            />
+            <span className="text-xs text-[var(--color-graphite-muted)]">
+              {t("listeningReplayOk")}
+            </span>
+          </div>
+        </div>
+      ) : null}
+
+      {(exercise.type === "single_choice" || exercise.type === "listening") && (
         <fieldset className="m-0 flex flex-col gap-2 border-0 p-0">
           <legend className="sr-only">{t("chooseOption")}</legend>
           {exercise.options.map((label, index) => (

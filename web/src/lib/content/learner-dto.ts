@@ -14,6 +14,8 @@ export const LEARNER_EXERCISE_WHITELIST = [
   "items",
   "textWithGaps",
   "gapCount",
+  "audioTextPl",
+  "audioUrl",
   "__learnerSafe",
 ] as const;
 
@@ -53,18 +55,28 @@ export type LearnerOrdering = LearnerExerciseBase & {
   items: string[];
 };
 
+export type LearnerListening = LearnerExerciseBase & {
+  type: "listening";
+  /** Spoken stimulus for TTS / optional URL — not an answer key. */
+  audioTextPl: string;
+  audioUrl?: string;
+  options: string[];
+};
+
 export type LearnerExercise =
   | LearnerSingleChoice
   | LearnerMultipleChoice
   | LearnerGapFill
-  | LearnerOrdering;
+  | LearnerOrdering
+  | LearnerListening;
 
 /** Submitted answer — learner → server. */
 export type SubmittedAnswerDto =
   | { type: "single_choice"; index: number }
   | { type: "multiple_choice"; indices: number[] }
   | { type: "gap_fill"; values: string[] }
-  | { type: "ordering"; order: number[] };
+  | { type: "ordering"; order: number[] }
+  | { type: "listening"; index: number };
 
 /**
  * Evaluation returned after a saved attempt.
@@ -141,6 +153,16 @@ export function toLearnerExercise(ex: ModuleExercise): LearnerExercise {
         type: "ordering",
         prompt: ex.prompt,
         items: [...ex.items],
+      };
+    case "listening":
+      return {
+        __learnerSafe: "LearnerExercise",
+        id: ex.id,
+        type: "listening",
+        prompt: ex.prompt,
+        audioTextPl: ex.audioTextPl,
+        ...(ex.audioUrl ? { audioUrl: ex.audioUrl } : {}),
+        options: [...ex.options],
       };
   }
 }

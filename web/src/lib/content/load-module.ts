@@ -19,6 +19,7 @@ import type {
   MultipleChoiceExercise,
   GapFillExercise,
   OrderingExercise,
+  ListeningExercise,
 } from "./types";
 import type { Lesson as PackageLesson, LessonStep as PackageLessonStep } from "@/modules/content/schemas";
 
@@ -110,6 +111,21 @@ function mapExercise(ex: PackageExercise): ModuleExercise {
         items,
         correctOrder,
       } satisfies OrderingExercise;
+    }
+    case "listening": {
+      const options = ex.options.map((o) => o.text);
+      const correctIndex = Math.max(
+        0,
+        ex.options.findIndex((o) => o.id === ex.correct_option_id),
+      );
+      return {
+        ...base,
+        type: "listening",
+        audioTextPl: ex.audio_text_pl,
+        ...(ex.audio_url ? { audioUrl: ex.audio_url } : {}),
+        options,
+        correctIndex,
+      } satisfies ListeningExercise;
     }
   }
 }

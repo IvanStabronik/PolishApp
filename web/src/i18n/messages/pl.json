@@ -111,7 +111,7 @@
     "previewBadge": "Podgląd wewnętrzny",
     "previewStatus": "Widzisz wstępne lekcje zamkniętej bety. To nie jest publiczna premiera ani niezależna certyfikacja treści.",
     "currentRoute": "Na trasie: {goal}",
-    "continueLearning": "Kontynuuj naukę",
+    "continueLearning": "Do jutrzejszej rozmowy",
     "viewProgress": "Zobacz postęp",
     "openCatalog": "Katalog A1",
     "nextStep": "Następny krok",
@@ -132,17 +132,17 @@
     "dailyPlan": "Plan dnia (15 min)",
     "reviewQueue": "Powtórka",
     "planReason": {
-      "unfinishedLesson": "Kontynuuj niedokończoną lekcję",
-      "weakConcept": "Podciągnij słabe miejsce",
-      "errorReview": "Powtórz niedawny błąd",
-      "miniCheck": "Krótkie sprawdzenie sali"
+      "unfinishedLesson": "Dokończ to, co zacząłeś — przyda się jutro na żywo",
+      "weakConcept": "Podciągnij miejsce, które potyka się w mowie",
+      "errorReview": "Rozbierz niedawny błąd, by jutro nie powtórzyć",
+      "miniCheck": "Krótkie sprawdzenie przed prawdziwą rozmową"
     },
     "planGoal": {
-      "finishLesson": "Dokończ bieżącą lekcję",
-      "miniCheck": "Zrób krótkie sprawdzenie sali",
-      "strengthenConcept": "Podciągnij słabe miejsce",
-      "reviewErrors": "Przejrzyj niedawne błędy",
-      "openNextSala": "Otwórz następną salę, gdy będziesz gotów/gotowa"
+      "finishLesson": "Jutro: krótkie spotkanie — imię i skąd",
+      "miniCheck": "Utrwal formuły przed rozmową na klatce",
+      "strengthenConcept": "Podciągnij to, co psuje się w żywej mowie",
+      "reviewErrors": "Przejrzyj wczorajsze potknięcia — by jutro nie wróciły",
+      "openNextSala": "Gdy gotów — następny byt: kawiarnia / tram / urząd"
     },
     "reviewReason": {
       "scheduledDue": "Według harmonogramu powtórek",
@@ -200,18 +200,20 @@
     "playLine": "Posłuchaj",
     "stopAudio": "Stop",
     "listeningHint": "Możesz odsłuchać polskie kwestie (synteza mowy w przeglądarce — tymczasowo, nie nagranie studyjne).",
-    "speaking": "Wymowa",
-    "speakingHint": "Powiedz kwestię na głos — spokojnie, jak w rozmowie dorosłych.",
-    "speakingHonesty": "To trening. Rozpoznawanie mowy to wskazówka, nie egzamin i nie certyfikat.",
-    "speakingRecord": "Nagraj",
-    "speakingStop": "Zatrzymaj",
+    "listeningExerciseHint": "Najpierw posłuchaj kwestii, potem wybierz odpowiedź. Tekst dźwięku nie jest pokazywany.",
+    "listeningReplayOk": "Możesz odsłuchać jeszcze raz.",
+    "speaking": "Na głos",
+    "speakingHint": "Powiedz kwestię na głos — spokojnie, jak z dorosłym na klatce.",
+    "speakingHonesty": "To trening mowy, nie egzamin i nie ocena JPJO.",
+    "speakingRecord": "Mów",
+    "speakingStop": "Stop",
     "speakingSelfCheck": "Powiedziałem/am na głos",
-    "speakingReveal": "Pokaż podpowiedź",
+    "speakingReveal": "Pokaż tekst",
     "speakingNextLine": "Inna kwestia",
     "speakingHeard": "Rozpoznano",
     "speakingCloseMatch": "blisko wzorca",
     "speakingBestEffort": "sprawdź sam — system może się mylić",
-    "speakingUnsupported": "W tej przeglądarce nie ma rozpoznawania mowy — powiedz na głos i zaznacz sam.",
+    "speakingUnsupported": "W tej przeglądarce nie ma rozpoznawania — powiedz na głos i zaznacz sam.",
     "speakingHidden": "…"
   },
   "progress": {

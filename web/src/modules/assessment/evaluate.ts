@@ -123,6 +123,12 @@ export function evaluateAnswer(
         { revealCorrectIndexes: [...exercise.correctOrder] },
       );
     }
+    case "listening": {
+      const a = answer as Extract<AttemptAnswer, { type: "listening" }>;
+      return finish(a.index === exercise.correctIndex, {
+        revealCorrectIndexes: [exercise.correctIndex],
+      });
+    }
     default:
       return finish(false);
   }
@@ -158,17 +164,24 @@ export type OrderingSpec = {
   correct_order: string[];
 };
 
+export type ListeningSpec = {
+  type: "listening";
+  correct_option_id: string;
+};
+
 export type ExerciseEvalSpec =
   | SingleChoiceSpec
   | MultipleChoiceSpec
   | GapFillSpec
-  | OrderingSpec;
+  | OrderingSpec
+  | ListeningSpec;
 
 export type LearnerResponse =
   | { type: "single_choice"; option_id: string }
   | { type: "multiple_choice"; option_ids: string[] }
   | { type: "gap_fill"; answers: Record<string, string> }
-  | { type: "ordering"; order: string[] };
+  | { type: "ordering"; order: string[] }
+  | { type: "listening"; option_id: string };
 
 function sameStringSet(a: string[], b: string[]): boolean {
   if (a.length !== b.length) return false;
@@ -282,6 +295,21 @@ export function evaluateResponse(
         details: { expected, got, correctPositions },
       };
     }
+    case "listening": {
+      const correct =
+        (response as Extract<LearnerResponse, { type: "listening" }>)
+          .option_id === spec.correct_option_id;
+      return {
+        correct,
+        partial: false,
+        score: correct ? 1 : 0,
+        details: {
+          expected: spec.correct_option_id,
+          got: (response as Extract<LearnerResponse, { type: "listening" }>)
+            .option_id,
+        },
+      };
+    }
     default: {
       const _exhaustive: never = spec;
       return _exhaustive;
@@ -315,5 +343,7 @@ export function answerKeyFromExercise(ex: {
       };
     case "ordering":
       return { type: "ordering", correct_order: ex.correct_order! };
+    case "listening":
+      return { type: "listening", correct_option_id: ex.correct_option_id! };
   }
 }

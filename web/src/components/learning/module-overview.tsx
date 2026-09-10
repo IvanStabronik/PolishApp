@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import type { DialogueTurn, KeyLine, DraftModule } from "@/lib/content/types";
 import type { LearnerL1 } from "@/lib/enums";
+import { HubLineAudio } from "@/components/learning/hub-line-audio";
 
 type Props = {
   dialogue: DialogueTurn[];
@@ -28,6 +29,9 @@ export async function ModuleOverview({
         >
           {t("dialogue")}
         </h2>
+        <p className="mt-2 text-sm text-[var(--color-graphite-muted)]">
+          {t("listeningHint")}
+        </p>
         <ul className="mt-4 flex list-none flex-col gap-4 p-0">
           {dialogue.map((turn, i) => (
             <li
@@ -37,9 +41,12 @@ export async function ModuleOverview({
               <p className="m-0 text-xs font-semibold uppercase tracking-wide text-[var(--color-forest)]">
                 {turn.speaker}
               </p>
-              <p className="m-0 mt-1 font-display text-xl text-[var(--color-ink)]">
-                {turn.pl}
-              </p>
+              <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <p className="m-0 font-display text-xl text-[var(--color-ink)]">
+                  {turn.pl}
+                </p>
+                <HubLineAudio text={turn.pl} audioUrl={turn.audioUrl} />
+              </div>
               {turn.glossRu.trim() ? (
                 <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
                   {turn.glossRu}
@@ -60,9 +67,12 @@ export async function ModuleOverview({
         <ul className="mt-4 flex list-none flex-col gap-5 p-0">
           {keyLines.map((line) => (
             <li key={line.pl}>
-              <p className="m-0 font-display text-xl text-[var(--color-ink)]">
-                {line.pl}
-              </p>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <p className="m-0 font-display text-xl text-[var(--color-ink)]">
+                  {line.pl}
+                </p>
+                <HubLineAudio text={line.pl} audioUrl={line.audioUrl} />
+              </div>
               <p className="m-0 mt-1 text-[var(--color-graphite)]">
                 {line.explanation}
               </p>

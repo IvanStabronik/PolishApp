@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-01
 slug: zamowienie-przy-barze
-version: 3
+version: 4
 status: DRAFT
 title_pl: Zamówienie przy barze
 sort_order: 1
@@ -153,6 +153,15 @@ steps:
   - id: step-key-lines
     kind: key_lines
     title_ru: Важные реплики
+  - id: step-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите заказ вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Poproszę kawę latte.
+      - Dużą, proszę.
+      - Kartą, proszę.
   - id: step-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -572,7 +581,6 @@ provenance:
     - "Curriculum links: SCN-A1-FOOD-01, FN-A1-TRANS-01, LEX-A1-SERVICE"
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
-    café order traps; adult RU chrome retained. DRAFT — not JPJO-approved,
-    not published to learners. reviewer_id is null (no fake review evidence).
+    Wave 3 v4 — speaking_practice at bar; DRAFT — not JPJO-approved.
+    reviewer_id null (no fake review evidence).
 visibility: internal_preview_only

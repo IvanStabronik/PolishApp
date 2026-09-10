@@ -34,6 +34,7 @@ import {
   publicErrorBody,
 } from "@/modules/ops/runtime";
 import { isLearnerL1 } from "@/lib/content/types";
+import { ensureOpenLessonSession } from "@/modules/learning/lesson-session";
 
 export const runtime = "nodejs";
 
@@ -165,12 +166,22 @@ export async function POST(request: Request) {
       contentStatus: normalizedStatus,
     });
 
+    let learningSessionId = body.learningSessionId ?? null;
+    if (!learningSessionId && body.lessonId) {
+      const ensured = await ensureOpenLessonSession({
+        userId: session.user.id,
+        lessonId: body.lessonId,
+        moduleId: body.moduleId,
+      });
+      learningSessionId = ensured.sessionId;
+    }
+
     const persistResult = await persistLearningAttempt(
       {
         userId: session.user.id,
         moduleId: body.moduleId,
         lessonId: body.lessonId ?? null,
-        learningSessionId: body.learningSessionId ?? null,
+        learningSessionId,
         exerciseCanonicalId:
           exerciseRow?.canonicalId ?? exercise.canonicalId ?? null,
         exerciseUuid: exerciseRow?.id ?? null,
@@ -220,6 +231,7 @@ export async function POST(request: Request) {
         persistResult.replayed ?? persistResult.idempotentReplay,
       ),
       attemptId: persistResult.attemptId,
+      learningSessionId,
       lessonId: body.lessonId ?? null,
       exerciseCanonicalId:
         exerciseRow?.canonicalId ?? exercise.canonicalId ?? body.exerciseId,

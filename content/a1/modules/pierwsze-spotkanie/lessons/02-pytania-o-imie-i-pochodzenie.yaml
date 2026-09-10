@@ -1,16 +1,17 @@
 kind: lesson
 canonical_id: LES-A1-PS-02
 slug: pytania-o-imie-i-pochodzenie
-version: 3
+version: 4
 status: DRAFT
 title_pl: Pytania o imię i pochodzenie
 sort_order: 2
 situation_ru: >
   Знакомство уже началось. Теперь вы сами спрашиваете имя и откуда человек —
-  и коротко отвечаете, когда спрашивают вас.
+  и коротко отвечаете, когда спрашивают вас. Как со взрослым на работе или
+  у соседа — не как в чате с друзьями.
 objective_ru: >
   Спросить Jak ma pan/pani na imię? и Skąd pan/pani jest?, ответить самому
-  и вернуть вопрос (A pan? / A pani?) — на pan/pani.
+  и вернуть вопрос (A pan? / A pani?) — на pan/pani, без masz / ty.
 curriculum_links:
   scenarios:
     - SCN-A1-EVERYDAY-01
@@ -133,6 +134,15 @@ steps:
   - id: step-l2-key-lines
     kind: key_lines
     title_ru: Важные реплики
+  - id: step-l2-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите вопрос вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Jak ma pan na imię?
+      - Skąd pani jest?
+      - A pani?
   - id: step-l2-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -174,7 +184,7 @@ exercises:
       - LEX-A1-IDENTITY
     feedback:
       correct: "Да: Jak ma pan na imię? — pan и глагол в 3 лице."
-      incorrect: "masz / ty здесь слишком свои для незнакомца."
+      incorrect: "masz / ty слишком свои; wy macie — калька «как вас зовут» во мн."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -189,7 +199,7 @@ exercises:
       - id: b
         text: Jak masz na imię?
       - id: c
-        text: Kim ty jesteś?
+        text: Jak wy macie na imię?
     correct_option_id: a
   - id: ex-ps-l2-02
     canonical_id: EX-A1-PS-L2-MC-02
@@ -205,7 +215,7 @@ exercises:
       - LEX-A1-GREETINGS
     feedback:
       correct: "Jak ma pani…, Skąd pan… и A pani? — на pan/pani."
-      incorrect: "Gdzie ty mieszkasz? — слишком своё для первого контакта."
+      incorrect: "Ile pani ma lat? — слишком личное для первого контакта на кlatce."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -220,7 +230,7 @@ exercises:
       - id: b
         text: Skąd pan jest?
       - id: c
-        text: Gdzie ty mieszkasz?
+        text: Ile pani ma lat?
       - id: d
         text: A pani?
     correct_option_ids:
@@ -452,8 +462,6 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Language pass v3 — shorter UK/BEL L1 notes on
-    pan/pani question traps; adult RU chrome retained. DRAFT — not
-    JPJO-approved, not published to learners. reviewer_id is null (no fake
-    review evidence).
+    Wave 3 v4 — speaking_practice added; adult distractors (wy macie / age
+    question trap); DRAFT — not JPJO-approved. reviewer_id null.
 visibility: internal_preview_only

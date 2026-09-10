@@ -67,6 +67,7 @@ export const exerciseTypeEnum = pgEnum("exercise_type", [
   "multiple_choice",
   "gap_fill",
   "ordering",
+  "listening",
 ]);
 
 /** Shared created_at / updated_at columns for curriculum & content tables. */

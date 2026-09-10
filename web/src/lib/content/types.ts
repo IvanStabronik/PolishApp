@@ -75,6 +75,16 @@ export type OrderingExercise = ExerciseBase & {
   correctOrder: number[];
 };
 
+/** @server-only — audio stimulus + correctIndex (keys never on learner DTO) */
+export type ListeningExercise = ExerciseBase & {
+  type: "listening";
+  /** Spoken Polish (TTS / human asset). */
+  audioTextPl: string;
+  audioUrl?: string;
+  options: string[];
+  correctIndex: number;
+};
+
 /**
  * Server-only authored exercise union (answer keys).
  * Alias kept for evaluate / persist / YAML load paths.
@@ -83,7 +93,8 @@ export type ModuleExercise =
   | SingleChoiceExercise
   | MultipleChoiceExercise
   | GapFillExercise
-  | OrderingExercise;
+  | OrderingExercise
+  | ListeningExercise;
 
 /** Explicit alias emphasizing server-only boundary. */
 export type AuthoredExercise = ModuleExercise;

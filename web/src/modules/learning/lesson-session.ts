@@ -66,6 +66,39 @@ export async function startLessonSession(input: {
   return { sessionId: row!.id };
 }
 
+/**
+ * Reuse an open lesson session when present; otherwise start one.
+ * Used so early attempts never race ahead of a client-only start.
+ */
+export async function ensureOpenLessonSession(input: {
+  userId: string;
+  lessonId: string;
+  moduleId: string;
+}): Promise<{ sessionId: string; reused: boolean }> {
+  const db = getDb();
+  const profile = await getOrCreateLearnerProfile(db, input.userId);
+
+  const recent = await db
+    .select()
+    .from(learningSessions)
+    .where(eq(learningSessions.learnerProfileId, profile.id))
+    .orderBy(desc(learningSessions.startedAt))
+    .limit(15);
+
+  const open = recent.find((row) => {
+    if (row.endedAt) return false;
+    const meta = (row.metadata ?? {}) as SessionMeta;
+    return meta.kind === "lesson" && meta.lessonId === input.lessonId;
+  });
+
+  if (open) {
+    return { sessionId: open.id, reused: true };
+  }
+
+  const started = await startLessonSession(input);
+  return { sessionId: started.sessionId, reused: false };
+}
+
 async function aggregateAttempts(
   db: Db,
   learnerProfileId: string,
@@ -89,22 +122,48 @@ async function aggregateAttempts(
 
   let correct = 0;
   let total = 0;
+  const seen = new Set<string>();
+
+  const countRow = (row: {
+    correct: boolean | null;
+    createdAt: Date;
+  }, key: string) => {
+    if (seen.has(key)) return;
+    seen.add(key);
+    total += 1;
+    if (row.correct === true) correct += 1;
+  };
+
   for (const row of rows) {
-    if (opts.sessionId && row.learningSessionId === opts.sessionId) {
-      total += 1;
-      if (row.correct === true) correct += 1;
-      continue;
-    }
-    if (opts.sessionId) continue;
     const response = row.response as Record<string, unknown> | null;
     const lessonId =
       response && typeof response.lessonId === "string"
         ? response.lessonId
         : null;
+    const key = `${row.createdAt.toISOString()}:${lessonId ?? ""}:${String(row.correct)}`;
+
+    if (opts.sessionId && row.learningSessionId === opts.sessionId) {
+      countRow(row, `sid:${row.learningSessionId}:${key}`);
+      continue;
+    }
+
+    // Harden: include unlinked attempts for this lesson in the session window
+    // (covers the Wave 2 race where client started session after first submit).
+    if (
+      opts.sessionId &&
+      !row.learningSessionId &&
+      lessonId === opts.lessonId &&
+      opts.since &&
+      row.createdAt >= opts.since
+    ) {
+      countRow(row, `orphan:${key}`);
+      continue;
+    }
+
+    if (opts.sessionId) continue;
     if (lessonId !== opts.lessonId) continue;
     if (opts.since && row.createdAt < opts.since) continue;
-    total += 1;
-    if (row.correct === true) correct += 1;
+    countRow(row, `lesson:${key}`);
   }
   return { correct, total };
 }
@@ -148,6 +207,7 @@ export async function completeLessonSession(input: {
   const fromSession = await aggregateAttempts(db, profile.id, {
     sessionId,
     lessonId: input.lessonId,
+    since: startedAt,
   });
   const scores =
     fromSession.total > 0

@@ -29,6 +29,8 @@ Production seed must **not** create demo accounts (`DEMO_MODE=false`).
 **EXTERNAL ACCESS REQUIRED** until Railway (or other) credentials + GitHub Environment `private-beta` secrets exist.
 Deploy workflow: `.github/workflows/deploy.yml` (`workflow_dispatch` only).
 
+**Fail-closed dry-run:** [https-deploy-dry-run.md](../operations/https-deploy-dry-run.md) — complete before claiming HTTPS is proven.
+
 ## Status
 
 ```
