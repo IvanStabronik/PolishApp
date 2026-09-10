@@ -1,13 +1,13 @@
 kind: lesson
 canonical_id: LES-A1-WK-02
 slug: rozmiar-dodatki-i-platnosc
-version: 4
+version: 5
 status: DRAFT
 title_pl: Rozmiar, dodatki i płatność
 sort_order: 2
 situation_ru: >
   Заказ уже начат у стойки. Бариста уточняет размер и добавку;
-  вы отвечаете коротко, закрываете заказ и платите.
+  вы отвечаете коротко, закрываете заказ и платите — без ty и без *Daj.
 objective_ru: >
   Назвать размер (dużą / małą), ответить на z mlekiem / bez mleka,
   сказать Tak, to wszystko и оплатить kartą — на pan/pani.
@@ -71,8 +71,8 @@ pan_pani:
     - Z mlekiem, proszę.
     - Kartą, proszę.
   counterexamples_pl:
-    - "*Ty mi powiedz."
-    - "*Daj mi to."
+    - "*Daj dużą kawę." # резко к незнакомцу
+    - "*Możno mnie z mlekiem?" # калька «можно мне»
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
@@ -100,8 +100,8 @@ grammar_points:
       Ile płacę? / Kartą, proszę.
     examples_pl: *a1
     counterexamples_pl:
-      - "*Ty daj."
-      - "*Ja nie rozumieć."
+      - "*Poproszę duży kawa." # без Acc / согласования
+      - "*Daj mi z mlekiem." # неверный регистр
     concept_ids:
       - GR-CAS-ACC-01
       - GR-PRO-DEM-01
@@ -161,10 +161,12 @@ steps:
     exercise_ids:
       - ex-wk-l2-01
       - ex-wk-l2-02
+      - ex-wk-l2-listen-01
       - ex-wk-l2-03
       - ex-wk-l2-04
       - ex-wk-l2-05
       - ex-wk-l2-06
+      - ex-wk-l2-write-01
   - id: step-l2-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -177,7 +179,7 @@ steps:
 exercises:
   - id: ex-wk-l2-01
     canonical_id: EX-A1-WK-L2-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Бариста спрашивает: «Dużą czy małą?» Что ответить?"
@@ -189,7 +191,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Dużą, proszę — размер в Acc, как у kawę."
-      incorrect: "Duży не согласуется; Daj слишком резко у стойки."
+      incorrect: "Duży не согласуется с kawę; Daj резко у стойки."
+      l1:
+        ukr: "Не *duży з kawę і не *Daj — тільки Dużą, proszę."
+        rus: "Согласование: dużą (не duży) + Acc; не приказ *Daj."
+        bel: "Dużą, не *duży; без рэзкага *Daj."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -204,11 +210,11 @@ exercises:
       - id: b
         text: Duży, proszę.
       - id: c
-        text: Daj dużą.
+        text: Daj dużą kawę.
     correct_option_id: a
   - id: ex-wk-l2-02
     canonical_id: EX-A1-WK-L2-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Какие реплики уточняют или закрывают заказ у стойки?"
@@ -221,6 +227,10 @@ exercises:
     feedback:
       correct: "Добавка и «это всё» — обычные шаги после выбора напитка."
       incorrect: "Do dworca — про маршрут, не про кофейню."
+      l1:
+        ukr: "Z mlekiem / to wszystko — кавʼярня; Do dworca — інший сценарій."
+        rus: "Не смешивайте кофейню с дорогой (Do dworca)."
+        bel: "Дадаткі і to wszystko — кавярня, не вакзал."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -242,14 +252,52 @@ exercises:
       - a
       - b
       - c
+  - id: ex-wk-l2-listen-01
+    canonical_id: EX-A1-WK-L2-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте баристу. О чём вопрос?"
+    audio_text_pl: Z mlekiem czy bez mleka?
+    options:
+      - id: a
+        text: Спрашивает про добавку молока.
+      - id: b
+        text: Называет цену покупки.
+      - id: c
+        text: Просит показать bilety.
+    correct_option_id: a
+    concept_ids:
+      - GR-PRO-DEM-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-ASK-01
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Да: Z mlekiem czy bez mleka? — про молоко."
+      incorrect: "Это про добавку, не цена и не билет."
+      l1:
+        ukr: "Слухайте пару z mlekiem / bez mleka — добавка, не ціна."
+        rus: "Слышите вопрос про молоко, не сумму и не транспорт."
+        bel: "Гэта дабаўка да кавы, не цана і не білет."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Dialogue Rozmiar, dodatki i płatność
+      ai_assisted: true
+    mini_check: false
   - id: ex-wk-l2-03
     canonical_id: EX-A1-WK-L2-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Poproszę {{gap1}} kawę."
     concept_ids:
-      - GR-NUM-MONEY-01
+      - GR-CAS-ACC-01
     function_ids:
       - FN-A1-ADDRESS-01
     lex_bundle_ids:
@@ -257,6 +305,10 @@ exercises:
     feedback:
       correct: "Dużą согласуется с kawę в Acc."
       incorrect: "Нужна форма dużą (не duży)."
+      l1:
+        ukr: "Після Poproszę — dużą kawę (Acc), не *duży kawa."
+        rus: "Согласование Acc: dużą kawę, не *duży kawa."
+        bel: "Dużą + kawę, не назоўны."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -272,7 +324,7 @@ exercises:
         placeholder: …
   - id: ex-wk-l2-04
     canonical_id: EX-A1-WK-L2-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Tak, to {{gap1}}."
@@ -285,6 +337,10 @@ exercises:
     feedback:
       correct: "To wszystko — закрыть выбор перед оплатой."
       incorrect: "Нужно слово wszystko."
+      l1:
+        ukr: "Ціла рамка Tak, to wszystko — не калька «це все є»."
+        rus: "Целиком: Tak, to wszystko — перед Ile płacę?"
+        bel: "Tak, to wszystko — цэлая формула закрыцця."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -337,12 +393,12 @@ exercises:
       - t4
   - id: ex-wk-l2-06
     canonical_id: EX-A1-WK-L2-SC-06
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Бариста спрашивает: «Kartą czy gotówką?» Что ответить?"
     concept_ids:
-      - GR-PRO-DEM-01
+      - GR-NUM-MONEY-01
     function_ids:
       - FN-A1-TRANS-01
     lex_bundle_ids:
@@ -350,6 +406,10 @@ exercises:
     feedback:
       correct: "Kartą, proszę — творительный в формуле оплаты."
       incorrect: "Karta / Na kartę — кальки, не то, что говорят у стойки."
+      l1:
+        ukr: "Kartą (Ins), не *Karta / *Na kartę."
+        rus: "Не именительный *Karta и не *Na kartę — нужно Kartą."
+        bel: "Толькі Kartą, proszę — не *Na kartę."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -366,6 +426,44 @@ exercises:
       - id: c
         text: Na kartę.
     correct_option_id: a
+  - id: ex-wk-l2-write-01
+    canonical_id: EX-A1-WK-L2-GF-09
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: Poproszę {{gap1}} kawę. {{gap2}} mlekiem, proszę."
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-PRO-DEM-01
+    function_ids:
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Размер dużą + добавка z mlekiem — две короткие рамки."
+      incorrect: "Нужны dużą (Acc) и предлог z перед mlekiem."
+      l1:
+        ukr: "dużą kawę + z mlekiem — не *duży / *z mleko."
+        rus: "dużą + z mlekiem целиком; не *с молоком в именительном."
+        bel: "dużą і z mlekiem — цэлыя, не калька."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - FN-A1-TRANS-01 productive dual gap
+      ai_assisted: true
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - dużą
+        placeholder: …
+      - id: gap2
+        accepted_answers:
+          - Z
+          - z
+        placeholder: …
   - id: ex-wk-l2-07
     canonical_id: EX-A1-WK-L2-MC-07
     version: 1
@@ -447,13 +545,13 @@ mini_check:
     - GR-PRO-DEM-01
     - GR-NUM-MONEY-01
 result_metadata:
-  title_ru: Итог урока
+  title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете уточнить размер и добавку,
-    закрыть заказ и оплатить у стойки (DRAFT preview).
+    закрыть заказ и оплатить у стойки (черновик, внутренний просмотр).
   retry_ru: >
-    Повторите dużą/małą, z mlekiem, Tak, to wszystko и Kartą, proszę,
-    затем пройдите короткую проверку снова.
+    Ещё раз dużą/małą, z mlekiem, Tak, to wszystko и Kartą, proszę —
+    потом короткая проверка снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-TRANS-01
@@ -472,7 +570,6 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft. Wave 4 v4 — speaking_practice for size/add-on/pay;
-    shorter UK/BEL L1 notes retained. DRAFT — not JPJO-approved, not published
-    to learners. reviewer_id is null (no fake review evidence).
+    Wave 5 deepen v5 — listening seed, productive dual gap, adult distractors,
+    distinct L1 traps. DRAFT — not JPJO-approved, not published. reviewer_id null.
 visibility: internal_preview_only

@@ -1,9 +1,9 @@
 # Improvement loop status
 
 **Branch:** `docs/requirements-r2`  
-**Stance:** Wave 1–4 foundations only — **not** reference quality.  
-**Re-audit (post–Wave 3):** ~**31 / 50** against `reference-quality-bar.md`.  
-**Wave 4 estimate (this pass):** ~**34 / 50** — code/docs moved; EXTERNAL wall unchanged. Never claim reference quality.
+**Stance:** Wave 1–5 foundations only — **not** reference quality.  
+**Wave 4 re-audit (honest):** ~**30 / 50** against `reference-quality-bar.md` (prior “34” was soft).  
+**Wave 5 estimate (this pass):** ~**32–33 / 50** — café listening + deepen + ops docs + stimulus harden; EXTERNAL wall unchanged. Never claim reference quality.
 
 ## Wave 3 — shipped (summary)
 
@@ -24,34 +24,42 @@
 | Listening `audioTextPl` on client DTO | **Fixed** — fetch-on-play API; DTO has `hasTtsStimulus` only |
 | Adaptive planGoal by hall | **Fixed** — `hallKey` + nested i18n (café / tram / urząd / sklep / spotkanie) |
 
-## Wave 4 — results this pass
+## Wave 4 — honest re-audit (~30/50)
 
-1. **Broader listening + speaking** — assessed `listening` + `speaking_practice` on L01 of w-sklepie, droga-i-transport, pierwsza-sprawa-w-urzedzie; café L02/L03 speaking. Still **DRAFT**; versions bumped.
-2. **Competitive week-1 bakeoff** — `docs/reports/competitive-week1-bakeoff.md` (script + current FAIL honesty).
-3. **JPJO hall packet** — `docs/reviews/pierwsze-spotkanie-jpjo-hall-packet.md`, status **`NOT_STARTED`** (no fake APPROVE).
-4. **Learner craft** — previewNoMastery softened; MasteryBadge “Уверенно/Впевнено/Pewnie”; UK/BEL step title fallback; speaking privacy note for mic.
-5. **Tests** — curriculum labels / listening DTO leak / hallKey plan / ensure export; content:validate + tsc + vitest expected green.
+What landed: FN SoT fix, DTO listening leak closed for lesson payload, hall-keyed plan copy, speak/listen seeds on several L01s (not café), competitive bakeoff script, JPJO hall packet `NOT_STARTED`, craft softenings.
+
+Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO + bakeoff execution still EXTERNAL; TTS ≠ studio; speaking not exam-grade; all content DRAFT. Soft inflation corrected here.
+
+## Wave 5 — results this pass
+
+1. **Café deepen + listening** — `w-kawiarni` L01–L03 v5: assessed `listening` on all three, productive dual gaps, adult distractors, distinct UK/BEL/RU L1; module v3. Still **DRAFT**.
+2. **Sklep L01 deepen** — v5 productive dual gap + sharper distractors/L1; listening retained.
+3. **Listening stimulus API** — same-origin + beta gate + rate limit; prefer `audioUrl` alone (no `textPl`) when URL present; removed no-op auth theater.
+4. **Plan UI** — weak/error items show `humanConceptLabel` (not raw GR-/FN- IDs).
+5. **Ops** — `docs/operations/local-closed-beta.md` (Windows runnable), `docs/operations/external-unblock-wizard.md` (Railway/GH secrets + JPJO + BASE_URL smoke).
+6. **Honesty** — Wave 4 regraded to ~30/50; no fake PUBLISHED / JPJO.
 
 ## Still broken vs reference bar
 
-1. TTS ≠ studio listening (FUN-110 / V2).
+1. TTS ≠ studio listening (FUN-110 / V2). Network tab can still see TTS `textPl` when no `audioUrl` (interim).
 2. Speaking recognition best-effort — not exam scoring.
 3. All content **DRAFT** — no JPJO PUBLISHED hall (§7). **EXTERNAL**
 4. Competitive week-1 not yet **run** with real invitees (script only).
 5. Live HTTPS not proven without Railway/host secrets. **EXTERNAL**
 6. Admin vs learner craft — freeze held; recheck §9 after player polish.
+7. Remaining halls L02/L03 deepen (transport / urząd / sklep 02–03) still thinner than PS/café.
 
-## Wave 5 = EXTERNAL wall (+ leftover code)
+## Wave 6 = after human unlock OR more deepen
 
 1. **JPJO human review** — calendar + first hall APPROVE/REJECT in packet (no AI self-approve).
-2. **Live HTTPS proof** — operator completes dry-run with real `RAILWAY_*` / webhook / secrets; health/ready public.
-3. **Invite path on live** — `BETA_ALLOW_DRAFT=true`, `DEMO_*=false`, invite pepper.
-4. Optional code leftovers: studio audio pipeline, deeper speaking upload policy, remaining L02/L03 listening seeds, timed bakeoff execution log.
+2. **Live HTTPS proof** — operator completes [external-unblock-wizard.md](../operations/external-unblock-wizard.md).
+3. **Invite path on live** — `BETA_ALLOW_DRAFT=true`, `DEMO_*=false`.
+4. Optional code: studio audio pipeline, remaining hall deepen, timed bakeoff execution log.
 
 ## External blockers (track)
 
-- Railway / host secrets and service ID.
-- Independent JPJO reviewer calendar.
+- Railway / host secrets and service ID (wizard §1).
+- Independent JPJO reviewer calendar (wizard §3).
 - Production `INVITE_TOKEN_PEPPER`, DB, auth if not provisioned.
 - Browser TTS / SpeechRecognition variance.
 

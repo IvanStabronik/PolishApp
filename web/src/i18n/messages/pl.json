@@ -302,7 +302,7 @@
   },
   "adminBeta": {
     "pageTitle": "Centrum zarządzania zamkniętą betą",
-    "pageLead": "Zaproszenia, aktywność uczestników, skrzynka opinii i podsumowania. Surowy token widać tylko przy utworzeniu. Publiczna publikacja treści zamknięta do niezależnego JPJO.",
+    "pageLead": "Zaproszenia, aktywność uczestników, skrzynka opinii i podsumowania. Surowy token widać tylko przy utworzeniu. Publiczna publikacja treści zamknięta do niezależnej weryfikacji nauczyciela.",
     "eyebrow": "Ops · Closed beta",
     "forbidden": "Brak dostępu — wymagana rola admin.",
     "loading": "Ładowanie…",

@@ -59,6 +59,7 @@ export function ListeningAudioControl({
       const res = await fetch("/api/learning/listening-stimulus", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ moduleId, exerciseId }),
       });
       if (!res.ok) {

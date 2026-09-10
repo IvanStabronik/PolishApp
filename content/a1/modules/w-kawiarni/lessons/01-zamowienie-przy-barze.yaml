@@ -1,17 +1,17 @@
 kind: lesson
 canonical_id: LES-A1-WK-01
 slug: zamowienie-przy-barze
-version: 4
+version: 5
 status: DRAFT
 title_pl: Zamówienie przy barze
 sort_order: 1
 situation_ru: >
-  Вы у стойки в небольшой кофейне в Польше. Нужен кофе или чай: размер,
-  есть ли ещё что-то в меню, оплата. Бариста — взрослый незнакомец;
-  речь спокойная, темы простые.
+  Утро или день, небольшая кофейня в Польше. Вы у стойки: кофе или чай,
+  размер, есть ли ещё в меню, потом оплата. Бариста — взрослый незнакомец;
+  без панибратства и без резкого «дайте».
 objective_ru: >
-  Поздороваться, заказать (Poproszę…), спросить о наличии, оплатить
-  и поблагодарить — на pan/pani, не на ty.
+  Поздороваться, заказать Poproszę… (+ Acc), спросить Czy jest…?,
+  спросить Ile płacę? и оплатить kartą — на pan/pani, не на ty.
 curriculum_links:
   scenarios:
     - SCN-A1-FOOD-01
@@ -175,12 +175,14 @@ steps:
     exercise_ids:
       - ex-wk-01
       - ex-wk-02
+      - ex-wk-listen-01
       - ex-wk-03
       - ex-wk-04
       - ex-wk-05
       - ex-wk-06
       - ex-wk-07
       - ex-wk-08
+      - ex-wk-write-01
   - id: step-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -193,15 +195,15 @@ steps:
 exercises:
   - id: ex-wk-01
     canonical_id: EX-A1-WK-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
-    prompt: "У стойки. Как вежливо заказать кофе?"
+    prompt: "У стойки, первый контакт. Как спокойно заказать кофе?"
     options:
       - id: a
         text: Poproszę kawę.
       - id: b
-        text: Daj kawę.
+        text: Daj kawę, szybko!
       - id: c
         text: Możno mnie kawa?
     correct_option_id: a
@@ -215,12 +217,12 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Poproszę kawę — спокойный заказ + Acc."
-      incorrect: "Daj / Możno mnie — слишком резко или калька с «можно мне»."
-      hint: "Ищите Poproszę + объект."
+      incorrect: "Daj… szybko — резко; Możno mnie — калька «можно мне», ещё и без Acc."
+      hint: "Ищите Poproszę + объект в винительном."
       l1:
-        ukr: "Не ставте «дайте» як *Daj до незнайомого баристи."
-        rus: "Не калькируйте «можно мне» как *Możno mnie."
-        bel: "Не пераносьце «дайце» ў рэзкі *Daj."
+        ukr: "Не «дайте швидко» як *Daj і не «можна мені» → *Możno mnie."
+        rus: "Не приказ *Daj и не «можно мне» → *Możno mnie kawa без Acc."
+        bel: "Не рэзкі *Daj і не калька «можна мне» без Poproszę + Acc."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -232,15 +234,15 @@ exercises:
 
   - id: ex-wk-02
     canonical_id: EX-A1-WK-SC-02
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
-    prompt: "Как спросить, есть ли чай?"
+    prompt: "Нужно узнать, есть ли чай в меню. Что сказать баристе?"
     options:
       - id: a
         text: Czy jest herbata?
       - id: b
-        text: Jest herbata, tak?
+        text: Herbata jest, no?
       - id: c
         text: Ty masz herbatę?
     correct_option_id: a
@@ -252,12 +254,12 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: "Czy jest…? — обычный вопрос о наличии."
-      incorrect: "Ty слишком свои; разговорный tag не заменяет czy."
+      correct: "Czy jest…? — обычный вопрос о наличии у стойки."
+      incorrect: "Разговорный tag или ty к персоналу — не сервисный регистр."
       l1:
-        ukr: "Тримайте Czy jest…?, не «ти маєш»."
-        rus: "Не используйте ty к персоналу; нужна формула Czy jest…?"
-        bel: "Не пераносьце «ці ёсць» у ty-форму да бара."
+        ukr: "Тримайте Czy jest…?, не «ти маєш» і не розмовний tag."
+        rus: "Не ty к баристе и не «есть же, да?» вместо Czy jest…?"
+        bel: "Не ty да бара і не размоўны tag замест Czy jest…?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -267,9 +269,48 @@ exercises:
       ai_assisted: true
     mini_check: false
 
+  - id: ex-wk-listen-01
+    canonical_id: EX-A1-WK-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте баристу. О чём вопрос?"
+    audio_text_pl: Dużą czy małą?
+    options:
+      - id: a
+        text: Он уточняет размер напитка.
+      - id: b
+        text: Он спрашивает, откуда вы.
+      - id: c
+        text: Он просит паспорт у окошка.
+    correct_option_id: a
+    concept_ids:
+      - GR-CAS-ACC-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Да: Dużą czy małą? — размер (большой / маленький)."
+      incorrect: "Это про размер кофе, не знакомство и не urząd."
+      l1:
+        ukr: "Слухайте пару dużą / małą — це розмір, не «звідки ви»."
+        rus: "Слышите размер напитка, не вопрос про имя и не документы."
+        bel: "Гэта памер напою, не прадстаўленне і не paszport."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Kawa przy barze / FN-A1-TRANS-01"
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-wk-03
     canonical_id: EX-A1-WK-SC-03
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Бариста спрашивает: «Kartą czy gotówką?» Что ответить?"
@@ -277,7 +318,7 @@ exercises:
       - id: a
         text: Kartą, proszę.
       - id: b
-        text: Na karcie.
+        text: Na karcie, proszę.
       - id: c
         text: Ja karta.
     correct_option_id: a
@@ -292,6 +333,10 @@ exercises:
     feedback:
       correct: "Kartą, proszę — творительный в формуле оплаты."
       incorrect: "Na karcie / Ja karta — кальки, не то, что говорят у стойки."
+      l1:
+        ukr: "Не «на карту / картою» → *Na karcie; потрібне Kartą (Ins)."
+        rus: "Не «на карте» → *Na karcie и не *Ja karta без творительного."
+        bel: "Не «на карту» і не *Ja karta — толькі Kartą, proszę."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -518,17 +563,17 @@ exercises:
 
   - id: ex-wk-10
     canonical_id: EX-A1-WK-SC-04
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
-    prompt: "Выберите правильную формулу заказа."
+    prompt: "Выберите правильную формулу заказа у стойки."
     options:
       - id: a
         text: Poproszę kawę.
       - id: b
         text: Poproszę kawa.
       - id: c
-        text: Ja chcę kawa.
+        text: Ja chcę kawa teraz.
     correct_option_id: a
     concept_ids:
       - GR-CAS-ACC-01
@@ -537,7 +582,11 @@ exercises:
     mini_check: true
     feedback:
       correct: "Poproszę kawę — Acc после Poproszę."
-      incorrect: "Kawa в именительном ломает заказ."
+      incorrect: "Именительный *kawa или калька «я хочу» ломают заказ у стойки."
+      l1:
+        ukr: "Не *Poproszę kawa і не «я хочу» → Ja chcę… замість Poproszę + Acc."
+        rus: "Не *Poproszę kawa и не «я хочу кофе» → Ja chcę kawa."
+        bel: "Не назоўны *kawa і не калька «я хачу»."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -545,6 +594,48 @@ exercises:
       sources:
         - "GP-A1-WK-POPROSZE-ACC"
       ai_assisted: true
+
+  - id: ex-wk-write-01
+    canonical_id: EX-A1-WK-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите целиком: {{gap1}} kawę latte. {{gap2}}, proszę."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - Poproszę
+          - poproszę
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - Kartą
+          - kartą
+        placeholder: "…"
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-QUANT-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+      - LEX-A1-MONEY
+    feedback:
+      correct: "Две рамки подряд: Poproszę… и Kartą, proszę."
+      incorrect: "Нужны Poproszę перед объектом и Kartą (творительный) для оплаты."
+      l1:
+        ukr: "Тримайте Poproszę + Acc і Kartą (Ins), не *Daj / *Na karcie."
+        rus: "Не пропускайте Poproszę и не пишите *karta / *na karcie."
+        bel: "Дзве цэлыя формулы: Poproszę… / Kartą, proszę."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "FN-A1-TRANS-01 productive micro-task"
+      ai_assisted: true
+    mini_check: false
 
 mini_check:
   exercise_ids:
@@ -556,13 +647,13 @@ mini_check:
     - GR-NUM-MONEY-01
     - PRAG-PAN-01
 result_metadata:
-  title_ru: Итог урока
+  title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете заказать напиток, уточнить наличие
-    и оплатить заказ в коротком диалоге у стойки (DRAFT preview).
+    и оплатить у стойки на pan/pani (черновик, внутренний просмотр).
   retry_ru: >
-    Повторите Poproszę + Acc, Czy jest…? и Kartą, proszę, затем пройдите
-    короткую проверку снова.
+    Ещё раз Poproszę + Acc, Czy jest…? и Kartą, proszę — потом короткая
+    проверка снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-TRANS-01
@@ -581,6 +672,7 @@ provenance:
     - "Curriculum links: SCN-A1-FOOD-01, FN-A1-TRANS-01, LEX-A1-SERVICE"
   ai_assisted: true
   notes: >
-    Wave 3 v4 — speaking_practice at bar; DRAFT — not JPJO-approved.
-    reviewer_id null (no fake review evidence).
+    Wave 5 deepen v5 — adult distractors, assessed listening (TTS interim),
+    productive dual gap, distinct UK/BEL/RU L1 traps. DRAFT — not JPJO-approved,
+    not published. reviewer_id is null (no fake review evidence).
 visibility: internal_preview_only

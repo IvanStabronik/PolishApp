@@ -58,6 +58,8 @@ describe("learner exercise DTO whitelist", () => {
         "items",
         "textWithGaps",
         "gapCount",
+        "hasTtsStimulus",
+        "audioUrl",
         "__learnerSafe",
       ].sort(),
     );

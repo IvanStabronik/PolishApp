@@ -1,17 +1,17 @@
 kind: lesson
 canonical_id: LES-A1-WS-01
 slug: zakupy-przy-kasie
-version: 4
+version: 5
 status: DRAFT
 title_pl: Zakupy przy kasie
 sort_order: 1
 situation_ru: >
-  Вы у кассы в небольшом магазине в Польше. Нужны хлеб и молоко: назвать
-  товары, количество, спросить цену и выбрать оплату. Кассир — взрослый
-  незнакомец; речь спокойная, без суеты.
+  У кассы в небольшом магазине в Польше: хлеб и молоко. Назвать товары,
+  количество, спросить цену, оплатить. Кассир — взрослый незнакомец;
+  без ty и без резкого *Daj.
 objective_ru: >
   Назвать товар и количество, спросить Ile to kosztuje?, подтвердить оплату
-  и поблагодарить — на pan/pani, не на ty к кассиру.
+  kartą и поблагодарить — на pan/pani.
 curriculum_links:
   scenarios:
     - SCN-A1-SHOP-01
@@ -180,6 +180,7 @@ steps:
       - ex-ws-06
       - ex-ws-07
       - ex-ws-08
+      - ex-ws-write-01
   - id: step-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -192,15 +193,15 @@ steps:
 exercises:
   - id: ex-ws-01
     canonical_id: EX-A1-WS-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
-    prompt: "У кассы. Как вежливо назвать товар?"
+    prompt: "У кассы, первый контакт. Как спокойно назвать товар?"
     options:
       - id: a
         text: Poproszę ten chleb.
       - id: b
-        text: Daj chleb.
+        text: Daj chleb, szybko!
       - id: c
         text: Ja chcę chleb teraz!
     correct_option_id: a
@@ -214,11 +215,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Poproszę ten chleb — спокойный выбор + Acc."
-      incorrect: "Daj / резкий приказ — слишком грубо у кассы."
+      incorrect: "Daj… szybko / резкий приказ — слишком грубо у кассы."
       l1:
-        ukr: "Не ставте «дайте» як *Daj до касира."
-        rus: "Не используйте приказ без Poproszę."
-        bel: "Трымайце Poproszę, не рэзкі *Daj."
+        ukr: "Не «дайте швидко» як *Daj і не «я хочу» без Poproszę."
+        rus: "Не приказ *Daj и не «я хочу сейчас» вместо Poproszę."
+        bel: "Трымайце Poproszę, не рэзкі *Daj / Ja chcę."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -269,10 +270,10 @@ exercises:
 
   - id: ex-ws-02
     canonical_id: EX-A1-WS-SC-02
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
-    prompt: "Как спросить цену?"
+    prompt: "Как спросить цену у кассы — спокойно, на pan/pani?"
     options:
       - id: a
         text: Ile to kosztuje?
@@ -292,6 +293,10 @@ exercises:
     feedback:
       correct: "Ile to kosztuje? — обычный вопрос о цене."
       incorrect: "L1-калька или ty к кассиру — не то, что говорят у кассы."
+      l1:
+        ukr: "Не *Skolko / skilky і не ty да касира — Ile to kosztuje?"
+        rus: "Не *Skolko stoit и не ty — только Ile to kosztuje?"
+        bel: "Не калька «колькі» і не ty — Ile to kosztuje?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -303,7 +308,7 @@ exercises:
 
   - id: ex-ws-03
     canonical_id: EX-A1-WS-SC-03
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Как сказать, что платите картой?"
@@ -325,6 +330,10 @@ exercises:
     feedback:
       correct: "Płacę kartą — творительный в формуле оплаты."
       incorrect: "Karta / na karcie — кальки, не сервисная формула."
+      l1:
+        ukr: "Kartą (Ins), не *karta / *na karcie."
+        rus: "Творительный kartą — не *karta и не «на карте»."
+        bel: "Płacę kartą — не *Na karcie."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -546,10 +555,10 @@ exercises:
 
   - id: ex-ws-10
     canonical_id: EX-A1-WS-SC-04
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
-    prompt: "Выберите корректный вопрос о цене."
+    prompt: "Выберите корректный вопрос о цене у кассы."
     options:
       - id: a
         text: Ile to kosztuje?
@@ -566,6 +575,10 @@ exercises:
     feedback:
       correct: "Ile to kosztuje? — готовая рамка."
       incorrect: "Инфинитив или калька ломают вопрос о цене."
+      l1:
+        ukr: "Не інфінітив *kosztować і не «яка ціна» → Co cena?"
+        rus: "Не *Ile to kosztować и не *Co cena."
+        bel: "Толькі Ile to kosztuje? — не калька."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -573,6 +586,46 @@ exercises:
       sources:
         - "GP-A1-WS-CENA-ILOSC"
       ai_assisted: true
+
+  - id: ex-ws-write-01
+    canonical_id: EX-A1-WS-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: Ile to {{gap1}}? Płacę {{gap2}}."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - kosztuje
+          - Kosztuje
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - kartą
+          - gotówką
+        placeholder: "…"
+    concept_ids:
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-QUANT-01
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-MONEY
+    feedback:
+      correct: "Две рамки: Ile to kosztuje? и Płacę kartą / gotówką."
+      incorrect: "Нужны kosztuje и творительный kartą или gotówką."
+      l1:
+        ukr: "kosztuje + kartą (Ins) — не *stoit / *na karcie."
+        rus: "Не *stoit и не *karta — kosztuje + kartą."
+        bel: "Дзве формулы: kosztuje / kartą."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "FN-A1-QUANT-01 productive dual gap"
+      ai_assisted: true
+    mini_check: false
 
 mini_check:
   exercise_ids:
@@ -584,13 +637,13 @@ mini_check:
     - GR-NUM-CARD-01
     - PRAG-PAN-01
 result_metadata:
-  title_ru: Итог урока
+  title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете назвать товар, количество
-    и цену и закрыть оплату у кассы (DRAFT preview).
+    и цену и закрыть оплату у кассы (черновик, внутренний просмотр).
   retry_ru: >
-    Повторите Poproszę…, Ile to kosztuje? и Płacę kartą, затем пройдите
-    короткую проверку снова.
+    Ещё раз Poproszę…, Ile to kosztuje? и Płacę kartą — потом короткая
+    проверка снова.
   evidence_skill: interaction
   linked_function_ids:
     - FN-A1-TRANS-01
@@ -609,8 +662,7 @@ provenance:
     - "Curriculum links: SCN-A1-SHOP-01, FN-A1-TRANS-01, FN-A1-QUANT-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Wave 4 v4 —
-    speaking_practice + assessed listening (TTS interim) at checkout; shorter UK/BEL
-    L1 notes retained. DRAFT — pending human review; not JPJO-approved, not
-    learner-published. No human reviewer assigned (reviewer_id: null).
+    Wave 5 deepen v5 — adult distractors, productive dual gap, distinct L1
+    traps; listening + speaking retained. DRAFT — not JPJO-approved, not
+    learner-published. reviewer_id null (no fake review evidence).
 visibility: internal_preview_only

@@ -15,6 +15,10 @@ import { loadContinueLearning } from "@/modules/learning/continue-learning";
 import { Link } from "@/i18n/navigation";
 import { LinkButton } from "@/components/ui/link-button";
 import { ReportProblemButton } from "@/components/feedback/report-problem-button";
+import {
+  humanConceptLabel,
+  type ConceptLabelLocale,
+} from "@/lib/content/concept-labels";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -33,6 +37,8 @@ export default async function DailyPlanPage({ params }: Props) {
   const scope = canAccessDraftContent(accessCtx) ? "preview" : "live";
   const snapshot = await loadContinueLearning(session.user.id, accessCtx, scope);
   const plan = snapshot.dailyPlan;
+  const labelLocale: ConceptLabelLocale =
+    locale === "uk" || locale === "pl" || locale === "ru" ? locale : "ru";
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -58,6 +64,15 @@ export default async function DailyPlanPage({ params }: Props) {
                 "href" in item && typeof item.href === "string"
                   ? item.href
                   : null;
+              const conceptId =
+                item.kind === "weak_concept"
+                  ? item.conceptCanonicalId
+                  : item.kind === "error_review"
+                    ? item.conceptCanonicalId
+                    : null;
+              const conceptLabel = conceptId
+                ? humanConceptLabel(conceptId, labelLocale)
+                : null;
               return (
                 <li
                   key={`${item.kind}-${i}`}
@@ -72,6 +87,14 @@ export default async function DailyPlanPage({ params }: Props) {
                     <p className="m-0 font-medium text-[var(--color-ink)]">
                       {t(`planReason.${item.reasonKey}`)}
                     </p>
+                    {conceptLabel ? (
+                      <p
+                        className="m-0 mt-1 text-sm text-[var(--color-ink-soft)]"
+                        data-testid="plan-concept-label"
+                      >
+                        {conceptLabel}
+                      </p>
+                    ) : null}
                     <p className="m-0 mt-1 text-sm text-[var(--color-graphite)]">
                       {item.minutes} min
                     </p>
