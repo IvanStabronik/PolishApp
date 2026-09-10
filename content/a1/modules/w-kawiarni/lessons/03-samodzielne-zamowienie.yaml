@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-03
 slug: samodzielne-zamowienie
-version: 5
+version: 6
 status: DRAFT
 title_pl: Samodzielne zamówienie
 sort_order: 3
@@ -268,9 +268,9 @@ exercises:
       - id: a
         text: Уточняет начинку канапки.
       - id: b
-        text: Спрашивает, откуда вы.
+        text: Уточняет размер кофе (dużą czy małą).
       - id: c
-        text: Называет номер okienka в urzędzie.
+        text: Спрашивает способ оплаты (kartą czy gotówką).
     correct_option_id: a
     concept_ids:
       - GR-PRO-DEM-01
@@ -282,11 +282,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Да: z serem / z szynką — выбор начинки."
-      incorrect: "Это про канапку, не знакомство и не urząd."
+      incorrect: "Это начинка канапки, не размер кофе и не оплата."
       l1:
-        ukr: "Слухайте пару z serem / z szynką — начинка, не імʼя."
-        rus: "Слышите начинку канапки, не skąd и не документы."
-        bel: "Гэта начынка, не прадстаўленне і не okienko."
+        ukr: "Слухайте z serem / z szynką — начинка, не rozmiar / płatność."
+        rus: "Слышите начинку, не размер напитка и не kartą."
+        bel: "Гэта начынка, не памер кавы і не аплата."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -579,6 +579,4 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Wave 5 deepen v5 — listening seed, productive dual gap, adult distractors,
-    distinct L1 traps. DRAFT — not JPJO-approved, not published. reviewer_id null.
-visibility: internal_preview_only
+    Wave 6 v6 — hard same-scenario listening foils (near-minimal café distractors). DRAFT — not JPJO-approved, not learner-published. reviewer_id null.

@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-03
 slug: samodzielne-zakupy
-version: 3
+version: 4
 status: DRAFT
 title_pl: Samodzielne zakupy
 sort_order: 3
@@ -146,6 +146,16 @@ steps:
   - id: step-l3-key-lines
     kind: key_lines
     title_ru: Важные реплики
+
+  - id: step-l3-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите список, подтверждение и просьбу о чеке вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Poproszę ten chleb, mleko i trzy bułki.
+      - Tak, jedno.
+      - Czy mogę dostać paragon?
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -159,10 +169,12 @@ steps:
     exercise_ids:
       - ex-ws-l3-01
       - ex-ws-l3-02
+      - ex-ws-l3-listen-01
       - ex-ws-l3-03
       - ex-ws-l3-04
       - ex-ws-l3-05
       - ex-ws-l3-06
+      - ex-ws-l3-write-01
   - id: step-l3-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -200,7 +212,7 @@ exercises:
       - id: a
         text: Poproszę chleb, mleko i trzy bułki.
       - id: b
-        text: Chleb mleko trzy.
+        text: Chleb, mleko, trzy — bez Poproszę.
       - id: c
         text: Daj wszystko.
     correct_option_id: a
@@ -362,8 +374,90 @@ exercises:
       - id: b
         text: Tak, jeden.
       - id: c
-        text: Ty wiesz.
+        text: Ty wiesz, ile trzeba.
     correct_option_id: a
+
+  - id: ex-ws-l3-listen-01
+    canonical_id: EX-A1-WS-L3-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте кассира. О чём вопрос?"
+    audio_text_pl: Jedno mleko?
+    options:
+      - id: a
+        text: Уточняет количество молока.
+      - id: b
+        text: Называет итоговую сумму (Razem…).
+      - id: c
+        text: Спрашивает, нужна ли torba.
+    correct_option_id: a
+    concept_ids:
+      - GR-NUM-CARD-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-QUANT-01
+      - FN-A1-CONFIRM-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+    feedback:
+      correct: "Да: Jedno mleko? — уточнение количества."
+      incorrect: "Это количество mleko, не сумма и не torba."
+      l1:
+        ukr: "Слухайте jedno — кількість, не Razem і не torba."
+        rus: "Слышите количество, не итог и не пакет."
+        bel: "Гэта колькасць mleko, не сума і не torba."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Samodzielne zakupy / FN-A1-QUANT-01"
+      ai_assisted: true
+    mini_check: false
+
+
+  - id: ex-ws-l3-write-01
+    canonical_id: EX-A1-WS-L3-GF-05
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: I {{gap1}} torbę, proszę. Płacę {{gap2}}."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - jeszcze
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - kartą
+          - gotówką
+        placeholder: "…"
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-NUM-MONEY-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-CONFIRM-01
+    lex_bundle_ids:
+      - LEX-A1-SERVICE
+      - LEX-A1-MONEY
+    feedback:
+      correct: "Две рамки: I jeszcze… и Płacę kartą / gotówką."
+      incorrect: "Нужны jeszcze и творительный kartą или gotówką."
+      l1:
+        ukr: "I jeszcze… + kartą (Ins) — не *Daj і не *na karcie."
+        rus: "Не *ещё без jeszcze и не *karta вместо kartą."
+        bel: "Jeszcze + kartą — дзве формулы, не калька."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "FN-A1-TRANS-01 productive dual gap"
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-ws-l3-07
     canonical_id: EX-A1-WS-L3-MC-07
     version: 1
@@ -471,8 +565,4 @@ provenance:
       LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
-    shorter UK/BEL L1 notes on full-checkout traps; adult RU chrome retained. DRAFT —
-    pending human review; not JPJO-approved, not learner-published.
-    No human reviewer assigned (reviewer_id: null).
-visibility: internal_preview_only
+    Wave 6 deepen v4 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).

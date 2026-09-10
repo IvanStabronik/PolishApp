@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-03
 slug: samodzielna-podroz
-version: 3
+version: 4
 status: DRAFT
 title_pl: Samodzielna podróż
 sort_order: 3
@@ -147,6 +147,16 @@ steps:
   - id: step-l3-key-lines
     kind: key_lines
     title_ru: Важные реплики
+
+  - id: step-l3-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите цепочку поездки вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Przepraszam, gdzie jest przystanek tramwajowy?
+      - Poproszę bilet na tramwaj.
+      - Na którym przystanku mam wysiąść?
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -160,10 +170,12 @@ steps:
     exercise_ids:
       - ex-dt-l3-01
       - ex-dt-l3-02
+      - ex-dt-l3-listen-01
       - ex-dt-l3-03
       - ex-dt-l3-04
       - ex-dt-l3-05
       - ex-dt-l3-06
+      - ex-dt-l3-write-01
   - id: step-l3-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -207,7 +219,7 @@ exercises:
       - id: b
         text: Ej, przystanek gdzie?
       - id: c
-        text: Ty pokaż przystanek.
+        text: Ty mi pokaż przystanek.
     correct_option_id: a
   - id: ex-dt-l3-02
     canonical_id: EX-A1-DT-L3-MC-02
@@ -377,6 +389,86 @@ exercises:
       - id: c
         text: Cześć.
     correct_option_id: a
+
+  - id: ex-dt-l3-listen-01
+    canonical_id: EX-A1-DT-L3-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте продавца. Что он сказал?"
+    audio_text_pl: Na piątym.
+    options:
+      - id: a
+        text: Назвал остановку выхода.
+      - id: b
+        text: Назвал цену билета.
+      - id: c
+        text: Подтвердил, что трамвай едет do centrum.
+    correct_option_id: a
+    concept_ids:
+      - GR-MOT-BASE-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-DIRECT-01
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Да: Na piątym — порядковый номер остановки выхода."
+      incorrect: "Это выход, не цена билета и не подтверждение линии."
+      l1:
+        ukr: "Слухайте na piątym — вихід, не cztery złote."
+        rus: "Слышите номер остановки, не цену и не «tak, jedzie»."
+        bel: "Гэта прыпынак выхаду, не цана і не лінія."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Samodzielna podróż / FN-A1-DIRECT-01"
+      ai_assisted: true
+    mini_check: false
+
+
+  - id: ex-dt-l3-write-01
+    canonical_id: EX-A1-DT-L3-GF-05
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: Poproszę bilet {{gap1}} tramwaj. Czy tramwaj jedzie {{gap2}} centrum?"
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - na
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - do
+        placeholder: "…"
+    concept_ids:
+      - GR-PREP-DO-NA-01
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-DIRECT-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Две рамки: bilet na… и jedzie do…."
+      incorrect: "Нужны na для билета и do для цели."
+      l1:
+        ukr: "Bilet na ≠ *do tramwaj; jedzie do ≠ *na centrum."
+        rus: "Не путайте na (билет) и do (цель)."
+        bel: "na для квітка, do для мэты — розныя рамкі."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "GR-PREP-DO-NA-01 productive dual gap"
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-dt-l3-07
     canonical_id: EX-A1-DT-L3-MC-07
     version: 1
@@ -484,8 +576,4 @@ provenance:
       LEX-A1-TRANSPORT, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
-    shorter UK/BEL L1 notes on solo-trip traps; adult RU chrome retained. DRAFT —
-    pending human review; not JPJO-approved, not learner-published.
-    No human reviewer assigned (reviewer_id: null).
-visibility: internal_preview_only
+    Wave 6 deepen v4 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).

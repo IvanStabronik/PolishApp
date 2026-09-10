@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-02
 slug: przystanki-i-czas-odjazdu
-version: 3
+version: 4
 status: DRAFT
 title_pl: Przystanki i czas odjazdu
 sort_order: 2
@@ -146,6 +146,16 @@ steps:
   - id: step-l2-key-lines
     kind: key_lines
     title_ru: Важные реплики
+
+  - id: step-l2-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите вопросы про линию, выход и время вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Który autobus jedzie do centrum?
+      - Na którym przystanku mam wysiąść?
+      - O której odjeżdża autobus?
   - id: step-l2-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -159,10 +169,12 @@ steps:
     exercise_ids:
       - ex-dt-l2-01
       - ex-dt-l2-02
+      - ex-dt-l2-listen-01
       - ex-dt-l2-03
       - ex-dt-l2-04
       - ex-dt-l2-05
       - ex-dt-l2-06
+      - ex-dt-l2-write-01
   - id: step-l2-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -206,7 +218,7 @@ exercises:
       - id: b
         text: Jaki autobus na centrum?
       - id: c
-        text: Ty jedziesz centrum?
+        text: Ty jedziesz do centrum?
     correct_option_id: a
   - id: ex-dt-l2-02
     canonical_id: EX-A1-DT-L2-MC-02
@@ -374,8 +386,88 @@ exercises:
       - id: b
         text: Na dziewięć.
       - id: c
-        text: Dziewięć ty.
+        text: Powiedz ty, o której.
     correct_option_id: a
+
+  - id: ex-dt-l2-listen-01
+    canonical_id: EX-A1-DT-L2-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте пассажира. Что он сказал?"
+    audio_text_pl: Na czwartym, przy poczcie.
+    options:
+      - id: a
+        text: Назвал остановку выхода и ориентир рядом.
+      - id: b
+        text: Назвал номер линии автобуса.
+      - id: c
+        text: Назвал время отправления.
+    correct_option_id: a
+    concept_ids:
+      - GR-MOT-BASE-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-DIRECT-01
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Да: номер остановки + przy poczcie."
+      incorrect: "Это выход с маршрута, не линия и не час отправления."
+      l1:
+        ukr: "Слухайте na czwartym + przy… — вихід, не numer linii."
+        rus: "Слышите остановку выхода, не номер автобуса и не O której…"
+        bel: "Гэта прыпынак выхаду, не лінія і не час."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Przystanki i czas odjazdu / FN-A1-DIRECT-01"
+      ai_assisted: true
+    mini_check: false
+
+
+  - id: ex-dt-l2-write-01
+    canonical_id: EX-A1-DT-L2-GF-05
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: Który autobus jedzie {{gap1}} centrum? O {{gap2}} odjeżdża autobus?"
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - do
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - której
+        placeholder: "…"
+    concept_ids:
+      - GR-PREP-DO-NA-01
+      - GR-TIME-EXPR-01
+    function_ids:
+      - FN-A1-DIRECT-01
+      - FN-A1-TIME-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Две рамки: do + Gen и O której…?"
+      incorrect: "Нужны do для цели и której в вопросе о времени."
+      l1:
+        ukr: "Не *na centrum і не *kiedy без O której…"
+        rus: "Не *na centrum вместо do; время — O której…?"
+        bel: "do + której — не калька «на цэнтр / калі»."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "FN-A1-DIRECT-01 / FN-A1-TIME-01 productive dual gap"
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-dt-l2-07
     canonical_id: EX-A1-DT-L2-MC-07
     version: 1
@@ -483,8 +575,4 @@ provenance:
       LEX-A1-TRANSPORT, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
-    shorter UK/BEL L1 notes on line, stop, and departure traps; adult RU chrome retained.
-    DRAFT — pending human review; not JPJO-approved, not learner-published.
-    No human reviewer assigned (reviewer_id: null).
-visibility: internal_preview_only
+    Wave 6 deepen v4 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).

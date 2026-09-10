@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-01
 slug: okienko-i-dokumenty
-version: 4
+version: 5
 status: DRAFT
 title_pl: Okienko i dokumenty
 sort_order: 1
@@ -184,6 +184,7 @@ steps:
       - ex-ur-06
       - ex-ur-07
       - ex-ur-08
+      - ex-ur-write-01
   - id: step-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -257,6 +258,10 @@ exercises:
     feedback:
       correct: "Oto + названные документы — понятная передача комплекта."
       incorrect: "Слишком разговорно или неясно — служащий не поймёт комплект."
+      l1:
+        ukr: "Oto + названі документи, не «тримай» / «папери»."
+        rus: "Нужно Oto + конкретные документы, не Trzymaj / papiery."
+        bel: "Oto + paszport/wniosek — не размоўнае Trzymaj."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -277,9 +282,9 @@ exercises:
       - id: a
         text: Понял и попросил ждать номер.
       - id: b
-        text: Спросил цену кофе.
+        text: Спросил, есть ли у вас документы.
       - id: c
-        text: Попрощался и закрыл окно.
+        text: Сказал, что не хватает formularza.
     correct_option_id: a
     concept_ids:
       - PRAG-PAN-01
@@ -291,11 +296,11 @@ exercises:
       - LEX-A1-URZAD
     feedback:
       correct: "Да: Rozumiem + proszę czekać na numer."
-      incorrect: "Это инструкция у окошка, не кафе и не прощание."
+      incorrect: "Это ожидание номера, не вопрос о документах и не Brakuje…"
       l1:
-        ukr: "Слухайте цілу рамку: rozumiem + czekać na numer."
-        rus: "Слышите подтверждение и ожидание номера — не цену и не Do widzenia."
-        bel: "Гэта інструкцыя ў okienku, не кава і не развітанне."
+        ukr: "Слухайте rozumiem + czekać na numer — не dokumenty / brakuje."
+        rus: "Слышите ожидание номера — не «есть ли документы» и не нехватку."
+        bel: "Гэта чаканне нумара, не пытанне пра дакументы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -522,6 +527,48 @@ exercises:
       ai_assisted: true
     mini_check: false
 
+
+  - id: ex-ur-write-01
+    canonical_id: EX-A1-UR-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: Przyszłam w {{gap1}} meldunku. {{gap2}} mój paszport i wniosek."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - sprawie
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - Oto
+          - oto
+        placeholder: "…"
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-TNS-PRS-01
+    function_ids:
+      - FN-A1-PURPOSE-01
+      - FN-A1-DOCS-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+      - LEX-A1-DOCS
+    feedback:
+      correct: "Две рамки: w sprawie… и Oto…."
+      incorrect: "Нужны sprawie и Oto перед документами."
+      l1:
+        ukr: "Не *w sprawa і не без Oto."
+        rus: "sprawie + Oto — не именительный и не без Oto."
+        bel: "sprawie + Oto — дзве формулы."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "FN-A1-PURPOSE-01 productive dual gap"
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-ur-09
     canonical_id: EX-A1-UR-OR-02
     version: 1
@@ -624,8 +671,4 @@ provenance:
     - "Curriculum links: SCN-A1-URZAD-01, FN-A1-PURPOSE-01, FN-A1-DOCS-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Wave 4 v4 —
-    speaking_practice + assessed listening (TTS interim) at okienko; shorter UK/BEL
-    L1 notes retained. DRAFT — pending human review; not JPJO-approved, not
-    learner-published. No human reviewer assigned (reviewer_id: null).
-visibility: internal_preview_only
+    Wave 6 deepen v5 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).

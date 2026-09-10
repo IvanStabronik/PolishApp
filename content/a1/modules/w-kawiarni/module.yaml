@@ -1,7 +1,7 @@
 kind: module
 canonical_id: MOD-A1-W-KAWIARNI
 slug: w-kawiarni
-version: 3
+version: 4
 status: DRAFT
 level: A1
 title_pl: W kawiarni
@@ -44,8 +44,4 @@ provenance:
     - "Common-knowledge Polish café order patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    Wave 5 deepen — L01–L03 listening seeds + adult distractors. DRAFT —
-    pending human review; not JPJO-approved, not learner-published.
-    reviewer_id null (no fake review evidence).
-visibility: internal_preview_only
-internal_preview_only: true
+    Wave 6 — hard same-scenario listening foils on L01–L03. DRAFT — not JPJO-approved, not learner-published. reviewer_id null.

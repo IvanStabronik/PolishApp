@@ -15,6 +15,10 @@ type Props = {
   /** Optional studio URL already known (no text leak). */
   audioUrl?: string | null;
   className?: string;
+  /** Fired once a play attempt successfully starts (play-gate for submit). */
+  onPlayed?: () => void;
+  /** Fired when this browser cannot play (gate must not soft-lock submit). */
+  onUnavailable?: () => void;
 };
 
 /**
@@ -26,6 +30,8 @@ export function ListeningAudioControl({
   exerciseId,
   audioUrl,
   className,
+  onPlayed,
+  onUnavailable,
 }: Props) {
   const t = useTranslations("learn");
   const [supported, setSupported] = useState(false);
@@ -33,8 +39,12 @@ export function ListeningAudioControl({
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    setSupported(Boolean(audioUrl) || isPolishTtsSupported());
+    const ok = Boolean(audioUrl) || isPolishTtsSupported();
+    setSupported(ok);
+    if (!ok) onUnavailable?.();
     return () => stopPolishAudio();
+    // Gate unlock once per stimulus identity; avoid re-firing on parent re-renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- onUnavailable is a notify-only callback
   }, [audioUrl]);
 
   if (!supported) return null;
@@ -54,6 +64,7 @@ export function ListeningAudioControl({
           onError: () => setPlaying(false),
         });
         setPlaying(ok);
+        if (ok) onPlayed?.();
         return;
       }
       const res = await fetch("/api/learning/listening-stimulus", {
@@ -78,6 +89,7 @@ export function ListeningAudioControl({
         onError: () => setPlaying(false),
       });
       setPlaying(ok);
+      if (ok) onPlayed?.();
     } finally {
       setBusy(false);
     }

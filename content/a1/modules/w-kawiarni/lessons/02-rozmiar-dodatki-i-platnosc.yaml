@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-02
 slug: rozmiar-dodatki-i-platnosc
-version: 5
+version: 6
 status: DRAFT
 title_pl: Rozmiar, dodatki i płatność
 sort_order: 2
@@ -263,9 +263,9 @@ exercises:
       - id: a
         text: Спрашивает про добавку молока.
       - id: b
-        text: Называет цену покупки.
+        text: Уточняет размер (dużą czy małą).
       - id: c
-        text: Просит показать bilety.
+        text: Спрашивает, это всё (to wszystko).
     correct_option_id: a
     concept_ids:
       - GR-PRO-DEM-01
@@ -277,11 +277,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Да: Z mlekiem czy bez mleka? — про молоко."
-      incorrect: "Это про добавку, не цена и не билет."
+      incorrect: "Это добавка молока, не размер и не «это всё»."
       l1:
-        ukr: "Слухайте пару z mlekiem / bez mleka — добавка, не ціна."
-        rus: "Слышите вопрос про молоко, не сумму и не транспорт."
-        bel: "Гэта дабаўка да кавы, не цана і не білет."
+        ukr: "Слухайте z mlekiem / bez mleka — добавка, не rozmiar / to wszystko."
+        rus: "Слышите молоко, не размер и не закрытие заказа."
+        bel: "Гэта дабаўка, не памер і не to wszystko."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -570,6 +570,4 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Wave 5 deepen v5 — listening seed, productive dual gap, adult distractors,
-    distinct L1 traps. DRAFT — not JPJO-approved, not published. reviewer_id null.
-visibility: internal_preview_only
+    Wave 6 v6 — hard same-scenario listening foils (near-minimal café distractors). DRAFT — not JPJO-approved, not learner-published. reviewer_id null.

@@ -289,7 +289,7 @@ exercises:
       - LEX-A1-IDENTITY
     feedback:
       correct: "Да: Nazywam się… A pani? — имя и встречный вопрос."
-      incorrect: "Это представление, не прощание и не заказ в кафе."
+      incorrect: "Это представление (Nazywam się…), не прощание и не вопрос «откуда»."
       l1:
         ukr: "Слухайте цілу рамку Nazywam się… A pani? — не окремі слова."
         rus: "Слышите Nazywam się + A pani? — не Do widzenia и не заказ."

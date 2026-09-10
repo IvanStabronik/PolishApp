@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-03
 slug: samodzielna-wizyta-w-urzedzie
-version: 3
+version: 4
 status: DRAFT
 title_pl: Samodzielna wizyta w urzędzie
 sort_order: 3
@@ -142,6 +142,16 @@ steps:
   - id: step-l3-key-lines
     kind: key_lines
     title_ru: Важные реплики
+
+  - id: step-l3-speaking
+    kind: speaking_practice
+    title_ru: Вслух
+    prompt_ru: >
+      Скажите цепочку визита вслух. Распознавание — ориентир, не экзамен.
+    lines_pl:
+      - Przyszłam w sprawie meldunku.
+      - Nazywam się Svitlana Koval.
+      - Oto paszport, wniosek i zdjęcie.
   - id: step-l3-pan-pani
     kind: pan_pani
     title_ru: Pan / pani
@@ -155,10 +165,12 @@ steps:
     exercise_ids:
       - ex-ur-l3-01
       - ex-ur-l3-02
+      - ex-ur-l3-listen-01
       - ex-ur-l3-03
       - ex-ur-l3-04
       - ex-ur-l3-05
       - ex-ur-l3-06
+      - ex-ur-l3-write-01
   - id: step-l3-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -360,6 +372,88 @@ exercises:
       - id: c
         text: Ja nie czekać.
     correct_option_id: a
+
+  - id: ex-ur-l3-listen-01
+    canonical_id: EX-A1-UR-L3-LIS-01
+    version: 1
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте служащего. Что он сказал?"
+    audio_text_pl: Przy okienku numer cztery.
+    options:
+      - id: a
+        text: Указал, где ждать.
+      - id: b
+        text: Сказал, что документы kompletne.
+      - id: c
+        text: Попросил заполнить formularz.
+    correct_option_id: a
+    concept_ids:
+      - PRAG-PAN-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-CONFIRM-01
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+    feedback:
+      correct: "Да: Przy okienku numer… — место ожидания."
+      incorrect: "Это где ждать, не комплектность и не просьба заполнить бланк."
+      l1:
+        ukr: "Слухайте przy okienku — де чекати, не kompletne / formularz."
+        rus: "Слышите место ожидания, не «kompletne» и не бланк."
+        bel: "Гэта месца чакання, не камплект і не бланк."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Samodzielna wizyta / FN-A1-CONFIRM-01"
+      ai_assisted: true
+    mini_check: false
+
+
+  - id: ex-ur-l3-write-01
+    canonical_id: EX-A1-UR-L3-GF-05
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: Przyszłam w {{gap1}} meldunku. {{gap2}} paszport, wniosek i zdjęcie."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - sprawie
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - Oto
+          - oto
+        placeholder: "…"
+    concept_ids:
+      - GR-CAS-ACC-01
+      - GR-TNS-PRS-01
+    function_ids:
+      - FN-A1-PURPOSE-01
+      - FN-A1-DOCS-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+      - LEX-A1-DOCS
+    feedback:
+      correct: "Две рамки: w sprawie… и Oto…."
+      incorrect: "Нужны sprawie и Oto перед комплектом."
+      l1:
+        ukr: "Не *w sprawa і не без Oto перед документами."
+        rus: "w sprawie (не *sprawa) + Oto… для комплекта."
+        bel: "sprawie + Oto — не назоўны і не без Oto."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "FN-A1-PURPOSE-01 / FN-A1-DOCS-01 productive dual gap"
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-ur-l3-07
     canonical_id: EX-A1-UR-L3-MC-07
     version: 1
@@ -467,8 +561,4 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
-    shorter UK/BEL L1 notes on full-visit chain traps; adult RU chrome retained.
-    DRAFT — pending human review; not JPJO-approved, not learner-published.
-    No human reviewer assigned (reviewer_id: null).
-visibility: internal_preview_only
+    Wave 6 deepen v4 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).

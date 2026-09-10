@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-01
 slug: zakupy-przy-kasie
-version: 5
+version: 6
 status: DRAFT
 title_pl: Zakupy przy kasie
 sort_order: 1
@@ -240,9 +240,9 @@ exercises:
       - id: a
         text: Назвал цену покупки.
       - id: b
-        text: Спросил, откуда вы.
+        text: Спросил количество mleka (jedno czy dwa).
       - id: c
-        text: Попросил паспорт у окошка.
+        text: Спросил, нужна ли torba.
     correct_option_id: a
     concept_ids:
       - GR-NUM-MONEY-01
@@ -254,11 +254,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Да: это сумма — złotych и groszy."
-      incorrect: "Это цена у кассы, не знакомство и не urząd."
+      incorrect: "Это сумма (złotych/groszy), не количество и не torba."
       l1:
-        ukr: "Слухайте цілу суму (złotych / groszy), не окремі слова."
-        rus: "Слышите цену целиком — не вопрос про имя и не документы."
-        bel: "Гэта цана ў касе, не прадстаўленне і не paszport."
+        ukr: "Слухайте цілу суму, не jedno mleko і не torba."
+        rus: "Слышите цену целиком — не количество и не пакет."
+        bel: "Гэта цана, не колькасць і не torba."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -662,7 +662,4 @@ provenance:
     - "Curriculum links: SCN-A1-SHOP-01, FN-A1-TRANS-01, FN-A1-QUANT-01"
   ai_assisted: true
   notes: >
-    Wave 5 deepen v5 — adult distractors, productive dual gap, distinct L1
-    traps; listening + speaking retained. DRAFT — not JPJO-approved, not
-    learner-published. reviewer_id null (no fake review evidence).
-visibility: internal_preview_only
+    Wave 6 v6 — hard same-scenario listening foils at checkout. DRAFT — not JPJO-approved, not learner-published. reviewer_id null.

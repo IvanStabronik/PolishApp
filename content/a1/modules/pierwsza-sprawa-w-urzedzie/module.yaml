@@ -1,7 +1,7 @@
 kind: module
 canonical_id: MOD-A1-PIERWSZA-SPRAWA-W-URZEDZIE
 slug: pierwsza-sprawa-w-urzedzie
-version: 2
+version: 3
 status: DRAFT
 level: A1
 title_pl: Pierwsza sprawa w urzędzie
@@ -46,8 +46,4 @@ provenance:
     - "Common-knowledge Polish institutional register patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
-    adult RU situation/objective. DRAFT — pending human review; not JPJO-approved,
-    not learner-published. No human reviewer assigned (reviewer_id: null).
-visibility: internal_preview_only
-internal_preview_only: true
+    Wave 6 — L01–L03 deepen (speaking, listening on L02/L03, dual gaps, hard foils). DRAFT — not JPJO-approved, not learner-published. reviewer_id null.

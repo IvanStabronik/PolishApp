@@ -51,6 +51,7 @@ export function ExercisePlayer({
   );
   const [result, setResult] = useState<EvaluationResultDto | null>(null);
   const [persistError, setPersistError] = useState<string | null>(null);
+  const [listeningPlayed, setListeningPlayed] = useState(false);
 
   function buildAnswer() {
     switch (exercise.type) {
@@ -70,8 +71,10 @@ export function ExercisePlayer({
   function canSubmit() {
     switch (exercise.type) {
       case "single_choice":
-      case "listening":
         return selected !== null;
+      case "listening":
+        // Play-gate: must start audio before submit (blocks skip-audio gaming).
+        return selected !== null && listeningPlayed;
       case "multiple_choice":
         return multiSelected.length > 0;
       case "gap_fill":
@@ -196,12 +199,22 @@ export function ExercisePlayer({
                 exerciseId={exercise.id}
                 audioUrl={exercise.audioUrl}
                 className="min-h-10 px-4 text-base"
+                onPlayed={() => setListeningPlayed(true)}
+                onUnavailable={() => setListeningPlayed(true)}
               />
             ) : null}
             <span className="text-xs text-[var(--color-graphite-muted)]">
               {t("listeningReplayOk")}
             </span>
           </div>
+          {!listeningPlayed && !result ? (
+            <p
+              className="m-0 text-xs text-[var(--color-graphite-muted)]"
+              data-testid="listening-play-gate-hint"
+            >
+              {t("listeningPlayBeforeSubmit")}
+            </p>
+          ) : null}
         </div>
       ) : null}
 

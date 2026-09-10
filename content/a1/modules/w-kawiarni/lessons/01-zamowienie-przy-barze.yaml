@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-01
 slug: zamowienie-przy-barze
-version: 5
+version: 6
 status: DRAFT
 title_pl: Zamówienie przy barze
 sort_order: 1
@@ -280,9 +280,9 @@ exercises:
       - id: a
         text: Он уточняет размер напитка.
       - id: b
-        text: Он спрашивает, откуда вы.
+        text: Он спрашивает, платить kartą или gotówką.
       - id: c
-        text: Он просит паспорт у окошка.
+        text: Он спрашивает, есть ли ещё herbata.
     correct_option_id: a
     concept_ids:
       - GR-CAS-ACC-01
@@ -294,11 +294,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Да: Dużą czy małą? — размер (большой / маленький)."
-      incorrect: "Это про размер кофе, не знакомство и не urząd."
+      incorrect: "Это размер (dużą/małą), не оплата и не вопрос о наличии."
       l1:
-        ukr: "Слухайте пару dużą / małą — це розмір, не «звідки ви»."
-        rus: "Слышите размер напитка, не вопрос про имя и не документы."
-        bel: "Гэта памер напою, не прадстаўленне і не paszport."
+        ukr: "Слухайте dużą / małą — розмір, не kartą і не Czy jest…?"
+        rus: "Слышите размер, не способ оплаты и не наличие в меню."
+        bel: "Гэта памер напою, не аплата і не наяўнасць."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -672,7 +672,4 @@ provenance:
     - "Curriculum links: SCN-A1-FOOD-01, FN-A1-TRANS-01, LEX-A1-SERVICE"
   ai_assisted: true
   notes: >
-    Wave 5 deepen v5 — adult distractors, assessed listening (TTS interim),
-    productive dual gap, distinct UK/BEL/RU L1 traps. DRAFT — not JPJO-approved,
-    not published. reviewer_id is null (no fake review evidence).
-visibility: internal_preview_only
+    Wave 6 v6 — hard same-scenario listening foils (near-minimal café distractors). DRAFT — not JPJO-approved, not learner-published. reviewer_id null.

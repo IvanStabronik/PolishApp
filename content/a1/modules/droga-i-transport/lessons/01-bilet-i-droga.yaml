@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-01
 slug: bilet-i-droga
-version: 4
+version: 5
 status: DRAFT
 title_pl: Bilet i droga
 sort_order: 1
@@ -184,6 +184,7 @@ steps:
       - ex-dt-06
       - ex-dt-07
       - ex-dt-08
+      - ex-dt-write-01
   - id: step-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -256,6 +257,10 @@ exercises:
     feedback:
       correct: "Dojechać do + Gen — обычная рамка направления."
       incorrect: "Na dworzec / w dworzec — типичная путаница предлогов."
+      l1:
+        ukr: "do dworca, не *на dworzec / *w dworzec."
+        rus: "Не *na dworzec — нужно do dworca."
+        bel: "do + Gen, не калька «на вакзал»."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -276,9 +281,9 @@ exercises:
       - id: a
         text: Назвал время отправления и цену билета.
       - id: b
-        text: Спросил имя и фамилию.
+        text: Дал только ориентир пути (prosto / w prawo).
       - id: c
-        text: Предложил кофе у стойки.
+        text: Спросил, куда вы едете.
     correct_option_id: a
     concept_ids:
       - GR-TIME-EXPR-01
@@ -292,11 +297,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Да: za X minut + цена билета."
-      incorrect: "Это время и цена билета, не представление и не кафе."
+      incorrect: "Это отправление и цена билета, не ориентир пути и не вопрос «куда»."
       l1:
-        ukr: "Слухайте рамку za… minut + bilet… złote."
-        rus: "Слышите отправление и цену — не имя и не заказ кофе."
-        bel: "Гэта час адпраўлення і цана білета."
+        ukr: "Слухайте za… minut + złote — не prosto / dokąd."
+        rus: "Слышите время и цену — не prosto/w prawo и не «куда едете»."
+        bel: "Гэта час і цана білета, не арыенцір шляху."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -517,6 +522,46 @@ exercises:
       ai_assisted: true
     mini_check: false
 
+
+  - id: ex-dt-write-01
+    canonical_id: EX-A1-DT-GF-03
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: Jak dojechać {{gap1}} dworca? Poproszę bilet {{gap2}} autobus."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - do
+        placeholder: "…"
+      - id: gap2
+        accepted_answers:
+          - na
+        placeholder: "…"
+    concept_ids:
+      - GR-PREP-DO-NA-01
+      - GR-CAS-ACC-01
+    function_ids:
+      - FN-A1-DIRECT-01
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Две рамки: dojechać do… и bilet na…."
+      incorrect: "Нужны do для цели и na для билета."
+      l1:
+        ukr: "do dworca ≠ *na dworzec; bilet na ≠ *do autobus."
+        rus: "Не путайте do (направление) и na (билет)."
+        bel: "do для мэты, na для квітка — розныя рамкі."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "GR-PREP-DO-NA-01 productive dual gap"
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-dt-09
     canonical_id: EX-A1-DT-OR-02
     version: 1
@@ -618,9 +663,4 @@ provenance:
     - "Curriculum links: SCN-A1-DIRECTIONS-01, SCN-A1-TICKET-01, FN-A1-DIRECT-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Wave 4 v4 —
-    speaking_practice + assessed listening (TTS interim) for ticket/directions;
-    shorter UK/BEL L1 notes retained. DRAFT — pending human review; not
-    JPJO-approved, not learner-published. No human reviewer assigned
-    (reviewer_id: null).
-visibility: internal_preview_only
+    Wave 6 deepen v5 — speaking + assessed listening (TTS interim), productive dual gap, hard same-scenario listening foils, distinct UK/BEL/RU L1. DRAFT — not JPJO-approved, not learner-published. reviewer_id null (no fake review evidence).
