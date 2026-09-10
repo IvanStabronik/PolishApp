@@ -5,6 +5,8 @@ Ruthless path to unlock what code cannot: live HTTPS + independent JPJO.
 
 Related: `web/.env.production.example`, `.github/workflows/deploy.yml`, [https-deploy-dry-run.md](./https-deploy-dry-run.md), [local-closed-beta.md](./local-closed-beta.md), [FOUNDER-UNBLOCK-NOW.md](./FOUNDER-UNBLOCK-NOW.md), [pierwsze-spotkanie-jpjo-hall-packet.md](../reviews/pierwsze-spotkanie-jpjo-hall-packet.md).
 
+**Interactive path:** `pwsh -File scripts/founder-unblock.ps1` (optional: `bash scripts/founder-unblock.sh`). Paste its Done/Blocked output back into chat; then mark matching rows here only after real curls succeed.
+
 Mark each row **Done** or **Blocked**. Empty secret = Blocked.
 
 ---

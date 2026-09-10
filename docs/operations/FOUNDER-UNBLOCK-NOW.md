@@ -2,11 +2,23 @@
 
 **Status (2026-09-10 probe):** GitHub Environment `private-beta` = **missing**. Repo secrets = **empty**. Railway CLI = **not installed**. `BASE_URL` = **unset**. Code cannot mint live HTTPS. No fake deploy.
 
-Do these steps once on Windows. Do **not** paste secret values into chat, tickets, or git.
+**Primary path (Windows):** run the interactive wizard — it walks only human-owned steps, prompts for each secret by name (never invents values), and prints Done/Blocked checkboxes to paste back into chat.
+
+```powershell
+cd D:\MyProjects\PolishApp
+pwsh -File scripts\founder-unblock.ps1
+# or: powershell -ExecutionPolicy Bypass -File scripts\founder-unblock.ps1
+```
+
+Optional (Git Bash / WSL / macOS): `bash scripts/founder-unblock.sh`
+
+Do **not** paste secret values into chat, tickets, or git. Related checklists: [external-unblock-wizard.md](./external-unblock-wizard.md), [https-deploy-dry-run.md](./https-deploy-dry-run.md).
 
 ---
 
-## 1) Railway project (15 min)
+## Manual fallback (if you prefer not to run the script)
+
+### 1) Railway project (15 min)
 
 1. Open https://railway.app → **New Project** → **Deploy from GitHub** → repo `PolishApp`.
 2. Add **Postgres** plugin; copy the Postgres connection URL (this is `DATABASE_URL`).
@@ -42,9 +54,7 @@ Paste each into Railway as `BETTER_AUTH_SECRET` / `INVITE_TOKEN_PEPPER` / `PRIVA
 6. Account → **Tokens** → create token → keep for GitHub.
 7. Service settings → copy **Service ID** → keep for GitHub.
 
----
-
-## 2) GitHub Environment `private-beta`
+### 2) GitHub Environment `private-beta`
 
 1. GitHub → repo → **Settings** → **Environments** → **New environment** → name exactly `private-beta`.
 2. Add **Environment secrets** (names must match):
@@ -63,9 +73,7 @@ Optional smoke later: `PROD_SMOKE_ADMIN_EMAIL` / `PROD_SMOKE_ADMIN_PASSWORD`.
 
 Do **not** invent values. Empty secret = deploy.yml fails closed.
 
----
-
-## 3) Dispatch deploy
+### 3) Dispatch deploy
 
 1. GitHub → **Actions** → workflow **Deploy private beta** → **Run workflow**.
 2. Inputs:
@@ -74,9 +82,7 @@ Do **not** invent values. Empty secret = deploy.yml fails closed.
    - `run_production_smoke` = false until smoke secrets exist
 3. Watch guard → migrate → deploy. Any missing secret stops the job — fix and re-run.
 
----
-
-## 4) Prove live HTTPS (PowerShell)
+### 4) Prove live HTTPS (PowerShell)
 
 ```powershell
 $BASE_URL = "https://YOUR_PRIVATE_BETA_HOST"   # no trailing slash
@@ -90,9 +96,7 @@ Then: create invite → accept → onboard → one lesson attempt persists.
 
 Mark Done rows in `docs/operations/external-unblock-wizard.md` only after those curls succeed.
 
----
-
-## 5) JPJO (parallel, human only)
+### 5) JPJO (parallel, human only)
 
 Packet: `docs/reviews/pierwsze-spotkanie-jpjo-hall-packet.md`  
 Status stays `NOT_STARTED` until a real reviewer opens it. AI must not APPROVE. No `PUBLISHED` until packet + DEC-016 gates.

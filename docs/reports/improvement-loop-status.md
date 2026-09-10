@@ -5,7 +5,13 @@
 **Wave 4 re-audit (honest):** ~**30 / 50** against `reference-quality-bar.md` (prior “34” was soft).  
 **Wave 5 estimate:** ~**32–33 / 50** — café listening + deepen + ops docs + stimulus harden; EXTERNAL wall unchanged.  
 **Wave 6 re-audit (honest):** ~**32.5 / 50** — CODE-DOABLE substance landed; further content/improve waves toward the bar are **diminishing-return waste** until EXTERNAL unlock. Never claim reference quality.  
-**Post–stop-rule micro-fixes (2026-09-10):** ~**33 / 50** — server play-proof + PS L02/L03 listening + foil fix. Still **EXTERNAL** until live HTTPS or JPJO. Not a marketed wave.
+**Post–stop-rule micro-fixes (2026-09-10):** ~**33 / 50** — server play-proof + PS L02/L03 listening + foil fix (`e7c7b1a`). Still **EXTERNAL** until live HTTPS or JPJO. Not a marketed wave.
+
+### Waiting on founder (EXTERNAL)
+
+**Blocked on human-owned steps only** — Railway / GitHub Environment `private-beta` secrets / live `BASE_URL` health·ready, and/or independent JPJO. Code cannot unlock this.
+
+**Run:** [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) (primary on Windows) — see [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Paste the wizard’s Done/Blocked block back into chat when finished. Do not invent secrets; do not claim HTTPS without curl 200.
 
 ### STOP RULE
 
@@ -15,12 +21,12 @@
 
 | Fix | Status |
 | --- | --- |
-| Server listening play evidence on attempt (HMAC `listeningPlayToken` from stimulus; unlock via `/api/learning/listening-play-unlock` when TTS unavailable) | **Done** — client gate alone was PARTIAL |
-| PS L02–L03 assessed listening + hard same-scenario foils; L01 café «сколько стоит кофе» giveaway removed | **Done** — still DRAFT |
-| Founder unblock one-pager | **Done** — [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) (probe: no `private-beta` env, no Railway CLI, no `BASE_URL`) |
+| Server listening play evidence on attempt (HMAC `listeningPlayToken` from stimulus; unlock via `/api/learning/listening-play-unlock` when TTS unavailable) | **Done** — `e7c7b1a`; client gate alone was PARTIAL |
+| PS L02–L03 assessed listening + hard same-scenario foils; L01 café «сколько стоит кофе» giveaway removed | **Done** — `e7c7b1a`; still DRAFT |
+| Founder unblock one-pager + interactive wizard | **Done** — [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + `scripts/founder-unblock.ps1` (probe: no `private-beta` env, no Railway CLI, no `BASE_URL`) |
 | JPJO hall packet inventory refresh | **Done** — status remains `NOT_STARTED` |
 
-Score held ~**33 / 50**. No fake PUBLISHED. No live HTTPS claimed.
+Score held ~**33 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL**.
 
 ### Local closed-beta smoke (2026-09-10)
 
@@ -91,13 +97,13 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 
 ## After STOP RULE — human unlock only
 
-Do **not** start Wave 7 as another content deepen. Founder path = [FOUNDER-UNBLOCK-NOW.md](../operations/FOUNDER-UNBLOCK-NOW.md) + [external-unblock-wizard.md](../operations/external-unblock-wizard.md):
+Do **not** start Wave 7 as another content deepen. Founder path = run [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) → [FOUNDER-UNBLOCK-NOW.md](../operations/FOUNDER-UNBLOCK-NOW.md) + [external-unblock-wizard.md](../operations/external-unblock-wizard.md):
 
 1. **Live HTTPS proof** — Railway/host secrets + `BASE_URL` health/ready (§1–§2, §4).
 2. **JPJO human review** — calendar + first hall APPROVE/REJECT in packet (§3; no AI self-approve).
 3. **Invite path on live** — same closed-beta flags as local (`BETA_ALLOW_DRAFT=true`, `DEMO_*=false`).
 
-Optional further micro-fixes (not a reference wave): studio audio pipeline; timed bakeoff log.
+Optional further micro-fixes (not a reference wave): studio audio pipeline; timed bakeoff log. Still waiting on founder **EXTERNAL**.
 
 ## External blockers (track)
 
