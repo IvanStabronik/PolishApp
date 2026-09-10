@@ -278,7 +278,16 @@
     "saved": "Zapisano w profilu.",
     "loading": "Ładowanie profilu…",
     "loadError": "Nie udało się wczytać profilu z serwera.",
-    "saveError": "Nie udało się zapisać zmian."
+    "saveError": "Nie udało się zapisać zmian.",
+    "passwordTitle": "Zmień hasło",
+    "currentPassword": "Obecne hasło",
+    "newPassword": "Nowe hasło",
+    "confirmPassword": "Powtórz nowe hasło",
+    "changePassword": "Zapisz hasło",
+    "passwordChanged": "Hasło zaktualizowane.",
+    "passwordMismatch": "Nowe hasła nie są takie same.",
+    "passwordInvalid": "Błędne obecne hasło lub zbyt krótkie nowe.",
+    "passwordFailed": "Nie udało się zmienić hasła. Spróbuj ponownie."
   },
   "privacy": {
     "title": "Prywatność i dane",

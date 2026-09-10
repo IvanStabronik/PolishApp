@@ -35,6 +35,7 @@ export default function SettingsPage() {
   const locale = useLocale() as UiLocale;
   const router = useRouter();
   const [pending, startTransition] = useTransition();
+  const [pwPending, startPwTransition] = useTransition();
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,6 +43,11 @@ export default function SettingsPage() {
   const [l1, setL1] = useState<LearnerL1>("ukr");
   const [weeklyGoal, setWeeklyGoal] = useState<WeeklyGoal>("180");
   const [goal, setGoal] = useState<Goal>("life");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [pwSaved, setPwSaved] = useState(false);
+  const [pwError, setPwError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -70,6 +76,48 @@ export default function SettingsPage() {
       cancelled = true;
     };
   }, []);
+
+  function onChangePassword(e: FormEvent) {
+    e.preventDefault();
+    setPwSaved(false);
+    setPwError(null);
+    if (newPassword !== confirmPassword) {
+      setPwError(t("passwordMismatch"));
+      return;
+    }
+    startPwTransition(async () => {
+      try {
+        const res = await fetch("/api/profile/password", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ currentPassword, newPassword }),
+        });
+        if (!res.ok) {
+          const body = (await res.json().catch(() => null)) as {
+            error?: string;
+          } | null;
+          if (
+            body?.error === "invalid_current" ||
+            body?.error === "too_short" ||
+            body?.error === "same_password" ||
+            body?.error === "validation_failed"
+          ) {
+            setPwError(t("passwordInvalid"));
+          } else {
+            setPwError(t("passwordFailed"));
+          }
+          return;
+        }
+        setPwSaved(true);
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+      } catch {
+        setPwError(t("passwordFailed"));
+      }
+    });
+  }
 
   function onSave(e: FormEvent) {
     e.preventDefault();
@@ -239,6 +287,67 @@ export default function SettingsPage() {
           </form>
         </div>
       )}
+
+      {!loading ? (
+        <div className="surface-panel motion-fade-rise-delay max-w-xl p-4 sm:p-6">
+          <form onSubmit={onChangePassword} className="flex flex-col gap-4">
+            <h2 className="m-0 text-base font-medium text-[var(--color-ink)]">
+              {t("passwordTitle")}
+            </h2>
+            <label className="flex flex-col gap-1 text-sm">
+              <span>{t("currentPassword")}</span>
+              <input
+                type="password"
+                autoComplete="current-password"
+                className="min-h-11 rounded border border-[var(--color-border)] bg-transparent px-3"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                required
+                data-testid="settings-current-password"
+              />
+            </label>
+            <label className="flex flex-col gap-1 text-sm">
+              <span>{t("newPassword")}</span>
+              <input
+                type="password"
+                autoComplete="new-password"
+                minLength={8}
+                className="min-h-11 rounded border border-[var(--color-border)] bg-transparent px-3"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+                data-testid="settings-new-password"
+              />
+            </label>
+            <label className="flex flex-col gap-1 text-sm">
+              <span>{t("confirmPassword")}</span>
+              <input
+                type="password"
+                autoComplete="new-password"
+                minLength={8}
+                className="min-h-11 rounded border border-[var(--color-border)] bg-transparent px-3"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                data-testid="settings-confirm-password"
+              />
+            </label>
+            <Button type="submit" disabled={pwPending}>
+              {t("changePassword")}
+            </Button>
+            {pwError ? (
+              <p role="alert" className="m-0 text-sm text-[var(--color-error)]">
+                {pwError}
+              </p>
+            ) : null}
+            {pwSaved ? (
+              <p role="status" className="m-0 text-sm text-[var(--color-success)]">
+                {t("passwordChanged")}
+              </p>
+            ) : null}
+          </form>
+        </div>
+      ) : null}
 
       <MyFeedbackList />
     </div>
