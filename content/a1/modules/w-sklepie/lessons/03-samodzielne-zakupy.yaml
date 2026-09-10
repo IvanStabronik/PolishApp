@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-03
 slug: samodzielne-zakupy
-version: 2
+version: 3
 status: DRAFT
 title_pl: Samodzielne zakupy
 sort_order: 3
@@ -82,15 +82,16 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Не ставте «дайте» як *Daj і не збирайте Poproszę… · jeszcze… ·
-      razem… · płacę… дослівно з українських слів. Тримайте pan/pani
-      до касира.
+      Не збирайте покупку з «дайте». Тримайте
+      Poproszę… → Tak, jedno → I jeszcze… → płacę…; «ти» до касира —
+      лише якщо сам запропонував.
     rus: >
       Не собирайте «попрошу / ещё / итого / плачу» дословной калькой.
       Poproszę… и I jeszcze… — польские рамки; без ty к кассиру.
     bel: >
-      Не пераносьце «дайце / яшчэ / разам / плачу» калькай.
-      Poproszę…, jeszcze… і płacę… — асобныя рамкі; без ty да касіра.
+      Не збірайце пакупку з «дайце». Трымайце
+      Poproszę… → Tak, jedno → I jeszcze… → płacę…; да касіра не ty,
+      пакуль ён сам не прапануе.
 grammar_points:
   - id: GP-A1-WS-L3
     title_pl: Pełna lista zakupów
@@ -113,24 +114,24 @@ grammar_points:
       - GR-NUM-CARD-01
     l1_notes:
       ukr: >
-        Список і Tak, jedno тримайте готовими. Не *Daj і не збирайте
-        рамку дослівно з L1.
+        Після Poproszę — Acc і liczba. Tak, jedno і I jeszcze… цілими;
+        не *Daj і не «можна мені ще».
       rus: >
         Не калькируйте весь заказ порядком слов из L1. Jedno / dwa —
         готовый слот; I jeszcze… добавляет позицию.
       bel: >
-        Аканне ў сумах на пісьме не пераносіце. Вучыце Poproszę +
-        спіс і Tak, jedno цэлымі формуламі.
+        Acc пасля Poproszę. Tak, jedno / I jeszcze… вучыце цэлымі;
+        не калька «дайце яшчэ»; аканне ў сумах на пісьме не пераносіце.
 l1_notes:
   ukr: >
-    Урок про самостійну покупку: список, Tak, jedno, I jeszcze…,
-    оплата і paragon. Не калькуйте з L1; pan/pani до касира.
+    Самі: Poproszę X, Y i Z, Tak, jedno, I jeszcze…, ціна й Kartą.
+    Без «дайте» і без ty до касира.
   rus: >
     Полный заказ у кассы без L1-сборки и без ty. Запомните
     Poproszę…, Tak, jedno, I jeszcze… и просьбу о paragon целиком.
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Спіс, колькасць
-    і paragon — польскія рамкі; пісьмо сум без акання; без «ты» да касіра.
+    Самі правядзіце пакупку цэлымі рамкамі: Poproszę… / Tak, jedno /
+    I jeszcze… / Kartą. Без калькі «дайце» і без ty да касіра.
 steps:
   - id: step-l3-situation
     kind: situation
@@ -470,7 +471,8 @@ provenance:
       LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
-    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
-    not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on full-checkout traps; adult RU chrome retained. DRAFT —
+    pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only

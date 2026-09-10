@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-01
 slug: zakupy-przy-kasie
-version: 2
+version: 3
 status: DRAFT
 title_pl: Zakupy przy kasie
 sort_order: 1
@@ -85,14 +85,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Не ставте «дайте» як *Daj і не калькуйте «скільки коштує» дослівно.
-      Тримайте Ile to kosztuje? і pan/pani до касира.
+      «Дайте / скільки коштує» → не *Daj / *Skolko. У каси —
+      Poproszę + Acc, Ile to kosztuje?; до касира pan/pani, не ty.
     rus: >
       «Сколько стоит» → Ile to kosztuje?, не *Skolko. Не говорите ty
       кассиру; kartą — творительный в формуле оплаты, не «на карте».
     bel: >
-      Не пераносьце «дайце / колькі каштуе» ў польскую калькай. Poproszę…
-      і Ile to kosztuje? — асобныя рамкі; без ty да касіра.
+      «Дайце / колькі каштуе» не робіць рэзкі *Daj. Poproszę… +
+      Ile to kosztuje? — асобныя рамкі; бел. «вы» ≠ wy да касіра.
 grammar_points:
   - id: GP-A1-WS-CENA-ILOSC
     title_pl: Ile to kosztuje? / ilość
@@ -119,24 +119,24 @@ grammar_points:
       - GR-CAS-ACC-01
     l1_notes:
       ukr: >
-        Числа 5+ часто тягнуть Gen — на A1 тримайте готові відповіді каси
-        (dwanaście złotych). Не *Skilky kosztuje.
+        Після Ile to kosztuje? — готова відповідь каси (dwanaście złotych),
+        не *Skilky. Kartą (Ins оплати) ≠ укр. «картою / на карту».
       rus: >
         Не калькируйте «сколько стоит это» порядком слов. Kartą — Ins.
         Следите за jedno / dwa в ответе о количестве.
       bel: >
-        Аканне ў сумах на пісьме не пераносіце. Вучыце Ile to kosztuje?
-        і płacę kartą цэлымі формуламі.
+        Acc пасля Poproszę; аканне ў сумах на пісьме не пераносіце.
+        Ile to kosztuje? і płacę kartą — цэлыя формулы.
 l1_notes:
   ukr: >
-    Урок про касу: Poproszę + Acc, кількість, Ile to kosztuje?, оплата
-    kartą. Не калькуйте «скільки коштує / дайте»; pan/pani до касира.
+    Не калькуйте «дайте / скільки коштує». Тримайте Poproszę + Acc,
+    Ile to kosztuje?, Kartą; з касиром — pan/pani, не ty.
   rus: >
     Цена и количество без L1-порядка слов и без ty у кассы. Запомните
     Ile to kosztuje? и płacę kartą целиком.
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Касавыя формулы
-    польскія; пісьмо сум без акання; без «ты» да касіра.
+    Не спадзявайцеся на «і так зразумеюць». Poproszę… / Ile to kosztuje? /
+    Kartą — асобныя польскія рамкі; пісьмо сум без акання.
 steps:
   - id: step-situation
     kind: situation
@@ -560,7 +560,8 @@ provenance:
     - "Curriculum links: SCN-A1-SHOP-01, FN-A1-TRANS-01, FN-A1-QUANT-01"
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
-    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
-    not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on checkout traps; adult RU chrome retained. DRAFT —
+    pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only

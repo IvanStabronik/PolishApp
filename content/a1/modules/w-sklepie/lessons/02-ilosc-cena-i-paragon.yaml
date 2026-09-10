@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-02
 slug: ilosc-cena-i-paragon
-version: 2
+version: 3
 status: DRAFT
 title_pl: Ilość, cena i paragon
 sort_order: 2
@@ -83,14 +83,15 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Не ставте «дайте» як *Daj і не збирайте jedno/dwa · ile · paragon
-      дослівно з українських слів. Тримайте Poproszę… і pan/pani до касира.
+      «Дайте» не збирає покупку. Тримайте dwa/jedną + Acc,
+      Ile kosztują…? і Poproszę paragon; «ти» до касира — лише якщо сам
+      запропонував.
     rus: >
       Не собирайте «два яблока / сколько стоит / чек» дословной калькой.
       Poproszę… и Ile kosztują…? — польские рамки; без ty к кассиру.
     bel: >
-      Не пераносьце «дайце / колькі / чэк» калькай. Poproszę…,
-      Ile kosztują…? і Poproszę paragon — асобныя рамкі; без ty да касіра.
+      Не з «дайце / колькі». Poproszę…, Ile kosztują…? і Poproszę paragon —
+      вучыце цэлымі; да касіра не ty, пакуль ён сам не прапануе.
 grammar_points:
   - id: GP-A1-WS-L2
     title_pl: Ilość i suma
@@ -113,25 +114,24 @@ grammar_points:
       - GR-NUM-CARD-01
     l1_notes:
       ukr: >
-        Dwa / jedną тримайте готовими слотами. Не *Skilky kosztuje;
-        для кількох предметів — kosztują.
+        Після Poproszę — Acc (dwa jabłka, jedną wodę), не називний.
+        Для кількох — kosztują, не *Skilky kosztuje.
       rus: >
         Не калькируйте «сколько стоят яблоки» порядком слов.
         Dwa jabłka — готовый слот; kosztują для мн. ч.
       bel: >
-        Аканне ў сумах на пісьме не пераносіце. Вучыце Poproszę +
-        liczba і Ile kosztują…? цэлымі формуламі.
+        Acc пасля Poproszę (dwa jabłka). Ile kosztują…? і Razem… —
+        цэлыя; аканне ў сумах на пісьме не пераносіце.
 l1_notes:
   ukr: >
-    Урок про кількість, ціну/підсумок і чек: Poproszę + liczba,
-    Ile kosztują…?, Razem…, Poproszę paragon. Не калькуйте з L1;
-    pan/pani до касира.
+    Кількість (dwa/jedną), Ile kosztują…?, Razem… і Poproszę paragon.
+    Без кальки «дайте»; pan/pani до касира.
   rus: >
     Количество, цена/итог и чек без L1-сборки и без ty у кассы.
     Запомните Poproszę dwa…, Ile kosztują…? и Poproszę paragon целиком.
   bel: >
-    Асобны акцэнт BEL: не капіюйце рускія нотаткі. Колькасць, сума
-    і paragon — польскія рамкі; пісьмо сум без акання; без «ты» да касіра.
+    Dwa… / Ile kosztują…? / Razem… / Poproszę paragon — асобныя рамкі.
+    Не спадзявайцеся на кальку «дайце»; да касіра — не ty.
 steps:
   - id: step-l2-situation
     kind: situation
@@ -487,7 +487,8 @@ provenance:
       LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v2 —
-    adult RU instructional chrome. DRAFT — pending human review; not JPJO-approved,
-    not learner-published. No human reviewer assigned (reviewer_id: null).
+    AI-assisted system draft (author_id: system:ai-draft-slowarium). Language pass v3 —
+    shorter UK/BEL L1 notes on quantity/price/paragon traps; adult RU chrome retained.
+    DRAFT — pending human review; not JPJO-approved, not learner-published.
+    No human reviewer assigned (reviewer_id: null).
 visibility: internal_preview_only
