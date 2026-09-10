@@ -126,6 +126,23 @@ describe("draftLessonToDetail structured steps", () => {
       expect(speaking.lines.length).toBeGreaterThan(0);
     }
   });
+
+  it("uses section titles for practice exercises — not sliced prompts", () => {
+    const mods = loadAllModulesFromYaml();
+    const mod = mods.find((m) => m.id === "pierwsze-spotkanie")!;
+    const lesson = mod.lessons[0]!;
+    const detail = draftLessonToDetail(mod, lesson, "rus");
+    const exercises = detail.steps.filter((s) => s.kind === "exercise");
+    expect(exercises.length).toBeGreaterThan(0);
+    for (const step of exercises) {
+      expect(step.kind).toBe("exercise");
+      if (step.kind !== "exercise") continue;
+      // Must not mid-truncate the learner prompt into the step h2.
+      expect(["Практика", "Короткая проверка"]).toContain(step.title);
+      expect(step.exercise.prompt.startsWith(step.title)).toBe(false);
+      expect(step.title.endsWith("разгов")).toBe(false);
+    }
+  });
 });
 
 describe("closed-beta DRAFT flag", () => {

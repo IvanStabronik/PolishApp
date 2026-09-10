@@ -10,22 +10,23 @@
 **Full A1 assessed-listening audio (2026-09-10):** ~**34.5 / 50** — **15 / 15** static MP3s wired (sklep + droga + urząd L01–L03 added). §3 listening path at interim ceiling (edge-tts ≠ studio). GitHub Environment `private-beta` shell **exists** (secrets empty). **Primary deploy path: Vercel + Neon/Supabase** (Railway secondary). No live HTTPS. No JPJO. No fake PUBLISHED.
 **Post–Vercel preflight (2026-09-10):** ~**35 / 50** — `scripts/vercel-neon-preflight.ps1` + FOUNDER helpers; local day-1 bakeoff checklist; JPJO one-page checklist. `pnpm --dir web build` **PASS**. Probe: `gh` OK; `vercel whoami` **no credentials**; no `.vercel` link. Still waiting Neon+Vercel human. No live HTTPS claimed.
 **Post–Neon bootstrap + DB/content NFT (2026-09-10):** ~**35.5 / 50** — `neon-bootstrap` migrate path; production `getSql` globalThis cache (Vercel `/api/ready`); `outputFileTracingRoot` + content NFT markers; first-admin bootstrap script (`bootstrap-first-admin.ps1`, `DEMO_MODE=false`). Still **EXTERNAL** for live HTTPS until founder pastes Neon URL + finishes Vercel. No fake PUBLISHED / JPJO.
+**Local day-1 bakeoff executed (2026-09-10):** ~**36 / 50** — checklist **LOCAL_PASS** (invite→onboard→PS L01 listen/speak/wrong+L1→plan); phrasebot compare **LOCAL reasoned**; live week still **FAIL**. Micro-fix: exercise step h2 no longer mid-truncates prompt (`draftLessonToDetail` uses section title). Artifact: `web/playwright-artifacts/day1-bakeoff/result.json`.
 
-### Critical re-score (post Neon bootstrap + first-admin path) — `/50`
+### Critical re-score (post local day-1 bakeoff) — `/50`
 
 | # | Criterion | /5 | Note |
 | --- | --- | ---: | --- |
-| 1 | Session-1 life loop | 3.5 | Local closed-beta PASS; live invite path unproven until Neon+Vercel |
-| 2 | Feedback that teaches | 4.0 | incorrect + L1 on deepened halls |
-| 3 | Listening + speaking path | 4.0 | All 15 assessed listen have `audio_url`; speaking still interim |
-| 4 | Human-readable progress | 3.5 | Labels improved; habit clarity ok |
+| 1 | Session-1 life loop | 4.0 | Local invite→lesson LOCAL_PASS; live invite path unproven until Neon+Vercel |
+| 2 | Feedback that teaches | 4.0 | incorrect + L1 on deepened halls; bakeoff wrong-answer evidence |
+| 3 | Listening + speaking path | 4.0 | All 15 assessed listen have `audio_url`; speaking still interim; local L5/L6 ✅ |
+| 4 | Human-readable progress | 3.5 | Labels improved; habit clarity ok; plan narratable (L7) |
 | 5 | Zero civilian ops jargon | 3.5 | Preview honesty; staff jargon out of learner chrome |
 | 6 | BEL first-class L1 | 3.5 | Notes present; UI locale share remains |
 | 7 | Content honesty contract | 4.0 | DRAFT + banner; no fake PUBLISHED |
 | 8 | Deploy teaches someone | 4.0 | Preflight + neon-bootstrap + first-admin (no DEMO_MODE) + NFT/getSql; secrets/HTTPS still EXTERNAL |
-| 9 | Admin ≤ learner craft | 3.5 | Freeze held; bootstrap is ops, not admin chrome |
-| 10 | Competitive first week | 3.0 | Local day-1 checklist added; live week still FAIL / not run |
-| | **Total** | **~35.5** | Still far from reference; EXTERNAL wall |
+| 9 | Admin ≤ learner craft | 3.5 | Freeze held; exercise h2 title micro-fix (no sliced prompt) |
+| 10 | Competitive first week | 3.5 | Local day-1 **LOCAL_PASS** / SPLIT vs phrasebot; live week still FAIL / not run |
+| | **Total** | **~36** | Still far from reference; EXTERNAL wall |
 
 ### Waiting on founder (EXTERNAL)
 
@@ -55,12 +56,13 @@ See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not inv
 | Vercel+Neon preflight script | **Done** — [`scripts/vercel-neon-preflight.ps1`](../../scripts/vercel-neon-preflight.ps1); stops when `vercel login` / secrets missing |
 | Neon bootstrap + production getSql cache + content NFT | **Done** — [`scripts/neon-bootstrap.ps1`](../../scripts/neon-bootstrap.ps1); `client.ts` always caches sql; `next.config` tracing root |
 | First-admin bootstrap without DEMO_MODE | **Done** — [`scripts/bootstrap-first-admin.ps1`](../../scripts/bootstrap-first-admin.ps1); refuses DEMO_MODE / ALLOW_PRODUCTION_DEMO; FORCE_SEED hardened |
-| Local day-1 competitive checklist | **Done** — in [`competitive-week1-bakeoff.md`](./competitive-week1-bakeoff.md); live week still **FAIL** until HTTPS |
+| Local day-1 competitive checklist | **Done + executed LOCAL_PASS** — [`competitive-week1-bakeoff.md`](./competitive-week1-bakeoff.md); live week still **FAIL** until HTTPS |
 | JPJO one-page reviewer checklist | **Done** — in hall packet; status remains `NOT_STARTED` |
 | Static assessed-listening audio — all 5 A1 halls L01–L03 | **Done** — **15×** MP3 under `web/public/audio/a1/`; YAML `audio_url`; see [`audio-assets.md`](../operations/audio-assets.md) |
 | JPJO hall packet inventory refresh | **Done** — status remains `NOT_STARTED` |
+| Exercise step h2 mid-truncation | **Done** — `draftLessonToDetail` uses practice/mini_check section title (not `prompt.slice(0,64)`) |
 
-Score estimate ~**35.5 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL** (Neon URL + Vercel).
+Score estimate ~**36 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL** (Neon URL + Vercel).
 
 ### Local closed-beta smoke (2026-09-10)
 
@@ -124,7 +126,7 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 1. Static edge-tts ≠ studio listening (FUN-110 / V2). All assessed items now have `audioUrl` (no `textPl` on stimulus) — still interim Neural TTS.
 2. Speaking recognition best-effort — not exam scoring.
 3. All content **DRAFT** — no JPJO PUBLISHED hall (§7). **EXTERNAL**
-4. Competitive week-1 not yet **run** with real invitees (local day-1 checklist exists; live still FAIL).
+4. Competitive week-1 **local day-1 LOCAL_PASS** (2026-09-10); live invitees + HTTPS still EXTERNAL / FAIL.
 5. Live HTTPS not proven without Neon/Vercel (human). **EXTERNAL** — founder path: [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + preflight.
 6. Admin vs learner craft — freeze held; recheck §9 after player polish.
 7. ~~Play-gate is client-side only~~ — **mitigated**: server requires `listeningPlayToken` (stimulus or `tts_unavailable` unlock). Still interim vs studio audio.

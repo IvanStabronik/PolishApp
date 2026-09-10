@@ -114,13 +114,16 @@ export function draftLessonToDetail(
       continue;
     }
     if (step.kind === "practice" || step.kind === "mini_check") {
+      // Use hall step title (Практика / Короткая проверка) — never slice the
+      // exercise prompt into an h2 (mid-word truncation + duplicate chrome).
+      const sectionTitle = titleOf(step.titleRu);
       for (const exerciseId of step.exerciseIds) {
         const authored = byId.get(exerciseId);
         if (!authored) continue;
         steps.push({
           id: authored.id,
           kind: "exercise",
-          title: authored.prompt.slice(0, 64),
+          title: sectionTitle,
           exercise: toLearnerExercise(authored),
         });
       }

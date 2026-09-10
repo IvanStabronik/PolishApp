@@ -35,13 +35,13 @@
 
 | Criterion | Status | Why |
 | --- | --- | --- |
-| 1 Session-1 | **PARTIAL** | Works in DRAFT beta if env set; live HTTPS still EXTERNAL. |
+| 1 Session-1 | **PARTIAL** | Works in DRAFT beta if env set; **local day-1 checklist LOCAL_PASS** 2026-09-10; live HTTPS still EXTERNAL. |
 | 2 Register | **PASS-ish** | pan/pani steps exist; depth uneven across halls. |
 | 3 Feedback | **PASS** | incorrect + L1 notes shipped. |
 | 4 Progress | **PARTIAL** | Labels improved; SoT FN parser was garbage until Wave 4 fix. |
-| 5 Listening | **PARTIAL** | Assessed listening seeded across L01 halls; TTS interim; stimulus not in lesson DTO (fetch-on-play). Still not studio audio. |
-| 6 Speaking | **PARTIAL** | Coverage broadened; Web Speech best-effort; privacy note added. |
-| 7 Beats phrasebot | **FAIL today** | Phrasebot wins on zero-friction Day 1 open (no invite/env). SŁOWARIUM wins on scenario coherence *if* beta path opens. Net: not yet a clean WIN. |
+| 5 Listening | **PARTIAL** | Assessed listening seeded across L01 halls; TTS interim; stimulus not in lesson DTO (fetch-on-play). Still not studio audio. Local L5 ✅. |
+| 6 Speaking | **PARTIAL** | Coverage broadened; Web Speech best-effort; privacy note added. Local L6 ✅. |
+| 7 Beats phrasebot | **FAIL today** | Phrasebot wins on zero-friction Day 1 open (no invite/env). SŁOWARIUM wins on scenario coherence *if* beta path opens. **Local day-1 SPLIT**; live week not a clean WIN. |
 | 8 Honesty | **PASS** | DRAFT + preview banner; no fake PUBLISHED. |
 
 ## What would flip FAIL → WIN
@@ -72,24 +72,24 @@ Run against [local-closed-beta.md](../operations/local-closed-beta.md) only. Fil
 
 | # | Check (operator) | Pass? | Notes |
 | ---: | --- | :---: | --- |
-| L1 | Create invite (admin) → open invite URL in private window | ☐ | |
-| L2 | Accept invite → set L1 (UK/RU/BEL) → finish onboarding without staff | ☐ | |
-| L3 | Open Pierwsze spotkanie (or first DRAFT hall) as previewer | ☐ | |
-| L4 | Complete one lesson end-to-end (dialogue → practice → at least one wrong answer with incorrect+L1) | ☐ | |
-| L5 | Assessed listening: play starts before submit (or TTS-unavailable unlock) | ☐ | |
-| L6 | Speaking step present with honesty (not exam scoring claim) | ☐ | |
-| L7 | After lesson: can name tomorrow’s life task in plain language (no GR-/FN- IDs) | ☐ | |
-| L8 | Same sitting: open a Telegram Polish phrasebot → 10 min dump of greetings | ☐ | |
-| L9 | Honest compare: scenarios+register+repair vs phrase volume / friction | ☐ | |
+| L1 | Create invite (admin) → open invite URL in private window | ✅ | 2026-09-10 LOCAL — admin `/ru/admin/beta` create; token once (~0.05 min automated) |
+| L2 | Accept invite → set L1 (UK/RU/BEL) → finish onboarding without staff | ✅ | Invite accept + L1=rus + consents; preview banner (~0.09 min automated) |
+| L3 | Open Pierwsze spotkanie (or first DRAFT hall) as previewer | ✅ | `pierwsze-spotkanie` / `LES-A1-PS-01`; DRAFT preview chrome |
+| L4 | Complete one lesson end-to-end (dialogue → practice → at least one wrong answer with incorrect+L1) | ✅ | Wrong attempt `correct=false` + L1 note; practice walk |
+| L5 | Assessed listening: play starts before submit (or TTS-unavailable unlock) | ✅ | `ex-ps-listen-01` reached; play control before submit |
+| L6 | Speaking step present with honesty (not exam scoring claim) | ✅ | Speaking step + «не экзамен» honesty; no JPJO in chrome |
+| L7 | After lesson: can name tomorrow’s life task in plain language (no GR-/FN- IDs) | ✅ | `/ru/plan` narratable RU life copy; no GR-/FN- |
+| L8 | Same sitting: open a Telegram Polish phrasebot → 10 min dump of greetings | ✅ | **LOCAL reasoned only** (not automated Telegram) — ~10 min dump; open &lt;1 min; no invite |
+| L9 | Honest compare: scenarios+register+repair vs phrase volume / friction | ✅ | LOCAL: SŁOWARIUM wins scenario/register/repair; phrasebot wins friction/volume |
 
-**Local day-1 result:** `LOCAL_PASS` / `LOCAL_FAIL` / `NOT_RUN` — ____  
+**Local day-1 result:** `LOCAL_PASS` — 2026-09-10 (Playwright operator script `e2e/day1-local-bakeoff.spec.ts` + artifact `web/playwright-artifacts/day1-bakeoff/result.json`; stack: Postgres :5433 healthy, `BETA_ALLOW_DRAFT=true`, health/ready 200). Automated wall ~0.5 min (not human learner pacing). Human Day-1 protocol budget remains 25 min — path is within budget.  
 **Live week-1 verdict:** remains **FAIL** until Neon+Vercel HTTPS + real invitees (see protocol above). Do not upgrade this row from local alone.
 
 ## Operator log (fill when running live or local series)
 
 | Day | SŁOWARIUM (min / pass?) | Phrasebot (min / pass?) | Notes |
 | --- | --- | --- | --- |
-| 1 | | | |
+| 1 | **LOCAL** automated ~0.5 / **PASS** (human budget 25; path clear) | **LOCAL reasoned** ~10 / PASS on volume | Invite→onboard→PS L01 listen+speak+wrong L1+plan. Live HTTPS not run. |
 | 2 | | | |
 | 3 | | | |
 | 4 | | | |
@@ -97,4 +97,4 @@ Run against [local-closed-beta.md](../operations/local-closed-beta.md) only. Fil
 | 6 | | | |
 | 7 | | | |
 
-**Verdict after run:** `WIN` / `FAIL` / `SPLIT` — do not pre-fill.
+**Verdict after run:** `SPLIT` (LOCAL) — local closed-beta day-1 **PASS**; live competitive week still **FAIL** (no HTTPS invitees). Phrasebot still wins zero-friction open.
