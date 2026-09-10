@@ -14,7 +14,8 @@ import {
 import type { DraftModule } from "@/lib/content/types";
 import { isLearnerL1 } from "@/lib/content/types";
 import type { LessonDetail, LoreLabel, ModuleSummary } from "@/lib/mocks/content";
-import type { LearnerL1 } from "@/lib/enums";
+import type { LearnerL1, UiLocale } from "@/lib/enums";
+import { UI_LOCALES } from "@/lib/enums";
 import { getRequestSession, getLearnerProfile } from "@/modules/auth/session";
 import { isDraftLearningEnvEnabled } from "@/lib/demo";
 import { draftLessonToDetail } from "@/modules/content/draft-lesson-to-detail";
@@ -51,12 +52,20 @@ async function resolveAccessContext(): Promise<ContentAccessContext> {
   };
 }
 
-async function resolveLearnerL1(): Promise<LearnerL1 | undefined> {
+async function resolveLearnerChrome(): Promise<{
+  l1?: LearnerL1;
+  uiLocale?: UiLocale;
+}> {
   const session = await getRequestSession();
-  if (!session) return undefined;
+  if (!session) return {};
   const profile = await getLearnerProfile(session.user.id);
-  if (profile?.l1 && isLearnerL1(profile.l1)) return profile.l1;
-  return undefined;
+  if (!profile) return {};
+  const l1 =
+    profile.l1 && isLearnerL1(profile.l1) ? profile.l1 : undefined;
+  const uiLocale = (UI_LOCALES as readonly string[]).includes(profile.uiLocale)
+    ? (profile.uiLocale as UiLocale)
+    : undefined;
+  return { l1, uiLocale };
 }
 
 export async function getA1Catalog(): Promise<CatalogModule[]> {
@@ -81,11 +90,11 @@ export async function listModuleLessons(
   const ctx = await resolveAccessContext();
   const yaml = getYamlModule(moduleId, ctx);
   if (!yaml) return [];
-  const l1 = await resolveLearnerL1();
+  const { l1, uiLocale } = await resolveLearnerChrome();
   return yaml.lessons
     .slice()
     .sort((a, b) => a.sortOrder - b.sortOrder)
-    .map((lesson) => draftLessonToDetail(yaml, lesson, l1));
+    .map((lesson) => draftLessonToDetail(yaml, lesson, l1, uiLocale));
 }
 
 export async function getLessonById(
@@ -94,8 +103,8 @@ export async function getLessonById(
   const ctx = await resolveAccessContext();
   const found = findLessonById(lessonId, ctx);
   if (!found) return null;
-  const l1 = await resolveLearnerL1();
-  return draftLessonToDetail(found.module, found.lesson, l1);
+  const { l1, uiLocale } = await resolveLearnerChrome();
+  return draftLessonToDetail(found.module, found.lesson, l1, uiLocale);
 }
 
 export {

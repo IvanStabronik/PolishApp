@@ -13,7 +13,11 @@ import {
   serializeLearnerExercise,
   toLearnerExercise,
 } from "@/lib/content/learner-dto";
-import { localizeStepTitle } from "@/lib/content/step-title-locale";
+import {
+  localizeSpeakingPrompt,
+  localizeStepTitle,
+  resolveStepChromeLang,
+} from "@/lib/content/step-title-locale";
 import { evaluationFromStoredResponse } from "@/modules/learning/persist-attempt";
 import { evaluateAnswer } from "@/modules/assessment/evaluate";
 import { ensureOpenLessonSession } from "@/modules/learning/lesson-session";
@@ -69,6 +73,27 @@ describe("UK/BEL step title fallback", () => {
     expect(localizeStepTitle("Ситуация", "ukr")).toBe("Ситуація");
     expect(localizeStepTitle("Диалог", "bel")).toBe("Дыялог");
     expect(localizeStepTitle("Ситуация", "rus")).toBe("Ситуация");
+  });
+
+  it("uses UK chrome when UI is uk even if L1 is rus", () => {
+    expect(resolveStepChromeLang("rus", "uk")).toBe("uk");
+    expect(localizeStepTitle("Практика", "rus", "uk")).toBe("Практика");
+    expect(
+      localizeSpeakingPrompt(
+        "Скажите заказ вслух. Распознавание — ориентир, не экзамен.",
+        "rus",
+        "uk",
+      ),
+    ).toMatch(/замовлення|вголос/);
+  });
+
+  it("localizes speaking prompts for bel L1", () => {
+    expect(
+      localizeSpeakingPrompt(
+        "Скажите реплику вслух. Распознавание — ориентир, не экзамен и не оценка.",
+        "bel",
+      ),
+    ).toMatch(/ўголас|рэпліку/);
   });
 });
 

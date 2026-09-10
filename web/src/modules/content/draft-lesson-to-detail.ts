@@ -5,8 +5,11 @@
 import { toLearnerExercise } from "@/lib/content/learner-dto";
 import type { DraftLesson, DraftModule } from "@/lib/content/types";
 import type { LessonDetail } from "@/lib/mocks/content";
-import type { LearnerL1 } from "@/lib/enums";
-import { localizeStepTitle } from "@/lib/content/step-title-locale";
+import type { LearnerL1, UiLocale } from "@/lib/enums";
+import {
+  localizeSpeakingPrompt,
+  localizeStepTitle,
+} from "@/lib/content/step-title-locale";
 
 /**
  * Expand YAML lesson steps into structured learner steps + exercises.
@@ -16,12 +19,14 @@ export function draftLessonToDetail(
   mod: DraftModule,
   lesson: DraftLesson,
   l1?: LearnerL1,
+  uiLocale?: UiLocale | string | null,
 ): LessonDetail {
   const byId = new Map(lesson.exercises.map((ex) => [ex.id, ex]));
   const steps: LessonDetail["steps"] = [];
   const note = (notes?: Partial<Record<LearnerL1, string>>) =>
     l1 && notes?.[l1] ? notes[l1] : undefined;
-  const titleOf = (titleRu: string) => localizeStepTitle(titleRu, l1);
+  const titleOf = (titleRu: string) =>
+    localizeStepTitle(titleRu, l1, uiLocale);
 
   for (const step of lesson.steps) {
     if (step.kind === "situation" || step.kind === "result") {
@@ -69,7 +74,11 @@ export function draftLessonToDetail(
         id: step.id,
         kind: "speaking_practice",
         title: titleOf(step.titleRu),
-        ...(step.promptRu ? { prompt: step.promptRu } : {}),
+        ...(step.promptRu
+          ? {
+              prompt: localizeSpeakingPrompt(step.promptRu, l1, uiLocale),
+            }
+          : {}),
         lines: [...step.linesPl],
       });
       continue;
