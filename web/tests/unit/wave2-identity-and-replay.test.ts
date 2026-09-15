@@ -149,6 +149,42 @@ describe("UK/BEL instructional body chrome", () => {
       "Зал 3 · W sklepie",
     );
   });
+
+  it("localizes café/sklep/urząd theory beyond situation (key line + pan + grammar)", () => {
+    const keyLine =
+      "Обычный заказ: Poproszę + винительный (Biernik). Не переводите «дайте мне» как резкое *Daj mi… к незнакомцу за стойкой.";
+    expect(localizeInstructionalBody(keyLine, "ukr")).toMatch(
+      /замовлення|знахідний/,
+    );
+    expect(localizeInstructionalBody(keyLine, "bel")).toMatch(
+      /заказ|вінавальны/,
+    );
+
+    const pan =
+      "К кассиру-незнакомцу по умолчанию — pan/pani и спокойный сервисный тон: Poproszę…, Ile to kosztuje?, Dziękuję. Форма ty и резкое *Daj… — не к незнакомцу у кассы.";
+    expect(localizeInstructionalBody(pan, "ukr")).toMatch(/касира|замовчуванням/);
+    expect(localizeInstructionalBody(pan, "bel")).toMatch(/касіра|змаўчанні/);
+
+    const grammar =
+      "Два коротких куска у окошка: цель визита (w sprawie + Gen) и документы (Oto…, prośba o formularz).";
+    expect(localizeInstructionalBody(grammar, "ukr")).toMatch(/віконця|мета/);
+    expect(localizeInstructionalBody(grammar, "bel")).toMatch(/акенца|мэта/);
+  });
+
+  it("covers all curated theory-extra RU keys for ukr and bel", async () => {
+    const { THEORY_EXTRA_UK, THEORY_EXTRA_BEL } = await import(
+      "@/lib/content/instructional-theory-extra"
+    );
+    const keys = Object.keys(THEORY_EXTRA_UK);
+    expect(keys.length).toBeGreaterThanOrEqual(100);
+    expect(Object.keys(THEORY_EXTRA_BEL).length).toBe(keys.length);
+    for (const ru of keys) {
+      expect(localizeInstructionalBody(ru, "ukr")).toBe(THEORY_EXTRA_UK[ru]);
+      expect(localizeInstructionalBody(ru, "bel")).toBe(THEORY_EXTRA_BEL[ru]);
+      expect(localizeInstructionalBody(ru, "ukr")).not.toBe(ru);
+      expect(localizeInstructionalBody(ru, "bel")).not.toBe(ru);
+    }
+  });
 });
 
 describe("UK/BEL exercise prompt + feedback chrome", () => {

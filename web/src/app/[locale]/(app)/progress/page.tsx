@@ -83,6 +83,31 @@ export default async function ProgressPage({ params }: Props) {
           </ul>
         </section>
       ) : null}
+
+      {overview.signedIn ? (
+        <section
+          className="surface-panel p-4 sm:p-6"
+          data-testid="progress-next-action"
+        >
+          <h2 className="font-display m-0 text-xl text-[var(--color-ink)]">
+            {t("nextActionLead")}
+          </h2>
+          <p className="mt-3 flex flex-wrap gap-4 text-sm">
+            <Link
+              href="/plan"
+              className="inline-flex min-h-11 items-center text-[var(--color-amber-deep)] underline"
+            >
+              {t("toPlan")}
+            </Link>
+            <Link
+              href="/dashboard"
+              className="inline-flex min-h-11 items-center text-[var(--color-amber-deep)] underline"
+            >
+              {t("toDashboard")}
+            </Link>
+          </p>
+        </section>
+      ) : null}
     </div>
   );
 }

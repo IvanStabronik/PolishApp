@@ -4,6 +4,9 @@ import { createAuthClient } from "better-auth/react";
  * Prefer the browser's current origin so login works through a free HTTPS
  * tunnel (cloudflared / ngrok) without baking localhost into the client bundle.
  * Server/SSR falls back to env (local closed-beta or production BASE_URL).
+ *
+ * On the browser bundle this module evaluates with `window` present, so rotated
+ * trycloudflare.com hostnames bind correctly per page load.
  */
 function resolveAuthClientBaseURL(): string {
   if (typeof window !== "undefined" && window.location?.origin) {

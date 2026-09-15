@@ -19,8 +19,25 @@
 **Alternate HTTPS tunnel path (2026-09-15):** ~**41 / 50** — [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1) + [`tunnel-closed-beta.md`](../operations/tunnel-closed-beta.md); `ALLOW_DEV_TUNNEL_ORIGINS` + auth client `window.location.origin` so login works through cloudflared/ngrok. **Live tunnel smoke PASS** this session: health+ready 200 on `https://namespace-buying-retailer-strength.trycloudflare.com` (ephemeral quick tunnel; local DNS NXDOMAIN mitigated via 1.1.1.1). **Tunnel ≠ Vercel/Neon production.** **No Neon done. No fake PUBLISHED / JPJO.**
 **Tunnel Session-1 life loop (2026-09-15 ~16:18Z):** ~**42 / 50** — Playwright [`e2e/tunnel-session1.spec.ts`](../../web/e2e/tunnel-session1.spec.ts) + [`playwright.tunnel.config.ts`](../../web/playwright.tunnel.config.ts) against same ephemeral URL: admin sign-in → `/ru/dashboard` DRAFT halls (preview banner) → Pierwsze spotkanie `LES-A1-PS-01` → UI submit `ex-ps-01` → **PASS**. Artifact: `web/playwright-artifacts/tunnel-session1/result.json` (gitignored). **Still not Neon/Vercel. Still DRAFT. No JPJO.**
 **LIVE_TUNNEL day-1 bakeoff (2026-09-15 ~16:23Z):** ~**42.5 / 50** — [`e2e/day1-tunnel-bakeoff.spec.ts`](../../web/e2e/day1-tunnel-bakeoff.spec.ts) against `https://namespace-buying-retailer-strength.trycloudflare.com`: invite → onboard → PS L01 listen/speak/wrong+L1 → plan **PASS** (L1–L9). Named-tunnel founder steps documented (needs interactive `cloudflared tunnel login` — no cert.pem yet). **Honest: LIVE_TUNNEL ≠ durable Vercel.** No Neon. No fake PUBLISHED / JPJO.
+**CODE theory+chrome pack (2026-09-15):** ~**43.5 / 50** — UK/BEL key-line / pan / grammar bodies for all A1 halls; civilian preview/progress soften; progress next-action CTAs; theory-extra + tunnel Referer unit coverage. Credentials re-probe: `gh` OK; `vercel whoami` **no credentials**; no `.vercel`; `DATABASE_URL`/`NEON_*` unset; `private-beta` secrets **0**. **No deploy. No JPJO. No fake PUBLISHED.** Audit: [`goal-completion-audit.md`](./goal-completion-audit.md).
 
-### Critical re-score (post LIVE_TUNNEL day-1 bakeoff) — `/50` (ruthless independent)
+### Critical re-score (post CODE theory+chrome pack) — `/50` (ruthless independent)
+
+| # | Criterion | before | after | Note |
+| --- | --- | ---: | ---: | --- |
+| 1 | Session-1 life loop | 4.65 | 4.65 | Unchanged — still ephemeral LIVE_TUNNEL; durable host EXTERNAL |
+| 2 | Feedback that teaches | 4.5 | 4.65 | Key-line / pan / grammar UK+BEL all A1; still chrome not deep tutoring |
+| 3 | Listening + speaking path | 4.0 | 4.0 | Unchanged — edge-tts + Web Speech interim |
+| 4 | Human-readable progress | 3.9 | 4.1 | Progress next-action CTAs; softer lead; “уровень” not “учебный модуль” |
+| 5 | Zero civilian ops jargon | 3.75 | 3.95 | Preview badge/status + result/progress copy softened |
+| 6 | BEL first-class L1 | 4.5 | 4.7 | Theory bodies beyond situation; UI still shares RU locale |
+| 7 | Content honesty contract | 4.0 | 4.0 | Still DRAFT; no JPJO |
+| 8 | Deploy teaches someone | 4.7 | 4.7 | Credentials re-probe: still no Vercel/Neon; docs unchanged |
+| 9 | Admin ≤ learner craft | 3.5 | 3.5 | Freeze held; learner-only pack |
+| 10 | Competitive first week | 3.9 | 4.0 | Slightly clearer habit chrome; week still PARTIAL_TUNNEL |
+| | **Total** | **~42.5** | **~43.5** | CODE ceiling rising; goal still EXTERNAL (Vercel/Neon + JPJO) |
+
+### Critical re-score (post LIVE_TUNNEL day-1 bakeoff) — `/50` (historical)
 
 | # | Criterion | before | after | Note |
 | --- | --- | ---: | ---: | --- |
@@ -181,8 +198,12 @@ See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not inv
 | Tunnel Session-1 life loop (login → DRAFT halls → lesson → attempt) | **Done PASS** — `e2e/tunnel-session1.spec.ts` on `https://namespace-buying-retailer-strength.trycloudflare.com` at **2026-09-15T16:18:40Z**; ephemeral; **≠ Neon/Vercel** |
 | LIVE_TUNNEL day-1 bakeoff (invite → plan on public HTTPS) | **Done PASS** — `e2e/day1-tunnel-bakeoff.spec.ts` at **2026-09-15T16:23:17Z**; **PARTIAL_TUNNEL** week; **≠ Vercel** |
 | Named tunnel stable hostname docs | **Done docs** — founder interactive `cloudflared tunnel login` still required (no cert.pem this machine) |
+| UK/BEL theory beyond situation (key lines / pan / grammar all A1) | **Done** — `instructional-theory-extra.ts`; player already wires `localizeInstructionalBody` |
+| Civilian preview/progress chrome soften + progress next-action | **Done** — messages + progress page CTAs |
+| Theory-extra + tunnel Referer Origin unit coverage | **Done** — wave2 + m5 tests |
+| Goal completion audit (evidence checklist) | **Done** — [`goal-completion-audit.md`](./goal-completion-audit.md) |
 
-Score estimate ~**42.5 / 50**. No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). Waiting on founder **EXTERNAL** (durable Neon+Vercel **and** JPJO).
+Score estimate ~**43.5 / 50**. No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). Waiting on founder **EXTERNAL** (durable Neon+Vercel **and** JPJO).
 
 ### Local closed-beta smoke (2026-09-10)
 

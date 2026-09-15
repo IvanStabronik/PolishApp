@@ -256,6 +256,31 @@ describe("M5 CSRF / origin protection", () => {
     expect(assertSameOrigin(req)).toBe(true);
   });
 
+  it("tunnel cookie session accepts trusted Referer when Origin is absent", () => {
+    setOriginEnv("BETTER_AUTH_URL", "http://127.0.0.1:3000");
+    setOriginEnv("NODE_ENV", "development");
+    setOriginEnv("ALLOW_DEV_TUNNEL_ORIGINS", "true");
+    clearOriginEnv("NEXT_PUBLIC_APP_URL");
+    clearOriginEnv("APP_URL");
+    clearOriginEnv("TRUSTED_ORIGINS");
+    const ok = new Request("https://abc.trycloudflare.com/api/learning/attempt", {
+      method: "POST",
+      headers: {
+        Cookie: "session=abc",
+        Referer: "https://abc.trycloudflare.com/ru/learn/x",
+      },
+    });
+    expect(assertSameOrigin(ok)).toBe(true);
+    const bad = new Request("https://abc.trycloudflare.com/api/learning/attempt", {
+      method: "POST",
+      headers: {
+        Cookie: "session=abc",
+        Referer: "https://evil.example/phish",
+      },
+    });
+    expect(assertSameOrigin(bad)).toBe(false);
+  });
+
   it("ALLOW_DEV_TUNNEL_ORIGINS is refused when primary URL is a real public host", () => {
     setOriginEnv("BETTER_AUTH_URL", "https://app.vercel.app");
     setOriginEnv("NODE_ENV", "production");

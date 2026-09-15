@@ -8,6 +8,10 @@ import {
   resolveStepChromeLang,
   type StepChromeLang,
 } from "@/lib/content/step-title-locale";
+import {
+  THEORY_EXTRA_BEL,
+  THEORY_EXTRA_UK,
+} from "@/lib/content/instructional-theory-extra";
 
 function norm(s: string): string {
   return s.replace(/\s+/g, " ").trim();
@@ -176,6 +180,8 @@ const BODY_UK: Record<string, string> = {
     "Службовець каже, чого бракує. Ви підтверджуєте, уточнюєте комплект і просите formularz.",
   "Вы сами проходите короткий визит: цель, имя, передача комплекта и уточнение, где ждать.":
     "Ви самі проходите короткий візит: мета, ім'я, передача комплекту і уточнення, де чекати.",
+
+  ...THEORY_EXTRA_UK,
 };
 
 const BODY_BEL: Record<string, string> = {
@@ -340,6 +346,8 @@ const BODY_BEL: Record<string, string> = {
     "Служачы кажа, чаго не хапае. Вы пацвярджаеце, удакладняеце камплект і просіце formularz.",
   "Вы сами проходите короткий визит: цель, имя, передача комплекта и уточнение, где ждать.":
     "Вы самі праходзіце кароткі візіт: мэта, імя, перадача камплекту і ўдакладненне, дзе чакаць.",
+
+  ...THEORY_EXTRA_BEL,
 };
 
 const HALL_WORD: Record<StepChromeLang, string> = {
