@@ -3,7 +3,7 @@
 **Primary path:** **Vercel (web)** + **Neon** (preferred) or **Supabase** Postgres → live HTTPS closed beta.  
 **Status (2026-09-10):** GitHub Environment `private-beta` shell **exists** (secrets still empty). No live HTTPS claimed. No fake secrets. No fake `PUBLISHED`. Code cannot mint accounts for you.
 
-**Alternate (if Neon/Vercel stalled):** free HTTPS tunnel over the **local closed-beta** that already PASSes — Cloudflare Tunnel preferred (`cloudflared`), ngrok acceptable. See [tunnel-closed-beta.md](./tunnel-closed-beta.md). Tunnel ≠ production Vercel; still not Neon done; still not `PUBLISHED` / JPJO.
+**Alternate (if Neon/Vercel stalled):** free HTTPS tunnel over the **local closed-beta** that already PASSes — Cloudflare Tunnel preferred (`cloudflared`), ngrok acceptable. See [tunnel-closed-beta.md](./tunnel-closed-beta.md). **Tunnel smoke + Session-1 life loop PASS** (2026-09-15, ephemeral `*.trycloudflare.com`). Tunnel ≠ production Vercel; still not Neon done; still not `PUBLISHED` / JPJO.
 
 **Contract (must match live):** `BETA_ALLOW_DRAFT=true`, `DEMO_MODE=false`, `DEMO_PREVIEW=false`.
 

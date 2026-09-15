@@ -106,6 +106,35 @@ Honest paste-back: **tunnel HTTPS health/ready 200** — alternate path only; Ne
 
 ---
 
+## Prove Session-1 life loop (login → DRAFT → lesson → attempt)
+
+With local closed-beta + tunnel already up:
+
+```powershell
+cd D:\MyProjects\PolishApp\web
+$env:BASE_URL = "https://YOUR-SUBDOMAIN.trycloudflare.com"
+$env:PLAYWRIGHT_BASE_URL = $env:BASE_URL
+# When LAN DNS NXDOMAIN on *.trycloudflare.com (Node getaddrinfo fails; Chromium needs MAP):
+$ip = (Resolve-DnsName YOUR-SUBDOMAIN.trycloudflare.com -Type A -Server 1.1.1.1 -DnsOnly |
+  Where-Object Type -eq A | Select-Object -First 1 -ExpandProperty IPAddress)
+$env:PLAYWRIGHT_HOST_RESOLVER_RULES = "MAP YOUR-SUBDOMAIN.trycloudflare.com $ip"
+pnpm exec playwright test -c playwright.tunnel.config.ts
+```
+
+Writes `web/playwright-artifacts/tunnel-session1/result.json` (gitignored).
+
+### Evidence (ephemeral — URL may be dead later)
+
+| Field | Value |
+| --- | --- |
+| Timestamp (UTC) | **2026-09-15T16:18:40Z** |
+| Public URL | `https://namespace-buying-retailer-strength.trycloudflare.com` |
+| Smoke health/ready | **PASS** 200 (via `1.1.1.1` + `curl --resolve`; system DNS NXDOMAIN) |
+| Session-1 | **PASS** — admin@demo → dashboard DRAFT halls → `LES-A1-PS-01` → UI attempt `ex-ps-01` |
+| Honest claim | Tunnel over **local** closed-beta. **Not** Neon/Vercel. Content remains **DRAFT**. No JPJO. |
+
+---
+
 ## Security notes
 
 - `ALLOW_DEV_TUNNEL_ORIGINS` is refused when `BETTER_AUTH_URL` / `APP_URL` point at a real public host (e.g. `*.vercel.app`). Do not set the flag on Vercel.

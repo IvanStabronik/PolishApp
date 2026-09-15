@@ -17,8 +17,25 @@
 **UK/BEL exercise prompt+feedback (2026-09-15):** ~**39 / 50** — curated maps for **all A1** exercise prompts (153) + correct/incorrect feedback (303); wired into `draftLessonToDetail` / standalone ExercisePlayer + `evaluateAnswer` (L1 + UK UI). UK chrome solid; BEL feedback phrase-level (prompts solid, longer feedback uneven — unknown RU still passes through). YAML unchanged (DRAFT honesty). **No live HTTPS. No JPJO. No fake PUBLISHED.** Credentials re-probe: `private-beta` secrets **empty**; `vercel whoami` **no credentials**; no Neon URL in shell env; local `web/.env.local` only (docker closed-beta).
 **BEL feedback parity close (2026-09-15):** ~**40 / 50** — `FEEDBACK_BEL` completed to **303 / 303** adult-quality Belarusian (was 260 + slurry). Coverage test: all A1 YAML correct/incorrect localize for `bel` with **0** unmapped. Wire unchanged. YAML still DRAFT. **No live HTTPS. No JPJO. No fake PUBLISHED.** Credentials re-probe: `gh` OK; `private-beta` secrets **0**; `vercel whoami` **no credentials**; no Neon/`DATABASE_URL` in shell — bootstrap/smoke **not runnable**.
 **Alternate HTTPS tunnel path (2026-09-15):** ~**41 / 50** — [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1) + [`tunnel-closed-beta.md`](../operations/tunnel-closed-beta.md); `ALLOW_DEV_TUNNEL_ORIGINS` + auth client `window.location.origin` so login works through cloudflared/ngrok. **Live tunnel smoke PASS** this session: health+ready 200 on `https://namespace-buying-retailer-strength.trycloudflare.com` (ephemeral quick tunnel; local DNS NXDOMAIN mitigated via 1.1.1.1). **Tunnel ≠ Vercel/Neon production.** **No Neon done. No fake PUBLISHED / JPJO.**
+**Tunnel Session-1 life loop (2026-09-15 ~16:18Z):** ~**42 / 50** — Playwright [`e2e/tunnel-session1.spec.ts`](../../web/e2e/tunnel-session1.spec.ts) + [`playwright.tunnel.config.ts`](../../web/playwright.tunnel.config.ts) against same ephemeral URL: admin sign-in → `/ru/dashboard` DRAFT halls (preview banner) → Pierwsze spotkanie `LES-A1-PS-01` → UI submit `ex-ps-01` → **PASS**. Artifact: `web/playwright-artifacts/tunnel-session1/result.json` (gitignored). **Still not Neon/Vercel. Still DRAFT. No JPJO.**
 
-### Critical re-score (post tunnel alternate HTTPS) — `/50`
+### Critical re-score (post tunnel Session-1 life loop) — `/50`
+
+| # | Criterion | before | after | Note |
+| --- | --- | ---: | ---: | --- |
+| 1 | Session-1 life loop | 4.15 | 4.55 | Public HTTPS login → DRAFT halls → lesson → one attempt **PASS** (ephemeral tunnel) |
+| 2 | Feedback that teaches | 4.5 | 4.5 | Unchanged |
+| 3 | Listening + speaking path | 4.0 | 4.0 | Unchanged |
+| 4 | Human-readable progress | 3.9 | 3.9 | Unchanged |
+| 5 | Zero civilian ops jargon | 3.75 | 3.75 | Unchanged |
+| 6 | BEL first-class L1 | 4.5 | 4.5 | Unchanged |
+| 7 | Content honesty contract | 4.0 | 4.0 | Still DRAFT; tunnel not PUBLISHED |
+| 8 | Deploy teaches someone | 4.5 | 4.65 | Tunnel smoke + Session-1 proven; Neon/Vercel still EXTERNAL |
+| 9 | Admin ≤ learner craft | 3.5 | 3.5 | Freeze held |
+| 10 | Competitive first week | 3.65 | 3.75 | Invitees can run Session-1 on tunnel; host rotates / machine must stay up |
+| | **Total** | **~41** | **~42** | Honest: live Session-1 via tunnel; durable production still EXTERNAL |
+
+### Critical re-score (post tunnel alternate HTTPS) — `/50` (historical)
 
 | # | Criterion | before | after | Note |
 | --- | --- | ---: | ---: | --- |
@@ -144,8 +161,9 @@ See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not inv
 | UK/BEL exercise prompt + correct/incorrect feedback (all A1) | **Done** — `exercise-chrome-locale.ts`; `draftLessonToDetail` + ExercisePlayer + `evaluateAnswer`; UK solid; BEL feedback was partial |
 | BEL feedback parity (all A1 correct/incorrect, adult BE) | **Done** — `FEEDBACK_BEL` 303/303; coverage unit test; no slurry |
 | Alternate live HTTPS via free tunnel (cloudflared/ngrok) | **Done** — [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1); auth Origin trust + client baseURL; **≠ Neon/Vercel** |
+| Tunnel Session-1 life loop (login → DRAFT halls → lesson → attempt) | **Done PASS** — `e2e/tunnel-session1.spec.ts` on `https://namespace-buying-retailer-strength.trycloudflare.com` at **2026-09-15T16:18:40Z**; ephemeral; **≠ Neon/Vercel** |
 
-Score estimate ~**41 / 50**. No fake PUBLISHED. No Neon claimed. Tunnel path available when local PASS. Waiting on founder **EXTERNAL** (Neon URL + Vercel and/or tunnel smoke + JPJO).
+Score estimate ~**42 / 50**. No fake PUBLISHED. No Neon claimed. Tunnel Session-1 **PASS** (ephemeral). Waiting on founder **EXTERNAL** (durable Neon+Vercel and/or keep tunnel for invitees + JPJO).
 
 ### Local closed-beta smoke (2026-09-10)
 
@@ -209,8 +227,8 @@ Why not 34: **w-kawiarni still had zero assessed listening**; live HTTPS + JPJO 
 1. Static edge-tts ≠ studio listening (FUN-110 / V2). All assessed items now have `audioUrl` (no `textPl` on stimulus) — still interim Neural TTS.
 2. Speaking recognition best-effort — not exam scoring.
 3. All content **DRAFT** — no JPJO PUBLISHED hall (§7). **EXTERNAL**
-4. Competitive week-1 **local day-1 LOCAL_PASS** (2026-09-10); live invitees + HTTPS still EXTERNAL / FAIL.
-5. Live HTTPS not proven without Neon/Vercel (human). **EXTERNAL** — founder path: [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + preflight.
+4. Competitive week-1 **local day-1 LOCAL_PASS** (2026-09-10); **tunnel Session-1 PASS** (2026-09-15, ephemeral). Durable multi-day invite week still weak until Neon/Vercel or a named/stable tunnel.
+5. Durable production HTTPS (Neon+Vercel) still **EXTERNAL**. Alternate tunnel health/ready + Session-1 **PASS** — founder path: [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) + [`tunnel-closed-beta.md`](../operations/tunnel-closed-beta.md).
 6. Admin vs learner craft — freeze held; recheck §9 after player polish.
 7. ~~Play-gate is client-side only~~ — **mitigated**: server requires `listeningPlayToken` (stimulus or `tts_unavailable` unlock). Still interim vs studio audio.
 
