@@ -16,8 +16,25 @@
 **UK/BEL instructional bodies (2026-09-15):** ~**38 / 50** — curated UK+BEL maps for all A1 hall/lesson situation+objective + situation `body_ru` shorts; Pierwsze spotkanie key-line / pan / grammar summaries; wired into lesson player, module hub, dashboard cards; `klatce` typo fixed. Exercise prompt/feedback chrome still mostly RU. **No live HTTPS. No JPJO. No fake PUBLISHED.** Credentials probe: `private-beta` secrets empty; `vercel whoami` no credentials; no Neon env in shell.
 **UK/BEL exercise prompt+feedback (2026-09-15):** ~**39 / 50** — curated maps for **all A1** exercise prompts (153) + correct/incorrect feedback (303); wired into `draftLessonToDetail` / standalone ExercisePlayer + `evaluateAnswer` (L1 + UK UI). UK chrome solid; BEL feedback phrase-level (prompts solid, longer feedback uneven — unknown RU still passes through). YAML unchanged (DRAFT honesty). **No live HTTPS. No JPJO. No fake PUBLISHED.** Credentials re-probe: `private-beta` secrets **empty**; `vercel whoami` **no credentials**; no Neon URL in shell env; local `web/.env.local` only (docker closed-beta).
 **BEL feedback parity close (2026-09-15):** ~**40 / 50** — `FEEDBACK_BEL` completed to **303 / 303** adult-quality Belarusian (was 260 + slurry). Coverage test: all A1 YAML correct/incorrect localize for `bel` with **0** unmapped. Wire unchanged. YAML still DRAFT. **No live HTTPS. No JPJO. No fake PUBLISHED.** Credentials re-probe: `gh` OK; `private-beta` secrets **0**; `vercel whoami` **no credentials**; no Neon/`DATABASE_URL` in shell — bootstrap/smoke **not runnable**.
+**Alternate HTTPS tunnel path (2026-09-15):** ~**41 / 50** — [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1) + [`tunnel-closed-beta.md`](../operations/tunnel-closed-beta.md); `ALLOW_DEV_TUNNEL_ORIGINS` + auth client `window.location.origin` so login works through cloudflared/ngrok. **Live tunnel smoke PASS** this session: health+ready 200 on `https://namespace-buying-retailer-strength.trycloudflare.com` (ephemeral quick tunnel; local DNS NXDOMAIN mitigated via 1.1.1.1). **Tunnel ≠ Vercel/Neon production.** **No Neon done. No fake PUBLISHED / JPJO.**
 
-### Critical re-score (post BEL feedback parity) — `/50`
+### Critical re-score (post tunnel alternate HTTPS) — `/50`
+
+| # | Criterion | before | after | Note |
+| --- | --- | ---: | ---: | --- |
+| 1 | Session-1 life loop | 4.0 | 4.15 | Tunnel can expose local invite path on real HTTPS; still not durable Vercel |
+| 2 | Feedback that teaches | 4.5 | 4.5 | Unchanged |
+| 3 | Listening + speaking path | 4.0 | 4.0 | Unchanged |
+| 4 | Human-readable progress | 3.9 | 3.9 | Unchanged |
+| 5 | Zero civilian ops jargon | 3.75 | 3.75 | Unchanged |
+| 6 | BEL first-class L1 | 4.5 | 4.5 | Unchanged |
+| 7 | Content honesty contract | 4.0 | 4.0 | Still DRAFT; tunnel not PUBLISHED |
+| 8 | Deploy teaches someone | 4.25 | 4.5 | Founder one-command tunnel when local PASS; Neon/Vercel still EXTERNAL |
+| 9 | Admin ≤ learner craft | 3.5 | 3.5 | Freeze held |
+| 10 | Competitive first week | 3.5 | 3.65 | Live week possible via tunnel invitees; host ephemeral ≠ production |
+| | **Total** | **~40** | **~41** | Honest: tunnel unblocks HTTPS demo, not production deploy |
+
+### Critical re-score (post BEL feedback parity) — `/50` (historical)
 
 | # | Criterion | before | after | Note |
 | --- | --- | ---: | ---: | --- |
@@ -83,17 +100,18 @@
 
 ### Waiting on founder (EXTERNAL)
 
-**Blocked on human-owned steps only** — Neon/Supabase `DATABASE_URL` (not pasted yet) + Vercel project + env vars → `neon-bootstrap` → `bootstrap-first-admin` → live `BASE_URL` health·ready, and/or independent JPJO. Code cannot unlock this.
+**Blocked on human-owned steps** — Neon/Supabase `DATABASE_URL` + Vercel still preferred for durable HTTPS. **Alternate:** local closed-beta PASS → [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1) for ephemeral live HTTPS (does **not** complete Neon/Vercel). JPJO still independent EXTERNAL.
 
 **Run (Windows):**
 1. [`scripts/vercel-neon-preflight.ps1`](../../scripts/vercel-neon-preflight.ps1) — fast config/auth probe (primary helper alongside wizard).
 2. After Neon Create: [`scripts/neon-bootstrap.ps1`](../../scripts/neon-bootstrap.ps1) `-DirectUrl` / `-PooledUrl`.
 3. After migrate + Vercel env: [`scripts/bootstrap-first-admin.ps1`](../../scripts/bootstrap-first-admin.ps1) `-DatabaseUrl` `-Email` `-Password` (`DEMO_MODE=false`).
 4. After live URL: [`scripts/smoke-vercel.ps1`](../../scripts/smoke-vercel.ps1) `-BaseUrl https://…`
-5. Click path (exact button labels): [`vercel-neon-click-checklist.md`](../operations/vercel-neon-click-checklist.md)
-6. [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) — interactive secret capture + Done/Blocked paste-back.
+5. **Alternate HTTPS:** [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1) when local PASS and Neon/Vercel stalled — see [`tunnel-closed-beta.md`](../operations/tunnel-closed-beta.md).
+6. Click path (exact button labels): [`vercel-neon-click-checklist.md`](../operations/vercel-neon-click-checklist.md)
+7. [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) — interactive secret capture + Done/Blocked paste-back.
 
-See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not invent secrets; do not claim HTTPS without curl 200 / smoke PASS.
+See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not invent secrets; do not claim HTTPS without curl 200 / smoke PASS. Tunnel smoke ≠ Neon/Vercel Done.
 
 ### STOP RULE
 
@@ -125,8 +143,9 @@ See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not inv
 | UK/BEL instructional bodies (situation/objective + PS theory) | **Done** — `instructional-body-locale.ts`; player + hub + dashboard; other-hall key-line/grammar still RU |
 | UK/BEL exercise prompt + correct/incorrect feedback (all A1) | **Done** — `exercise-chrome-locale.ts`; `draftLessonToDetail` + ExercisePlayer + `evaluateAnswer`; UK solid; BEL feedback was partial |
 | BEL feedback parity (all A1 correct/incorrect, adult BE) | **Done** — `FEEDBACK_BEL` 303/303; coverage unit test; no slurry |
+| Alternate live HTTPS via free tunnel (cloudflared/ngrok) | **Done** — [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1); auth Origin trust + client baseURL; **≠ Neon/Vercel** |
 
-Score estimate ~**40 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL** (Neon URL + Vercel).
+Score estimate ~**41 / 50**. No fake PUBLISHED. No Neon claimed. Tunnel path available when local PASS. Waiting on founder **EXTERNAL** (Neon URL + Vercel and/or tunnel smoke + JPJO).
 
 ### Local closed-beta smoke (2026-09-10)
 

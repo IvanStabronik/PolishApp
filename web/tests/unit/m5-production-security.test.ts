@@ -22,6 +22,7 @@ const ORIGIN_ENV_KEYS = [
   "NEXT_PUBLIC_APP_URL",
   "APP_URL",
   "TRUSTED_ORIGINS",
+  "ALLOW_DEV_TUNNEL_ORIGINS",
   "NODE_ENV",
 ] as const;
 
@@ -236,6 +237,39 @@ describe("M5 CSRF / origin protection", () => {
     const origins = resolveTrustedOrigins();
     expect(origins).toContain("http://127.0.0.1:3000");
     expect(origins).toContain("http://localhost:3000");
+  });
+
+  it("ALLOW_DEV_TUNNEL_ORIGINS trusts cloudflared/ngrok wildcards on loopback base", () => {
+    setOriginEnv("BETTER_AUTH_URL", "http://127.0.0.1:3000");
+    setOriginEnv("NODE_ENV", "development");
+    setOriginEnv("ALLOW_DEV_TUNNEL_ORIGINS", "true");
+    clearOriginEnv("NEXT_PUBLIC_APP_URL");
+    clearOriginEnv("APP_URL");
+    clearOriginEnv("TRUSTED_ORIGINS");
+    const origins = resolveTrustedOrigins();
+    expect(origins).toContain("https://*.trycloudflare.com");
+    expect(origins).toContain("https://*.ngrok-free.app");
+    const req = new Request("https://abc.trycloudflare.com/api/privacy/export", {
+      method: "POST",
+      headers: { Origin: "https://abc.trycloudflare.com" },
+    });
+    expect(assertSameOrigin(req)).toBe(true);
+  });
+
+  it("ALLOW_DEV_TUNNEL_ORIGINS is refused when primary URL is a real public host", () => {
+    setOriginEnv("BETTER_AUTH_URL", "https://app.vercel.app");
+    setOriginEnv("NODE_ENV", "production");
+    setOriginEnv("ALLOW_DEV_TUNNEL_ORIGINS", "true");
+    clearOriginEnv("NEXT_PUBLIC_APP_URL");
+    clearOriginEnv("APP_URL");
+    clearOriginEnv("TRUSTED_ORIGINS");
+    const origins = resolveTrustedOrigins();
+    expect(origins).not.toContain("https://*.trycloudflare.com");
+    const req = new Request("https://app.vercel.app/api/privacy/export", {
+      method: "POST",
+      headers: { Origin: "https://evil.trycloudflare.com" },
+    });
+    expect(assertSameOrigin(req)).toBe(false);
   });
 });
 

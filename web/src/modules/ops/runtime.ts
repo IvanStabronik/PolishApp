@@ -122,6 +122,96 @@ function isLoopbackHost(hostname: string): boolean {
   );
 }
 
+/** Host suffixes for free HTTPS tunnels (closed-beta alternate path). */
+export const DEV_TUNNEL_HOST_SUFFIXES = [
+  ".trycloudflare.com",
+  ".cfargotunnel.com",
+  ".ngrok-free.app",
+  ".ngrok-free.dev",
+  ".ngrok.app",
+  ".ngrok.io",
+] as const;
+
+/** Better Auth wildcard patterns (supported by matchesOriginPattern). */
+export const DEV_TUNNEL_ORIGIN_PATTERNS = [
+  "https://*.trycloudflare.com",
+  "https://*.cfargotunnel.com",
+  "https://*.ngrok-free.app",
+  "https://*.ngrok-free.dev",
+  "https://*.ngrok.app",
+  "https://*.ngrok.io",
+] as const;
+
+export function isDevTunnelHost(hostname: string): boolean {
+  const host = hostname.toLowerCase();
+  return DEV_TUNNEL_HOST_SUFFIXES.some(
+    (suffix) => host.endsWith(suffix) && host.length > suffix.length,
+  );
+}
+
+/**
+ * Opt-in free-tunnel Origin allow-list for local closed-beta HTTPS.
+ * Never enable on Vercel/production hosts — refused when primary URL is a
+ * non-loopback, non-tunnel public host.
+ */
+export function shouldAllowDevTunnelOrigins(
+  env: NodeJS.ProcessEnv = process.env,
+): boolean {
+  const flag = env.ALLOW_DEV_TUNNEL_ORIGINS;
+  if (flag !== "true" && flag !== "1") return false;
+
+  for (const key of ["BETTER_AUTH_URL", "NEXT_PUBLIC_APP_URL", "APP_URL"]) {
+    const v = env[key];
+    if (!v) continue;
+    try {
+      const host = new URL(v).hostname;
+      if (isLoopbackHost(host) || isDevTunnelHost(host)) continue;
+      return false;
+    } catch {
+      /* ignore */
+    }
+  }
+  return true;
+}
+
+/** Exact origin or Better Auth-style `https://*.suffix` pattern. */
+export function originMatchesTrustedPattern(
+  candidateOrigin: string,
+  pattern: string,
+): boolean {
+  if (!pattern.includes("*")) {
+    return candidateOrigin === pattern;
+  }
+  // Expected shape: https://*.trycloudflare.com
+  const m = /^https:\/\/\*\.([a-z0-9.-]+)$/i.exec(pattern.trim());
+  if (!m) return false;
+  try {
+    const u = new URL(candidateOrigin);
+    if (u.protocol !== "https:") return false;
+    const host = u.hostname.toLowerCase();
+    const suffix = `.${m[1].toLowerCase()}`;
+    return host.endsWith(suffix) && host.length > suffix.length;
+  } catch {
+    return false;
+  }
+}
+
+export function isTrustedRequestOrigin(
+  candidate: string,
+  env: NodeJS.ProcessEnv = process.env,
+): boolean {
+  let origin: string;
+  try {
+    origin = new URL(candidate).origin;
+  } catch {
+    return false;
+  }
+  for (const pattern of resolveTrustedOrigins(env)) {
+    if (originMatchesTrustedPattern(origin, pattern)) return true;
+  }
+  return false;
+}
+
 export function assertEnvValidated(): void {
   if (!validated && process.env.SKIP_ENV_VALIDATION !== "true") {
     validateRuntimeEnv();
@@ -222,6 +312,13 @@ export function resolveTrustedOrigins(
     allowed.add("http://localhost:3001");
     allowed.add("http://127.0.0.1:3001");
   }
+
+  // Free HTTPS tunnel (cloudflared / ngrok) for local closed-beta — opt-in only.
+  if (shouldAllowDevTunnelOrigins(env)) {
+    for (const pattern of DEV_TUNNEL_ORIGIN_PATTERNS) {
+      allowed.add(pattern);
+    }
+  }
   return [...allowed];
 }
 
@@ -256,15 +353,10 @@ function shouldAllowHardcodedLoopbackOrigins(
  *   separately — there is no ambient session cookie to forge via CSRF.
  */
 export function assertSameOrigin(request: Request): boolean {
-  const allowed = new Set(resolveTrustedOrigins());
   const origin = request.headers.get("origin");
 
   if (origin) {
-    try {
-      return allowed.has(new URL(origin).origin);
-    } catch {
-      return false;
-    }
+    return isTrustedRequestOrigin(origin);
   }
 
   const secFetchSite = request.headers.get("sec-fetch-site")?.toLowerCase();
@@ -279,11 +371,7 @@ export function assertSameOrigin(request: Request): boolean {
   if (cookie && cookie.trim().length > 0) {
     const referer = request.headers.get("referer");
     if (referer) {
-      try {
-        return allowed.has(new URL(referer).origin);
-      } catch {
-        return false;
-      }
+      return isTrustedRequestOrigin(referer);
     }
     return false;
   }

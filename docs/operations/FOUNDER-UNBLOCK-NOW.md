@@ -3,6 +3,8 @@
 **Primary path:** **Vercel (web)** + **Neon** (preferred) or **Supabase** Postgres → live HTTPS closed beta.  
 **Status (2026-09-10):** GitHub Environment `private-beta` shell **exists** (secrets still empty). No live HTTPS claimed. No fake secrets. No fake `PUBLISHED`. Code cannot mint accounts for you.
 
+**Alternate (if Neon/Vercel stalled):** free HTTPS tunnel over the **local closed-beta** that already PASSes — Cloudflare Tunnel preferred (`cloudflared`), ngrok acceptable. See [tunnel-closed-beta.md](./tunnel-closed-beta.md). Tunnel ≠ production Vercel; still not Neon done; still not `PUBLISHED` / JPJO.
+
 **Contract (must match live):** `BETA_ALLOW_DRAFT=true`, `DEMO_MODE=false`, `DEMO_PREVIEW=false`.
 
 **Primary helpers (Windows):**
@@ -35,7 +37,15 @@ powershell -ExecutionPolicy Bypass -File scripts\founder-unblock.ps1
 
 Optional (Git Bash / WSL / macOS): `bash scripts/founder-unblock.sh`
 
-Do **not** paste secret values into chat, tickets, or git. Related: [external-unblock-wizard.md](./external-unblock-wizard.md), [https-deploy-dry-run.md](./https-deploy-dry-run.md), [local-closed-beta.md](./local-closed-beta.md).
+**Alternate HTTPS (local already PASS, Neon/Vercel stalled):**
+
+```powershell
+cd D:\MyProjects\PolishApp
+# once in web/.env.local: ALLOW_DEV_TUNNEL_ORIGINS=true  (never on Vercel), then restart pnpm dev
+powershell -ExecutionPolicy Bypass -File scripts\tunnel-closed-beta.ps1
+```
+
+Do **not** paste secret values into chat, tickets, or git. Related: [external-unblock-wizard.md](./external-unblock-wizard.md), [https-deploy-dry-run.md](./https-deploy-dry-run.md), [local-closed-beta.md](./local-closed-beta.md), [tunnel-closed-beta.md](./tunnel-closed-beta.md).
 
 ---
 
