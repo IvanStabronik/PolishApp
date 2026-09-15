@@ -176,6 +176,26 @@ describe("UK/BEL exercise prompt + feedback chrome", () => {
     ).toBe("Неизвестная строка без карты");
   });
 
+  it("BEL feedback stays distinct Belarusian (no RU slurry)", () => {
+    const samples = [
+      "Нужен предлог z: Jestem z…",
+      "Сначала поздороваться, потом имена, потом вежливо закрыть.",
+      "Это представление (Nazywam się… A pani?), не прощание и не вопрос «откуда».",
+      "Количество, цена и paragon — нужные куски у кассы.",
+      "Cześć слишком своё; Witam serdecznie — канцелярски/письменно, не для кlatki.",
+    ];
+    for (const ru of samples) {
+      const bel = localizeExerciseFeedback(ru, "bel");
+      expect(bel).not.toBe(ru);
+      expect(bel).not.toMatch(
+        /слишком|сначала|Нужен |Это |Количество|прощание|своё/,
+      );
+      expect(bel).toMatch(
+        /Патрэбн|Спачатку|Гэта |Колькасць|развітанне|занадта|сваё/,
+      );
+    }
+  });
+
   it("draftLessonToDetail surfaces UK exercise prompts", () => {
     const mods = loadAllModulesFromYaml();
     const ps = mods.find((m) => m.id.includes("pierwsze-spotkanie"));
@@ -188,6 +208,20 @@ describe("UK/BEL exercise prompt + feedback chrome", () => {
       expect(exStep.exercise.prompt).not.toMatch(/^Сосед на к/);
       expect(exStep.exercise.prompt).toMatch(
         /Сусід|Як |Позначте|Доповніть|Послухайте/,
+      );
+    }
+  });
+
+  it("draftLessonToDetail surfaces BEL exercise prompts", () => {
+    const mods = loadAllModulesFromYaml();
+    const ps = mods.find((m) => m.id.includes("pierwsze-spotkanie"));
+    expect(ps).toBeTruthy();
+    const detail = draftLessonToDetail(ps!, ps!.lessons[0]!, "bel", "ru");
+    const exStep = detail.steps.find((s) => s.kind === "exercise");
+    expect(exStep?.kind).toBe("exercise");
+    if (exStep?.kind === "exercise") {
+      expect(exStep.exercise.prompt).toMatch(
+        /Сусед|Як |Пазначце|Дапоўніце|Паслухайце/,
       );
     }
   });
@@ -207,6 +241,47 @@ describe("UK/BEL exercise prompt + feedback chrome", () => {
       /Так\.|спокійн|pani|Dzień dobry|Nazywam|Skąd/,
     );
     expect(result.explanation).not.toMatch(/^Да\./);
+  });
+
+  it("evaluateAnswer returns BEL feedback when L1 is bel", () => {
+    const mods = loadAllModulesFromYaml();
+    const ps = mods.find((m) => m.id.includes("pierwsze-spotkanie"));
+    const ex = ps!.lessons[0]!.exercises.find((e) => e.type === "single_choice");
+    expect(ex).toBeTruthy();
+    if (!ex || ex.type !== "single_choice") throw new Error("expected SC");
+    const result = evaluateAnswer(
+      ex,
+      { type: "single_choice", index: ex.correctIndex },
+      { l1: "bel" },
+    );
+    expect(result.explanation).toMatch(
+      /Так\.|спакойн|pani|Dzień dobry|Nazywam|Skąd/,
+    );
+    expect(result.explanation).not.toMatch(/^Да\./);
+    expect(result.explanation).not.toMatch(/спокойн/);
+  });
+
+  it("all A1 correct/incorrect explanations localize for bel", () => {
+    const mods = loadAllModulesFromYaml();
+    let checked = 0;
+    let unmapped = 0;
+    for (const mod of mods) {
+      for (const lesson of mod.lessons) {
+        for (const ex of lesson.exercises) {
+          const fb = (ex as { feedback?: { correct?: string; incorrect?: string } })
+            .feedback;
+          if (!fb) continue;
+          for (const raw of [fb.correct, fb.incorrect]) {
+            if (!raw) continue;
+            checked++;
+            const bel = localizeExerciseFeedback(raw, "bel");
+            if (bel === raw) unmapped++;
+          }
+        }
+      }
+    }
+    expect(checked).toBeGreaterThan(200);
+    expect(unmapped).toBe(0);
   });
 });
 
