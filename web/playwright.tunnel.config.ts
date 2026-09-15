@@ -54,7 +54,7 @@ if (resolverRules) {
 
 export default defineConfig({
   testDir: "./e2e",
-  testMatch: ["**/tunnel-session1.spec.ts"],
+  testMatch: ["**/tunnel-session1.spec.ts", "**/day1-tunnel-bakeoff.spec.ts"],
   fullyParallel: false,
   forbidOnly: true,
   retries: 0,

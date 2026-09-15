@@ -35,21 +35,21 @@
 
 | Criterion | Status | Why |
 | --- | --- | --- |
-| 1 Session-1 | **PARTIAL** | Works in DRAFT beta if env set; **local day-1 checklist LOCAL_PASS** 2026-09-10; live HTTPS still EXTERNAL. |
+| 1 Session-1 | **LIVE_TUNNEL PASS** / durable **FAIL** | Local **LOCAL_PASS** 2026-09-10; **LIVE_TUNNEL** day-1 **PASS** 2026-09-15 (invite→plan on public HTTPS). Durable Neon/Vercel still EXTERNAL. |
 | 2 Register | **PASS-ish** | pan/pani steps exist; depth uneven across halls. |
-| 3 Feedback | **PASS** | incorrect + L1 notes shipped. |
-| 4 Progress | **PARTIAL** | Labels improved; SoT FN parser was garbage until Wave 4 fix. |
-| 5 Listening | **PARTIAL** | Assessed listening seeded across L01 halls; TTS interim; stimulus not in lesson DTO (fetch-on-play). Still not studio audio. Local L5 ✅. |
-| 6 Speaking | **PARTIAL** | Coverage broadened; Web Speech best-effort; privacy note added. Local L6 ✅. |
-| 7 Beats phrasebot | **FAIL today** | Phrasebot wins on zero-friction Day 1 open (no invite/env). SŁOWARIUM wins on scenario coherence *if* beta path opens. **Local day-1 SPLIT**; live week not a clean WIN. |
-| 8 Honesty | **PASS** | DRAFT + preview banner; no fake PUBLISHED. |
+| 3 Feedback | **PASS** | incorrect + L1 notes shipped (UK+BEL). |
+| 4 Progress | **PARTIAL** | Labels improved; SoT FN parser fixed; plan narratable on tunnel L7. |
+| 5 Listening | **PARTIAL** | Assessed listening on path; edge-tts interim; L5 ✅ local + LIVE_TUNNEL. |
+| 6 Speaking | **PARTIAL** | Web Speech best-effort + honesty; L6 ✅ local + LIVE_TUNNEL. |
+| 7 Beats phrasebot | **SPLIT** | LIVE_TUNNEL: SŁOWARIUM wins scenario/register/repair once invitee has HTTPS; phrasebot still wins zero-friction open. Durable multi-day week still weak. |
+| 8 Honesty | **PASS** | DRAFT + preview banner; no fake PUBLISHED / JPJO. |
 
-## What would flip FAIL → WIN
+## What would flip PARTIAL_TUNNEL → WIN
 
-1. **Live HTTPS closed beta** with `BETA_ALLOW_DRAFT=true`, invites working, health/ready green (EXTERNAL).
+1. **Durable HTTPS closed beta** (Neon + Vercel) with `BETA_ALLOW_DRAFT=true`, invites working, health/ready green — **or** named tunnel + always-on host with stable hostname (EXTERNAL / founder).
 2. **First hall JPJO human APPROVE** → honest PUBLISHED path for Pierwsze spotkanie (EXTERNAL).
 3. **Studio or recorded listening** for assessed items (or keep TTS but label forever).
-4. **Timed bakeoff with 3 real invitees** — stop guessing; log day scores.
+4. **Timed bakeoff with 3 real invitees** across days 2–7 — stop guessing; log day scores.
 5. **Phrasebot parity on friction** — first lesson under 3 taps after invite accept.
 
 ## Telegram phrasebot — honest strengths
@@ -82,14 +82,29 @@ Run against [local-closed-beta.md](../operations/local-closed-beta.md) only. Fil
 | L8 | Same sitting: open a Telegram Polish phrasebot → 10 min dump of greetings | ✅ | **LOCAL reasoned only** (not automated Telegram) — ~10 min dump; open &lt;1 min; no invite |
 | L9 | Honest compare: scenarios+register+repair vs phrase volume / friction | ✅ | LOCAL: SŁOWARIUM wins scenario/register/repair; phrasebot wins friction/volume |
 
-**Local day-1 result:** `LOCAL_PASS` — 2026-09-10 (Playwright operator script `e2e/day1-local-bakeoff.spec.ts` + artifact `web/playwright-artifacts/day1-bakeoff/result.json`; stack: Postgres :5433 healthy, `BETA_ALLOW_DRAFT=true`, health/ready 200). Automated wall ~0.5 min (not human learner pacing). Human Day-1 protocol budget remains 25 min — path is within budget.  
-**Live week-1 verdict:** remains **FAIL** until Neon+Vercel HTTPS + real invitees (see protocol above). Do not upgrade this row from local alone.
+**Local day-1 result:** `LOCAL_PASS` — 2026-09-10 (Playwright `e2e/day1-local-bakeoff.spec.ts` + `web/playwright-artifacts/day1-bakeoff/result.json`). Automated wall ~0.5 min.
+
+### LIVE_TUNNEL day-1 (2026-09-15) — honest, not Vercel
+
+| Field | Value |
+| --- | --- |
+| Mode | **LIVE_TUNNEL** (Cloudflare quick tunnel → local :3000). **Not** durable Vercel/Neon. |
+| Public URL | `https://namespace-buying-retailer-strength.trycloudflare.com` |
+| Ran at (UTC) | **2026-09-15T16:23:17Z** |
+| Spec | `e2e/day1-tunnel-bakeoff.spec.ts` + `playwright.tunnel.config.ts` |
+| Result | **PASS** (L1–L9) — invite → onboard → PS L01 listen/speak/wrong+L1 → plan |
+| Wall clock | ~0.59 min automated |
+| Artifact | `web/playwright-artifacts/day1-tunnel-bakeoff/result.json` (gitignored) |
+| Smoke | health/ready **200** via `1.1.1.1` + `curl --resolve` |
+
+**Live week-1 verdict:** **PARTIAL_TUNNEL** — day-1 invite path proven on public HTTPS; hostname ephemeral; host machine must stay up; no timed days 2–7 with real invitees; durable Neon+Vercel still EXTERNAL. Do **not** claim production WIN.
 
 ## Operator log (fill when running live or local series)
 
 | Day | SŁOWARIUM (min / pass?) | Phrasebot (min / pass?) | Notes |
 | --- | --- | --- | --- |
-| 1 | **LOCAL** automated ~0.5 / **PASS** (human budget 25; path clear) | **LOCAL reasoned** ~10 / PASS on volume | Invite→onboard→PS L01 listen+speak+wrong L1+plan. Live HTTPS not run. |
+| 1 | **LOCAL** ~0.5 / **PASS** (2026-09-10) | **LOCAL reasoned** ~10 / PASS on volume | Invite→onboard→PS L01 listen+speak+wrong L1+plan |
+| 1 | **LIVE_TUNNEL** ~0.59 / **PASS** (2026-09-15) | reasoned ~10 / PASS volume | Same checklist on public HTTPS; **≠ Vercel** |
 | 2 | | | |
 | 3 | | | |
 | 4 | | | |
@@ -97,4 +112,4 @@ Run against [local-closed-beta.md](../operations/local-closed-beta.md) only. Fil
 | 6 | | | |
 | 7 | | | |
 
-**Verdict after run:** `SPLIT` (LOCAL) — local closed-beta day-1 **PASS**; live competitive week still **FAIL** (no HTTPS invitees). Phrasebot still wins zero-friction open.
+**Verdict after run:** `SPLIT` / `PARTIAL_TUNNEL` — day-1 **PASS** on local + LIVE_TUNNEL; durable competitive week still **FAIL** until Neon+Vercel (or named stable tunnel + always-on host) + real multi-day invitees. Phrasebot still wins zero-friction open.
