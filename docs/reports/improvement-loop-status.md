@@ -149,20 +149,25 @@
 | 10 | Competitive first week | 3.5 | 3.5 | Local day-1 LOCAL_PASS; live week FAIL |
 | | **Total** | **~36** | **~37.5** | Still far from reference; EXTERNAL wall |
 
-### Waiting on founder (EXTERNAL)
+### WAITING_ON_FOUNDER
 
-**Blocked on human-owned steps** — Neon/Supabase `DATABASE_URL` + Vercel still preferred for durable HTTPS. **Alternate:** local closed-beta PASS → [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1) for ephemeral live HTTPS (does **not** complete Neon/Vercel). JPJO still independent EXTERNAL.
+**Status:** ~**43.5 / 50** — CODE + LIVE_TUNNEL day-1 **done**. Goal still **EXTERNAL**.
 
-**Run (Windows):**
-1. [`scripts/vercel-neon-preflight.ps1`](../../scripts/vercel-neon-preflight.ps1) — fast config/auth probe (primary helper alongside wizard).
-2. After Neon Create: [`scripts/neon-bootstrap.ps1`](../../scripts/neon-bootstrap.ps1) `-DirectUrl` / `-PooledUrl`.
-3. After migrate + Vercel env: [`scripts/bootstrap-first-admin.ps1`](../../scripts/bootstrap-first-admin.ps1) `-DatabaseUrl` `-Email` `-Password` (`DEMO_MODE=false`).
-4. After live URL: [`scripts/smoke-vercel.ps1`](../../scripts/smoke-vercel.ps1) `-BaseUrl https://…`
-5. **Alternate HTTPS:** [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1) when local PASS and Neon/Vercel stalled — see [`tunnel-closed-beta.md`](../operations/tunnel-closed-beta.md).
-6. Click path (exact button labels): [`vercel-neon-click-checklist.md`](../operations/vercel-neon-click-checklist.md)
-7. [`scripts/founder-unblock.ps1`](../../scripts/founder-unblock.ps1) — interactive secret capture + Done/Blocked paste-back.
+**Blocked on:** durable HTTPS (Neon + Vercel preferred) **and** independent JPJO. Agents must **not** force Neon/Vercel logins.
 
-See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not invent secrets; do not claim HTTPS without curl 200 / smoke PASS. Tunnel smoke ≠ Neon/Vercel Done.
+**Founder: reply with exactly ONE of:**
+
+1. **Neon Direct URL** (paste) — agent runs bootstrap/migrate only after that
+2. **`vercel залогинен`** — founder already logged in; agent may then use CLI without opening browser auth
+3. **`пауза эталона`** — pause reference-quality push; no deploy / no auth work
+
+**Hard rule for agents:** do **not** run `vercel login`, browser OAuth, or any credential probe that opens a browser until the founder chooses (1), (2), or (3). No deploy attempts while waiting.
+
+After founder chooses, helpers (only then): [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md), [`scripts/neon-bootstrap.ps1`](../../scripts/neon-bootstrap.ps1), [`scripts/smoke-vercel.ps1`](../../scripts/smoke-vercel.ps1), click path [`vercel-neon-click-checklist.md`](../operations/vercel-neon-click-checklist.md). Tunnel ≠ Neon/Vercel Done. Do not invent secrets; do not claim HTTPS without curl 200 / smoke PASS.
+
+### Waiting on founder (EXTERNAL) — historical note
+
+Preferred durable path remains Neon/Supabase `DATABASE_URL` + Vercel. Alternate ephemeral HTTPS: [`scripts/tunnel-closed-beta.ps1`](../../scripts/tunnel-closed-beta.ps1) (already proven; does **not** complete Neon/Vercel). JPJO is independent EXTERNAL.
 
 ### STOP RULE
 
@@ -203,7 +208,7 @@ See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not inv
 | Theory-extra + tunnel Referer Origin unit coverage | **Done** — wave2 + m5 tests |
 | Goal completion audit (evidence checklist) | **Done** — [`goal-completion-audit.md`](./goal-completion-audit.md) |
 
-Score estimate ~**43.5 / 50**. No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). Waiting on founder **EXTERNAL** (durable Neon+Vercel **and** JPJO).
+Score estimate ~**43.5 / 50**. No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). See **WAITING_ON_FOUNDER** above — durable Neon+Vercel **and** JPJO; agents must not force logins.
 
 ### Local closed-beta smoke (2026-09-10)
 

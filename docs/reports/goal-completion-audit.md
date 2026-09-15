@@ -32,18 +32,18 @@ Evidence required — not docs alone:
 5. **GitHub `private-beta` secrets** — optional if Vercel Git env alone; currently **count 0**.
 6. **Competitive week** — at least one invitee multi-day log on durable host; phrasebot friction comparison **PASS** or documented near-parity. LIVE_TUNNEL day-1 alone = **PARTIAL**.
 
-## Credentials re-probe (this session)
+## Credentials (last known; no browser probes)
 
 | Probe | Result |
 | --- | --- |
 | `gh auth status` | **OK** (IvanStabronik) |
-| `vercel whoami` | **No credentials** |
+| `vercel whoami` | **No credentials** (do not run `vercel login`) |
 | `web/.vercel` link | **Absent** |
 | `DATABASE_URL` / `NEON_*` in process env | **Unset** |
 | `web/.env.local` | **Exists** (local closed-beta only) |
 | GitHub Environment `private-beta` secrets `total_count` | **0** |
 
-**Deploy:** not possible this session. No durable Vercel claim.
+**Deploy:** not attempted. No durable Vercel claim. **Agents must not open browser auth** until founder replies under **WAITING_ON_FOUNDER**.
 
 ## CODE shipped this pass (learner value)
 
@@ -52,14 +52,28 @@ Evidence required — not docs alone:
 - Progress page next-action CTAs (plan + dashboard).
 - Unit coverage for theory-extra + tunnel cookie/Referer Origin edge.
 
-## Founder actions (ranked)
+## WAITING_ON_FOUNDER
 
-1. **Neon Create** → paste pooled + direct URLs → `scripts/neon-bootstrap.ps1` → migrate.
-2. **`vercel login`** → link project → set production env (`DATABASE_URL`, auth secrets, `BETA_ALLOW_DRAFT=true`, `DEMO_*=false`) → deploy → `scripts/smoke-vercel.ps1`.
-3. **`scripts/bootstrap-first-admin.ps1`** on production DB (`DEMO_MODE=false`).
-4. Run **live day-1 bakeoff** against durable `BASE_URL`; file artifact.
-5. Book **JPJO** reviewer; first hall packet decision (APPROVE/REJECT) — no AI self-approve.
-6. Optional: named Cloudflare tunnel + always-on host if Vercel still blocked (still ≠ production bar for §8 durable claim).
-7. Optional: fill GitHub `private-beta` secrets if using Actions deploy path.
+**Status:** ~**43.5 / 50** — CODE + LIVE_TUNNEL day-1 **done**. Goal **not** complete.
+
+**Blocked on:** durable HTTPS (Neon + Vercel preferred) **and** independent JPJO. Do **not** force Neon/Vercel logins.
+
+**Founder: reply with exactly ONE of:**
+
+1. **Neon Direct URL** (paste) — agent runs bootstrap/migrate only after that
+2. **`vercel залогинен`** — founder already logged in; agent may then use CLI without opening browser auth
+3. **`пауза эталона`** — pause reference-quality push; no deploy / no auth work
+
+**Hard rule for agents:** do **not** run `vercel login`, browser OAuth, or any credential probe that opens a browser until the founder chooses (1), (2), or (3). No deploy attempts while waiting.
+
+### After founder chooses (ranked)
+
+1. **Neon Create** → paste pooled + direct URLs → `scripts/neon-bootstrap.ps1` → migrate *(only if (1))*
+2. Link Vercel project → set production env → deploy → `scripts/smoke-vercel.ps1` *(only if (2) or after founder auth)*
+3. **`scripts/bootstrap-first-admin.ps1`** on production DB (`DEMO_MODE=false`)
+4. Run **live day-1 bakeoff** against durable `BASE_URL`; file artifact
+5. Book **JPJO** reviewer; first hall packet decision (APPROVE/REJECT) — no AI self-approve
+6. Optional: named Cloudflare tunnel + always-on host if Vercel still blocked (still ≠ §8 durable claim)
+7. Optional: fill GitHub `private-beta` secrets if using Actions deploy path
 
 See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md) and [`external-unblock-wizard.md`](../operations/external-unblock-wizard.md).
