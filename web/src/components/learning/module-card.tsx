@@ -1,18 +1,25 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { DraftModule } from "@/lib/content/types";
+import type { LearnerL1, UiLocale } from "@/lib/enums";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import {
+  localizeHallLabel,
+  localizeInstructionalBody,
+} from "@/lib/content/instructional-body-locale";
 
 type Props = {
   module: DraftModule;
+  l1?: LearnerL1;
+  uiLocale?: UiLocale | string | null;
 };
 
 /**
  * Learner module card — no DRAFT / Черновик badges.
  * Closed-beta honesty lives on PreviewBanner once, not per card.
  */
-export async function ModuleCard({ module }: Props) {
+export async function ModuleCard({ module, l1, uiLocale }: Props) {
   const tLearn = await getTranslations("learn");
 
   return (
@@ -28,14 +35,16 @@ export async function ModuleCard({ module }: Props) {
       </div>
       <div>
         <p className="m-0 text-sm text-[var(--color-graphite)]">
-          {module.hallLabel}
+          {localizeHallLabel(module.hallLabel, l1, uiLocale)}
         </p>
         <h2 className="m-0 mt-1 font-display text-2xl text-[var(--color-ink)]">
           {module.titlePl}
         </h2>
         <p className="m-0 mt-1 text-[var(--color-graphite)]">{module.title}</p>
       </div>
-      <p className="m-0 text-[var(--color-ink-soft)]">{module.objective}</p>
+      <p className="m-0 text-[var(--color-ink-soft)]">
+        {localizeInstructionalBody(module.objective, l1, uiLocale)}
+      </p>
       <Link
         href={`/learn/${module.id}`}
         data-testid={`module-open-${module.id}`}

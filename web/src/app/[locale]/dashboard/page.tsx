@@ -15,6 +15,8 @@ import { Link } from "@/i18n/navigation";
 import { ContinueCta } from "@/components/learning/continue-cta";
 import { protectApp } from "@/lib/auth/protect";
 import { loadContinueLearning } from "@/modules/learning/continue-learning";
+import { getLearnerProfile } from "@/modules/auth/session";
+import { isLearnerL1 } from "@/lib/content/types";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -36,6 +38,9 @@ export default async function DashboardPage({ params }: Props) {
   const modules = listPreviewModules(accessCtx);
   const scope = showPreview ? "preview" : "live";
   const snapshot = await loadContinueLearning(session.user.id, accessCtx, scope);
+  const profile = await getLearnerProfile(session.user.id);
+  const l1 =
+    profile?.l1 && isLearnerL1(profile.l1) ? profile.l1 : ("rus" as const);
 
   const displayName = session.user.name || session.user.email;
   const progressWidth = Math.max(0, Math.min(100, snapshot.overallPercent));
@@ -177,7 +182,7 @@ export default async function DashboardPage({ params }: Props) {
             <ul className="mt-5 grid list-none gap-4 p-0 sm:mt-6 sm:gap-5 md:grid-cols-2">
               {modules.map((mod) => (
                 <li key={mod.id} className="min-w-0">
-                  <ModuleCard module={mod} />
+                  <ModuleCard module={mod} l1={l1} uiLocale={locale} />
                 </li>
               ))}
             </ul>

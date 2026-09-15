@@ -18,6 +18,10 @@ import {
 import { Link } from "@/i18n/navigation";
 import { getLearnerProfile } from "@/modules/auth/session";
 import { isLearnerL1 } from "@/lib/content/types";
+import {
+  localizeHallLabel,
+  localizeInstructionalBody,
+} from "@/lib/content/instructional-body-locale";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string }>;
@@ -68,23 +72,53 @@ export default async function ModulePage({ params }: Props) {
           className="mt-3"
           title={mod.titlePl}
           lead={mod.title}
-          eyebrow={mod.hallLabel}
+          eyebrow={localizeHallLabel(mod.hallLabel, l1, locale)}
         >
           <p className="mt-4 max-w-2xl text-[var(--color-ink-soft)]">
-            {mod.situation}
+            {localizeInstructionalBody(mod.situation, l1, locale)}
           </p>
           <p className="mt-2 max-w-2xl text-[var(--color-ink-soft)]">
-            <strong>{t("objective")}:</strong> {mod.objective}
+            <strong>{t("objective")}:</strong>{" "}
+            {localizeInstructionalBody(mod.objective, l1, locale)}
           </p>
         </PageIntro>
 
         <div className="surface-panel mt-8 p-4 sm:p-6">
           <ModuleOverview
             dialogue={mod.dialogue}
-            keyLines={mod.keyLines}
+            keyLines={mod.keyLines.map((line) => ({
+              ...line,
+              explanation: localizeInstructionalBody(
+                line.explanation,
+                l1,
+                locale,
+              ),
+            }))}
             l1={l1}
-            pragmatics={mod.pragmatics}
-            grammar={mod.grammar}
+            pragmatics={
+              mod.pragmatics
+                ? {
+                    ...mod.pragmatics,
+                    panPani: localizeInstructionalBody(
+                      mod.pragmatics.panPani,
+                      l1,
+                      locale,
+                    ),
+                  }
+                : undefined
+            }
+            grammar={
+              mod.grammar
+                ? {
+                    ...mod.grammar,
+                    explanation: localizeInstructionalBody(
+                      mod.grammar.explanation,
+                      l1,
+                      locale,
+                    ),
+                  }
+                : undefined
+            }
           />
         </div>
 
@@ -105,7 +139,7 @@ export default async function ModulePage({ params }: Props) {
                     {lesson.titlePl}
                   </p>
                   <p className="m-0 text-sm text-[var(--color-graphite-muted)]">
-                    {lesson.objective}
+                    {localizeInstructionalBody(lesson.objective, l1, locale)}
                   </p>
                 </div>
                 <LinkButton href={`/learn/lessons/${lesson.id}`}>

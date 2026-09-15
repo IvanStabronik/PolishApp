@@ -6,6 +6,7 @@ import { toLearnerExercise } from "@/lib/content/learner-dto";
 import type { DraftLesson, DraftModule } from "@/lib/content/types";
 import type { LessonDetail } from "@/lib/mocks/content";
 import type { LearnerL1, UiLocale } from "@/lib/enums";
+import { localizeInstructionalBody } from "@/lib/content/instructional-body-locale";
 import {
   localizeSpeakingPrompt,
   localizeStepTitle,
@@ -27,6 +28,8 @@ export function draftLessonToDetail(
     l1 && notes?.[l1] ? notes[l1] : undefined;
   const titleOf = (titleRu: string) =>
     localizeStepTitle(titleRu, l1, uiLocale);
+  const bodyOf = (textRu: string) =>
+    localizeInstructionalBody(textRu, l1, uiLocale);
 
   for (const step of lesson.steps) {
     if (step.kind === "situation" || step.kind === "result") {
@@ -36,8 +39,8 @@ export function draftLessonToDetail(
         title: titleOf(step.titleRu),
         body:
           step.kind === "situation"
-            ? (step.bodyRu ?? lesson.situation)
-            : lesson.objective,
+            ? bodyOf(step.bodyRu ?? lesson.situation)
+            : bodyOf(lesson.objective),
       });
       continue;
     }
@@ -62,7 +65,7 @@ export function draftLessonToDetail(
         title: titleOf(step.titleRu),
         lines: lesson.keyLines.map((k) => ({
           pl: k.pl,
-          explanation: k.explanation,
+          explanation: bodyOf(k.explanation),
           ...(note(k.l1Notes) ? { l1Note: note(k.l1Notes) } : {}),
           ...(k.audioUrl ? { audioUrl: k.audioUrl } : {}),
         })),
@@ -88,7 +91,7 @@ export function draftLessonToDetail(
         id: step.id,
         kind: "pan_pani",
         title: titleOf(step.titleRu),
-        summary: lesson.pragmatics.panPani,
+        summary: bodyOf(lesson.pragmatics.panPani),
         form: lesson.pragmatics.form,
         examples: lesson.pragmatics.examples,
         ...(note(lesson.pragmatics.l1Notes)
@@ -102,10 +105,12 @@ export function draftLessonToDetail(
         id: step.id,
         kind: "grammar",
         title: titleOf(step.titleRu),
-        summary: lesson.grammar.explanation,
+        summary: bodyOf(lesson.grammar.explanation),
         form: lesson.grammar.form,
-        meaning: lesson.grammar.meaning,
-        use: lesson.grammar.use,
+        meaning: lesson.grammar.meaning
+          ? bodyOf(lesson.grammar.meaning)
+          : lesson.grammar.meaning,
+        use: lesson.grammar.use ? bodyOf(lesson.grammar.use) : lesson.grammar.use,
         examples: lesson.grammar.examples,
         ...(note(lesson.grammar.l1Notes)
           ? { l1Note: note(lesson.grammar.l1Notes) }

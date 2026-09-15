@@ -127,6 +127,23 @@ describe("draftLessonToDetail structured steps", () => {
     }
   });
 
+  it("localizes situation/objective theory bodies for bel L1", () => {
+    const mods = loadAllModulesFromYaml();
+    const mod = mods.find((m) => m.id === "pierwsze-spotkanie")!;
+    const lesson = mod.lessons[0]!;
+    const detail = draftLessonToDetail(mod, lesson, "bel");
+    const situation = detail.steps.find((s) => s.kind === "theory");
+    expect(situation && situation.kind === "theory").toBe(true);
+    if (situation && situation.kind === "theory") {
+      expect(situation.body).toMatch(/klatce|павітацца|назваць сябе/);
+      expect(situation.body).not.toMatch(/поздороваться/);
+    }
+    const keyLines = detail.steps.find((s) => s.kind === "key_lines");
+    if (keyLines && keyLines.kind === "key_lines" && keyLines.lines[0]) {
+      expect(keyLines.lines[0].explanation).toMatch(/Звычайнае|добры дзень|незнаёмца/);
+    }
+  });
+
   it("uses section titles for practice exercises — not sliced prompts", () => {
     const mods = loadAllModulesFromYaml();
     const mod = mods.find((m) => m.id === "pierwsze-spotkanie")!;

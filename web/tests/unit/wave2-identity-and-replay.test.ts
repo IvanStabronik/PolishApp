@@ -18,6 +18,10 @@ import {
   localizeStepTitle,
   resolveStepChromeLang,
 } from "@/lib/content/step-title-locale";
+import {
+  localizeHallLabel,
+  localizeInstructionalBody,
+} from "@/lib/content/instructional-body-locale";
 import { evaluationFromStoredResponse } from "@/modules/learning/persist-attempt";
 import { evaluateAnswer } from "@/modules/assessment/evaluate";
 import { ensureOpenLessonSession } from "@/modules/learning/lesson-session";
@@ -108,6 +112,36 @@ describe("UK/BEL step title fallback", () => {
         "bel",
       ),
     ).toMatch(/ўголас|рэпліку/);
+  });
+});
+
+describe("UK/BEL instructional body chrome", () => {
+  it("localizes hall situation/objective for ukr and bel", () => {
+    const situation =
+      "Сосед на кладке или знакомый коллеги — первый короткий разговор со взрослым человеком в Польше. Нужно поздороваться нормально, назвать себя и сказать, откуда вы.";
+    expect(localizeInstructionalBody(situation, "ukr")).toMatch(/Сусід|клітці/);
+    expect(localizeInstructionalBody(situation, "bel")).toMatch(/Сусід|клетцы/);
+    expect(localizeInstructionalBody(situation, "rus")).toBe(situation);
+  });
+
+  it("localizes café objective and leaves unknown RU intact", () => {
+    const objective =
+      "Поздороваться, заказать Poproszę… (+ Acc), спросить Czy jest…?, спросить Ile płacę? и оплатить kartą — на pan/pani, не на ty.";
+    expect(localizeInstructionalBody(objective, "ukr")).toMatch(/Привітатися|замовити/);
+    expect(localizeInstructionalBody(objective, "bel")).toMatch(/Павітацца|заказаць/);
+    expect(localizeInstructionalBody("Неизвестная строка без карты", "ukr")).toBe(
+      "Неизвестная строка без карты",
+    );
+  });
+
+  it("localizes hall word in hub label", () => {
+    expect(localizeHallLabel("Зал 1 · Pierwsze spotkanie", "ukr")).toMatch(
+      /^Зала 1/,
+    );
+    expect(localizeHallLabel("Зал 2 · W kawiarni", "bel")).toMatch(/^Зала 2/);
+    expect(localizeHallLabel("Зал 3 · W sklepie", "rus")).toBe(
+      "Зал 3 · W sklepie",
+    );
   });
 });
 

@@ -9,7 +9,8 @@ export type StepChromeLang = "ru" | "uk" | "bel";
 
 /**
  * Prefer L1 ukr/bel; if UI is Ukrainian and L1 is rus (or unset), use UK chrome.
- * Does not bulk-translate theory bodies — titles + speaking prompts only.
+ * Titles + speaking prompts. Theory situation/objective/explanations:
+ * see instructional-body-locale.ts.
  */
 export function resolveStepChromeLang(
   l1?: LearnerL1,
