@@ -4,6 +4,8 @@
  */
 
 import type { ModuleExercise } from "./types";
+import type { LearnerL1, UiLocale } from "@/lib/enums";
+import { localizeExercisePrompt } from "@/lib/content/exercise-chrome-locale";
 
 /** Explicit whitelist of fields allowed on the learner client. */
 export const LEARNER_EXERCISE_WHITELIST = [
@@ -193,6 +195,24 @@ export function assertNoAnswerKeyLeak(
       );
     }
   }
+}
+
+/** Localize RU exercise prompt chrome for learner DTO (gap markers preserved). */
+export function localizeLearnerExercise(
+  ex: LearnerExercise,
+  l1?: LearnerL1,
+  uiLocale?: UiLocale | string | null,
+): LearnerExercise {
+  const prompt = localizeExercisePrompt(ex.prompt, l1, uiLocale);
+  if (prompt === ex.prompt) return ex;
+  if (ex.type === "gap_fill") {
+    return {
+      ...ex,
+      prompt,
+      textWithGaps: prompt.replace(/\{\{[^}]+\}\}/g, "___"),
+    };
+  }
+  return { ...ex, prompt };
 }
 
 /** ExercisePlayer props — TypeScript rejects ModuleExercise (missing brand). */

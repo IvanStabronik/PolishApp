@@ -33,6 +33,8 @@ import {
   getCorrelationId,
   publicErrorBody,
 } from "@/modules/ops/runtime";
+import { UI_LOCALES } from "@/lib/enums";
+import type { UiLocale } from "@/lib/enums";
 import { isLearnerL1 } from "@/lib/content/types";
 import { ensureOpenLessonSession } from "@/modules/learning/lesson-session";
 import { verifyListeningPlayToken } from "@/modules/learning/listening-play-proof";
@@ -146,11 +148,16 @@ export async function POST(request: Request) {
   const profile = await getLearnerProfile(session.user.id);
   const learnerL1 =
     profile?.l1 && isLearnerL1(profile.l1) ? profile.l1 : undefined;
+  const uiLocale =
+    profile?.uiLocale &&
+    (UI_LOCALES as readonly string[]).includes(profile.uiLocale)
+      ? (profile.uiLocale as UiLocale)
+      : undefined;
 
   const evaluation = evaluateAnswer(
     exercise,
     body.answer as unknown as AttemptAnswer,
-    { l1: learnerL1 },
+    { l1: learnerL1, uiLocale },
   );
 
   try {

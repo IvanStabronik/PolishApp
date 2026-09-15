@@ -13,6 +13,23 @@
 **Local day-1 bakeoff executed (2026-09-10):** ~**36 / 50** — checklist **LOCAL_PASS** (invite→onboard→PS L01 listen/speak/wrong+L1→plan); phrasebot compare **LOCAL reasoned**; live week still **FAIL**. Micro-fix: exercise step h2 no longer mid-truncates prompt (`draftLessonToDetail` uses section title). Artifact: `web/playwright-artifacts/day1-bakeoff/result.json`.
 **CODE-DOABLE pack (2026-09-10, post-HTTPS-block):** ~**37.5 / 50** — `smoke-vercel.ps1`; Vercel/Neon screenshot-free click checklist; lesson result → plan “tomorrow” CTA; BEL concept-label table + L1→label locale; UK no longer gets Russian SoT titles; listening/speaking failure surfaces; civilian “L1” / closed-beta chrome soften; review due dates localized. **No live HTTPS. No JPJO. No fake PUBLISHED.** Admin freeze held.
 **UK/BEL instructional bodies (2026-09-15):** ~**38 / 50** — curated UK+BEL maps for all A1 hall/lesson situation+objective + situation `body_ru` shorts; Pierwsze spotkanie key-line / pan / grammar summaries; wired into lesson player, module hub, dashboard cards; `klatce` typo fixed. Exercise prompt/feedback chrome still mostly RU. **No live HTTPS. No JPJO. No fake PUBLISHED.** Credentials probe: `private-beta` secrets empty; `vercel whoami` no credentials; no Neon env in shell.
+**UK/BEL exercise prompt+feedback (2026-09-15):** ~**39 / 50** — curated maps for **all A1** exercise prompts (153) + correct/incorrect feedback (303); wired into `draftLessonToDetail` / standalone ExercisePlayer + `evaluateAnswer` (L1 + UK UI). UK chrome solid; BEL feedback phrase-level (prompts solid, longer feedback uneven — unknown RU still passes through). YAML unchanged (DRAFT honesty). **No live HTTPS. No JPJO. No fake PUBLISHED.** Credentials re-probe: `private-beta` secrets **empty**; `vercel whoami` **no credentials**; no Neon URL in shell env; local `web/.env.local` only (docker closed-beta).
+
+### Critical re-score (post exercise prompt/feedback chrome) — `/50`
+
+| # | Criterion | before | after | Note |
+| --- | --- | ---: | ---: | --- |
+| 1 | Session-1 life loop | 4.0 | 4.0 | Local still LOCAL_PASS; live invite EXTERNAL |
+| 2 | Feedback that teaches | 4.0 | 4.35 | UK correct/incorrect chrome; L1 notes unchanged |
+| 3 | Listening + speaking path | 4.0 | 4.0 | Unchanged; interim TTS/ASR |
+| 4 | Human-readable progress | 3.85 | 3.9 | Exercise prompts localized in player |
+| 5 | Zero civilian ops jargon | 3.75 | 3.75 | Unchanged |
+| 6 | BEL first-class L1 | 4.1 | 4.25 | BEL prompts mapped; BEL feedback partial (not slurry-forced) |
+| 7 | Content honesty contract | 4.0 | 4.0 | DRAFT + banner; maps not fake PUBLISHED |
+| 8 | Deploy teaches someone | 4.25 | 4.25 | Docs/scripts ready; secrets/HTTPS EXTERNAL |
+| 9 | Admin ≤ learner craft | 3.5 | 3.5 | Freeze held |
+| 10 | Competitive first week | 3.5 | 3.5 | Local day-1 LOCAL_PASS; live week FAIL |
+| | **Total** | **~38** | **~39** | Still far from reference; EXTERNAL wall |
 
 ### Critical re-score (post UK/BEL instructional bodies) — `/50`
 
@@ -88,8 +105,9 @@ See [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md). Do not inv
 | Listening/speaking failure surfaces | **Done** — unlock/play + mic error copy |
 | Civilian chrome soften (L1 acronym / beta jargon) | **Done** — onboarding/settings/banner/previewMode |
 | UK/BEL instructional bodies (situation/objective + PS theory) | **Done** — `instructional-body-locale.ts`; player + hub + dashboard; other-hall key-line/grammar still RU |
+| UK/BEL exercise prompt + correct/incorrect feedback (all A1) | **Done** — `exercise-chrome-locale.ts`; `draftLessonToDetail` + ExercisePlayer + `evaluateAnswer`; UK solid; BEL feedback partial |
 
-Score estimate ~**38 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL** (Neon URL + Vercel).
+Score estimate ~**39 / 50**. No fake PUBLISHED. No live HTTPS claimed. Waiting on founder **EXTERNAL** (Neon URL + Vercel).
 
 ### Local closed-beta smoke (2026-09-10)
 

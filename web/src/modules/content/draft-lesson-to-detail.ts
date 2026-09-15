@@ -2,7 +2,7 @@
  * Pure YAML DraftLesson → learner LessonDetail mapping (no session / DB).
  */
 
-import { toLearnerExercise } from "@/lib/content/learner-dto";
+import { toLearnerExercise, localizeLearnerExercise } from "@/lib/content/learner-dto";
 import type { DraftLesson, DraftModule } from "@/lib/content/types";
 import type { LessonDetail } from "@/lib/mocks/content";
 import type { LearnerL1, UiLocale } from "@/lib/enums";
@@ -129,7 +129,11 @@ export function draftLessonToDetail(
           id: authored.id,
           kind: "exercise",
           title: sectionTitle,
-          exercise: toLearnerExercise(authored),
+          exercise: localizeLearnerExercise(
+            toLearnerExercise(authored),
+            l1,
+            uiLocale,
+          ),
         });
       }
     }

@@ -5,8 +5,9 @@
 
 import type { ModuleExercise } from "@/lib/content/types";
 import type { AttemptAnswer } from "@/lib/content/evaluate-yaml";
-import type { LearnerL1 } from "@/lib/enums";
+import type { LearnerL1, UiLocale } from "@/lib/enums";
 import { isLearnerL1 } from "@/lib/content/types";
+import { localizeExerciseFeedback } from "@/lib/content/exercise-chrome-locale";
 
 export type EvalResult = {
   correct: boolean;
@@ -25,6 +26,8 @@ export type EvalResult = {
 export type EvaluateAnswerOptions = {
   /** Learner L1 for selecting feedback.l1Notes. */
   l1?: LearnerL1 | string | null;
+  /** UI locale — UK chrome when UI is uk even if L1 is rus. */
+  uiLocale?: UiLocale | string | null;
 };
 
 /** Normalize Polish learner text for closed matching (ASM-006). */
@@ -41,12 +44,16 @@ export function normalizeAnswer(raw: string): string {
 function resolveFeedbackText(
   exercise: ModuleExercise,
   correct: boolean,
+  l1?: LearnerL1 | string | null,
+  uiLocale?: UiLocale | string | null,
 ): string {
   const fb = exercise.feedback;
-  if (correct) {
-    return fb.correct || fb.explanation || "";
-  }
-  return fb.incorrect || fb.explanation || "";
+  const raw = correct
+    ? fb.correct || fb.explanation || ""
+    : fb.incorrect || fb.explanation || "";
+  const langL1 =
+    typeof l1 === "string" && isLearnerL1(l1) ? l1 : undefined;
+  return localizeExerciseFeedback(raw, langL1, uiLocale);
 }
 
 function resolveL1Note(
@@ -73,7 +80,12 @@ export function evaluateAnswer(
   };
 
   const finish = (correct: boolean, extra: Partial<EvalResult> = {}): EvalResult => {
-    const explanation = resolveFeedbackText(exercise, correct);
+    const explanation = resolveFeedbackText(
+      exercise,
+      correct,
+      options.l1,
+      options.uiLocale,
+    );
     const l1Note = resolveL1Note(exercise, options.l1);
     return {
       ...baseMeta,

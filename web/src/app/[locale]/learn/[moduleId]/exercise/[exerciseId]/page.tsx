@@ -11,12 +11,16 @@ import {
   getExercise,
   isInternalPreview,
 } from "@/lib/content/load-module";
-import { toLearnerExercise } from "@/lib/content/learner-dto";
+import { toLearnerExercise, localizeLearnerExercise } from "@/lib/content/learner-dto";
 import { protectApp } from "@/lib/auth/protect";
 import {
   canAccessDraftContent,
   isDraftLearningEnvEnabled,
 } from "@/lib/demo";
+import { getLearnerProfile } from "@/modules/auth/session";
+import { isLearnerL1 } from "@/lib/content/types";
+import { UI_LOCALES } from "@/lib/enums";
+import type { UiLocale } from "@/lib/enums";
 
 type Props = {
   params: Promise<{ locale: string; moduleId: string; exerciseId: string }>;
@@ -42,8 +46,23 @@ export default async function ExercisePage({ params }: Props) {
   const authored = getExercise(moduleId, exerciseId, accessCtx);
   if (!mod || !authored) notFound();
 
+  const profile = await getLearnerProfile(session.user.id);
+  const l1 =
+    profile?.l1 && isLearnerL1(profile.l1) ? profile.l1 : undefined;
+  const profileUi =
+    profile?.uiLocale &&
+    (UI_LOCALES as readonly string[]).includes(profile.uiLocale)
+      ? (profile.uiLocale as UiLocale)
+      : undefined;
+  // Prefer profile UI locale; fall back to route locale (uk/ru/pl).
+  const uiLocale = profileUi ?? locale;
+
   // Strip answer keys before any client serialization (RSC → ExercisePlayer).
-  const exercise = toLearnerExercise(authored);
+  const exercise = localizeLearnerExercise(
+    toLearnerExercise(authored),
+    l1,
+    uiLocale,
+  );
 
   const t = await getTranslations("learn");
   const ids = mod.exercises.map((ex) => ex.id);

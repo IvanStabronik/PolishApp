@@ -22,8 +22,14 @@ import {
   localizeHallLabel,
   localizeInstructionalBody,
 } from "@/lib/content/instructional-body-locale";
-import { evaluationFromStoredResponse } from "@/modules/learning/persist-attempt";
+import {
+  localizeExerciseFeedback,
+  localizeExercisePrompt,
+} from "@/lib/content/exercise-chrome-locale";
+import { draftLessonToDetail } from "@/modules/content/draft-lesson-to-detail";
 import { evaluateAnswer } from "@/modules/assessment/evaluate";
+import { loadAllModulesFromYaml } from "@/lib/content/load-module";
+import { evaluationFromStoredResponse } from "@/modules/learning/persist-attempt";
 import { ensureOpenLessonSession } from "@/modules/learning/lesson-session";
 import type { ListeningExercise } from "@/lib/content/types";
 
@@ -142,6 +148,65 @@ describe("UK/BEL instructional body chrome", () => {
     expect(localizeHallLabel("Зал 3 · W sklepie", "rus")).toBe(
       "Зал 3 · W sklepie",
     );
+  });
+});
+
+describe("UK/BEL exercise prompt + feedback chrome", () => {
+  it("localizes PS and café prompts for ukr L1 and UK UI", () => {
+    const ps =
+      "Сосед на кlatce, день. Вы видите его впервые. Чем открыть разговор?";
+    expect(localizeExercisePrompt(ps, "ukr")).toMatch(/Сусід|відкрити/);
+    expect(localizeExercisePrompt(ps, "bel")).toMatch(/Сусед|адкрыць/);
+    expect(localizeExercisePrompt(ps, "rus")).toBe(ps);
+
+    const cafe =
+      "У стойки, первый контакт. Как спокойно заказать кофе?";
+    expect(localizeExercisePrompt(cafe, "rus", "uk")).toMatch(
+      /стійки|замовити/,
+    );
+  });
+
+  it("localizes correct/incorrect feedback and leaves unknown RU intact", () => {
+    const correct =
+      "Да. Dzień dobry — спокойное дневное приветствие для незнакомца.";
+    expect(localizeExerciseFeedback(correct, "ukr")).toMatch(/Так\.|спокійне/);
+    expect(localizeExerciseFeedback(correct, "bel")).toMatch(/Так\.|спакойнае/);
+    expect(
+      localizeExerciseFeedback("Неизвестная строка без карты", "ukr"),
+    ).toBe("Неизвестная строка без карты");
+  });
+
+  it("draftLessonToDetail surfaces UK exercise prompts", () => {
+    const mods = loadAllModulesFromYaml();
+    const ps = mods.find((m) => m.id.includes("pierwsze-spotkanie"));
+    expect(ps).toBeTruthy();
+    const lesson = ps!.lessons[0]!;
+    const detail = draftLessonToDetail(ps!, lesson, "ukr", "uk");
+    const exStep = detail.steps.find((s) => s.kind === "exercise");
+    expect(exStep?.kind).toBe("exercise");
+    if (exStep?.kind === "exercise") {
+      expect(exStep.exercise.prompt).not.toMatch(/^Сосед на к/);
+      expect(exStep.exercise.prompt).toMatch(
+        /Сусід|Як |Позначте|Доповніть|Послухайте/,
+      );
+    }
+  });
+
+  it("evaluateAnswer returns UK feedback when L1 is ukr", () => {
+    const mods = loadAllModulesFromYaml();
+    const ps = mods.find((m) => m.id.includes("pierwsze-spotkanie"));
+    const ex = ps!.lessons[0]!.exercises.find((e) => e.type === "single_choice");
+    expect(ex).toBeTruthy();
+    if (!ex || ex.type !== "single_choice") throw new Error("expected SC");
+    const result = evaluateAnswer(
+      ex,
+      { type: "single_choice", index: ex.correctIndex },
+      { l1: "ukr" },
+    );
+    expect(result.explanation).toMatch(
+      /Так\.|спокійн|pani|Dzień dobry|Nazywam|Skąd/,
+    );
+    expect(result.explanation).not.toMatch(/^Да\./);
   });
 });
 
