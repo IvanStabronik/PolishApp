@@ -202,26 +202,26 @@ export function ExercisePlayer({
           className="flex flex-col gap-3 rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-paper-raised)] px-4 py-4"
           data-testid="exercise-listening-audio"
         >
-          <p className="m-0 text-sm text-[var(--color-graphite-muted)]">
+          <p className="m-0 text-sm text-[var(--color-ink-soft)]">
             {t("listeningExerciseHint")}
           </p>
-          <div className="flex flex-wrap items-center gap-3">
-            <ListeningAudioControl
-              moduleId={moduleId}
-              exerciseId={exercise.id}
-              audioUrl={exercise.audioUrl}
-              className="min-h-10 px-4 text-base"
-              onPlayed={markListeningPlayed}
-              onUnavailable={markListeningPlayed}
-            />
-            <span className="text-xs text-[var(--color-graphite-muted)]">
+          <ListeningAudioControl
+            moduleId={moduleId}
+            exerciseId={exercise.id}
+            audioUrl={exercise.audioUrl}
+            onPlayed={markListeningPlayed}
+            onUnavailable={markListeningPlayed}
+          />
+          {listeningPlayed && !result ? (
+            <p className="m-0 text-xs text-[var(--color-graphite-muted)]">
               {t("listeningReplayOk")}
-            </span>
-          </div>
+            </p>
+          ) : null}
           {!listeningPlayed && !result ? (
             <p
-              className="m-0 text-xs text-[var(--color-graphite-muted)]"
+              className="m-0 text-sm text-[var(--color-graphite)]"
               data-testid="listening-play-gate-hint"
+              role="status"
             >
               {t("listeningPlayBeforeSubmit")}
             </p>

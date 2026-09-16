@@ -37,8 +37,8 @@ function getRecognitionCtor():
 
 /**
  * Constrained speaking practice — not exam scoring.
- * Chrome Web Speech when available; otherwise say-aloud + self-check reveal.
- * Archive adult chrome: compact controls, no gamified streak language.
+ * Chrome Web Speech when available; otherwise say-aloud + self-check.
+ * Archive adult chrome: primary try-first controls, honest non-exam copy.
  */
 export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
   const t = useTranslations("learn");
@@ -46,11 +46,12 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
   const [listening, setListening] = useState(false);
   const [heard, setHeard] = useState<string | null>(null);
   const [supported, setSupported] = useState(false);
-  const [revealed, setRevealed] = useState(false);
+  const [selfChecked, setSelfChecked] = useState(false);
   const [micError, setMicError] = useState(false);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   const line = lines[lineIndex] ?? lines[0] ?? "";
+  const attempted = Boolean(heard) || selfChecked;
 
   useEffect(() => {
     setSupported(Boolean(getRecognitionCtor()));
@@ -65,7 +66,7 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
 
   useEffect(() => {
     setHeard(null);
-    setRevealed(false);
+    setSelfChecked(false);
     setListening(false);
     setMicError(false);
   }, [lineIndex]);
@@ -114,12 +115,19 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
     setListening(false);
   }
 
+  function markSelfChecked() {
+    setSelfChecked(true);
+    setMicError(false);
+  }
+
   const matchHint =
     heard && line
       ? normalizeAnswer(heard) === normalizeAnswer(line)
         ? "close"
         : "diff"
       : null;
+
+  const showSelfCheck = !supported || micError || selfChecked;
 
   return (
     <section data-testid="lesson-speaking-step">
@@ -145,71 +153,99 @@ export function SpeakingPracticeStep({ title, prompt, lines }: Props) {
           <PolishLineAudio text={line} />
         </div>
 
-        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-          {supported ? (
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+          {supported && !micError ? (
             <Button
               type="button"
-              variant="secondary"
+              variant="primary"
               onClick={listening ? stopListen : startListen}
               data-testid="speaking-record"
+              aria-pressed={listening}
             >
               {listening ? t("speakingStop") : t("speakingRecord")}
             </Button>
-          ) : (
+          ) : null}
+          {showSelfCheck ? (
             <Button
               type="button"
-              variant="secondary"
-              onClick={() => {
-                setRevealed(true);
-              }}
+              variant={supported && !micError ? "secondary" : "primary"}
+              onClick={markSelfChecked}
               data-testid="speaking-self-check"
+              disabled={selfChecked}
             >
-              {t("speakingSelfCheck")}
-            </Button>
-          )}
-          {!revealed && supported ? (
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => setRevealed(true)}
-            >
-              {t("speakingReveal")}
+              {selfChecked ? t("speakingSaidMarked") : t("speakingSelfCheck")}
             </Button>
           ) : null}
           {lines.length > 1 ? (
             <Button
               type="button"
               variant="ghost"
-              onClick={() =>
-                setLineIndex((i) => (i + 1) % lines.length)
-              }
+              onClick={() => setLineIndex((i) => (i + 1) % lines.length)}
+              disabled={!attempted}
+              data-testid="speaking-next-line"
+              title={!attempted ? t("speakingTryFirst") : undefined}
             >
               {t("speakingNextLine")}
             </Button>
           ) : null}
         </div>
 
-        {heard ? (
-          <p className="mt-3 text-sm text-[var(--color-ink-soft)]" data-testid="speaking-heard">
-            {t("speakingHeard")}: {heard}
-            {matchHint === "close" ? ` — ${t("speakingCloseMatch")}` : null}
-            {matchHint === "diff" ? ` — ${t("speakingBestEffort")}` : null}
-          </p>
-        ) : null}
-        {micError ? (
-          <p
-            className="mt-3 text-sm text-[var(--color-warning)]"
-            data-testid="speaking-mic-error"
-            role="status"
-          >
-            {t("speakingMicError")}
-          </p>
-        ) : null}
-        {!supported ? (
-          <p className="mt-3 text-sm text-[var(--color-graphite-muted)]">
-            {t("speakingUnsupported")}
-          </p>
-        ) : null}
+        <div className="mt-3 min-h-[1.25rem]" aria-live="polite">
+          {listening ? (
+            <p
+              className="m-0 text-sm text-[var(--color-ink-soft)]"
+              data-testid="speaking-listening"
+              role="status"
+            >
+              {t("speakingListening")}
+            </p>
+          ) : null}
+          {!listening && !attempted && !micError && supported ? (
+            <p
+              className="m-0 text-sm text-[var(--color-graphite-muted)]"
+              data-testid="speaking-empty-hint"
+              role="status"
+            >
+              {t("speakingTryFirst")}
+            </p>
+          ) : null}
+          {heard ? (
+            <p
+              className="m-0 text-sm text-[var(--color-ink-soft)]"
+              data-testid="speaking-heard"
+            >
+              {t("speakingHeard")}: {heard}
+              {matchHint === "close" ? ` — ${t("speakingCloseMatch")}` : null}
+              {matchHint === "diff" ? ` — ${t("speakingBestEffort")}` : null}
+            </p>
+          ) : null}
+          {selfChecked && !heard ? (
+            <p
+              className="m-0 text-sm text-[var(--color-ink-soft)]"
+              data-testid="speaking-self-checked"
+              role="status"
+            >
+              {t("speakingSaidMarked")}
+            </p>
+          ) : null}
+          {micError ? (
+            <p
+              className="m-0 text-sm text-[var(--color-warning)]"
+              data-testid="speaking-mic-error"
+              role="status"
+            >
+              {t("speakingMicError")}
+            </p>
+          ) : null}
+          {!supported ? (
+            <p
+              className="m-0 text-sm text-[var(--color-graphite-muted)]"
+              data-testid="speaking-unsupported"
+            >
+              {t("speakingUnsupported")}
+            </p>
+          ) : null}
+        </div>
       </div>
     </section>
   );

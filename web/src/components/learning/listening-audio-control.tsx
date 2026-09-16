@@ -38,6 +38,8 @@ export function ListeningAudioControl({
   const [supported, setSupported] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [playedOnce, setPlayedOnce] = useState(false);
+  const [unlocking, setUnlocking] = useState(false);
   const [errorKey, setErrorKey] = useState<
     null | "listeningPlayFailed" | "listeningUnlockFailed"
   >(null);
@@ -46,10 +48,15 @@ export function ListeningAudioControl({
     const ok = Boolean(audioUrl) || isPolishTtsSupported();
     setSupported(ok);
     setErrorKey(null);
+    setPlayedOnce(false);
+    setPlaying(false);
     if (!ok) {
+      setUnlocking(true);
       void requestUnlock().then((token) => {
+        setUnlocking(false);
         if (token) {
           onUnavailable?.(token);
+          setPlayedOnce(true);
           setErrorKey(null);
         } else {
           setErrorKey("listeningUnlockFailed");
@@ -85,6 +92,7 @@ export function ListeningAudioControl({
     const token = await requestUnlock();
     if (token) {
       onUnavailable?.(token);
+      setPlayedOnce(true);
       setErrorKey(null);
       return true;
     }
@@ -138,6 +146,7 @@ export function ListeningAudioControl({
       setPlaying(ok);
       if (ok && token) {
         onPlayed?.(token);
+        setPlayedOnce(true);
         setErrorKey(null);
       } else if (!ok) {
         setErrorKey("listeningPlayFailed");
@@ -149,34 +158,106 @@ export function ListeningAudioControl({
   }
 
   if (!supported) {
-    return errorKey ? (
-      <p
-        className="m-0 text-sm text-[var(--color-warning)]"
-        data-testid="listening-audio-error"
-        role="status"
+    return (
+      <div
+        className="flex flex-col gap-2"
+        data-testid="listening-audio-unavailable"
       >
-        {t(errorKey)}
-      </p>
-    ) : null;
+        {unlocking ? (
+          <p
+            className="m-0 text-sm text-[var(--color-graphite-muted)]"
+            role="status"
+            data-testid="listening-unlocking"
+          >
+            {t("listeningUnavailable")}
+          </p>
+        ) : null}
+        {errorKey ? (
+          <p
+            className="m-0 text-sm text-[var(--color-warning)]"
+            data-testid="listening-audio-error"
+            role="status"
+          >
+            {t(errorKey)}
+          </p>
+        ) : playedOnce ? (
+          <p
+            className="m-0 text-sm text-[var(--color-graphite-muted)]"
+            role="status"
+          >
+            {t("listeningUnavailable")}
+          </p>
+        ) : null}
+        {errorKey === "listeningUnlockFailed" ? (
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
+            className={className}
+            onClick={() => {
+              setUnlocking(true);
+              setErrorKey(null);
+              void requestUnlock().then((token) => {
+                setUnlocking(false);
+                if (token) {
+                  onUnavailable?.(token);
+                  setPlayedOnce(true);
+                  setErrorKey(null);
+                } else {
+                  setErrorKey("listeningUnlockFailed");
+                }
+              });
+            }}
+            data-testid="listening-audio-retry"
+          >
+            {t("listeningRetry")}
+          </Button>
+        ) : null}
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col gap-2">
-      <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        className={className}
-        onClick={() => void onPlay()}
-        disabled={busy}
-        data-testid="listening-audio-control"
-        aria-label={playing ? t("stopAudio") : t("playLine")}
-      >
-        {playing ? t("stopAudio") : t("playLine")}
-      </Button>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button
+          type="button"
+          variant="secondary"
+          size="md"
+          className={className}
+          onClick={() => void onPlay()}
+          disabled={busy}
+          data-testid="listening-audio-control"
+          aria-label={playing ? t("stopAudio") : t("playLine")}
+          aria-pressed={playing}
+        >
+          {playing ? t("stopAudio") : t("playLine")}
+        </Button>
+        {errorKey ? (
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => void onPlay()}
+            disabled={busy}
+            data-testid="listening-audio-retry"
+          >
+            {t("listeningRetry")}
+          </Button>
+        ) : null}
+      </div>
+      {!playedOnce && !errorKey && !busy ? (
+        <p
+          className="m-0 text-sm text-[var(--color-graphite-muted)]"
+          data-testid="listening-idle-hint"
+          role="status"
+        >
+          {t("listeningIdleHint")}
+        </p>
+      ) : null}
       {errorKey ? (
         <p
-          className="m-0 text-xs text-[var(--color-warning)]"
+          className="m-0 text-sm text-[var(--color-warning)]"
           data-testid="listening-audio-error"
           role="status"
         >
