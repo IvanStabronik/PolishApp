@@ -20,6 +20,7 @@ export function resolveStepChromeLang(
   if (l1 === "bel") return "bel";
   const base = (uiLocale ?? "").toLowerCase().split("-")[0];
   if (base === "uk") return "uk";
+  if (base === "be" || base === "bel") return "bel";
   return "ru";
 }
 
@@ -120,7 +121,7 @@ const PROMPT_BEL: Record<string, string> = {
 };
 
 /**
- * Prefer UK/BEL step chrome when L1 is ukr/bel, or when UK UI is selected.
+ * Prefer UK/BEL step chrome when L1 is ukr/bel, or when UK/BE UI is selected.
  */
 export function localizeStepTitle(
   titleRu: string,

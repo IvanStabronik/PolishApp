@@ -1,9 +1,16 @@
 /** Shared enums — UI locale ≠ learner L1 */
-export const UI_LOCALES = ["ru", "uk", "pl"] as const;
+export const UI_LOCALES = ["ru", "uk", "pl", "be"] as const;
 export type UiLocale = (typeof UI_LOCALES)[number];
 
 export const LEARNER_L1 = ["ukr", "rus", "bel"] as const;
 export type LearnerL1 = (typeof LEARNER_L1)[number];
+
+/** Default menu language for a learner L1 — BEL prefers `be`, not RU. */
+export function preferredUiLocaleForL1(l1: LearnerL1): UiLocale {
+  if (l1 === "ukr") return "uk";
+  if (l1 === "bel") return "be";
+  return "ru";
+}
 
 export const CONTENT_STATUSES = [
   "DRAFT",

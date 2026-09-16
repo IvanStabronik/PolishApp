@@ -64,6 +64,13 @@
       "when": 1757900000000,
       "tag": "0008_listening_exercise_type",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1758000000000,
+      "tag": "0009_ui_locale_be",
+      "breakpoints": true
     }
   ]
 }

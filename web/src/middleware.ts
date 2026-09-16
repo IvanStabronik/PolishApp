@@ -9,5 +9,5 @@ export default function middleware(request: Parameters<typeof intlMiddleware>[0]
 }
 
 export const config = {
-  matcher: ["/", "/(ru|uk|pl)/:path*", "/((?!api|_next|_vercel|.*\\..*).*)"],
+  matcher: ["/", "/(ru|uk|pl|be)/:path*", "/((?!api|_next|_vercel|.*\\..*).*)"],
 };

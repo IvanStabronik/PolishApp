@@ -3,7 +3,7 @@
  * Prefer curated life-outcome copy; fall back to curriculum inventory SoT;
  * never return raw GR-/FN- IDs as primary UI text.
  *
- * Locales: UI ru/uk/pl plus `be` when learner L1 is Belarusian (menu may stay RU).
+ * Locales: UI ru/uk/pl/be. `be` also when learner L1 is Belarusian.
  */
 
 import {
@@ -155,6 +155,7 @@ export function resolveConceptLabelLocale(opts: {
   const ui = (opts.uiLocale ?? "ru").toLowerCase().split("-")[0] ?? "ru";
   if (ui === "uk") return "uk";
   if (ui === "pl") return "pl";
+  if (ui === "be" || ui === "bel") return "be";
   return "ru";
 }
 

@@ -357,7 +357,7 @@ const HALL_WORD: Record<StepChromeLang, string> = {
 };
 
 /**
- * Prefer UK/BEL instructional body when L1 is ukr/bel, or when UK UI is selected.
+ * Prefer UK/BEL instructional body when L1 is ukr/bel, or when UK/BE UI is selected.
  * Unknown RU strings pass through unchanged.
  */
 export function localizeInstructionalBody(

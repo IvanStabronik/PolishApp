@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export function PrivacyActions() {
   const t = useTranslations("privacy");
+  const locale = useLocale();
   const [pending, setPending] = useState(false);
   const [exportMsg, setExportMsg] = useState<string | null>(null);
   const [exportError, setExportError] = useState(false);
@@ -79,7 +80,7 @@ export function PrivacyActions() {
         }
         // Defer hard navigation so Playwright can observe the API response first.
         window.setTimeout(() => {
-          window.location.replace("/ru/login");
+          window.location.replace(`/${locale}/login`);
         }, 50);
       } finally {
         setPending(false);

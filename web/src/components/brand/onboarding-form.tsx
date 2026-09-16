@@ -3,21 +3,32 @@
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { LEARNER_L1, UI_LOCALES, type LearnerL1, type UiLocale } from "@/lib/enums";
+import {
+  LEARNER_L1,
+  UI_LOCALES,
+  preferredUiLocaleForL1,
+  type LearnerL1,
+  type UiLocale,
+} from "@/lib/enums";
 import { Button } from "@/components/ui/button";
 
 type Goal = "life" | "exam" | "study";
 type Weekly = "60" | "180" | "300";
 type Level = "a0" | "a1" | "a2";
 
+function isUiLocale(value: string): value is UiLocale {
+  return (UI_LOCALES as readonly string[]).includes(value);
+}
+
 export function OnboardingForm() {
   const t = useTranslations("onboarding");
-  const locale = useLocale() as UiLocale;
+  const locale = useLocale();
+  const routeUi: UiLocale = isUiLocale(locale) ? locale : "ru";
   const router = useRouter();
   const [pending, startTransition] = useTransition();
 
   const [ageConfirmed, setAgeConfirmed] = useState(false);
-  const [uiLocale, setUiLocale] = useState<UiLocale>(locale);
+  const [uiLocale, setUiLocale] = useState<UiLocale>(routeUi);
   const [l1, setL1] = useState<LearnerL1>("ukr");
   const [level, setLevel] = useState<Level>("a1");
   const [goal, setGoal] = useState<Goal>("life");
@@ -26,6 +37,8 @@ export function OnboardingForm() {
   const [consentPrivacy, setConsentPrivacy] = useState(false);
   const [consentResearch, setConsentResearch] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  /** After learner picks UI manually, L1 changes no longer override it. */
+  const [uiLocaleTouched, setUiLocaleTouched] = useState(false);
 
   const canSubmit =
     ageConfirmed && consentTerms && consentPrivacy && !pending;
@@ -92,7 +105,7 @@ export function OnboardingForm() {
           );
         }
 
-        if (uiLocale !== locale) {
+        if (uiLocale !== routeUi) {
           router.replace("/dashboard", { locale: uiLocale });
         } else {
           router.push("/dashboard");
@@ -140,11 +153,20 @@ export function OnboardingForm() {
             name="uiLocale"
             data-testid="onboarding-ui-locale"
             value={uiLocale}
-            onChange={(e) => setUiLocale(e.target.value as UiLocale)}
+            onChange={(e) => {
+              setUiLocaleTouched(true);
+              setUiLocale(e.target.value as UiLocale);
+            }}
           >
             {UI_LOCALES.map((code) => (
               <option key={code} value={code}>
-                {code.toUpperCase()}
+                {code === "be"
+                  ? "BE · беларуская"
+                  : code === "uk"
+                    ? "UK · українська"
+                    : code === "pl"
+                      ? "PL · polski"
+                      : "RU · русский"}
               </option>
             ))}
           </select>
@@ -165,7 +187,12 @@ export function OnboardingForm() {
                 value={code}
                 data-testid={`onboarding-l1-${code}`}
                 checked={l1 === code}
-                onChange={() => setL1(code)}
+                onChange={() => {
+                  setL1(code);
+                  if (!uiLocaleTouched) {
+                    setUiLocale(preferredUiLocaleForL1(code));
+                  }
+                }}
               />
               <span>
                 {code === "ukr"

@@ -937,7 +937,7 @@ const FEEDBACK_BEL: Record<string, string> = {
 };
 
 /**
- * Prefer UK/BEL exercise prompt when L1 is ukr/bel, or when UK UI is selected.
+ * Prefer UK/BEL exercise prompt when L1 is ukr/bel, or when UK/BE UI is selected.
  */
 export function localizeExercisePrompt(
   promptRu: string,

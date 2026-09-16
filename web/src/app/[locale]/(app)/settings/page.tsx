@@ -186,7 +186,13 @@ export default function SettingsPage() {
                       checked={uiLocale === code}
                       onChange={() => setUiLocale(code)}
                     />
-                    {code.toUpperCase()}
+                    {code === "be"
+                      ? "BE · беларуская"
+                      : code === "uk"
+                        ? "UK · українська"
+                        : code === "pl"
+                          ? "PL · polski"
+                          : "RU · русский"}
                   </label>
                 ))}
               </div>

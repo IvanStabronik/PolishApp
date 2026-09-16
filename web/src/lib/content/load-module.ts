@@ -233,7 +233,7 @@ function packageToDraftModule(pkg: ContentPackage, hallIndex: number): DraftModu
     hallLabel: `Зал ${hallIndex} · ${mod.working_title}`,
     objective: mod.objective_ru,
     situation: mod.situation_ru,
-    uiLocales: ["ru", "uk", "pl"],
+    uiLocales: ["ru", "uk", "pl", "be"],
     l1Applicability: ["ukr", "rus", "bel"] as LearnerL1[],
     dialogue: overviewLesson.dialogue,
     keyLines: overviewLesson.keyLines,
