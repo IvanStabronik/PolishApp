@@ -137,3 +137,53 @@ describe("be message catalog", () => {
     expect(be.settings.loading).not.toBe(ru.settings.loading);
   });
 });
+
+describe("civilian message chrome (§5 ops jargon)", () => {
+  function flatten(
+    obj: Record<string, unknown>,
+    prefix = "",
+  ): Record<string, string> {
+    const out: Record<string, string> = {};
+    for (const [k, v] of Object.entries(obj)) {
+      const key = prefix ? `${prefix}.${k}` : k;
+      if (v && typeof v === "object" && !Array.isArray(v)) {
+        Object.assign(out, flatten(v as Record<string, unknown>, key));
+      } else if (typeof v === "string") {
+        out[key] = v;
+      }
+    }
+    return out;
+  }
+
+  /** Learner-facing catalogs — adminBeta may keep JPJO / ops chrome. */
+  const LEARNER_LOCALES = ["ru", "uk", "be", "pl"] as const;
+
+  const FORBIDDEN =
+    /\bJPJO\b|\bDEMO_[A-Z_]+\b|\/admin\b|\bDRAFT\b|\bpreviewer\b|\bmastery\b|\btriage\b/i;
+
+  it("forbids JPJO and related ops jargon outside adminBeta", async () => {
+    for (const loc of LEARNER_LOCALES) {
+      const catalog = (
+        await import(`@/i18n/messages/${loc}.json`)
+      ).default as Record<string, unknown>;
+      const { adminBeta: _admin, ...learnerNamespaces } = catalog;
+      const flat = flatten(learnerNamespaces);
+      for (const [key, value] of Object.entries(flat)) {
+        expect(value, `${loc}:${key}`).not.toMatch(FORBIDDEN);
+      }
+    }
+  });
+
+  it("keeps an honest short preview banner without ops dump", async () => {
+    for (const loc of LEARNER_LOCALES) {
+      const catalog = (await import(`@/i18n/messages/${loc}.json`)).default as {
+        demo: { bannerTitle: string; bannerBody: string };
+      };
+      expect(catalog.demo.bannerTitle.length).toBeGreaterThan(3);
+      expect(catalog.demo.bannerBody.length).toBeGreaterThan(10);
+      expect(catalog.demo.bannerBody).not.toMatch(/JPJO|DEMO_|\/admin|DRAFT/i);
+      // One short sentence — no multi-paragraph staff dump.
+      expect(catalog.demo.bannerBody.split(/[.!?。]/).filter(Boolean).length).toBeLessThanOrEqual(2);
+    }
+  });
+});
