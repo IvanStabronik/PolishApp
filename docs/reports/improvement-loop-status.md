@@ -25,8 +25,25 @@
 **§5 civilian ops jargon sweep (2026-09-16):** ~**44.3 / 50** — residual learner chrome cleaned (no `DEMO_PREVIEW` / `/admin/beta` / English `triage` / «освоение» calques; DRAFT badge labels → «в подготовке»; honest one-sentence preview banner; invite email template softened). Unit guard forbids JPJO/`DEMO_*`/`DRAFT`/`previewer`/`mastery`/`triage`/`/admin` outside `adminBeta`. Admin chrome may keep JPJO. **No Neon/Vercel login.** Still **WAITING_ON_FOUNDER**.
 **Ruthless independent re-audit (2026-09-16):** ~**42.4 / 50** — re-scored all ten against current code+docs; **deflated** prior ~44.3 for tunnel-as-durable + docs-only §8 + soft §10. Micro CODE: RU `кlatka` typo; learner i18n keys scrubbed of `mastery`/`triage`/`draft` tokens; key+value jargon guard. No learner→admin nav leak. **No Neon/Vercel login.** Still **WAITING_ON_FOUNDER**.
 **§9 Admin ≤ learner craft (2026-09-16):** ~**42.7 / 50** — confirmed no learner→`/admin` links (header/footer); admin page role-gated `notFound`. Speaking try-first + listening empty/error/retry craft; dead Reveal removed; RU `кlatce` fixed. Admin console **not** gutted. §3 **4.0→4.1**, §9 **3.55→3.8**. **No Neon/Vercel login.** Still **WAITING_ON_FOUNDER**.
+**W sklepie substance deepen (2026-09-16):** ~**42.9 / 50** — all 3 lessons: adult same-scenario distractors (morph/L1 calques, not cartoon), distinct UK/BEL/RU L1 traps, productive dual/triple gaps, harder listening foils; versions bumped; DRAFT honesty + provenance; UK/BEL chrome maps synced; `content:validate` **PASS**. §2 **4.55→4.65**. **No Neon/Vercel login.** Still **WAITING_ON_FOUNDER**.
 
-### Critical re-score (post §9 speaking/listening craft) — `/50`
+### Critical re-score (post W sklepie substance deepen) — `/50`
+
+| # | Criterion | before | after | Note |
+| --- | --- | ---: | ---: | --- |
+| 1 | Session-1 life loop | 4.5 | 4.5 | Unchanged — durable host still EXTERNAL |
+| 2 | Feedback that teaches | 4.55 | 4.65 | Sklep L01–L03 distractors + distinct L1 + productive gaps |
+| 3 | Listening + speaking path | 4.1 | 4.1 | Kept; harder same-scenario foils (still edge-tts) |
+| 4 | Human-readable progress | 4.1 | 4.1 | Unchanged |
+| 5 | Zero civilian ops jargon | 4.35 | 4.35 | Unchanged |
+| 6 | BEL first-class L1 | 5.0 | 5.0 | Chrome maps extended for new feedback |
+| 7 | Content honesty contract | 4.0 | 4.0 | Still DRAFT; no JPJO |
+| 8 | Deploy teaches someone | 4.45 | 4.45 | No Neon/Vercel; agents must not force login |
+| 9 | Admin ≤ learner craft | 3.8 | 3.8 | Freeze held |
+| 10 | Competitive first week | 3.85 | 3.85 | Still PARTIAL_TUNNEL |
+| | **Total** | **~42.7** | **~42.9** | CODE substance; goal still EXTERNAL |
+
+### Critical re-score (post §9 speaking/listening craft) — `/50` (historical)
 
 | # | Criterion | before | after | Note |
 | --- | --- | ---: | ---: | --- |
@@ -236,7 +253,7 @@
 
 ### WAITING_ON_FOUNDER
 
-**Status:** ~**42.7 / 50** — §9 speaking/listening craft + prior ruthless ~42.4 baseline; LIVE_TUNNEL day-1 still **done**. Goal still **EXTERNAL**.
+**Status:** ~**42.9 / 50** — W sklepie substance deepen + prior §9 craft (~42.7); LIVE_TUNNEL day-1 still **done**. Goal still **EXTERNAL**.
 
 **Blocked on:** durable HTTPS (Neon + Vercel preferred) **and** independent JPJO. Agents must **not** force Neon/Vercel logins.
 
@@ -296,8 +313,10 @@ Preferred durable path remains Neon/Supabase `DATABASE_URL` + Vercel. Alternate 
 | BEL `be` message key parity + RU loading remnants | **Done** — 368/368 vs ru/uk; adult BE loading; ADR/data-model `be`; unit parity guard |
 | §5 civilian ops jargon sweep (learner chrome) | **Done** — messages ru/uk/be/pl; short honest preview banner; JPJO/ops unit guard (non-admin namespaces) |
 | Ruthless re-audit + ops-key scrub | **Done** — independent ~**42.4 / 50**; RU `кlatka` fix; learner keys without mastery/triage/draft; key+value guard |
+| §9 speaking/listening craft | **Done** — try-first speaking + listening idle/error/retry; no learner→admin nav |
+| W sklepie L01–L03 substance deepen | **Done** — adult distractors, distinct L1, dual/triple gaps, hard foils; DRAFT; validate PASS |
 
-Score estimate ~**42.7 / 50** (post §9 craft; prior ruthless 42.4). No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). BEL learners can use `/be/…` menu. See **WAITING_ON_FOUNDER** above — durable Neon+Vercel **and** JPJO; agents must not force logins.
+Score estimate ~**42.9 / 50** (post sklep substance; prior §9 ~42.7). No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). BEL learners can use `/be/…` menu. See **WAITING_ON_FOUNDER** above — durable Neon+Vercel **and** JPJO; agents must not force logins.
 
 ### Local closed-beta smoke (2026-09-10)
 

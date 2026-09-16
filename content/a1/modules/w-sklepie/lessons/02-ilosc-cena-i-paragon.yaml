@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-02
 slug: ilosc-cena-i-paragon
-version: 5
+version: 6
 status: DRAFT
 title_pl: Ilość, cena i paragon
 sort_order: 2
@@ -83,15 +83,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      «Дайте» не збирає покупку. Тримайте dwa/jedną + Acc,
-      Ile kosztują…? і Poproszę paragon; «ти» до касира — лише якщо сам
-      запропонував.
+      «Два яблука» → dwa jabłka (не *dwie jabłka). «Скільки коштують» →
+      Ile kosztują…?; «дайте чек» → Poproszę paragon, не *Daj.
     rus: >
-      Не собирайте «два яблока / сколько стоит / чек» дословной калькой.
-      Poproszę… и Ile kosztują…? — польские рамки; без ty к кассиру.
+      Не *dwie jabłka и не «сколько стоят» порядком L1. kosztują для мн. ч.;
+      чек — Poproszę paragon, не приказ.
     bel: >
-      Не з «дайце / колькі». Poproszę…, Ile kosztują…? і Poproszę paragon —
-      вучыце цэлымі; да касіра не ty, пакуль ён сам не прапануе.
+      Не *dwie jabłka (род ліку). Ile kosztują…? і Poproszę paragon —
+      цэлыя; аканне ў Razem… на пісьме не пераносіце.
 grammar_points:
   - id: GP-A1-WS-L2
     title_pl: Ilość i suma
@@ -114,24 +113,24 @@ grammar_points:
       - GR-NUM-CARD-01
     l1_notes:
       ukr: >
-        Після Poproszę — Acc (dwa jabłka, jedną wodę), не називний.
-        Для кількох — kosztują, не *Skilky kosztuje.
+        Після Poproszę — Acc (dwa jabłka, jedną wodę), не *dwie jabłka.
+        Для кількох — kosztują; Razem… слухайте як підсумок, не ціну однієї позиції.
       rus: >
-        Не калькируйте «сколько стоят яблоки» порядком слов.
-        Dwa jabłka — готовый слот; kosztują для мн. ч.
+        Не *dwie jabłka. kosztują для мн. ч.; Razem… — итог, не цена только jabłek.
+        Poproszę paragon — не *Daj paragon.
       bel: >
-        Acc пасля Poproszę (dwa jabłka). Ile kosztują…? і Razem… —
-        цэлыя; аканне ў сумах на пісьме не пераносіце.
+        Acc: dwa jabłka. Ile kosztują…? ≠ адзіночны kosztuje.
+        Razem… — вынік; аканне ў сумах не пераносіце.
 l1_notes:
   ukr: >
-    Кількість (dwa/jedną), Ile kosztują…?, Razem… і Poproszę paragon.
-    Без кальки «дайте»; pan/pani до касира.
+    Пастки: *dwie jabłka, *kosztuje для мн., *Daj paragon.
+    Тримайте dwa… / Ile kosztują…? / Razem… / Poproszę paragon.
   rus: >
-    Количество, цена/итог и чек без L1-сборки и без ty у кассы.
-    Запомните Poproszę dwa…, Ile kosztują…? и Poproszę paragon целиком.
+    Пастки: род числа, единственное kosztuje для мн., приказ вместо Poproszę.
+    Связка: количество → цена/итог → чек.
   bel: >
-    Dwa… / Ile kosztują…? / Razem… / Poproszę paragon — асобныя рамкі.
-    Не спадзявайцеся на кальку «дайце»; да касіра — не ty.
+    Пасткі: *dwie jabłka, аканне ў Razem…, *Daj замест Poproszę paragon.
+    Вучыце рамкі цэлымі.
 steps:
   - id: step-l2-situation
     kind: situation
@@ -187,7 +186,7 @@ steps:
 exercises:
   - id: ex-ws-l2-01
     canonical_id: EX-A1-WS-L2-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "У кассы. Как попросить два яблока?"
@@ -199,7 +198,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Poproszę dwa jabłka — количество + Acc."
-      incorrect: "Dwie jabłka / Daj dwa jabłko — неверная форма или слишком грубо."
+      incorrect: "Dwie jabłka ломает род числа; dwa jabłko — неверное окончание."
+      l1:
+        ukr: "Не *dwie jabłka (як «дві») і не *dwa jabłko — dwa jabłka."
+        rus: "Не *dwie jabłka (калька «две») и не *dwa jabłko."
+        bel: "Не *dwie jabłka і не *dwa jabłko — tylko dwa jabłka."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -207,6 +210,7 @@ exercises:
       sources:
         - Curriculum SCN-A1-SHOP-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE
       ai_assisted: true
+      notes: "Adult morph distractors (gender/number), not cartoon Daj. DRAFT."
     mini_check: false
     options:
       - id: a
@@ -214,12 +218,12 @@ exercises:
       - id: b
         text: Poproszę dwie jabłka.
       - id: c
-        text: Daj mi dwa jabłka, szybko!
+        text: Poproszę dwa jabłko.
     correct_option_id: a
 
   - id: ex-ws-l2-02
     canonical_id: EX-A1-WS-L2-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Отметьте реплики про количество, цену и итог у кассы."
@@ -231,7 +235,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Количество, цена и Razem… — нужные куски покупки."
-      incorrect: "Skąd pani jest? не относится к кассе."
+      incorrect: "Co dla pana? — открытие кассира, не ваш шаг количества/цены."
+      l1:
+        ukr: "Co dla pana? каже касир. Вам: ilość / cena / Razem…"
+        rus: "Co dla pana? говорит кассир — не отмечайте как свой шаг."
+        bel: "Co dla pana? — рэпліка касіра, не ваш крок."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -248,7 +256,7 @@ exercises:
       - id: c
         text: Ile kosztują jabłka?
       - id: d
-        text: Skąd pani jest?
+        text: Co dla pana?
     correct_option_ids:
       - a
       - b
@@ -256,7 +264,7 @@ exercises:
 
   - id: ex-ws-l2-03
     canonical_id: EX-A1-WS-L2-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Poproszę {{gap1}} jabłka."
@@ -270,8 +278,8 @@ exercises:
       correct: "Dwa jabłka — готовый слот количества."
       incorrect: "Нужно dwa."
       l1:
-        ukr: "Не *dwie jabłka."
-        rus: "Не *dwie jabłka."
+        ukr: "Не *dwie перед jabłka."
+        rus: "Не *dwie jabłka — только dwa."
         bel: "Трымайце dwa, не *dwie jabłka."
     provenance:
       originality: created_for_product
@@ -289,7 +297,7 @@ exercises:
 
   - id: ex-ws-l2-04
     canonical_id: EX-A1-WS-L2-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Ile {{gap1}} jabłka?"
@@ -303,8 +311,8 @@ exercises:
       correct: "Для нескольких яблок — kosztują."
       incorrect: "Нужна форма kosztują."
       l1:
-        ukr: "Не *kosztuje для кількох jabłka."
-        rus: "Не *kosztuje для нескольких jabłka."
+        ukr: "Мн.: kosztują, не *kosztuje і не *stoją."
+        rus: "Мн. ч.: kosztują — не *kosztuje и не *stoiat."
         bel: "Трымайце kosztują, не адзіночны kosztuje."
     provenance:
       originality: created_for_product
@@ -322,7 +330,7 @@ exercises:
 
   - id: ex-ws-l2-05
     canonical_id: EX-A1-WS-L2-OR-05
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Расставьте шаги покупки у кассы."
@@ -335,6 +343,10 @@ exercises:
     feedback:
       correct: "Выбор → цена → итог → оплата и чек."
       incorrect: "Сначала назовите товар, потом цену, итог и оплату."
+      l1:
+        ukr: "Порядок: Poproszę → Ile kosztują → Razem → płatność/paragon."
+        rus: "Товар → цена позиции → Razem → оплата и чек."
+        bel: "Тавар → цана → Razem → аплата і чэк."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -360,7 +372,7 @@ exercises:
 
   - id: ex-ws-l2-06
     canonical_id: EX-A1-WS-L2-SC-06
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Как вежливо попросить чек?"
@@ -372,7 +384,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Poproszę paragon — спокойная сервисная просьба."
-      incorrect: "Daj / ty к кассиру — слишком грубо у кассы."
+      incorrect: "Daj paragon / Czy mogę dostać resztę? — не просьба о чеке."
+      l1:
+        ukr: "«Дайте чек» → Poproszę paragon, не *Daj; reszta ≠ paragon."
+        rus: "Не *Daj paragon; reszta — сдача, не чек."
+        bel: "Poproszę paragon — не *Daj і не reszta замест чэка."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -387,13 +403,13 @@ exercises:
       - id: b
         text: Daj paragon.
       - id: c
-        text: Ty daj paragon.
+        text: Czy mogę dostać resztę?
     correct_option_id: a
 
 
   - id: ex-ws-l2-listen-01
     canonical_id: EX-A1-WS-L2-LIS-01
-    version: 2
+    version: 3
     type: listening
     status: DRAFT
     prompt: "Послушайте кассира. Что она сказала?"
@@ -401,11 +417,11 @@ exercises:
     audio_url: /audio/a1/EX-A1-WS-L2-LIS-01.mp3
     options:
       - id: a
-        text: Назвала итоговую сумму покупки.
+        text: Назвала итоговую сумму покупки (Razem…).
       - id: b
-        text: Уточнила размер воды (małą czy dużą).
+        text: Назвала цену только jabłek (sześć złotych).
       - id: c
-        text: Спросила, платите kartą или gotówką.
+        text: Уточнила размер воды (małą czy dużą).
     correct_option_id: a
     concept_ids:
       - GR-NUM-MONEY-01
@@ -417,11 +433,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Да: Razem… — итог у кассы."
-      incorrect: "Это итог (Razem…), не размер и не способ оплаты."
+      incorrect: "Это итог (Razem…), не цена одной позиции и не размер воды."
       l1:
-        ukr: "Слухайте Razem + złotych — підсумок, не rozmiar / karta."
-        rus: "Слышите итог, не размер воды и не kartą/gotówką."
-        bel: "Гэта Razem…, не памер і не спосаб аплаты."
+        ukr: "Razem… = підсумок; не sześć złotych за jabłka і не małą/dużą."
+        rus: "Слышите итог Razem…, не цену jabłek и не размер воды."
+        bel: "Гэта Razem…, не цана адной пазіцыі і не памер вады."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -429,15 +445,16 @@ exercises:
       sources:
         - "Dialogue Ilość, cena i paragon / GR-NUM-MONEY-01"
       ai_assisted: true
+      notes: "Hard foil: item price vs Razem total. DRAFT."
     mini_check: false
 
 
   - id: ex-ws-l2-write-01
     canonical_id: EX-A1-WS-L2-GF-05
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: Poproszę {{gap1}} jabłka. Poproszę {{gap2}}."
+    prompt: "Напишите: Poproszę {{gap1}} jabłka. Ile {{gap2}} jabłka?"
     gaps:
       - id: gap1
         accepted_answers:
@@ -445,37 +462,37 @@ exercises:
         placeholder: "…"
       - id: gap2
         accepted_answers:
-          - paragon
-          - Paragon
+          - kosztują
         placeholder: "…"
     concept_ids:
       - GR-NUM-CARD-01
-      - GR-CAS-ACC-01
+      - GR-NUM-MONEY-01
     function_ids:
       - FN-A1-TRANS-01
-      - FN-A1-CONFIRM-01
+      - FN-A1-QUANT-01
     lex_bundle_ids:
       - LEX-A1-SERVICE
       - LEX-A1-MONEY
     feedback:
-      correct: "Две рамки: количество (dwa) и просьба о чеке (paragon)."
-      incorrect: "Нужны dwa перед jabłka и paragon в просьбе о чеке."
+      correct: "Две рамки: количество (dwa) и мн. ч. kosztują."
+      incorrect: "Нужны dwa перед jabłka и kosztują (не *kosztuje)."
       l1:
-        ukr: "Не *dwie jabłka і не *Daj paragon — dwa + Poproszę paragon."
-        rus: "Не *dwie jabłka и не приказ вместо Poproszę paragon."
-        bel: "Dwa + Poproszę paragon — не *dwie і не *Daj."
+        ukr: "Не *dwie і не *kosztuje для jabłka — dwa + kosztują."
+        rus: "Не *dwie jabłka и не ед. *kosztuje — dwa + kosztują."
+        bel: "Dwa + kosztują — не *dwie і не адзіночны kosztuje."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "FN-A1-TRANS-01 productive dual gap"
+        - "FN-A1-TRANS-01 productive dual gap (ilość + kosztują)"
       ai_assisted: true
+      notes: "Productive dual gap: number + plural kosztują. DRAFT."
     mini_check: false
 
   - id: ex-ws-l2-07
     canonical_id: EX-A1-WS-L2-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Отметьте уместные способы закрыть покупку у кассы."
@@ -487,7 +504,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Оплата и Dziękuję — спокойное завершение."
-      incorrect: "Hej, dawaj — слишком грубо для кассы."
+      incorrect: "Pośpiesz się! — приказ кассиру, не способ оплаты."
+      l1:
+        ukr: "Не наказ *Pośpiesz się — Płacę kartą / gotówką і Dziękuję."
+        rus: "Не *Pośpiesz się к кассиру — оплата Ins и Dziękuję."
+        bel: "Не *Pośpiesz się — аплата і Dziękuję."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -504,7 +525,7 @@ exercises:
       - id: c
         text: Dziękuję.
       - id: d
-        text: Hej, dawaj.
+        text: Pośpiesz się!
     correct_option_ids:
       - a
       - b
@@ -512,7 +533,7 @@ exercises:
 
   - id: ex-ws-l2-08
     canonical_id: EX-A1-WS-L2-OR-08
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Соберите финал: цена → сумма → оплата → чек."
@@ -525,6 +546,10 @@ exercises:
     feedback:
       correct: "Вопрос о цене → сумма → оплата → чек и благодарность."
       incorrect: "Сначала уточните цену, затем оплатите и попросите чек."
+      l1:
+        ukr: "Cena → suma → płatność → paragon."
+        rus: "Цена → сумма → оплата → чек."
+        bel: "Цана → сума → аплата → чэк."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -559,7 +584,7 @@ result_metadata:
   title_ru: Итог урока
   success_ru: >
     Короткая проверка пройдена. Вы можете связать количество, цену
-    или итог и попросить чек у кассы (DRAFT preview).
+    или итог и попросить чек у кассы.
   retry_ru: >
     Повторите Poproszę dwa…, Ile kosztują…? и Poproszę paragon,
     затем пройдите короткую проверку снова.
@@ -582,5 +607,6 @@ provenance:
       LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Hard shop foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult morph distractors, distinct L1,
+    Razem-vs-item-price listening foil, productive dual gap (dwa/kosztują).
+    Static edge-tts audio. status DRAFT — not JPJO-approved. reviewer_id null.

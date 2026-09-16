@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WS-01
 slug: zakupy-przy-kasie
-version: 7
+version: 8
 status: DRAFT
 title_pl: Zakupy przy kasie
 sort_order: 1
@@ -85,13 +85,13 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      «Дайте / скільки коштує» → не *Daj / *Skolko. У каси —
-      Poproszę + Acc, Ile to kosztuje?; до касира pan/pani, не ty.
+      «Дайте / можна мені» → не *Daj / *Możno mnie. Тримайте
+      Poproszę + Acc; «скільки коштує» → Ile to kosztuje?, не *stoit.
     rus: >
-      «Сколько стоит» → Ile to kosztuje?, не *Skolko. Не говорите ty
-      кассиру; kartą — творительный в формуле оплаты, не «на карте».
+      «Можно мне» → не *Możno mnie; «сколько стоит» → Ile to kosztuje?,
+      не *stoit. Kartą — творительный, не «на карту» / *kartę.
     bel: >
-      «Дайце / колькі каштуе» не робіць рэзкі *Daj. Poproszę… +
+      «Дайце / можна мне» не робіць *Daj / *Możno mnie. Poproszę… і
       Ile to kosztuje? — асобныя рамкі; бел. «вы» ≠ wy да касіра.
 grammar_points:
   - id: GP-A1-WS-CENA-ILOSC
@@ -119,24 +119,24 @@ grammar_points:
       - GR-CAS-ACC-01
     l1_notes:
       ukr: >
-        Після Ile to kosztuje? — готова відповідь каси (dwanaście złotych),
-        не *Skilky. Kartą (Ins оплати) ≠ укр. «картою / на карту».
+        Після Ile to kosztuje? слухайте złotych/groszy цілком.
+        Kartą (Ins) ≠ «картою / на карту»; не *Płacę kartę.
       rus: >
-        Не калькируйте «сколько стоит это» порядком слов. Kartą — Ins.
-        Следите за jedno / dwa в ответе о количестве.
+        Не *Ile kosztuje to jest и не *stoit. Kartą — Ins, не *kartę /
+        *na kartę. Jedno / dwa — готовый слот количества.
       bel: >
-        Acc пасля Poproszę; аканне ў сумах на пісьме не пераносіце.
-        Ile to kosztuje? і płacę kartą — цэлыя формулы.
+        Не пераносіце аканне ў сумы. Ile to kosztuje? і płacę kartą —
+        цэлыя; не *kartę і не *na kartę.
 l1_notes:
   ukr: >
-    Не калькуйте «дайте / скільки коштує». Тримайте Poproszę + Acc,
-    Ile to kosztuje?, Kartą; з касиром — pan/pani, не ty.
+    Пастка: «дайте / можна мені / скільки». Тримайте Poproszę + Acc,
+    Ile to kosztuje?, kartą (Ins); з касиром — pan/pani.
   rus: >
-    Цена и количество без L1-порядка слов и без ty у кассы. Запомните
-    Ile to kosztuje? и płacę kartą целиком.
+    Пастка: «можно мне / сколько стоит / на карту». Целиком:
+    Poproszę…, Ile to kosztuje?, płacę kartą — без ty у кассы.
   bel: >
-    Не спадзявайцеся на «і так зразумеюць». Poproszę… / Ile to kosztuje? /
-    Kartą — асобныя польскія рамкі; пісьмо сум без акання.
+    Пастка: «дайце / можна мне» і аканне ў сумах. Poproszę… /
+    Ile to kosztuje? / kartą — асобныя польскія рамкі.
 steps:
   - id: step-situation
     kind: situation
@@ -193,7 +193,7 @@ steps:
 exercises:
   - id: ex-ws-01
     canonical_id: EX-A1-WS-SC-01
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
     prompt: "У кассы, первый контакт. Как спокойно назвать товар?"
@@ -201,9 +201,9 @@ exercises:
       - id: a
         text: Poproszę ten chleb.
       - id: b
-        text: Daj chleb, szybko!
+        text: Proszę chleb.
       - id: c
-        text: Ja chcę chleb teraz!
+        text: Możno mnie ten chleb?
     correct_option_id: a
     concept_ids:
       - GR-CAS-ACC-01
@@ -215,11 +215,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Poproszę ten chleb — спокойный выбор + Acc."
-      incorrect: "Daj… szybko / резкий приказ — слишком грубо у кассы."
+      incorrect: "Proszę chleb без Acc или *Możno mnie — не сервисная рамка у кассы."
       l1:
-        ukr: "Не «дайте швидко» як *Daj і не «я хочу» без Poproszę."
-        rus: "Не приказ *Daj и не «я хочу сейчас» вместо Poproszę."
-        bel: "Трымайце Poproszę, не рэзкі *Daj / Ja chcę."
+        ukr: "«Можна мені» → *Możno mnie; «прошу хліб» без Acc → *Proszę chleb. Тримайте Poproszę ten chleb."
+        rus: "Не «можно мне» → *Możno mnie и не голый Proszę chleb без Acc — только Poproszę ten chleb."
+        bel: "Не калька «можна мне» і не *Proszę chleb без Acc — Poproszę ten chleb."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -227,11 +227,12 @@ exercises:
       sources:
         - "LEX-A1-SERVICE"
       ai_assisted: true
+      notes: "Adult same-scenario distractors (Acc miss + L1 calque). DRAFT."
     mini_check: false
 
   - id: ex-ws-listen-01
     canonical_id: EX-A1-WS-LIS-01
-    version: 2
+    version: 3
     type: listening
     status: DRAFT
     prompt: "Послушайте кассира. Что он сказал?"
@@ -239,11 +240,11 @@ exercises:
     audio_url: /audio/a1/EX-A1-WS-LIS-01.mp3
     options:
       - id: a
-        text: Назвал цену покупки.
+        text: Назвал цену покупки (złotych i groszy).
       - id: b
-        text: Спросил количество mleka (jedno czy dwa).
+        text: "Уточнил количество: jedno czy dwa."
       - id: c
-        text: Спросил, нужна ли torba.
+        text: Сказал «Oto paragon».
     correct_option_id: a
     concept_ids:
       - GR-NUM-MONEY-01
@@ -255,11 +256,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Да: это сумма — złotych и groszy."
-      incorrect: "Это сумма (złotych/groszy), не количество и не torba."
+      incorrect: "Это сумма (złotych/groszy), не количество и не paragon."
       l1:
-        ukr: "Слухайте цілу суму, не jedno mleko і не torba."
-        rus: "Слышите цену целиком — не количество и не пакет."
-        bel: "Гэта цана, не колькасць і не torba."
+        ukr: "Слухайте złotych i groszy — ціна, не jedno czy dwa і не Oto paragon."
+        rus: "Слышите цену целиком — не количество mleka и не выдачу чека."
+        bel: "Гэта цана (złotych/groszy), не колькасць і не Oto paragon."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -267,11 +268,12 @@ exercises:
       sources:
         - "LEX-A1-MONEY / GR-NUM-MONEY-01"
       ai_assisted: true
+      notes: "Hard same-scenario foils (quantity vs paragon). DRAFT."
     mini_check: false
 
   - id: ex-ws-02
     canonical_id: EX-A1-WS-SC-02
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
     prompt: "Как спросить цену у кассы — спокойно, на pan/pani?"
@@ -279,9 +281,9 @@ exercises:
       - id: a
         text: Ile to kosztuje?
       - id: b
-        text: Skolko stoit?
+        text: Ile to stoit?
       - id: c
-        text: Jaka cena ty masz?
+        text: Ile kosztuje to jest?
     correct_option_id: a
     concept_ids:
       - GR-NUM-MONEY-01
@@ -293,11 +295,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Ile to kosztuje? — обычный вопрос о цене."
-      incorrect: "L1-калька или ty к кассиру — не то, что говорят у кассы."
+      incorrect: "L1-калька *stoit или сломанный порядок слов — не рамка у кассы."
       l1:
-        ukr: "Не *Skolko / skilky і не ty да касира — Ile to kosztuje?"
-        rus: "Не *Skolko stoit и не ty — только Ile to kosztuje?"
-        bel: "Не калька «колькі» і не ty — Ile to kosztuje?"
+        ukr: "«Скільки коштує» → Ile to kosztuje?, не *stoit і не *Ile kosztuje to jest."
+        rus: "Не *stoit и не *Ile kosztuje to jest — только Ile to kosztuje?"
+        bel: "Не *stoit і не зламаны парадак — Ile to kosztuje?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -309,7 +311,7 @@ exercises:
 
   - id: ex-ws-03
     canonical_id: EX-A1-WS-SC-03
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
     prompt: "Как сказать, что платите картой?"
@@ -317,9 +319,9 @@ exercises:
       - id: a
         text: Płacę kartą.
       - id: b
-        text: Płacę karta.
+        text: Płacę kartę.
       - id: c
-        text: Na karcie płacę.
+        text: Płacę na kartę.
     correct_option_id: a
     concept_ids:
       - GR-NUM-MONEY-01
@@ -330,11 +332,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Płacę kartą — творительный в формуле оплаты."
-      incorrect: "Karta / na karcie — кальки, не сервисная формула."
+      incorrect: "Kartę / na kartę — Acc или калька, не творительный kartą."
       l1:
-        ukr: "Kartą (Ins), не *karta / *na karcie."
-        rus: "Творительный kartą — не *karta и не «на карте»."
-        bel: "Płacę kartą — не *Na karcie."
+        ukr: "Kartą (Ins) ≠ «на карту» → *na kartę і ≠ Acc *kartę."
+        rus: "Творительный kartą — не винительный *kartę и не «на карту» → *na kartę."
+        bel: "Płacę kartą — не *kartę і не *na kartę."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -346,7 +348,7 @@ exercises:
 
   - id: ex-ws-04
     canonical_id: EX-A1-WS-MC-01
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Отметьте уместные реплики покупателя у кассы."
@@ -356,7 +358,7 @@ exercises:
       - id: b
         text: Ile to kosztuje?
       - id: c
-        text: Hej, dawaj szybciej!
+        text: Daj mleko.
       - id: d
         text: Dziękuję. Do widzenia.
     correct_option_ids:
@@ -371,7 +373,11 @@ exercises:
       - FN-A1-THANKS-01
     feedback:
       correct: "Выбор, цена и спокойное прощание — уместны."
-      incorrect: "Hej, dawaj szybciej! — слишком грубо для кассы."
+      incorrect: "Daj mleko — резко у кассы; нужны Poproszę / Ile… / Dziękuję."
+      l1:
+        ukr: "«Дайте» → *Daj mleko. Тримайте Poproszę, не наказ."
+        rus: "Не приказ *Daj mleko к кассиру — только Poproszę…"
+        bel: "Не *Daj mleko — трымайце Poproszę."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -383,7 +389,7 @@ exercises:
 
   - id: ex-ws-05
     canonical_id: EX-A1-WS-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Какие реплики закрывают количество, цену и чек?"
@@ -393,7 +399,7 @@ exercises:
       - id: b
         text: Dwanaście złotych.
       - id: c
-        text: Cześć, stary!
+        text: Co dla pana?
       - id: d
         text: Czy mogę dostać paragon?
     correct_option_ids:
@@ -408,7 +414,11 @@ exercises:
       - FN-A1-CONFIRM-01
     feedback:
       correct: "Количество, цена и paragon — нужные куски у кассы."
-      incorrect: "Cześć, stary! не относится к покупке у кассы."
+      incorrect: "Co dla pana? — реплика кассира, не шаг покупателя к чеку."
+      l1:
+        ukr: "Co dla pana? каже касир. Вам: Jedno / cena / paragon."
+        rus: "Co dla pana? говорит кассир. Вам нужны количество, сумма, paragon."
+        bel: "Co dla pana? — рэпліка касіра, не ваш крок да чэка."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -420,7 +430,7 @@ exercises:
 
   - id: ex-ws-06
     canonical_id: EX-A1-WS-GF-01
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Ile to {{gap1}}?"
@@ -440,9 +450,9 @@ exercises:
       correct: "Ile to kosztuje? — целая рамка цены."
       incorrect: "Нужен глагол kosztuje."
       l1:
-        ukr: "Не *Ile to stoit / skilky."
-        rus: "Не *Ile to stoit."
-        bel: "Трымайце kosztuje, не кальку «каштуе»."
+        ukr: "Не *stoit / *skilky — tylko kosztuje."
+        rus: "Не *stoit — только kosztuje."
+        bel: "Не калька «каштуе» → kosztuje."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -454,7 +464,7 @@ exercises:
 
   - id: ex-ws-07
     canonical_id: EX-A1-WS-GF-02
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Płacę {{gap1}}."
@@ -473,6 +483,10 @@ exercises:
     feedback:
       correct: "Kartą или gotówką — творительный в формуле оплаты."
       incorrect: "Нужна форма kartą или gotówką."
+      l1:
+        ukr: "Ins: kartą / gotówką — не *kartę / *na kartę."
+        rus: "Творительный: kartą / gotówką — не *kartę / *na kartę."
+        bel: "Kartą / gotówką — не *kartę і не *na kartę."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -484,7 +498,7 @@ exercises:
 
   - id: ex-ws-08
     canonical_id: EX-A1-WS-OR-01
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Расставьте шаги покупки у кассы."
@@ -511,6 +525,10 @@ exercises:
     feedback:
       correct: "Выбор → количество/цена → оплата → прощание."
       incorrect: "Сначала назовите товар, потом цену и оплату."
+      l1:
+        ukr: "Порядок: Poproszę → ilość/cena → płatność → Do widzenia."
+        rus: "Сначала товар, потом количество/цена, потом оплата."
+        bel: "Спачатку тавар, потым цана, потым аплата."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -522,7 +540,7 @@ exercises:
 
   - id: ex-ws-09
     canonical_id: EX-A1-WS-OR-02
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Соберите порядок: количество, затем цена."
@@ -546,6 +564,10 @@ exercises:
     feedback:
       correct: "Вопрос о количестве → ответ → вопрос о цене."
       incorrect: "Сначала количество, затем цена."
+      l1:
+        ukr: "Спочатку ilość (Ile mleka?), потім cena."
+        rus: "Сначала количество, потом цена — не наоборот."
+        bel: "Спачатку колькасць, потым цана."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -556,7 +578,7 @@ exercises:
 
   - id: ex-ws-10
     canonical_id: EX-A1-WS-SC-04
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
     prompt: "Выберите корректный вопрос о цене у кассы."
@@ -566,7 +588,7 @@ exercises:
       - id: b
         text: Ile to kosztować?
       - id: c
-        text: Co cena?
+        text: Ile to stoit?
     correct_option_id: a
     concept_ids:
       - GR-NUM-MONEY-01
@@ -575,11 +597,11 @@ exercises:
     mini_check: true
     feedback:
       correct: "Ile to kosztuje? — готовая рамка."
-      incorrect: "Инфинитив или калька ломают вопрос о цене."
+      incorrect: "Инфинитив *kosztować или калька *stoit ломают вопрос."
       l1:
-        ukr: "Не інфінітив *kosztować і не «яка ціна» → Co cena?"
-        rus: "Не *Ile to kosztować и не *Co cena."
-        bel: "Толькі Ile to kosztuje? — не калька."
+        ukr: "Не інфінітив *kosztować і не *stoit — Ile to kosztuje?"
+        rus: "Не *Ile to kosztować и не *stoit."
+        bel: "Толькі Ile to kosztuje? — не *stoit і не інфінітыў."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -590,42 +612,51 @@ exercises:
 
   - id: ex-ws-write-01
     canonical_id: EX-A1-WS-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: Ile to {{gap1}}? Płacę {{gap2}}."
+    prompt: "Напишите: Poproszę {{gap1}}. Ile to {{gap2}}? Płacę {{gap3}}."
     gaps:
       - id: gap1
+        accepted_answers:
+          - ten chleb
+          - mleko
+          - ten chleb i mleko
+        placeholder: "…"
+      - id: gap2
         accepted_answers:
           - kosztuje
           - Kosztuje
         placeholder: "…"
-      - id: gap2
+      - id: gap3
         accepted_answers:
           - kartą
           - gotówką
         placeholder: "…"
     concept_ids:
+      - GR-CAS-ACC-01
       - GR-NUM-MONEY-01
     function_ids:
       - FN-A1-QUANT-01
       - FN-A1-TRANS-01
     lex_bundle_ids:
+      - LEX-A1-SERVICE
       - LEX-A1-MONEY
     feedback:
-      correct: "Две рамки: Ile to kosztuje? и Płacę kartą / gotówką."
-      incorrect: "Нужны kosztuje и творительный kartą или gotówką."
+      correct: "Три рамки: Poproszę + Acc, Ile to kosztuje?, Płacę kartą / gotówką."
+      incorrect: "Нужны товар (Acc), kosztuje и творительный kartą или gotówką."
       l1:
-        ukr: "kosztuje + kartą (Ins) — не *stoit / *na karcie."
-        rus: "Не *stoit и не *karta — kosztuje + kartą."
-        bel: "Дзве формулы: kosztuje / kartą."
+        ukr: "Acc після Poproszę; kosztuje ≠ *stoit; kartą (Ins) ≠ *na kartę."
+        rus: "Не *stoit и не *kartę — kosztuje + kartą; после Poproszę — Acc."
+        bel: "Тры формулы: Acc / kosztuje / kartą — не калькі."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "FN-A1-QUANT-01 productive dual gap"
+        - "FN-A1-QUANT-01 productive triple gap"
       ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
     mini_check: false
 
 mini_check:
@@ -641,7 +672,7 @@ result_metadata:
   title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете назвать товар, количество
-    и цену и закрыть оплату у кассы (черновик, внутренний просмотр).
+    и цену и закрыть оплату у кассы.
   retry_ru: >
     Ещё раз Poproszę…, Ile to kosztuje? и Płacę kartą — потом короткая
     проверка снова.
@@ -663,5 +694,7 @@ provenance:
     - "Curriculum links: SCN-A1-SHOP-01, FN-A1-TRANS-01, FN-A1-QUANT-01"
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim, not studio).
-    Hard same-scenario foils. DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.

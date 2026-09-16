@@ -1,7 +1,7 @@
 kind: module
 canonical_id: MOD-A1-W-SKLEPIE
 slug: w-sklepie
-version: 5
+version: 6
 status: DRAFT
 level: A1
 title_pl: W sklepie
@@ -45,5 +45,7 @@ provenance:
     - "Common-knowledge Polish retail dialogue patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    Static audio on L01–L03 assessed listening (edge-tts interim under /audio/a1/).
-    DRAFT — not JPJO-approved, not learner-published. reviewer_id null.
+    Substance deepen 2026-09-16 (L01–L03): adult same-scenario distractors,
+    distinct UK/BEL/RU L1 traps, productive dual/triple gaps, hard listening foils.
+    Static edge-tts under /audio/a1/. status DRAFT — not JPJO-approved,
+    not learner-published. reviewer_id null.

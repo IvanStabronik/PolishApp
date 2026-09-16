@@ -1,7 +1,7 @@
-kind: lesson
+﻿kind: lesson
 canonical_id: LES-A1-WS-03
 slug: samodzielne-zakupy
-version: 5
+version: 6
 status: DRAFT
 title_pl: Samodzielne zakupy
 sort_order: 3
@@ -82,16 +82,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      Не збирайте покупку з «дайте». Тримайте
-      Poproszę… → Tak, jedno → I jeszcze… → płacę…; «ти» до касира —
-      лише якщо сам запропонував.
+      Пастка: зібрати список без Poproszę або відповісти *jeden на Jedno mleko?
+      Тримайте Poproszę… → Tak, jedno → I jeszcze… → paragon.
     rus: >
-      Не собирайте «попрошу / ещё / итого / плачу» дословной калькой.
-      Poproszę… и I jeszcze… — польские рамки; без ty к кассиру.
+      Пастка: калька «ещё» без jeszcze; *jeden вместо jedno для mleko;
+      список без рамки Poproszę.
     bel: >
-      Не збірайце пакупку з «дайце». Трымайце
-      Poproszę… → Tak, jedno → I jeszcze… → płacę…; да касіра не ty,
-      пакуль ён сам не прапануе.
+      Пастка: *Daj / «яшчэ» без jeszcze; *jeden замест jedno;
+      аканне ў Razem… не пераносіце.
 grammar_points:
   - id: GP-A1-WS-L3
     title_pl: Pełna lista zakupów
@@ -114,24 +112,24 @@ grammar_points:
       - GR-NUM-CARD-01
     l1_notes:
       ukr: >
-        Після Poproszę — Acc і liczba. Tak, jedno і I jeszcze… цілими;
-        не *Daj і не «можна мені ще».
+        Acc і liczba після Poproszę. Tak, jedno (не *jeden для mleko);
+        I jeszcze… цілком — не «можна мені ще».
       rus: >
-        Не калькируйте весь заказ порядком слов из L1. Jedno / dwa —
-        готовый слот; I jeszcze… добавляет позицию.
+        Не *jeden к mleko и не «ещё» без jeszcze. Список — одна рамка Poproszę…
+        с i между позициями.
       bel: >
-        Acc пасля Poproszę. Tak, jedno / I jeszcze… вучыце цэлымі;
-        не калька «дайце яшчэ»; аканне ў сумах на пісьме не пераносіце.
+        Tak, jedno / I jeszcze… вучыце цэлымі; не *jeden і не калька «дайце яшчэ».
+        Acc пасля Poproszę.
 l1_notes:
   ukr: >
-    Самі: Poproszę X, Y i Z, Tak, jedno, I jeszcze…, ціна й Kartą.
-    Без «дайте» і без ty до касира.
+    Самі: Poproszę X, Y i Z → Tak, jedno → I jeszcze… → Kartą / paragon.
+    Пастки: *jeden, список без Poproszę, *Daj torbę.
   rus: >
-    Полный заказ у кассы без L1-сборки и без ty. Запомните
-    Poproszę…, Tak, jedno, I jeszcze… и просьбу о paragon целиком.
+    Полный заказ без L1-сборки: Poproszę…, Tak, jedno (не *jeden),
+    I jeszcze…, потом оплата и чек.
   bel: >
-    Самі правядзіце пакупку цэлымі рамкамі: Poproszę… / Tak, jedno /
-    I jeszcze… / Kartą. Без калькі «дайце» і без ty да касіра.
+    Самі цэлымі рамкамі. Пасткі: *jeden, «яшчэ» без jeszcze, *Daj.
+    Без ty да касіра.
 steps:
   - id: step-l3-situation
     kind: situation
@@ -184,10 +182,11 @@ steps:
   - id: step-l3-result
     kind: result
     title_ru: Итог
+
 exercises:
   - id: ex-ws-l3-01
     canonical_id: EX-A1-WS-L3-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "У кассы. Как ясно заказать три позиции?"
@@ -199,7 +198,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Poproszę и союз i связывают список."
-      incorrect: "Остальные варианты слишком обрывисты или грубы у кассы."
+      incorrect: "Список без Poproszę или *Daj wszystko — не сервисная рамка."
+      l1:
+        ukr: "Не перелік без Poproszę і не *Daj wszystko — Poproszę A, B i C."
+        rus: "Не голый список и не *Daj wszystko — нужна рамка Poproszę… i…"
+        bel: "Не спіс без Poproszę і не *Daj wszystko."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -212,13 +215,13 @@ exercises:
       - id: a
         text: Poproszę chleb, mleko i trzy bułki.
       - id: b
-        text: Chleb, mleko, trzy — bez Poproszę.
+        text: Chleb, mleko, trzy bułki.
       - id: c
         text: Daj wszystko.
     correct_option_id: a
   - id: ex-ws-l3-02
     canonical_id: EX-A1-WS-L3-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Что помогает закрыть покупку самостоятельно у кассы?"
@@ -230,7 +233,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Список, подтверждение количества и torba — нужные шаги."
-      incorrect: "Кассир не должен угадывать ваш заказ."
+      incorrect: "Milczę, kasjer wie — кассир не угадывает ваш заказ."
+      l1:
+        ukr: "Не мовчіть: Poproszę… / Tak, jedno / I jeszcze torbę."
+        rus: "Не ждите угадывания — назовите список, количество, torbę."
+        bel: "Не маўчыце — Poproszę…, Tak, jedno, I jeszcze…"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -241,20 +248,20 @@ exercises:
     mini_check: false
     options:
       - id: a
-        text: Назвать полный список
+        text: Poproszę ten chleb, mleko i trzy bułki.
       - id: b
-        text: Подтвердить количество
+        text: Tak, jedno.
       - id: c
-        text: Добавить torbę, если нужна
+        text: I jeszcze torbę, proszę.
       - id: d
-        text: Ждать, пока кассир угадает
+        text: Milczę, kasjer wie.
     correct_option_ids:
       - a
       - b
       - c
   - id: ex-ws-l3-03
     canonical_id: EX-A1-WS-L3-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: I {{gap1}} torbę, proszę."
@@ -267,6 +274,10 @@ exercises:
     feedback:
       correct: "I jeszcze… добавляет позицию."
       incorrect: "Нужно jeszcze."
+      l1:
+        ukr: "Не «ще» латиницею і не *też torbę — jeszcze."
+        rus: "Не «ещё» без jeszcze и не *też torbę в этой рамке."
+        bel: "Трымайце jeszcze, не кальку «яшчэ» без польскай рамкі."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -282,7 +293,7 @@ exercises:
         placeholder: …
   - id: ex-ws-l3-04
     canonical_id: EX-A1-WS-L3-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Czy mogę dostać {{gap1}}?"
@@ -295,6 +306,10 @@ exercises:
     feedback:
       correct: "В конце просьбы — слово paragon."
       incorrect: "Нужно paragon."
+      l1:
+        ukr: "paragon ≠ reszta (здача) і ≠ torba."
+        rus: "paragon — чек, не reszta и не torba."
+        bel: "paragon — чэк, не reszta і не torba."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -310,7 +325,7 @@ exercises:
         placeholder: …
   - id: ex-ws-l3-05
     canonical_id: EX-A1-WS-L3-OR-05
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Расставьте шаги самостоятельной покупки."
@@ -323,6 +338,10 @@ exercises:
     feedback:
       correct: "Список → уточнение → сумма → оплата."
       incorrect: "Количество уточняют до оплаты."
+      l1:
+        ukr: "Poproszę → Tak, jedno → Razem/Ile → płatność."
+        rus: "Список → количество → сумма → оплата."
+        bel: "Спіс → колькасць → сума → аплата."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -347,7 +366,7 @@ exercises:
       - t4
   - id: ex-ws-l3-06
     canonical_id: EX-A1-WS-L3-SC-06
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Кассир спрашивает «Jedno mleko?». Как ответить?"
@@ -359,7 +378,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Tak, jedno подтверждает количество mleko."
-      incorrect: "Jeden не согласуется; ty не отвечает на вопрос."
+      incorrect: "Jeden не согласуется; *Możno jedno — калька «можно»."
+      l1:
+        ukr: "mleko → jedno (не *jeden); не «можна» → *Możno jedno."
+        rus: "К mleko — jedno, не *jeden; не «можно» → *Możno jedno."
+        bel: "Tak, jedno — не *jeden і не *Możno jedno."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -374,12 +397,12 @@ exercises:
       - id: b
         text: Tak, jeden.
       - id: c
-        text: Ty wiesz, ile trzeba.
+        text: Możno jedno?
     correct_option_id: a
 
   - id: ex-ws-l3-listen-01
     canonical_id: EX-A1-WS-L3-LIS-01
-    version: 2
+    version: 3
     type: listening
     status: DRAFT
     prompt: "Послушайте кассира. О чём вопрос?"
@@ -387,9 +410,9 @@ exercises:
     audio_url: /audio/a1/EX-A1-WS-L3-LIS-01.mp3
     options:
       - id: a
-        text: Уточняет количество молока.
+        text: Уточняет количество молока (jedno).
       - id: b
-        text: Называет итоговую сумму (Razem…).
+        text: Уточняет количество bułek (trzy).
       - id: c
         text: Спрашивает, нужна ли torba.
     correct_option_id: a
@@ -403,11 +426,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Да: Jedno mleko? — уточнение количества."
-      incorrect: "Это количество mleko, не сумма и не torba."
+      incorrect: "Это количество mleko, не bułki и не torba."
       l1:
-        ukr: "Слухайте jedno — кількість, не Razem і не torba."
-        rus: "Слышите количество, не итог и не пакет."
-        bel: "Гэта колькасць mleko, не сума і не torba."
+        ukr: "Слухайте jedno + mleko — не trzy bułki і не torba."
+        rus: "Слышите количество mleko, не bułki и не пакет."
+        bel: "Гэта колькасць mleko, не bułki і не torba."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -415,26 +438,32 @@ exercises:
       sources:
         - "Dialogue Samodzielne zakupy / FN-A1-QUANT-01"
       ai_assisted: true
+      notes: "Near-minimal foil: mleko vs bułki quantity. DRAFT."
     mini_check: false
 
 
   - id: ex-ws-l3-write-01
     canonical_id: EX-A1-WS-L3-GF-05
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: I {{gap1}} torbę, proszę. Płacę {{gap2}}."
+    prompt: "Напишите: Tak, {{gap1}}. I {{gap2}} torbę, proszę. Płacę {{gap3}}."
     gaps:
       - id: gap1
         accepted_answers:
-          - jeszcze
+          - jedno
         placeholder: "…"
       - id: gap2
+        accepted_answers:
+          - jeszcze
+        placeholder: "…"
+      - id: gap3
         accepted_answers:
           - kartą
           - gotówką
         placeholder: "…"
     concept_ids:
+      - GR-NUM-CARD-01
       - GR-CAS-ACC-01
       - GR-NUM-MONEY-01
     function_ids:
@@ -444,24 +473,25 @@ exercises:
       - LEX-A1-SERVICE
       - LEX-A1-MONEY
     feedback:
-      correct: "Две рамки: I jeszcze… и Płacę kartą / gotówką."
-      incorrect: "Нужны jeszcze и творительный kartą или gotówką."
+      correct: "Три рамки: Tak, jedno · I jeszcze… · Płacę kartą / gotówką."
+      incorrect: "Нужны jedno, jeszcze и творительный kartą или gotówką."
       l1:
-        ukr: "I jeszcze… + kartą (Ins) — не *Daj і не *na karcie."
-        rus: "Не *ещё без jeszcze и не *karta вместо kartą."
-        bel: "Jeszcze + kartą — дзве формулы, не калька."
+        ukr: "jedno ≠ *jeden; jeszcze ≠ «ще»; kartą (Ins) ≠ *na kartę."
+        rus: "Не *jeden, не «ещё» без jeszcze, не *kartę — jedno / jeszcze / kartą."
+        bel: "Тры формулы: jedno / jeszcze / kartą — не калькі."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "FN-A1-TRANS-01 productive dual gap"
+        - "FN-A1-TRANS-01 productive triple gap"
       ai_assisted: true
+      notes: "Productive triple gap (ilość + jeszcze + Ins). DRAFT."
     mini_check: false
 
   - id: ex-ws-l3-07
     canonical_id: EX-A1-WS-L3-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Какие реплики уместны после суммы у кассы?"
@@ -473,7 +503,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Подтверждение, оплата и чек — после суммы."
-      incorrect: "Вопрос о происхождении к покупке не относится."
+      incorrect: "Nazywam się… — представление, не шаг после Razem…"
+      l1:
+        ukr: "Після Razem…: Dobrze / Płacę… / paragon — не Nazywam się."
+        rus: "После суммы — Dobrze, оплата, paragon; не представление."
+        bel: "Пасля Razem… — аплата і чэк, не Nazywam się."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -490,14 +524,14 @@ exercises:
       - id: c
         text: Czy mogę dostać paragon?
       - id: d
-        text: Skąd pan jest?
+        text: Nazywam się Larysa.
     correct_option_ids:
       - a
       - b
       - c
   - id: ex-ws-l3-08
     canonical_id: EX-A1-WS-L3-OR-08
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Соберите финал у кассы: сумма → оплата → чек → прощание."
@@ -510,6 +544,10 @@ exercises:
     feedback:
       correct: "Сумма → принятие и оплата → чек → прощание."
       incorrect: "Не прощайтесь до завершения оплаты."
+      l1:
+        ukr: "Razem → Płacę → paragon → Do widzenia."
+        rus: "Сумма → оплата → чек → прощание."
+        bel: "Сума → аплата → чэк → развітанне."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -543,7 +581,7 @@ result_metadata:
   title_ru: Итог урока
   success_ru: >
     Короткая проверка пройдена. Вы можете провести покупку от списка
-    до чека и ответить на уточнение кассира (DRAFT preview).
+    до чека и ответить на уточнение кассира.
   retry_ru: >
     Повторите Poproszę…, Tak, jedno, I jeszcze… и просьбу о paragon,
     затем пройдите короткую проверку снова.
@@ -566,5 +604,6 @@ provenance:
       LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Hard shop foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct L1,
+    near-minimal listening foils, productive triple gap. Static edge-tts.
+    status DRAFT — not JPJO-approved. reviewer_id null.
