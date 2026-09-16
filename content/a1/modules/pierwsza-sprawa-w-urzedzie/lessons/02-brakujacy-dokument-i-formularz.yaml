@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-02
 slug: brakujacy-dokument-i-formularz
-version: 5
+version: 6
 status: DRAFT
 title_pl: Brakujący dokument i formularz
 sort_order: 2
@@ -80,14 +80,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      «Дай мені» → не *Daj mi…. Nie mam… / Brakuje… + Gen; просьба —
-      Proszę o… / Czy mogę prosić o….
+      «У мене немає + називний» → Nie mam + Gen (*wniosku*). «Дай мені» →
+      не *Daj…; просьба — Proszę o… / Czy mogę prosić o….
     rus: >
-      Не *Daj mi formularz и не ty к служащему. Brakuje + Gen; просьба —
-      Proszę o… или Czy mogę prosić o….
+      «У меня нет» → Nie mam + Gen, не *Nie mam wniosek. Brakuje тоже
+      с Gen. Просьба — Proszę o…, не приказ.
     bel: >
-      «Дай мне» не робіць *Daj mi…. Gen пасля nie mam / brakuje;
-      просьба — Proszę o…, не прыказ.
+      Назоўны пасля nie mam / brakuje — пастка. Gen + Proszę o…;
+      «дай мне» не робіць *Daj mi… да служачай.
 grammar_points:
   - id: GP-A1-UR-L2
     title_pl: Brak i uzupełnienie dokumentów
@@ -103,32 +103,32 @@ grammar_points:
       Служащий называет недостающее; вы уточняете комплект и просите бланк.
     examples_pl: *a1
     counterexamples_pl:
-      - "*Ty daj." # приказ
-      - "*Ja nie rozumieć." # ломает глагол
+      - "*Nie mam wniosek." # нужен Gen
+      - "*Proszę formularz." # без o
     concept_ids:
       - PRAG-PAN-01
       - GR-TV-AGR-01
       - GR-CAS-ACC-01
     l1_notes:
       ukr: >
-        *Nie mam wniosek → Nie mam wniosku (Gen). Не *Daj…; уточнення —
-        Czego jeszcze potrzebuję?
+        *Nie mam wniosek → Nie mam wniosku (Gen). Brakuje теж з Gen;
+        Proszę o… — з o.
       rus: >
         «У меня нет» → Nie mam + Gen, не *Nie mam wniosek. Brakuje тоже
-        с Gen. Просьба — Proszę o…, не приказ.
+        с Gen. Просьба — Proszę o…, не без o.
       bel: >
         Назоўны пасля nie mam / brakuje — пастка. Gen + Proszę o…;
         без ty да служачай.
 l1_notes:
   ukr: >
-    Не калькуйте «дай / у мене немає + називний». Тримайте Nie mam… /
+    Пастка: «дай / у мене немає + називний». Тримайте Nie mam… /
     Brakuje… + Gen, Czego jeszcze…?, Proszę o formularz.
   rus: >
-    Фокус: Gen после nie mam / brakuje и спокойная просьба о бланке —
-    без ty к служащему.
+    Пастка: именительный после nie mam / brakuje и приказ вместо просьбы.
+    Gen + Proszę o… — без ty к служащему.
   bel: >
-    Не спадзявайцеся на «і так зразумеюць». Nie mam… / Brakuje… + Gen;
-    просьба — Proszę o…, не «дай».
+    Пастка: назоўны пасля nie mam / brakuje. Gen + Proszę o… —
+    не «дай»; без ty да urzędniczki.
 steps:
   - id: step-l2-situation
     kind: situation
@@ -184,19 +184,33 @@ steps:
 exercises:
   - id: ex-ur-l2-01
     canonical_id: EX-A1-UR-L2-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Как спокойно сказать, что у вас нет заявления?"
+    options:
+      - id: a
+        text: Nie mam wniosku.
+      - id: b
+        text: Nie mam wniosek.
+      - id: c
+        text: Ja nie mam wniosek.
+    correct_option_id: a
     concept_ids:
       - PRAG-PAN-01
+      - GR-CAS-ACC-01
     function_ids:
       - FN-A1-PURPOSE-01
+      - FN-A1-DOCS-01
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
       correct: "Nie mam wniosku — ясное сообщение об отсутствии (Gen)."
-      incorrect: "Остальные варианты ломают глагол или порядок слов."
+      incorrect: "Именительный *wniosek после nie mam ломает рамку."
+      l1:
+        ukr: "Nie mam + Gen (*wniosku*), не *Nie mam wniosek."
+        rus: "Не *Nie mam wniosek — нужен Gen wniosku."
+        bel: "Пасля nie mam — Gen (*wniosku*), не назоўны."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -204,38 +218,15 @@ exercises:
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
       ai_assisted: true
+      notes: "Adult same-scenario distractors (nom after nie mam). DRAFT."
     mini_check: false
-    options:
-      - id: a
-        text: Nie mam wniosku.
-      - id: b
-        text: Nie mieć wniosek.
-      - id: c
-        text: Ja nie mieć wniosek.
-    correct_option_id: a
+
   - id: ex-ur-l2-02
     canonical_id: EX-A1-UR-L2-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Какие реплики помогают уточнить комплект у окошка?"
-    concept_ids:
-      - GR-TV-AGR-01
-    function_ids:
-      - FN-A1-DOCS-01
-    lex_bundle_ids:
-      - LEX-A1-DOCS
-    feedback:
-      correct: "Уточнение, проверка нехватки и просьба о бланке — уместны."
-      incorrect: "Daj mi… — слишком резко для служащего."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
-      ai_assisted: true
-    mini_check: false
     options:
       - id: a
         text: Czego jeszcze potrzebuję?
@@ -244,26 +235,100 @@ exercises:
       - id: c
         text: Czy mogę prosić o formularz?
       - id: d
-        text: Daj mi wszystko.
+        text: Miło pana poznać.
     correct_option_ids:
       - a
       - b
       - c
+    concept_ids:
+      - GR-TV-AGR-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-DOCS-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: "Уточнение, проверка нехватки и просьба о бланке — уместны."
+      incorrect: "Miło pana poznać — знакомство, не уточнение комплекта."
+      l1:
+        ukr: "Знайомство ≠ Czego jeszcze…? / Brakuje… / formularz."
+        rus: "Представление не закрывает пробел в комплекте."
+        bel: "Miło pana poznać — не ўдакладненне камплекту."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
+      ai_assisted: true
+    mini_check: false
+
+  - id: ex-ur-l2-listen-01
+    canonical_id: EX-A1-UR-L2-LIS-01
+    version: 3
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте служащую. Что она сказала?"
+    audio_text_pl: Brakuje wniosku i jednego zdjęcia.
+    audio_url: /audio/a1/EX-A1-UR-L2-LIS-01.mp3
+    options:
+      - id: a
+        text: Назвала, каких документов не хватает.
+      - id: b
+        text: Попросила ждать na numer.
+      - id: c
+        text: Сказала «Formularz jest tutaj».
+    correct_option_id: a
+    concept_ids:
+      - GR-CAS-ACC-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-DOCS-01
+      - FN-A1-CONFIRM-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: "Да: Brakuje… + Gen — перечень недостающего."
+      incorrect: "Это нехватка комплекта, не ожидание номера и не выдача бланка."
+      l1:
+        ukr: "Слухайте Brakuje + Gen — нехватка, не czekać / Formularz jest…"
+        rus: "Слышите нехватку документов, не Proszę czekać и не выдачу бланка."
+        bel: "Гэта brakuje, не чаканне нумара і не выдача бланка."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Brakujący dokument / FN-A1-DOCS-01"
+      ai_assisted: true
+      notes: "Hard same-scenario foils (wait vs blank handoff). DRAFT."
+    mini_check: false
+
   - id: ex-ur-l2-03
     canonical_id: EX-A1-UR-L2-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Nie {{gap1}} wniosku."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - mam
+        placeholder: …
     concept_ids:
       - GR-CAS-ACC-01
     function_ids:
       - FN-A1-ADDRESS-01
+      - FN-A1-DOCS-01
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
       correct: "Nie mam… — обычная рамка «у меня нет»."
       incorrect: "Нужна форма mam после Nie."
+      l1:
+        ukr: "Nie mam…, не інфінітив *mieć."
+        rus: "Не *Nie mieć — нужна форма mam."
+        bel: "Пасля Nie — mam, не інфінітыў."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -272,62 +337,48 @@ exercises:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-ADDRESS-01 / LEX-A1-URZAD
       ai_assisted: true
     mini_check: false
-    gaps:
-      - id: gap1
-        accepted_answers:
-          - mam
-        placeholder: …
+
   - id: ex-ur-l2-04
     canonical_id: EX-A1-UR-L2-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Czy mogę prosić o {{gap1}}?"
-    concept_ids:
-      - GR-TNS-PRS-01
-    function_ids:
-      - FN-A1-GREET-01
-    lex_bundle_ids:
-      - LEX-A1-DOCS
-    feedback:
-      correct: "Prosić o formularz — просьба заканчивается названием бланка."
-      incorrect: "Нужно слово formularz."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-GREET-01 / LEX-A1-DOCS
-      ai_assisted: true
-    mini_check: false
     gaps:
       - id: gap1
         accepted_answers:
           - formularz
         placeholder: …
-  - id: ex-ur-l2-05
-    canonical_id: EX-A1-UR-L2-OR-05
-    version: 1
-    type: ordering
-    status: DRAFT
-    prompt: "Расставьте реакцию на недостающий документ по порядку."
     concept_ids:
+      - GR-TNS-PRS-01
       - PRAG-PAN-01
     function_ids:
+      - FN-A1-DOCS-01
       - FN-A1-REG-01
     lex_bundle_ids:
-      - LEX-A1-URZAD
+      - LEX-A1-DOCS
     feedback:
-      correct: "Нехватка → понял → уточнение → просьба о бланке."
-      incorrect: "Сначала покажите, что поняли, потом уточняйте и просите."
+      correct: "Prosić o formularz — просьба заканчивается названием бланка."
+      incorrect: "Нужно слово formularz."
+      l1:
+        ukr: "У кінці — formularz, не *blankiet як єдина відповідь тут."
+        rus: "В этой рамке — formularz."
+        bel: "У гэтай рамцы — formularz."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-REG-01 / LEX-A1-URZAD
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
       ai_assisted: true
     mini_check: false
+
+  - id: ex-ur-l2-05
+    canonical_id: EX-A1-UR-L2-OR-05
+    version: 2
+    type: ordering
+    status: DRAFT
+    prompt: "Расставьте реакцию на недостающий документ по порядку."
     items:
       - id: t1
         text: Brakuje jednego zdjęcia.
@@ -342,21 +393,58 @@ exercises:
       - t2
       - t3
       - t4
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-REG-01
+      - FN-A1-DOCS-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+    feedback:
+      correct: "Нехватка → понял → уточнение → просьба о бланке."
+      incorrect: "Сначала покажите, что поняли, потом уточняйте и просите."
+      l1:
+        ukr: "Порядок: Brakuje… → Rozumiem → Czego…? → formularz."
+        rus: "Сначала понимание, потом уточнение и бланк."
+        bel: "Спачатку зразуменне, потым удакладненне і бланк."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-REG-01 / LEX-A1-URZAD
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-ur-l2-06
     canonical_id: EX-A1-UR-L2-SC-06
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Служащий говорит «Brakuje wniosku». Как спокойно ответить?"
+    options:
+      - id: a
+        text: Rozumiem. Proszę o formularz.
+      - id: b
+        text: Proszę formularz.
+      - id: c
+        text: Nie, brakuje nie wniosku.
+    correct_option_id: a
     concept_ids:
       - GR-TV-AGR-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-IDENTIFY-01
+      - FN-A1-DOCS-01
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
       correct: "Rozumiem + просьба о бланке — понятный следующий шаг."
-      incorrect: "Приказ или спор не закрывают пробел в комплекте."
+      incorrect: "Без o (*Proszę formularz) или спор не закрывают пробел."
+      l1:
+        ukr: "Rozumiem + Proszę o…; не *Proszę formularz і не сварка."
+        rus: "Нужен o в Proszę o…; спор не закрывает комплект."
+        bel: "Rozumiem + Proszę o… — не без o і не спрэчка."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -364,63 +452,15 @@ exercises:
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-IDENTIFY-01 / LEX-A1-DOCS
       ai_assisted: true
+      notes: "Adult same-scenario distractors (missing o + dispute). DRAFT."
     mini_check: false
-    options:
-      - id: a
-        text: Rozumiem. Proszę o formularz.
-      - id: b
-        text: Daj go.
-      - id: c
-        text: Ty źle mówisz, daj wniosek.
-    correct_option_id: a
-
-  - id: ex-ur-l2-listen-01
-    canonical_id: EX-A1-UR-L2-LIS-01
-    version: 2
-    type: listening
-    status: DRAFT
-    prompt: "Послушайте служащую. Что она сказала?"
-    audio_text_pl: Brakuje wniosku i jednego zdjęcia.
-    audio_url: /audio/a1/EX-A1-UR-L2-LIS-01.mp3
-    options:
-      - id: a
-        text: Назвала, каких документов не хватает.
-      - id: b
-        text: Попросила ждать na numer.
-      - id: c
-        text: Спросила, как вас зовут.
-    correct_option_id: a
-    concept_ids:
-      - GR-CAS-ACC-01
-      - PHON-CORE-01
-    function_ids:
-      - FN-A1-DOCS-01
-      - FN-A1-CONFIRM-01
-    lex_bundle_ids:
-      - LEX-A1-DOCS
-    feedback:
-      correct: "Да: Brakuje… + Gen — перечень недостающего."
-      incorrect: "Это нехватка комплекта, не ожидание номера и не имя."
-      l1:
-        ukr: "Слухайте Brakuje + Gen — нехватка, не czekać / nazywam."
-        rus: "Слышите нехватку документов, не Proszę czekać и не имя."
-        bel: "Гэта brakuje, не чаканне нумара і не імя."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - "Dialogue Brakujący dokument / FN-A1-DOCS-01"
-      ai_assisted: true
-    mini_check: false
-
 
   - id: ex-ur-l2-write-01
     canonical_id: EX-A1-UR-L2-GF-05
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: Nie mam {{gap1}}. Czy mogę prosić o {{gap2}}?"
+    prompt: "Напишите: Nie mam {{gap1}}. Czego jeszcze {{gap2}}? Czy mogę prosić o {{gap3}}?"
     gaps:
       - id: gap1
         accepted_answers:
@@ -428,55 +468,44 @@ exercises:
         placeholder: "…"
       - id: gap2
         accepted_answers:
+          - potrzebuję
+        placeholder: "…"
+      - id: gap3
+        accepted_answers:
           - formularz
         placeholder: "…"
     concept_ids:
       - GR-CAS-ACC-01
       - PRAG-PAN-01
+      - GR-TNS-PRS-01
     function_ids:
       - FN-A1-DOCS-01
       - FN-A1-REG-01
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
-      correct: "Две рамки: Nie mam + Gen и просьба o formularz."
-      incorrect: "Нужны wniosku (Gen) и formularz в просьбе."
+      correct: "Три рамки: Nie mam + Gen, Czego jeszcze potrzebuję? и o formularz."
+      incorrect: "Нужны wniosku (Gen), potrzebuję и formularz в просьбе."
       l1:
-        ukr: "Не *Nie mam wniosek і не *Daj formularz."
-        rus: "Gen после nie mam; просьба — o formularz, не приказ."
-        bel: "wniosku (Gen) + formularz — не назоўны і не *Daj."
+        ukr: "Не *Nie mam wniosek; potrzebuję ў питанні; o formularz."
+        rus: "Gen после nie mam; potrzebuję в уточнении; formularz в просьбе."
+        bel: "wniosku (Gen) + potrzebuję + formularz — тры формулы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "FN-A1-DOCS-01 productive dual gap"
+        - "FN-A1-DOCS-01 productive triple gap"
       ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
     mini_check: false
 
   - id: ex-ur-l2-07
     canonical_id: EX-A1-UR-L2-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Что уместно передать через Oto…?"
-    concept_ids:
-      - GR-CAS-ACC-01
-    function_ids:
-      - FN-A1-PURPOSE-01
-    lex_bundle_ids:
-      - LEX-A1-URZAD
-    feedback:
-      correct: "Oto… вводит конкретные документы на стол."
-      incorrect: "Приветствие — не документ; Oto к нему не подходит."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
-      ai_assisted: true
-    mini_check: true
     options:
       - id: a
         text: Oto mój paszport.
@@ -490,29 +519,34 @@ exercises:
       - a
       - b
       - c
-  - id: ex-ur-l2-08
-    canonical_id: EX-A1-UR-L2-OR-08
-    version: 1
-    type: ordering
-    status: DRAFT
-    prompt: "Соберите порядок: нехватка → бланк → заполнение → передача."
     concept_ids:
-      - GR-TNS-PRS-01
+      - GR-CAS-ACC-01
     function_ids:
       - FN-A1-DOCS-01
     lex_bundle_ids:
-      - LEX-A1-DOCS
+      - LEX-A1-URZAD
     feedback:
-      correct: "Сказать, чего нет → попросить бланк → заполнить → передать."
-      incorrect: "Документ передают после заполнения, не раньше."
+      correct: "Oto… вводит конкретные документы на стол."
+      incorrect: "Приветствие — не документ; Oto к нему не подходит."
+      l1:
+        ukr: "Oto + документи, не привітання."
+        rus: "Oto к документам, не к dzień dobry."
+        bel: "Oto + дакументы, не прывітанне."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-URZAD
       ai_assisted: true
     mini_check: true
+
+  - id: ex-ur-l2-08
+    canonical_id: EX-A1-UR-L2-OR-08
+    version: 2
+    type: ordering
+    status: DRAFT
+    prompt: "Соберите порядок: нехватка → бланк → заполнение → передача."
     items:
       - id: t1
         text: Nie mam wniosku.
@@ -527,6 +561,29 @@ exercises:
       - t2
       - t3
       - t4
+    concept_ids:
+      - GR-TNS-PRS-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-DOCS-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: "Сказать, чего нет → попросить бланк → заполнить → передать."
+      incorrect: "Документ передают после заполнения, не раньше."
+      l1:
+        ukr: "Спочатку Nie mam…, потім formularz і Oto…"
+        rus: "Сначала нехватка, потом бланк и передача."
+        bel: "Спачатку недахоп, потым бланк і перадача."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
+      ai_assisted: true
+    mini_check: true
+
 mini_check:
   exercise_ids: *a2
   pass_threshold: 1
@@ -538,7 +595,7 @@ result_metadata:
   title_ru: Итог урока
   success_ru: >
     Короткая проверка пройдена. Вы можете понять Brakuje…, уточнить комплект
-    и попросить formularz у окошка (DRAFT preview).
+    и попросить formularz у окошка.
   retry_ru: >
     Повторите Nie mam… / Brakuje…, Czego jeszcze potrzebuję? и просьбу о
     formularz, затем пройдите короткую проверку снова.
@@ -560,5 +617,7 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Hard urząd foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.

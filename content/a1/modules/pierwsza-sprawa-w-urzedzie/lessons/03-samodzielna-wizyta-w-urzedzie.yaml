@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-UR-03
 slug: samodzielna-wizyta-w-urzedzie
-version: 5
+version: 6
 status: DRAFT
 title_pl: Samodzielna wizyta w urzędzie
 sort_order: 3
@@ -80,14 +80,14 @@ pan_pani:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
-      «Ти / дай» → не *Ty… / *Daj… до urzędnika. Ланцюжок: w sprawie… ·
-      Nazywam się… · Oto… · Gdzie mam…?
+      «Ти / дай / як мене звуть» → не *Ty… / *Daj…; ім'я — Nazywam się…
+      цілком. Ланцюжок: w sprawie… · Nazywam się… · Oto… · Gdzie mam…?
     rus: >
-      Не *Ty… / *Daj… к служащему. Отработайте цепочку w sprawie… →
-      Nazywam się… → Oto… → Gdzie mam czekać? целиком.
+      Не *Ty… / *Daj… к служащему. Имя — Nazywam się…, не *Nazywam…
+      без się. Цепочка целиком.
     bel: >
-      «Ты / дай» не робіць *Ty… / *Daj…. w sprawie… · Nazywam się… ·
-      Oto… — асобныя польскія рамкі.
+      «Ты / дай / як мяне клічуць» → Nazywam się… цалкам; w sprawie… ·
+      Oto… — асобныя польскія рамкі; без ty да служачага.
 grammar_points:
   - id: GP-A1-UR-L3
     title_pl: Pełny przebieg wizyty
@@ -102,32 +102,32 @@ grammar_points:
       Самостоятельный визит к одному okienku: цель, имя, комплект и ожидание.
     examples_pl: *a1
     counterexamples_pl:
-      - "*Ty daj." # приказ
-      - "*Ja nie rozumieć." # ломает глагол
+      - "*Nazywam Svitlana." # без się
+      - "*Przyszłam w sprawa." # без Gen
     concept_ids:
       - PRAG-PAN-01
       - GR-TV-AGR-01
       - GR-CAS-ACC-01
     l1_notes:
       ukr: >
-        Не збирайте візит з укр. слів дослівно. Ланцюжок польськими формулами:
+        Не *Nazywam без się. Ланцюжок польськими формулами:
         w sprawie… → Nazywam się… → Oto… → Gdzie mam…?
       rus: >
         Цепочку Przyszłam w sprawie… → Nazywam się… → Oto… → Gdzie mam…?
-        берите целиком, без дословной кальки с русского.
+        берите целиком; się обязательно.
       bel: >
         «Па справе / як мяне клічуць» → w sprawie… / Nazywam się…. Ланцужок
-        цалкам; без ty да служачага.
+        цалкам; się абавязковае.
 l1_notes:
   ukr: >
-    Не калькуйте «ти / дай / па справе». Тримайте w sprawie…, Nazywam się…,
-    Oto…, Gdzie mam czekać?; без ty до служачого.
+    Пастка: «ти / дай / як мене звуть без się». Тримайте w sprawie…,
+    Nazywam się…, Oto…, Gdzie mam czekać?
   rus: >
-    Фокус: цель → имя → комплект → где ждать, без ty к служащему.
-    Держите pan/pani у окошка.
+    Пастка: ty / приказ / *Nazywam без się. Цель → имя → комплект → где
+    ждать — целиком, на pan/pani.
   bel: >
-    Не спадзявайцеся на «і так зразумеюць». w sprawie… / Nazywam się… /
-    Oto… / Gdzie mam…? — асобныя польскія рамкі; без ty да urzędnika.
+    Пастка: «ты / дай» і *Nazywam без się. w sprawie… / Nazywam się… /
+    Oto… / Gdzie mam…? — асобныя польскія рамкі.
 steps:
   - id: step-l3-situation
     kind: situation
@@ -183,19 +183,33 @@ steps:
 exercises:
   - id: ex-ur-l3-01
     canonical_id: EX-A1-UR-L3-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Как спокойно начать визит у окошка?"
+    options:
+      - id: a
+        text: Dzień dobry. Przyszłam w sprawie meldunku.
+      - id: b
+        text: Dzień dobry. Przyszłam w sprawa meldunek.
+      - id: c
+        text: Dzień dobry. Przyszłam po meldunek.
+    correct_option_id: a
     concept_ids:
       - PRAG-PAN-01
+      - GR-TNS-PRS-01
     function_ids:
       - FN-A1-PURPOSE-01
+      - FN-A1-GREET-01
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
       correct: "Приветствие и цель сразу сориентируют служащего."
-      incorrect: "Cześć / Hej — слишком свои для urzędu."
+      incorrect: "Именительный *w sprawa или *po meldunek ломают рамку цели."
+      l1:
+        ukr: "w sprawie + Gen ≠ *w sprawa і ≠ *po meldunek."
+        rus: "Не *w sprawa meldunek и не *po meldunek после Dzień dobry."
+        bel: "Трымайце w sprawie meldunku — не *w sprawa і не *po meldunek."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -203,38 +217,15 @@ exercises:
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
       ai_assisted: true
+      notes: "Adult same-scenario distractors (nom + po calque). DRAFT."
     mini_check: false
-    options:
-      - id: a
-        text: Dzień dobry. Przyszłam w sprawie meldunku.
-      - id: b
-        text: Cześć, ja po meldunek.
-      - id: c
-        text: Hej, pomóż mi.
-    correct_option_id: a
+
   - id: ex-ur-l3-02
     canonical_id: EX-A1-UR-L3-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Какие шаги входят в полный короткий визит?"
-    concept_ids:
-      - GR-TV-AGR-01
-    function_ids:
-      - FN-A1-DOCS-01
-    lex_bundle_ids:
-      - LEX-A1-DOCS
-    feedback:
-      correct: "Цель, имя и документы — основа визита у окошка."
-      incorrect: "Переход на ty у окошка не к месту."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
-      ai_assisted: true
-    mini_check: false
     options:
       - id: a
         text: Назвать цель
@@ -243,26 +234,102 @@ exercises:
       - id: c
         text: Передать документы
       - id: d
-        text: Перейти на ty
+        text: Miło pana poznać
     correct_option_ids:
       - a
       - b
       - c
+    concept_ids:
+      - GR-TV-AGR-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-DOCS-01
+      - FN-A1-IDENTIFY-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: "Цель, имя и документы — основа визита у окошка."
+      incorrect: "Miło pana poznać — знакомство, не обязательный шаг этого визита."
+      l1:
+        ukr: "Знайомство ≠ cel / imię / dokumenty ў візиті."
+        rus: "Представление не заменяет цель и комплект."
+        bel: "Miło pana poznać — не абавязковы крок гэтага візіту."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
+      ai_assisted: true
+    mini_check: false
+
+  - id: ex-ur-l3-listen-01
+    canonical_id: EX-A1-UR-L3-LIS-01
+    version: 3
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте служащего. Что он сказал?"
+    audio_text_pl: Przy okienku numer cztery.
+    audio_url: /audio/a1/EX-A1-UR-L3-LIS-01.mp3
+    options:
+      - id: a
+        text: Указал, где ждать.
+      - id: b
+        text: Сказал «Dokumenty są kompletne».
+      - id: c
+        text: Попросил «Proszę czekać na numer».
+    correct_option_id: a
+    concept_ids:
+      - PRAG-PAN-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-CONFIRM-01
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+    feedback:
+      correct: "Да: Przy okienku numer… — место ожидания."
+      incorrect: "Это где ждать, не комплектность и не общая инструкция czekać."
+      l1:
+        ukr: "Слухайте przy okienku — де чекати, не kompletne / czekać na numer."
+        rus: "Слышите место ожидания, не «kompletne» и не общую инструкцию."
+        bel: "Гэта месца чакання, не камплект і не агульная інструкцыя czekać."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Samodzielna wizyta / FN-A1-CONFIRM-01"
+      ai_assisted: true
+      notes: "Hard same-scenario foils (kompletne vs czekać). DRAFT."
+    mini_check: false
+
   - id: ex-ur-l3-03
     canonical_id: EX-A1-UR-L3-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Nazywam {{gap1}} Svitlana Koval."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - się
+        placeholder: …
     concept_ids:
       - GR-CAS-ACC-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-ADDRESS-01
+      - FN-A1-IDENTIFY-01
     lex_bundle_ids:
       - LEX-A1-URZAD
     feedback:
       correct: "Nazywam się… — целая формула имени."
       incorrect: "Нужно się в формуле Nazywam się…"
+      l1:
+        ukr: "Nazywam się… цілком; не *Nazywam без się."
+        rus: "Не *Nazywam без się — формула целиком."
+        bel: "się абавязковае ў Nazywam się…"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -271,62 +338,47 @@ exercises:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-ADDRESS-01 / LEX-A1-URZAD
       ai_assisted: true
     mini_check: false
-    gaps:
-      - id: gap1
-        accepted_answers:
-          - się
-        placeholder: …
+
   - id: ex-ur-l3-04
     canonical_id: EX-A1-UR-L3-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Przyszłam w sprawie {{gap1}}."
-    concept_ids:
-      - GR-TNS-PRS-01
-    function_ids:
-      - FN-A1-GREET-01
-    lex_bundle_ids:
-      - LEX-A1-DOCS
-    feedback:
-      correct: "После w sprawie — Gen: meldunku."
-      incorrect: "Нужна форма meldunku (Gen)."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-GREET-01 / LEX-A1-DOCS
-      ai_assisted: true
-    mini_check: false
     gaps:
       - id: gap1
         accepted_answers:
           - meldunku
         placeholder: …
-  - id: ex-ur-l3-05
-    canonical_id: EX-A1-UR-L3-OR-05
-    version: 1
-    type: ordering
-    status: DRAFT
-    prompt: "Расставьте шаги самостоятельного визита по порядку."
     concept_ids:
-      - PRAG-PAN-01
+      - GR-TNS-PRS-01
+      - GR-CAS-ACC-01
     function_ids:
-      - FN-A1-REG-01
+      - FN-A1-PURPOSE-01
     lex_bundle_ids:
-      - LEX-A1-URZAD
+      - LEX-A1-DOCS
     feedback:
-      correct: "Цель → имя → комплект → где ждать."
-      incorrect: "Сначала цель визита, потом имя и документы."
+      correct: "После w sprawie — Gen: meldunku."
+      incorrect: "Нужна форма meldunku (Gen)."
+      l1:
+        ukr: "meldunku (Gen), не *meldunek."
+        rus: "Не *meldunek — нужен Gen meldunku."
+        bel: "meldunku (Gen), не назоўны."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-REG-01 / LEX-A1-URZAD
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-DOCS
       ai_assisted: true
     mini_check: false
+
+  - id: ex-ur-l3-05
+    canonical_id: EX-A1-UR-L3-OR-05
+    version: 2
+    type: ordering
+    status: DRAFT
+    prompt: "Расставьте шаги самостоятельного визита по порядку."
     items:
       - id: t1
         text: Dzień dobry. Przyszłam w sprawie meldunku.
@@ -341,21 +393,58 @@ exercises:
       - t2
       - t3
       - t4
+    concept_ids:
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-REG-01
+      - FN-A1-PURPOSE-01
+    lex_bundle_ids:
+      - LEX-A1-URZAD
+    feedback:
+      correct: "Цель → имя → комплект → где ждать."
+      incorrect: "Сначала цель визита, потом имя и документы."
+      l1:
+        ukr: "Порядок: cel → imię → Oto… → Gdzie mam…?"
+        rus: "Сначала цель, потом имя и комплект."
+        bel: "Спачатку мэта, потым імя і камплект."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-REG-01 / LEX-A1-URZAD
+      ai_assisted: true
+    mini_check: false
+
   - id: ex-ur-l3-06
     canonical_id: EX-A1-UR-L3-SC-06
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Служащий говорит «Proszę czekać na numer». Как уточнить место?"
+    options:
+      - id: a
+        text: Gdzie mam czekać?
+      - id: b
+        text: Gdzie czekać ja?
+      - id: c
+        text: Gdzie pan każe czekać, ty?
+    correct_option_id: a
     concept_ids:
       - GR-TV-AGR-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-IDENTIFY-01
+      - FN-A1-ASK-01
     lex_bundle_ids:
       - LEX-A1-DOCS
     feedback:
       correct: "Gdzie mam czekać? — спокойное уточнение инструкции."
-      incorrect: "Ty или сломанная реплика у окошка не подходят."
+      incorrect: "Сломанный порядок или ty у окошка не подходят."
+      l1:
+        ukr: "Gdzie mam czekać? цілком; не *Gdzie czekać ja і не ty."
+        rus: "Не *Gdzie czekać ja и не ty — только Gdzie mam czekać?"
+        bel: "Толькі Gdzie mam czekać? — не зламаны парадак і не ty."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -363,63 +452,15 @@ exercises:
       sources:
         - Curriculum SCN-A1-URZAD-01 / FN-A1-IDENTIFY-01 / LEX-A1-DOCS
       ai_assisted: true
+      notes: "Adult same-scenario distractors (word order + ty). DRAFT."
     mini_check: false
-    options:
-      - id: a
-        text: Gdzie mam czekać?
-      - id: b
-        text: Gdzie ty każesz?
-      - id: c
-        text: Ja nie czekać.
-    correct_option_id: a
-
-  - id: ex-ur-l3-listen-01
-    canonical_id: EX-A1-UR-L3-LIS-01
-    version: 2
-    type: listening
-    status: DRAFT
-    prompt: "Послушайте служащего. Что он сказал?"
-    audio_text_pl: Przy okienku numer cztery.
-    audio_url: /audio/a1/EX-A1-UR-L3-LIS-01.mp3
-    options:
-      - id: a
-        text: Указал, где ждать.
-      - id: b
-        text: Сказал, что документы kompletne.
-      - id: c
-        text: Попросил заполнить formularz.
-    correct_option_id: a
-    concept_ids:
-      - PRAG-PAN-01
-      - PHON-CORE-01
-    function_ids:
-      - FN-A1-CONFIRM-01
-      - FN-A1-ASK-01
-    lex_bundle_ids:
-      - LEX-A1-URZAD
-    feedback:
-      correct: "Да: Przy okienku numer… — место ожидания."
-      incorrect: "Это где ждать, не комплектность и не просьба заполнить бланк."
-      l1:
-        ukr: "Слухайте przy okienku — де чекати, не kompletne / formularz."
-        rus: "Слышите место ожидания, не «kompletne» и не бланк."
-        bel: "Гэта месца чакання, не камплект і не бланк."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - "Dialogue Samodzielna wizyta / FN-A1-CONFIRM-01"
-      ai_assisted: true
-    mini_check: false
-
 
   - id: ex-ur-l3-write-01
     canonical_id: EX-A1-UR-L3-GF-05
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: Przyszłam w {{gap1}} meldunku. {{gap2}} paszport, wniosek i zdjęcie."
+    prompt: "Напишите: Przyszłam w {{gap1}} meldunku. Nazywam {{gap2}} Svitlana Koval. {{gap3}} paszport, wniosek i zdjęcie."
     gaps:
       - id: gap1
         accepted_answers:
@@ -427,57 +468,47 @@ exercises:
         placeholder: "…"
       - id: gap2
         accepted_answers:
+          - się
+        placeholder: "…"
+      - id: gap3
+        accepted_answers:
           - Oto
           - oto
         placeholder: "…"
     concept_ids:
       - GR-CAS-ACC-01
       - GR-TNS-PRS-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-PURPOSE-01
       - FN-A1-DOCS-01
+      - FN-A1-IDENTIFY-01
     lex_bundle_ids:
       - LEX-A1-URZAD
       - LEX-A1-DOCS
     feedback:
-      correct: "Две рамки: w sprawie… и Oto…."
-      incorrect: "Нужны sprawie и Oto перед комплектом."
+      correct: "Три рамки: w sprawie…, Nazywam się… и Oto…"
+      incorrect: "Нужны sprawie, się и Oto перед комплектом."
       l1:
-        ukr: "Не *w sprawa і не без Oto перед документами."
-        rus: "w sprawie (не *sprawa) + Oto… для комплекта."
-        bel: "sprawie + Oto — не назоўны і не без Oto."
+        ukr: "Не *w sprawa; się абавязкове; не без Oto."
+        rus: "sprawie + się + Oto — не именительный и не без się/Oto."
+        bel: "Тры формулы: sprawie / się / Oto."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "FN-A1-PURPOSE-01 / FN-A1-DOCS-01 productive dual gap"
+        - "FN-A1-PURPOSE-01 / FN-A1-DOCS-01 productive triple gap"
       ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
     mini_check: false
 
   - id: ex-ur-l3-07
     canonical_id: EX-A1-UR-L3-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Что уместно в финале короткого визита?"
-    concept_ids:
-      - GR-CAS-ACC-01
-    function_ids:
-      - FN-A1-PURPOSE-01
-    lex_bundle_ids:
-      - LEX-A1-URZAD
-    feedback:
-      correct: "Комплект в порядке, понимание и прощание закрывают визит."
-      incorrect: "Daj… — слишком резко для служащего."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
-      ai_assisted: true
-    mini_check: true
     options:
       - id: a
         text: Dokumenty są kompletne.
@@ -486,34 +517,41 @@ exercises:
       - id: c
         text: Dziękuję. Do widzenia.
       - id: d
-        text: Daj numer.
+        text: Proszę formularz.
     correct_option_ids:
       - a
       - b
       - c
-  - id: ex-ur-l3-08
-    canonical_id: EX-A1-UR-L3-OR-08
-    version: 1
-    type: ordering
-    status: DRAFT
-    prompt: "Соберите финал визита: результат → инструкция → уточнение → прощание."
     concept_ids:
-      - GR-TNS-PRS-01
+      - GR-CAS-ACC-01
+      - PRAG-PAN-01
     function_ids:
-      - FN-A1-DOCS-01
+      - FN-A1-PURPOSE-01
+      - FN-A1-REG-01
     lex_bundle_ids:
-      - LEX-A1-DOCS
+      - LEX-A1-URZAD
     feedback:
-      correct: "Результат → инструкция → уточнение → закрытие."
-      incorrect: "Сначала результат и инструкция, потом уточнение и прощание."
+      correct: "Комплект в порядке, понимание и прощание закрывают визит."
+      incorrect: "Proszę formularz без o — сломанная просьба, не финал этого визита."
+      l1:
+        ukr: "Фінал ≠ *Proszę formularz без o."
+        rus: "Без o просьба о бланке не подходит в финал этого визита."
+        bel: "Фінал ≠ *Proszę formularz без o."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-PURPOSE-01 / LEX-A1-URZAD
       ai_assisted: true
     mini_check: true
+
+  - id: ex-ur-l3-08
+    canonical_id: EX-A1-UR-L3-OR-08
+    version: 2
+    type: ordering
+    status: DRAFT
+    prompt: "Соберите финал визита: результат → инструкция → уточнение → прощание."
     items:
       - id: t1
         text: Dokumenty są kompletne.
@@ -528,6 +566,29 @@ exercises:
       - t2
       - t3
       - t4
+    concept_ids:
+      - GR-TNS-PRS-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-DOCS-01
+    lex_bundle_ids:
+      - LEX-A1-DOCS
+    feedback:
+      correct: "Результат → инструкция → уточнение → закрытие."
+      incorrect: "Сначала результат и инструкция, потом уточнение и прощание."
+      l1:
+        ukr: "Порядок: kompletne → czekać → Gdzie mam…? → Do widzenia."
+        rus: "Сначала результат и инструкция, потом уточнение."
+        bel: "Спачатку вынік і інструкцыя, потым удакладненне."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-URZAD-01 / FN-A1-DOCS-01 / LEX-A1-DOCS
+      ai_assisted: true
+    mini_check: true
+
 mini_check:
   exercise_ids: *a2
   pass_threshold: 1
@@ -539,8 +600,7 @@ result_metadata:
   title_ru: Итог урока
   success_ru: >
     Короткая проверка пройдена. Вы можете пройти короткий визит от
-    приветствия до прощания: цель, имя, документы и уточнение, где ждать
-    (DRAFT preview).
+    приветствия до прощания: цель, имя, документы и уточнение, где ждать.
   retry_ru: >
     Повторите w sprawie… · Nazywam się… · Oto dokumenty · Gdzie mam czekać?,
     затем пройдите короткую проверку снова.
@@ -562,5 +622,7 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-GREET-01, FN-A1-REG-01, FN-A1-IDENTIFY-01 / LEX-A1-URZAD, LEX-A1-DOCS
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Hard urząd foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.
