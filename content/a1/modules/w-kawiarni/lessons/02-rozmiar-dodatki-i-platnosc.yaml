@@ -214,7 +214,7 @@ exercises:
     correct_option_id: a
   - id: ex-wk-l2-02
     canonical_id: EX-A1-WK-L2-MC-02
-    version: 3
+    version: 4
     type: multiple_choice
     status: DRAFT
     prompt: "Какие реплики уточняют или закрывают заказ у стойки?"
@@ -226,11 +226,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Добавка и «это всё» — обычные шаги после выбора напитка."
-      incorrect: "Miło pana poznać — знакомство, не шаг уточнения заказа у стойки."
+      incorrect: "Co podać? — реплика баристы, не ваш шаг уточнения/закрытия заказа."
       l1:
-        ukr: "Z mlekiem / to wszystko — кавʼярня; Miło pana poznać — інший слот."
-        rus: "Не смешивайте заказ с формулой знакомства (Miło pana poznać)."
-        bel: "Дадаткі і to wszystko — кавярня, не знаёмства."
+        ukr: "Z mlekiem / to wszystko — ваш крок; Co podać? каже бариста."
+        rus: "Co podać? говорит бариста. Вам: добавка / to wszystko."
+        bel: "Co podać? — рэпліка барысты, не ваш крок да to wszystko."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -238,6 +238,7 @@ exercises:
       sources:
         - Curriculum SCN-A1-FOOD-01 / FN-A1-ASK-01 / LEX-A1-MONEY
       ai_assisted: true
+      notes: "Adult same-scenario distractor (barista opener). DRAFT."
     mini_check: false
     options:
       - id: a
@@ -247,7 +248,7 @@ exercises:
       - id: c
         text: Tak, to wszystko.
       - id: d
-        text: Miło pana poznać.
+        text: Co podać?
     correct_option_ids:
       - a
       - b

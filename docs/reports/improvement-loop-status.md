@@ -29,8 +29,25 @@
 **Droga i transport substance deepen (2026-09-16):** ~**43.0 / 50** — L01–L03 same bar as sklep: adult same-scenario distractors, distinct UK/BEL/RU L1, productive triple gaps, harder listening foils; listening/speaking kept; DRAFT + provenance; chrome maps synced; `content:validate` **PASS**. §2 **4.65→4.75**. **No Neon/Vercel login.** Still **WAITING_ON_FOUNDER**.
 **Pierwsza sprawa w urzędzie substance deepen (2026-09-16):** ~**43.1 / 50** — L01–L03 same bar as sklep/droga: adult same-scenario distractors, distinct UK/BEL/RU L1, productive triple gaps, harder listening foils; listening/speaking kept; DRAFT + provenance; chrome maps synced; `content:validate` **PASS**. §2 **4.75→4.85**. **No Neon/Vercel login.** Still **WAITING_ON_FOUNDER**.
 **Pierwsze spotkanie + W kawiarni substance deepen (2026-09-16):** ~**43.2 / 50** — L01–L03 each: adult same-scenario distractors, distinct UK/BEL/RU L1, productive triple gaps, harder listening foils; DRAFT honesty + provenance; chrome maps synced; `content:validate` **PASS**. §2 **4.85→4.95**. **A1 substance deepen across all 5 halls is CODE-complete** (still DRAFT / no JPJO). **No Neon/Vercel login.** Still **WAITING_ON_FOUNDER**.
+**CODE_CEILING_A1 (2026-09-16):** ~**43.2 / 50** held — spot-check confirms deepen is real (triple gaps + distinct L1 + same-scenario foils across PS / sklep / droga / urząd / café), not empty version bumps. Café L02 cross-hall foil → same-scenario `Co podać?`. JPJO hall packet polished for one-sitting review (`NOT_STARTED`). **Further YAML churn without Neon/JPJO will not meaningfully raise /50.** Agents should **prefer waiting** over content churn unless founder unblocks. Still **WAITING_ON_FOUNDER**.
 
-### Critical re-score (post Pierwsze spotkanie + W kawiarni substance deepen) — `/50`
+### Critical re-score (post CODE_CEILING_A1 confirmation) — `/50`
+
+| # | Criterion | before | after | Note |
+| --- | --- | ---: | ---: | --- |
+| 1 | Session-1 life loop | 4.5 | 4.5 | Unchanged — durable host still EXTERNAL |
+| 2 | Feedback that teaches | 4.95 | 4.95 | A1 deepen CODE-complete; ceiling without JPJO |
+| 3 | Listening + speaking path | 4.1 | 4.1 | Kept; edge-tts interim |
+| 4 | Human-readable progress | 4.1 | 4.1 | Unchanged |
+| 5 | Zero civilian ops jargon | 4.35 | 4.35 | Unchanged |
+| 6 | BEL first-class L1 | 5.0 | 5.0 | Unchanged |
+| 7 | Content honesty contract | 4.0 | 4.0 | Still DRAFT; JPJO packet ready, status `NOT_STARTED` |
+| 8 | Deploy teaches someone | 4.45 | 4.45 | No Neon/Vercel; agents must not force login |
+| 9 | Admin ≤ learner craft | 3.8 | 3.8 | Freeze held |
+| 10 | Competitive first week | 3.85 | 3.85 | Still PARTIAL_TUNNEL |
+| | **Total** | **~43.2** | **~43.2** | **CODE_CEILING_A1** — YAML churn ≠ score lift |
+
+### Critical re-score (post Pierwsze spotkanie + W kawiarni substance deepen) — `/50` (historical)
 
 | # | Criterion | before | after | Note |
 | --- | --- | ---: | ---: | --- |
@@ -304,7 +321,9 @@
 
 ### WAITING_ON_FOUNDER
 
-**Status:** ~**43.2 / 50** — All 5 A1 halls substance deepen (PS + café + urząd + droga + sklep) + prior §9 craft; LIVE_TUNNEL day-1 still **done**. Goal still **EXTERNAL**.
+**Status:** ~**43.2 / 50** — **CODE_CEILING_A1**. All 5 A1 halls substance deepen CODE-complete; LIVE_TUNNEL day-1 still **done**. Goal still **EXTERNAL**.
+
+**Ceiling:** further YAML / content churn **without** Neon (durable HTTPS) **or** independent JPJO will **not** meaningfully raise `/50`. Prefer **waiting** over another deepen wave.
 
 **Blocked on:** durable HTTPS (Neon + Vercel preferred) **and** independent JPJO. Agents must **not** force Neon/Vercel logins.
 
@@ -314,7 +333,7 @@
 2. **`vercel залогинен`** — founder already logged in; agent may then use CLI without opening browser auth
 3. **`пауза эталона`** — pause reference-quality push; no deploy / no auth work
 
-**Hard rule for agents:** do **not** run `vercel login`, browser OAuth, or any credential probe that opens a browser until the founder chooses (1), (2), or (3). No deploy attempts while waiting.
+**Hard rule for agents:** do **not** run `vercel login`, browser OAuth, or any credential probe that opens a browser until the founder chooses (1), (2), or (3). No deploy attempts while waiting. Do **not** invent another scored content wave to “raise” the bar — wait for (1)/(2)/(3) or a booked JPJO sitting on [`pierwsze-spotkanie-jpjo-hall-packet.md`](../reviews/pierwsze-spotkanie-jpjo-hall-packet.md).
 
 After founder chooses, helpers (only then): [`FOUNDER-UNBLOCK-NOW.md`](../operations/FOUNDER-UNBLOCK-NOW.md), [`scripts/neon-bootstrap.ps1`](../../scripts/neon-bootstrap.ps1), [`scripts/smoke-vercel.ps1`](../../scripts/smoke-vercel.ps1), click path [`vercel-neon-click-checklist.md`](../operations/vercel-neon-click-checklist.md). Tunnel ≠ Neon/Vercel Done. Do not invent secrets; do not claim HTTPS without curl 200 / smoke PASS.
 
@@ -325,6 +344,8 @@ Preferred durable path remains Neon/Supabase `DATABASE_URL` + Vercel. Alternate 
 ### STOP RULE
 
 **No more content / improve waves marketed toward reference quality** until [`external-unblock-wizard.md`](../operations/external-unblock-wizard.md) has **at least one real Done row** — either live HTTPS smoke (§4) **or** a JPJO human decision (§3). Optional micro-fixes only (e.g. server play-gate, static audio) — not another scored “wave toward reference.”
+
+**CODE_CEILING_A1:** A1 hall substance deepen is CODE-complete. Agents **prefer waiting** on founder (1)/(2)/(3) over YAML churn.
 
 ### Micro-fixes under stop-rule exception (shipped)
 
@@ -370,8 +391,9 @@ Preferred durable path remains Neon/Supabase `DATABASE_URL` + Vercel. Alternate 
 | Pierwsza sprawa w urzędzie L01–L03 substance deepen | **Done** — adult distractors, distinct L1, triple gaps, hard foils; DRAFT; validate PASS |
 | Pierwsze spotkanie L01–L03 substance deepen | **Done** — adult distractors, distinct L1, triple gaps, hard foils; DRAFT; validate PASS |
 | W kawiarni L01–L03 substance deepen | **Done** — adult distractors, distinct L1, triple gaps, hard foils; DRAFT; validate PASS |
+| CODE_CEILING_A1 confirmation + JPJO packet polish | **Done** — spot-check deepen real; café L02 foil fix; hall packet one-sitting ready; status `NOT_STARTED` |
 
-Score estimate ~**43.2 / 50** (post PS + café substance; prior urząd ~43.1). **A1 substance deepen across all 5 halls is CODE-complete** (still DRAFT / no JPJO). No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). BEL learners can use `/be/…` menu. See **WAITING_ON_FOUNDER** above — durable Neon+Vercel **and** JPJO; agents must not force logins.
+Score estimate ~**43.2 / 50** — **CODE_CEILING_A1**. Further YAML without Neon/JPJO ≠ meaningful /50 lift. Prefer waiting. No fake PUBLISHED / APPROVE. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). See **WAITING_ON_FOUNDER** — three founder options only.
 
 ### Local closed-beta smoke (2026-09-10)
 
