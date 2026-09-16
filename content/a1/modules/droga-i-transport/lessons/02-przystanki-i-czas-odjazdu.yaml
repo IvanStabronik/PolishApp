@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-02
 slug: przystanki-i-czas-odjazdu
-version: 5
+version: 6
 status: DRAFT
 title_pl: Przystanki i czas odjazdu
 sort_order: 2
@@ -77,19 +77,19 @@ pan_pani:
     - O której odjeżdża autobus?
   counterexamples_pl:
     - "*Ty mi powiedz." # слишком свои
-    - "*Daj mi to." # грубо к незнакомцу
+    - "*Jaki autobus na centrum?" # L1-калька предлога
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
     ukr: >
       «Який автобус / на якій / о котрій» → który… / na którym… / o której…
-      цілком. Починайте з Przepraszam, не «скажи мені».
+      цілком. do centrum ≠ *на centrum; старт — Przepraszam.
     rus: >
       Не говорите ty пассажиру. Учите три вопроса целиком: który autobus…
-      / na którym przystanku… / o której… — без кальки «скажи мне».
+      / na którym przystanku… / o której… — без «на центр».
     bel: >
-      «Скажы мне» не робіць *Ty mi powiedz. Przepraszam + który / na którym /
-      o której — асобныя польскія рамкі.
+      «Скажы мне» не робіць *Ty mi powiedz. który / na którym / o której —
+      асобныя польскія рамкі; do centrum без акання.
 grammar_points:
   - id: GP-A1-DT-L2
     title_pl: Linia, przystanek i godzina
@@ -106,18 +106,18 @@ grammar_points:
       сложной пересадки.
     examples_pl: *a1
     counterexamples_pl:
-      - "*Ty daj." # грубо / неполный ответ
-      - "*Ja nie rozumieć." # ломаная рамка
+      - "*Jaki autobus na centrum?" # L1-предлог
+      - "*Na dziewięć." # сломанный ответ о времени
     concept_ids:
       - GR-MOT-BASE-01
       - GR-PREP-DO-NA-01
-      - GR-NUM-MONEY-01
+      - GR-TIME-EXPR-01
     l1_notes:
       ukr: >
         *який автобус на центр → który autobus jedzie do centrum; вихід —
-        na którym przystanku, не «на якій».
+        na którym przystanku (Gen), не «на якій» + номінатив.
       rus: >
-        «Какой автобус на центр» часто ломает рамку. Учите który… do + Gen
+        «Какой автобус на центр» ломает рамку. Учите który… do + Gen
         и O której odjeżdża… целиком.
       bel: >
         «Які аўтобус на цэнтр» → który… do + Gen. który / na którym / o której —
@@ -146,7 +146,6 @@ steps:
   - id: step-l2-key-lines
     kind: key_lines
     title_ru: Важные реплики
-
   - id: step-l2-speaking
     kind: speaking_practice
     title_ru: Вслух
@@ -187,23 +186,32 @@ steps:
 exercises:
   - id: ex-dt-l2-01
     canonical_id: EX-A1-DT-L2-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "На остановке. Как спросить, какой автобус идёт в центр?"
+    options:
+      - id: a
+        text: Który autobus jedzie do centrum?
+      - id: b
+        text: Jaki autobus na centrum?
+      - id: c
+        text: Który autobus jedzie na centrum?
+    correct_option_id: a
     concept_ids:
       - GR-MOT-BASE-01
+      - GR-PREP-DO-NA-01
     function_ids:
       - FN-A1-DIRECT-01
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
       correct: "Który autobus jedzie do centrum? — обычный вопрос о линии."
-      incorrect: "Jaki… na centrum / ty — ломает рамку или слишком свои."
+      incorrect: "Na centrum вместо do centrum — L1-калька предлога."
       l1:
-        ukr: "Тримайте który… do + Gen, не «на центр»."
-        rus: "Не *na centrum вместо do centrum."
-        bel: "Трымайце do centrum, не кальку «на цэнтр»."
+        ukr: "Тримайте który… do + Gen; не *на centrum і не голе Jaki… na…"
+        rus: "Не *na centrum («на центр») — только do centrum."
+        bel: "do centrum, не калька «на цэнтр» — нават з który."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -211,38 +219,15 @@ exercises:
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-DIRECT-01 / LEX-A1-TRANSPORT
       ai_assisted: true
+      notes: "Adult same-scenario prep distractors. DRAFT."
     mini_check: false
-    options:
-      - id: a
-        text: Który autobus jedzie do centrum?
-      - id: b
-        text: Jaki autobus na centrum?
-      - id: c
-        text: Ty jedziesz do centrum?
-    correct_option_id: a
+
   - id: ex-dt-l2-02
     canonical_id: EX-A1-DT-L2-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Что нужно уточнить для простой поездки?"
-    concept_ids:
-      - GR-PREP-DO-NA-01
-    function_ids:
-      - FN-A1-TRANS-01
-    lex_bundle_ids:
-      - LEX-A1-MONEY
-    feedback:
-      correct: "Линия, остановка выхода и время отправления — три нужных куска."
-      incorrect: "Имя водителя к маршруту не относится."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-MONEY
-      ai_assisted: true
-    mini_check: false
     options:
       - id: a
         text: Номер линии
@@ -251,19 +236,89 @@ exercises:
       - id: c
         text: Время отправления
       - id: d
-        text: Имя водителя
+        text: Miło pana poznać
     correct_option_ids:
       - a
       - b
       - c
+    concept_ids:
+      - GR-PREP-DO-NA-01
+      - GR-TIME-EXPR-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-TIME-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Линия, остановка выхода и время отправления — три нужных куска."
+      incorrect: "Miło pana poznać — формула знакомства, не шаг маршрута."
+      l1:
+        ukr: "Знайомство ≠ лінія / вихід / час на зупинці."
+        rus: "Представление не закрывает маршрут у остановки."
+        bel: "Miło pana poznać — не крок простай паездкі."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01
+      ai_assisted: true
+    mini_check: false
+
+  - id: ex-dt-l2-listen-01
+    canonical_id: EX-A1-DT-L2-LIS-01
+    version: 3
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте пассажира. Что он сказал?"
+    audio_text_pl: Na czwartym, przy poczcie.
+    audio_url: /audio/a1/EX-A1-DT-L2-LIS-01.mp3
+    options:
+      - id: a
+        text: Назвал остановку выхода и ориентир рядом.
+      - id: b
+        text: Назвал номер линии автобуса.
+      - id: c
+        text: Назвал только время — O dziewiątej dziesięć.
+    correct_option_id: a
+    concept_ids:
+      - GR-MOT-BASE-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-DIRECT-01
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Да: номер остановки + przy poczcie."
+      incorrect: "Это выход с маршрута, не линия и не час отправления."
+      l1:
+        ukr: "Слухайте na czwartym + przy… — вихід, не numer linii і не O dziewiątej…"
+        rus: "Слышите остановку выхода, не номер автобуса и не время."
+        bel: "Гэта прыпынак выхаду + арыенцір, не лінія і не час."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Przystanki i czas odjazdu / FN-A1-DIRECT-01"
+      ai_assisted: true
+      notes: "Hard same-scenario foils (line vs time). DRAFT."
+    mini_check: false
+
   - id: ex-dt-l2-03
     canonical_id: EX-A1-DT-L2-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Na którym {{gap1}} mam wysiąść?"
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - przystanku
+        placeholder: …
     concept_ids:
-      - GR-NUM-MONEY-01
+      - GR-MOT-BASE-01
     function_ids:
       - FN-A1-ASK-01
     lex_bundle_ids:
@@ -272,7 +327,7 @@ exercises:
       correct: "Na którym przystanku… — готовая рамка про выход."
       incorrect: "Нужна форма przystanku."
       l1:
-        ukr: "Не *przystanek у цій рамці — потрібен przystanku."
+        ukr: "Не *przystanek у цій рамці — потрібен przystanku (Gen)."
         rus: "После na którym — przystanku, не именительный."
         bel: "Трымайце przystanku, не назоўны склон."
     provenance:
@@ -283,28 +338,29 @@ exercises:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01 / LEX-A1-TRANSPORT
       ai_assisted: true
     mini_check: false
-    gaps:
-      - id: gap1
-        accepted_answers:
-          - przystanku
-        placeholder: …
+
   - id: ex-dt-l2-04
     canonical_id: EX-A1-DT-L2-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: O {{gap1}} odjeżdża autobus?"
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - której
+        placeholder: …
     concept_ids:
       - GR-TIME-EXPR-01
     function_ids:
       - FN-A1-TIME-01
     lex_bundle_ids:
-      - LEX-A1-MONEY
+      - LEX-A1-TRANSPORT
     feedback:
       correct: "O której… — вопрос о времени отправления."
       incorrect: "Нужно której."
       l1:
-        ukr: "O której, не *kiedy без рамки відправлення."
+        ukr: "O której, не *kiedy без рамки відправлення і не *którym."
         rus: "Держите O której, не смешивайте с «когда» без формулы."
         bel: "Трымайце której ў O której odjeżdża…?"
     provenance:
@@ -312,37 +368,16 @@ exercises:
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TIME-01 / LEX-A1-MONEY
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TIME-01
       ai_assisted: true
     mini_check: false
-    gaps:
-      - id: gap1
-        accepted_answers:
-          - której
-        placeholder: …
+
   - id: ex-dt-l2-05
     canonical_id: EX-A1-DT-L2-OR-05
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Расставьте шаги: сначала линия, потом остановка выхода."
-    concept_ids:
-      - PRAG-PAN-01
-    function_ids:
-      - FN-A1-THANKS-01
-    lex_bundle_ids:
-      - LEX-A1-TRANSPORT
-    feedback:
-      correct: "Вопрос о линии → ответ → вопрос об остановке → ответ."
-      incorrect: "Сначала выберите линию, потом уточните выход."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-THANKS-01 / LEX-A1-TRANSPORT
-      ai_assisted: true
-    mini_check: false
     items:
       - id: t1
         text: Który autobus jedzie do centrum?
@@ -357,85 +392,72 @@ exercises:
       - t2
       - t3
       - t4
-  - id: ex-dt-l2-06
-    canonical_id: EX-A1-DT-L2-SC-06
-    version: 1
-    type: single_choice
-    status: DRAFT
-    prompt: "Как ответить на вопрос O której odjeżdża…?"
     concept_ids:
+      - PRAG-PAN-01
       - GR-MOT-BASE-01
     function_ids:
       - FN-A1-DIRECT-01
+      - FN-A1-THANKS-01
     lex_bundle_ids:
-      - LEX-A1-MONEY
+      - LEX-A1-TRANSPORT
     feedback:
-      correct: "O dziewiątej dziesięć — ответ рамкой O + время."
-      incorrect: "Na dziewięć / ty — неверная рамка или слишком свои."
+      correct: "Вопрос о линии → ответ → вопрос об остановке → ответ."
+      incorrect: "Сначала выберите линию, потом уточните выход."
+      l1:
+        ukr: "Спочатку лінія, потім вихід."
+        rus: "Сначала линия, потом остановка выхода."
+        bel: "Спачатку лінія, потым прыпынак выхаду."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-DIRECT-01 / LEX-A1-MONEY
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-THANKS-01 / LEX-A1-TRANSPORT
       ai_assisted: true
     mini_check: false
+
+  - id: ex-dt-l2-06
+    canonical_id: EX-A1-DT-L2-SC-06
+    version: 2
+    type: single_choice
+    status: DRAFT
+    prompt: "Как ответить на вопрос O której odjeżdża…?"
     options:
       - id: a
         text: O dziewiątej dziesięć.
       - id: b
         text: Na dziewięć.
       - id: c
-        text: Powiedz ty, o której.
-    correct_option_id: a
-
-  - id: ex-dt-l2-listen-01
-    canonical_id: EX-A1-DT-L2-LIS-01
-    version: 2
-    type: listening
-    status: DRAFT
-    prompt: "Послушайте пассажира. Что он сказал?"
-    audio_text_pl: Na czwartym, przy poczcie.
-    audio_url: /audio/a1/EX-A1-DT-L2-LIS-01.mp3
-    options:
-      - id: a
-        text: Назвал остановку выхода и ориентир рядом.
-      - id: b
-        text: Назвал номер линии автобуса.
-      - id: c
-        text: Назвал время отправления.
+        text: Której godzinie dziewięć.
     correct_option_id: a
     concept_ids:
-      - GR-MOT-BASE-01
-      - PHON-CORE-01
+      - GR-TIME-EXPR-01
     function_ids:
-      - FN-A1-DIRECT-01
-      - FN-A1-ASK-01
+      - FN-A1-TIME-01
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Да: номер остановки + przy poczcie."
-      incorrect: "Это выход с маршрута, не линия и не час отправления."
+      correct: "O dziewiątej dziesięć — ответ рамкой O + время."
+      incorrect: "Na dziewięć / сломанный порядок — не рамка ответа о времени."
       l1:
-        ukr: "Слухайте na czwartym + przy… — вихід, не numer linii."
-        rus: "Слышите остановку выхода, не номер автобуса и не O której…"
-        bel: "Гэта прыпынак выхаду, не лінія і не час."
+        ukr: "Відповідь: O + час; не *Na dziewięć і не калька порядку."
+        rus: "Не *Na dziewięć — держите O dziewiątej…"
+        bel: "O dziewiątej… — не *Na dziewięć і не зламаны парадак."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "Dialogue Przystanki i czas odjazdu / FN-A1-DIRECT-01"
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TIME-01
       ai_assisted: true
     mini_check: false
 
-
   - id: ex-dt-l2-write-01
     canonical_id: EX-A1-DT-L2-GF-05
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: Który autobus jedzie {{gap1}} centrum? O {{gap2}} odjeżdża autobus?"
+    prompt: "Напишите: Który autobus jedzie {{gap1}} centrum? Na którym {{gap2}} mam wysiąść? O {{gap3}} odjeżdża autobus?"
     gaps:
       - id: gap1
         accepted_answers:
@@ -443,55 +465,46 @@ exercises:
         placeholder: "…"
       - id: gap2
         accepted_answers:
+          - przystanku
+        placeholder: "…"
+      - id: gap3
+        accepted_answers:
           - której
+          - Której
         placeholder: "…"
     concept_ids:
       - GR-PREP-DO-NA-01
+      - GR-MOT-BASE-01
       - GR-TIME-EXPR-01
     function_ids:
       - FN-A1-DIRECT-01
+      - FN-A1-ASK-01
       - FN-A1-TIME-01
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Две рамки: do + Gen и O której…?"
-      incorrect: "Нужны do для цели и której в вопросе о времени."
+      correct: "Три рамки: do + Gen, przystanku и O której…?"
+      incorrect: "Нужны do для цели, przystanku для выхода и której во времени."
       l1:
-        ukr: "Не *na centrum і не *kiedy без O której…"
-        rus: "Не *na centrum вместо do; время — O której…?"
-        bel: "do + której — не калька «на цэнтр / калі»."
+        ukr: "Не *na centrum; przystanku ≠ *przystanek; O której ≠ *kiedy без рамки."
+        rus: "Не *na centrum; после na którym — przystanku; время — O której…?"
+        bel: "Тры формулы: do / przystanku / której — не калькі."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "FN-A1-DIRECT-01 / FN-A1-TIME-01 productive dual gap"
+        - "FN-A1-DIRECT-01 / FN-A1-TIME-01 productive triple gap"
       ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
     mini_check: false
 
   - id: ex-dt-l2-07
     canonical_id: EX-A1-DT-L2-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Отметьте вежливые элементы разговора с пассажиром."
-    concept_ids:
-      - GR-PREP-DO-NA-01
-    function_ids:
-      - FN-A1-TRANS-01
-    lex_bundle_ids:
-      - LEX-A1-TRANSPORT
-    feedback:
-      correct: "Przepraszam и Dziękuję держат спокойный контакт."
-      incorrect: "Ej, ty — неуместно к незнакомцу на остановке."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-TRANSPORT
-      ai_assisted: true
-    mini_check: true
     options:
       - id: a
         text: Przepraszam
@@ -500,34 +513,39 @@ exercises:
       - id: c
         text: Bardzo dziękuję
       - id: d
-        text: Ej, ty
+        text: Ty mi powiedz
     correct_option_ids:
       - a
       - b
       - c
-  - id: ex-dt-l2-08
-    canonical_id: EX-A1-DT-L2-OR-08
-    version: 1
-    type: ordering
-    status: DRAFT
-    prompt: "Соберите план поездки: линия → время → выход → ориентир."
     concept_ids:
-      - GR-NUM-MONEY-01
+      - PRAG-PAN-01
     function_ids:
-      - FN-A1-ASK-01
+      - FN-A1-THANKS-01
     lex_bundle_ids:
-      - LEX-A1-MONEY
+      - LEX-A1-TRANSPORT
     feedback:
-      correct: "Линия → время → выход → ориентир — порядок простой поездки."
-      incorrect: "Держите сведения в порядке от отъезда к выходу."
+      correct: "Przepraszam и Dziękuję держат спокойный контакт."
+      incorrect: "Ty mi powiedz — слишком свои к незнакомцу на остановке."
+      l1:
+        ukr: "«Скажи мені» → *Ty mi powiedz. Тримайте Przepraszam / Dziękuję."
+        rus: "Не *Ty mi powiedz к пассажиру — только Przepraszam / Dziękuję."
+        bel: "Не *Ty mi powiedz — трымайце Przepraszam і Dziękuję."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01 / LEX-A1-MONEY
+        - Curriculum SCN-A1-DIRECTIONS-01 / PRAG-PAN-01
       ai_assisted: true
     mini_check: true
+
+  - id: ex-dt-l2-08
+    canonical_id: EX-A1-DT-L2-OR-08
+    version: 2
+    type: ordering
+    status: DRAFT
+    prompt: "Соберите план поездки: линия → время → выход → ориентир."
     items:
       - id: t1
         text: Autobus numer osiem.
@@ -542,18 +560,43 @@ exercises:
       - t2
       - t3
       - t4
+    concept_ids:
+      - GR-MOT-BASE-01
+      - GR-TIME-EXPR-01
+    function_ids:
+      - FN-A1-ASK-01
+      - FN-A1-TIME-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Линия → время → выход → ориентир — порядок простой поездки."
+      incorrect: "Держите сведения в порядке от отъезда к выходу."
+      l1:
+        ukr: "Порядок: лінія → час → вихід → орієнтир."
+        rus: "Сначала линия и время, потом выход и ориентир."
+        bel: "Спачатку лінія і час, потым выхад і арыенцір."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01
+      ai_assisted: true
+    mini_check: true
+
 mini_check:
   exercise_ids: *a2
   pass_threshold: 1
   concept_ids:
     - GR-MOT-BASE-01
     - GR-PREP-DO-NA-01
-    - GR-NUM-MONEY-01
+    - GR-TIME-EXPR-01
+    - PRAG-PAN-01
 result_metadata:
   title_ru: Итог урока
   success_ru: >
     Короткая проверка пройдена. Вы можете уточнить линию, остановку выхода
-    и время отправления у пассажира (DRAFT preview).
+    и время отправления у пассажира.
   retry_ru: >
     Повторите który autobus…, na którym przystanku… и O której…?, затем
     пройдите короткую проверку снова.
@@ -565,7 +608,7 @@ result_metadata:
   linked_concept_ids:
     - GR-MOT-BASE-01
     - GR-PREP-DO-NA-01
-    - GR-NUM-MONEY-01
+    - GR-TIME-EXPR-01
 provenance:
   originality: created_for_product
   author_id: system:ai-draft-slowarium
@@ -576,5 +619,7 @@ provenance:
       LEX-A1-TRANSPORT, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Hard transport foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.

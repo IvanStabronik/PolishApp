@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-DT-03
 slug: samodzielna-podroz
-version: 5
+version: 6
 status: DRAFT
 title_pl: Samodzielna podróż
 sort_order: 3
@@ -78,7 +78,7 @@ pan_pani:
     - Poproszę bilet na tramwaj.
   counterexamples_pl:
     - "*Ty mi powiedz." # слишком свои
-    - "*Daj mi to." # грубо к незнакомцу
+    - "*Bilet do tramwaj." # путаница do/na
   concept_ids:
     - PRAG-PAN-01
   l1_notes:
@@ -90,7 +90,7 @@ pan_pani:
       gdzie… / czy … do… / bilet na… / na którym… — без кальки «скажи мне».
     bel: >
       «Скажы мне» не робіць *Ty mi powiedz. Прыпынак → лінія → квіток → выход —
-      асобныя польскія рамкі; без ty.
+      асобныя польскія рамкі; без ty і без акання ў нумарах.
 grammar_points:
   - id: GP-A1-DT-L3
     title_pl: Od drogi do przejazdu
@@ -107,12 +107,12 @@ grammar_points:
       На улице и у продавца — один маршрут без сложной пересадки.
     examples_pl: *a1
     counterexamples_pl:
-      - "*Ty daj." # грубо / неполный ответ
-      - "*Ja nie rozumieć." # ломаная рамка
+      - "*Bilet do tramwaj." # путаница do/na
+      - "*Jedzie na centrum." # L1-предлог
     concept_ids:
       - GR-MOT-BASE-01
       - GR-PREP-DO-NA-01
-      - GR-NUM-MONEY-01
+      - GR-CAS-ACC-01
     l1_notes:
       ukr: >
         *їхати на центр → jedzie do centrum; квиток — bilet na tramwaj,
@@ -147,7 +147,6 @@ steps:
   - id: step-l3-key-lines
     kind: key_lines
     title_ru: Важные реплики
-
   - id: step-l3-speaking
     kind: speaking_practice
     title_ru: Вслух
@@ -188,23 +187,32 @@ steps:
 exercises:
   - id: ex-dt-l3-01
     canonical_id: EX-A1-DT-L3-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "На улице. Как вежливо спросить, где остановка?"
+    options:
+      - id: a
+        text: Przepraszam, gdzie jest przystanek?
+      - id: b
+        text: Gdzie jest przystanek?
+      - id: c
+        text: Gdzie jest na przystanek?
+    correct_option_id: a
     concept_ids:
       - GR-MOT-BASE-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-DIRECT-01
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
       correct: "Przepraszam + gdzie jest… — спокойный старт к незнакомцу."
-      incorrect: "Ej / ty — слишком грубо или слишком свои к прохожему."
+      incorrect: "Без Przepraszam слишком резко; *na przystanek ломает вопрос о месте."
       l1:
-        ukr: "Починайте з Przepraszam, не «ей»."
-        rus: "Не используйте ty к прохожему."
-        bel: "Трымайце Przepraszam, не грубае зварот."
+        ukr: "Починайте з Przepraszam; не *Gdzie jest na przystanek."
+        rus: "Не опускайте Przepraszam и не *na przystanek."
+        bel: "Трымайце Przepraszam + gdzie jest…; не *na przystanek."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -212,38 +220,15 @@ exercises:
       sources:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-DIRECT-01 / LEX-A1-TRANSPORT
       ai_assisted: true
+      notes: "Adult same-scenario distractors. DRAFT."
     mini_check: false
-    options:
-      - id: a
-        text: Przepraszam, gdzie jest przystanek?
-      - id: b
-        text: Ej, przystanek gdzie?
-      - id: c
-        text: Ty mi pokaż przystanek.
-    correct_option_id: a
+
   - id: ex-dt-l3-02
     canonical_id: EX-A1-DT-L3-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Какие шаги нужны для простой самостоятельной поездки?"
-    concept_ids:
-      - GR-PREP-DO-NA-01
-    function_ids:
-      - FN-A1-TRANS-01
-    lex_bundle_ids:
-      - LEX-A1-MONEY
-    feedback:
-      correct: "Остановка, линия и билет — три нужных куска до поездки."
-      incorrect: "Игнорировать выход — так легко проехать мимо."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-MONEY
-      ai_assisted: true
-    mini_check: false
     options:
       - id: a
         text: Найти остановку
@@ -252,21 +237,93 @@ exercises:
       - id: c
         text: Купить билет
       - id: d
-        text: Игнорировать остановку выхода
+        text: Miło pana poznać
     correct_option_ids:
       - a
       - b
       - c
+    concept_ids:
+      - GR-PREP-DO-NA-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-TRANS-01
+      - FN-A1-DIRECT-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Остановка, линия и билет — три нужных куска до поездки."
+      incorrect: "Miło pana poznać — знакомство, не шаг самостоятельной поездки."
+      l1:
+        ukr: "Знайомство ≠ przystanek / linia / bilet."
+        rus: "Представление не заменяет выход и билет."
+        bel: "Miło pana poznać — не крок самастойнай паездкі."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01
+      ai_assisted: true
+    mini_check: false
+
+  - id: ex-dt-l3-listen-01
+    canonical_id: EX-A1-DT-L3-LIS-01
+    version: 3
+    type: listening
+    status: DRAFT
+    prompt: "Послушайте продавца. Что он сказал?"
+    audio_text_pl: Na piątym.
+    audio_url: /audio/a1/EX-A1-DT-L3-LIS-01.mp3
+    options:
+      - id: a
+        text: Назвал остановку выхода.
+      - id: b
+        text: Назвал цену билета — cztery złote.
+      - id: c
+        text: "Дал ориентир пути: prosto i w lewo."
+    correct_option_id: a
+    concept_ids:
+      - GR-MOT-BASE-01
+      - PHON-CORE-01
+    function_ids:
+      - FN-A1-DIRECT-01
+      - FN-A1-ASK-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Да: Na piątym — порядковый номер остановки выхода."
+      incorrect: "Это выход, не цена билета и не ориентир пути на улице."
+      l1:
+        ukr: "Слухайте na piątym — вихід, не cztery złote і не prosto/w lewo."
+        rus: "Слышите номер остановки, не цену и не prosto/w lewo."
+        bel: "Гэта прыпынак выхаду, не цана і не арыенцір шляху."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - "Dialogue Samodzielna podróż / FN-A1-DIRECT-01"
+      ai_assisted: true
+      notes: "Hard same-scenario foils (price vs directions). DRAFT."
+    mini_check: false
+
   - id: ex-dt-l3-03
     canonical_id: EX-A1-DT-L3-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Czy tramwaj jedzie {{gap1}} centrum?"
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - do
+        placeholder: …
     concept_ids:
-      - GR-NUM-MONEY-01
+      - GR-PREP-DO-NA-01
+      - GR-MOT-BASE-01
     function_ids:
       - FN-A1-ASK-01
+      - FN-A1-DIRECT-01
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
@@ -284,23 +341,25 @@ exercises:
         - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01 / LEX-A1-TRANSPORT
       ai_assisted: true
     mini_check: false
-    gaps:
-      - id: gap1
-        accepted_answers:
-          - do
-        placeholder: …
+
   - id: ex-dt-l3-04
     canonical_id: EX-A1-DT-L3-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Дополните: Poproszę bilet {{gap1}} tramwaj."
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - na
+        placeholder: …
     concept_ids:
-      - GR-TIME-EXPR-01
+      - GR-PREP-DO-NA-01
+      - GR-CAS-ACC-01
     function_ids:
-      - FN-A1-TIME-01
+      - FN-A1-TRANS-01
     lex_bundle_ids:
-      - LEX-A1-MONEY
+      - LEX-A1-TRANSPORT
     feedback:
       correct: "Bilet na + Acc — формула билета."
       incorrect: "Нужен предлог na в формуле билета."
@@ -313,37 +372,16 @@ exercises:
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TIME-01 / LEX-A1-MONEY
+        - Curriculum SCN-A1-TICKET-01 / LEX-A1-TRANSPORT
       ai_assisted: true
     mini_check: false
-    gaps:
-      - id: gap1
-        accepted_answers:
-          - na
-        placeholder: …
+
   - id: ex-dt-l3-05
     canonical_id: EX-A1-DT-L3-OR-05
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Расставьте шаги: сначала остановка, потом линия и билет."
-    concept_ids:
-      - PRAG-PAN-01
-    function_ids:
-      - FN-A1-THANKS-01
-    lex_bundle_ids:
-      - LEX-A1-TRANSPORT
-    feedback:
-      correct: "Остановка → линия → билет → выход."
-      incorrect: "Сначала найдите остановку и проверьте линию, потом билет."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-THANKS-01 / LEX-A1-TRANSPORT
-      ai_assisted: true
-    mini_check: false
     items:
       - id: t1
         text: Przepraszam, gdzie jest przystanek?
@@ -358,85 +396,72 @@ exercises:
       - t2
       - t3
       - t4
-  - id: ex-dt-l3-06
-    canonical_id: EX-A1-DT-L3-SC-06
-    version: 1
-    type: single_choice
-    status: DRAFT
-    prompt: "Прохожий сказал «prosto i w lewo». Как спокойно закрыть контакт?"
     concept_ids:
-      - GR-MOT-BASE-01
+      - PRAG-PAN-01
+      - GR-PREP-DO-NA-01
     function_ids:
-      - FN-A1-DIRECT-01
+      - FN-A1-THANKS-01
+      - FN-A1-TRANS-01
     lex_bundle_ids:
-      - LEX-A1-MONEY
+      - LEX-A1-TRANSPORT
     feedback:
-      correct: "Dziękuję — спокойное завершение короткой помощи."
-      incorrect: "Ty / cześć — меняют регистр с незнакомцем."
+      correct: "Остановка → линия → билет → выход."
+      incorrect: "Сначала найдите остановку и проверьте линию, потом билет."
+      l1:
+        ukr: "Порядок: przystanek → linia → bilet → wyjście."
+        rus: "Сначала остановка и линия, потом билет и выход."
+        bel: "Спачатку прыпынак і лінія, потым білет і выхад."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-DIRECT-01 / LEX-A1-MONEY
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-THANKS-01 / LEX-A1-TRANSPORT
       ai_assisted: true
     mini_check: false
+
+  - id: ex-dt-l3-06
+    canonical_id: EX-A1-DT-L3-SC-06
+    version: 2
+    type: single_choice
+    status: DRAFT
+    prompt: "Прохожий сказал «prosto i w lewo». Как спокойно закрыть контакт?"
     options:
       - id: a
         text: Dziękuję.
       - id: b
         text: No dobra, ty.
       - id: c
-        text: Cześć.
-    correct_option_id: a
-
-  - id: ex-dt-l3-listen-01
-    canonical_id: EX-A1-DT-L3-LIS-01
-    version: 2
-    type: listening
-    status: DRAFT
-    prompt: "Послушайте продавца. Что он сказал?"
-    audio_text_pl: Na piątym.
-    audio_url: /audio/a1/EX-A1-DT-L3-LIS-01.mp3
-    options:
-      - id: a
-        text: Назвал остановку выхода.
-      - id: b
-        text: Назвал цену билета.
-      - id: c
-        text: Подтвердил, что трамвай едет do centrum.
+        text: Poproszę bilet na tramwaj.
     correct_option_id: a
     concept_ids:
-      - GR-MOT-BASE-01
-      - PHON-CORE-01
+      - PRAG-PAN-01
     function_ids:
-      - FN-A1-DIRECT-01
-      - FN-A1-ASK-01
+      - FN-A1-THANKS-01
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Да: Na piątym — порядковый номер остановки выхода."
-      incorrect: "Это выход, не цена билета и не подтверждение линии."
+      correct: "Dziękuję — спокойное завершение короткой помощи."
+      incorrect: "Ty меняет регистр; билет — следующий шаг у кассы, не закрытие помощи."
       l1:
-        ukr: "Слухайте na piątym — вихід, не cztery złote."
-        rus: "Слышите номер остановки, не цену и не «tak, jedzie»."
-        bel: "Гэта прыпынак выхаду, не цана і не лінія."
+        ukr: "Після орієнтира — Dziękuję; квиток — окремо біля каси."
+        rus: "Не ty к прохожему; билет не закрывает уличную помощь."
+        bel: "Dziękuję зачыняе дапамогу; bilet — наступны крок каля касы."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "Dialogue Samodzielna podróż / FN-A1-DIRECT-01"
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-THANKS-01
       ai_assisted: true
     mini_check: false
 
-
   - id: ex-dt-l3-write-01
     canonical_id: EX-A1-DT-L3-GF-05
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: Poproszę bilet {{gap1}} tramwaj. Czy tramwaj jedzie {{gap2}} centrum?"
+    prompt: "Напишите: Poproszę bilet {{gap1}} tramwaj. Czy tramwaj jedzie {{gap2}} centrum? Na którym {{gap3}} mam wysiąść?"
     gaps:
       - id: gap1
         accepted_answers:
@@ -446,53 +471,43 @@ exercises:
         accepted_answers:
           - do
         placeholder: "…"
+      - id: gap3
+        accepted_answers:
+          - przystanku
+        placeholder: "…"
     concept_ids:
       - GR-PREP-DO-NA-01
       - GR-CAS-ACC-01
+      - GR-MOT-BASE-01
     function_ids:
       - FN-A1-TRANS-01
       - FN-A1-DIRECT-01
+      - FN-A1-ASK-01
     lex_bundle_ids:
       - LEX-A1-TRANSPORT
     feedback:
-      correct: "Две рамки: bilet na… и jedzie do…."
-      incorrect: "Нужны na для билета и do для цели."
+      correct: "Три рамки: bilet na…, jedzie do… и na którym przystanku…"
+      incorrect: "Нужны na для билета, do для цели и przystanku для выхода."
       l1:
-        ukr: "Bilet na ≠ *do tramwaj; jedzie do ≠ *na centrum."
-        rus: "Не путайте na (билет) и do (цель)."
-        bel: "na для квітка, do для мэты — розныя рамкі."
+        ukr: "Bilet na ≠ *do tramwaj; jedzie do ≠ *na centrum; przystanku ≠ *przystanek."
+        rus: "Не путайте na (билет), do (цель) и przystanku (выход)."
+        bel: "Тры формулы: na / do / przystanku — не калькі."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "GR-PREP-DO-NA-01 productive dual gap"
+        - "GR-PREP-DO-NA-01 productive triple gap"
       ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
     mini_check: false
 
   - id: ex-dt-l3-07
     canonical_id: EX-A1-DT-L3-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Отметьте корректные транспортные рамки."
-    concept_ids:
-      - GR-PREP-DO-NA-01
-    function_ids:
-      - FN-A1-TRANS-01
-    lex_bundle_ids:
-      - LEX-A1-TRANSPORT
-    feedback:
-      correct: "Do centrum, bilet na tramwaj и na piątym — нужные куски."
-      incorrect: "Do tramwaj — ломает формулу билета / направления."
-    provenance:
-      originality: created_for_product
-      author_id: system:ai-draft-slowarium
-      reviewer_id: null
-      sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-TRANSPORT
-      ai_assisted: true
-    mini_check: true
     options:
       - id: a
         text: do centrum
@@ -501,34 +516,40 @@ exercises:
       - id: c
         text: na piątym przystanku
       - id: d
-        text: do tramwaj
+        text: bilet do tramwaj
     correct_option_ids:
       - a
       - b
       - c
-  - id: ex-dt-l3-08
-    canonical_id: EX-A1-DT-L3-OR-08
-    version: 1
-    type: ordering
-    status: DRAFT
-    prompt: "Соберите поездку: остановка → линия → билет → выход."
     concept_ids:
-      - GR-NUM-MONEY-01
+      - GR-PREP-DO-NA-01
+      - GR-CAS-ACC-01
     function_ids:
-      - FN-A1-ASK-01
+      - FN-A1-TRANS-01
     lex_bundle_ids:
-      - LEX-A1-MONEY
+      - LEX-A1-TRANSPORT
     feedback:
-      correct: "Остановка → линия → билет → выход — порядок простой поездки."
-      incorrect: "Держите сведения в порядке от старта к выходу."
+      correct: "Do centrum, bilet na tramwaj и na piątym — нужные куски."
+      incorrect: "Bilet do tramwaj — ломает формулу билета (нужен na)."
+      l1:
+        ukr: "*bilet do tramwaj — типова плутанина do/na."
+        rus: "Не *bilet do tramwaj — только bilet na + Acc."
+        bel: "Не *bilet do tramwaj — трымайце bilet na…"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01 / LEX-A1-MONEY
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-TRANS-01 / LEX-A1-TRANSPORT
       ai_assisted: true
     mini_check: true
+
+  - id: ex-dt-l3-08
+    canonical_id: EX-A1-DT-L3-OR-08
+    version: 2
+    type: ordering
+    status: DRAFT
+    prompt: "Соберите поездку: остановка → линия → билет → выход."
     items:
       - id: t1
         text: Znajduję przystanek.
@@ -543,18 +564,42 @@ exercises:
       - t2
       - t3
       - t4
+    concept_ids:
+      - GR-MOT-BASE-01
+      - GR-PREP-DO-NA-01
+    function_ids:
+      - FN-A1-ASK-01
+      - FN-A1-TRANS-01
+    lex_bundle_ids:
+      - LEX-A1-TRANSPORT
+    feedback:
+      correct: "Остановка → линия → билет → выход — порядок простой поездки."
+      incorrect: "Держите сведения в порядке от старта к выходу."
+      l1:
+        ukr: "Порядок: przystanek → linia → bilet → wyjście."
+        rus: "Сначала остановка и линия, потом билет и выход."
+        bel: "Спачатку прыпынак і лінія, потым білет і выхад."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - Curriculum SCN-A1-DIRECTIONS-01 / FN-A1-ASK-01
+      ai_assisted: true
+    mini_check: true
+
 mini_check:
   exercise_ids: *a2
   pass_threshold: 1
   concept_ids:
     - GR-MOT-BASE-01
     - GR-PREP-DO-NA-01
-    - GR-NUM-MONEY-01
+    - GR-CAS-ACC-01
 result_metadata:
   title_ru: Итог урока
   success_ru: >
     Короткая проверка пройдена. Вы можете найти остановку, проверить линию,
-    купить билет и уточнить выход — в одной простой поездке (DRAFT preview).
+    купить билет и уточнить выход — в одной простой поездке.
   retry_ru: >
     Повторите gdzie…, czy … do…, bilet na… и Na którym…?, затем пройдите
     короткую проверку снова.
@@ -566,7 +611,7 @@ result_metadata:
   linked_concept_ids:
     - GR-MOT-BASE-01
     - GR-PREP-DO-NA-01
-    - GR-NUM-MONEY-01
+    - GR-CAS-ACC-01
 provenance:
   originality: created_for_product
   author_id: system:ai-draft-slowarium
@@ -577,5 +622,7 @@ provenance:
       LEX-A1-TRANSPORT, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Hard transport foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.
