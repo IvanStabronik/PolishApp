@@ -21,8 +21,25 @@
 **LIVE_TUNNEL day-1 bakeoff (2026-09-15 ~16:23Z):** ~**42.5 / 50** — [`e2e/day1-tunnel-bakeoff.spec.ts`](../../web/e2e/day1-tunnel-bakeoff.spec.ts) against `https://namespace-buying-retailer-strength.trycloudflare.com`: invite → onboard → PS L01 listen/speak/wrong+L1 → plan **PASS** (L1–L9). Named-tunnel founder steps documented (needs interactive `cloudflared tunnel login` — no cert.pem yet). **Honest: LIVE_TUNNEL ≠ durable Vercel.** No Neon. No fake PUBLISHED / JPJO.
 **CODE theory+chrome pack (2026-09-15):** ~**43.5 / 50** — UK/BEL key-line / pan / grammar bodies for all A1 halls; civilian preview/progress soften; progress next-action CTAs; theory-extra + tunnel Referer unit coverage. Credentials re-probe: `gh` OK; `vercel whoami` **no credentials**; no `.vercel`; `DATABASE_URL`/`NEON_*` unset; `private-beta` secrets **0**. **No deploy. No JPJO. No fake PUBLISHED.** Audit: [`goal-completion-audit.md`](./goal-completion-audit.md).
 **BEL UI locale `be` (2026-09-16):** ~**43.8 / 50** — first-class UI locale `be` alongside `ru`/`uk`/`pl` (`UI_LOCALES`, routing, middleware, messages/`be.json`, PG enum migration `0009`). Onboarding prefers `be` when L1=`bel` (manual UI override respected). Settings switcher lists BE. Adult Belarusian learner chrome (dashboard / learn / auth / progress / beta invite / plan strings). **No Neon/Vercel login. No durable HTTPS claimed.** Still **WAITING_ON_FOUNDER**.
+**BEL `be` key-parity harden (2026-09-16):** ~**43.9 / 50** — verified **368 / 368** message keys vs `ru`/`uk`; remaining RU-identical loading chrome rewritten (adult BE); concept-label typo `Прадстаўленне`; ADR-005 + data-model list `be`; unit parity guard. Locale switcher / middleware `/be` / onboarding L1→`be` skim **OK**. **No Neon/Vercel login.** Still **WAITING_ON_FOUNDER**.
 
-### Critical re-score (post BEL UI locale) — `/50` (ruthless independent)
+### Critical re-score (post BEL key-parity harden) — `/50` (ruthless independent)
+
+| # | Criterion | before | after | Note |
+| --- | --- | ---: | ---: | --- |
+| 1 | Session-1 life loop | 4.65 | 4.65 | Unchanged — durable host still EXTERNAL |
+| 2 | Feedback that teaches | 4.65 | 4.65 | Unchanged |
+| 3 | Listening + speaking path | 4.0 | 4.0 | Unchanged |
+| 4 | Human-readable progress | 4.1 | 4.1 | Unchanged |
+| 5 | Zero civilian ops jargon | 3.95 | 3.95 | Unchanged |
+| 6 | BEL first-class L1 | 4.9 | 5.0 | Key parity + RU loading remnants gone; still not JPJO-reviewed |
+| 7 | Content honesty contract | 4.0 | 4.0 | Still DRAFT; no JPJO |
+| 8 | Deploy teaches someone | 4.7 | 4.7 | No Neon/Vercel; agents must not force login |
+| 9 | Admin ≤ learner craft | 3.5 | 3.5 | Freeze held |
+| 10 | Competitive first week | 4.0 | 4.0 | Unchanged — still PARTIAL_TUNNEL |
+| | **Total** | **~43.8** | **~43.9** | Micro CODE lift; goal still EXTERNAL |
+
+### Critical re-score (post BEL UI locale) — `/50` (historical)
 
 | # | Criterion | before | after | Note |
 | --- | --- | ---: | ---: | --- |
@@ -168,7 +185,7 @@
 
 ### WAITING_ON_FOUNDER
 
-**Status:** ~**43.8 / 50** — CODE + LIVE_TUNNEL day-1 **done**; BEL UI locale `be` shipped. Goal still **EXTERNAL**.
+**Status:** ~**43.9 / 50** — CODE + LIVE_TUNNEL day-1 **done**; BEL UI locale `be` + key parity vs `ru`/`uk`. Goal still **EXTERNAL**.
 
 **Blocked on:** durable HTTPS (Neon + Vercel preferred) **and** independent JPJO. Agents must **not** force Neon/Vercel logins.
 
@@ -225,8 +242,9 @@ Preferred durable path remains Neon/Supabase `DATABASE_URL` + Vercel. Alternate 
 | Theory-extra + tunnel Referer Origin unit coverage | **Done** — wave2 + m5 tests |
 | Goal completion audit (evidence checklist) | **Done** — [`goal-completion-audit.md`](./goal-completion-audit.md) |
 | BEL UI locale `be` (menu language) | **Done** — `UI_LOCALES`+routing+middleware+`be.json`+migration `0009`; onboarding prefers `be` for L1=`bel` |
+| BEL `be` message key parity + RU loading remnants | **Done** — 368/368 vs ru/uk; adult BE loading; ADR/data-model `be`; unit parity guard |
 
-Score estimate ~**43.8 / 50**. No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). BEL learners can use `/be/…` menu. See **WAITING_ON_FOUNDER** above — durable Neon+Vercel **and** JPJO; agents must not force logins.
+Score estimate ~**43.9 / 50**. No fake PUBLISHED. No Neon claimed. LIVE_TUNNEL day-1 **PASS** (ephemeral). BEL learners can use `/be/…` menu. See **WAITING_ON_FOUNDER** above — durable Neon+Vercel **and** JPJO; agents must not force logins.
 
 ### Local closed-beta smoke (2026-09-10)
 

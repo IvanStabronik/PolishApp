@@ -190,7 +190,7 @@ function softFallback(canonicalId: string, locale: ConceptLabelLocale): string {
   if (canonicalId.startsWith("FN-A1-IDENTIFY")) {
     if (locale === "pl") return "Przedstawianie się";
     if (locale === "uk") return "Представлення себе";
-    if (locale === "be") return "Прастаўленне сябе";
+    if (locale === "be") return "Прадстаўленне сябе";
     return "Представление себя";
   }
   if (canonicalId.startsWith("FN-")) {

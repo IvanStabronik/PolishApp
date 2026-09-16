@@ -55,7 +55,7 @@ erDiagram
     uuid id PK
     uuid user_id FK
     string l1 "ukr|rus|bel"
-    string ui_locale "ru|uk|pl"
+    string ui_locale "ru|uk|pl|be"
     jsonb goals
     int weekly_minutes
     jsonb consents
@@ -168,7 +168,7 @@ erDiagram
 ### Profiles
 
 - **learner_profiles.l1** — методика: `ukr` | `rus` | `bel` (отдельные значения; нет «славянский»).
-- **learner_profiles.ui_locale** — оболочка: `ru` | `uk` | `pl` (белорусский UI не обязателен).
+- **learner_profiles.ui_locale** — оболочка: `ru` | `uk` | `pl` | `be` (меню; ≠ L1 `bel`).
 - Смена UI locale **не** меняет L1 и банк ошибок.
 
 ### Content

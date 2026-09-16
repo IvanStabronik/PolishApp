@@ -62,6 +62,46 @@ describe("locale / L1 enums", () => {
 });
 
 describe("be message catalog", () => {
+  function flatten(
+    obj: Record<string, unknown>,
+    prefix = "",
+  ): Record<string, string> {
+    const out: Record<string, string> = {};
+    for (const [k, v] of Object.entries(obj)) {
+      const key = prefix ? `${prefix}.${k}` : k;
+      if (v && typeof v === "object" && !Array.isArray(v)) {
+        Object.assign(out, flatten(v as Record<string, unknown>, key));
+      } else if (typeof v === "string") {
+        out[key] = v;
+      }
+    }
+    return out;
+  }
+
+  it("keeps full key parity with ru and uk catalogs", async () => {
+    const be = flatten(
+      (await import("@/i18n/messages/be.json")).default as Record<
+        string,
+        unknown
+      >,
+    );
+    const ru = flatten(
+      (await import("@/i18n/messages/ru.json")).default as Record<
+        string,
+        unknown
+      >,
+    );
+    const uk = flatten(
+      (await import("@/i18n/messages/uk.json")).default as Record<
+        string,
+        unknown
+      >,
+    );
+    const beKeys = Object.keys(be).sort();
+    expect(beKeys).toEqual(Object.keys(ru).sort());
+    expect(beKeys).toEqual(Object.keys(uk).sort());
+  });
+
   it("ships learner-facing namespaces with Belarusian (not Russian) chrome", async () => {
     const be = (await import("@/i18n/messages/be.json")).default as {
       nav: { dashboard: string; learn: string };
@@ -71,10 +111,14 @@ describe("be message catalog", () => {
       beta: { inviteTitle: string };
       onboarding: { l1Bel: string; stepLocale: string };
       learn: { dailyPlan: string };
+      common: { loading: string };
+      settings: { loading: string };
     };
     const ru = (await import("@/i18n/messages/ru.json")).default as {
       nav: { dashboard: string };
       dashboard: { lead: string };
+      common: { loading: string };
+      settings: { loading: string };
     };
 
     expect(be.nav.dashboard).toBe("Кабінет");
@@ -89,5 +133,7 @@ describe("be message catalog", () => {
     // Must not silently ship the Russian lead string.
     expect(be.dashboard.lead).not.toBe(ru.dashboard.lead);
     expect(be.dashboard.lead).toMatch(/маршруце|ачкі/i);
+    expect(be.common.loading).not.toBe(ru.common.loading);
+    expect(be.settings.loading).not.toBe(ru.settings.loading);
   });
 });
