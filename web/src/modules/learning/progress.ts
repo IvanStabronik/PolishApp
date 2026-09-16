@@ -43,7 +43,7 @@ export type ProgressOverview = {
 };
 
 export type LoadProgressOptions = {
-  /** UI locale (uk|ru|pl) for concept labels and fallbacks. */
+  /** UI locale (uk|ru|pl|be) for concept labels and fallbacks. */
   locale?: string | null;
 };
 

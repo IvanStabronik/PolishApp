@@ -31,7 +31,7 @@
     "level": "Poziom",
     "module": "Moduł",
     "lesson": "Lekcja",
-    "draft": "W przygotowaniu",
+    "inPreparation": "W przygotowaniu",
     "published": "Dostępne",
     "loreModule": "Sala {hall} · {loreTitle}",
     "academicModule": "Poziom {code}",
@@ -181,7 +181,7 @@
     },
     "reviewReason": {
       "scheduledDue": "Według harmonogramu powtórek",
-      "masteryReviewDue": "Czas powtórzyć to, czego już się uczono",
+      "topicReviewDue": "Czas powtórzyć to, czego już się uczono",
       "errorThreshold": "Zebrało się błędów — warto powtórzyć"
     },
     "openItem": "Otwórz",
@@ -217,8 +217,8 @@
     "toDashboard": "Do gabinetu",
     "resultTomorrowLead": "Co robić dalej",
     "resultToPlan": "Plan na jutro",
-    "masteryHint": "Pewność w tematach pojawi się po kilku potwierdzonych odpowiedziach — zajrzyj do postępów.",
-    "previewNoMastery": "Lekcje są jeszcze wstępne: odpowiedzi się zapisują, ale trwały postęp jeszcze się nie buduje.",
+    "topicConfidenceHint": "Pewność w tematach pojawi się po kilku potwierdzonych odpowiedziach — zajrzyj do postępów.",
+    "previewNoStableProgress": "Lekcje są jeszcze wstępne: odpowiedzi się zapisują, ale trwały postęp jeszcze się nie buduje.",
     "persistError": "Odpowiedź sprawdzona, ale nie udało się zapisać próby. Spróbuj ponownie później.",
     "persistErrorMissingVersion": "Odpowiedź sprawdzona, ale teraz nie udało się zapisać próby — spróbuj ponownie później.",
     "catalogEmptyDraft": "Nie ma jeszcze dostępnych lekcji. Jeśli ekran jest pusty — napisz do organizatorów.",
@@ -368,7 +368,7 @@
     "lead": "Status zaktualizuje się, gdy zespół przeczyta zgłoszenie. Widzimy raport — to nie czarna skrzynka.",
     "empty": "Nie wysłałeś jeszcze zgłoszeń.",
     "status_new": "Nowe",
-    "status_triaged": "W toku",
+    "status_inProgress": "W toku",
     "status_resolved": "Zamknięte",
     "status_wont_fix": "Nie będzie poprawiane",
     "category": "Kategoria"

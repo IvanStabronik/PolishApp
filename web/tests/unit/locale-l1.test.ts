@@ -170,6 +170,8 @@ describe("civilian message chrome (§5 ops jargon)", () => {
       const flat = flatten(learnerNamespaces);
       for (const [key, value] of Object.entries(flat)) {
         expect(value, `${loc}:${key}`).not.toMatch(FORBIDDEN);
+        // Keys also must not smuggle ops tokens (missing-translation fallbacks).
+        expect(key, `${loc}:key:${key}`).not.toMatch(FORBIDDEN);
       }
     }
   });

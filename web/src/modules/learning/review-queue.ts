@@ -32,7 +32,7 @@ export type ReviewQueueItem = {
   errorCount: number;
   lastAttemptAt: string | null;
   masteryState: string;
-  reasonKey: "scheduledDue" | "masteryReviewDue" | "errorThreshold";
+  reasonKey: "scheduledDue" | "topicReviewDue" | "errorThreshold";
   href: string | null;
 };
 
@@ -70,7 +70,7 @@ export function buildReviewQueue(input: ReviewQueueInput): ReviewQueue {
     const source: ReviewQueueItem["source"] =
       m.state === "REVIEW_DUE" ? "weak_mastery" : "error_threshold";
     const reasonKey: ReviewQueueItem["reasonKey"] =
-      m.state === "REVIEW_DUE" ? "masteryReviewDue" : "errorThreshold";
+      m.state === "REVIEW_DUE" ? "topicReviewDue" : "errorThreshold";
     const item: ReviewQueueItem = {
       conceptCanonicalId: m.conceptCanonicalId,
       source: existing?.source === "schedule" ? "schedule" : source,

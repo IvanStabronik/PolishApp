@@ -64,11 +64,11 @@ export default async function ResultPage({ params }: Props) {
             {mod.titlePl} · {mod.exercises.length} {t("exercisesCount")}
           </p>
           <p className="mt-2 text-sm text-[var(--color-graphite)]">
-            {t("masteryHint")}
+            {t("topicConfidenceHint")}
           </p>
           {showDraftBanner ? (
             <p className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-warning)] bg-[var(--color-warning-bg)] px-4 py-3 text-sm text-[var(--color-warning)]">
-              {t("previewNoMastery")}
+              {t("previewNoStableProgress")}
             </p>
           ) : null}
           <p

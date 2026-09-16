@@ -34,7 +34,7 @@ export function MyFeedbackList() {
 
   function statusLabel(status: string): string {
     if (status === "new") return t("status_new");
-    if (status === "triaged") return t("status_triaged");
+    if (status === "triaged") return t("status_inProgress");
     if (status === "resolved") return t("status_resolved");
     if (status === "wont_fix") return t("status_wont_fix");
     return status;
