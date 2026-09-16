@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-02
 slug: rozmiar-dodatki-i-platnosc
-version: 7
+version: 8
 status: DRAFT
 title_pl: Rozmiar, dodatki i płatność
 sort_order: 2
@@ -214,7 +214,7 @@ exercises:
     correct_option_id: a
   - id: ex-wk-l2-02
     canonical_id: EX-A1-WK-L2-MC-02
-    version: 2
+    version: 3
     type: multiple_choice
     status: DRAFT
     prompt: "Какие реплики уточняют или закрывают заказ у стойки?"
@@ -226,11 +226,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Добавка и «это всё» — обычные шаги после выбора напитка."
-      incorrect: "Do dworca — про маршрут, не про кофейню."
+      incorrect: "Miło pana poznać — знакомство, не шаг уточнения заказа у стойки."
       l1:
-        ukr: "Z mlekiem / to wszystko — кавʼярня; Do dworca — інший сценарій."
-        rus: "Не смешивайте кофейню с дорогой (Do dworca)."
-        bel: "Дадаткі і to wszystko — кавярня, не вакзал."
+        ukr: "Z mlekiem / to wszystko — кавʼярня; Miło pana poznać — інший слот."
+        rus: "Не смешивайте заказ с формулой знакомства (Miło pana poznać)."
+        bel: "Дадаткі і to wszystko — кавярня, не знаёмства."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -247,14 +247,14 @@ exercises:
       - id: c
         text: Tak, to wszystko.
       - id: d
-        text: Do dworca, proszę.
+        text: Miło pana poznać.
     correct_option_ids:
       - a
       - b
       - c
   - id: ex-wk-l2-listen-01
     canonical_id: EX-A1-WK-L2-LIS-01
-    version: 2
+    version: 3
     type: listening
     status: DRAFT
     prompt: "Послушайте баристу. О чём вопрос?"
@@ -266,7 +266,7 @@ exercises:
       - id: b
         text: Уточняет размер (dużą czy małą).
       - id: c
-        text: Спрашивает, это всё (to wszystko).
+        text: Спрашивает способ оплаты (kartą czy gotówką).
     correct_option_id: a
     concept_ids:
       - GR-PRO-DEM-01
@@ -278,11 +278,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Да: Z mlekiem czy bez mleka? — про молоко."
-      incorrect: "Это добавка молока, не размер и не «это всё»."
+      incorrect: "Это добавка молока, не размер и не оплата."
       l1:
-        ukr: "Слухайте z mlekiem / bez mleka — добавка, не rozmiar / to wszystko."
-        rus: "Слышите молоко, не размер и не закрытие заказа."
-        bel: "Гэта дабаўка, не памер і не to wszystko."
+        ukr: "Слухайте z mlekiem / bez mleka — добавка, не rozmiar / kartą."
+        rus: "Слышите молоко, не размер и не способ оплаты."
+        bel: "Гэта дабаўка, не памер і не аплата."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -290,6 +290,7 @@ exercises:
       sources:
         - Dialogue Rozmiar, dodatki i płatność
       ai_assisted: true
+      notes: "Hard same-scenario foils (size vs payment). DRAFT."
     mini_check: false
   - id: ex-wk-l2-03
     canonical_id: EX-A1-WK-L2-GF-03
@@ -429,10 +430,10 @@ exercises:
     correct_option_id: a
   - id: ex-wk-l2-write-01
     canonical_id: EX-A1-WK-L2-GF-09
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: Poproszę {{gap1}} kawę. {{gap2}} mlekiem, proszę."
+    prompt: "Напишите: Poproszę {{gap1}} kawę. {{gap2}} mlekiem, proszę. Tak, to {{gap3}}."
     concept_ids:
       - GR-CAS-ACC-01
       - GR-PRO-DEM-01
@@ -441,19 +442,20 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: "Размер dużą + добавка z mlekiem — две короткие рамки."
-      incorrect: "Нужны dużą (Acc) и предлог z перед mlekiem."
+      correct: "Три рамки: dużą kawę, z mlekiem и to wszystko."
+      incorrect: "Нужны dużą (Acc), предлог z и слово wszystko."
       l1:
-        ukr: "dużą kawę + z mlekiem — не *duży / *z mleko."
-        rus: "dużą + z mlekiem целиком; не *с молоком в именительном."
-        bel: "dużą і z mlekiem — цэлыя, не калька."
+        ukr: "dużą kawę + z mlekiem + to wszystko — не *duży / *z mleko."
+        rus: "dużą + z mlekiem + wszystko; не *с молоком в именительном."
+        bel: "Тры формулы: dużą / z mlekiem / wszystko."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - FN-A1-TRANS-01 productive dual gap
+        - FN-A1-TRANS-01 productive triple gap
       ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
     mini_check: false
     gaps:
       - id: gap1
@@ -465,14 +467,19 @@ exercises:
           - Z
           - z
         placeholder: …
+      - id: gap3
+        accepted_answers:
+          - wszystko
+        placeholder: …
   - id: ex-wk-l2-07
     canonical_id: EX-A1-WK-L2-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Что можно поставить после Poproszę?"
     concept_ids:
       - GR-NUM-MONEY-01
+      - GR-CAS-ACC-01
     function_ids:
       - FN-A1-ASK-01
     lex_bundle_ids:
@@ -480,6 +487,10 @@ exercises:
     feedback:
       correct: "После Poproszę — объект в Acc (напиток, еда)."
       incorrect: "Kartą — способ оплаты, не объект заказа."
+      l1:
+        ukr: "Після Poproszę — Acc (kawę…), не kartą як об'єкт замовлення."
+        rus: "После Poproszę — Acc; kartą — слот оплаты."
+        bel: "Пасля Poproszę — Acc, не kartą як аб'ект."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -503,7 +514,7 @@ exercises:
       - d
   - id: ex-wk-l2-08
     canonical_id: EX-A1-WK-L2-OR-08
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Соберите шаги закрытия заказа и оплаты."
@@ -516,6 +527,10 @@ exercises:
     feedback:
       correct: "Вопрос «это всё?» → ответ → сумма → способ оплаты."
       incorrect: "Сначала подтвердите заказ, потом спросите цену и платите."
+      l1:
+        ukr: "Спочатку to wszystko, потім Ile płacę?, потім Kartą."
+        rus: "Сначала подтверждение, потом сумма и оплата."
+        bel: "Спачатку to wszystko, потым сума і аплата."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -549,7 +564,7 @@ result_metadata:
   title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете уточнить размер и добавку,
-    закрыть заказ и оплатить у стойки (черновик, внутренний просмотр).
+    закрыть заказ и оплатить у стойки.
   retry_ru: >
     Ещё раз dużą/małą, z mlekiem, Tak, to wszystko и Kartą, proszę —
     потом короткая проверка снова.
@@ -571,5 +586,7 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Hard café foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.

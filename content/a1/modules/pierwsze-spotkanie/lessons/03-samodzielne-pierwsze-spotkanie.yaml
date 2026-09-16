@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-03
 slug: samodzielne-pierwsze-spotkanie
-version: 6
+version: 7
 status: DRAFT
 title_pl: Samodzielne pierwsze spotkanie
 sort_order: 3
@@ -161,6 +161,7 @@ steps:
       - ex-ps-l3-04
       - ex-ps-l3-05
       - ex-ps-l3-06
+      - ex-ps-l3-write-01
   - id: step-l3-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -173,19 +174,24 @@ steps:
 exercises:
   - id: ex-ps-l3-01
     canonical_id: EX-A1-PS-L3-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Как лучше начать знакомство с соседкой — самим, на pan/pani?"
     concept_ids:
       - GR-CAS-NOM-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-IDENTIFY-01
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
       correct: "Dzień dobry + Nazywam się… — спокойное открытие."
-      incorrect: "Siema / A ty kto? — слишком свои для первого контакта с соседкой."
+      incorrect: "Без Nazywam się или cześć к незнакомке — не рамка первого контакта."
+      l1:
+        ukr: "Не *Ja Nina без Nazywam się і не cześć до сусідки-незнайомки."
+        rus: "Не *Ja Nina без формулы и не cześć к незнакомке — Nazywam się…"
+        bel: "Не без Nazywam się і не cześć да незнаёмкі."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -193,23 +199,25 @@ exercises:
       sources:
         - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01 / LEX-A1-IDENTITY
       ai_assisted: true
+      notes: "Adult same-scenario distractors (missing MWU + cześć). DRAFT."
     mini_check: false
     options:
       - id: a
         text: Dzień dobry. Nazywam się Nina Kowal.
       - id: b
-        text: Siema, Nina z trzeciego.
+        text: Dzień dobry. Ja Nina Kowal.
       - id: c
-        text: Ja jestem Nina. A ty kto?
+        text: Cześć. Nazywam się Nina Kowal.
     correct_option_id: a
   - id: ex-ps-l3-02
     canonical_id: EX-A1-PS-L3-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Что обычно входит в короткое первое знакомство?"
     concept_ids:
       - GR-TNS-PRS-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-GREET-01
     lex_bundle_ids:
@@ -217,6 +225,10 @@ exercises:
     feedback:
       correct: "Приветствие, имя и происхождение или встречный вопрос."
       incorrect: "Требовать переход на ty у незнакомца нельзя."
+      l1:
+        ukr: "Без вимоги «давайте на ти» — тільки вітання / ім'я / skąd."
+        rus: "Без требования перейти на ty — приветствие, имя, skąd."
+        bel: "Без патрабавання ty — прывітанне, імя, skąd."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -240,7 +252,7 @@ exercises:
       - c
   - id: ex-ps-l3-listen-01
     canonical_id: EX-A1-PS-L3-LIS-01
-    version: 2
+    version: 3
     type: listening
     status: DRAFT
     prompt: "Послушайте. Чем закрывают знакомство?"
@@ -252,7 +264,7 @@ exercises:
       - id: b
         text: Представление (Nazywam się…).
       - id: c
-        text: Вопрос об имени (Jak ma pan na imię?).
+        text: Закрытие формулой «Miło panią poznać».
     correct_option_id: a
     concept_ids:
       - PRAG-PAN-01
@@ -264,11 +276,11 @@ exercises:
       - LEX-A1-GREETINGS
     feedback:
       correct: "Да: Dziękuję za rozmowę + Do widzenia — спокойное закрытие."
-      incorrect: "Это закрытие разговора, не представление и не вопрос об имени."
+      incorrect: "Это благодарность и прощание, не представление и не Miło panią poznać."
       l1:
-        ukr: "Слухайте Dziękuję za rozmowę / Do widzenia — фінал, не Nazywam się / Jak ma…"
-        rus: "Слышите закрытие — не представление и не вопрос об имени."
-        bel: "Гэта закрыццё знаёмства, не прадстаўленне і не пытанне пра імя."
+        ukr: "Слухайте Dziękuję za rozmowę / Do widzenia — не Nazywam się і не Miło…"
+        rus: "Слышите закрытие разговора — не представление и не Miło panią poznać."
+        bel: "Гэта дзякуй + Do widzenia, не прадстаўленне і не Miło…"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -276,10 +288,11 @@ exercises:
       sources:
         - Dialogue Samodzielne pierwsze spotkanie
       ai_assisted: true
+      notes: "Hard same-scenario foils (Miło… vs Dziękuję za rozmowę). DRAFT."
     mini_check: false
   - id: ex-ps-l3-03
     canonical_id: EX-A1-PS-L3-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Вставьте пропущенное: Miło {{gap1}} poznać. (мужчину)"
@@ -292,6 +305,10 @@ exercises:
     feedback:
       correct: "Miło pana poznać — к мужчине."
       incorrect: "Нужна форма pana."
+      l1:
+        ukr: "До чоловіка — pana, не pani / pan."
+        rus: "К мужчине — pana (Acc), не pani."
+        bel: "Да мужчыны — pana, не pani."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -307,12 +324,12 @@ exercises:
         placeholder: …
   - id: ex-ps-l3-04
     canonical_id: EX-A1-PS-L3-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Вставьте пропущенное: Jestem {{gap1}} Białorusi."
     concept_ids:
-      - PHON-CORE-01
+      - GR-CAS-NOM-01
     function_ids:
       - FN-A1-GREET-01
     lex_bundle_ids:
@@ -320,6 +337,10 @@ exercises:
     feedback:
       correct: "Jestem z… — предлог z + место."
       incorrect: "Нужен предлог z."
+      l1:
+        ukr: "Jestem z + dopełniacz, не без z."
+        rus: "Нужен z перед Białorusi."
+        bel: "Трымайце z перад Białorusi."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -335,7 +356,7 @@ exercises:
         placeholder: …
   - id: ex-ps-l3-05
     canonical_id: EX-A1-PS-L3-OR-05
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Расставьте реплики в порядке короткого знакомства."
@@ -348,6 +369,10 @@ exercises:
     feedback:
       correct: "Приветствие → имя → откуда / вопрос → закрытие."
       incorrect: "Не начинайте с прощания и не ставьте вопрос раньше имени."
+      l1:
+        ukr: "Порядок: вітання → ім'я → skąd → закриття."
+        rus: "Сначала приветствие и имя, потом skąd, затем закрытие."
+        bel: "Спачатку прывітанне і імя, потым skąd, потым закрыццё."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -372,19 +397,24 @@ exercises:
       - t4
   - id: ex-ps-l3-06
     canonical_id: EX-A1-PS-L3-SC-06
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Незнакомец говорит «Miło panią poznać». Как ответить?"
     concept_ids:
       - GR-TNS-PRS-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-GREET-01
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
       correct: "Wzajemnie — спокойный ответ в том же регистре."
-      incorrect: "Ty też меняет регистр; Cześć не отвечает на формулу."
+      incorrect: "Ty też меняет регистр; Miło mi też — не стандартный ответ на эту формулу."
+      l1:
+        ukr: "Wzajemnie, не Ty też і не *Miło mi też як єдина відповідь тут."
+        rus: "На Miło panią poznać — Wzajemnie; не ty и не *Miło mi też."
+        bel: "Wzajemnie — не Ty też і не *Miło mi też."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -392,6 +422,7 @@ exercises:
       sources:
         - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-GREET-01 / LEX-A1-GREETINGS
       ai_assisted: true
+      notes: "Adult same-scenario distractors (ty vs near-miss). DRAFT."
     mini_check: false
     options:
       - id: a
@@ -399,11 +430,56 @@ exercises:
       - id: b
         text: Ty też.
       - id: c
-        text: Cześć.
+        text: Miło mi też.
     correct_option_id: a
+  - id: ex-ps-l3-write-01
+    canonical_id: EX-A1-PS-L3-GF-09
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: {{gap1}} się Nina Kowal. Jestem {{gap2}} Białorusi. Miło {{gap3}} poznać."
+    concept_ids:
+      - GR-CAS-NOM-01
+      - GR-TNS-PRS-01
+      - PRAG-PAN-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: "Три рамки: Nazywam się…, Jestem z… и Miło pana poznać."
+      incorrect: "Нужны Nazywam, предлог z и pana (к мужчине)."
+      l1:
+        ukr: "Nazywam / z / pana — не без się, не без z, не pani до чоловіка."
+        rus: "Nazywam + z + pana — не *pani к мужчине в этой рамке."
+        bel: "Тры формулы: Nazywam się… / z… / Miło pana poznać."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - FN-A1-IDENTIFY-01 productive triple gap
+      ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - Nazywam
+          - nazywam
+        placeholder: …
+      - id: gap2
+        accepted_answers:
+          - z
+        placeholder: …
+      - id: gap3
+        accepted_answers:
+          - pana
+        placeholder: …
   - id: ex-ps-l3-07
     canonical_id: EX-A1-PS-L3-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Отметьте все целые уместные рамки."
@@ -416,6 +492,10 @@ exercises:
     feedback:
       correct: "Nazywam się…, Jestem z… и Skąd pani jest? — полные."
       incorrect: "Nazywam без się — так не говорят."
+      l1:
+        ukr: "Без się (*Nazywam Nina) — зламана рамка."
+        rus: "Без się формула ломается."
+        bel: "Без się — зламаная рамка."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -439,12 +519,12 @@ exercises:
       - c
   - id: ex-ps-l3-08
     canonical_id: EX-A1-PS-L3-OR-08
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Соберите финал встречи по порядку."
     concept_ids:
-      - PHON-CORE-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-GREET-01
     lex_bundle_ids:
@@ -452,6 +532,10 @@ exercises:
     feedback:
       correct: "Miło… → Wzajemnie → благодарность → Do widzenia."
       incorrect: "Сначала взаимный ответ, потом закрытие."
+      l1:
+        ukr: "Спочатку Miło… / Wzajemnie, потім Dziękuję / Do widzenia."
+        rus: "Сначала взаимное закрытие, потом благодарность и Do widzenia."
+        bel: "Спачатку Miło… / Wzajemnie, потым Dziękuję / Do widzenia."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -485,8 +569,7 @@ result_metadata:
   title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете сами провести короткое знакомство:
-    приветствие, имя, происхождение, встречный вопрос и прощание
-    (черновик, внутренний просмотр).
+    приветствие, имя, происхождение, встречный вопрос и прощание.
   retry_ru: >
     Ещё раз Dzień dobry · Nazywam się… · A pan/pani? · Do widzenia —
     потом короткая проверка снова.
@@ -507,6 +590,8 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Same-scenario foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.
 visibility: internal_preview_only

@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-02
 slug: pytania-o-imie-i-pochodzenie
-version: 6
+version: 7
 status: DRAFT
 title_pl: Pytania o imię i pochodzenie
 sort_order: 2
@@ -161,6 +161,7 @@ steps:
       - ex-ps-l2-04
       - ex-ps-l2-05
       - ex-ps-l2-06
+      - ex-ps-l2-write-01
   - id: step-l2-mini-check
     kind: mini_check
     title_ru: Короткая проверка
@@ -173,12 +174,13 @@ steps:
 exercises:
   - id: ex-ps-l2-01
     canonical_id: EX-A1-PS-L2-SC-01
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Как спросить имя у мужчины-незнакомца — на pan/pani?"
     concept_ids:
       - GR-CAS-NOM-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-IDENTIFY-01
     lex_bundle_ids:
@@ -186,6 +188,10 @@ exercises:
     feedback:
       correct: "Да: Jak ma pan na imię? — pan и глагол в 3 лице."
       incorrect: "masz / ty слишком свои; wy macie — калька «как вас зовут» во мн."
+      l1:
+        ukr: "Не ty (*masz) і не wy macie — тільки Jak ma pan na imię?"
+        rus: "Не *Jak masz… и не wy macie («вы») — только pan + ma."
+        bel: "Не ty / wy — толькі Jak ma pan na imię?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -193,6 +199,7 @@ exercises:
       sources:
         - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-IDENTIFY-01 / LEX-A1-IDENTITY
       ai_assisted: true
+      notes: "Adult same-scenario distractors (ty vs wy calque). DRAFT."
     mini_check: false
     options:
       - id: a
@@ -204,19 +211,24 @@ exercises:
     correct_option_id: a
   - id: ex-ps-l2-02
     canonical_id: EX-A1-PS-L2-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Отметьте всё, что уместно спросить при первом знакомстве со взрослым."
     concept_ids:
       - GR-TNS-PRS-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-GREET-01
     lex_bundle_ids:
       - LEX-A1-GREETINGS
     feedback:
       correct: "Jak ma pani…, Skąd pan… и A pani? — на pan/pani."
-      incorrect: "Ile pani ma lat? — слишком личное для первого контакта на кlatce."
+      incorrect: "Ile pani ma lat? — слишком личное для первого контакта на клатке."
+      l1:
+        ukr: "Вік на перший контакт — ні; тримайте ім'я / skąd / A pani?"
+        rus: "Возраст на первом контакте неуместен; нужны имя, skąd, A pani?"
+        bel: "Узрост на першы кантакт — не; імя / skąd / A pani?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -240,7 +252,7 @@ exercises:
       - d
   - id: ex-ps-l2-listen-01
     canonical_id: EX-A1-PS-L2-LIS-01
-    version: 2
+    version: 3
     type: listening
     status: DRAFT
     prompt: "Послушайте. Что спросили?"
@@ -252,7 +264,7 @@ exercises:
       - id: b
         text: Спросили, откуда он (Skąd pan jest?).
       - id: c
-        text: Вернули вопрос коротко (A pan?).
+        text: Сказали «Miło pana poznać».
     correct_option_id: a
     concept_ids:
       - PRAG-PAN-01
@@ -265,11 +277,11 @@ exercises:
       - LEX-A1-IDENTITY
     feedback:
       correct: "Да: Jak ma pan na imię? — вопрос об имени."
-      incorrect: "Это вопрос об имени, не skąd и не короткий возврат A pan?"
+      incorrect: "Это вопрос об имени, не skąd и не закрытие Miło pana poznać."
       l1:
-        ukr: "Слухайте Jak ma pan na imię? — ім'я, не Skąd… і не A pan?"
-        rus: "Слышите вопрос об имени — не происхождение и не A pan?"
-        bel: "Гэта пытанне пра імя, не skąd і не A pan?"
+        ukr: "Слухайте Jak ma pan na imię? — ім'я, не Skąd… і не Miło pana poznać."
+        rus: "Слышите вопрос об имени — не происхождение и не Miło pana poznać."
+        bel: "Гэта пытанне пра імя, не skąd і не Miło pana poznać."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -277,10 +289,11 @@ exercises:
       sources:
         - Dialogue Pytania o imię i pochodzenie
       ai_assisted: true
+      notes: "Hard same-scenario foils (origin vs closing). DRAFT."
     mini_check: false
   - id: ex-ps-l2-03
     canonical_id: EX-A1-PS-L2-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Вставьте пропущенное: Jak ma {{gap1}} na imię?"
@@ -293,6 +306,10 @@ exercises:
     feedback:
       correct: "Jak ma pani na imię? — целиком, с pani."
       incorrect: "Нужна форма pani."
+      l1:
+        ukr: "Після ma — pani, не ty / pan без узгодження з контекстом."
+        rus: "В этой рамке — pani (к женщине)."
+        bel: "У гэтай рамцы — pani."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -308,12 +325,13 @@ exercises:
         placeholder: …
   - id: ex-ps-l2-04
     canonical_id: EX-A1-PS-L2-GF-04
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Вставьте пропущенное: Skąd pan {{gap1}}?"
     concept_ids:
-      - PHON-CORE-01
+      - PRAG-PAN-01
+      - GR-TNS-PRS-01
     function_ids:
       - FN-A1-GREET-01
     lex_bundle_ids:
@@ -321,6 +339,10 @@ exercises:
     feedback:
       correct: "Skąd pan jest? — pan и глагол в 3 лице."
       incorrect: "Нужно jest, не jesteś."
+      l1:
+        ukr: "pan + jest, не *jesteś."
+        rus: "После pan — jest (3 л.), не jesteś."
+        bel: "Пасля pan — jest, не jesteś."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -336,7 +358,7 @@ exercises:
         placeholder: …
   - id: ex-ps-l2-05
     canonical_id: EX-A1-PS-L2-OR-05
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Расставьте реплики в порядке короткого взаимного знакомства."
@@ -349,6 +371,10 @@ exercises:
     feedback:
       correct: "Вопрос → ответ и встречный вопрос → ответ → закрытие."
       incorrect: "Сначала спросить, потом обменяться именами, затем закрыть."
+      l1:
+        ukr: "Спочатку питання, потім імена, потім закриття."
+        rus: "Сначала вопрос, потом обмен именами, затем закрытие."
+        bel: "Спачатку пытанне, потым імёны, потым закрыццё."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -373,12 +399,13 @@ exercises:
       - t4
   - id: ex-ps-l2-06
     canonical_id: EX-A1-PS-L2-SC-06
-    version: 1
+    version: 2
     type: single_choice
     status: DRAFT
     prompt: "Как коротко вернуть вопрос о происхождении женщине?"
     concept_ids:
       - GR-TNS-PRS-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-GREET-01
     lex_bundle_ids:
@@ -386,6 +413,10 @@ exercises:
     feedback:
       correct: "A pani? — вежливо возвращает тот же вопрос."
       incorrect: "A ty? меняет регистр; I pani? так обычно не говорят."
+      l1:
+        ukr: "A pani?, не A ty? і не *I pani?"
+        rus: "Короткий возврат — A pani?, не ty и не *I pani?"
+        bel: "A pani? — не A ty? і не *I pani?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -393,6 +424,7 @@ exercises:
       sources:
         - Curriculum SCN-A1-EVERYDAY-01 / FN-A1-GREET-01 / LEX-A1-GREETINGS
       ai_assisted: true
+      notes: "Adult same-scenario distractors (ty vs broken return). DRAFT."
     mini_check: false
     options:
       - id: a
@@ -402,9 +434,53 @@ exercises:
       - id: c
         text: I pani?
     correct_option_id: a
+  - id: ex-ps-l2-write-01
+    canonical_id: EX-A1-PS-L2-GF-09
+    version: 1
+    type: gap_fill
+    status: DRAFT
+    prompt: "Напишите: Jak ma {{gap1}} na imię? Skąd pan {{gap2}}? Jestem {{gap3}} Ukrainy."
+    concept_ids:
+      - PRAG-PAN-01
+      - GR-TNS-PRS-01
+      - GR-CAS-NOM-01
+    function_ids:
+      - FN-A1-IDENTIFY-01
+      - FN-A1-GREET-01
+    lex_bundle_ids:
+      - LEX-A1-IDENTITY
+    feedback:
+      correct: "Три рамки: Jak ma pani…, Skąd pan jest? и Jestem z…"
+      incorrect: "Нужны pani, jest (3 л.) и предлог z."
+      l1:
+        ukr: "pani / jest / z — не ty, не jesteś, не без z."
+        rus: "pani + jest + z — не ty и не без предлога."
+        bel: "Тры формулы: pani / jest / z."
+    provenance:
+      originality: created_for_product
+      author_id: system:ai-draft-slowarium
+      reviewer_id: null
+      sources:
+        - FN-A1-IDENTIFY-01 productive triple gap
+      ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
+    mini_check: false
+    gaps:
+      - id: gap1
+        accepted_answers:
+          - pani
+        placeholder: …
+      - id: gap2
+        accepted_answers:
+          - jest
+        placeholder: …
+      - id: gap3
+        accepted_answers:
+          - z
+        placeholder: …
   - id: ex-ps-l2-07
     canonical_id: EX-A1-PS-L2-MC-07
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Какие ответы говорят, откуда вы?"
@@ -417,6 +493,10 @@ exercises:
     feedback:
       correct: "Jestem z… называет происхождение; имя и Wzajemnie — нет."
       incorrect: "Nazywam się… и Wzajemnie не отвечают на skąd."
+      l1:
+        ukr: "На skąd відповідає Jestem z…, не ім'я і не Wzajemnie."
+        rus: "На skąd — Jestem z…; имя и Wzajemnie — другие слоты."
+        bel: "На skąd — Jestem z…, не імя і не Wzajemnie."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -439,12 +519,12 @@ exercises:
       - b
   - id: ex-ps-l2-08
     canonical_id: EX-A1-PS-L2-OR-08
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Соберите ответ о себе по порядку."
     concept_ids:
-      - PHON-CORE-01
+      - GR-CAS-NOM-01
     function_ids:
       - FN-A1-GREET-01
     lex_bundle_ids:
@@ -452,6 +532,10 @@ exercises:
     feedback:
       correct: "Имя → откуда → где сейчас — так понятнее."
       incorrect: "Сначала кто вы, потом skąd, затем где живёте сейчас."
+      l1:
+        ukr: "Спочатку ім'я, потім skąd, потім де зараз."
+        rus: "Сначала кто вы, потом skąd, затем где сейчас."
+        bel: "Спачатку імя, потым skąd, потым дзе зараз."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -482,7 +566,7 @@ result_metadata:
   title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете спросить имя и откуда человек,
-    ответить и вернуть вопрос на pan/pani (черновик, внутренний просмотр).
+    ответить и вернуть вопрос на pan/pani.
   retry_ru: >
     Ещё раз Jak ma pan/pani na imię?, Skąd pan/pani jest? и A pan? / A pani? —
     потом короткая проверка снова.
@@ -503,6 +587,8 @@ provenance:
       FN-A1-GREET-01 / LEX-A1-IDENTITY, LEX-A1-GREETINGS
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Same-scenario foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.
 visibility: internal_preview_only

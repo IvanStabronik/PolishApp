@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-PS-01
 slug: powitanie-i-przedstawienie
-version: 7
+version: 8
 status: DRAFT
 title_pl: Powitanie i przedstawienie
 sort_order: 1
@@ -191,17 +191,17 @@ steps:
 exercises:
   - id: ex-ps-01
     canonical_id: EX-A1-PS-SC-01
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
-    prompt: "Сосед на кlatce, день. Вы видите его впервые. Чем открыть разговор?"
+    prompt: "Сосед на клатке, день. Вы видите его впервые. Чем открыть разговор?"
     options:
       - id: a
         text: Dzień dobry.
       - id: b
-        text: Cześć! Jak się masz?
+        text: Cześć panu!
       - id: c
-        text: Witam serdecznie Pana!
+        text: Dobry dzień!
     correct_option_id: a
     concept_ids:
       - PRAG-PAN-01
@@ -212,12 +212,12 @@ exercises:
       - LEX-A1-GREETINGS
     feedback:
       correct: "Да. Dzień dobry — спокойное дневное приветствие для незнакомца."
-      incorrect: "Cześć слишком своё; Witam serdecznie — канцелярски/письменно, не для кlatki."
+      incorrect: "Cześć panu смешивает регистры; *Dobry dzień — калька порядка слов, не формула."
       hint: "Представьте соседа, которого видите впервые — не друга из чата."
       l1:
-        ukr: "Не ставте «Привіт» / cześć до дорослого незнайомця на кlatce."
-        rus: "Не подставляйте «Привет» и не копируйте письмовое «Приветствую» как Witam serdecznie."
-        bel: "Не «Прывітанне» і не пісьмовы пафас Witam — на кlatce дастаткова Dzień dobry."
+        ukr: "Не «привіт + pan» (*Cześć panu) і не *Dobry dzień — тільки Dzień dobry."
+        rus: "Не cześć к незнакомцу и не «Добрый день» → *Dobry dzień; только Dzień dobry."
+        bel: "Не *Cześć panu і не калька *Dobry dzień — на клатцы Dzień dobry."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -225,11 +225,12 @@ exercises:
       sources:
         - "LEX-A1-GREETINGS / FN-A1-GREET-01"
       ai_assisted: true
+      notes: "Adult same-scenario distractors (register mix + L1 word order). DRAFT."
     mini_check: false
 
   - id: ex-ps-02
     canonical_id: EX-A1-PS-SC-02
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
     prompt: "Как спросить незнакомку, откуда она — на pan/pani?"
@@ -261,11 +262,12 @@ exercises:
       sources:
         - "PRAG-PAN-01"
       ai_assisted: true
+      notes: "Adult same-scenario distractors (register mix + wy calque). DRAFT."
     mini_check: false
 
   - id: ex-ps-listen-01
     canonical_id: EX-A1-PS-LIS-01
-    version: 3
+    version: 4
     type: listening
     status: DRAFT
     prompt: "Послушайте реплику соседа. Что он сказал?"
@@ -275,7 +277,7 @@ exercises:
       - id: a
         text: Он назвал себя и спросил ваше имя на pan/pani.
       - id: b
-        text: Он только попрощался (Do widzenia).
+        text: Он сказал «Miło panią poznać».
       - id: c
         text: Он спросил, откуда вы (Skąd pani jest?).
     correct_option_id: a
@@ -290,11 +292,11 @@ exercises:
       - LEX-A1-IDENTITY
     feedback:
       correct: "Да: Nazywam się… A pani? — имя и встречный вопрос."
-      incorrect: "Это представление (Nazywam się… A pani?), не прощание и не вопрос «откуда»."
+      incorrect: "Это представление + A pani?, не Miło panią poznać и не вопрос «откуда»."
       l1:
-        ukr: "Слухайте цілу рамку Nazywam się… A pani? — не Do widzenia і не Skąd…?"
-        rus: "Слышите Nazywam się + A pani? — не Do widzenia и не Skąd pani jest?"
-        bel: "Гэта прадстаўленне + A pani?, не развітанне і не skąd."
+        ukr: "Слухайте Nazywam się… A pani? — не Miło panią poznać і не Skąd…?"
+        rus: "Слышите имя + A pani? — не закрытие Miło… и не Skąd pani jest?"
+        bel: "Гэта прадстаўленне + A pani?, не Miło panią poznać і не skąd."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -302,11 +304,12 @@ exercises:
       sources:
         - "Dialogue Spotkanie na klatce / FN-A1-IDENTIFY-01"
       ai_assisted: true
+      notes: "Hard same-scenario foils (closing vs origin). DRAFT."
     mini_check: false
 
   - id: ex-ps-03
     canonical_id: EX-A1-PS-MC-01
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Отметьте всё, что уместно при первом дневном разговоре со взрослым."
@@ -316,7 +319,7 @@ exercises:
       - id: b
         text: Do widzenia.
       - id: c
-        text: Cześć, co tam?
+        text: Jak się masz?
       - id: d
         text: Miło panią poznać.
     correct_option_ids:
@@ -331,7 +334,11 @@ exercises:
       - LEX-A1-GREETINGS
     feedback:
       correct: "Dzień dobry, Miło panią poznać и Do widzenia — на pan/pani."
-      incorrect: "Cześć, co tam? — слишком своё для первого разговора со взрослым."
+      incorrect: "Jak się masz? — на ty; не для первого контакта со взрослым незнакомцем."
+      l1:
+        ukr: "Jak się masz? — «ти»; на перший контакт тримайте pan/pani."
+        rus: "Jak się masz? — регистр ty; к незнакомцу — Dzień dobry / Miło panią poznać."
+        bel: "Jak się masz? — на ty; да незнаёмца — pan/pani."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -343,7 +350,7 @@ exercises:
 
   - id: ex-ps-04
     canonical_id: EX-A1-PS-MC-02
-    version: 1
+    version: 2
     type: multiple_choice
     status: DRAFT
     prompt: "Какие реплики называют имя или откуда вы?"
@@ -353,7 +360,7 @@ exercises:
       - id: b
         text: Jestem z Lwowa.
       - id: c
-        text: Do widzenia.
+        text: Miło panią poznać.
       - id: d
         text: Jestem z Ukrainy.
     correct_option_ids:
@@ -368,8 +375,12 @@ exercises:
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: "Имя и Jestem z… говорят, кто вы; Do widzenia — только прощание."
-      incorrect: "Do widzenia закрывает разговор, но не говорит, кто вы."
+      correct: "Имя и Jestem z… говорят, кто вы; Miło panią poznać — вежливое закрытие."
+      incorrect: "Miło panią poznać закрывает контакт, но не говорит, кто вы."
+      l1:
+        ukr: "Miło panią poznać ≠ ім'я / skąd — це ввічливе закриття."
+        rus: "Miło panią poznać — не слот имени и не Jestem z…"
+        bel: "Miło panią poznać — не імя і не паходжанне."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -381,7 +392,7 @@ exercises:
 
   - id: ex-ps-05
     canonical_id: EX-A1-PS-GF-01
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Вставьте пропущенное: {{gap1}} się Anna Nowak."
@@ -416,7 +427,7 @@ exercises:
 
   - id: ex-ps-06
     canonical_id: EX-A1-PS-GF-02
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
     prompt: "Вставьте пропущенное: Jestem {{gap1}} Ukrainy."
@@ -450,7 +461,7 @@ exercises:
 
   - id: ex-ps-07
     canonical_id: EX-A1-PS-OR-01
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Расставьте реплики в порядке короткого первого разговора."
@@ -477,6 +488,10 @@ exercises:
     feedback:
       correct: "Сначала поздороваться, потом имена, потом вежливо закрыть."
       incorrect: "Сначала приветствие, потом кто вы / откуда, затем прощание."
+      l1:
+        ukr: "Порядок: Dzień dobry → імена → Miło… / Do widzenia."
+        rus: "Сначала приветствие, потом кто вы, затем закрытие."
+        bel: "Спачатку прывітанне, потым імя, потым закрыццё."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -488,7 +503,7 @@ exercises:
 
   - id: ex-ps-08
     canonical_id: EX-A1-PS-OR-02
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Соберите представление о себе по порядку."
@@ -512,6 +527,10 @@ exercises:
     feedback:
       correct: "Имя → откуда → где сейчас — так понятнее."
       incorrect: "Сначала кто вы, потом skąd, затем где живёте сейчас."
+      l1:
+        ukr: "Спочатку ім'я, потім skąd, потім де зараз."
+        rus: "Сначала кто вы, потом skąd, затем где сейчас."
+        bel: "Спачатку імя, потым skąd, потым дзе зараз."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -522,7 +541,7 @@ exercises:
 
   - id: ex-ps-09
     canonical_id: EX-A1-PS-SC-03
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
     prompt: "Какая формула представления правильная?"
@@ -557,10 +576,10 @@ exercises:
 
   - id: ex-ps-write-01
     canonical_id: EX-A1-PS-GF-03
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите целиком: {{gap1}} się Anna Nowak. Jestem {{gap2}} Ukrainy."
+    prompt: "Напишите целиком: {{gap1}} się Anna Nowak. Jestem {{gap2}} Ukrainy. Skąd pani {{gap3}}?"
     gaps:
       - id: gap1
         accepted_answers:
@@ -571,27 +590,34 @@ exercises:
         accepted_answers:
           - z
         placeholder: "…"
+      - id: gap3
+        accepted_answers:
+          - jest
+        placeholder: "…"
     concept_ids:
       - GR-CAS-NOM-01
       - GR-TNS-PRS-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-IDENTIFY-01
+      - FN-A1-GREET-01
     lex_bundle_ids:
       - LEX-A1-IDENTITY
     feedback:
-      correct: "Две формулы подряд: Nazywam się… и Jestem z…"
-      incorrect: "Нужны Nazywam перед się и предлог z перед Ukrainy."
+      correct: "Три рамки: Nazywam się…, Jestem z… и Skąd pani jest?"
+      incorrect: "Нужны Nazywam, предлог z и глагол jest (3 л.) после pani."
       l1:
-        ukr: "Тримайте обидві рамки: Nazywam się… і Jestem z + dopełniacz."
-        rus: "Не пропускайте się и z — это две отдельные формулы."
-        bel: "Дзве цэлыя формулы: Nazywam się… / Jestem z…"
+        ukr: "Nazywam się…; z + dopełniacz; pani + jest — не jesteś."
+        rus: "Не пропускайте się / z и не *pani jesteś — только jest."
+        bel: "Тры формулы: Nazywam się… / Jestem z… / Skąd pani jest?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - "FN-A1-IDENTIFY-01 productive micro-task"
+        - "FN-A1-IDENTIFY-01 productive triple gap"
       ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
     mini_check: false
 
 mini_check:
@@ -607,7 +633,7 @@ result_metadata:
   title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете поздороваться, представиться и
-    держаться pan/pani в коротком бытовом разговоре (черновик, внутренний просмотр).
+    держаться pan/pani в коротком бытовом разговоре.
   retry_ru: >
     Ещё раз Nazywam się… / Jestem z… и выбор pan/pani — потом короткая
     проверка снова.
@@ -629,6 +655,8 @@ provenance:
     - "Curriculum links: SCN-A1-EVERYDAY-01, FN-A1-GREET-01, FN-A1-IDENTIFY-01"
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim, not studio).
-    Hard same-scenario foils. DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.
 visibility: internal_preview_only

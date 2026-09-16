@@ -1,7 +1,7 @@
 kind: lesson
 canonical_id: LES-A1-WK-03
 slug: samodzielne-zamowienie
-version: 7
+version: 8
 status: DRAFT
 title_pl: Samodzielne zamówienie
 sort_order: 3
@@ -184,7 +184,7 @@ steps:
 exercises:
   - id: ex-wk-l3-01
     canonical_id: EX-A1-WK-L3-SC-01
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
     prompt: "Как спокойно заказать чай и канапку у стойки?"
@@ -196,11 +196,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Poproszę herbatę i kanapkę — две позиции в Acc."
-      incorrect: "Dawaj / Ja mieć — резко или ломаная конструкция, не заказ."
+      incorrect: "Именительный после Poproszę или калька «можно мне» ломают заказ."
       l1:
-        ukr: "Не «давай» і не *Ja mieć — тільки Poproszę + Acc + i + Acc."
-        rus: "Не приказ dawaj и не *Ja mieć — Poproszę herbatę i kanapkę."
-        bel: "Не dawaj / *Ja mieć — Poproszę з Acc."
+        ukr: "Не *Poproszę herbata i kanapka і не «можна мені» → *Możno mnie."
+        rus: "Не именительный *herbata и не *Możno mnie — Poproszę + Acc + i + Acc."
+        bel: "Не назоўны пасля Poproszę і не калька «можна мне»."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -208,23 +208,25 @@ exercises:
       sources:
         - Curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01 / LEX-A1-SERVICE
       ai_assisted: true
+      notes: "Adult same-scenario distractors (nom after Poproszę + L1 calque). DRAFT."
     mini_check: false
     options:
       - id: a
         text: Poproszę herbatę i kanapkę.
       - id: b
-        text: Herbata, kanapka, dawaj.
+        text: Poproszę herbata i kanapka.
       - id: c
-        text: Ja mieć herbatę.
+        text: Możno mnie herbatę i kanapkę?
     correct_option_id: a
   - id: ex-wk-l3-02
     canonical_id: EX-A1-WK-L3-MC-02
-    version: 2
+    version: 3
     type: multiple_choice
     status: DRAFT
     prompt: "Что нужно сделать, чтобы довести заказ до оплаты?"
     concept_ids:
       - GR-PRO-DEM-01
+      - PRAG-PAN-01
     function_ids:
       - FN-A1-ASK-01
     lex_bundle_ids:
@@ -259,7 +261,7 @@ exercises:
       - c
   - id: ex-wk-l3-listen-01
     canonical_id: EX-A1-WK-L3-LIS-01
-    version: 2
+    version: 3
     type: listening
     status: DRAFT
     prompt: "Послушайте баристу. Что он спросил?"
@@ -271,7 +273,7 @@ exercises:
       - id: b
         text: Уточняет размер кофе (dużą czy małą).
       - id: c
-        text: Спрашивает способ оплаты (kartą czy gotówką).
+        text: Спрашивает «Coś jeszcze?»
     correct_option_id: a
     concept_ids:
       - GR-PRO-DEM-01
@@ -283,11 +285,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Да: z serem / z szynką — выбор начинки."
-      incorrect: "Это начинка канапки, не размер кофе и не оплата."
+      incorrect: "Это начинка канапки, не размер кофе и не Coś jeszcze?"
       l1:
-        ukr: "Слухайте z serem / z szynką — начинка, не rozmiar / płatność."
-        rus: "Слышите начинку, не размер напитка и не kartą."
-        bel: "Гэта начынка, не памер кавы і не аплата."
+        ukr: "Слухайте z serem / z szynką — начинка, не rozmiar / Coś jeszcze?"
+        rus: "Слышите начинку, не размер напитка и не «что-нибудь ещё?»."
+        bel: "Гэта начынка, не памер кавы і не Coś jeszcze?"
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -295,6 +297,7 @@ exercises:
       sources:
         - Dialogue Samodzielne zamówienie
       ai_assisted: true
+      notes: "Hard same-scenario foils (size vs coś jeszcze). DRAFT."
     mini_check: false
   - id: ex-wk-l3-03
     canonical_id: EX-A1-WK-L3-GF-03
@@ -399,7 +402,7 @@ exercises:
       - t4
   - id: ex-wk-l3-06
     canonical_id: EX-A1-WK-L3-SC-06
-    version: 2
+    version: 3
     type: single_choice
     status: DRAFT
     prompt: "Бариста спрашивает: «Kanapka z serem czy z szynką?» Что ответить?"
@@ -411,11 +414,11 @@ exercises:
       - LEX-A1-MONEY
     feedback:
       correct: "Z serem, proszę — короткий спокойный ответ."
-      incorrect: "Одно слово Ser неясно; Ty daj — резко и на ty."
+      incorrect: "Z ser без Ins или *Daj ser — ломают ответ у стойки."
       l1:
-        ukr: "Z serem, proszę — не голе Ser і не ty."
-        rus: "Короткий ответ с proszę; не ty и не одно слово Ser."
-        bel: "Z serem, proszę — без ty і без аднаго Ser."
+        ukr: "Z serem, proszę — не *Z ser і не наказ *Daj ser."
+        rus: "Narzędnik: z serem; не *Z ser и не приказ *Daj ser."
+        bel: "Z serem, proszę — без *Z ser і без *Daj ser."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -423,42 +426,46 @@ exercises:
       sources:
         - Curriculum SCN-A1-FOOD-01 / FN-A1-TRANS-01 / LEX-A1-MONEY
       ai_assisted: true
+      notes: "Adult same-scenario distractors (case miss + order). DRAFT."
     mini_check: false
     options:
       - id: a
         text: Z serem, proszę.
       - id: b
-        text: Ser.
+        text: Z ser, proszę.
       - id: c
-        text: Ty daj ser.
+        text: Daj ser.
     correct_option_id: a
   - id: ex-wk-l3-write-01
     canonical_id: EX-A1-WK-L3-GF-09
-    version: 1
+    version: 2
     type: gap_fill
     status: DRAFT
-    prompt: "Напишите: Poproszę herbatę {{gap1}} kanapkę. To poproszę {{gap2}} sok."
+    prompt: "Напишите: Poproszę herbatę {{gap1}} kanapkę. Czy {{gap2}} sok? To poproszę {{gap3}} sok."
     concept_ids:
       - GR-CAS-ACC-01
       - PRAG-PAN-01
+      - GR-EXIST-01
     function_ids:
       - FN-A1-TRANS-01
+      - FN-A1-ASK-01
     lex_bundle_ids:
       - LEX-A1-SERVICE
     feedback:
-      correct: "Две рамки: X i Y, затем To poproszę też…"
-      incorrect: "Нужны союз i между позициями и слово też при добавлении."
+      correct: "Три рамки: X i Y, Czy jest…? и To poproszę też…"
+      incorrect: "Нужны союз i, глагол jest и слово też."
       l1:
-        ukr: "i між Acc-позиціями; też у To poproszę też…"
-        rus: "i связывает две Acc; też добавляет позицию."
-        bel: "i + też — дзве асобныя рамкі."
+        ukr: "i між Acc; jest у Czy jest…?; też у To poproszę też…"
+        rus: "i связывает Acc; jest в наличии; też добавляет позицию."
+        bel: "Тры формулы: i / jest / też."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
       reviewer_id: null
       sources:
-        - FN-A1-TRANS-01 productive dual gap
+        - FN-A1-TRANS-01 productive triple gap
       ai_assisted: true
+      notes: "Productive controlled write (3 gaps). DRAFT — not JPJO."
     mini_check: false
     gaps:
       - id: gap1
@@ -467,11 +474,15 @@ exercises:
         placeholder: …
       - id: gap2
         accepted_answers:
+          - jest
+        placeholder: …
+      - id: gap3
+        accepted_answers:
           - też
         placeholder: …
   - id: ex-wk-l3-07
     canonical_id: EX-A1-WK-L3-MC-07
-    version: 2
+    version: 3
     type: multiple_choice
     status: DRAFT
     prompt: "Какие финальные реплики уместны у стойки?"
@@ -483,11 +494,11 @@ exercises:
       - LEX-A1-SERVICE
     feedback:
       correct: "Цена, способ оплаты и благодарность — обычный финал."
-      incorrect: "Daj paragon! слишком резко для первого контакта."
+      incorrect: "Proszę paragon без o / спокойной рамки — не лучший финал у стойки."
       l1:
-        ukr: "Не *Daj paragon — спокійно Czy mogę dostać paragon? / Dziękuję."
-        rus: "Не приказ *Daj paragon у стойки."
-        bel: "Без рэзкага *Daj paragon."
+        ukr: "Не голе *Proszę paragon — спокійно Czy mogę dostać paragon? / Dziękuję."
+        rus: "Не голое *Proszę paragon вместо спокойного финала."
+        bel: "Без голага *Proszę paragon — трымайце Ile / Kartą / Dziękuję."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -504,14 +515,14 @@ exercises:
       - id: c
         text: Dziękuję.
       - id: d
-        text: Daj paragon!
+        text: Proszę paragon.
     correct_option_ids:
       - a
       - b
       - c
   - id: ex-wk-l3-08
     canonical_id: EX-A1-WK-L3-OR-08
-    version: 1
+    version: 2
     type: ordering
     status: DRAFT
     prompt: "Соберите последний обмен: цена, оплата, прощание."
@@ -524,6 +535,10 @@ exercises:
     feedback:
       correct: "Вопрос о сумме → ответ → способ оплаты → прощание."
       incorrect: "Сначала узнайте сумму, потом платите и прощайтесь."
+      l1:
+        ukr: "Спочатку Ile płacę?, потім Kartą, потім Do widzenia."
+        rus: "Сначала сумма, потом оплата и прощание."
+        bel: "Спачатку сума, потым аплата і развітанне."
     provenance:
       originality: created_for_product
       author_id: system:ai-draft-slowarium
@@ -557,8 +572,7 @@ result_metadata:
   title_ru: Итог
   success_ru: >
     Короткая проверка пройдена. Вы можете сами заказать две позиции,
-    спросить о наличии, добавить позицию и оплатить у стойки
-    (черновик, внутренний просмотр).
+    спросить о наличии, добавить позицию и оплатить у стойки.
   retry_ru: >
     Ещё раз Poproszę X i Y, Czy jest…?, To poproszę też… и Kartą —
     потом короткая проверка снова.
@@ -580,5 +594,7 @@ provenance:
       FN-A1-ADDRESS-01, FN-A1-QUANT-01, FN-A1-THANKS-01 / LEX-A1-SERVICE, LEX-A1-MONEY
   ai_assisted: true
   notes: >
-    Static assessed-listening audio (edge-tts interim). Hard café foils.
-    DRAFT — not JPJO-approved. reviewer_id null.
+    Substance deepen 2026-09-16: adult same-scenario distractors, distinct
+    UK/BEL/RU L1 traps, productive triple gap, hard listening foils.
+    Static assessed-listening audio (edge-tts interim). status DRAFT —
+    not JPJO-approved, not learner-published. reviewer_id null.

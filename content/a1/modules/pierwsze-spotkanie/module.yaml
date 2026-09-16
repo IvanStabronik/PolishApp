@@ -1,13 +1,13 @@
 kind: module
 canonical_id: MOD-A1-PIERWSZE-SPOTKANIE
 slug: pierwsze-spotkanie
-version: 4
+version: 5
 status: DRAFT
 level: A1
 title_pl: Pierwsze spotkanie
 working_title: Pierwsze spotkanie
 situation_ru: >
-  Сосед на кладке или знакомый коллеги — первый короткий разговор со взрослым
+  Сосед на клатке или знакомый коллеги — первый короткий разговор со взрослым
   человеком в Польше. Нужно поздороваться нормально, назвать себя и сказать,
   откуда вы.
 objective_ru: >
@@ -41,7 +41,8 @@ provenance:
     - "Common-knowledge Polish greeting & self-introduction patterns (język ogólny)"
   ai_assisted: true
   notes: >
-    Static audio on L01–L03 assessed listening (edge-tts interim under /audio/a1/).
+    Substance deepen 2026-09-16 (L01–L03): adult distractors, distinct L1,
+    productive triple gaps, hard listening foils. Static audio under /audio/a1/.
     DRAFT — pending human JPJO; not learner-published. reviewer_id null.
 visibility: internal_preview_only
 internal_preview_only: true
